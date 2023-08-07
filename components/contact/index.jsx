@@ -9,6 +9,7 @@ export default function IndexContact() {
                 <FormContact />
                 <MapLocation />
                 <RelatedNews />
+                <div>test</div>
             </main>
         </>
     )
