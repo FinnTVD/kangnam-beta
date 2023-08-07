@@ -1,0 +1,23 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+.news-pagination{
+    @apply flex justify-center
+}
+.news-pagination .page{
+    @apply bg-[#D6A279] opacity-10 w-[2.125vw] h-[2.125vw] flex items-center justify-center rounded-[50%]
+    /* background-color: #D6A279;
+    opacity: 0.1;
+    width: 2.125vw;
+    height: 2.125vw;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+/* .news-pagination .previous, .news-pagination .next{
+    @apply w-auto
+} */
+.news-pagination li a{
+    @apply text-[#000] text-18pc font-semibold leading-[1.5]
+}

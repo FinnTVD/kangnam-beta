@@ -1,10 +1,25 @@
 import IndexHome from '@/components/home'
+import Link from 'next-intl/link'
 
 export default async function Home() {
     return (
         <>
             <span className='sub-title'>Home Page</span>
-            <p className='title56 text-black-second'>Chúng tôi là ai</p>
+            <Link
+                className='text-nu'
+                href='/'
+                locale='vn'
+            >
+                VietNam
+            </Link>{' '}
+            |{' '}
+            <Link
+                className='text-nu'
+                href='/'
+                locale='en'
+            >
+                English
+            </Link>
             <IndexHome />
         </>
     )

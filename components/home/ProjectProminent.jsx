@@ -1,18 +1,18 @@
-import Link from 'next/link'
 import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
 
-export default function ProjectProminent() {
+export default function ProjectProminent({ children }) {
     return (
-        <section className='w-screen px-120 py-[8.125vw]'>
-            <div className='flex justify-between'>
+        <section className='w-screen px-120 py-[8.125vw] relative'>
+            <div className='relative z-10 flex items-center justify-between'>
                 <div>
                     <span className='sub-title'>Tổng hợp các dự án</span>
                     <h2 className='title56 text-den mt-[0.62vw] mb-[3vw]'>Dự án nổi bật</h2>
                 </div>
-                <Button href={'/'}>Xem tất cả</Button>
+                <Button href='/danh-sach-du-an'>Xem tất cả</Button>
             </div>
             <SlideProjectProminent />
+            {children}
         </section>
     )
 }

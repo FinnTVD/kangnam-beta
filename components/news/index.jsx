@@ -1,0 +1,20 @@
+import ListNews from "./ListNews";
+
+export default function IndexNews() {
+//     const newsArr = [{id: 0, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 1, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 2, category: 'Tin nóng', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 3, category: 'Dự án', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 4, category: 'Dự án', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 5, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 6, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 7, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+//     {id: 8, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+// ]
+    // const newsArrSlice = newsArr.slice(1, 6);
+    return(
+        <>
+            <ListNews></ListNews>
+        </>
+    )
+}
