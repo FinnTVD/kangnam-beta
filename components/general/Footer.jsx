@@ -11,27 +11,27 @@ export default function Footer() {
             <div className="py-[5vw] px-[7.5625vw] flex">
                 <div>
                     <div className="relative w-[24.0625vw] h-[6.625vw]">
-                        <Image fill src="logoKangnam.svg" className="top-0 left-0 object-contain"></Image>
+                        <Image fill src="/logoKangnam.svg" className="top-0 left-0 object-contain"></Image>
                     </div>
                     <div className="flex mt-[2.5vw]">
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center">
                             <div className="relative w-[0.5vw] h-full flex">
-                                <Image fill src="facebook.svg" className="w-full h-full object-contain"></Image>
+                                <Image fill src="/facebook.svg" className="w-full h-full object-contain"></Image>
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
-                                <Image fill src="youtube.svg" className="w-full h-full object-contain"></Image>
+                                <Image fill src="/youtube.svg" className="w-full h-full object-contain"></Image>
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
-                                <Image fill src="tiktok.svg" className="w-full h-full object-contain"></Image>
+                                <Image fill src="/tiktok.svg" className="w-full h-full object-contain"></Image>
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
-                                <Image fill src="instagram.svg" className="w-full h-full object-contain"></Image>
+                                <Image fill src="/instagram.svg" className="w-full h-full object-contain"></Image>
                             </div>
                         </div>
                     </div>
@@ -42,14 +42,14 @@ export default function Footer() {
                         <div className="mt-[1.25vw] flex flex-col gap-[0.75vw]">
                             <div className="flex">
                                 <div className="relative w-[1.25vw] h-[2.5vw] flex">
-                                    <Image fill src="location.svg" className="object-contain"></Image>
+                                    <Image fill src="/location.svg" className="object-contain"></Image>
                                 </div>
                                 <span className="ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%]"> {addr} </span>
                             </div>
                             {phoneArr.map((phone) => 
                                 <div className="flex">
                                     <div className="relative w-[1.25vw] h-[1.25vw] flex">
-                                        <Image fill src="call.svg" className="object-contain"></Image>
+                                        <Image fill src="/call.svg" className="object-contain"></Image>
                                     </div>
                                     <span className="ml-[0.5vw] text-den-2 title16-400-130"> {phone} </span>
                                 </div>

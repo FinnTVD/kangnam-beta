@@ -25,10 +25,8 @@ const arrPartner = []
     }
     return (
         <section className="w-full px-120 pb-[15.625vw] pt-[9.625vw] relative">
-            <div className='absolute bottom-[0.5vw] left-0 h-[6.25vw] w-full z-[-1]' style={{background: 'linear-gradient(0deg, #fff, #ffffff00)'}}></div>
-            <div className='absolute opacity-70 left-0 top-0 w-full h-full z-[-1]' style={{background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%), white'}}></div>
-            <div className='absolute opacity-30 left-0 top-0 w-full h-full z-[-1] bg-lightgray'></div>
-            <Image src="/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2]"></Image>
+            <div className='absolute top-0 left-0 bg-opacity-30 h-full w-full z-[-1]' style={{background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%)'}}></div>
+            <Image src="/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2] opacity-30"></Image>
             <div className='flex justify-between items-end'>
                 <div>
                     <span className='sub-title'>Tổng hợp các dự án</span>

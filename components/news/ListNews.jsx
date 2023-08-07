@@ -18,7 +18,12 @@ export default function ListNews () {
     {id: 6, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
     {id: 7, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
     {id: 8, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
-]
+    {id: 9, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+    {id: 10, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+    {id: 11, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+    {id: 12, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+    {id: 13, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'},
+    {id: 14, category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: 'Buổi đấu giá 121 lô đất tại các huyện Nam Đàn, Thanh Chương, Yên Thành, thị xã Thái Hòa và thị trấn Hưng Nguyên (tỉnh Nghệ An) sẽ được tổ chức vào các ngày cuối tháng 7 và đầu tháng 8 tới. Giá khởi điểm thấp nhất từ hơn 260 triệu đồng/lô.', picture: '/featuredImg.jpg'}]
     const pageLength = Math.ceil(newsArr.length/9);
     // console.log(pageLength)
     const pageArr = new Array(pageLength);
@@ -27,7 +32,7 @@ export default function ListNews () {
     const [pageNumber, setPageNumber] = useState(1);
     const [listNews, setListNews] = useState();
     useEffect(() => {
-        setListNews(newsArr.filter((item) => item.category===category).slice(9*(pageNumber-1),9*pageNumber-1))
+        setListNews(newsArr.filter((item) => item.category===category).slice(9*(pageNumber-1),9*pageNumber))
     }, [category, pageNumber])
     return (
         <section className="px-120 pt-[6.875vw] pb-[8.125vw]">
@@ -56,12 +61,12 @@ export default function ListNews () {
             <ReactPaginate
                 breakLabel="..."
                 nextLabel="Next"
-                onPageChange={() => setPageNumber(index+1)}
+                onPageChange={(e) => {setPageNumber(e.selected+1)}}
                 pageRangeDisplayed={5}
                 pageCount={pageLength}
                 renderOnZeroPageCount={null}
                 previousLabel="Previous"
-                pageClassName="page"
+                pageClassName={classes['page']}
                 className={classes['news-pagination']}
             />
             {/* {pageArr.map((p, index) => {
