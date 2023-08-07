@@ -5,6 +5,8 @@ import Header from './Header'
 import MyProject from './MyProject'
 import ProjectProminent from './ProjectProminent'
 import Prominent from './Prominent'
+import Partner from './Partner'
+import LatestNews from './LatestNews'
 
 export default function IndexHome() {
     return (
@@ -24,6 +26,8 @@ export default function IndexHome() {
                     />
                 </ProjectProminent>
                 <Prominent />
+                <Partner/>
+                <LatestNews/>
                 <div className='h-[100vh]'></div>
             </main>
             <Footer />
