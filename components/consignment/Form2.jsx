@@ -2,6 +2,7 @@
 import useResizeArea from '@/hooks/useResizeArea'
 import Image from 'next/image'
 
+
 export default function Form2({ handlePrevSlide, handleNextSlide }) {
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
     const handleSubmitForm = (e) => {

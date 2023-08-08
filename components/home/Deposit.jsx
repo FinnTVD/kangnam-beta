@@ -3,19 +3,14 @@ import Button from '../general/Button'
 
 export default function Deposit() {
     return (
-        <section className='relative h-fit pt pt-[8.44vw] pb-[7vw]'>
+        <section
+            id='deposit'
+            className='relative h-fit pt pt-[8.44vw] pb-[7vw]'
+        >
             <Image
                 className='z-0 object-cover'
                 src='/bg-deposit.jpg'
                 alt='bg-deposit'
-                quality={100}
-                sizes='100vw'
-                fill
-            />
-            <Image
-                className='z-[1] object-cover'
-                src='/linear-deposit.png'
-                alt='linear-deposit'
                 quality={100}
                 sizes='100vw'
                 fill
@@ -201,24 +196,6 @@ export default function Deposit() {
                 >
                     Đăng kí ngay
                 </Button>
-            </div>
-            <div className='absolute bottom-0 right-[0.94vw] h-[34.8125vw] w-[62vw] z-[5]'>
-                <Image
-                    className='object-cover w-full h-full relative z-[1]'
-                    src='/people2.png'
-                    alt='people2'
-                    width={1000}
-                    height={600}
-                    quality={100}
-                />
-                <Image
-                    className='object-cover w-[33.75vw] h-[33.75vw] absolute bottom-[3.31vw] left-[8.44vw] z-0'
-                    src='/circle.png'
-                    alt='circle'
-                    width={540}
-                    height={540}
-                    quality={100}
-                />
             </div>
         </section>
     )

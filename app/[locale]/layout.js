@@ -4,6 +4,7 @@ import './globals.css'
 import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import localFont from 'next/font/local'
+import Footer from '@/components/general/Footer'
 const avertaStdCY = localFont({
     src: [
         {
@@ -66,6 +67,7 @@ export default function RootLayout({ children, params }) {
                 className={avertaStdCY.className}
             >
                 {children}
+                <Footer />
             </body>
         </html>
     )

@@ -2,23 +2,46 @@
 import Image from 'next/image'
 import Button from '../general/Button'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import useResizeArea from '@/hooks/useResizeArea'
+
+const schema = yup
+    .object({
+        fullName: yup.string().required('Vui lòng điền thông tin!'),
+        numberPhone: yup
+            .string()
+            .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
+                if (value && isNaN(value)) {
+                    return false
+                }
+                return true
+            })
+            .required('Vui lòng điền thông tin!'),
+        email: yup
+            .string()
+            .required('Vui lòng điền thông tin!')
+            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
+    })
+    .required()
 
 export default function FormContact() {
-    const [heightDefault, setHeightDefault] = useState(null)
-    const [heightArea, setHeightArea] = useState(false)
-    const areaRef = useRef()
+    const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
 
-    useEffect(() => {
-        areaRef?.current && setHeightDefault(areaRef.current.clientHeight)
-    }, [])
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    })
 
-    const handleResizeHeight = (e) => {
-        areaRef.current.clientHeight < e.target.scrollHeight && setHeightArea(e.target.scrollHeight)
-        if (!e.target.value) {
-            setHeightArea(heightDefault)
-        }
+    const onSubmit = (e) => {
+        console.log(e)
     }
+
     return (
         <section className='px-120 pt-[8.12vw] pb-[6.88vw]'>
             <div className='flex gap-x-[2.25vw]'>
@@ -90,43 +113,60 @@ export default function FormContact() {
                     <h2 className='text-den title56'>Điền thông tin</h2>
                     <form
                         action=''
-                        className='flex flex-col gap-y-[1.5vw] mt-[2vw]'
+                        className='flex flex-col gap-y-[2vw] mt-[1.25vw]'
+                        autoComplete='false'
+                        onSubmit={handleSubmit(onSubmit)}
                     >
-                        <input
-                            type='text'
-                            placeholder='Họ và tên *'
-                            required
-                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
-                        />
+                        <div className='relative'>
+                            <input
+                                type='text'
+                                placeholder='Họ và tên *'
+                                className='placeholder:text-16pc w-full placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                                {...register('fullName')}
+                            />
+                            <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
+                                {errors.fullName?.message}
+                            </p>
+                        </div>
                         <div className='flex flex-1 gap-x-[1.5vw]'>
-                            <input
-                                type='tel'
-                                placeholder='Số điện thoại *'
-                                required
-                                className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
-                            />
-                            <input
-                                type='email'
-                                placeholder='Email *'
-                                required
-                                className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
-                            />
+                            <div className='relative'>
+                                <input
+                                    type='text'
+                                    placeholder='Số điện thoại *'
+                                    className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                                    {...register('numberPhone')}
+                                />
+                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
+                                    {errors.numberPhone?.message}
+                                </p>
+                            </div>
+                            <div className='relative'>
+                                <input
+                                    type='text'
+                                    placeholder='Email *'
+                                    className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                                    {...register('email')}
+                                />
+                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
+                                    {errors.email?.message}
+                                </p>
+                            </div>
                         </div>
                         <input
                             type='text'
                             placeholder='Địa chỉ'
                             className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                            {...register('address')}
                         />
                         <textarea
                             onChange={handleResizeHeight}
                             ref={areaRef}
-                            name=''
-                            id=''
                             placeholder='Nội dung'
                             className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] w-full rounded-[1vw] outline-none shadow-input focus:outline-[#d6a279] resize-none'
                             style={{
                                 height: heightArea ? `${heightArea}px` : '10.375vw',
                             }}
+                            {...register('content')}
                         ></textarea>
                         <Button
                             span='-tracking-[0.32px] text-white'
