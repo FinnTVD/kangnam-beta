@@ -5,6 +5,8 @@ import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import localFont from 'next/font/local'
 import Footer from '@/components/general/Footer'
+import { NextIntlClientProvider } from 'next-intl'
+
 const avertaStdCY = localFont({
     src: [
         {
@@ -46,10 +48,12 @@ export const metadata = {
     description: 'KangNam by OkHub',
 }
 
-export default function RootLayout({ children, params }) {
+export default async function RootLayout({ children, params }) {
     const locale = useLocale()
-
-    if (params.locale !== locale) {
+    let messages
+    try {
+        messages = (await import(`../../messages/${locale}.json`)).default
+    } catch (error) {
         notFound()
     }
 
@@ -66,6 +70,13 @@ export default function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
+                <NextIntlClientProvider
+                    locale={locale}
+                    messages={messages}
+                >
+                    {children}
+                    <Footer />
+                </NextIntlClientProvider>
                 {children}
                 <Footer></Footer>
             </body>

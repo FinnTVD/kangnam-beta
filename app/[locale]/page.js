@@ -4,7 +4,7 @@ import Link from 'next-intl/link'
 export default async function Home() {
     return (
         <>
-            <span className='sub-title'>Home Page</span>
+            {/* <span className='sub-title'>Home Page</span>
             <Link
                 className='text-nu'
                 href='/'
@@ -19,7 +19,7 @@ export default async function Home() {
                 locale='en'
             >
                 English
-            </Link>
+            </Link> */}
             <IndexHome />
         </>
     )

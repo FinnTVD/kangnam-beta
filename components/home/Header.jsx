@@ -1,7 +1,11 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import SocialMedia from './SocialMedia'
 import BoxCurrency from './BoxCurrency'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useRef, useState } from 'react'
 
 const listNav = [
     {
@@ -51,8 +55,50 @@ const arrSuggest = [
         title: 'glory heights',
     },
 ]
-
+gsap.registerPlugin(ScrollTrigger)
 export default function Header() {
+    const featureRef = useRef()
+    const [map, setMap] = useState(null)
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        const boxMap = document.getElementById('boxMap')
+        boxMap && setMap(boxMap)
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    const handleScroll = () => {
+        if (!map || !featureRef.current) return
+        gsap.to(featureRef.current, {
+            opacity: 0,
+            scrollTrigger: {
+                trigger: map,
+                start: 'top bottom',
+                end: 'center top',
+                scrub: true,
+            },
+        })
+        // gsap.to(featureRef.current, {
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: map,
+        //         start: 'center top',
+        //         end: 'bottom center',
+        //         scrub: true,
+        //     },
+        // })
+    }
+
+    const handleScrollDown = () => {
+        if (typeof window !== 'undefined') {
+            window.scrollTo({
+                top: document.getElementById('weAre').offsetTop,
+                behavior: 'smooth',
+            })
+        }
+    }
     return (
         <header className='relative w-screen h-fit'>
             <div className='relative w-full h-screen'>
@@ -252,7 +298,10 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-                <div className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] '>
+                <div
+                    onClick={handleScrollDown}
+                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] '
+                >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='24'
@@ -277,7 +326,10 @@ export default function Header() {
                     </span>
                 </div>
                 <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
-                <ul className='fixed right-[3.94vw] bottom-[5.86vw] z-[9999] gap-y-[1.88vw] flex flex-col'>
+                <ul
+                    ref={featureRef}
+                    className='fixed right-[3.94vw] bottom-[5.86vw] z-[9999] gap-y-[1.88vw] flex flex-col transition-all duration-500 ease-linear'
+                >
                     <li className='relative w-[4.5vw] h-[4.5vw] shadow-feature flex justify-center items-center bg-white rounded-full'>
                         <Image
                             src='/social.svg'
@@ -309,116 +361,6 @@ export default function Header() {
                     </li>
                 </ul>
             </div>
-
-            <div className='w-full h-screen relative bg-[#57534E]'>
-                <Image
-                    className='z-0 object-cover'
-                    src='/bg-we.png'
-                    alt='bg-we'
-                    sizes='100vw'
-                    quality={100}
-                    fill
-                />
-                <div className='relative z-10 flex justify-between h-full'>
-                    <div className='flex items-center pl-[7.5vw]'>
-                        <div className='w-[40.2vw] h-fit'>
-                            <span className='sub-title'>Câu chuyện thương hiệu</span>
-                            <h2 className='text-vang-nhe mt-[0.12vw] mb-[1vw] -tracking-[1.12px] title56'>
-                                Chúng tôi là ai
-                            </h2>
-                            <p className='text-vang-nhe title16-400-150 w-[38vw]'>
-                                Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp,
-                                chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung
-                                với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản
-                            </p>
-                            <ul className='flex my-[2.5vw]'>
-                                <li className='flex flex-col items-center gap-y-[1vw]'>
-                                    <Image
-                                        src='/check.svg'
-                                        alt='check'
-                                        width={100}
-                                        height={100}
-                                        quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
-                                    />
-                                    <span className='text-vang-nhe title18-600-130'>Cam kết xác thực</span>
-                                </li>
-                                <li className='flex flex-col items-center gap-y-[1vw] ml-[3.75vw] mr-[3.12vw]'>
-                                    <Image
-                                        src='/pig.svg'
-                                        alt='pig'
-                                        width={100}
-                                        height={100}
-                                        quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
-                                    />
-                                    <span className='text-vang-nhe title18-600-130'>Trọn hỗ trợ, chi phí thấp</span>
-                                </li>
-                                <li className='flex flex-col items-center gap-y-[1vw]'>
-                                    <Image
-                                        src='/watch.svg'
-                                        alt='watch'
-                                        width={100}
-                                        height={100}
-                                        quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
-                                    />
-                                    <span className='text-vang-nhe title18-600-130'>Thủ tục nhanh chóng</span>
-                                </li>
-                            </ul>
-                            <div className='flex gap-x-[1.5vw]'>
-                                <Link
-                                    href='/'
-                                    className='rounded-[6.25vw] py-[1vw] px-[2.5vw] bg-transparent border border-solid border-vang-nhe title16-400-150'
-                                >
-                                    Xem dự án
-                                </Link>
-                                <Link
-                                    href='/'
-                                    className='rounded-[6.25vw] text-den-2 py-[1vw] px-[2.5vw] bg-vang-nhe title16-400-150'
-                                >
-                                    Về chúng tôi
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex items-end'>
-                        <div className='h-[77.5vh] w-[48.1875vw] relative z-10'>
-                            <Image
-                                src='/house.png'
-                                alt='house'
-                                className='object-fill z-[2]'
-                                sizes='48.1875vw'
-                                quality={100}
-                                fill
-                            />
-                            <Image
-                                src='/circle-house.png'
-                                alt='circle'
-                                className='object-cover w-[35.5vw] h-[35.5vw] absolute -top-[3.81vw] left-[2.69vw] z-[1]'
-                                width={600}
-                                height={600}
-                                quality={100}
-                            />
-                            <Image
-                                src='/people.png'
-                                alt='people'
-                                className='object-cover w-[33.875vw] h-[38.5625vw] absolute bottom-0 left-[5.68vw] z-[3]'
-                                width={600}
-                                height={600}
-                                quality={100}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Image
-                className='object-cover z-[3]'
-                src='/linear.png'
-                alt='linear'
-                sizes='100vw'
-                fill
-            />
         </header>
     )
 }

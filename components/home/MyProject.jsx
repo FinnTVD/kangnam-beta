@@ -7,7 +7,10 @@ const arrItem = new Array(6).fill(0)
 
 export default function MyProject() {
     return (
-        <section className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw]'>
+        <section
+            id='boxMap'
+            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw]'
+        >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
                 <ul className='flex gap-x-[1.5vw]'>
@@ -54,7 +57,7 @@ export default function MyProject() {
                             >
                                 <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                     <Image
-                                        className='object-cover z-0'
+                                        className='z-0 object-cover'
                                         src='/itemproject.jpg'
                                         alt='itemProject'
                                         sizes='18vw'
@@ -88,7 +91,7 @@ export default function MyProject() {
                                         <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
                                             Diện tích:
                                         </span>
-                                        <span className='text-den capitalize title14-400-150'>52m2 (10m x 5.2m)</span>
+                                        <span className='capitalize text-den title14-400-150'>52m2 (10m x 5.2m)</span>
                                     </div>
                                     <div className='flex items-center my-[0.5vw]'>
                                         <svg
@@ -117,7 +120,7 @@ export default function MyProject() {
                                         <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
                                             Địa chỉ:
                                         </span>
-                                        <span className='text-den capitalize title14-400-150'>
+                                        <span className='capitalize text-den title14-400-150'>
                                             Tôn Đức Thắng, Hà Nội
                                         </span>
                                     </div>
@@ -137,7 +140,7 @@ export default function MyProject() {
                                         <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
                                             Mức giá:
                                         </span>
-                                        <span className='text-den capitalize title14-400-150'>25 tỷ</span>
+                                        <span className='capitalize text-den title14-400-150'>25 tỷ</span>
                                     </div>
                                 </div>
                             </div>
