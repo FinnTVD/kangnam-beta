@@ -5,7 +5,6 @@ import OtherNewsItem from "../general/OtherNewsItem";
 export default function ListNewsCategorized({list}) {
     const listArrSlice1 = list.slice(1,3);
     const listArrSlice2 = list.slice(3,9);
-    console.log(listArrSlice2)
     return(
         <div>
             <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw] gap-[1.5vw]'>

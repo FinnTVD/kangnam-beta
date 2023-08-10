@@ -16,22 +16,38 @@ export default function Footer() {
                     <div className="flex mt-[2.5vw]">
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center">
                             <div className="relative w-[0.5vw] h-full flex">
+
                                 <Image fill src="/facebook.svg" className="object-contain w-full h-full"></Image>
+
+                                <Image fill src="/facebook.svg" className="w-full h-full object-contain"></Image>
+
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
+
                                 <Image fill src="/youtube.svg" className="object-contain w-full h-full"></Image>
+
+                                <Image fill src="/youtube.svg" className="w-full h-full object-contain"></Image>
+
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
+
                                 <Image fill src="/tiktok.svg" className="object-contain w-full h-full"></Image>
+
+                                <Image fill src="/tiktok.svg" className="w-full h-full object-contain"></Image>
+
                             </div>
                         </div>
                         <div className="border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1.5vw]">
                             <div className="relative w-[1vw] h-full flex">
+
                                 <Image fill src="/instagram.svg" className="object-contain w-full h-full"></Image>
+
+                                <Image fill src="/instagram.svg" className="w-full h-full object-contain"></Image>
+
                             </div>
                         </div>
                     </div>
