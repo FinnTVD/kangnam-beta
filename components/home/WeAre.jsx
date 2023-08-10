@@ -6,7 +6,7 @@ export default function WeAre() {
         <>
             <section
                 id='weAre'
-                className='relative w-full h-screen bg-den-2'
+                className='relative w-full h-screen bg-den-2 '
             >
                 <Image
                     className='z-0 object-cover'
@@ -65,23 +65,53 @@ export default function WeAre() {
                             </ul>
                             <div className='flex gap-x-[1.5vw]'>
                                 <Link
-                                    href='/'
-                                    className='rounded-[6.25vw] py-[1vw] px-[2.5vw] bg-transparent border border-solid border-vang-nhe title16-400-150 hover:border-logo hover:bg-logo'
+                                    href='/danh-sach-du-an'
+                                    className='flex justify-center items-center gap-x-[0.5vw] rounded-[6.25vw] py-[1vw] px-[2.06vw] bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject'
                                 >
                                     Xem dự án
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='8'
+                                        height='14'
+                                        viewBox='0 0 8 14'
+                                        fill='none'
+                                        className=''
+                                    >
+                                        <path
+                                            d='M1 1L7 7L1 13'
+                                            stroke='#D6A279'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                    </svg>
                                 </Link>
                                 <Link
-                                    href='/'
-                                    className='group relative rounded-[6.25vw] text-den-2 py-[1vw] px-[2.5vw] bg-vang-nhe title16-400-150 hover:text-logo overflow-hidden'
+                                    href='/gioi-thieu'
+                                    className='flex justify-center gap-x-[0.5vw] items-center group relative rounded-[6.25vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden'
                                 >
                                     Về chúng tôi
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='8'
+                                        height='14'
+                                        viewBox='0 0 8 14'
+                                        fill='none'
+                                    >
+                                        <path
+                                            d='M1 1L7 7L1 13'
+                                            stroke='white'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                        />
+                                    </svg>
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='28'
                                         height='36'
                                         viewBox='0 0 28 36'
                                         fill='none'
-                                        className='absolute transition-all ease-linear duration-200 -bottom-[20%] opacity-0 left-0 w-[3vw] h-[3vw] group-hover:opacity-50'
+                                        stroke='white'
+                                        className='absolute transition-all ease-linear duration-200 -bottom-[20%] opacity-0 left-0 w-[3vw] h-[3vw] translate-y-1/2 group-hover:translate-y-0 group-hover:opacity-50'
                                     >
                                         <path
                                             d='M22.9201 14.1638V9.30395L18.866 6.677H18.9378V3.19984L14.0003 0L9.06277 3.19984V6.677H9.13459L5.08055 9.30395V14.1638L0 17.4559V35.9983L7.47348 35.9994V35.2603V34.5211V26.3498L9.91903 27.9346V35.9994H12.6983V13.5459L9.91903 15.3477V26.122L7.62331 24.634L7.47348 24.5372V16.932L4.69422 18.7338V24.5503L5.99253 25.3914L4.69422 25.9939V34.5217H1.62273V18.2184L6.68966 14.9348H6.70328V14.9257L13.9997 10.1974L21.2961 14.9257V14.9348H21.3097L26.3766 18.2184V34.5211H23.3052V25.9939L22.0069 25.3914L23.3052 24.5503V18.7338L20.5259 16.932V24.5372L20.3761 24.634L18.0804 26.122V15.3477L15.3011 13.5459V36H18.0804V27.9352L20.5259 26.3504V34.5217V35.9994L28 35.9983V17.4559L22.9194 14.1632L22.9201 14.1638ZM10.6861 3.96178L14.0003 1.81432L17.3145 3.96178V5.67189L14.0003 3.52386L10.6861 5.67189V3.96178ZM14.0003 8.38369L6.7039 13.112V10.0659L14.0003 5.33762L21.2967 10.0659V13.112L14.0003 8.38369Z'

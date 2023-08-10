@@ -1,11 +1,13 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import SocialMedia from './SocialMedia'
 import BoxCurrency from './BoxCurrency'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState } from 'react'
+import BoxLanguage from '../general/BoxLanguage'
 
 const listNav = [
     {
@@ -15,7 +17,7 @@ const listNav = [
     },
     {
         id: 2,
-        title: 'Về KANGNAM',
+        title: 'Về chúng tôi',
         href: '/gioi-thieu',
     },
     {
@@ -59,36 +61,43 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Header() {
     const featureRef = useRef()
     const [map, setMap] = useState(null)
+    const [isShow, setIsShow] = useState(null)
+    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
+        // window.addEventListener('scroll', handleScroll)
         const boxMap = document.getElementById('boxMap')
         boxMap && setMap(boxMap)
 
         return () => {
-            window.removeEventListener('scroll', handleScroll)
+            // window.removeEventListener('scroll', handleScroll)
         }
     }, [])
 
-    const handleScroll = () => {
-        if (!map || !featureRef.current) return
-        gsap.to(featureRef.current, {
-            opacity: 0,
-            scrollTrigger: {
-                trigger: map,
-                start: 'top bottom',
-                end: 'center top',
-                scrub: true,
-            },
-        })
-        // gsap.to(featureRef.current, {
-        //     opacity: 1,
-        //     scrollTrigger: {
-        //         trigger: map,
-        //         start: 'center top',
-        //         end: 'bottom center',
-        //         scrub: true,
-        //     },
-        // })
+    // const handleScroll = () => {
+    //     if (!map || !featureRef.current) return
+    //     gsap.to(featureRef.current, {
+    //         opacity: 0,
+    //         scrollTrigger: {
+    //             trigger: map,
+    //             start: 'top bottom',
+    //             end: 'center top',
+    //             scrub: true,
+    //         },
+    //     })
+    //     // gsap.to(featureRef.current, {
+    //     //     opacity: 1,
+    //     //     scrollTrigger: {
+    //     //         trigger: map,
+    //     //         start: 'center top',
+    //     //         end: 'bottom center',
+    //     //         scrub: true,
+    //     //     },
+    //     // })
+    // }
+
+    const handleCurrently = () => {
+        setIsShow(!isShow)
     }
 
     const handleScrollDown = () => {
@@ -121,8 +130,8 @@ export default function Header() {
                 <div className='absolute z-[2] bg-gradient-header1 top-0 left-0 w-full h-full'></div>
                 {/* linear-white */}
                 <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>
-                <nav className='px-120 relative z-10 py-[1.03vw] h-fit border-b border-solid border-white04'>
-                    <div className='flex items-center justify-between w-full'>
+                <nav className='px-120 relative z-40 py-[1.03vw] h-fit border-b border-solid border-white04'>
+                    <div className='flex items-center justify-end w-full gap-x-[2.5vw]'>
                         <div className='py-[1.32vw] px-[1.95vw] bg-gradient-primary w-fit h-fit absolute left-[7.5vw] top-0'>
                             <div className='relative w-[3.52vw] h-[5.5vw]'>
                                 <Image
@@ -153,78 +162,68 @@ export default function Header() {
                                 href='/dang-tin'
                                 className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                             >
-                                Kí gửi nhà đất
+                                Kí gửi BĐS
                             </Link>
-                            <div className='flex flex-col gap-y-[0.56vw]'>
-                                <span className='text-white -tracking-[0.6px] title12-600-150'>Chọn ngôn ngữ</span>
-                                <div className='flex items-center gap-x-[0.5vw]'>
-                                    <Image
-                                        className='w-[1.75vw] h-[1.125vw] object-cover'
-                                        src='/korea.jpg'
-                                        alt='korea'
-                                        quality={100}
-                                        width={28}
-                                        height={18}
-                                    />
-                                    <span>Korea</span>
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='11'
-                                        height='7'
-                                        viewBox='0 0 11 7'
-                                        fill='none'
-                                    >
-                                        <path
-                                            d='M5.6 6.5L10.4497 0.5H0.750258L5.6 6.5Z'
-                                            fill='white'
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
+                            <BoxLanguage />
                         </div>
                     </div>
                 </nav>
                 <div className='absolute top-[47%] -translate-y-1/2 left-[7.5vw] z-10'>
                     <p className='title18-400-160'>An tâm với 100% bất động sản được xác thực tại KANGNAM</p>
                     <h1 className='mt-[0.5vw] mb-[1.87vw] text-white title60'>Lựa chọn căn nhà ưng ý của bạn</h1>
-                    <div className='w-[54vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center'>
-                        <div className='flex items-center'>
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                width='28'
-                                height='36'
-                                className='w-[1.75vw] h-[2.25vw] ml-[2.12vw] mr-[1.5vw]'
-                                viewBox='0 0 28 36'
-                                fill='none'
-                            >
-                                <path
-                                    d='M22.9201 14.1638V9.30395L18.866 6.677H18.9378V3.19984L14.0003 0L9.06277 3.19984V6.677H9.13459L5.08055 9.30395V14.1638L0 17.4559V35.9983L7.47348 35.9994V35.2603V34.5211V26.3498L9.91903 27.9346V35.9994H12.6983V13.5459L9.91903 15.3477V26.122L7.62331 24.634L7.47348 24.5372V16.932L4.69422 18.7338V24.5503L5.99253 25.3914L4.69422 25.9939V34.5217H1.62273V18.2184L6.68966 14.9348H6.70328V14.9257L13.9997 10.1974L21.2961 14.9257V14.9348H21.3097L26.3766 18.2184V34.5211H23.3052V25.9939L22.0069 25.3914L23.3052 24.5503V18.7338L20.5259 16.932V24.5372L20.3761 24.634L18.0804 26.122V15.3477L15.3011 13.5459V36H18.0804V27.9352L20.5259 26.3504V34.5217V35.9994L28 35.9983V17.4559L22.9194 14.1632L22.9201 14.1638ZM10.6861 3.96178L14.0003 1.81432L17.3145 3.96178V5.67189L14.0003 3.52386L10.6861 5.67189V3.96178ZM14.0003 8.38369L6.7039 13.112V10.0659L14.0003 5.33762L21.2967 10.0659V13.112L14.0003 8.38369Z'
-                                    fill='#D6A279'
+                    <div className='w-[54vw] py-[1.53vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center'>
+                        <div className='flex items-center w-full'>
+                            <div className='gap-x-[0.5vw] flex items-center title16-400-130 text-den'>
+                                Mua nhà
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='21'
+                                    height='21'
+                                    viewBox='0 0 21 21'
+                                    fill='none'
+                                >
+                                    <path
+                                        d='M14.1561 9.53609L13.5639 8.94389L10.5 12.0057L7.43607 8.94389L6.84387 9.53609L10.5 13.1943L14.1561 9.53609Z'
+                                        fill='#D6A279'
+                                    />
+                                </svg>
+                            </div>
+                            <div className='border-l border-solid border-[#57534E] opacity-30 h-[1.6875vw] mx-[1vw]'></div>
+                            <div className='flex-1 flex items-center gap-x-[0.62vw]'>
+                                <label htmlFor='search'>
+                                    <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='16'
+                                        height='17'
+                                        viewBox='0 0 16 17'
+                                        fill='none'
+                                        className='w-[1vw] h-[1vw]'
+                                    >
+                                        <path
+                                            fillRule='evenodd'
+                                            clipRule='evenodd'
+                                            d='M7.19929 2.72722C6.58212 2.72003 5.96965 2.83469 5.39737 3.06456C4.82509 3.29442 4.30438 3.63492 3.8654 4.06632C3.42642 4.49773 3.0779 5.01146 2.84003 5.57776C2.60217 6.14405 2.47969 6.75165 2.47969 7.36536C2.47969 7.97906 2.60217 8.58666 2.84003 9.15296C3.0779 9.71925 3.42642 10.233 3.8654 10.6644C4.30438 11.0958 4.82509 11.4363 5.39737 11.6662C5.96965 11.896 6.58212 12.0107 7.19929 12.0035C8.42696 11.9892 9.59947 11.4942 10.4625 10.626C11.3256 9.75771 11.8096 8.58614 11.8096 7.36536C11.8096 6.14457 11.3256 4.973 10.4625 4.10474C9.59947 3.23647 8.42696 2.74152 7.19929 2.72722ZM1.57497 7.36631C1.56703 6.62685 1.70666 5.89316 1.98577 5.20771C2.26487 4.52226 2.67792 3.89864 3.201 3.37295C3.72409 2.84726 4.34682 2.42994 5.03318 2.14512C5.71953 1.8603 6.45588 1.71365 7.19961 1.71365C7.94333 1.71365 8.67968 1.8603 9.36603 2.14512C10.0524 2.42994 10.6751 2.84726 11.1982 3.37295C11.7213 3.89864 12.1343 4.52226 12.4134 5.20771C12.6926 5.89316 12.8322 6.62685 12.8242 7.36631C12.8084 8.83925 12.2089 10.2465 11.1558 11.2825C10.1027 12.3186 8.68104 12.8997 7.19961 12.8997C5.71817 12.8997 4.29654 12.3186 3.24343 11.2825C2.19032 10.2465 1.59077 8.83925 1.57497 7.36631Z'
+                                            fill='#D6A279'
+                                        />
+                                        <path
+                                            fillRule='evenodd'
+                                            clipRule='evenodd'
+                                            d='M10.7105 10.4576L14.3041 14.0212L13.6263 14.6977L10.0327 11.1334L10.7105 10.4576Z'
+                                            fill='#D6A279'
+                                        />
+                                    </svg>
+                                </label>
+                                <input
+                                    className='outline-none text-den title16-400-130 placeholder:text-20pc placeholder:font-normal placeholder:leading-[1.3] placeholder:text-den placeholder:opacity-[0.27]'
+                                    type='text'
+                                    name='search'
+                                    id='search'
+                                    value={valueSearch}
+                                    onChange={(e) => setValueSearch(e.target.value)}
+                                    // placeholder='Tìm kiếm theo tên hoặc địa điểm'
                                 />
-                            </svg>
-                            <div className='border-l border-solid border-[#57534E] opacity-30 h-[1.6875vw]'></div>
-                            <input
-                                className='outline-none w-[40vw] ml-[1.125vw] text-den title20-400-130 placeholder:text-20pc placeholder:font-normal placeholder:leading-[1.3] placeholder:text-den placeholder:opacity-[0.27]'
-                                type='search'
-                                name=''
-                                id=''
-                                placeholder='Tìm kiếm theo tên hoặc địa điểm'
-                            />
+                            </div>
                         </div>
-                        <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth='1.5'
-                            stroke='#444'
-                            className='w-[2.13vw] h-[2.04vw] mr-[1.69vw] my-[1.22vw]'
-                        >
-                            <path
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                d='M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z'
-                            />
-                        </svg>
                     </div>
                     <div className='flex items-center my-[1.88vw]'>
                         <span className='mr-[0.81vw] text-white title16-600-160'>Gợi ý:</span>
@@ -328,9 +327,9 @@ export default function Header() {
                 <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
                 <ul
                     ref={featureRef}
-                    className='fixed right-[3.94vw] bottom-[5.86vw] z-[9999] gap-y-[1.88vw] flex flex-col transition-all duration-500 ease-linear'
+                    className='fixed right-[3.94vw] bottom-[5.86vw] z-[9999] gap-y-[1.88vw] flex flex-col transition-all duration-500 ease-linear select-none'
                 >
-                    <li className='relative w-[4.5vw] h-[4.5vw] shadow-feature flex justify-center items-center bg-white rounded-full'>
+                    <li className='group relative w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full before:content-normal before:w-[3.64vw] before:h-[20vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[45%]'>
                         <Image
                             src='/social.svg'
                             alt='social'
@@ -338,19 +337,24 @@ export default function Header() {
                             height={36}
                             className='object-contain w-[2.04vw] h-[2.04vw]'
                         />
-                        {/* <SocialMedia /> */}
+                        <SocialMedia />
                     </li>
-                    <li className='relative w-[4.5vw] h-[4.5vw] shadow-feature flex justify-center items-center bg-white rounded-full'>
-                        <Image
-                            src='/tiente.svg'
-                            alt='tiente'
-                            width={36}
-                            height={36}
-                            className='object-contain w-[2.04vw] h-[2.04vw]'
-                        />
-                        {/* <BoxCurrency /> */}
+                    <li className='relative w-[4.5vw] h-[4.5vw] shadow-feature bg-white rounded-full'>
+                        <div
+                            onClick={handleCurrently}
+                            className='relative w-full h-full flex justify-center items-center cursor-pointer '
+                        >
+                            <Image
+                                src='/tiente.svg'
+                                alt='tiente'
+                                width={36}
+                                height={36}
+                                className='object-contain w-[2.04vw] h-[2.04vw]'
+                            />
+                        </div>
+                        <BoxCurrency className={!isShow && 'hidden'} />
                     </li>
-                    <li className='w-[4.5vw] h-[4.5vw] shadow-feature flex justify-center items-center bg-white rounded-full'>
+                    <li className='w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full'>
                         <Image
                             src='/call.svg'
                             alt='call'

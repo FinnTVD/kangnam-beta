@@ -9,7 +9,14 @@ export default function ProjectProminent({ children }) {
                     <span className='sub-title'>Tổng hợp các dự án</span>
                     <h2 className='title56 text-den mt-[0.62vw] mb-[3vw]'>Dự án nổi bật</h2>
                 </div>
-                <Button href='/danh-sach-du-an'>Xem tất cả</Button>
+                <Button
+                    href='/danh-sach-du-an'
+                    className='border-none bg-logo'
+                    span='text-white'
+                    stroke='white'
+                >
+                    Xem tất cả
+                </Button>
             </div>
             <SlideProjectProminent />
             {children}

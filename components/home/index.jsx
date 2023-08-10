@@ -9,7 +9,6 @@ import LatestNews from './LatestNews'
 
 import WeAre from './WeAre'
 
-
 export default function IndexHome() {
     return (
         <>
@@ -29,12 +28,9 @@ export default function IndexHome() {
                     />
                 </ProjectProminent>
                 <Prominent />
-
                 <Partner />
                 <LatestNews />
             </main>
-            {/* <Footer /> */}
-
         </>
     )
 }
