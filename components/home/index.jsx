@@ -33,11 +33,6 @@ export default function IndexHome() {
                 <Partner />
                 <LatestNews />
             </main>
-
-                <Partner/>
-                <LatestNews/>
-                {/* <div className='h-[100vh]'></div> */}
-            </main>
             {/* <Footer /> */}
 
         </>
