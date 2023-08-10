@@ -1,0 +1,18 @@
+.description{
+    @apply px-[16.25vw] py-[7.5vw]
+}
+.description h2{
+    @apply title32-800-125 text-den mt-[4.6vw]
+}
+.description p, .description li{
+    @apply text-den-2 title18-400-150
+}
+.description p{
+    @apply mt-[1vw]
+}
+.description strong, .description h3, .description h4{
+    @apply text-den text-[1.5vw] font-extrabold leading-[1.5] tracking-[-0.32]
+}
+.description ul{
+    @apply list-disc list-inside
+}

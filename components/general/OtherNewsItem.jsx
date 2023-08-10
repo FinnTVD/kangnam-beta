@@ -1,16 +1,18 @@
 import Image from "next/image"
 import Button from "./Button"
+import Link from "next/link"
 
 export default function OtherNewsItem ({newsOtherItem, id}) {
     return(
+        <Link href={`/danh-sach-tin-tuc/${newsOtherItem.slug}`}>
         <div className="group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw]" style={{boxShadow: '6px 0px 39.76811599731445px 0px rgba(0, 0, 0, 0.05)'}}>
             <div className="flex h-[11vw] items-center">
                 <div className="w-[45%] h-[11vw] relative rounded-lg overflow-hidden">
                         <Image src={newsOtherItem.picture} fill alt={`news${id}`} className="group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden"/>
                 </div>
                 <div className="w-[50%] ml-[5%] flex flex-col">
-                    <h2 className="text-den-2 title20-700-150 group-hover:text-nau-nhat transition duration-300">{newsOtherItem.title}</h2>
-                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-3">{newsOtherItem.content}</span>
+                    <h2 className="text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 line-clamp-2">{newsOtherItem.title}</h2>
+                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-3">{newsOtherItem.content.replace( /(<([^>]+)>)/ig, '')}</span>
                 </div>
             </div>
             <div className="flex justify-between mt-[1.125vw]">
@@ -34,5 +36,6 @@ export default function OtherNewsItem ({newsOtherItem, id}) {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }

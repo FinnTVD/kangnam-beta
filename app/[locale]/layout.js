@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import localFont from 'next/font/local'
 import Footer from '@/components/general/Footer'
+import Script from 'next/script'
 import { NextIntlClientProvider } from 'next-intl'
 
 const avertaStdCY = localFont({
@@ -65,6 +66,7 @@ export default async function RootLayout({ children, params }) {
                     href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
                     rel='stylesheet'
                 />
+                <Script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0" nonce="KrgYDVii"></Script>
             </head>
             <body
                 suppressHydrationWarning={true}

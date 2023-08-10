@@ -43,6 +43,7 @@ export default function Contact(){
                 </div>
                 <Image width={862} height={710} src="/about-us-map.svg" className="absolute right-0 top-0 w-[50.625vw] h-[44.375vw] object-contain"></Image>
             </div>
+            <Image fill src="/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06]"></Image>
         </section>
     )
 }

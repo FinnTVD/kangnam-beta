@@ -8,20 +8,10 @@
 .news-pagination li:nth-child(1), .news-pagination li:last-child{
     @apply hidden
 }
-.news-pagination li{
+.page{
     @apply bg-[#D6A279] opacity-10 w-[2.125vw] h-[2.125vw] flex items-center justify-center rounded-[50%]
-    /* background-color: #D6A279;
-    opacity: 0.1;
-    width: 2.125vw;
-    height: 2.125vw;
-    display: flex;
-    align-items: center;
-    justify-content: center; */
 }
-/* .news-pagination .previous, .news-pagination .next{
-    @apply w-auto
-} */
-.page.selected{
+.selected{
     @apply bg-[#D6A279] opacity-100
 }
 .news-pagination li a{
