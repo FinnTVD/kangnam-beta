@@ -8,8 +8,8 @@ export default function Contact(){
         <section className="relative px-120 pt-[8.125vw] pb-[8.125vw]">
             <div className='flex justify-between items-end'>
                 <div>
-                    <span className='sub-title'>Liên hệ</span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>Thông tin văn phòng</h2>
+                    <span data-aos="fade-up" className='sub-title'>Liên hệ</span>
+                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw]'>Thông tin văn phòng</h2>
                 </div>
                 <button className="text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" style={{boxShadow: "0px 0px 30px 0px rgba(206, 126, 64, 0.36)"}}>
                     <span> Liên hệ ngay </span>
@@ -21,7 +21,7 @@ export default function Contact(){
             <div className="flex relative pt-[6.5vw]">
                 <div>
                     <h3 className="title32-600-127 text-den">{title}</h3>
-                    <div className="mt-[1.1875vw]">
+                    <div data-aos="fade-right" className="mt-[1.1875vw]">
                         <div className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M12.0003 11.7515C12.4821 11.7515 12.8939 11.5799 13.2355 11.2367C13.5772 10.8936 13.748 10.4811 13.748 9.99924C13.748 9.51739 13.5765 9.10563 13.2333 8.76397C12.8902 8.4223 12.4777 8.25146 11.9958 8.25146C11.514 8.25146 11.1022 8.42304 10.7605 8.76619C10.4189 9.10932 10.248 9.52182 10.248 10.0037C10.248 10.4855 10.4196 10.8973 10.7628 11.239C11.1059 11.5806 11.5184 11.7515 12.0003 11.7515ZM11.998 20.0265C14.2147 18.0098 15.8522 16.1806 16.9105 14.539C17.9689 12.8973 18.498 11.4515 18.498 10.2015C18.498 8.2383 17.8706 6.63084 16.6157 5.37909C15.3609 4.12734 13.8217 3.50146 11.998 3.50146C10.1744 3.50146 8.6352 4.12734 7.38035 5.37909C6.12548 6.63084 5.49805 8.2383 5.49805 10.2015C5.49805 11.4515 6.03971 12.8973 7.12305 14.539C8.20638 16.1806 9.83138 18.0098 11.998 20.0265ZM11.998 22.0015C9.31471 19.7181 7.31055 17.5973 5.98555 15.639C4.66055 13.6806 3.99805 11.8681 3.99805 10.2015C3.99805 7.70147 4.80221 5.7098 6.41055 4.22646C8.01888 2.74313 9.88138 2.00146 11.998 2.00146C14.1147 2.00146 15.9772 2.74313 17.5855 4.22646C19.1939 5.7098 19.998 7.70147 19.998 10.2015C19.998 11.8681 19.3355 13.6806 18.0105 15.639C16.6855 17.5973 14.6814 19.7181 11.998 22.0015Z" fill="#D6A279"/>
@@ -37,7 +37,7 @@ export default function Contact(){
                             </div>
                         )}
                     </div>
-                    <div className="relative w-[41.25vw] h-[25.3125vw] mt-[2vw]">
+                    <div data-aos="zoom-in" className="relative w-[41.25vw] h-[25.3125vw] mt-[2vw]">
                         <Image fill src='/about-us-contact-address.png' className="top-0 left-0 object-cover rounded-lg"></Image>
                     </div>
                 </div>

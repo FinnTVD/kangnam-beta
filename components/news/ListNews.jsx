@@ -58,7 +58,7 @@ export default function ListNews () {
                 </div>
                 <div className="flex gap-[1.5vw]">
                     {categories.map((category, index) => 
-                        <span className={index===cateIndex ? `${categoryStyle} bg-[#D6A279] text-white` : `${categoryStyle} bg-transparent text-den`} onClick={() => {setCategory(category); setCateIndex(index)}}> {category} </span>     
+                        <span key={index} className={index===cateIndex ? `${categoryStyle} bg-[#D6A279] text-white` : `${categoryStyle} bg-transparent text-den`} onClick={() => {setCategory(category); setCateIndex(index)}}> {category} </span>     
                     )}
                 </div>
             </div>
