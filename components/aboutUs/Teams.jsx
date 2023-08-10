@@ -6,12 +6,12 @@ export default function Teams() {
         <section className="flex justify-end items-center px-120 pt-[6.125vw] pb-[9.5625vw] relative">
             <div className="flex-col w-[41.625vw]">
                 <div>
-                    <span className='sub-title'>Đội ngũ</span>
-                    <h2 className='title56 text-den mt-[0.125vw]'>Chuyên viên Kangnam</h2>
+                    <span data-aos="fade-up" className='sub-title'>Đội ngũ</span>
+                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.125vw]'>Chuyên viên Kangnam</h2>
                 </div>
-                <span className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
+                <span data-aos="fade-up" className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
             </div>
-            <Image fill src="/about-us-team-bg.png" className="object-cover top-0 left-0 z-[-1]"></Image>
+            <Image data-aos="zoom-out" data-aos-anchor-placement="top-center" fill src="/about-us-team-bg.png" className="object-cover top-0 left-0 z-[-1]"></Image>
         </section>
     )
 }

@@ -1,0 +1,12 @@
+.post-detail img{
+    @apply w-full
+}
+.post-detail span, .post-detail p{
+    @apply text-den-2 font-normal leading-normal text-18pc
+}
+.post-detail p{
+    @apply mt-[1vw]
+}
+.post-detail h2, .post-detail h3{
+    @apply text-den text-[1.5vw] font-bold leading-[1.375] mt-[1.5vw]
+}

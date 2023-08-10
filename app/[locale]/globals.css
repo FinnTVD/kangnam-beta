@@ -34,6 +34,10 @@
         @apply font-extrabold leading-[1.3] text-32pc -tracking-[1.6px];
     }
 
+    .title32-800-125 {
+        @apply font-extrabold leading-[1.25] text-32pc -tracking-[1.6px];
+    }
+
     .title32-600-127 {
         @apply font-extrabold leading-[1.27] text-32pc -tracking-[1.6px];
     }

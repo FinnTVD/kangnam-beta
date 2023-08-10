@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Button from '../general/Button'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper/modules'
 
 export default function Partner() {
     const imgArray = ['/partnerlogo.jpg', '/partnerlogo.jpg', '/logoVin.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg',
@@ -44,58 +45,65 @@ const arrPartner = []
             <Swiper
                 slidesPerView={1}
                 spaceBetween={24}
+                loop={true}
+                autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                }}
+                speed={800}
+                modules={[Autoplay]}
             >
             {arrPartner?.map((a, pIndex) => (
                 <SwiperSlide key={pIndex}>
                     <div className='mt-[3.5vw] grid grid-cols-5'>
-                {imgArray.slice(10*pIndex, a).map((item, index) => {
-                if(index===0){
-                    return(
-                        <div className={imgBorder[0]}>
-                            <div className='w-[55%] h-[45%] relative'>
-                                <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
-                            </div>
-                        </div>
-                    )
-                }
-                else if(index===4){
-                    return(
-                        <div className={imgBorder[1]}>
-                            <div className='w-[55%] h-[45%] relative'>
-                                <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
-                            </div>
-                        </div>
-                    )
-                }
-                else if(index===imgArray.slice(10*pIndex, a).length-1){
-                    return(
-                        <div className={imgBorder[3]}>
-                            <div className='w-[55%] h-[45%] relative'>
-                                <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
-                            </div>
-                        </div>
-                    )
-                }
-                else if(index===5){
-                    return(
-                        <div className={imgBorder[2]}>
-                            <div className='w-[55%] h-[45%] relative'>
-                                <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
-                            </div>
-                        </div>
-                    )
-                }
-                else{
-                    return(
-                        <div className={imgBorder[4]}>
-                            <div className='w-[55%] h-[45%] relative'>
-                                <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
-                            </div>
-                        </div>
-                    )
-                }
-                })}
-            </div>
+                        {imgArray.slice(10*pIndex, a).map((item, index) => {
+                        if(index===0){
+                            return(
+                                <div className={imgBorder[0]}>
+                                    <div className='w-[55%] h-[45%] relative'>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        else if(index===4){
+                            return(
+                                <div className={imgBorder[1]}>
+                                    <div className='w-[55%] h-[45%] relative'>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        else if(index===imgArray.slice(10*pIndex, a).length-1){
+                            return(
+                                <div className={imgBorder[3]}>
+                                    <div className='w-[55%] h-[45%] relative'>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        else if(index===5){
+                            return(
+                                <div className={imgBorder[2]}>
+                                    <div className='w-[55%] h-[45%] relative'>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        else{
+                            return(
+                                <div className={imgBorder[4]}>
+                                    <div className='w-[55%] h-[45%] relative'>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        })}
+                    </div>
                 </SwiperSlide>
             ))}
             </Swiper>

@@ -6,12 +6,12 @@ export default function Story() {
         <section className="relative flex justify-between items-center px-120 pt-[1.25vw] pb-[6.125vw]">
             <div className="flex-col w-[41.625vw]">
                 <div>
-                    <span className='sub-title'>Cậu chuyện thương hiệu</span>
-                    <h2 className='title56 text-den mt-[0.125vw]'>Giới thiệu về Kangnam</h2>
+                    <span data-aos="fade-up" className='sub-title'>Cậu chuyện thương hiệu</span>
+                    <h2 data-aos="fade-up" data-aos-delay="300" className='title56 text-den mt-[0.125vw]'>Giới thiệu về Kangnam</h2>
                 </div>
-                <span className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
+                <span data-aos="fade-up" data-aos-delay="600" className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
             </div>
-            <div className="relative w-[32.125vw] h-[30.6875vw]">
+            <div data-aos="fade-left" className="relative w-[32.125vw] h-[30.6875vw]">
                 <Image fill src="/about-us-logo.svg" className="object-contain"></Image>
             </div>
             <Image fill src="/partner-bg.jpg" className="top-0 left-0 z-[-2] opacity-20"></Image>

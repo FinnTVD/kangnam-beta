@@ -19,7 +19,7 @@ export default function ListNewsCategorized({list}) {
             </div>
             <div className="mt-[5.25vw] grid grid-cols-3 gap-[1.5vw]">
                 {listArrSlice2?.map((item) => 
-                    <NewsItem newsOtherItem={item}></NewsItem>
+                    <NewsItem key={item.id} newsOtherItem={item}></NewsItem>
                 )}
             </div>
         </div>
