@@ -112,7 +112,6 @@ export default function FormContact() {
                     <span className='sub-title'>Kết nối với chúng tôi</span>
                     <h2 className='text-den title56'>Điền thông tin</h2>
                     <form
-                        action=''
                         className='flex flex-col gap-y-[2vw] mt-[1.25vw]'
                         autoComplete='false'
                         onSubmit={handleSubmit(onSubmit)}

@@ -9,12 +9,26 @@
 // - API tiền tệ
 // -------------------------------------
 
-// - API bộ lọc của danh sách dự án, lọc theo:
-// + Loại hình
-// + Địa điểm
-// + Cho thuê
-// + Mua lại
+// - API danh sách dự án, lọc theo:
+// + Loại hình => có các mục lọc nhỏ theo: ['Nhà mặt phố', 'Chung cư', 'Văn phòng', 'Phân xưởng', 'Đất nền']
+// + Địa điểm => có các mục lọc nhỏ theo: ['Hà nội','Hà nam','TP. Hồ Chí Minh','Nghệ An','Quảng Ninh','Hà Tĩnh','Sơn La','Đắk Lắk','Lâm Đồng','Ninh Thuận']
+// + Cho thuê => có các mục lọc nhỏ theo:['Thuê căn hộ','Thuê Sinh Viên','Thuê nhà phố','Thuê Studio','Thuê đất nền','Thuê Office-tel',]
+// + Mua lại => có các mục lọc nhỏ theo:['Căn hộ', 'Nhà phố', 'Đất nền', 'Studio', 'Sinh Viên', 'Office-tel']
+// + Dự án mới nhất
+// + Dự án có giá từ cao xuống thấp
+// + Dự án có giá từ thấp đến cao
 // Hỗ trợ phân trang
+// -------------------------------------
+
+// - API danh sách tin tức, lọc theo:
+// + Thị trường
+// + Môi giới
+// + Tư vấn
+// + Bài viết mới nhất
+// Hỗ trợ phân trang
+// -------------------------------------
+
+// - API Map, marker lọc theo thành phố/tỉnh - quận/huyện - phường/xã
 
 const apiHomePage = {
     meta: {
@@ -26,19 +40,14 @@ const apiHomePage = {
         },
     },
     header: {
-        logo: {
+        logoSmall: {
             src: '/image',
             alt: '',
         },
-        navbar: [
-            'Trang chủ',
-            'Về KANGNAM',
-            'Dự án',
-            'Kí gửi bất động sản',
-            'Bán lại',
-            'Thỏa thuận & Pháp lí',
-            'Tin tức',
-        ],
+        logoLarge: {
+            src: '/image',
+            alt: '',
+        },
         slideBanner: [
             {
                 src: '/image',
@@ -47,10 +56,7 @@ const apiHomePage = {
         ],
         slogan: 'An tâm với 100% bất động sản được xác thực tại KANGNAM',
         title: 'Lựa Chọn Căn Nhà Ưng Ý Của Bạn',
-        suggest: {
-            title: 'Gợi ý:',
-            listItem: ['vinhomes central park', 'lumiere boulevard', 'glory heights'],
-        },
+        suggest: ['vinhomes central park', 'lumiere boulevard', 'glory heights'],
         categoryType: [
             {
                 icon: {
@@ -68,19 +74,7 @@ const apiHomePage = {
         title: 'Chúng Tôi Là Ai',
         description:
             'Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp, chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản',
-        backgroundPrimary: {
-            src: '/image',
-            alt: '',
-        },
-        backgroundSecond: {
-            src: '/image',
-            alt: '',
-        },
-        backgroundThird: {
-            src: '/image',
-            alt: '',
-        },
-        backgroundFourth: {
+        background: {
             src: '/image',
             alt: '',
         },
@@ -133,6 +127,7 @@ const apiHomePage = {
                 type: ['Căn hộ', 'Nhà phố', 'Đất nền', 'Studio', 'Sinh Viên', 'Office-tel'],
             },
         ],
+        //cần có api danh sách dự án và map
     },
     section3: {
         backgroundImage: {
@@ -160,6 +155,7 @@ const apiHomePage = {
             src: '/image',
             alt: '',
         },
+        listProjectSetOff: [], //danh sách các dự án mà admin chọn
     },
     section5: {
         backgroundImage: {
@@ -180,5 +176,36 @@ const apiHomePage = {
     section7: {
         subTitle: 'Tổng hợp các dự án',
         title: 'Tin tức mới nhất',
+        //cần có api danh sách tin tức
+    },
+    footer: {
+        logo: {
+            src: '/image',
+            alt: '',
+        },
+        socialMedia: {
+            facebook: {
+                link: 'http://www.facebook...',
+            },
+            instagram: {
+                link: 'http://www.instagram...',
+            },
+            youtube: {
+                link: 'http://www.youtube...',
+            },
+            twitter: {
+                link: 'http://www.twitter...',
+            },
+            linkedin: {
+                link: 'http://www.linkedin...',
+            },
+        },
+        contact: {
+            address: 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội',
+            numberPhone1: '0637 858 974',
+            numberPhone2: '0337 858 892',
+            numberPhone3: '0837 858 357',
+        },
+        copyRight: '© 2023 Copyright. Powered by OKHUB Viet Nam',
     },
 }

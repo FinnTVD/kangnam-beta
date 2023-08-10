@@ -93,14 +93,30 @@ export default function WeAre() {
                         </div>
                     </div>
                     <div className='flex items-end'>
-                        <div className='h-[80.5vh] w-[48.1875vw] relative z-10'>
+                        <div className='h-[77.5vh] w-[48.1875vw] relative z-10'>
                             <Image
-                                src='/people.png'
-                                alt='people'
+                                src='/house.png'
+                                alt='house'
                                 className='object-fill z-[2]'
                                 sizes='48.1875vw'
                                 quality={100}
                                 fill
+                            />
+                            <Image
+                                src='/circle-house.png'
+                                alt='circle'
+                                className='object-cover w-[35.5vw] h-[35.5vw] absolute -top-[3.81vw] left-[2.69vw] z-[1]'
+                                width={600}
+                                height={600}
+                                quality={100}
+                            />
+                            <Image
+                                src='/people.png'
+                                alt='people'
+                                className='object-cover w-[33.875vw] h-[38.5625vw] absolute bottom-0 left-[5.68vw] z-[3]'
+                                width={600}
+                                height={600}
+                                quality={100}
                             />
                         </div>
                     </div>

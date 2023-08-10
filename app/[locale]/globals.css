@@ -148,9 +148,4 @@
 textarea::-webkit-scrollbar {
     width: 0px;
 }
-
-input:focus + label {
-    top: 0;
-    transform: scale(0.9);
-}
 /* form */

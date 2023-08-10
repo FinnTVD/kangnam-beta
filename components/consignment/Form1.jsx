@@ -4,40 +4,82 @@ import { useState } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslations } from 'next-intl'
 
 const schema = yup
     .object({
-        address: yup.string().required('Vui lòng điền thông tin!'),
+        address: yup.string().required('Vui lòng điền địa chỉ!'),
     })
     .required()
 
-const labelPrice = {
-    vn: {
-        sell: 'Giá bán mong muốn *',
-        hire: 'Giá thuê mong muốn *',
-        sellandhire: '',
-    },
-}
-
 export default function Form1({ handleNextSlide }) {
     const [selectedOption, setSelectedOption] = useState('sell')
-    console.log('🚀 ~ file: Form1.jsx:16 ~ Form1 ~ selectedOption:', selectedOption)
     const [inputValue, setInputValue] = useState('')
-    const [validatePrice, setValidatePrice] = useState('')
+    const [inputValueHire, setInputValueHire] = useState('')
+    const [validatePrice, setValidatePrice] = useState({
+        status: false,
+        validate: false,
+        title: '',
+    })
+    const [validatePriceHire, setValidatePriceHire] = useState({
+        status: false,
+        validate: false,
+        title: '',
+    })
+    const t = useTranslations('Form1')
 
     const handleInputChange = (event) => {
         const value = event.target.value
+        const name = event.target.name
         // Kiểm tra nếu giá trị nhập vào chỉ bao gồm các ký tự số
         if (/^\d*$/.test(value)) {
-            setInputValue(value)
-            if (value.length >= 10) {
-                const ty = handleCheckPrice(value, 'ty')
-                setValidatePrice(ty)
-            } else if (value.length >= 7) {
-                const tr = handleCheckPrice(value)
-                setValidatePrice(tr)
-            } else {
-                setValidatePrice('')
+            if (name === 'price') {
+                setInputValue(value)
+                if (value.length >= 10) {
+                    const ty = handleCheckPrice(value, 'ty')
+                    setValidatePrice({
+                        status: true,
+                        title: ty,
+                        validate: false,
+                    })
+                } else if (value.length >= 7) {
+                    const tr = handleCheckPrice(value)
+                    setValidatePrice({
+                        status: true,
+                        title: tr,
+                        validate: false,
+                    })
+                } else {
+                    setValidatePrice({
+                        status: false,
+                        title: '',
+                        validate: false,
+                    })
+                }
+            }
+            if (name === 'priceHire') {
+                setInputValueHire(value)
+                if (value.length >= 10) {
+                    const ty = handleCheckPrice(value, 'ty')
+                    setValidatePriceHire({
+                        status: true,
+                        validate: false,
+                        title: ty,
+                    })
+                } else if (value.length >= 7) {
+                    const tr = handleCheckPrice(value)
+                    setValidatePriceHire({
+                        status: true,
+                        validate: false,
+                        title: tr,
+                    })
+                } else {
+                    setValidatePriceHire({
+                        status: false,
+                        title: '',
+                        validate: false,
+                    })
+                }
             }
         }
     }
@@ -60,7 +102,7 @@ export default function Form1({ handleNextSlide }) {
             if (str.length === 1) {
                 str[0] === '0' && str.pop()
             }
-            return a[0] + '.' + str.join('') + content
+            return a[0] + ',' + str.join('') + content
         }
     }
 
@@ -78,12 +120,16 @@ export default function Form1({ handleNextSlide }) {
     })
 
     const handleClickSubmit = () => {
-        setValidatePrice('Vui lòng điền thông tin!')
+        !inputValue && setValidatePrice({ status: false, title: '', validate: true })
+        !inputValueHire &&
+            selectedOption === 'sellandhire' &&
+            setValidatePriceHire({ status: false, title: '', validate: true })
     }
 
     const onSubmit = (e) => {
-        // if (!inputValue) return
-        // console.log({ ...e, demand: selectedOption, price: inputValue })
+        if (!inputValueHire && selectedOption === 'sellandhire') return
+        if (!inputValue) return
+        console.log('🚀 ~ file: Form1.jsx:130 ~ onSubmit ~ e:', e)
         handleNextSlide()
     }
 
@@ -96,7 +142,6 @@ export default function Form1({ handleNextSlide }) {
                         Nhu cầu của bạn là gì?
                     </span>
                     <form
-                        action=''
                         autoComplete='false'
                         onSubmit={handleSubmit(onSubmit)}
                     >
@@ -174,58 +219,56 @@ export default function Form1({ handleNextSlide }) {
                                     />
                                 </svg>
                             </div>
-                            <div className={`relative flex-1`}>
+                            <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    className='w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150'
+                                    className={`${
+                                        validatePrice.validate
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'border-[#C5C5C5] placeholder:text-[#646464]'
+                                    } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
+                                    placeholder={t('sell')}
                                     name='price'
                                     id='price'
                                     value={inputValue}
                                     onChange={handleInputChange}
                                 />
-                                <label
-                                    htmlFor='price'
-                                    className='absolute top-1/2 left-[1.5vw] -translate-y-1/2 text-[#646464] font-normal leading-normal bg-white pointer-events-none transition-all 0.5s ease-linear'
-                                >
-                                    Giá bán mong muốn *
-                                </label>
-                                <p
-                                    className={`${
-                                        inputValue ? 'text-den' : 'text-red-400'
-                                    } absolute -bottom-[0.25vw] left-0 translate-y-full w-full pl-[1.5vw] title10-600-150`}
-                                >
-                                    {validatePrice}
+                                <p className='absolute bottom-0 left-0 translate-y-full pl-[1.5vw] text-den title14-600-150'>
+                                    {validatePrice.status && validatePrice.title}
                                 </p>
                             </div>
-                            <div className={`relative flex-1`}>
-                                <input
-                                    type='text'
-                                    className='w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                    placeholder='Giá bán mong muốn *'
-                                    name='price'
-                                    id='price'
-                                    value={inputValue}
-                                    onChange={handleInputChange}
-                                />
-                                <p
-                                    className={`${
-                                        inputValue ? 'text-den' : 'text-red-400'
-                                    } absolute -bottom-[0.25vw] left-0 translate-y-full w-full pl-[1.5vw] title10-600-150`}
-                                >
-                                    {validatePrice}
-                                </p>
-                            </div>
+                            {selectedOption === 'sellandhire' && (
+                                <div className={`relative flex-1`}>
+                                    <input
+                                        type='text'
+                                        className={`${
+                                            validatePriceHire.validate
+                                                ? 'border-red-400 placeholder:text-red-400'
+                                                : 'placeholder:text-[#646464] border-[#C5C5C5]'
+                                        } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
+                                        placeholder={t('hire')}
+                                        name='priceHire'
+                                        id='priceHire'
+                                        value={inputValueHire}
+                                        onChange={handleInputChange}
+                                    />
+                                    <p className='absolute bottom-0 left-0 translate-y-full pl-[1.5vw] text-den title14-600-150'>
+                                        {validatePriceHire.status && validatePriceHire.title}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                         <div className='relative'>
                             <input
                                 type='text'
-                                className='w-full py-[1vw] mt-[1.5vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Địa chỉ *'
+                                className={`${
+                                    errors.address?.message
+                                        ? 'border-red-400 placeholder:text-red-400'
+                                        : 'placeholder:text-[#646464] border-[#C5C5C5]'
+                                } w-full py-[1vw] mt-[1.5vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den focus:border-logo title16-400-150 placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
+                                placeholder={`${errors.address?.message ?? 'Địa chỉ *'}`}
                                 {...register('address')}
                             />
-                            <p className='absolute -bottom-[0.25vw] left-0 translate-y-full pl-[1.5vw] text-red-400 title10-600-150'>
-                                {errors.address?.message}
-                            </p>
                         </div>
                         <button
                             onClick={handleClickSubmit}

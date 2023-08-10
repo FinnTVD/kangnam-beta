@@ -49,6 +49,9 @@ export default function Map() {
         mapRef.current = new vietmapgl.Map({
             container: 'map',
             style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
+            // style: `https://maps.vietmap.vn/api/tm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,
+            // style: `https://maps.vietmap.vn/api/lm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,
+            // style: `https://maps.vietmap.vn/api/dm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,
             center: [105.78234226958115, 20.920931262916405],
             zoom: 6,
             pitch: 90, // starting zooms

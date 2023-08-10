@@ -72,7 +72,7 @@ export default function Header() {
     const handleScroll = () => {
         if (!map || !featureRef.current) return
         gsap.to(featureRef.current, {
-            opacity:0,
+            opacity: 0,
             scrollTrigger: {
                 trigger: map,
                 start: 'top bottom',
