@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import localFont from 'next/font/local'
 import Footer from '@/components/general/Footer'
 import { NextIntlClientProvider } from 'next-intl'
+
 const avertaStdCY = localFont({
     src: [
         {
@@ -76,6 +77,8 @@ export default async function RootLayout({ children, params }) {
                     {children}
                     <Footer />
                 </NextIntlClientProvider>
+                {children}
+                <Footer></Footer>
             </body>
         </html>
     )

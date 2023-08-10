@@ -4,13 +4,13 @@ export default function NewsItem({newsOtherItem}){
     return(
     <div className="group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw]" style={{boxShadow: '6px 0px 39.76811599731445px 0px rgba(0, 0, 0, 0.05)'}}>
             {/* <div className="flex h-[11vw] items-center"> */}
-                <div className="w-full h-[16.25vw] relative rounded-lg overflow-hidden">
+                <div className="w-full h-[16.1875vw] relative rounded-lg overflow-hidden">
                     <Image src={newsOtherItem.picture} fill alt={`news${newsOtherItem.id}`} className="group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden"/>
                 </div>
-                <span className="bg-nau-nhat title12-400-150 mt-[1vw] py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat">{newsOtherItem.category}</span>
+                <span className="bg-nau-nhat inline-block title12-400-150 mt-[1vw] py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat">{newsOtherItem.category}</span>
                 <div className="w-full mt-[0.2625vw]] flex flex-col">
                     <h2 className="text-den-2 title20-700-150 group-hover:text-nau-nhat transition duration-300">{newsOtherItem.title}</h2>
-                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-3">{newsOtherItem.content}</span>
+                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-2">{newsOtherItem.content}</span>
                 </div>
             {/* </div> */}
             <div className="flex mt-[0.5vw]">
