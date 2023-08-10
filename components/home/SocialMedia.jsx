@@ -6,11 +6,14 @@ export default function SocialMedia() {
     return (
         <ul
             id='list-social'
-            className='flex flex-col gap-y-[0.63vw] absolute top-1/2 -left-full -translate-y-1/2 -translate-x-[0.62vw]'
+            className='group-hover:flex hidden flex-col gap-y-[0.63vw] absolute top-1/2 -left-full -translate-y-1/2 -translate-x-[0.62vw]'
         >
             {arrMedia &&
                 arrMedia.map((e, index) => (
-                    <li key={index}>
+                    <li
+                        key={index}
+                        className='hover:scale-105'
+                    >
                         <Link
                             href={'/'}
                             className='flex justify-center items-center w-[3.5vw] h-[3.5vw] bg-white rounded-full border border-solid border-[#D6A279]'

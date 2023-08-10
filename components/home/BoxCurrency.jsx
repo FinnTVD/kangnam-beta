@@ -1,8 +1,10 @@
 import Image from 'next/image'
 
-export default function BoxCurrency() {
+export default function BoxCurrency({ className }) {
     return (
-        <div className='absolute -left-[1.88vw] -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white '>
+        <div
+            className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
+        >
             <span className='text-den title20-700-130 mx-auto block'>Chuyển đổi tiền tệ</span>
             <span className='text-den title10-400-150 opacity-50 mb-[0.31vw]'>Số tiền</span>
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>

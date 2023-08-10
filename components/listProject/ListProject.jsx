@@ -3,6 +3,8 @@ import Image from 'next/image'
 import Map from '../home/Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
+import BoxFilter from '../general/BoxFilter'
+import BoxSort from './BoxSort'
 const listProject = new Array(16).fill(0)
 
 export default function ListProject() {
@@ -11,8 +13,8 @@ export default function ListProject() {
         <section className=''>
             <div className='flex'>
                 <div className='flex-1'>
-                    <div className='flex items-start justify-between border-b border-solid border-line pl-[7.5vw] pr-[1.25vw]'>
-                        <div className='flex flex-col gap-y-[0.31vw]'>
+                    <div className='flex items-center justify-between border-b border-solid border-line pl-[7.5vw] pr-[1.25vw]'>
+                        <div className='flex flex-col gap-y-[0.31vw] mb-[1vw]'>
                             <span className='opacity-50 text-den title14-400-150'>100% xác thực</span>
                             <h3 className='text-den title32-800-130'>Mua bán nhà đất căn hộ</h3>
                         </div>
@@ -21,21 +23,8 @@ export default function ListProject() {
                             <div>{Element}</div>
                         </div>
                     </div>
-                    <div className='pl-[7.5vw] pr-[1.25vw] border-b border-solid border-line'>
-                        <ul className='flex gap-x-[1.5vw] my-[1vw]'>
-                            <li className='border py-[0.59vw] px-[1.5vw] border-solid border-logo shadow-filter rounded-[6.25vw] backdrop-blur-[7.5px] text-den title14-400-150'>
-                                Loại hình
-                            </li>
-                            <li className='border py-[0.59vw] px-[1.5vw] border-solid border-logo shadow-filter rounded-[6.25vw] backdrop-blur-[7.5px] text-den title14-400-150'>
-                                Loại hình
-                            </li>
-                            <li className='border py-[0.59vw] px-[1.5vw] border-solid border-logo shadow-filter rounded-[6.25vw] backdrop-blur-[7.5px] text-den title14-400-150'>
-                                Loại hình
-                            </li>
-                            <li className='border py-[0.59vw] px-[1.5vw] border-solid border-logo shadow-filter rounded-[6.25vw] backdrop-blur-[7.5px] text-den title14-400-150'>
-                                Loại hình
-                            </li>
-                        </ul>
+                    <div className='pl-[7.5vw] pr-[1.25vw] border-b border-solid border-line py-[1vw]'>
+                        <BoxFilter />
                     </div>
                     <article className='pl-[7.5vw] pr-[1.25vw]'>
                         <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
@@ -45,19 +34,7 @@ export default function ListProject() {
                                     {show ? 12 : 16} trong số 50 nhà đất xác thực
                                 </span>
                             </div>
-                            <select
-                                name=''
-                                id=''
-                                className='opacity-50 text-den title16-400-150'
-                            >
-                                <option
-                                    value=''
-                                    defaultChecked
-                                    disabled
-                                >
-                                    Sắp xếp theo
-                                </option>
-                            </select>
+                            <BoxSort />
                         </div>
                         <div
                             className={`grid ${
@@ -66,7 +43,8 @@ export default function ListProject() {
                         >
                             {listProject &&
                                 listProject.slice(0, show ? 12 : 16).map((e, index) => (
-                                    <div
+                                    <Link
+                                        href={'/'}
                                         className='w-full'
                                         key={index}
                                     >
@@ -79,12 +57,9 @@ export default function ListProject() {
                                                 quality={100}
                                                 fill
                                             />
-                                            <Link
-                                                href={'/'}
-                                                className='block absolute rounded-[0.9375vw] bg-white top-[1vw] left-[1vw] text-nau-nhat py-[0.22vw] px-[0.94vw] h-fit w-fit title10-600-150'
-                                            >
+                                            <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
                                                 Thuê
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className='pt-[1.13vw]'>
                                             <h6 className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw]'>
@@ -160,7 +135,7 @@ export default function ListProject() {
                                                 <span className='capitalize text-den title14-400-150'>25 tỷ</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                         </div>
                     </article>

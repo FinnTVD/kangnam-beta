@@ -70,8 +70,12 @@
         @apply text-16pc font-semibold leading-[1.6];
     }
 
+    .title16-800-130 {
+        @apply text-16pc font-extrabold leading-[1.3];
+    }
+
     .title16-600-150 {
-        @apply text-16pc font-semibold leading-[1.5];
+        @apply text-16pc font-semibold leading-normal;
     }
 
     .title16-600-130 {
@@ -80,6 +84,10 @@
 
     .title16-400-150 {
         @apply font-normal leading-normal text-16pc;
+    }
+
+    .title16-400-130 {
+        @apply font-normal leading-[1.3] text-16pc;
     }
 
     .title15-500-150 {

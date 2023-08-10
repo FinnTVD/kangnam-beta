@@ -92,7 +92,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide }) {
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'border-[#C5C5C5] placeholder:text-[#646464]'
                                     } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                    placeholder='Họ và tên *'
+                                    placeholder={`${errors.fullName?.message ?? 'Họ và tên *'}`}
                                     {...register('fullName')}
                                 />
                             </div>
@@ -104,7 +104,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide }) {
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'border-[#C5C5C5] placeholder:text-[#646464]'
                                     } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                    placeholder='Số điện thoại *'
+                                    placeholder={`${errors.numberPhone?.message ?? 'Số điện thoại *'}`}
                                     {...register('numberPhone')}
                                 />
                             </div>
@@ -144,10 +144,10 @@ export default function Form2({ handlePrevSlide, handleNextSlide }) {
                             </svg>
                         </button>
                     </form>
-                    <div className='absolute bottom-0 left-0'>
+                    {/* <div className='absolute bottom-0 left-0'>
                         <p className='pl-[1.5vw] text-red-400 title14-600-150'>{errors.fullName?.message}</p>
                         <p className='pl-[1.5vw] text-red-400 title14-600-150'>{errors.numberPhone?.message}</p>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='relative w-[28.8125vw] h-[31.875vw] rounded-[1vw] overflow-hidden'>
                     <Image
