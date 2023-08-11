@@ -19,7 +19,7 @@
     }
 
     .title60 {
-        @apply capitalize leading-[1.3] text-56pc font-extrabold -tracking-[1.8px];
+        @apply leading-[1.3] text-60pc font-extrabold -tracking-[1.8px] text-white;
     }
 
     .title56 {
@@ -48,6 +48,10 @@
 
     .title20-700-130 {
         @apply text-20pc font-bold leading-[1.3];
+    }
+
+    .title20-400-150 {
+        @apply font-normal leading-normal text-20pc;
     }
 
     .title20-400-130 {
@@ -87,7 +91,7 @@
     }
 
     .title16-600-150 {
-        @apply text-16pc font-semibold leading-normal;
+        @apply font-semibold leading-normal text-16pc;
     }
 
     .title16-600-130 {
@@ -156,6 +160,10 @@
     font-weight: 700;
     font-size: 14px;
     border: 4px solid rgba(48, 51, 58, 0.3);
+}
+canvas.vietmapgl-canvas.mapboxgl-canvas {
+    border-top-left-radius: 0.5vw;
+    overflow: hidden;
 }
 
 /* My Project */

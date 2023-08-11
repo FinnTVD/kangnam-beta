@@ -1,18 +1,16 @@
 import Image from 'next/image'
 import Deposit from './Deposit'
-import Header from './Header'
+// import Header from './Header'
 import MyProject from './MyProject'
 import ProjectProminent from './ProjectProminent'
 import Prominent from './Prominent'
 import Partner from './Partner'
 import LatestNews from './LatestNews'
-
 import WeAre from './WeAre'
 
 export default function IndexHome() {
     return (
         <>
-            <Header />
             <main>
                 <WeAre />
                 <MyProject />

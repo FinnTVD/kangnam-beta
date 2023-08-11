@@ -14,7 +14,7 @@ export default function Prominent() {
             <div className='absolute bottom-0 left-0 w-full h-[76vh] bg-gradient-slide z-[1]'></div>
             <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] items-center w-full mb-[3.19vw]'>
                 <div className='flex flex-col items-center'>
-                    <h2 className='title60'>Nổi bật theo khu vực</h2>
+                    <h2 className='capitalize title60'>Nổi bật theo khu vực</h2>
                     <span className='mt-[0.75vw] mb-[1.5vw] w-[21.5vw] text-24pc font-normal leading-[1.3] block text-center'>
                         Căn hộ Vinhomes Grand Park hướng Bắc
                     </span>

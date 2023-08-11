@@ -1,51 +1,14 @@
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import SocialMedia from './SocialMedia'
 import BoxCurrency from './BoxCurrency'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState } from 'react'
-import BoxLanguage from '../general/BoxLanguage'
+import NavBar from '../general/NavBar'
+import { usePathname } from 'next/navigation'
 
-const listNav = [
-    {
-        id: 1,
-        title: 'Trang chủ',
-        href: '/',
-    },
-    {
-        id: 2,
-        title: 'Về chúng tôi',
-        href: '/gioi-thieu',
-    },
-    {
-        id: 3,
-        title: 'Dự án',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 4,
-        title: 'Kí gửi bất động sản',
-        href: '/dang-tin',
-    },
-    {
-        id: 5,
-        title: 'Bán lại',
-        href: '/',
-    },
-    {
-        id: 6,
-        title: 'Thỏa thuận & Pháp lí',
-        href: '/thoa-thuan-va-phap-li',
-    },
-    {
-        id: 7,
-        title: 'Tin tức',
-        href: '/danh-sach-tin-tuc',
-    },
-]
 const arrSuggest = [
     {
         title: 'vinhomes central park',
@@ -63,6 +26,8 @@ export default function Header() {
     const [map, setMap] = useState(null)
     const [isShow, setIsShow] = useState(null)
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+    const pathName = usePathname()
+    console.log('🚀 ~ file: Header.jsx:31 ~ Header ~ pathName:', pathName)
 
     useEffect(() => {
         // window.addEventListener('scroll', handleScroll)
@@ -130,47 +95,10 @@ export default function Header() {
                 <div className='absolute z-[2] bg-gradient-header1 top-0 left-0 w-full h-full'></div>
                 {/* linear-white */}
                 <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>
-                <nav className='px-120 relative z-40 py-[1.03vw] h-fit border-b border-solid border-white04'>
-                    <div className='flex items-center justify-end w-full gap-x-[2.5vw]'>
-                        <div className='py-[1.32vw] px-[1.95vw] bg-gradient-primary w-fit h-fit absolute left-[7.5vw] top-0'>
-                            <div className='relative w-[3.52vw] h-[5.5vw]'>
-                                <Image
-                                    className='object-cover'
-                                    src='/logo.png'
-                                    alt='logo'
-                                    quality={100}
-                                    sizes='3.52vw'
-                                    fill
-                                />
-                            </div>
-                        </div>
-                        <ul className='flex gap-x-[1.75vw] ml-[9.1875vw]'>
-                            {listNav &&
-                                listNav.map((e, index) => (
-                                    <li key={index}>
-                                        <Link
-                                            className='block title16-600-130'
-                                            href={e.href}
-                                        >
-                                            {e.title}
-                                        </Link>
-                                    </li>
-                                ))}
-                        </ul>
-                        <div className='flex gap-x-[1.5vw] items-center'>
-                            <Link
-                                href='/dang-tin'
-                                className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
-                            >
-                                Kí gửi BĐS
-                            </Link>
-                            <BoxLanguage />
-                        </div>
-                    </div>
-                </nav>
+                <NavBar />
                 <div className='absolute top-[47%] -translate-y-1/2 left-[7.5vw] z-10'>
                     <p className='title18-400-160'>An tâm với 100% bất động sản được xác thực tại KANGNAM</p>
-                    <h1 className='mt-[0.5vw] mb-[1.87vw] text-white title60'>Lựa chọn căn nhà ưng ý của bạn</h1>
+                    <h1 className='mt-[0.5vw] mb-[1.87vw] text-white caption-top title60'>Lựa chọn căn nhà ưng ý của bạn</h1>
                     <div className='w-[54vw] py-[1.53vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center'>
                         <div className='flex items-center w-full'>
                             <div className='gap-x-[0.5vw] flex items-center title16-400-130 text-den'>
@@ -342,7 +270,7 @@ export default function Header() {
                     <li className='relative w-[4.5vw] h-[4.5vw] shadow-feature bg-white rounded-full'>
                         <div
                             onClick={handleCurrently}
-                            className='relative w-full h-full flex justify-center items-center cursor-pointer '
+                            className='relative flex items-center justify-center w-full h-full cursor-pointer '
                         >
                             <Image
                                 src='/tiente.svg'

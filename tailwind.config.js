@@ -18,6 +18,10 @@ module.exports = {
                 'gradient-line-header':
                     'linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, #FFF 52.55%, rgba(255, 255, 255, 0.00) 100%)',
                 'gradient-slide': 'linear-gradient(360deg, rgba(115, 76, 45, 0.67) 0%, rgba(115, 76, 45, 0.00) 88.33%)',
+                'gradient-header-other':
+                    'linear-gradient(180deg, rgba(164, 110, 71, 0.60) 0%, rgba(47, 22, 1, 0.60) 100%)',
+                'gradient-mark-home':
+                    'linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.18) 50.66%, rgba(255, 255, 255, 0.00) 100%)',
             },
             boxShadow: {
                 button: '0px 0px 30px 0px rgba(200, 200, 200, 0.36)',
