@@ -1,6 +1,10 @@
+'use client'
 import Image from "next/image"
+import { useTranslations } from "next-intl";
+import Button from "../general/Button";
 
 export default function Contact(){
+    const t = useTranslations('AboutUsContact')
     const title = "Trụ sở chính (Hà Nội)";
     const address = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phone = ["+84 337858021 / +84 339625612", "+82 10-8413-1981"];
@@ -8,15 +12,16 @@ export default function Contact(){
         <section className="relative px-120 pt-[8.125vw] pb-[8.125vw]">
             <div className='flex justify-between items-end'>
                 <div>
-                    <span data-aos="fade-up" className='sub-title'>Liên hệ</span>
-                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw]'>Thông tin văn phòng</h2>
+                    <span data-aos="fade-up" className='sub-title'>{t('subtitle')}</span>
+                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw]'>{t('title')}</h2>
                 </div>
-                <button className="text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" style={{boxShadow: "0px 0px 30px 0px rgba(206, 126, 64, 0.36)"}}>
+                {/* <button className="text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" style={{boxShadow: "0px 0px 30px 0px rgba(206, 126, 64, 0.36)"}}>
                     <span> Liên hệ ngay </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="7" height="14" viewBox="0 0 7 14" fill="none" className="w-[0.375vw] ml-[0.75vw]">
                         <path d="M0.5 1L6.5 7L0.5 13" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                </button>
+                </button> */}
+                <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center"> {t('button')} </Button>
             </div>
             <div className="flex relative pt-[6.5vw]">
                 <div>
@@ -43,7 +48,7 @@ export default function Contact(){
                 </div>
                 <Image width={862} height={710} src="/about-us-map.svg" className="absolute right-0 top-0 w-[50.625vw] h-[44.375vw] object-contain"></Image>
             </div>
-            <Image fill src="/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06]"></Image>
+            <Image fill src="/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06] z-[-1]"></Image>
         </section>
     )
 }

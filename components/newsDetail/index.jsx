@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation"
 import PostDetail from "./PostDetail";
 import RelatedNews from "./RelatedNews";
-
+import { useEffect } from "react";
 
 export default function IndexNewsDetail({slug}){
     const content = "<img src='/about-us-contact-address.png'></img><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p><h2>1. Đôi nét về các dự án bất động sản</h2><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p>"
@@ -26,7 +26,11 @@ export default function IndexNewsDetail({slug}){
     // console.log(slug)
     const post = newsArr.find((item) => item.slug === slug)
     const relatedNewsArr = newsArr.filter((item) => item.category === post.category && item!==post).slice(0, 5);
-    console.log(relatedNewsArr)
+    // console.log(relatedNewsArr)
+    // useEffect(() => {
+    //     window.location.reload()
+    //     }, [slug])
+
     return(
         <>
             <PostDetail post={post}></PostDetail>
