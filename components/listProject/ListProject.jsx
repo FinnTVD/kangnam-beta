@@ -10,7 +10,7 @@ const listProject = new Array(16).fill(0)
 export default function ListProject() {
     const [show, Element] = useToggleShowMap()
     return (
-        <section className=''>
+        <section className='mt-[7.75vw]'>
             <div className='flex'>
                 <div className='flex-1'>
                     <div className='flex items-center justify-between border-b border-solid border-line pl-[7.5vw] pr-[1.25vw]'>
@@ -140,11 +140,16 @@ export default function ListProject() {
                         </div>
                     </article>
                 </div>
-                <div className={`${!show && 'hidden'} w-[36.3125vw]`}>
-                    <div className='w-full h-[46.9375vw]'>
+                <div
+                    className={`${
+                        !show && 'hidden'
+                    } w-[35.3125vw] fixed top-[5.57vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
+                >
+                    <div className='w-full h-[46.9375vw] rounded-tl-[0.5vw] overflow-hidden'>
                         <Map />
                     </div>
                 </div>
+                <div className={`${!show && 'hidden'} w-[35.3125vw]`}></div>
             </div>
             <div className='h-[100vh]'></div>
         </section>

@@ -34,7 +34,7 @@ const handleCheckIcon = (locale) => {
     }
 }
 
-export default function BoxLanguage() {
+export default function BoxLanguage({ type = '' }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
     const locale = useLocale()
     if (!locale) return
@@ -43,9 +43,13 @@ export default function BoxLanguage() {
             onClick={() => {
                 setIsShowLanguage(!isShowLanguage)
             }}
-            className='flex flex-col gap-y-[0.56vw] relative z-40 w-[8vw]'
+            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw]'
         >
-            <span className='text-white -tracking-[0.6px] title12-600-150'>Chọn ngôn ngữ</span>
+            <span
+                className={`${type === 'ds' ? 'text-den opacity-60' : 'text-white'} -tracking-[0.6px] title12-600-150`}
+            >
+                Chọn ngôn ngữ
+            </span>
             <div className='flex items-center gap-x-[0.5vw] select-none cursor-pointer'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
@@ -55,7 +59,7 @@ export default function BoxLanguage() {
                     width={28}
                     height={18}
                 />
-                <span className='text-white title16-600-150 -tracking-[0.48px]'>{handleCheckCountry(locale)}</span>
+                <span className={`${type === 'ds'?'text-den':'text-white'} title16-600-150 -tracking-[0.48px]`}>{handleCheckCountry(locale)}</span>
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='11'
@@ -66,11 +70,13 @@ export default function BoxLanguage() {
                 >
                     <path
                         d='M5.6 6.5L10.4497 0.5H0.750258L5.6 6.5Z'
-                        fill='white'
+                        fill={`${type === 'ds' ? '#444' : 'white'}`}
                     />
                 </svg>
             </div>
-            <SelectLanguage className={!isShowLanguage ? 'hidden' : ''} />
+            <SelectLanguage
+                className={!isShowLanguage ? 'hidden' : ''}
+            />
         </div>
     )
 }

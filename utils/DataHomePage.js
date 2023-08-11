@@ -184,20 +184,23 @@ const apiHomePage = {
             alt: '',
         },
         socialMedia: {
-            facebook: {
-                link: 'http://www.facebook...',
+            KakaoTalk: {
+                link: '',
             },
-            instagram: {
-                link: 'http://www.instagram...',
+            weChat: {
+                link: '',
             },
-            youtube: {
-                link: 'http://www.youtube...',
+            zalo: {
+                link: '',
             },
-            twitter: {
-                link: 'http://www.twitter...',
+            telegram: {
+                link: '',
+            },
+            skype: {
+                link: '',
             },
             linkedin: {
-                link: 'http://www.linkedin...',
+                link: '',
             },
         },
         contact: {
