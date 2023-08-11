@@ -1,10 +1,13 @@
+'use client';
 import Button from '../general/Button'
 import Image from 'next/image'
 import LatestNewsItem from '../general/LatestNewsItem'
 import OtherNewsItem from '../general/OtherNewsItem'
+import { useTranslations } from 'next-intl'
 // import React, { useEffect } from 'react'
 
 export default function LatestNews () {
+    const t = useTranslations("HomepageNews");
     const content = "<img src='/about-us-contact-address.png'></img><span>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</span><h2>1. Đôi nét về các dự án bất động sản</h2><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p>"
     const categories = ['Thị trường', 'Tin nóng', 'Dự án'];
     const newsArr = [{id: 0, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/featuredImg.jpg'},
@@ -28,8 +31,8 @@ export default function LatestNews () {
     <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative'>
         <div className='flex justify-between items-end'>
             <div>
-                <span className='sub-title'>Tổng hợp các dự án</span>
-                <h2 className='title56 text-den mt-[0.62vw]'>Tin tức mới nhất</h2>
+                <span className='sub-title'>{t('subtitle')}</span>
+                <h2 className='title56 text-den mt-[0.62vw]'>{t('title')}</h2>
             </div>
             <Button href={'/danh-sach-tin-tuc'}>Xem tất cả</Button>
         </div>

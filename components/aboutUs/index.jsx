@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from "react";
 
 export default function IndexAboutUs() {
+    
     useEffect(() => {
         Aos.init({
             disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
