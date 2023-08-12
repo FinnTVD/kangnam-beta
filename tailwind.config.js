@@ -34,6 +34,7 @@ module.exports = {
                 viewProject: '0px 0px 1.5px 5px rgb(214,162,121,0.1)',
                 boxFilter: '0px 0px 26px 0px rgba(0, 0, 0, 0.08)',
                 itemProject: '0 2px 10px 0 rgba(0,0,0,0.3)',
+                ware: '0 0 0 10px hsla(0,0%,100%,0)',
             },
             colors: {
                 'vang-nhe': '#fcf8f5',

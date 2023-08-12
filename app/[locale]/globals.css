@@ -169,6 +169,16 @@ canvas.vietmapgl-canvas.mapboxgl-canvas {
 /* My Project */
 
 /* list social */
+.item-social:hover {
+    animation: shadow 0.5s;
+    box-shadow: 0 0 0 0.8vw hsla(0, 0%, 100%, 0);
+}
+
+@keyframes shadow {
+    0% {
+        box-shadow: 0 0 0 0 #cbd8cd;
+    }
+}
 
 /* list social */
 
