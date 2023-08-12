@@ -3,7 +3,6 @@ import Image from 'next/image'
 import BoxCurrency from './BoxCurrency'
 import SocialMedia from './SocialMedia'
 import { useState } from 'react'
-import classes from './FeatureHome.module.css'
 
 export default function FeatureHome() {
     const [isShow, setIsShow] = useState(null)
