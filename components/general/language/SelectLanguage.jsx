@@ -19,7 +19,7 @@ const handleCheckLang = (lang, pathName) => {
                 break
         }
     } else {
-        if (path[1]) {
+        if (path[1] && lang !== 'vn') {
             switch (lang) {
                 case 'vn':
                     return '/'
