@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import BoxLanguage from './BoxLanguage'
 import { useState } from 'react'
+import BoxLanguage from './language/BoxLanguage'
 const listNav = [
     {
         id: 1,
@@ -36,19 +36,19 @@ const listNav = [
     },
 ]
 
-export default function NavBarV2() {
+export default function NavBarV2({ lang }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04'>
             <div className='flex items-center justify-between w-full gap-x-[2.5vw]'>
                 <div className='flex gap-x-[1.92vw] items-center'>
                     <Link
-                        href='/'
+                        href={`/${lang !== 'vn' ? lang : ''}`}
                         className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw]'
                     >
                         <Image
                             className='object-cover'
-                            src='/logo-no-bg.svg'
+                            src='/images/logo-no-bg.svg'
                             alt='logo'
                             quality={100}
                             sizes='3.52vw'
@@ -119,7 +119,7 @@ export default function NavBarV2() {
                                 <li key={index}>
                                     <Link
                                         className='block text-den title16-600-130'
-                                        href={e.href}
+                                        href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
                                     >
                                         {e.title}
                                     </Link>
@@ -128,12 +128,15 @@ export default function NavBarV2() {
                     </ul>
                     <div className='flex gap-x-[1.25vw] items-center'>
                         <Link
-                            href='/dang-tin'
+                            href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
                             className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                         >
                             Kí gửi nhà đất
                         </Link>
-                        <BoxLanguage type={'ds'} />
+                        <BoxLanguage
+                            type={'ds'}
+                            lang={lang}
+                        />
                     </div>
                 </div>
             </div>

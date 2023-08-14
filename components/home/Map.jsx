@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import useDebounce from '@/hooks/useDebounce'
+import mapJson from './map.json'
 
 const arrMarker = [
     [105.9151962942141, 20.920931262916405],
@@ -48,7 +49,8 @@ export default function Map() {
     const loadMap = () => {
         mapRef.current = new vietmapgl.Map({
             container: 'map',
-            style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
+            style: mapJson,
+            // style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
             // style: `https://maps.vietmap.vn/api/tm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,
             // style: `https://maps.vietmap.vn/api/lm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,
             // style: `https://maps.vietmap.vn/api/dm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`,

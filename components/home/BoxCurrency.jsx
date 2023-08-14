@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function BoxCurrency({ className }) {
+export default function BoxCurrency({ className = '' }) {
     return (
         <div
             className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
@@ -15,7 +15,7 @@ export default function BoxCurrency({ className }) {
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/america.png'
+                        src='/images/america.png'
                         alt='america'
                         width={16}
                         height={16}
@@ -63,7 +63,7 @@ export default function BoxCurrency({ className }) {
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/vn.png'
+                        src='/images/vn.png'
                         alt='vn'
                         width={16}
                         height={16}

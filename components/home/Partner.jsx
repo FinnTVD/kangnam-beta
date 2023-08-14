@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 
 export default function Partner() {
-    const imgArray = ['/partnerlogo.jpg', '/partnerlogo.jpg', '/logoVin.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg',
-    '/partnerlogo.jpg', '/logoVin.jpg', '/partnerlogo.jpg', '/logoVin.jpg', '/logoVin.jpg', '/logoVin.jpg', '/logoVin.jpg']
+    const imgArray = ['/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg',
+    '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg']
     const imgBorder = ['bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tl-2xl', 
     'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tr-2xl',
     'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-bl-2xl',
@@ -30,12 +30,12 @@ const arrPartner = []
             <div className='absolute bottom-[0.5vw] left-0 h-[6.25vw] w-full z-[-1]' style={{background: 'linear-gradient(0deg, #fff, #ffffff00)'}}></div>
             <div className='absolute opacity-70 left-0 top-0 w-full h-full z-[-1]' style={{background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%), white'}}></div>
             <div className='absolute opacity-30 left-0 top-0 w-full h-full z-[-1] bg-lightgray'></div>
-            <Image src="/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2]"></Image>
+            <Image src="/images/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2]"></Image>
 
             <div className='absolute top-0 left-0 bg-opacity-30 h-full w-full z-[-1]' style={{background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%)'}}></div>
-            <Image src="/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2] opacity-30"></Image>
+            <Image src="/images/partner-bg.jpg" fill className="absolute top-0 left-0 w-full h-full object-cover z-[-2] opacity-30"></Image>
 
-            <div className='flex justify-between items-end'>
+            <div className='flex items-end justify-between'>
                 <div>
                     <span className='sub-title'>Tổng hợp các dự án</span>
                     <h2 className='title56 text-den mt-[0.62vw]'>Đối tác của chúng tôi</h2>
@@ -61,7 +61,7 @@ const arrPartner = []
                             return(
                                 <div className={imgBorder[0]}>
                                     <div className='w-[55%] h-[45%] relative'>
-                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                     </div>
                                 </div>
                             )
@@ -70,7 +70,7 @@ const arrPartner = []
                             return(
                                 <div className={imgBorder[1]}>
                                     <div className='w-[55%] h-[45%] relative'>
-                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                     </div>
                                 </div>
                             )
@@ -79,7 +79,7 @@ const arrPartner = []
                             return(
                                 <div className={imgBorder[3]}>
                                     <div className='w-[55%] h-[45%] relative'>
-                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                     </div>
                                 </div>
                             )
@@ -88,7 +88,7 @@ const arrPartner = []
                             return(
                                 <div className={imgBorder[2]}>
                                     <div className='w-[55%] h-[45%] relative'>
-                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                     </div>
                                 </div>
                             )
@@ -97,7 +97,7 @@ const arrPartner = []
                             return(
                                 <div className={imgBorder[4]}>
                                     <div className='w-[55%] h-[45%] relative'>
-                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain grayscale hover:grayscale-0 transition-grayscale duration-300'></Image>
+                                        <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                     </div>
                                 </div>
                             )

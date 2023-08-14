@@ -3,14 +3,17 @@ import Image from 'next/image'
 import Map from '../home/Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
-import BoxFilter from '../general/BoxFilter'
+import BoxFilter from '../general/filter/BoxFilter'
 import BoxSort from './BoxSort'
 const listProject = new Array(16).fill(0)
 
 export default function ListProject() {
     const [show, Element] = useToggleShowMap()
     return (
-        <section className='mt-[7.75vw]'>
+        <section
+            id='list-project'
+            className='mt-[7.75vw] relative z-10'
+        >
             <div className='flex'>
                 <div className='flex-1'>
                     <div className='flex items-center justify-between border-b border-solid border-line pl-[7.5vw] pr-[1.25vw]'>
@@ -51,7 +54,7 @@ export default function ListProject() {
                                         <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                             <Image
                                                 className='z-0 object-cover'
-                                                src='/itemproject.jpg'
+                                                src='/images/itemproject.jpg'
                                                 alt='itemProject'
                                                 sizes='18vw'
                                                 quality={100}
@@ -145,13 +148,12 @@ export default function ListProject() {
                         !show && 'hidden'
                     } w-[35.3125vw] fixed top-[5.57vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                 >
-                    <div className='w-full h-[46.9375vw] rounded-tl-[0.5vw] overflow-hidden'>
+                    <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                         <Map />
                     </div>
                 </div>
                 <div className={`${!show && 'hidden'} w-[35.3125vw]`}></div>
             </div>
-            <div className='h-[100vh]'></div>
         </section>
     )
 }

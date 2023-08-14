@@ -1,8 +1,8 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SelectLanguage from './SelectLanguage'
 import Image from 'next/image'
-import { useLocale } from 'next-intl'
+import useClickOutSide from '@/hooks/useClickOutSide'
 
 const handleCheckCountry = (locale) => {
     switch (locale) {
@@ -22,27 +22,30 @@ const handleCheckCountry = (locale) => {
 const handleCheckIcon = (locale) => {
     switch (locale) {
         case 'vn':
-            return '/vn.svg'
+            return '/images/vn.svg'
         case 'en':
-            return '/english.svg'
+            return '/images/english.svg'
         case 'kr':
-            return '/korea.svg'
+            return '/images/korea.svg'
         case 'ch':
-            return '/china.svg'
+            return '/images/china.svg'
         default:
             break
     }
 }
 
-export default function BoxLanguage({ type = '' }) {
+export default function BoxLanguage({ type = '', lang }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
-    const locale = useLocale()
-    if (!locale) return
+    const [sideRef, isOutSide] = useClickOutSide()
+    useEffect(() => {
+        isOutSide && setIsShowLanguage(false)
+    }, [isOutSide])
     return (
         <div
             onClick={() => {
                 setIsShowLanguage(!isShowLanguage)
             }}
+            ref={sideRef}
             className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw]'
         >
             <span
@@ -53,13 +56,15 @@ export default function BoxLanguage({ type = '' }) {
             <div className='flex items-center gap-x-[0.5vw] select-none cursor-pointer'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
-                    src={handleCheckIcon(locale)}
+                    src={handleCheckIcon(lang)}
                     alt='country'
                     quality={100}
                     width={28}
                     height={18}
                 />
-                <span className={`${type === 'ds'?'text-den':'text-white'} title16-600-150 -tracking-[0.48px]`}>{handleCheckCountry(locale)}</span>
+                <span className={`${type === 'ds' ? 'text-den' : 'text-white'} title16-600-150 -tracking-[0.48px]`}>
+                    {handleCheckCountry(lang)}
+                </span>
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='11'
@@ -75,7 +80,8 @@ export default function BoxLanguage({ type = '' }) {
                 </svg>
             </div>
             <SelectLanguage
-                className={!isShowLanguage ? 'hidden' : ''}
+                className={!isShowLanguage || isOutSide ? 'hidden' : ''}
+                lang={lang}
             />
         </div>
     )

@@ -1,7 +1,8 @@
+import { handleCheckParamsLanguage } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function WeAre() {
+export default function WeAre({ lang }) {
     return (
         <>
             <section
@@ -10,7 +11,7 @@ export default function WeAre() {
             >
                 <Image
                     className='z-0 object-cover'
-                    src='/bg-we.png'
+                    src='/images/bg-we.png'
                     alt='bg-we'
                     sizes='100vw'
                     quality={100}
@@ -31,7 +32,7 @@ export default function WeAre() {
                             <ul className='flex my-[2.5vw]'>
                                 <li className='flex flex-col items-center gap-y-[1vw]'>
                                     <Image
-                                        src='/check.svg'
+                                        src='/images/check.svg'
                                         alt='check'
                                         width={100}
                                         height={100}
@@ -42,7 +43,7 @@ export default function WeAre() {
                                 </li>
                                 <li className='flex flex-col items-center gap-y-[1vw] ml-[3.75vw] mr-[3.12vw]'>
                                     <Image
-                                        src='/pig.svg'
+                                        src='/images/pig.svg'
                                         alt='pig'
                                         width={100}
                                         height={100}
@@ -53,7 +54,7 @@ export default function WeAre() {
                                 </li>
                                 <li className='flex flex-col items-center gap-y-[1vw]'>
                                     <Image
-                                        src='/watch.svg'
+                                        src='/images/watch.svg'
                                         alt='watch'
                                         width={100}
                                         height={100}
@@ -65,7 +66,7 @@ export default function WeAre() {
                             </ul>
                             <div className='flex gap-x-[1.5vw]'>
                                 <Link
-                                    href='/danh-sach-du-an'
+                                    href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
                                     className='flex justify-center items-center gap-x-[0.5vw] rounded-[6.25vw] py-[1vw] px-[2.06vw] bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject'
                                 >
                                     Xem dự án
@@ -86,7 +87,7 @@ export default function WeAre() {
                                     </svg>
                                 </Link>
                                 <Link
-                                    href='/gioi-thieu'
+                                    href={handleCheckParamsLanguage(lang, '/gioi-thieu')}
                                     className='flex justify-center gap-x-[0.5vw] items-center group relative rounded-[6.25vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden'
                                 >
                                     Về chúng tôi
@@ -125,7 +126,7 @@ export default function WeAre() {
                     <div className='flex items-end'>
                         <div className='h-[77.5vh] w-[48.1875vw] relative z-10'>
                             <Image
-                                src='/house.png'
+                                src='/images/house.png'
                                 alt='house'
                                 className='object-fill z-[2]'
                                 sizes='48.1875vw'
@@ -133,7 +134,7 @@ export default function WeAre() {
                                 fill
                             />
                             <Image
-                                src='/circle-house.png'
+                                src='/images/circle-house.png'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] absolute -top-[3.81vw] left-[2.69vw] z-[1]'
                                 width={600}
@@ -141,7 +142,7 @@ export default function WeAre() {
                                 quality={100}
                             />
                             <Image
-                                src='/people.png'
+                                src='/images/people.png'
                                 alt='people'
                                 className='object-cover w-[33.875vw] h-[38.5625vw] absolute bottom-0 left-[5.68vw] z-[3]'
                                 width={600}
@@ -154,7 +155,7 @@ export default function WeAre() {
             </section>
             <Image
                 className='object-cover z-[3] !h-[200vh]'
-                src='/linear.png'
+                src='/images/linear.png'
                 alt='linear'
                 sizes='100vw'
                 fill

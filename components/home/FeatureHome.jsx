@@ -2,10 +2,15 @@
 import Image from 'next/image'
 import BoxCurrency from './BoxCurrency'
 import SocialMedia from './SocialMedia'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useClickOutSide from '@/hooks/useClickOutSide'
 
 export default function FeatureHome() {
     const [isShow, setIsShow] = useState(null)
+    const [sideRef, isOutSide] = useClickOutSide()
+    useEffect(() => {
+        isOutSide && setIsShow(false)
+    }, [isOutSide])
 
     const handleCurrently = () => {
         setIsShow(!isShow)
@@ -17,7 +22,7 @@ export default function FeatureHome() {
                 className={`item-social transition-all duration-200 ease-linear group relative w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full before:content-normal before:w-[10.64vw] before:h-[25vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[58%]`}
             >
                 <Image
-                    src='/social.svg'
+                    src='/images/social.svg'
                     alt='social'
                     width={36}
                     height={36}
@@ -30,23 +35,24 @@ export default function FeatureHome() {
             >
                 <div
                     onClick={handleCurrently}
-                    className='relative flex items-center justify-center w-full h-full cursor-pointer '
+                    ref={sideRef}
+                    className='relative flex rounded-full items-center justify-center w-full h-full cursor-pointer '
                 >
                     <Image
-                        src='/tiente.svg'
+                        src='/images/tiente.svg'
                         alt='tiente'
                         width={36}
                         height={36}
                         className='object-contain w-[2.04vw] h-[2.04vw] group-hover:scale-125 transition-all duration-200 ease-linear'
                     />
                 </div>
-                <BoxCurrency className={!isShow && 'hidden'} />
+                <BoxCurrency className={!isShow || isOutSide ? 'hidden' : ''} />
             </li>
             <li
                 className={`item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
             >
                 <Image
-                    src='/call.svg'
+                    src='/images/call.svg'
                     alt='call'
                     width={36}
                     height={36}

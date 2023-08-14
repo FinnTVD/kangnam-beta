@@ -78,7 +78,7 @@ export default function Header() {
             <div className='relative w-full h-screen'>
                 <Image
                     className='z-0 object-cover'
-                    src='/bg-header.jpg'
+                    src='/images/bg-header.jpg'
                     alt='bg-header'
                     sizes='100vw'
                     quality={100}
@@ -86,7 +86,7 @@ export default function Header() {
                 />
                 <Image
                     className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
-                    src='/big-logo.png'
+                    src='/images/big-logo.png'
                     alt='big-logo'
                     width={350}
                     height={550}
@@ -98,7 +98,9 @@ export default function Header() {
                 <NavBar />
                 <div className='absolute top-[47%] -translate-y-1/2 left-[7.5vw] z-10'>
                     <p className='title18-400-160'>An tâm với 100% bất động sản được xác thực tại KANGNAM</p>
-                    <h1 className='mt-[0.5vw] mb-[1.87vw] text-white caption-top title60'>Lựa chọn căn nhà ưng ý của bạn</h1>
+                    <h1 className='mt-[0.5vw] mb-[1.87vw] text-white caption-top title60'>
+                        Lựa chọn căn nhà ưng ý của bạn
+                    </h1>
                     <div className='w-[54vw] py-[1.53vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center'>
                         <div className='flex items-center w-full'>
                             <div className='gap-x-[0.5vw] flex items-center title16-400-130 text-den'>
@@ -170,7 +172,7 @@ export default function Header() {
                     <div className='flex gap-x-[1.06vw]'>
                         <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                             <Image
-                                src='/px.png'
+                                src='/images/px.png'
                                 alt='px'
                                 width={32}
                                 height={32}
@@ -181,7 +183,7 @@ export default function Header() {
                         </div>
                         <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                             <Image
-                                src='/cc.png'
+                                src='/images/cc.png'
                                 alt='cc'
                                 width={32}
                                 height={32}
@@ -192,7 +194,7 @@ export default function Header() {
                         </div>
                         <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                             <Image
-                                src='/bt.png'
+                                src='/images/bt.png'
                                 alt='bt'
                                 width={32}
                                 height={32}
@@ -203,7 +205,7 @@ export default function Header() {
                         </div>
                         <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                             <Image
-                                src='/nmp.png'
+                                src='/images/nmp.png'
                                 alt='nmp'
                                 width={32}
                                 height={32}
@@ -214,7 +216,7 @@ export default function Header() {
                         </div>
                         <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                             <Image
-                                src='/dn.png'
+                                src='/images/dn.png'
                                 alt='dn'
                                 width={32}
                                 height={32}
@@ -259,7 +261,7 @@ export default function Header() {
                 >
                     <li className='group relative w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full before:content-normal before:w-[3.64vw] before:h-[20vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[45%]'>
                         <Image
-                            src='/social.svg'
+                            src='/images/social.svg'
                             alt='social'
                             width={36}
                             height={36}
@@ -273,7 +275,7 @@ export default function Header() {
                             className='relative flex items-center justify-center w-full h-full cursor-pointer '
                         >
                             <Image
-                                src='/tiente.svg'
+                                src='/images/tiente.svg'
                                 alt='tiente'
                                 width={36}
                                 height={36}
@@ -284,7 +286,7 @@ export default function Header() {
                     </li>
                     <li className='w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full'>
                         <Image
-                            src='/call.svg'
+                            src='/images/call.svg'
                             alt='call'
                             width={36}
                             height={36}
