@@ -1,6 +1,44 @@
 {
-    "form1": {
+    "Form1": {
         "sell": "所需销售价格 *",
         "hire": "所需租金 *"
+    },
+    "HomepageNews":{
+        "subtitle": "新闻综合",
+        "title": "最新消息"
+    },
+    "HomepagePartner":{
+        "subtitle": "合作伙伴综合",
+        "title": "我们的伙伴"
+    },
+    "HomepageFooter":{
+        "title1": "接触",
+        "title2": "导航",
+        "title3": "服务"
+    },
+    "AboutUsStory":{
+        "subtitle": "品牌故事",
+        "title": "介绍"
+    },
+    "AboutUsTeams":{
+        "subtitle": "江南专家",
+        "title": "江南专家"
+    },
+    "AboutUsContact":{
+        "subtitle": "接触",
+        "title": "文字信息",
+        "button": "文字信息"
+    },
+    "NewsList":{
+        "subtitle" : "新闻关于",
+        "title": "消息"
+    },
+    "NewsDetailDes":{
+        "byAuthor": "撰写者",
+        "share": "分享吧"
+    },
+    "NewsDetailRelated":{
+        "subtitle": "新闻聚合器",
+        "title": "相关新闻"
     }
 }
