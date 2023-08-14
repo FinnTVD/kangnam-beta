@@ -9,7 +9,7 @@ export default function Deposit() {
         >
             <Image
                 className='z-0 object-cover'
-                src='/bg-deposit.jpg'
+                src='/images/bg-deposit.jpg'
                 alt='bg-deposit'
                 quality={100}
                 sizes='100vw'
@@ -189,10 +189,10 @@ export default function Deposit() {
                     <span className='title18-600-150'>Đặt khách hàng làm trọng tâm</span>
                 </div>
                 <Button
-                    className='bg-white border-none shadow-button text-den-2 mt-[2.5vw]'
+                    className='bg-logo border-none text-white mt-[2.5vw]'
                     span='-tracking-[0.32px] font-semibold'
                     icon='w-[1.2vw] h-[1.2vw]'
-                    stroke='#57534E'
+                    stroke='white'
                 >
                     Đăng kí ngay
                 </Button>

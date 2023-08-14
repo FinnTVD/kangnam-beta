@@ -31,7 +31,7 @@ export default function SlideProjectProminent() {
                             <div className='w-[20.125vw] h-[26.1825vw] relative select-none p-[1.5vw] flex items-end rounded-[1vw] overflow-auto'>
                                 <Image
                                     className='object-cover rounded-[1vw]'
-                                    src='/slideitem.jpg'
+                                    src='/images/slideitem.jpg'
                                     alt={`slide-${index}`}
                                     quality={100}
                                     sizes='20.125vw'

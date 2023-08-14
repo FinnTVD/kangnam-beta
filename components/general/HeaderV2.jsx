@@ -8,6 +8,7 @@ import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
 import { usePathname } from 'next/navigation'
 import ContentPageOther from './ContentPageOther'
+import classes from './headerV2.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -26,7 +27,7 @@ const isCheckPathName = (pathName) => {
     }
 }
 
-export default function HeaderV2() {
+export default function HeaderV2({ lang }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
 
@@ -58,7 +59,7 @@ export default function HeaderV2() {
             <div className={`${isHome ? 'h-screen' : 'h-[80vh]'} relative w-full`}>
                 <Image
                     className='z-0 object-cover'
-                    src='/bg-header.jpg'
+                    src='/images/bg-header.jpg'
                     alt='bg-header'
                     sizes='100vw'
                     quality={100}
@@ -67,7 +68,7 @@ export default function HeaderV2() {
                 {isHome && (
                     <Image
                         className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
-                        src='/big-logo.png'
+                        src='/images/big-logo.png'
                         alt='big-logo'
                         width={350}
                         height={550}
@@ -81,7 +82,10 @@ export default function HeaderV2() {
                 ></div>
                 {/* linear-white */}
                 {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>}
-                <NavBar isHome={isHome} />
+                <NavBar
+                    isHome={isHome}
+                    lang={lang}
+                />
                 {isHome ? <SearchHome /> : <ContentPageOther />}
                 <div
                     onClick={handleScrollDown}
@@ -93,7 +97,7 @@ export default function HeaderV2() {
                         height='25'
                         viewBox='0 0 24 25'
                         fill='none'
-                        className='w-[1.375vw] h-[1.375vw]'
+                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw]`}
                     >
                         <path
                             d='M1 1L12 12L23 1'

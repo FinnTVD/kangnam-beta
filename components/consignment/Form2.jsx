@@ -152,7 +152,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide }) {
                 <div className='relative w-[28.8125vw] h-[31.875vw] rounded-[1vw] overflow-hidden'>
                     <Image
                         className='object-cover'
-                        src='/form1.jpg'
+                        src='/images/form1.jpg'
                         alt='form1'
                         sizes='w-[28.8125vw]'
                         fill

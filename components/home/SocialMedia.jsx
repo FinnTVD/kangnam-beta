@@ -4,32 +4,32 @@ import Link from 'next/link'
 const listSocial = [
     {
         id: 1,
-        src: '/talk.svg',
+        src: '/images/talk.svg',
         title: 'kakao talk',
     },
     {
         id: 2,
-        src: '/wechat.svg',
+        src: '/images/wechat.svg',
         title: 'wechat',
     },
     {
         id: 3,
-        src: '/zalo.svg',
+        src: '/images/zalo.svg',
         title: 'zalo',
     },
     {
         id: 4,
-        src: '/telegram.svg',
+        src: '/images/telegram.svg',
         title: 'telegram',
     },
     {
         id: 5,
-        src: '/skype.svg',
+        src: '/images/skype.svg',
         title: 'skype',
     },
     {
         id: 6,
-        src: '/linkedin.svg',
+        src: '/images/linkedin.svg',
         title: 'linkedin',
     },
 ]

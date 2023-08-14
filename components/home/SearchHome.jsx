@@ -89,7 +89,7 @@ export default function SearchHome() {
             <div className='flex gap-x-[1.06vw]'>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
-                        src='/px.png'
+                        src='/images/px.png'
                         alt='px'
                         width={32}
                         height={32}
@@ -100,7 +100,7 @@ export default function SearchHome() {
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
-                        src='/cc.png'
+                        src='/images/cc.png'
                         alt='cc'
                         width={32}
                         height={32}
@@ -111,7 +111,7 @@ export default function SearchHome() {
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
-                        src='/bt.png'
+                        src='/images/bt.png'
                         alt='bt'
                         width={32}
                         height={32}
@@ -122,7 +122,7 @@ export default function SearchHome() {
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
-                        src='/nmp.png'
+                        src='/images/nmp.png'
                         alt='nmp'
                         width={32}
                         height={32}
@@ -133,7 +133,7 @@ export default function SearchHome() {
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
-                        src='/dn.png'
+                        src='/images/dn.png'
                         alt='dn'
                         width={32}
                         height={32}

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useTranslations } from 'next-intl'
 
 const schema = yup
     .object({
@@ -12,7 +11,7 @@ const schema = yup
     })
     .required()
 
-export default function Form1({ handleNextSlide }) {
+export default function Form1({ t, handleNextSlide }) {
     const [selectedOption, setSelectedOption] = useState('sell')
     const [inputValue, setInputValue] = useState('')
     const [inputValueHire, setInputValueHire] = useState('')
@@ -26,7 +25,6 @@ export default function Form1({ handleNextSlide }) {
         validate: false,
         title: '',
     })
-    const t = useTranslations('Form1')
 
     const handleInputChange = (event) => {
         const value = event.target.value
@@ -227,7 +225,7 @@ export default function Form1({ handleNextSlide }) {
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'border-[#C5C5C5] placeholder:text-[#646464]'
                                     } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                    placeholder={t('sell')}
+                                    placeholder={t.form1.sell}
                                     name='price'
                                     id='price'
                                     value={inputValue}
@@ -246,7 +244,7 @@ export default function Form1({ handleNextSlide }) {
                                                 ? 'border-red-400 placeholder:text-red-400'
                                                 : 'placeholder:text-[#646464] border-[#C5C5C5]'
                                         } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                        placeholder={t('hire')}
+                                        placeholder={t.form1.hire}
                                         name='priceHire'
                                         id='priceHire'
                                         value={inputValueHire}
@@ -296,7 +294,7 @@ export default function Form1({ handleNextSlide }) {
                 <div className='relative w-[28.8125vw] h-[31.875vw] rounded-[1vw] overflow-hidden'>
                     <Image
                         className='object-cover'
-                        src='/form1.jpg'
+                        src='/images/form1.jpg'
                         alt='form1'
                         sizes='w-[28.8125vw]'
                         fill

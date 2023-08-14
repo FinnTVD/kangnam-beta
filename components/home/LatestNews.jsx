@@ -6,6 +6,7 @@ import OtherNewsItem from '../general/OtherNewsItem'
 import { useTranslations } from 'next-intl'
 // import React, { useEffect } from 'react'
 
+
 export default function LatestNews () {
     const t = useTranslations("HomepageNews");
     const content = "<img src='/about-us-contact-address.png'></img><span>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</span><h2>1. Đôi nét về các dự án bất động sản</h2><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p>"
@@ -39,13 +40,26 @@ export default function LatestNews () {
         <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw]'>
             <div className='col-span-2 row-span-2'>
                 <LatestNewsItem newsItem={newsArr[0]} id={newsArr[0].id} key={newsArr[0].id}></LatestNewsItem>
+
             </div>
-            {newsArrSlice?.map((news) => 
-            <div key={news.id}>
-                <OtherNewsItem newsOtherItem={news} id={news.id} key={news.id}></OtherNewsItem>
+            <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw]'>
+                <div className='col-span-2 row-span-2'>
+                    <LatestNewsItem
+                        newsItem={newsArr[0]}
+                        id={newsArr[0].id}
+                        key={newsArr[0].id}
+                    ></LatestNewsItem>
+                </div>
+                {newsArrSlice?.map((news) => (
+                    <div key={news.id}>
+                        <OtherNewsItem
+                            newsOtherItem={news}
+                            id={news.id}
+                            key={news.id}
+                        ></OtherNewsItem>
+                    </div>
+                ))}
             </div>
-            )}
-        </div>
-    </section>
+        </section>
     )
 }

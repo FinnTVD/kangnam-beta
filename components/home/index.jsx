@@ -8,16 +8,16 @@ import Partner from './Partner'
 import LatestNews from './LatestNews'
 import WeAre from './WeAre'
 
-export default function IndexHome() {
+export default function IndexHome({ lang }) {
     return (
         <>
             <main>
-                <WeAre />
-                <MyProject />
+                <WeAre lang={lang} />
+                <MyProject lang={lang}/>
                 <Deposit />
                 <ProjectProminent>
                     <Image
-                        src='/bg-sky.png'
+                        src='/images/bg-sky.png'
                         alt='sky'
                         height={800}
                         width={1600}

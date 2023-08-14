@@ -6,7 +6,7 @@ export default function Prominent() {
         <section className='relative flex items-end h-screen'>
             <Image
                 className='z-0 object-cover'
-                src='/bg-prominent.jpg'
+                src='/images/bg-prominent.jpg'
                 quality={100}
                 sizes='100vw'
                 fill

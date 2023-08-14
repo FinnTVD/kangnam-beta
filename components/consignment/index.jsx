@@ -1,11 +1,11 @@
 import ProjectProminent from '../home/ProjectProminent'
 import SlideForm from './SlideForm'
 
-export default function ConsignmentIndex() {
+export default function ConsignmentIndex({t}) {
     return (
         <>
             <main>
-                <SlideForm />
+                <SlideForm t={t} />
                 <ProjectProminent />
             </main>
         </>

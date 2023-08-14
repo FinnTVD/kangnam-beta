@@ -1,3 +1,4 @@
+
 'use client'
 import Image from "next/image"
 import { useTranslations } from "next-intl"
@@ -11,14 +12,35 @@ export default function Story() {
                 <div>
                     <span data-aos="fade-up" className='sub-title'>{t('subtitle')}</span>
                     <h2 data-aos="fade-up" data-aos-delay="300" className='title56 text-den mt-[0.125vw]'>{t('title')}</h2>
+
                 </div>
-                <span data-aos="fade-up" data-aos-delay="600" className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
+                <span
+                    data-aos='fade-up'
+                    data-aos-delay='600'
+                    className='mt-[1vw] text-den title16-400-150 inline-block'
+                >
+                    {description}
+                </span>
             </div>
-            <div data-aos="fade-left" className="relative w-[32.125vw] h-[30.6875vw]">
-                <Image fill src="/about-us-logo.svg" className="object-contain"></Image>
+            <div
+                data-aos='fade-left'
+                className='relative w-[32.125vw] h-[30.6875vw]'
+            >
+                <Image
+                    fill
+                    src='/images/about-us-logo.svg'
+                    className='object-contain'
+                ></Image>
             </div>
-            <Image fill src="/partner-bg.jpg" className="top-0 left-0 z-[-2] opacity-20"></Image>
-            <div className="bg-opacity-20 z-[-1] absolute top-0 left-0 w-full h-full" style={{background: "linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%)"}}></div>
+            <Image
+                fill
+                src='/images/partner-bg.jpg'
+                className='top-0 left-0 z-[-2] opacity-20'
+            ></Image>
+            <div
+                className='bg-opacity-20 z-[-1] absolute top-0 left-0 w-full h-full'
+                style={{ background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%)' }}
+            ></div>
         </section>
     )
 }

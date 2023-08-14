@@ -1,12 +1,9 @@
 import 'swiper/css'
 import './globals.css'
 
-import { useLocale } from 'next-intl'
-import { notFound } from 'next/navigation'
 import localFont from 'next/font/local'
 import Footer from '@/components/general/Footer'
 import Script from 'next/script'
-import { NextIntlClientProvider } from 'next-intl'
 import HeaderV2 from '@/components/general/HeaderV2'
 
 const avertaStdCY = localFont({
@@ -49,18 +46,13 @@ export const metadata = {
     title: 'KangNam',
     description: 'KangNam by OkHub',
 }
+export async function generateStaticParams() {
+    return [{ lang: 'vn' }, { lang: 'en' }, { lang: 'kr' }, { lang: 'ch' }]
+}
 
 export default async function RootLayout({ children, params }) {
-    const locale = useLocale()
-    let messages
-    try {
-        messages = (await import(`../../messages/${locale}.json`)).default
-    } catch (error) {
-        notFound()
-    }
-
     return (
-        <html lang={locale}>
+        <html lang={params.lang}>
             <head>
                 <script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
                 <link
@@ -79,16 +71,9 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
-                <NextIntlClientProvider
-                    locale={locale}
-                    messages={messages}
-                >
-                    <HeaderV2 />
-                    {children}
-                    <Footer />
-                </NextIntlClientProvider>
-                {/* {children}
-                <Footer></Footer> */}
+                <HeaderV2 lang={params.lang} />
+                {children}
+                <Footer />
             </body>
         </html>
     )

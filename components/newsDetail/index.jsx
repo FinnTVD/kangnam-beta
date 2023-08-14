@@ -1,4 +1,5 @@
 'use client'
+
 import { useParams } from "next/navigation"
 import PostDetail from "./PostDetail";
 import RelatedNews from "./RelatedNews";
@@ -21,10 +22,12 @@ export default function IndexNewsDetail({slug}){
     {id: 12, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-12", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/featuredImg.jpg'},
     {id: 13, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-13", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/featuredImg.jpg'},
     {id: 14, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-14", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/featuredImg.jpg'}]
+
     // const router = useRouter()
     // const { slug } = useParams()
     // console.log(slug)
     const post = newsArr.find((item) => item.slug === slug)
+
     const relatedNewsArr = newsArr.filter((item) => item.category === post.category && item!==post).slice(0, 5);
     // console.log(relatedNewsArr)
     // useEffect(() => {
@@ -32,6 +35,7 @@ export default function IndexNewsDetail({slug}){
     //     }, [slug])
 
     return(
+
         <>
             <PostDetail post={post}></PostDetail>
             <RelatedNews relatedNews={relatedNewsArr}></RelatedNews>

@@ -24,7 +24,7 @@ export default function SlideRelatedNews() {
                                 <div className='w-full h-[16.23vw] relative rounded-[0.5vw] overflow-hidden'>
                                     <Image
                                         className='object-cover '
-                                        src='/itemproject.jpg'
+                                        src='/images/itemproject.jpg'
                                         alt='itemProject'
                                         sizes='33vw'
                                         fill

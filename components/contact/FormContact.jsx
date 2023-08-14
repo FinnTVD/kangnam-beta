@@ -47,7 +47,7 @@ export default function FormContact() {
             <div className='flex gap-x-[2.25vw]'>
                 <div className='w-[41vw] h-[46.8125vw] flex items-end rounded-[1vw] overflow-hidden px-[1.75vw] py-[2.44vw] relative'>
                     <Image
-                        src='/form-contact.jpg'
+                        src='/images/form-contact.jpg'
                         alt='form-contact'
                         sizes='41vw'
                         fill

@@ -1,3 +1,4 @@
+
 'use client'
 import Image from "next/image"
 import { useTranslations } from "next-intl"
@@ -11,10 +12,22 @@ export default function Teams() {
                 <div>
                     <span data-aos="fade-up" className='sub-title'>{t('subtitle')}</span>
                     <h2 data-aos="fade-up" className='title56 text-den mt-[0.125vw]'>{t('title')}</h2>
+
                 </div>
-                <span data-aos="fade-up" className="mt-[1vw] text-den title16-400-150 inline-block">{description}</span>
+                <span
+                    data-aos='fade-up'
+                    className='mt-[1vw] text-den title16-400-150 inline-block'
+                >
+                    {description}
+                </span>
             </div>
-            <Image data-aos="zoom-out" data-aos-anchor-placement="top-center" fill src="/about-us-team-bg.png" className="object-cover top-0 left-0 z-[-1]"></Image>
+            <Image
+                data-aos='zoom-out'
+                data-aos-anchor-placement='top-center'
+                fill
+                src='/images/about-us-team-bg.png'
+                className='object-cover top-0 left-0 z-[-1]'
+            ></Image>
         </section>
     )
 }

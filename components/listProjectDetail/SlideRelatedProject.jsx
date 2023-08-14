@@ -29,7 +29,7 @@ export default function SlideRelatedProject() {
                                 <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                     <Image
                                         className='z-0 object-cover'
-                                        src='/itemproject.jpg'
+                                        src='/images/itemproject.jpg'
                                         alt='itemProject'
                                         sizes='18vw'
                                         quality={100}

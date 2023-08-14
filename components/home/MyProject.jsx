@@ -4,11 +4,12 @@ import Map from './Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
-import BoxFilter from '../general/BoxFilter'
+import BoxFilter from '../general/filter/BoxFilter'
+import { handleCheckParamsLanguage } from '@/utils'
 
 const arrItem = new Array(8).fill(0)
 
-export default function MyProject() {
+export default function MyProject({ lang }) {
     const [show, Element] = useToggleShowMap()
     return (
         <section
@@ -40,7 +41,7 @@ export default function MyProject() {
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
                                             className='z-0 object-cover'
-                                            src='/itemproject.jpg'
+                                            src='/images/itemproject.jpg'
                                             alt='itemProject'
                                             sizes='18vw'
                                             quality={100}
@@ -130,7 +131,7 @@ export default function MyProject() {
                     <div className='flex justify-between items-center mt-[2.69vw]'>
                         <div>123</div>
                         <Button
-                            href='/danh-sach-du-an'
+                            href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
                             className='border-none bg-logo'
                             stroke='white'
                             span='text-white font-semibold -tracking-[0.32px]'
