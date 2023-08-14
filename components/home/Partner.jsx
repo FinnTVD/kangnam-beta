@@ -4,13 +4,10 @@ import Button from '../general/Button'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import { useTranslations } from 'next-intl'
 
 export default function Partner() {
-
-    const t = useTranslations('HomepagePartner')
-    const imgArray = ['/partnerlogo.jpg', '/partnerlogo.jpg', '/logoVin.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg', '/partnerlogo.jpg',
-    '/partnerlogo.jpg', '/logoVin.jpg', '/partnerlogo.jpg', '/logoVin.jpg', '/logoVin.jpg', '/logoVin.jpg', '/logoVin.jpg']
+    const imgArray = ['/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg',
+    '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg']
 
     const imgBorder = ['bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tl-2xl', 
     'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tr-2xl',
@@ -41,8 +38,8 @@ const arrPartner = []
 
             <div className='flex items-end justify-between'>
                 <div>
-                    <span className='sub-title'>{t('subtitle')}</span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>{t('title')}</h2>
+                    <span className='sub-title'>a</span>
+                    <h2 className='title56 text-den mt-[0.62vw]'>a</h2>
                 </div>
                 <Button href={'/'}>Trở thành đối tác</Button>
             </div>

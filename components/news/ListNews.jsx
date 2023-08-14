@@ -3,10 +3,8 @@ import ListNewsCategorized from "./ListNewsCategorized"
 import { useEffect, useRef, useState } from "react"
 import ReactPaginate from 'react-paginate';
 import classes from './ListNewsStyles.module.css';
-import { useTranslations } from "next-intl"
 
 export default function ListNews () {
-    const t = useTranslations('NewsList')
     const content = "<span>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</span><h2>1. Đôi nét về các dự án bất động sản</h2><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p>"
     const categories = ['Thị trường', 'Tin nóng', 'Dự án'];
     const newsArr = [{id: 0, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
@@ -53,8 +51,8 @@ export default function ListNews () {
         <section className="px-120 pt-[6.875vw] pb-[8.125vw]" ref={newsCategorizedRef}>
             <div className='flex items-center justify-between'>
                 <div>
-                    <span className='sub-title'>{t('subtitle') + ' ' + category} </span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>{t('title')}</h2>
+                    <span className='sub-title'> a {category} </span>
+                    <h2 className='title56 text-den mt-[0.62vw]'>a</h2>
                 </div>
                 <div className="flex gap-[1.5vw]">
                     {categories.map((category, index) => 
