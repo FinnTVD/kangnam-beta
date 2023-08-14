@@ -1,10 +1,8 @@
 'use client';
 import classes from "./NewsDetailStyle.module.css"
 import { useEffect, useRef } from "react";
-import { useTranslations } from "next-intl";
 
 export default function PostDetail({post}) {
-    const t = useTranslations('NewsDetailDes')
     const urlRef = useRef('');
     const fbShareHandler = () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlRef.current}`)
@@ -27,11 +25,11 @@ export default function PostDetail({post}) {
             <div className="">
                 <span className="text-den-2 text-20pc font-normal leading-[1.7]">{post.date} /</span>
                 <span className="text-den-2 uppercase text-20pc font-normal leading-[1.7]"> {post.category} - </span>
-                <span className="text-den-2 text-20pc font-normal leading-[1.7]"> {t('byAuthor')} {post.author} </span>
+                <span className="text-den-2 text-20pc font-normal leading-[1.7]"> a {post.author} </span>
             </div>
             <div className={`${classes['post-detail']} mt-[0.625vw] pt-[1vw] pb-[2vw] border-b border-t border-neutral-700 border-opacity-10`} dangerouslySetInnerHTML={{__html: post?.content}}></div>
             <div className="flex justify-end items-center mt-[1.625vw]">
-                <span className="title14-700-150 text-[#394854] uppercase"> {t('share')}: </span>
+                <span className="title14-700-150 text-[#394854] uppercase"> a: </span>
                 <div className="flex gap-[0.5vw] ml-[0.8125vw]">
                     <div onClick={twitterShareHandler} className="cursor-pointer">
                         <svg className="w-[1.5vw]" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

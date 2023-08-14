@@ -1,10 +1,8 @@
 'use client'
 
 import Image from "next/image"
-import { useTranslations } from "next-intl";
 
 export default function Footer() {
-    const t = useTranslations('HomepageFooter')
     const addr = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357'];
     const menuArr = ['Trang chủ', 'Về KANGNAM', 'Dự án', 'Ký gửi nhà đất', 'Thỏa thuận & pháp lý', 'Tin tức'];
@@ -140,11 +138,11 @@ export default function Footer() {
 
                 <div className="flex justify-between flex-grow ml-[4.625vw]">
                     <div className="max-w-[19.6875vw]">
-                        <h2 className="uppercase text-nau-nhat title18-700-130"> {t('title1')} </h2>
+                        <h2 className="uppercase text-nau-nhat title18-700-130"> a </h2>
                         <div className="mt-[1.25vw] flex flex-col gap-[0.75vw]">
                             <div className="flex items-center">
                                 <div className="relative w-[1.25vw] h-[2.5vw] flex">
-                                    <Image fill src="/location.svg" className="object-contain"></Image>
+                                    <Image fill src="/images/location.svg" className="object-contain"></Image>
 
                                 </div>
                                 <span className='ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%]'> {addr} </span>
@@ -168,25 +166,25 @@ export default function Footer() {
                     </div>
                     <div>
 
-                        <h2 className="uppercase text-nau-nhat title18-700-130"> {t('title2')} </h2>
+                        <h2 className="uppercase text-nau-nhat title18-700-130"> a </h2>
                         <div className="mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw]">
                             {menuArr.map((menu, index) => 
                                 <span key={index} className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left">
 
                                     {menu}
                                 </span>
-                            ))}
+                            )}
                         </div>
                     </div>
                     <div>
-                        <h2 className="uppercase text-nau-nhat title18-700-130"> {t('title3')} </h2>
+                        <h2 className="uppercase text-nau-nhat title18-700-130"> a </h2>
                         <div className="mt-[1.25vw] flex flex-col gap-[0.75vw]">
                             {serviceArr.map((service, index) => 
                                 <span key={index} className="text-den-2 title16-400-130">
 
                                     {service}
                                 </span>
-                            ))}
+                            )}
                         </div>
                     </div>
                 </div>

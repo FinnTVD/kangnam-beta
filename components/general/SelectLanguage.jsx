@@ -9,7 +9,7 @@ export default function SelectLanguage({ className }) {
             <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
-                    src='/vn.svg'
+                    src='/images/vn.svg'
                     alt='viet nam'
                     quality={100}
                     width={28}
@@ -26,7 +26,7 @@ export default function SelectLanguage({ className }) {
             <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
-                    src='/english.svg'
+                    src='/images/english.svg'
                     alt='english'
                     quality={100}
                     width={28}
@@ -43,7 +43,7 @@ export default function SelectLanguage({ className }) {
             <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
-                    src='/korea.svg'
+                    src='/images/korea.svg'
                     alt='korea'
                     quality={100}
                     width={28}
@@ -60,7 +60,7 @@ export default function SelectLanguage({ className }) {
             <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
-                    src='/china.svg'
+                    src='/images/china.svg'
                     alt='china'
                     quality={100}
                     width={28}
