@@ -1,5 +1,6 @@
+const baseURL = 'https://jsonplaceholder.typicode.com'
 export async function getData(query) {
-    const res = await fetch(`${process.env.API}${query}`, {
+    const res = await fetch(`${baseURL}${query}`, {
         headers: {
             'Content-Type': 'application/json',
         },
