@@ -2,13 +2,6 @@
 
 import Image from "next/image"
 import { useEffect } from "react";
-import useSWR from 'swr'
-
-const getData = async() => {
-    const response = await fetch('https://api-land.okhub.tech/api/v1/social');
-    const data = response.json()
-    return data
-}
 
 export default function Footer({t}) {
     const addr = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
@@ -22,8 +15,6 @@ export default function Footer({t}) {
     //     const data = await response.json();
     //     console.log(data);
     // }
-    const {data, isLoading} = useSWR('https://api-land.okhub.tech/api/v1/social', getData)
-    console.log(data)
     
     const linkFacebookHandler = () => {
         window.open('https://www.facebook.com/')
