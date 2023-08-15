@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import BoxLanguage from './language/BoxLanguage'
+import { useEffect, useRef, useState } from 'react'
 import SelectSearch from './SelectSearch'
 const listNav = [
     {
@@ -37,29 +37,71 @@ const listNav = [
     },
 ]
 
-export default function NavBarV2({ lang }) {
+export default function NavBarFixed({ isHome = true, lang }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+    const [prevScrollY, setPrevScrollY] = useState(0)
+    const navRef = useRef()
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        document.addEventListener('scroll', handleScroll)
+        // window.scrollTo(0, 0);
+        return () => {
+            document.removeEventListener('scroll', handleScroll)
+        }
+    }, [prevScrollY])
+
+    const handleScroll = () => {
+        if (typeof window === 'undefined' || !navRef?.current) return
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        if (window.innerWidth >= 1024) {
+            if (scrollTop >= 500) {
+                if (scrollTop > prevScrollY) {
+                    //Cuộn xuống
+                    navRef?.current?.classList?.remove('active')
+                } else if (scrollTop < prevScrollY) {
+                    //Cuộn lên
+                    navRef?.current?.classList?.add('active')
+                }
+            } else {
+                navRef?.current?.classList?.remove('active')
+            }
+        }
+        setPrevScrollY(scrollTop)
+    }
     return (
-        <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04'>
-            <div className='flex items-center justify-between w-full gap-x-[2.5vw]'>
-                <div className='flex gap-x-[1.92vw] items-center'>
+        <nav
+            id='nav'
+            ref={navRef}
+            className={`${
+                isHome ? 'px-120' : 'px-[3.75vw]'
+            } fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999]`}
+            style={{ boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px' }}
+        >
+            <div className={`${isHome ? 'gap-x-[3.12vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
+                <div
+                    id='logo-banner-active'
+                    className='justify-start flex-1 py-[0.5vw]'
+                >
                     <Link
                         href={`/${lang !== 'vn' ? lang : ''}`}
-                        className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw]'
+                        className='relative w-[3.5vw] h-[4.75vw] block'
                     >
                         <Image
-                            className='object-cover'
+                            className='object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
                             quality={100}
-                            sizes='3.52vw'
+                            sizes='3.5vw'
                             fill
                         />
                     </Link>
-                    <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white rounded-[6.25vw] flex justify-between items-center shadow-input border border-solid border-logo'>
+                </div>
+
+                {!isHome && (
+                    <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[6.25vw] flex justify-between items-center shadow-input border border-solid border-logo backdrop-blur-[11px] mr-[0.5vw]'>
                         <div className='flex items-center w-full'>
                             <SelectSearch />
-                            <div className='border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw]'></div>
+                            <div className='border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw]'></div>
                             <div className='flex-1 flex items-center gap-x-[0.5vw]'>
                                 <label htmlFor='search'>
                                     <svg
@@ -85,7 +127,7 @@ export default function NavBarV2({ lang }) {
                                     </svg>
                                 </label>
                                 <input
-                                    className='outline-none text-den title16-400-130 mr-[1.5vw]'
+                                    className='bg-transparent outline-none text-den title16-400-130'
                                     type='text'
                                     name='search'
                                     id='search'
@@ -96,33 +138,34 @@ export default function NavBarV2({ lang }) {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className='flex gap-x-[3.13vw] items-center'>
-                    <ul className='flex gap-x-[1.88vw]'>
-                        {listNav &&
-                            listNav.map((e, index) => (
-                                <li key={index}>
-                                    <Link
-                                        className='block text-den title16-600-130'
-                                        href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
-                                    >
-                                        {e.title}
-                                    </Link>
-                                </li>
-                            ))}
-                    </ul>
-                    <div className='flex gap-x-[1.25vw] items-center'>
-                        <Link
-                            href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
-                            className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
-                        >
-                            Kí gửi nhà đất
-                        </Link>
-                        <BoxLanguage
-                            type={'ds'}
-                            lang={lang}
-                        />
-                    </div>
+                )}
+                <ul
+                    id='list-title-nav'
+                    className={`${isHome ? 'gap-x-[2.5vw]' : 'gap-x-[1.88vw]'} flex`}
+                >
+                    {listNav &&
+                        listNav?.map((e, index) => (
+                            <li key={index}>
+                                <Link
+                                    className='block text-den title16-600-130'
+                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
+                                >
+                                    {e.title}
+                                </Link>
+                            </li>
+                        ))}
+                </ul>
+                <div className='flex gap-x-[1.5vw] items-center'>
+                    <Link
+                        href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
+                    >
+                        Kí gửi nhà đất
+                    </Link>
+                    <BoxLanguage
+                        lang={lang}
+                        type='ds'
+                    />
                 </div>
             </div>
         </nav>

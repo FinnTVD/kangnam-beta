@@ -7,13 +7,16 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 
 export default function FeatureHome() {
     const [isShow, setIsShow] = useState(null)
+    console.log('🚀 ~ file: FeatureHome.jsx:10 ~ FeatureHome ~ isShow:', isShow)
     const [sideRef, isOutSide] = useClickOutSide()
+    console.log('🚀 ~ file: FeatureHome.jsx:12 ~ FeatureHome ~ isOutSide:', isOutSide)
     useEffect(() => {
         isOutSide && setIsShow(false)
     }, [isOutSide])
 
     const handleCurrently = () => {
         setIsShow(!isShow)
+        console.log('close')
     }
 
     return (
@@ -32,10 +35,10 @@ export default function FeatureHome() {
             </li>
             <li
                 className={`item-social transition-all duration-200 ease-linear relative w-[4.5vw] h-[4.5vw] shadow-feature bg-white rounded-full group`}
+                ref={sideRef}
             >
                 <div
                     onClick={handleCurrently}
-                    ref={sideRef}
                     className='relative flex rounded-full items-center justify-center w-full h-full cursor-pointer '
                 >
                     <Image

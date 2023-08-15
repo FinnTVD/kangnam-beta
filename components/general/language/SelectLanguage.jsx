@@ -52,6 +52,7 @@ export default function SelectLanguage({ className, lang }) {
     const pathName = usePathname()
     return (
         <ul
+            id='box-select-language'
             className={`${className} absolute flex flex-col -bottom-[0.5vw] left-0 translate-y-full bg-white rounded-md w-[8vw] h-fit py-[0.5vw] z-[99999] text-black`}
         >
             <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>

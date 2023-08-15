@@ -9,6 +9,8 @@ import SearchHome from '../home/SearchHome'
 import { usePathname } from 'next/navigation'
 import ContentPageOther from './ContentPageOther'
 import classes from './headerV2.module.css'
+import SlideBanner from '../home/SlideBanner'
+import NavBarFixed from './NavBarFixed'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -57,18 +59,19 @@ export default function HeaderV2({ lang }) {
             className='relative w-screen h-fit'
         >
             <div className={`${isHome ? 'h-screen' : 'h-[80vh]'} relative w-full`}>
-                <Image
+                {/* <Image
                     className='z-0 object-cover'
                     src='/images/bg-header.jpg'
                     alt='bg-header'
                     sizes='100vw'
                     quality={100}
                     fill
-                />
+                /> */}
+                <SlideBanner />
                 {isHome && (
                     <Image
                         className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
-                        src='/images/big-logo.png'
+                        src='/images/big-logo.svg'
                         alt='big-logo'
                         width={350}
                         height={550}
@@ -83,6 +86,10 @@ export default function HeaderV2({ lang }) {
                 {/* linear-white */}
                 {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>}
                 <NavBar
+                    isHome={isHome}
+                    lang={lang}
+                />
+                <NavBarFixed
                     isHome={isHome}
                     lang={lang}
                 />

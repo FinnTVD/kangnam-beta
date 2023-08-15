@@ -8,8 +8,7 @@ export default function IndexContact() {
             <main>
                 <FormContact />
                 <MapLocation />
-                <RelatedNews />
-                <div>test</div>
+                {/* <RelatedNews /> */}
             </main>
         </>
     )
