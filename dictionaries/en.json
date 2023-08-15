@@ -1,43 +1,79 @@
 {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "About us",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Project",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Resale",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Agreement & Legal",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "News",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Contact",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Land deposit",
+        "title": "Select Language"
+    },
     "Form1": {
         "sell": "Desired selling price *",
         "hire": "Desired rent *"
     },
-    "HomepageNews":{
+    "HomepageNews": {
         "subtitle": "News synthesis",
         "title": "Latest news"
     },
-    "HomepagePartner":{
+    "HomepagePartner": {
         "subtitle": "Partners synthesis",
         "title": "Our partners"
     },
-    "HomepageFooter":{
+    "HomepageFooter": {
         "title1": "Contact",
         "title2": "Navigation",
         "title3": "Service"
     },
-    "AboutUsStory":{
+    "AboutUsStory": {
         "subtitle": "Brand story",
         "title": "Introduction"
     },
-    "AboutUsTeams":{
+    "AboutUsTeams": {
         "subtitle": "Our teams",
         "title": "Kangnam specialists"
     },
-    "AboutUsContact":{
+    "AboutUsContact": {
         "subtitle": "Contact",
         "title": "Our office",
         "button": "Contact now"
     },
-    "NewsList":{
-        "subtitle" : "News about",
+    "NewsList": {
+        "subtitle": "News about",
         "title": "News"
     },
-    "NewsDetailDes":{
+    "NewsDetailDes": {
         "byAuthor": "By",
         "share": "Share on it"
     },
-    "NewsDetailRelated":{
+    "NewsDetailRelated": {
         "subtitle": "News synthesis",
         "title": "Related news"
     }

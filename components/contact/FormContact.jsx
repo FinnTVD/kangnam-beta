@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useResizeArea from '@/hooks/useResizeArea'
 import SelectCategory from './SelectCategory'
+import { useState } from 'react'
 const listSocial = [
     {
         id: 1,
@@ -42,7 +43,7 @@ const listSocial = [
 
 const schema = yup
     .object({
-        fullName: yup.string().required('Vui lòng điền thông tin!'),
+        fullName: yup.string().required('Vui lòng điền họ tên!'),
         numberPhone: yup
             .string()
             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
@@ -51,15 +52,16 @@ const schema = yup
                 }
                 return true
             })
-            .required('Vui lòng điền thông tin!'),
+            .required('Vui lòng điền số điện thoại!'),
         email: yup
             .string()
-            .required('Vui lòng điền thông tin!')
+            .required('Vui lòng điền email!')
             .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
     })
     .required()
 
 export default function FormContact() {
+    const [valueCategory, setValueCategory] = useState('')
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
 
     const {
@@ -72,7 +74,11 @@ export default function FormContact() {
     })
 
     const onSubmit = (e) => {
-        console.log(e)
+        if (!valueCategory) return
+        console.log({
+            ...e,
+            category: valueCategory,
+        })
     }
 
     return (
@@ -153,46 +159,45 @@ export default function FormContact() {
                             <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder='Họ và tên *'
-                                    className='placeholder:text-16pc w-full placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279]'
+                                    placeholder={`${errors.fullName?.message ?? 'Họ và tên *'}`}
+                                    className={`${
+                                        errors.fullName?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
                                     {...register('fullName')}
                                 />
-                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                    {errors.fullName?.message}
-                                </p>
                             </div>
                             <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder='Số điện thoại *'
-                                    className='w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279]'
+                                    placeholder={`${errors.numberPhone?.message ?? 'Số điện thoại *'}`}
+                                    className={`${
+                                        errors.numberPhone?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
                                     {...register('numberPhone')}
                                 />
-                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                    {errors.numberPhone?.message}
-                                </p>
                             </div>
                         </div>
                         <div className='flex flex-1 gap-x-[1.5vw]'>
                             <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder='Email *'
-                                    className='w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279]'
+                                    placeholder={`${errors.email?.message ?? 'Email *'}`}
+                                    className={`${
+                                        errors.email?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
                                     {...register('email')}
                                 />
-                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                    {errors.email?.message}
-                                </p>
                             </div>
-                            <div className='relative flex-1'>
-                                <input
-                                    type='text'
-                                    {...register('category')}
-                                    className='hidden'
-                                />
-                                <SelectCategory />
-                            </div>
+                            <SelectCategory
+                                setValueCategory={setValueCategory}
+                                valueCategory={valueCategory}
+                            />
                         </div>
                         <input
                             type='text'

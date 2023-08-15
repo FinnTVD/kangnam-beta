@@ -8,12 +8,12 @@ import Partner from './Partner'
 import LatestNews from './LatestNews'
 import WeAre from './WeAre'
 
-export default function IndexHome({ lang }) {
+export default function IndexHome({ lang, t }) {
     return (
         <>
             <main>
                 <WeAre lang={lang} />
-                <MyProject lang={lang}/>
+                <MyProject lang={lang} />
                 <Deposit />
                 <ProjectProminent>
                     <Image

@@ -1,43 +1,79 @@
 {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "About us",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Project",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Resale",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Agreement & Legal",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "News",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Contact",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Land deposit",
+        "title": "Select Language"
+    },
     "Form1": {
         "sell": "所需销售价格 *",
         "hire": "所需租金 *"
     },
-    "HomepageNews":{
+    "HomepageNews": {
         "subtitle": "新闻综合",
         "title": "最新消息"
     },
-    "HomepagePartner":{
+    "HomepagePartner": {
         "subtitle": "合作伙伴综合",
         "title": "我们的伙伴"
     },
-    "HomepageFooter":{
+    "HomepageFooter": {
         "title1": "接触",
         "title2": "导航",
         "title3": "服务"
     },
-    "AboutUsStory":{
+    "AboutUsStory": {
         "subtitle": "品牌故事",
         "title": "介绍"
     },
-    "AboutUsTeams":{
+    "AboutUsTeams": {
         "subtitle": "江南专家",
         "title": "江南专家"
     },
-    "AboutUsContact":{
+    "AboutUsContact": {
         "subtitle": "接触",
         "title": "文字信息",
         "button": "文字信息"
     },
-    "NewsList":{
-        "subtitle" : "新闻关于",
+    "NewsList": {
+        "subtitle": "新闻关于",
         "title": "消息"
     },
-    "NewsDetailDes":{
+    "NewsDetailDes": {
         "byAuthor": "撰写者",
         "share": "分享吧"
     },
-    "NewsDetailRelated":{
+    "NewsDetailRelated": {
         "subtitle": "新闻聚合器",
         "title": "相关新闻"
     }

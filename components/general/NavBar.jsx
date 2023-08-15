@@ -37,7 +37,7 @@ const listNav = [
     },
 ]
 
-export default function NavBar({ isHome = true, lang }) {
+export default function NavBar({ isHome = true, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     return (
         <nav
@@ -123,8 +123,8 @@ export default function NavBar({ isHome = true, lang }) {
                     </div>
                 )}
                 <ul className={`${isHome ? 'gap-x-[2.5vw]' : 'gap-x-[1.88vw]'} flex`}>
-                    {listNav &&
-                        listNav?.map((e, index) => (
+                    {t &&
+                        t?.Navbar?.listNav?.map((e, index) => (
                             <li key={index}>
                                 <Link
                                     className='block title16-600-130'
@@ -140,9 +140,9 @@ export default function NavBar({ isHome = true, lang }) {
                         href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
                         className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                     >
-                        Kí gửi nhà đất
+                        {t?.Navbar?.button}
                     </Link>
-                    <BoxLanguage lang={lang} />
+                    <BoxLanguage lang={lang} t={t}/>
                 </div>
             </div>
         </nav>
