@@ -1,39 +1,75 @@
 {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "Về chúng tôi",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Dự án",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Bán lại",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Thỏa thuận & Pháp lí",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "Tin tức",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Liên hệ",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Kí gửi nhà đất",
+        "title":"Chọn ngôn ngữ"
+    },
     "Form1": {
         "sell": "Giá bán mong muốn *",
         "hire": "Giá thuê mong muốn *"
     },
-    "HomepageNews":{
+    "HomepageNews": {
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức mới nhất"
     },
-    "HomepagePartner":{
+    "HomepagePartner": {
         "subtitle": "Tổng hợp các đối tác",
         "title": "Đối tác cảu chúng tôi"
     },
-    "HomepageFooter":{
+    "HomepageFooter": {
         "title1": "Liên hệ",
         "title2": "Điều hướng chung",
         "title3": "Dịch vụ"
     },
-    "AboutUsStory":{
+    "AboutUsStory": {
         "subtitle": "Đội ngũ",
         "title": "Chuyên viên Kangnam"
     },
-    "AboutUsContact":{
+    "AboutUsContact": {
         "subtitle": "Liên hệ",
         "title": "Thông tin văn phòng",
         "button": "Liên hệ ngay"
     },
-    "NewsList":{
-        "subtitle" : "Tin tức về",
+    "NewsList": {
+        "subtitle": "Tin tức về",
         "title": "Tin tức"
     },
-    "NewsDetailDes":{
+    "NewsDetailDes": {
         "byAuthor": "Viết bởi",
         "share": "Chia sẻ lên"
     },
-    "NewsDetailRelated":{
+    "NewsDetailRelated": {
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức liên quan"
     }

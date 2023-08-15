@@ -7,8 +7,8 @@ import { Autoplay, EffectFade } from 'swiper/modules'
 
 const arrBanner = [
     { id: 1, src: '/images/bg-header.jpg', alt: 'bg header' },
-    { id: 1, src: '/images/bg-header1.jfif', alt: 'bg-header1' },
-    { id: 1, src: '/images/bg-header2.jfif', alt: 'bg-header2' },
+    { id: 2, src: '/images/bg-header1.jfif', alt: 'bg-header1' },
+    { id: 3, src: '/images/bg-header2.jfif', alt: 'bg-header2' },
 ]
 export default function SlideBanner() {
     return (

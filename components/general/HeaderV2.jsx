@@ -29,7 +29,7 @@ const isCheckPathName = (pathName) => {
     }
 }
 
-export default function HeaderV2({ lang }) {
+export default function HeaderV2({ lang, t }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
 
@@ -71,7 +71,7 @@ export default function HeaderV2({ lang }) {
                 {isHome && (
                     <Image
                         className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
-                        src='/images/big-logo.svg'
+                        src='/images/big-logo.png'
                         alt='big-logo'
                         width={350}
                         height={550}
@@ -88,6 +88,7 @@ export default function HeaderV2({ lang }) {
                 <NavBar
                     isHome={isHome}
                     lang={lang}
+                    t={t}
                 />
                 <NavBarFixed
                     isHome={isHome}

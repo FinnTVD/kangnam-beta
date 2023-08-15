@@ -34,7 +34,7 @@ const handleCheckIcon = (locale) => {
     }
 }
 
-export default function BoxLanguage({ type = '', lang }) {
+export default function BoxLanguage({ type = '', lang, t }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function BoxLanguage({ type = '', lang }) {
                     type === 'ds' ? 'text-den opacity-60' : 'text-white'
                 } title-language-active -tracking-[0.6px] title12-600-150`}
             >
-                Chọn ngôn ngữ
+                {t?.Navbar?.title}
             </span>
             <div className='flex items-center gap-x-[0.5vw] select-none cursor-pointer'>
                 <Image
