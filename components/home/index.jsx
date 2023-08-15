@@ -8,7 +8,7 @@ import Partner from './Partner'
 import LatestNews from './LatestNews'
 import WeAre from './WeAre'
 
-export default function IndexHome({ lang }) {
+export default function IndexHome({ lang, t }) {
     return (
         <>
             <main>
@@ -26,8 +26,8 @@ export default function IndexHome({ lang }) {
                     />
                 </ProjectProminent>
                 <Prominent />
-                <Partner />
-                <LatestNews />
+                <Partner t={t}/>
+                <LatestNews t={t}/>
             </main>
         </>
     )

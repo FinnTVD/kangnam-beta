@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import Footer from '@/components/general/Footer'
 import Script from 'next/script'
 import HeaderV2 from '@/components/general/HeaderV2'
+import { getDictionary } from './dictionaries'
 
 const avertaStdCY = localFont({
     src: [
@@ -51,6 +52,8 @@ export async function generateStaticParams() {
 }
 
 export default async function RootLayout({ children, params }) {
+    const t = await getDictionary(params.lang)
+
     return (
         <html lang={params.lang}>
             <head>
@@ -73,7 +76,7 @@ export default async function RootLayout({ children, params }) {
             >
                 <HeaderV2 lang={params.lang} />
                 {children}
-                <Footer />
+                <Footer t={t}/>
             </body>
         </html>
     )

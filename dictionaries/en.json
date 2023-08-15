@@ -2,5 +2,44 @@
     "form1": {
         "sell": "Desired selling price *",
         "hire": "Desired rent *"
+    },
+    "homepageNews":{
+        "subtitle": "News synthesis",
+        "title": "Latest news"
+    },
+    "homepagePartners":{
+        "subtitle": "Partners synthesis",
+        "title": "Our partners"
+    },
+    "footer":{
+        "title1": "Contact",
+        "title2": "Navigation",
+        "title3": "Services"
+    },
+    "aboutUsStory":{
+        "subtitle": "Brand story",
+        "title": "Introduction"
+    },
+    "aboutUsTeams":{
+        "subtitle": "Our teams",
+        "title": "Kangnam specialists"
+    },
+    "aboutUsContact":{
+        "subtitle": "Contact",
+        "title": "Our office",
+        "button": "Contact now"
+    },
+    "newsList":{
+        "subtitle" : "News about",
+        "title": "News"
+    },
+    "newsDetailDes":{
+        "byAuthor": "By",
+        "share": "Share on it"
+    },
+    "newsDetailRelated":{
+        "subtitle": "News synthesis",
+        "title": "Related news",
+        "button": "See all"
     }
 }
