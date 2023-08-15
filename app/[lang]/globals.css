@@ -140,6 +140,25 @@
 }
 
 /* ------------HomePage----------------- */
+/* Nav */
+
+#nav.active {
+    @apply translate-y-0;
+}
+
+#nav .title-language-active {
+    @apply text-den;
+}
+
+#nav #box-select-language {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#nav #list-title-nav > li {
+    @apply text-den;
+}
+/* Nav */
+
 /* My Project */
 #boxMap #map,
 #boxMap #map .vietmapgl-canvas-container,

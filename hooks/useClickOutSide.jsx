@@ -12,10 +12,10 @@ export default function useClickOutSide() {
 
     const handleClickOutSide = (e) => {
         if (!sideRef?.current?.contains(e.target)) {
-            //in side
+            //out side
             setIsOutSide(true)
         } else {
-            //out side
+            //in side
             setIsOutSide(false)
         }
     }
