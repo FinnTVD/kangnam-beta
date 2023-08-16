@@ -11,6 +11,8 @@ import ContentPageOther from './ContentPageOther'
 import classes from './headerV2.module.css'
 import SlideBanner from '../home/SlideBanner'
 import NavBarFixed from './NavBarFixed'
+import { useMediaQuery } from 'react-responsive'
+import NavBarRes from './NavBarRes'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -32,6 +34,9 @@ const isCheckPathName = (pathName) => {
 export default function HeaderV2({ lang, t }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
 
     useEffect(() => {
         if (!pathName) return
@@ -85,11 +90,19 @@ export default function HeaderV2({ lang, t }) {
                 ></div>
                 {/* linear-white */}
                 {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>}
-                <NavBar
-                    isHome={isHome}
-                    lang={lang}
-                    t={t}
-                />
+                {isMobile ? (
+                    <NavBarRes
+                        isHome={isHome}
+                        lang={lang}
+                        t={t}
+                    />
+                ) : (
+                    <NavBar
+                        isHome={isHome}
+                        lang={lang}
+                        t={t}
+                    />
+                )}
                 <NavBarFixed
                     isHome={isHome}
                     lang={lang}
