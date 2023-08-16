@@ -127,6 +127,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                         t?.Navbar?.listNav?.map((e, index) => (
                             <li key={index}>
                                 <Link
+                                    scroll={false}
                                     className='block title16-600-130'
                                     href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
                                 >

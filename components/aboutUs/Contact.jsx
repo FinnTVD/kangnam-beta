@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Button from "../general/Button";
 
-export default function Contact(){
+export default function Contact({t}){
     const title = "Trụ sở chính (Hà Nội)";
     const address = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phone = ["+84 337858021 / +84 339625612", "+82 10-8413-1981"];
@@ -11,8 +11,8 @@ export default function Contact(){
         <section className="relative px-120 pt-[8.125vw] pb-[8.125vw]">
             <div className='flex justify-between items-end'>
                 <div>
-                    <span data-aos="fade-up" className='sub-title'>a</span>
-                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw]'>a</h2>
+                    <span data-aos="fade-up" className='sub-title'>{t.aboutUsContact.subtitle}</span>
+                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw]'>{t.aboutUsContact.title}</h2>
                 </div>
                 {/* <button className="text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" style={{boxShadow: "0px 0px 30px 0px rgba(206, 126, 64, 0.36)"}}>
 
@@ -33,7 +33,7 @@ export default function Contact(){
                         />
                     </svg>
                 </button> */}
-                <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center"> a </Button>
+                <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center"> {t.aboutUsContact.button} </Button>
             </div>
             <div className='flex relative pt-[6.5vw]'>
                 <div>

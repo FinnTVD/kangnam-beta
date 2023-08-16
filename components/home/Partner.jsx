@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 
-export default function Partner() {
+export default function Partner({t}) {
     const imgArray = ['/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg', '/images/partnerlogo.jpg',
     '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/partnerlogo.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg', '/images/logoVin.jpg']
 
@@ -38,10 +38,10 @@ const arrPartner = []
 
             <div className='flex items-end justify-between'>
                 <div>
-                    <span className='sub-title'>a</span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>a</h2>
+                    <span className='sub-title'>{t.homepagePartners.subtitle}</span>
+                    <h2 className='title56 text-den mt-[0.62vw]'>{t.homepagePartners.title}</h2>
                 </div>
-                <Button href={'/'}>Trở thành đối tác</Button>
+                <Button stroke='white' href={'/'} className='bg-[#D6A279] text-white border-none'>Trở thành đối tác</Button>
             </div>
             <Swiper
                 slidesPerView={1}

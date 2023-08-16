@@ -1,8 +1,10 @@
 import IndexNewsDetail from "@/components/newsDetail";
+import { getDictionary } from "../../dictionaries";
 
+export default async function NewsDetail({ params }){
+  const t = await getDictionary(params.lang)
 
-export default function NewsDetail({ params }){
   return(
-    <IndexNewsDetail slug={params.slug}></IndexNewsDetail>
+    <IndexNewsDetail t={t} slug={params.slug}></IndexNewsDetail>
   )
 }

@@ -1,9 +1,9 @@
 import ListNews from "./ListNews";
 
-export default function IndexNews() {
+export default function IndexNews({t}) {
     return(
         <>
-            <ListNews></ListNews>
+            <ListNews t={t}></ListNews>
         </>
     )
 }

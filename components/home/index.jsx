@@ -26,8 +26,8 @@ export default function IndexHome({ lang, t }) {
                     />
                 </ProjectProminent>
                 <Prominent />
-                <Partner />
-                <LatestNews />
+                <Partner t={t}/>
+                <LatestNews t={t}/>
             </main>
         </>
     )
