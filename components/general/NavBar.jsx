@@ -39,6 +39,7 @@ const listNav = [
 
 export default function NavBar({ isHome = true, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+
     return (
         <nav
             className={`${
@@ -143,9 +144,13 @@ export default function NavBar({ isHome = true, lang, t }) {
                     >
                         {t?.Navbar?.button}
                     </Link>
-                    <BoxLanguage lang={lang} t={t}/>
+                    <BoxLanguage
+                        lang={lang}
+                        t={t}
+                    />
                 </div>
             </div>
+            {/* <div className='w-screen h-screen bg-logo absolute top-0 left-0'></div> */}
         </nav>
     )
 }
