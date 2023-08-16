@@ -1,17 +1,20 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import MenuRes from './MenuRes'
+import { useState } from 'react'
 
 export default function NavBarRes({ lang, t, isHome }) {
+    const [isOpen, setIsOpen] = useState(false)
     return (
-        <nav className='relative z-[9999]'>
-            <div>
+        <nav className='relative z-[9999] w-full'>
+            <div className='pb-[0.53vw] pt-[2.13vw] flex justify-between pl-[7.2vw] pr-[2.8vw] items-center'>
                 <Link
                     href={`/${lang !== 'vn' ? lang : ''}`}
-                    className='relative w-[10.67vw] h-[10.13vw] block mb-[0.53vw] mt-[2.13vw]'
+                    className='relative w-[10.67vw] h-[14.13vw] block'
                 >
                     <Image
-                        className='object-cover brightness-0 invert'
+                        className='object-contain brightness-0 invert'
                         src='/images/logo-no-bg.svg'
                         alt='logo'
                         quality={100}
@@ -19,14 +22,17 @@ export default function NavBarRes({ lang, t, isHome }) {
                         fill
                     />
                 </Link>
-                <div>
+                <div
+                    onClick={() => setIsOpen(true)}
+                    className='relative'
+                >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='white'
-                        className='w-[5.33vw] h-[3.6vw]'
+                        className='w-[10.33vw] h-[8.6vw]'
                     >
                         <path
                             strokeLinecap='round'
@@ -36,6 +42,12 @@ export default function NavBarRes({ lang, t, isHome }) {
                     </svg>
                 </div>
             </div>
+            <MenuRes
+                lang={lang}
+                t={t}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+            />
         </nav>
     )
 }

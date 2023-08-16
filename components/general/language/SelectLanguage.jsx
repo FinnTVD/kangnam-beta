@@ -53,11 +53,11 @@ export default function SelectLanguage({ className, lang }) {
     return (
         <ul
             id='box-select-language'
-            className={`${className} absolute flex flex-col -bottom-[0.5vw] left-0 translate-y-full bg-white rounded-md w-[8vw] h-fit py-[0.5vw] z-[99999] text-black`}
+            className={`${className} absolute flex flex-col -bottom-[0.5vw] left-0 translate-y-full bg-white rounded-md w-[8vw] h-fit py-[0.5vw] z-[99999] text-black max-md:w-[27.5vw] max-md:-left-[2.13vw] max-md:py-[1vw] max-md:-bottom-[1vw]`}
         >
-            <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
+            <li className='cursor-pointer select-none max-md:py-[1vw] flex items-center gap-x-[0.5vw] max-md:px-[2.13vw] max-md:gap-x-[2.4vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
+                    className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/vn.svg'
                     alt='viet nam'
                     quality={100}
@@ -66,14 +66,14 @@ export default function SelectLanguage({ className, lang }) {
                 />
                 <Link
                     href={handleCheckLang('vn', pathName)}
-                    className='title16-600-150 whitespace-nowrap -tracking-[0.48px] block'
+                    className='title16-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'
                 >
                     Việt Nam
                 </Link>
             </li>
-            <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
+            <li className='cursor-pointer select-none max-md:py-[1vw] flex items-center gap-x-[0.5vw] max-md:px-[2.13vw] max-md:gap-x-[2.4vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
+                    className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/english.svg'
                     alt='english'
                     quality={100}
@@ -82,14 +82,14 @@ export default function SelectLanguage({ className, lang }) {
                 />
                 <Link
                     href={handleCheckLang('en', pathName)}
-                    className='title16-600-150 whitespace-nowrap -tracking-[0.48px] block'
+                    className='title16-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'
                 >
                     English
                 </Link>
             </li>
-            <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
+            <li className='cursor-pointer select-none max-md:py-[1vw] flex items-center gap-x-[0.5vw] max-md:px-[2.13vw] max-md:gap-x-[2.4vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
+                    className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/korea.svg'
                     alt='korea'
                     quality={100}
@@ -98,14 +98,14 @@ export default function SelectLanguage({ className, lang }) {
                 />
                 <Link
                     href={handleCheckLang('kr', pathName)}
-                    className='title16-600-150 whitespace-nowrap -tracking-[0.48px] block'
+                    className='title16-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'
                 >
                     Korea
                 </Link>
             </li>
-            <li className='cursor-pointer select-none flex items-center gap-x-[0.5vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
+            <li className='cursor-pointer select-none max-md:py-[1vw] flex items-center gap-x-[0.5vw] max-md:px-[2.13vw] max-md:gap-x-[2.4vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
+                    className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/china.svg'
                     alt='china'
                     quality={100}
@@ -114,7 +114,7 @@ export default function SelectLanguage({ className, lang }) {
                 />
                 <Link
                     href={handleCheckLang('ch', pathName)}
-                    className='title16-600-150 whitespace-nowrap -tracking-[0.48px] block'
+                    className='title16-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'
                 >
                     China
                 </Link>

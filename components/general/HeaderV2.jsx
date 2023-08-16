@@ -75,7 +75,7 @@ export default function HeaderV2({ lang, t }) {
                 <SlideBanner />
                 {isHome && (
                     <Image
-                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
+                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[12.17vh] max-md:right-[4.8vw]'
                         src='/images/big-logo.png'
                         alt='big-logo'
                         width={350}
@@ -138,7 +138,7 @@ export default function HeaderV2({ lang, t }) {
                 {isHome && (
                     <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
                 )}
-                {isHome && <FeatureHome />}
+                {isHome && !isMobile && <FeatureHome />}
             </div>
         </header>
     )
