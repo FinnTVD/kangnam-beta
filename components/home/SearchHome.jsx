@@ -16,7 +16,7 @@ export default function SearchHome() {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
 
     return (
-        <div className='absolute top-[47%] -translate-y-1/2 left-[7.5vw] z-10'>
+        <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] z-10'>
             <p className='title18-400-160'>An tâm với 100% bất động sản được xác thực tại KANGNAM</p>
             <h1 className='mt-[0.5vw] mb-[1.87vw] text-white capitalize title60'>Lựa chọn căn nhà ưng ý của bạn</h1>
             <div className='w-[54vw] py-[1.53vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center'>

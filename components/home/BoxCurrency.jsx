@@ -6,10 +6,16 @@ export default function BoxCurrency({ className = '' }) {
             className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
         >
             <span className='text-den title20-700-130 mx-auto block'>Chuyển đổi tiền tệ</span>
-            <span className='text-den title10-400-150 opacity-50 mb-[0.31vw]'>Số tiền</span>
+            <label
+                htmlFor='currency-default'
+                className='text-den title10-400-150 opacity-50 mb-[0.31vw] cursor-pointer block'
+            >
+                Số tiền
+            </label>
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
                     type='text'
+                    id='currency-default'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5]'
                     placeholder='Nhập số tiền'
                 />
@@ -43,7 +49,7 @@ export default function BoxCurrency({ className = '' }) {
                 height='13'
                 viewBox='0 0 17 13'
                 fill='none'
-                className='my-[0.75vw] mx-auto'
+                className='py-[0.75vw] px-[0.5vw] mx-auto cursor-pointer box-content'
             >
                 <path
                     d='M3.64645 12.3536C3.84171 12.5488 4.15829 12.5488 4.35355 12.3536L7.53553 9.17157C7.7308 8.97631 7.7308 8.65973 7.53553 8.46447C7.34027 8.2692 7.02369 8.2692 6.82843 8.46447L4 11.2929L1.17157 8.46447C0.97631 8.2692 0.659728 8.2692 0.464466 8.46447C0.269204 8.65973 0.269204 8.97631 0.464466 9.17157L3.64645 12.3536ZM3.5 1L3.5 12L4.5 12L4.5 1L3.5 1Z'
@@ -54,12 +60,18 @@ export default function BoxCurrency({ className = '' }) {
                     fill='#D6A279'
                 />
             </svg>
-            <span className='text-den title10-400-150 opacity-50 mb-[0.31vw]'>Chuyển đổi thành</span>
+            <label
+                htmlFor='currency-new'
+                className='text-den title10-400-150 opacity-50 mb-[0.31vw] block cursor-pointer'
+            >
+                Chuyển đổi thành
+            </label>
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
                     type='text'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5]'
                     placeholder='Thành tiền'
+                    id='currency-new'
                 />
                 <div className='flex items-center'>
                     <Image

@@ -1,5 +1,41 @@
 {
-    "form1": {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "Về chúng tôi",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Dự án",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Bán lại",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Thỏa thuận & Pháp lí",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "Tin tức",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Liên hệ",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Kí gửi nhà đất",
+        "title":"Chọn ngôn ngữ"
+    },
+    "Form1": {
         "sell": "Giá bán mong muốn *",
         "hire": "Giá thuê mong muốn *"
     },

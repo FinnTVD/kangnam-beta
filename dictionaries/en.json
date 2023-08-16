@@ -1,5 +1,41 @@
 {
-    "form1": {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "About us",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Project",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Resale",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Agreement & Legal",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "News",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Contact",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Land deposit",
+        "title": "Select Language"
+    },
+    "Form1": {
         "sell": "Desired selling price *",
         "hire": "Desired rent *"
     },

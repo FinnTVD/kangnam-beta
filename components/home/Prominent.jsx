@@ -1,16 +1,86 @@
-import Image from 'next/image'
+'use client'
+import { useState } from 'react'
 import Button from '../general/Button'
+import 'swiper/css/effect-fade'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import Image from 'next/image'
+import { useRef } from 'react'
+
+const arrArea = [
+    '01. Khu vực Bắc Từ Liêm, Hà Nội',
+    '02. Khu vực Thanh Xuân, Hà Nội',
+    '03. Khu vực Hà Đông, Hà Nội',
+    '04. Khu vực Đống Đa, Hà Nội',
+]
+
+const arrProminent = [
+    { id: 1, src: '/images/bg-prominent.jpg', alt: 'bg header primary' },
+    { id: 2, src: '/images/bg-header.jpg', alt: 'bg header' },
+    { id: 3, src: '/images/bg-header1.jfif', alt: 'bg-header1' },
+    { id: 4, src: '/images/bg-header2.jfif', alt: 'bg-header2' },
+]
 
 export default function Prominent() {
+    const [indexSlider, setIndexSlider] = useState(0)
+    const swiperRef = useRef()
+
+    const handleSlideChange = (swiper) => {
+        setIndexSlider(swiper.realIndex)
+    }
+
+    const handleSlideClick = (index) => {
+        if (swiperRef.current) {
+            swiperRef.current.slideTo(index)
+        }
+    }
+
     return (
-        <section className='relative flex items-end h-screen'>
-            <Image
+        <section
+            id='prominent'
+            className='relative flex items-end h-screen'
+        >
+            {/* <Image
                 className='z-0 object-cover'
                 src='/images/bg-prominent.jpg'
                 quality={100}
                 sizes='100vw'
                 fill
-            />
+            /> */}
+            <Swiper
+                slidesPerView={1}
+                loop={true}
+                effect={'fade'}
+                autoplay={{
+                    delay: 5000,
+                    disableOnInteraction: false,
+                }}
+                speed={1000}
+                onSlideChange={handleSlideChange}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper
+                }}
+                modules={[EffectFade, Autoplay]}
+                className='absolute top-0 left-0 z-0 w-full h-full mySwiper'
+            >
+                {arrProminent &&
+                    arrProminent?.map((e, index) => (
+                        <SwiperSlide key={index}>
+                            <div className='relative w-full h-full overflow-hidden box-img-slide'>
+                                <Image
+                                    className={`${
+                                        indexSlider === index ? 'active' : ''
+                                    } object-cover w-[110vw] h-[110vh] scale-110`}
+                                    src={e.src}
+                                    alt={e.alt}
+                                    sizes='100vw'
+                                    fill
+                                    quality={100}
+                                />
+                            </div>
+                        </SwiperSlide>
+                    ))}
+            </Swiper>
             <div className='absolute bottom-0 left-0 w-full h-[76vh] bg-gradient-slide z-[1]'></div>
             <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] items-center w-full mb-[3.19vw]'>
                 <div className='flex flex-col items-center'>
@@ -27,18 +97,18 @@ export default function Prominent() {
                     </Button>
                 </div>
                 <ul className='flex gap-x-[1.5vw] w-full'>
-                    <li className='flex-1 border-t border-solid border-white02 pt-[0.5vw]'>
-                        01. Khu vực Bắc Từ Liêm, Hà Nội
-                    </li>
-                    <li className='flex-1 border-t border-solid border-white02 pt-[0.5vw]'>
-                        02. Khu vực Thanh Xuân, Hà Nội
-                    </li>
-                    <li className='flex-1 border-t border-solid border-white02 pt-[0.5vw]'>
-                        03. Khu vực Hà Đông, Hà Nội{' '}
-                    </li>
-                    <li className='flex-1 border-t border-solid border-white02 pt-[0.5vw]'>
-                        04. Khu vực Đống Đa, Hà Nội{' '}
-                    </li>
+                    {arrArea &&
+                        arrArea?.map((e, index) => (
+                            <li
+                                onClick={() => handleSlideClick(index)}
+                                key={index}
+                                className={`${
+                                    indexSlider === index ? 'active' : ''
+                                } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
+                            >
+                                {e}
+                            </li>
+                        ))}
                 </ul>
             </div>
         </section>

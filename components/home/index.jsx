@@ -13,7 +13,7 @@ export default function IndexHome({ lang, t }) {
         <>
             <main>
                 <WeAre lang={lang} />
-                <MyProject lang={lang}/>
+                <MyProject lang={lang} />
                 <Deposit />
                 <ProjectProminent>
                     <Image

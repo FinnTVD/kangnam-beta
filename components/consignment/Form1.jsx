@@ -225,7 +225,7 @@ export default function Form1({ t, handleNextSlide }) {
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'border-[#C5C5C5] placeholder:text-[#646464]'
                                     } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                    placeholder={t.form1.sell}
+                                    placeholder={t.Form1.sell}
                                     name='price'
                                     id='price'
                                     value={inputValue}
@@ -244,7 +244,7 @@ export default function Form1({ t, handleNextSlide }) {
                                                 ? 'border-red-400 placeholder:text-red-400'
                                                 : 'placeholder:text-[#646464] border-[#C5C5C5]'
                                         } w-full py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid text-den title16-400-150 focus:border-logo placeholder:text-16pc placeholder:font-normal placeholder:leading-normal`}
-                                        placeholder={t.form1.hire}
+                                        placeholder={t.Form1.hire}
                                         name='priceHire'
                                         id='priceHire'
                                         value={inputValueHire}

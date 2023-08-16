@@ -34,7 +34,7 @@ const handleCheckIcon = (locale) => {
     }
 }
 
-export default function BoxLanguage({ type = '', lang }) {
+export default function BoxLanguage({ type = '', lang, t }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
     useEffect(() => {
@@ -49,9 +49,11 @@ export default function BoxLanguage({ type = '', lang }) {
             className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw]'
         >
             <span
-                className={`${type === 'ds' ? 'text-den opacity-60' : 'text-white'} -tracking-[0.6px] title12-600-150`}
+                className={`${
+                    type === 'ds' ? 'text-den opacity-60' : 'text-white'
+                } title-language-active -tracking-[0.6px] title12-600-150`}
             >
-                Chọn ngôn ngữ
+                {t?.Navbar?.title}
             </span>
             <div className='flex items-center gap-x-[0.5vw] select-none cursor-pointer'>
                 <Image
@@ -62,7 +64,11 @@ export default function BoxLanguage({ type = '', lang }) {
                     width={28}
                     height={18}
                 />
-                <span className={`${type === 'ds' ? 'text-den' : 'text-white'} title16-600-150 -tracking-[0.48px]`}>
+                <span
+                    className={`${
+                        type === 'ds' ? 'text-den' : 'text-white'
+                    } title-language-active title16-600-150 -tracking-[0.48px]`}
+                >
                     {handleCheckCountry(lang)}
                 </span>
                 <svg

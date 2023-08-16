@@ -1,8 +1,45 @@
 {
-    "form1": {
+    "Navbar": {
+        "listNav": [
+            {
+                "id": 1,
+                "title": "About us",
+                "href": "/gioi-thieu"
+            },
+            {
+                "id": 2,
+                "title": "Project",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 3,
+                "title": "Resale",
+                "href": "/danh-sach-du-an"
+            },
+            {
+                "id": 4,
+                "title": "Agreement & Legal",
+                "href": "/thoa-thuan-va-phap-li"
+            },
+            {
+                "id": 5,
+                "title": "News",
+                "href": "/danh-sach-tin-tuc"
+            },
+            {
+                "id": 6,
+                "title": "Contact",
+                "href": "/lien-he"
+            }
+        ],
+        "button": "Land deposit",
+        "title": "Select Language"
+    },
+    "Form1": {
         "sell": "원하는 판매 가격  *",
         "hire": "원하는 임대료 *"
     },
+
     "homepageNews":{
         "subtitle": "뉴스 합성",
         "title": "최근 뉴스"
@@ -29,6 +66,7 @@
         "title": "사무실 정보",
         "button": "지금 연락하세요"
     },
+
     "newsList":{
         "subtitle" : "에 대한 뉴스",
         "title": "소식"

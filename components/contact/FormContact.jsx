@@ -6,10 +6,44 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useResizeArea from '@/hooks/useResizeArea'
+import SelectCategory from './SelectCategory'
+import { useState } from 'react'
+const listSocial = [
+    {
+        id: 1,
+        src: '/images/talk.svg',
+        title: 'kakao talk',
+    },
+    {
+        id: 2,
+        src: '/images/wechat.svg',
+        title: 'wechat',
+    },
+    {
+        id: 3,
+        src: '/images/zalo.svg',
+        title: 'zalo',
+    },
+    {
+        id: 4,
+        src: '/images/telegram.svg',
+        title: 'telegram',
+    },
+    {
+        id: 5,
+        src: '/images/skype.svg',
+        title: 'skype',
+    },
+    {
+        id: 6,
+        src: '/images/linkedin.svg',
+        title: 'linkedin',
+    },
+]
 
 const schema = yup
     .object({
-        fullName: yup.string().required('Vui lòng điền thông tin!'),
+        fullName: yup.string().required('Vui lòng điền họ tên!'),
         numberPhone: yup
             .string()
             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
@@ -18,15 +52,16 @@ const schema = yup
                 }
                 return true
             })
-            .required('Vui lòng điền thông tin!'),
+            .required('Vui lòng điền số điện thoại!'),
         email: yup
             .string()
-            .required('Vui lòng điền thông tin!')
+            .required('Vui lòng điền email!')
             .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
     })
     .required()
 
 export default function FormContact() {
+    const [valueCategory, setValueCategory] = useState('')
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
 
     const {
@@ -39,7 +74,11 @@ export default function FormContact() {
     })
 
     const onSubmit = (e) => {
-        console.log(e)
+        if (!valueCategory) return
+        console.log({
+            ...e,
+            category: valueCategory,
+        })
     }
 
     return (
@@ -55,7 +94,7 @@ export default function FormContact() {
                         className='z-0 object-cover'
                     />
                     <div className='relative z-10 px-[1.75vw] pt-[1.5vw] pb-[2.31vw] rounded-[1vw] border border-solid border-white09 backdrop-blur-[11.1199px] bg-white07 w-full h-fit'>
-                        <span className='sub-title'>Thông tin liên hệ</span>
+                        <span className='sub-title block mb-[1.25vw]'>Thông tin liên hệ</span>
                         <ul className='flex flex-col gap-y-[1vw]'>
                             <li className='flex gap-x-[0.5vw] items-center'>
                                 <svg
@@ -116,52 +155,61 @@ export default function FormContact() {
                         autoComplete='false'
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <div className='relative'>
-                            <input
-                                type='text'
-                                placeholder='Họ và tên *'
-                                className='placeholder:text-16pc w-full placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
-                                {...register('fullName')}
-                            />
-                            <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                {errors.fullName?.message}
-                            </p>
-                        </div>
                         <div className='flex flex-1 gap-x-[1.5vw]'>
-                            <div className='relative'>
+                            <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder='Số điện thoại *'
-                                    className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                                    placeholder={`${errors.fullName?.message ?? 'Họ và tên *'}`}
+                                    className={`${
+                                        errors.fullName?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
+                                    {...register('fullName')}
+                                />
+                            </div>
+                            <div className='relative flex-1'>
+                                <input
+                                    type='text'
+                                    placeholder={`${errors.numberPhone?.message ?? 'Số điện thoại *'}`}
+                                    className={`${
+                                        errors.numberPhone?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
                                     {...register('numberPhone')}
                                 />
-                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                    {errors.numberPhone?.message}
-                                </p>
                             </div>
-                            <div className='relative'>
+                        </div>
+                        <div className='flex flex-1 gap-x-[1.5vw]'>
+                            <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder='Email *'
-                                    className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                                    placeholder={`${errors.email?.message ?? 'Email *'}`}
+                                    className={`${
+                                        errors.email?.message
+                                            ? 'border-red-400 placeholder:text-red-400'
+                                            : 'placeholder:text-den border-den03 placeholder:opacity-70'
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid focus:border-[#d6a279]`}
                                     {...register('email')}
                                 />
-                                <p className='absolute -bottom-[0.5vw] left-0 translate-y-full pl-[2vw] text-red-400 title10-600-150'>
-                                    {errors.email?.message}
-                                </p>
                             </div>
+                            <SelectCategory
+                                setValueCategory={setValueCategory}
+                                valueCategory={valueCategory}
+                            />
                         </div>
                         <input
                             type='text'
                             placeholder='Địa chỉ'
-                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input'
+                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[6.25vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279]'
                             {...register('address')}
                         />
                         <textarea
                             onChange={handleResizeHeight}
                             ref={areaRef}
                             placeholder='Nội dung'
-                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] w-full rounded-[1vw] outline-none shadow-input focus:outline-[#d6a279] resize-none'
+                            className='placeholder:text-16pc placeholder:font-normal border border-solid border-den03 text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] w-full rounded-[1vw] outline-none shadow-input focus:border-[#d6a279] resize-none'
                             style={{
                                 height: heightArea ? `${heightArea}px` : '10.375vw',
                             }}
@@ -179,113 +227,28 @@ export default function FormContact() {
                     <div className='flex items-start justify-between'>
                         <span className='w-fit text-20pc leading-[1.4] font-extrabold text-den'>Liên hệ ngay:</span>
                         <ul className='flex gap-x-[1vw]'>
-                            <li>
-                                <Link
-                                    href='/'
-                                    className='w-[2.5vw] h-[2.5vw] block'
-                                >
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='40'
-                                        height='40'
-                                        viewBox='0 0 40 40'
-                                        fill='none'
-                                        className='w-full h-full'
+                            {listSocial &&
+                                listSocial?.map((e, index) => (
+                                    <li
+                                        key={index}
+                                        className='overflow-hidden rounded-full bg-logo w-[2.6875vw] h-[2.6875vw]'
+                                        title={e.title}
                                     >
-                                        <circle
-                                            cx='20'
-                                            cy='20'
-                                            r='20'
-                                            fill='#D6A279'
-                                        />
-                                        <path
-                                            d='M21.0937 21.5754V28.4706H17.9263V21.5754H15.2949V18.7795H17.9263V17.7623C17.9263 13.9857 19.5039 12 22.8419 12C23.8652 12 24.1211 12.1645 24.6815 12.2985V15.0639C24.0541 14.9542 23.8774 14.8933 23.2257 14.8933C22.4521 14.8933 22.0379 15.1126 21.6602 15.5451C21.2826 15.9775 21.0937 16.7268 21.0937 17.7988V18.7856H24.6815L23.719 21.5814H21.0937V21.5754Z'
-                                            fill='white'
-                                        />
-                                    </svg>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href='/'
-                                    className='w-[2.5vw] h-[2.5vw] block'
-                                >
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='40'
-                                        height='40'
-                                        viewBox='0 0 40 40'
-                                        fill='none'
-                                        className='w-full h-full'
-                                    >
-                                        <circle
-                                            cx='20'
-                                            cy='20'
-                                            r='20'
-                                            fill='#D6A279'
-                                        />
-                                        <path
-                                            d='M23.433 12.6266L23.0356 12H20.6309V17.6431L20.6227 23.1551C20.6268 23.1961 20.6309 23.2411 20.6309 23.2821C20.6309 24.6621 19.5084 25.7883 18.1237 25.7883C16.739 25.7883 15.6165 24.6662 15.6165 23.2821C15.6165 21.902 16.739 20.7759 18.1237 20.7759C18.4105 20.7759 18.689 20.8291 18.9471 20.9192V18.1673C18.6809 18.1222 18.4064 18.0976 18.1237 18.0976C15.2683 18.1017 12.9414 20.4278 12.9414 23.2862C12.9414 26.1446 15.2683 28.4706 18.1278 28.4706C20.9873 28.4706 23.3142 26.1446 23.3142 23.2862V16.7299C24.3507 17.7659 25.6903 18.7774 27.1733 19.1009V16.2876C25.5633 15.575 23.9615 13.4701 23.433 12.6266Z'
-                                            fill='white'
-                                        />
-                                    </svg>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href='/'
-                                    className='w-[2.5vw] h-[2.5vw] block'
-                                >
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='40'
-                                        height='40'
-                                        viewBox='0 0 40 40'
-                                        fill='none'
-                                        className='w-full h-full'
-                                    >
-                                        <circle
-                                            cx='20'
-                                            cy='20'
-                                            r='20'
-                                            fill='#D6A279'
-                                        />
-                                        <path
-                                            d='M27.4128 27.0591H13.294C11.4048 27.0591 9.88281 25.3883 9.88281 23.3333V16.6671C9.88281 14.6038 11.4125 12.9414 13.294 12.9414H27.4128C29.3019 12.9414 30.824 14.6121 30.824 16.6671V23.3333C30.8316 25.3967 29.3019 27.0591 27.4128 27.0591Z'
-                                            fill='white'
-                                        />
-                                        <path
-                                            d='M24.0566 19.8959L18.1172 16.4709V23.3209L24.0566 19.8959Z'
-                                            fill='#D6A279'
-                                        />
-                                    </svg>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href='/'
-                                    className='w-[2.5vw] h-[2.5vw] block relative'
-                                >
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='40'
-                                        height='40'
-                                        viewBox='0 0 40 40'
-                                        fill='none'
-                                        className='w-full h-full'
-                                    >
-                                        <circle
-                                            cx='20'
-                                            cy='20'
-                                            r='20'
-                                            fill='#D6A279'
-                                        />
-                                    </svg>
-                                    <span className='absolute text-white -translate-x-1/2 -translate-y-1/2 text-14pc title top-1/2 left-1/2'>
-                                        Zalo
-                                    </span>
-                                </Link>
-                            </li>
+                                        <Link
+                                            href='/'
+                                            className='flex items-center justify-center w-full h-full '
+                                        >
+                                            <Image
+                                                className='w-[1.5vw] h-[1.5vw] object-contain brightness-0 invert'
+                                                src={e.src}
+                                                alt={e.title}
+                                                width={36}
+                                                height={36}
+                                                quality={100}
+                                            />
+                                        </Link>
+                                    </li>
+                                ))}
                         </ul>
                     </div>
                 </div>
