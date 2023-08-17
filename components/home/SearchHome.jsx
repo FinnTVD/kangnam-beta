@@ -77,61 +77,61 @@ export default function SearchHome() {
                         ))}
                 </ul>
             </div>
-            <div className='flex gap-x-[1.06vw] max-md:gap-x-[2.13vw] max-md:gap-y-[2.67vw] max-md:flex-wrap'>
-                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:my-[2.67vw] max-md:px-[4.27vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
+            <div className='flex gap-x-[1.06vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-md:flex-wrap'>
+                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
                         src='/images/px.png'
                         alt='px'
                         width={32}
                         height={32}
                         quality={100}
-                        className='object-cover w-[2vw] h-[2vw]'
+                        className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150'>Phân xưởng</span>
+                    <span className='text-white title14-400-150 title-mb12-400-150'>Phân xưởng</span>
                 </div>
-                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:my-[2.67vw] max-md:px-[4.27vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
+                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
                         src='/images/cc.png'
                         alt='cc'
                         width={32}
                         height={32}
                         quality={100}
-                        className='object-cover w-[2vw] h-[2vw]'
+                        className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150'>Chung cư</span>
+                    <span className='text-white title14-400-150 title-mb12-400-150'>Chung cư</span>
                 </div>
-                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:my-[2.67vw] max-md:px-[4.27vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
+                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
                         src='/images/bt.png'
                         alt='bt'
                         width={32}
                         height={32}
                         quality={100}
-                        className='object-cover w-[2vw] h-[2vw]'
+                        className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150'>Biệt thự</span>
+                    <span className='text-white title14-400-150 title-mb12-400-150'>Biệt thự</span>
                 </div>
-                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:my-[2.67vw] max-md:px-[4.27vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
+                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
                         src='/images/nmp.png'
                         alt='nmp'
                         width={32}
                         height={32}
                         quality={100}
-                        className='object-cover w-[2vw] h-[2vw]'
+                        className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150'>Nhà mặt phố</span>
+                    <span className='text-white title14-400-150 title-mb12-400-150'>Nhà mặt phố</span>
                 </div>
-                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:my-[2.67vw] max-md:px-[4.27vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
+                <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
                         src='/images/dn.png'
                         alt='dn'
                         width={32}
                         height={32}
                         quality={100}
-                        className='object-cover w-[2vw] h-[2vw]'
+                        className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150'>Đất nền</span>
+                    <span className='text-white title14-400-150 title-mb12-400-150'>Đất nền</span>
                 </div>
             </div>
         </div>

@@ -129,7 +129,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                     </svg>
                 </div>
             </div>
-            <ul className='px-10 flex flex-col mt-[8vw] mb-[13.33vw] text-white'>
+            <ul className='px-mb10 flex flex-col mt-[8vw] mb-[13.33vw] text-white'>
                 {listNavRes &&
                     listNavRes?.map((e, index) => (
                         <li
@@ -140,7 +140,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                         </li>
                     ))}
             </ul>
-            <div className='px-10 mt-[13.33vw] flex justify-between items-end'>
+            <div className='px-mb10 mt-[13.33vw] flex justify-between items-end'>
                 <ul className='flex flex-col text-white gap-y-[1.07vw] w-full'>
                     {listNavRes2 &&
                         listNavRes2?.map((e, index) => (
@@ -157,20 +157,20 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                     t={t}
                 />
             </div>
-            <div className='px-10 my-[4.27vw]'>
+            <div className='px-mb10 my-[4.27vw]'>
                 <div className='border border-t border-white01'></div>
             </div>
-            <span className='block text-white px-10 title-mb12-400-200 opacity-50'>Email:</span>
-            <span className='block text-white px-10 title-mb13-400-184 opacity-95 -mt-[1.6vw]'>
+            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50'>Email:</span>
+            <span className='block text-white px-mb10 title-mb13-400-184 opacity-95 -mt-[1.6vw]'>
                 kangnam@gmail.com.vn
             </span>
-            <span className='block text-white px-10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Địa chỉ:</span>
-            <address className='block text-white px-10 title-mb13-400-130 opacity-95 not-italic'>
+            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Địa chỉ:</span>
+            <address className='block text-white px-mb10 title-mb13-400-130 opacity-95 not-italic'>
                 Villa E11, The Manor, kdt mới Mỹ Đình - Mễ Trì, Nam Từ Liêm, Hà Nội.
             </address>
-            <span className='block text-white px-10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Hotline:</span>
-            <span className='block text-white px-10 title-mb13-600-150'>(+84) 254 3526981</span>
-            <div className='px-10 mt-[4.27vw]'>
+            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Hotline:</span>
+            <span className='block text-white px-mb10 title-mb13-600-150'>(+84) 254 3526981</span>
+            <div className='px-mb10 mt-[4.27vw]'>
                 <Link
                     href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
                     className='bg-nu h-fit w-full text-center block rounded-[6.25vw] py-[3.82vw] text-white title-mb13-600-150'

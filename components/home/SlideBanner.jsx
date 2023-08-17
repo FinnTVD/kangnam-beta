@@ -30,6 +30,7 @@ export default function SlideBanner() {
                         <SwiperSlide key={index}>
                             <div className='relative w-full h-full'>
                                 <Image
+                                    className='object-cover'
                                     src={e.src}
                                     alt={e.alt}
                                     fill
