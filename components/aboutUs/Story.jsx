@@ -2,14 +2,14 @@
 'use client'
 import Image from "next/image"
 
-export default function Story() {
+export default function Story({t}) {
     const description = 'Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở.'
     return(
         <section className="relative flex justify-between items-center px-120 pt-[1.25vw] pb-[6.125vw]">
             <div className="flex-col w-[41.625vw]">
                 <div>
-                    <span data-aos="fade-up" className='sub-title'>a</span>
-                    <h2 data-aos="fade-up" data-aos-delay="300" className='title56 text-den mt-[0.125vw]'>a</h2>
+                    <span data-aos="fade-up" className='sub-title'>{t.aboutUsStory.subtitle}</span>
+                    <h2 data-aos="fade-up" data-aos-delay="300" className='title56 text-den mt-[0.125vw]'>{t.aboutUsStory.title}</h2>
 
                 </div>
                 <span

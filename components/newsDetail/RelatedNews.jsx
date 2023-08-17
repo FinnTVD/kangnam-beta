@@ -3,13 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import NewsItem from '../news/NewsItem'
 import Button from '../general/Button'
 
-export default function RelatedNews({relatedNews}) {
+export default function RelatedNews({t, relatedNews}) {
     return(
         <section className='px-120 mt-[3.75vw]'>
             <div className='flex justify-between items-end'>
                 <div>
-                    <span className='sub-title'>a</span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>a</h2>
+                    <span className='sub-title'>{t.newsDetailRelated.subtitle}</span>
+                    <h2 className='title56 text-den mt-[0.62vw]'>{t.newsDetailRelated.title}</h2>
                 </div>
                 <Button href={'/danh-sach-tin-tuc'}>Xem tất cả</Button>
             </div>

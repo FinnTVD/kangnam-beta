@@ -39,38 +39,43 @@
         "sell": "Giá bán mong muốn *",
         "hire": "Giá thuê mong muốn *"
     },
-    "HomepageNews": {
+    "homepageNews":{
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức mới nhất"
     },
-    "HomepagePartner": {
+    "homepagePartners":{
         "subtitle": "Tổng hợp các đối tác",
-        "title": "Đối tác cảu chúng tôi"
+        "title": "Đối tác của chúng tôi"
     },
-    "HomepageFooter": {
+    "footer":{
         "title1": "Liên hệ",
         "title2": "Điều hướng chung",
         "title3": "Dịch vụ"
     },
-    "AboutUsStory": {
+    "aboutUsStory":{
+        "subtitle": "Câu chuyện thương hiệu",
+        "title": "Giới thiệu"
+    },
+    "aboutUsTeams":{
         "subtitle": "Đội ngũ",
         "title": "Chuyên viên Kangnam"
     },
-    "AboutUsContact": {
+    "aboutUsContact":{
         "subtitle": "Liên hệ",
         "title": "Thông tin văn phòng",
         "button": "Liên hệ ngay"
     },
-    "NewsList": {
-        "subtitle": "Tin tức về",
+    "newsList":{
+        "subtitle" : "Tin tức về",
         "title": "Tin tức"
     },
-    "NewsDetailDes": {
+    "newsDetailDes":{
         "byAuthor": "Viết bởi",
         "share": "Chia sẻ lên"
     },
-    "NewsDetailRelated": {
+    "newsDetailRelated":{
         "subtitle": "Tổng hợp tin tức",
-        "title": "Tin tức liên quan"
+        "title": "Tin tức liên quan",
+        "button": "Xem tất cả"
     }
 }
