@@ -8,7 +8,7 @@ import Aos from "aos";
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 
-export default function IndexAboutUs() {
+export default function IndexAboutUs({t}) {
     
     useEffect(() => {
         Aos.init({
@@ -35,10 +35,10 @@ export default function IndexAboutUs() {
       }, []);
     return(
         <>
-            <Story></Story>
-            <Teams></Teams>
+            <Story t={t}></Story>
+            <Teams t={t}></Teams>
             <Mission></Mission>
-            <Contact></Contact>
+            <Contact t={t}></Contact>
         </>
     )
 }

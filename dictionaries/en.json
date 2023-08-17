@@ -39,42 +39,43 @@
         "sell": "Desired selling price *",
         "hire": "Desired rent *"
     },
-    "HomepageNews": {
+    "homepageNews":{
         "subtitle": "News synthesis",
         "title": "Latest news"
     },
-    "HomepagePartner": {
+    "homepagePartners":{
         "subtitle": "Partners synthesis",
         "title": "Our partners"
     },
-    "HomepageFooter": {
+    "footer":{
         "title1": "Contact",
         "title2": "Navigation",
-        "title3": "Service"
+        "title3": "Services"
     },
-    "AboutUsStory": {
+    "aboutUsStory":{
         "subtitle": "Brand story",
         "title": "Introduction"
     },
-    "AboutUsTeams": {
+    "aboutUsTeams":{
         "subtitle": "Our teams",
         "title": "Kangnam specialists"
     },
-    "AboutUsContact": {
+    "aboutUsContact":{
         "subtitle": "Contact",
         "title": "Our office",
         "button": "Contact now"
     },
-    "NewsList": {
-        "subtitle": "News about",
+    "newsList":{
+        "subtitle" : "News about",
         "title": "News"
     },
-    "NewsDetailDes": {
+    "newsDetailDes":{
         "byAuthor": "By",
         "share": "Share on it"
     },
-    "NewsDetailRelated": {
+    "newsDetailRelated":{
         "subtitle": "News synthesis",
-        "title": "Related news"
+        "title": "Related news",
+        "button": "See all"
     }
 }

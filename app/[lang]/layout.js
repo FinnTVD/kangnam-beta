@@ -53,6 +53,7 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({ children, params }) {
     const t = await getDictionary(params.lang)
+
     return (
         <html lang={params.lang}>
             <head>
@@ -71,7 +72,7 @@ export default async function RootLayout({ children, params }) {
                     t={t}
                 />
                 {children}
-                <Footer />
+                <Footer t={t}/>
                 {/* <Script
                     async
                     defer
