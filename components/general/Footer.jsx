@@ -9,12 +9,6 @@ export default function Footer({t}) {
     const menuArr = ['Trang chủ', 'Về KANGNAM', 'Dự án', 'Ký gửi nhà đất', 'Thỏa thuận & pháp lý', 'Tin tức'];
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản'];
     const copyright= "© 2023 Copyright. Powered by OKHUB Viet Nam";
-
-    // const getSocial = async() => {
-    //     const response = await fetch('https://api-land.okhub.tech/api/v1/social');
-    //     const data = await response.json();
-    //     console.log(data);
-    // }
     
     const linkFacebookHandler = () => {
         window.open('https://www.facebook.com/')
@@ -29,9 +23,6 @@ export default function Footer({t}) {
         window.open('https://www.instagram.com/')
     }
 
-    useEffect(() => {
-        getSocial()
-    }, [])
     return (
         <footer className='bg-[#FBF7F2]'>
             <div className='py-[5vw] px-[7.5625vw] flex'>
