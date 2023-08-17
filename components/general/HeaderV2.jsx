@@ -11,6 +11,8 @@ import ContentPageOther from './ContentPageOther'
 import classes from './headerV2.module.css'
 import SlideBanner from '../home/SlideBanner'
 import NavBarFixed from './NavBarFixed'
+import { useMediaQuery } from 'react-responsive'
+import NavBarRes from './NavBarRes'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -32,6 +34,9 @@ const isCheckPathName = (pathName) => {
 export default function HeaderV2({ lang, t }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
 
     useEffect(() => {
         if (!pathName) return
@@ -70,7 +75,7 @@ export default function HeaderV2({ lang, t }) {
                 <SlideBanner />
                 {isHome && (
                     <Image
-                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge'
+                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[12.17vh] max-md:right-[4.8vw]'
                         src='/images/big-logo.png'
                         alt='big-logo'
                         width={350}
@@ -85,11 +90,19 @@ export default function HeaderV2({ lang, t }) {
                 ></div>
                 {/* linear-white */}
                 {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>}
-                <NavBar
-                    isHome={isHome}
-                    lang={lang}
-                    t={t}
-                />
+                {isMobile ? (
+                    <NavBarRes
+                        isHome={isHome}
+                        lang={lang}
+                        t={t}
+                    />
+                ) : (
+                    <NavBar
+                        isHome={isHome}
+                        lang={lang}
+                        t={t}
+                    />
+                )}
                 <NavBarFixed
                     isHome={isHome}
                     lang={lang}
@@ -97,7 +110,7 @@ export default function HeaderV2({ lang, t }) {
                 {isHome ? <SearchHome /> : <ContentPageOther />}
                 <div
                     onClick={handleScrollDown}
-                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] select-none'
+                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -105,7 +118,7 @@ export default function HeaderV2({ lang, t }) {
                         height='25'
                         viewBox='0 0 24 25'
                         fill='none'
-                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw]`}
+                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                     >
                         <path
                             d='M1 1L12 12L23 1'
@@ -118,14 +131,14 @@ export default function HeaderV2({ lang, t }) {
                             strokeWidth='2'
                         />
                     </svg>
-                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px]'>
+                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
                         Cuộn xuống
                     </span>
                 </div>
                 {isHome && (
                     <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
                 )}
-                {isHome && <FeatureHome />}
+                {isHome && !isMobile && <FeatureHome />}
             </div>
         </header>
     )

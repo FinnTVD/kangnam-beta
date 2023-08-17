@@ -46,18 +46,18 @@ export default function BoxLanguage({ type = '', lang, t }) {
                 setIsShowLanguage(!isShowLanguage)
             }}
             ref={sideRef}
-            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw]'
+            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-md:w-fit'
         >
             <span
                 className={`${
                     type === 'ds' ? 'text-den opacity-60' : 'text-white'
-                } title-language-active -tracking-[0.6px] title12-600-150`}
+                } title-language-active -tracking-[0.6px] title12-600-150 title-mb12-400-150 max-md:opacity-60 max-md:-tracking-[0.6px] max-md:whitespace-nowrap`}
             >
                 {t?.Navbar?.title}
             </span>
-            <div className='flex items-center gap-x-[0.5vw] select-none cursor-pointer'>
+            <div className='flex items-center gap-x-[0.5vw] max-md:gap-x-[2.4vw] select-none cursor-pointer'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px]'
+                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px] max-md:w-[6.13vw] max-md:h-[3.73vw]'
                     src={handleCheckIcon(lang)}
                     alt='country'
                     quality={100}
@@ -67,7 +67,7 @@ export default function BoxLanguage({ type = '', lang, t }) {
                 <span
                     className={`${
                         type === 'ds' ? 'text-den' : 'text-white'
-                    } title-language-active title16-600-150 -tracking-[0.48px]`}
+                    } title-language-active title16-600-150 -tracking-[0.48px] title-mb14-600-150 max-md:-tracking-[0.42px] max-md:whitespace-nowrap`}
                 >
                     {handleCheckCountry(lang)}
                 </span>

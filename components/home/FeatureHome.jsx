@@ -7,9 +7,7 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 
 export default function FeatureHome() {
     const [isShow, setIsShow] = useState(null)
-    console.log('🚀 ~ file: FeatureHome.jsx:10 ~ FeatureHome ~ isShow:', isShow)
     const [sideRef, isOutSide] = useClickOutSide()
-    console.log('🚀 ~ file: FeatureHome.jsx:12 ~ FeatureHome ~ isOutSide:', isOutSide)
     useEffect(() => {
         isOutSide && setIsShow(false)
     }, [isOutSide])

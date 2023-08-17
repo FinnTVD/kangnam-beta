@@ -17,57 +17,65 @@ export default function WeAre({ lang }) {
                     quality={100}
                     fill
                 />
-                <div className='relative z-10 flex justify-between h-full'>
-                    <div className='flex items-center pl-[7.5vw]'>
-                        <div className='w-[40.2vw] h-fit'>
-                            <span className='sub-title'>Câu chuyện thương hiệu</span>
-                            <h2 className='text-vang-nhe mt-[0.12vw] mb-[1vw] -tracking-[1.12px] title56'>
+                <div className='relative z-10 flex justify-between h-full max-md:flex-col'>
+                    <div className='flex items-center pl-[7.5vw] px-mb10 max-md:pt-[13.33vw]'>
+                        <div className='w-[40.2vw] h-fit max-md:w-full'>
+                            <span className='sub-title max-md:tracking-[0.5px] max-md:uppercase title-mb10-700-150'>
+                                Câu chuyện thương hiệu
+                            </span>
+                            <h2 className='text-vang-nhe mt-[0.12vw] mb-[1vw] max-md:mt-[1.07vw] max-md:mb-[4.27vw] -tracking-[1.12px] title56 title-mb25-700-130 max-md:-tracking-[1.25px]'>
                                 Chúng tôi là ai
                             </h2>
-                            <p className='text-vang-nhe title16-400-150 w-[38vw]'>
+                            <p className='text-vang-nhe title16-400-150 title-mb14-400-150 w-[38vw] max-md:w-full'>
                                 Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp,
                                 chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung
                                 với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản
                             </p>
-                            <ul className='flex my-[2.5vw]'>
-                                <li className='flex flex-col items-center gap-y-[1vw]'>
+                            <ul className='flex my-[2.5vw] max-md:mt-[6.4vw] max-md:mb-[8.8vw] max-md:justify-between'>
+                                <li className='flex flex-col items-center gap-y-[1vw] max-md:gap-y-[2.93vw] max-md:text-center max-md:w-[18.67vw]'>
                                     <Image
                                         src='/images/check.svg'
                                         alt='check'
                                         width={100}
                                         height={100}
                                         quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
+                                        className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130'>Cam kết xác thực</span>
+                                    <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
+                                        Cam kết xác thực
+                                    </span>
                                 </li>
-                                <li className='flex flex-col items-center gap-y-[1vw] ml-[3.75vw] mr-[3.12vw]'>
+                                <li className='flex flex-col items-center gap-y-[1vw] max-md:gap-y-[2.93vw] max-md:text-center ml-[3.75vw] mr-[3.12vw] max-md:w-[25.067vw]'>
                                     <Image
                                         src='/images/pig.svg'
                                         alt='pig'
                                         width={100}
                                         height={100}
                                         quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
+                                        className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130'>Trọn hỗ trợ, chi phí thấp</span>
+                                    <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
+                                        Trọn hỗ trợ, chi phí thấp
+                                    </span>
                                 </li>
-                                <li className='flex flex-col items-center gap-y-[1vw]'>
+                                <li className='flex flex-col items-center gap-y-[1vw] max-md:gap-y-[2.93vw] max-md:text-center max-md:w-[20vw]'>
                                     <Image
                                         src='/images/watch.svg'
                                         alt='watch'
                                         width={100}
                                         height={100}
                                         quality={100}
-                                        className='w-[4.375vw] h-[4.375vw] object-cover'
+                                        className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130'>Thủ tục nhanh chóng</span>
+                                    <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
+                                        Thủ tục nhanh chóng
+                                    </span>
                                 </li>
                             </ul>
-                            <div className='flex gap-x-[1.5vw]'>
+                            <div className='flex gap-x-[1.5vw] max-md:gap-x-[2.67vw]'>
                                 <Link
                                     href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
-                                    className='flex justify-center items-center gap-x-[0.5vw] rounded-[6.25vw] py-[1vw] px-[2.06vw] bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject'
+                                    className='flex justify-center items-center gap-x-[0.5vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject max-md:px-[8.41vw] max-md:box-content title-mb14-400-150'
                                 >
                                     Xem dự án
                                     <svg
@@ -88,7 +96,7 @@ export default function WeAre({ lang }) {
                                 </Link>
                                 <Link
                                     href={handleCheckParamsLanguage(lang, '/gioi-thieu')}
-                                    className='flex justify-center gap-x-[0.5vw] items-center group relative rounded-[6.25vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden'
+                                    className='flex justify-center gap-x-[0.5vw] items-center group relative rounded-[10vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden title-mb14-400-150 max-md:py-[4vw] max-md:px-[6.67vw] max-md:box-content max-md:gap-x-[3.2vw]'
                                 >
                                     Về chúng tôi
                                     <svg
@@ -124,7 +132,7 @@ export default function WeAre({ lang }) {
                         </div>
                     </div>
                     <div className='flex items-end'>
-                        <div className='h-[77.5vh] w-[48.1875vw] relative z-10'>
+                        <div className='h-[77.5vh] max-md:h-[38.8vh] w-[48.1875vw] max-md:w-full relative z-10'>
                             <Image
                                 src='/images/house.png'
                                 alt='house'
@@ -136,7 +144,7 @@ export default function WeAre({ lang }) {
                             <Image
                                 src='/images/circle-house.png'
                                 alt='circle'
-                                className='object-cover w-[35.5vw] h-[35.5vw] absolute -top-[3.81vw] left-[2.69vw] z-[1]'
+                                className='object-cover w-[35.5vw] h-[35.5vw] max-md:w-[63.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-md:left-[23.46vw]'
                                 width={600}
                                 height={600}
                                 quality={100}
@@ -144,7 +152,7 @@ export default function WeAre({ lang }) {
                             <Image
                                 src='/images/people.png'
                                 alt='people'
-                                className='object-cover w-[33.875vw] h-[38.5625vw] absolute bottom-0 left-[5.68vw] z-[3]'
+                                className='object-cover w-[33.875vw] h-[38.5625vw] max-md:w-[62.62vw] max-md:h-[71.29vw] absolute bottom-0 left-[5.68vw] z-[3] max-md:left-1/2 max-md:-translate-x-1/2'
                                 width={600}
                                 height={600}
                                 quality={100}

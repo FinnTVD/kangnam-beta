@@ -9,7 +9,7 @@ const handleCheckParamsLanguage = (lang, href) => {
         case 'ch':
             return '/ch' + href
         default:
-            break
+            return '/'
     }
 }
 
