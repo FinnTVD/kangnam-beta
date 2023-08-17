@@ -44,7 +44,7 @@ export default function NavBar({ isHome = true, lang, t }) {
         <nav
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
-            } relative z-40 py-[1.03vw] h-fit border-b border-solid border-white04`}
+            } absolute top-0 left-0 w-full z-40 py-[1.03vw] h-fit border-b border-solid border-white04`}
         >
             <div className={`${isHome ? 'gap-x-[3.12vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
                 <Link
@@ -130,7 +130,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                                 <Link
                                     scroll={false}
                                     className='block title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
+                                    href={`${lang !== 'vn' ? '/' + lang + e.href : '/' + e.href}`}
                                 >
                                     {e.title}
                                 </Link>
@@ -150,7 +150,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                     />
                 </div>
             </div>
-            {/* <div className='w-screen h-screen bg-logo absolute top-0 left-0'></div> */}
+            {/* <div className='absolute top-0 left-0 w-screen h-screen bg-logo'></div> */}
         </nav>
     )
 }

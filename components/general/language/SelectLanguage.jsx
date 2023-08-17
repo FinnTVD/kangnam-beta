@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 const handleCheckLang = (lang, pathName) => {
-    if (!lang || !pathName) return
+    if (!lang || !pathName) return '/'
     const path = pathName.split('/')
     if (path?.length > 2) {
         switch (lang) {

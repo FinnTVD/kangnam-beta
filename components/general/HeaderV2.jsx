@@ -110,7 +110,7 @@ export default function HeaderV2({ lang, t }) {
                 {isHome ? <SearchHome /> : <ContentPageOther />}
                 <div
                     onClick={handleScrollDown}
-                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] select-none'
+                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -118,7 +118,7 @@ export default function HeaderV2({ lang, t }) {
                         height='25'
                         viewBox='0 0 24 25'
                         fill='none'
-                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw]`}
+                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                     >
                         <path
                             d='M1 1L12 12L23 1'
@@ -131,7 +131,7 @@ export default function HeaderV2({ lang, t }) {
                             strokeWidth='2'
                         />
                     </svg>
-                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px]'>
+                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
                         Cuộn xuống
                     </span>
                 </div>

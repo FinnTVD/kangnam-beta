@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Button({
     children,
-    href = '',
+    href = '/',
     className = '',
     stroke = '#412A1A',
     span = '',

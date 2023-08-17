@@ -148,7 +148,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                             <li key={index}>
                                 <Link
                                     className='block text-den title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
+                                    href={`${lang !== 'vn' ? '/' + lang + e.href : '/' + e.href}`}
                                 >
                                     {e.title}
                                 </Link>

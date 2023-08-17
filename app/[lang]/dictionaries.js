@@ -7,4 +7,17 @@ const dictionaries = {
     ch: () => import('../../dictionaries/ch.json').then((module) => module.default),
 }
 
-export const getDictionary = async (locale) => dictionaries[locale]()
+export const getDictionary = async (locale) => {
+    switch (locale) {
+        case 'vn':
+            return dictionaries.vn()
+        case 'en':
+            return dictionaries.en()
+        case 'kr':
+            return dictionaries.kr()
+        case 'ch':
+            return dictionaries.ch()
+        default:
+            return dictionaries.vn()
+    }
+}
