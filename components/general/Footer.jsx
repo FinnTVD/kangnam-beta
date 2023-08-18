@@ -1,21 +1,16 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link';
 import { useEffect } from 'react'
 
-export default function Footer({ t }) {
-    const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
-    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
-    const menuArr = ['Trang chủ', 'Về KANGNAM', 'Dự án', 'Ký gửi nhà đất', 'Thỏa thuận & pháp lý', 'Tin tức']
-    const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
-    const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
-
-    // const getSocial = async() => {
-    //     const response = await fetch('https://api-land.okhub.tech/api/v1/social');
-    //     const data = await response.json();
-    //     console.log(data);
-    // }
-
+export default function Footer({t}) {
+    const addr = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
+    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357'];
+    const menuArr = [{url:'/', title:'Trang chủ'}, {url:'/gioi-thieu', title: 'Về KANGNAM'}, {url:'/danh-sach-du-an', title:'Dự án'}, {url:'/ky-gui-nha-dat', title:'Ký gửi nhà đất'}, {url:'/thoa-thuan-va-phap-li', title:'Thỏa thuận & pháp lý'}, {url:'/danh-sach-tin-tuc', title:'Tin tức'}];
+    const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản'];
+    const copyright= "© 2023 Copyright. Powered by OKHUB Viet Nam";
+    
     const linkFacebookHandler = () => {
         window.open('https://www.facebook.com/')
     }
@@ -29,24 +24,21 @@ export default function Footer({ t }) {
         window.open('https://www.instagram.com/')
     }
 
-    // useEffect(() => {
-    //     getSocial()
-    // }, [])
     return (
         <footer className='bg-[#FBF7F2]'>
-            <div className='py-[5vw] px-[7.5625vw] flex'>
+            <div className='py-[5vw] px-[7.5625vw] flex max-md:flex-col max-md:px-mb10 max-md:pt-[16vw] max-md:pb-[0]'>
                 <div>
-                    <div className='relative w-[24.0625vw] h-[6.625vw]'>
+                    <div className='relative w-[24.0625vw] h-[6.625vw] max-md:w-[87.7vw] max-md:h-[25.6vw]'>
                         <Image
                             fill
                             src='/images/logoKangnam.svg'
                             className='top-0 left-0 object-contain'
                         ></Image>
                     </div>
-                    <div className='flex mt-[2.5vw]'>
+                    <div className='flex mt-[2.5vw] max-md:w-full max-md:mt-[4.2vw]'>
                         <div
                             onClick={linkFacebookHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             {/* <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -80,9 +72,9 @@ export default function Footer({ t }) {
                                 height='21'
                                 viewBox='0 0 21 21'
                                 fill='none'
-                                className='w-1.3125vw h-auto'
+                                className='w-1.3125vw h-auto max-md:w-[5.6vw]'
                             >
-                                <g clip-path='url(#clip0_1280_454)'>
+                                <g clipPath='url(#clip0_1280_454)'>
                                     <path
                                         className='transition-all duration-300 group-hover:fill-white'
                                         d='M10.5004 0C4.66674 0 1.15011 3.59625 0.254989 7.16012C-0.674261 10.8561 0.948864 14.3973 4.50311 16.513C3.71299 19.3795 3.23436 20.342 3.98949 20.8574C4.83649 21.4366 6.05624 20.2388 8.09411 18.6751L8.93149 18.0338C12.2119 18.459 15.5535 17.5149 17.9195 15.4849C19.9057 13.7804 20.9995 11.501 20.9995 9.06763C21.0004 4.067 16.2902 0 10.5004 0ZM17.0664 14.4883C14.9191 16.331 11.847 17.1561 8.85186 16.6968C8.43274 16.6294 6.58386 18.2481 5.07886 19.2964C5.24861 18.6532 5.58111 17.5709 5.90399 16.3625C5.94238 16.2197 5.93128 16.0681 5.87249 15.9324C5.8137 15.7967 5.71069 15.6849 5.58024 15.6153C1.61911 13.4881 0.888489 10.0188 1.52636 7.48037C2.29986 4.41087 5.37374 1.3125 10.5004 1.3125C15.5666 1.3125 19.6879 4.7915 19.6879 9.06675C19.6879 11.1125 18.7569 13.0375 17.0664 14.4883Z'
@@ -107,7 +99,7 @@ export default function Footer({ t }) {
                         </div>
                         <div
                             onClick={linkYoutubeHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw]'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw] max-md:ml-[4.2vw] max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             {/* <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -129,7 +121,7 @@ export default function Footer({ t }) {
                                 height='26'
                                 viewBox='0 0 26 26'
                                 fill='none'
-                                className='w-[1.625vw] h-auto'
+                                className='w-[1.625vw] h-auto max-md:w-[6.93vw]'
                             >
                                 <path
                                     className='transition-all duration-300 group-hover:fill-white'
@@ -150,7 +142,7 @@ export default function Footer({ t }) {
                         </div>
                         <div
                             onClick={linkTiktokHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw]'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw] max-md:ml-[4.2vw] max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             {/* <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -172,7 +164,7 @@ export default function Footer({ t }) {
                                 height='13'
                                 viewBox='0 0 29 13'
                                 fill='none'
-                                className='w-[1.875vw] h-auto'
+                                className='w-[1.875vw] h-auto max-md:w-[8vw]'
                             >
                                 <path
                                     className='transition-all duration-300 group-hover:fill-white'
@@ -183,7 +175,7 @@ export default function Footer({ t }) {
                         </div>
                         <div
                             onClick={linkInstaHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw]'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw] max-md:ml-[4.2vw] max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -191,9 +183,9 @@ export default function Footer({ t }) {
                                 height='23'
                                 viewBox='0 0 23 23'
                                 fill='none'
-                                className='w-[1.4375vw] h-auto'
+                                className='w-[1.4375vw] h-auto max-md:w-[6.13vw]'
                             >
-                                <g clip-path='url(#clip0_1280_468)'>
+                                <g clipPath='url(#clip0_1280_468)'>
                                     <path
                                         className='transition-all duration-300 group-hover:fill-white'
                                         d='M22.5496 1.88453C22.3676 1.71797 22.1445 1.60286 21.9033 1.55103C21.6621 1.4992 21.4114 1.51252 21.177 1.58962L0.953747 8.25607C0.4026 8.43774 0.0288501 8.92972 0.00158248 9.50935C-0.0256402 10.089 0.300268 10.6139 0.831873 10.8466L5.83325 13.0348L7.34222 20.0334C7.40489 20.3242 7.55246 20.5831 7.86507 20.6628C8.18127 20.7433 8.40467 20.5705 8.6406 20.3939L12.352 17.6148L16.691 21.1654C16.9437 21.3723 17.2526 21.4802 17.5676 21.4802C17.7202 21.48 17.8717 21.4549 18.0162 21.4057C18.4728 21.2509 18.8114 20.8782 18.9217 20.4088L22.9632 3.22608C23.0195 2.98589 23.0109 2.73502 22.9382 2.49925C22.8656 2.26349 22.7314 2.05132 22.5496 1.88453ZM8.9639 14.2887C8.96143 14.2946 8.959 14.3012 8.95671 14.3091L8.12009 17.232L7.18643 12.9018L13.6065 9.33478L9.11789 14.0281C9.0475 14.1022 8.99485 14.1913 8.9639 14.2887ZM9.22943 18.2654L9.60943 16.9378L9.97289 15.6679L11.2752 16.7336L9.22943 18.2654ZM21.6482 2.91675L17.6068 20.0995C17.6048 20.108 17.6021 20.1198 17.5823 20.1265C17.5628 20.1331 17.5532 20.1255 17.5465 20.1199L12.7987 16.2347L12.7983 16.2344L10.5985 14.4343L17.6658 7.04476C17.7775 6.92796 17.8436 6.77499 17.8521 6.61361C17.8606 6.45224 17.811 6.29315 17.7123 6.16523C17.6135 6.0373 17.4722 5.94901 17.3139 5.91641C17.1556 5.88381 16.9908 5.90906 16.8496 5.98756L6.38498 11.8018L1.37336 9.60898C1.35809 9.60234 1.34969 9.59861 1.3509 9.57278C1.35211 9.54704 1.36083 9.54412 1.37664 9.53891L21.5999 2.8725C21.6097 2.86931 21.6208 2.86563 21.637 2.88045C21.6533 2.89537 21.6506 2.90669 21.6482 2.91675Z'
@@ -213,7 +205,7 @@ export default function Footer({ t }) {
                         </div>
                         <div
                             onClick={linkInstaHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw]'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw] max-md:ml-[4.2vw] max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -221,9 +213,9 @@ export default function Footer({ t }) {
                                 height='19'
                                 viewBox='0 0 19 19'
                                 fill='none'
-                                className='w-[1.1875vw] h-auto'
+                                className='w-[1.1875vw] h-auto max-md:w-[5.06vw]'
                             >
-                                <g clip-path='url(#clip0_1280_473)'>
+                                <g clipPath='url(#clip0_1280_473)'>
                                     <path
                                         className='transition-all duration-300 group-hover:fill-white'
                                         d='M18.2404 11.3525C18.5326 9.96685 18.4924 8.52081 18.1217 7.15359C17.7161 5.65767 16.9192 4.28452 15.8172 3.18252C14.7152 2.08055 13.342 1.28363 11.8461 0.878062C10.4789 0.507339 9.03287 0.46715 7.64717 0.759312C6.74003 0.191724 5.66412 -0.0711217 4.58865 0.0165306C3.41039 0.112607 2.30056 0.626497 1.46352 1.46354C0.626485 2.30058 0.112631 3.41037 0.0165551 4.58863C-0.0711714 5.66413 0.191674 6.73993 0.759336 7.64715C0.467137 9.03277 0.507401 10.4789 0.878086 11.8461C1.28365 13.342 2.08054 14.7152 3.18254 15.8172C4.28454 16.9191 5.6577 17.716 7.15358 18.1216C8.5208 18.4924 9.96688 18.5326 11.3525 18.2404C12.1454 18.7366 13.067 19 14.0047 19C14.1399 19 14.2756 18.9945 14.4111 18.9835C15.5895 18.8874 16.6994 18.3735 17.5364 17.5364C18.3735 16.6993 18.8874 15.5894 18.9835 14.4111C19.0711 13.3356 18.8081 12.2597 18.2404 11.3525ZM16.7105 16.7105C15.3908 18.0302 13.3269 18.2101 11.8032 17.1381C11.7353 17.0904 11.658 17.0576 11.5764 17.0421C11.4948 17.0266 11.4109 17.0286 11.3302 17.0481C8.67454 17.6891 5.93747 16.9202 4.00848 14.9912C2.0795 13.0623 1.31063 10.3252 1.9517 7.66952C1.99111 7.50624 1.95827 7.33387 1.86167 7.19645C0.789914 5.67278 0.969821 3.60905 2.28947 2.28944C3.60908 0.969833 5.67277 0.789816 7.19648 1.86165C7.26439 1.90941 7.34172 1.94215 7.42328 1.95768C7.50485 1.9732 7.5888 1.97115 7.66951 1.95167C10.3252 1.31065 13.0622 2.07951 14.9912 4.00853C16.9202 5.93748 17.6891 8.67456 17.0481 11.3301C17.0286 11.4109 17.0265 11.4948 17.0421 11.5764C17.0576 11.658 17.0903 11.7353 17.1381 11.8032C18.2101 13.327 18.0303 15.3908 16.7105 16.7105Z'
@@ -248,7 +240,7 @@ export default function Footer({ t }) {
                         </div>
                         <div
                             onClick={linkInstaHandler}
-                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw]'
+                            className='group hover:bg-[#926B4F] transition-all duration-300 cursor-pointer border-[0.7px] border-nau-nhat rounded-[50%] w-[2.6875vw] h-[2.6875vw] flex items-center justify-center ml-[1vw] max-md:ml-[4.2vw] max-md:w-[11.46vw] max-md:h-[11.46vw]'
                         >
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -256,7 +248,7 @@ export default function Footer({ t }) {
                                 height='17'
                                 viewBox='0 0 17 17'
                                 fill='none'
-                                className='w-[1.0625vw] h-auto'
+                                className='w-[1.0625vw] h-auto max-md:w-[4.53vw]'
                             >
                                 <path
                                     className='transition-all duration-300 group-hover:fill-white'
@@ -268,57 +260,57 @@ export default function Footer({ t }) {
                     </div>
                 </div>
 
-                <div className='flex justify-between flex-grow ml-[4.625vw]'>
-                    <div className='max-w-[19.6875vw]'>
-                        <h2 className='uppercase text-nau-nhat title18-700-130'> {t.footer.title1} </h2>
-                        <div className='mt-[1.25vw] flex flex-col gap-[0.75vw]'>
+                <div className='flex justify-between flex-grow ml-[4.625vw] max-md:flex-col max-md:justify-normal max-md:ml-0'>
+                    <div className='max-w-[19.6875vw] max-md:max-w-full max-md:py-[6.4vw]'>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title1} </h2>
+                        <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             <div className='flex items-center'>
-                                <div className='relative w-[1.25vw] h-[2.5vw] flex'>
+                                <div className='relative w-[1.25vw] h-[2.5vw] flex max-md:w-[5.3vw] max-md:h-[10.6vw]'>
                                     <Image
                                         fill
                                         src='/images/location.svg'
                                         className='object-contain'
                                     ></Image>
                                 </div>
-                                <span className='ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%]'> {addr} </span>
+                                <span className='ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%] max-md:title-mb16-400-150 max-md:ml-[2.1vw]'> {addr} </span>
                             </div>
                             {phoneArr.map((phone, index) => (
                                 <div
                                     key={index}
                                     className='flex items-center'
                                 >
-                                    <div className='relative w-[1.25vw] h-[1.25vw] flex'>
+                                    <div className='relative w-[1.25vw] h-[1.25vw] flex max-md:w-[5.3vw] max-md:h-[5.3vw]'>
                                         <Image
                                             fill
                                             src='/images/call-footer.svg'
                                             className='object-contain'
                                         ></Image>
                                     </div>
-                                    <span className='ml-[0.5vw] text-den-2 title16-400-130'> {phone} </span>
+                                    <span className='ml-[0.5vw] text-den-2 title16-400-130 max-md:title-mb16-400-130 max-md:ml-[2.1vw]'> {phone} </span>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div>
-                        <h2 className='uppercase text-nau-nhat title18-700-130'> {t.footer.title2} </h2>
-                        <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw]'>
+                    <div className='max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw]'>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title2} </h2>
+                        <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {menuArr.map((menu, index) => (
-                                <span
+                                <Link href={menu.url}
                                     key={index}
-                                    className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left"
+                                    className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130"
                                 >
-                                    {menu}
-                                </span>
+                                    {menu.title}
+                                </Link>
                             ))}
                         </div>
                     </div>
-                    <div>
-                        <h2 className='uppercase text-nau-nhat title18-700-130'> {t.footer.title3} </h2>
-                        <div className='mt-[1.25vw] flex flex-col gap-[0.75vw]'>
+                    <div className='max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw]'>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title3} </h2>
+                        <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {serviceArr.map((service, index) => (
                                 <span
                                     key={index}
-                                    className='text-den-2 title16-400-130'
+                                    className='text-den-2 title16-400-130 max-md:title-mb16-400-130'
                                 >
                                     {service}
                                 </span>
@@ -327,8 +319,8 @@ export default function Footer({ t }) {
                     </div>
                 </div>
             </div>
-            <div className='border-t border-den-2 border-opacity-40 py-[0.625vw] flex justify-center'>
-                <span className='text-center title14-400-160 text-den-2'>{copyright}</span>
+            <div className='border-t border-den-2 border-opacity-40 py-[0.625vw] flex justify-center max-md:pt-[4.2vw] max-md:pb-[6.1vw]'>
+                <span className='text-center title14-400-160 text-den-2 max-md:title-mb14-400-160'>{copyright}</span>
             </div>
         </footer>
     )

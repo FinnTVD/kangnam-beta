@@ -32,7 +32,7 @@ export default function ListNews ({t}) {
     const [pageNumber, setPageNumber] = useState(1);
     const [listNews, setListNews] = useState();
     const [cateIndex, setCateIndex] = useState(0);
-    const categoryStyle = "border border-[#D6A279] rounded-full py-[0.625vw] px-[1.5vw] title14-400-150 cursor-pointer";
+    const categoryStyle = "border border-[#D6A279] rounded-full py-[0.625vw] px-[1.5vw] title14-400-150 cursor-pointer max-md:title-mb14-400-150 max-md:py-[2.6vw] max-md:px-[6.4vw] whitespace-nowrap";
     const newsCategorizedRef = useRef()
     useEffect(() => {
         let pNumber;
@@ -48,17 +48,19 @@ export default function ListNews ({t}) {
         prevCategory = category;
     }, [category, pageNumber])
     return (
-        <section className="px-120 pt-[6.875vw] pb-[8.125vw]" ref={newsCategorizedRef}>
-            <div className='flex items-center justify-between'>
+        <section className="px-120 pt-[6.875vw] pb-[8.125vw] max-md:pl-[2.6vw] max-md:pr-0 max-md:pb-[16vw] max-md:pt-[13.3vw]" ref={newsCategorizedRef}>
+            <div className='flex items-center justify-between max-md:flex-col max-md:items-start max-md:justify-normal'>
                 <div>
-                    <span className='sub-title'> {t.newsList.subtitle} {category} </span>
-                    <h2 className='title56 text-den mt-[0.62vw]'>{t.newsList.title}</h2>
+                    <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px]'> {t.newsList.subtitle} {category} </span>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case'>{t.newsList.title}</h2>
                 </div>
-                <div className="flex gap-[1.5vw]">
-                    {categories.map((category, index) => 
-                        <span key={index} className={index===cateIndex ? `${categoryStyle} bg-[#D6A279] text-white` : `${categoryStyle} bg-transparent text-den`} onClick={() => {setCategory(category); setCateIndex(index)}}> {category} </span>     
-                    )}
-                </div>
+                {/* <div className="max-md:overflow-scroll max-md:w-full"> */}
+                    <div className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] flex-nowrap max-md:overflow-scroll max-md:w-full`}>
+                        {categories.map((category, index) => 
+                            <span key={index} className={index===cateIndex ? `${categoryStyle} bg-[#D6A279] text-white` : `${categoryStyle} bg-transparent text-den`} onClick={() => {setCategory(category); setCateIndex(index)}}> {category} </span>     
+                        )}
+                    </div>
+                {/* </div> */}
             </div>
             
             {listNews&& 
