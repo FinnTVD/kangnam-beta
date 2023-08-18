@@ -1,24 +1,27 @@
 import Image from "next/image"
 import Button from "./Button"
 import Link from "next/link"
+import { useMediaQuery } from "react-responsive"
 
 export default function OtherNewsItem ({newsOtherItem, id}) {
+    const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
+
     return(
         <Link href={`/danh-sach-tin-tuc/${newsOtherItem.slug}`}>
-        <div className="group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw]" style={{boxShadow: '6px 0px 39.76811599731445px 0px rgba(0, 0, 0, 0.05)'}}>
-            <div className="flex h-[11vw] items-center">
-                <div className="w-[45%] h-[11vw] relative rounded-lg overflow-hidden">
+        <div className="group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw]" style={{boxShadow: !isMobile? '6px 0px 39.76811599731445px 0px rgba(0, 0, 0, 0.05)' : '4.874141693115234px 0px 32.305904388427734px 0px rgba(0, 0, 0, 0.05)'}}>
+            <div className="flex h-[11vw] items-center max-md:h-[30.1vw]">
+                <div className="w-[45%] h-full relative rounded-lg overflow-hidden max-md:rounded-[6.5px]">
                         <Image src={newsOtherItem.picture} fill alt={`news${id}`} className="group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden"/>
                 </div>
                 <div className="w-[50%] ml-[5%] flex flex-col">
-                    <h2 className="text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 line-clamp-2">{newsOtherItem.title}</h2>
-                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-3">{newsOtherItem.content.replace( /(<([^>]+)>)/ig, '')}</span>
+                    <h2 className="text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 line-clamp-2 max-md:title-mb14-700-125">{newsOtherItem.title}</h2>
+                    <span className="text-den-2 title14-400-160 mt-[0.5vw] line-clamp-3 max-md:title-mb12-400-160">{newsOtherItem.content.replace( /(<([^>]+)>)/ig, '')}</span>
                 </div>
             </div>
-            <div className="flex justify-between mt-[1.125vw]">
-                <div className="bg-nau-nhat title12-400-150 py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat">{newsOtherItem.category}</div>
+            <div className="flex justify-between mt-[1.125vw] max-md:mt-[2.1vw]">
+                <div className="bg-nau-nhat title12-400-150 py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:title-mb10-400-150 max-md:py-[1.1vw] max-md:px-[3.73vw]">{newsOtherItem.category}</div>
                 <div className="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none" className="w-[1.3125vw] h-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none" className="w-[1.3125vw] h-auto max-md:w-[4.5vw]">
                     <g opacity="0.7">
                         <path d="M7.00098 1.75V4.375" stroke="#656263" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                         <path d="M13.999 1.75V4.375" stroke="#656263" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
@@ -32,7 +35,7 @@ export default function OtherNewsItem ({newsOtherItem, id}) {
                         <path d="M7.25691 14.6113H7.26477" stroke="#656263" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </g>
                 </svg>
-                <span className="text-[#656263] title14-400-150 ml-[0.375vw] opacity-70">{newsOtherItem.date}</span>
+                <span className="text-[#656263] title14-400-150 ml-[0.375vw] opacity-70 max-md:title-mb12-400-150 max-md:ml-[1.3vw]">{newsOtherItem.date}</span>
                 </div>
             </div>
         </div>

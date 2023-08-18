@@ -2,20 +2,23 @@
 @tailwind components;
 @tailwind utilities; */
 
+.news-categories::-webkit-scrollbar{
+    display: none;
+}
 .news-pagination{
-    @apply flex justify-center mt-[2.5vw] gap-[0.75vw]
+    @apply flex flex-wrap justify-center mt-[2.5vw] gap-[0.75vw] max-md:gap-[3.2vw] max-md:mt-[6.4vw]
 }
 .news-pagination li:nth-child(1), .news-pagination li:last-child{
     @apply hidden
 }
 .page{
-    @apply bg-[#D6A279] opacity-10 w-[2.125vw] h-[2.125vw] flex items-center justify-center rounded-[50%]
+    @apply bg-[#D6A279] opacity-10 w-[2.125vw] h-[2.125vw] flex items-center justify-center rounded-[50%] max-md:w-[9.1vw] max-md:h-[9.1vw]
 }
 .selected{
     @apply bg-[#D6A279] opacity-100
 }
 .news-pagination li a{
-    @apply text-[#000] text-18pc font-semibold leading-[1.5]
+    @apply text-[#000] text-18pc font-semibold leading-[1.5] max-md:text-18mb
 }
 .page.selected a{
     @apply text-white
