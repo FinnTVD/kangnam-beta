@@ -72,15 +72,15 @@ export default async function RootLayout({ children, params }) {
                     t={t}
                 />
                 {children}
-                <Footer t={t}/>
-                <Script
+                <Footer t={t} />
+                {/* <Script
                     async
                     defer
                     crossorigin='anonymous'
                     src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=969348797395616&autoLogAppEvents=1'
                     nonce='OlcKjsAi'
                     strategy='afterInteractive'
-                ></Script>
+                ></Script> */}
             </body>
         </html>
     )
