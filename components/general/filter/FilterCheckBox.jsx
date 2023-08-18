@@ -2,24 +2,26 @@ const arrFilter = new Array(10).fill(0)
 export default function FilterCheckBox({ className, setIndexFilter }) {
     return (
         <div
-            className={`${className} absolute z-50 left-0 -bottom-[1.5vw] translate-y-full flex flex-col shadow-boxFilter rounded-[0.75vw] bg-white w-[20.875vw] gap-y-[2.3vw] transition-all duration-[2s] ease-linear`}
+            className={`${className} absolute z-50 left-0 -bottom-[1.5vw] translate-y-full flex flex-col shadow-boxFilter rounded-[0.75vw] bg-white w-[20.875vw] gap-y-[2.3vw] max-md:gap-y-[6.4vw] transition-all duration-[2s] ease-linear max-md:w-[94vw] max-md:rounded-xl`}
         >
-            <div className='px-[1.5vw] pt-[1.5vw]'>
-                <p className='text-den title16-600-150 whitespace-nowrap mb-[1.5vw]'>Chọn loại hình bất động sản</p>
-                <div className='grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw]'>
+            <div className='px-[1.5vw] pt-[1.5vw] max-md:pt-[6.4vw] max-md:px-[5.87vw]'>
+                <p className='text-den title16-600-150 whitespace-nowrap mb-[1.5vw] max-md:mb-[6.4vw] title-mb16-600-150'>
+                    Chọn loại hình bất động sản
+                </p>
+                <div className='grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]'>
                     {arrFilter.map((e, index) => (
                         <div
                             key={index}
-                            className='w-fit flex items-center gap-x-[0.75vw]'
+                            className='w-fit flex items-center gap-x-[0.75vw] max-md:gap-x-[3.2vw]'
                         >
                             <input
                                 type='checkbox'
                                 name={`filter${index}`}
                                 id={`filter${index}`}
-                                className='w-[1.5vw] h-[1.5vw] outline-none border border-solid border-den02'
+                                className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] outline-none border border-solid border-den02'
                             />
                             <label
-                                className='title14-400-150 text-den whitespace-nowrap w-fit cursor-pointer'
+                                className='title14-400-150 text-den whitespace-nowrap w-fit cursor-pointer title-mb14-400-150 max-md:w-[23.74vw] max-md:whitespace-normal'
                                 htmlFor={`filter${index}`}
                             >
                                 Nhà mặt phố
@@ -28,16 +30,16 @@ export default function FilterCheckBox({ className, setIndexFilter }) {
                     ))}
                 </div>
             </div>
-            <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw]'>
-                <span className='title14-400-150 text-den'>Đặt lại</span>
-                <div className='flex gap-x-[0.63vw]'>
+            <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw] max-md:py-[5.6vw] max-md:px-[6.4vw]'>
+                <span className='title14-400-150 text-den title-mb14-400-150'>Đặt lại</span>
+                <div className='flex gap-x-[0.63vw] max-md:gap-x-[2.67vw]'>
                     <button
                         onClick={() => setIndexFilter(-1)}
-                        className='py-[0.28vw] px-[1vw] rounded-[6.25vw] shadow-filter border border-solid border-logo text-den title14-400-150'
+                        className='py-[0.28vw] px-[1vw] rounded-[10vw] border border-solid border-logo text-den title14-400-150 title-mb14-400-150 max-md:py-[1.2vw] max-md:px-[4.27vw]'
                     >
                         Hủy
                     </button>
-                    <button className='py-[0.28vw] px-[1vw] rounded-[6.25vw] shadow-filter border border-solid border-logo text-logo title14-400-150'>
+                    <button className='py-[0.28vw] px-[1vw] rounded-[10vw] border border-solid border-logo text-logo title14-400-150 title-mb14-400-150 max-md:py-[1.2vw] max-md:px-[4.27vw]'>
                         Áp dụng
                     </button>
                 </div>

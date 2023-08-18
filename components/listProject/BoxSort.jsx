@@ -23,16 +23,17 @@ export default function BoxSort() {
         <div className='relative w-fit z-10 select-none'>
             <div
                 onClick={() => setIsShow(!isShow)}
-                className='gap-x-[0.63vw] flex items-center cursor-pointer'
+                className='gap-x-[0.63vw] max-md:gap-x-[4.27vw] flex items-center cursor-pointer'
             >
-                <span className='text-den05 text-de title16-400-150'>{arrFilter[indexValue].title}</span>
+                <span className='text-den05 text-de title16-400-150 title-mb14-400-150'>
+                    {arrFilter[indexValue].title}
+                </span>
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='11'
                     height='6'
                     viewBox='0 0 11 6'
                     fill='none'
-                    className={`${isShow && 'rotate-180'} transition-all duration-300`}
                 >
                     <path
                         opacity='0.7'
@@ -44,7 +45,7 @@ export default function BoxSort() {
             <ul
                 className={`${
                     !isShow && 'hidden'
-                } absolute -left-[0.8vw] rounded-lg overflow-hidden -bottom-[0.5vw] translate-y-full bg-white shadow-boxFilter`}
+                } absolute -left-[0.8vw] rounded-lg overflow-hidden -bottom-[0.5vw] translate-y-full bg-white shadow-boxFilter max-md:-left-[2.5vw] max-md:py-[1vw]`}
             >
                 {arrFilter.map((e, index) => (
                     <li
@@ -53,7 +54,7 @@ export default function BoxSort() {
                             setIndexValue(index)
                             setIsShow(false)
                         }}
-                        className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] items-center'
+                        className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] max-md:gap-x-[1vw] items-center max-md:text-14mb max-md:px-[2.5vw] max-md:py-[1.5vw]'
                     >
                         {e.title}
                         <svg
@@ -62,7 +63,9 @@ export default function BoxSort() {
                             viewBox='0 0 24 24'
                             strokeWidth='1.5'
                             stroke='black'
-                            className={`${indexValue !== index && 'hidden'} w-[0.8vw] h-[0.8vw]`}
+                            className={`${
+                                indexValue !== index && 'hidden'
+                            } w-[0.8vw] h-[0.8vw] max-md:w-[3vw] max-md:h-[3vw]`}
                         >
                             <path
                                 strokeLinecap='round'

@@ -7,12 +7,12 @@ export default function useResizeArea() {
     const areaRef = useRef()
 
     useEffect(() => {
-        areaRef?.current && setHeightDefault(areaRef.current.clientHeight)
+        areaRef?.current && setHeightDefault(areaRef?.current?.clientHeight)
     }, [])
 
     const handleResizeHeight = (e) => {
-        areaRef.current.clientHeight < e.target.scrollHeight && setHeightArea(e.target.scrollHeight)
-        if (!e.target.value) {
+        areaRef?.current?.clientHeight < e?.target?.scrollHeight && setHeightArea(e?.target?.scrollHeight)
+        if (!e?.target?.value) {
             setHeightArea(heightDefault)
         }
     }

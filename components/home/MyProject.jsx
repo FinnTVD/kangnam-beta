@@ -6,11 +6,17 @@ import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
 import BoxFilter from '../general/filter/BoxFilter'
 import { handleCheckParamsLanguage } from '@/utils'
+import { useMediaQuery } from 'react-responsive'
 
 const arrItem = new Array(8).fill(0)
 
 export default function MyProject({ lang }) {
     const [show, Element] = useToggleShowMap()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
+    if (isMobile) return <></>
+
     return (
         <section
             id='boxMap'
