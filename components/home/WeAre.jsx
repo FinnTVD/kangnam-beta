@@ -162,7 +162,7 @@ export default function WeAre({ lang }) {
                 </div>
             </section>
             <Image
-                className='object-cover z-[3] !h-[200vh]'
+                className='object-cover z-[3] !h-[200vh] max-md:!h-[164vh]'
                 src='/images/linear.png'
                 alt='linear'
                 sizes='100vw'

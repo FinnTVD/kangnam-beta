@@ -141,32 +141,76 @@
 
     @media screen and (max-width: 767.9px) {
         /* mobile */
+        .title-mb30-800-130 {
+            @apply text-30mb font-extrabold leading-[1.3];
+        }
+
         .title-mb25-700-130 {
             @apply text-25mb font-bold leading-[1.3];
         }
 
         .title-mb22-800-150 {
-            @apply text-22mb font-extrabold leading-normal;
+            @apply font-extrabold leading-normal text-22mb;
         }
 
         .title-mb22-800-130 {
             @apply text-22mb font-extrabold leading-[1.3];
         }
 
+        .title-mb20-800-140 {
+            @apply text-20mb font-extrabold leading-[1.4];
+        }
+
+        .title-mb20-400-130 {
+            @apply text-20mb font-normal leading-[1.3];
+        }
+
         .title-mb20-400-120 {
             @apply text-20mb font-normal leading-[1.2];
+        }
+
+        .title-mb18-700-150 {
+            @apply font-bold leading-normal text-18mb;
+        }
+
+        .title-mb18-700-130 {
+            @apply font-bold leading-[1.3] text-18mb;
+        }
+
+        .title-mb16-700-150 {
+            @apply font-bold leading-normal text-16mb;
+        }
+
+        .title-mb16-600-150 {
+            @apply font-semibold leading-normal text-16mb;
+        }
+
+        .title-mb16-400-150 {
+            @apply font-normal leading-normal text-16mb;
         }
 
         .title-mb14-400-171 {
             @apply text-14mb font-normal leading-[1.71];
         }
 
+        .title-mb14-700-150 {
+            @apply font-bold leading-normal text-14mb;
+        }
+
+        .title-mb14-600-160 {
+            @apply font-semibold leading-[1.6] text-14mb;
+        }
+
         .title-mb14-600-150 {
-            @apply text-14mb font-semibold leading-normal;
+            @apply font-semibold leading-normal text-14mb;
         }
 
         .title-mb14-400-150 {
-            @apply text-14mb font-normal leading-normal;
+            @apply font-normal leading-normal text-14mb;
+        }
+
+        .title-mb14-700-130 {
+            @apply text-14mb font-bold leading-[1.3];
         }
 
         .title-mb14-400-130 {
@@ -174,7 +218,7 @@
         }
 
         .title-mb13-600-150 {
-            @apply text-13mb font-semibold leading-normal;
+            @apply font-semibold leading-normal text-13mb;
         }
 
         .title-mb13-400-184 {
@@ -187,6 +231,14 @@
 
         .title-mb12-600-160 {
             @apply text-12mb font-semibold leading-[1.6];
+        }
+
+        .title-mb12-700-150 {
+            @apply font-bold leading-normal text-12mb;
+        }
+
+        .title-mb12-600-150 {
+            @apply font-semibold leading-normal text-12mb;
         }
 
         .title-mb12-600-130 {
@@ -202,7 +254,7 @@
         }
 
         .title-mb12-400-150 {
-            @apply text-12mb font-normal leading-normal;
+            @apply font-normal leading-normal text-12mb;
         }
 
         .title-mb12-400-130 {
@@ -217,8 +269,12 @@
             @apply text-10mb font-semibold leading-[1.8];
         }
 
+        .title-mb10-600-150 {
+            @apply text-10mb font-semibold leading-normal;
+        }
+
         .title-mb10-400-150 {
-            @apply text-10mb font-normal leading-normal;
+            @apply font-normal leading-normal text-10mb;
         }
 
         .px-mb10 {

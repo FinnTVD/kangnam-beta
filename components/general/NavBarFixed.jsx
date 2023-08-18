@@ -69,7 +69,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
         setPrevScrollY(scrollTop)
     }
     return (
-        <nav
+        <div
             id='nav'
             ref={navRef}
             className={`${
@@ -98,7 +98,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                 </div>
 
                 {!isHome && (
-                    <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[6.25vw] flex justify-between items-center shadow-input border border-solid border-logo backdrop-blur-[11px] mr-[0.5vw]'>
+                    <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo backdrop-blur-[11px] mr-[0.5vw]'>
                         <div className='flex items-center w-full'>
                             <SelectSearch />
                             <div className='border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw]'></div>
@@ -148,7 +148,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                             <li key={index}>
                                 <Link
                                     className='block text-den title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : '/' + e.href}`}
+                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
                                 >
                                     {e.title}
                                 </Link>
@@ -168,6 +168,6 @@ export default function NavBarFixed({ isHome = true, lang }) {
                     />
                 </div>
             </div>
-        </nav>
+        </div>
     )
 }

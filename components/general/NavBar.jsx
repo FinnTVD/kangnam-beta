@@ -4,38 +4,6 @@ import Link from 'next/link'
 import BoxLanguage from './language/BoxLanguage'
 import { useState } from 'react'
 import SelectSearch from './SelectSearch'
-const listNav = [
-    {
-        id: 1,
-        title: 'Về chúng tôi',
-        href: '/gioi-thieu',
-    },
-    {
-        id: 2,
-        title: 'Dự án',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 3,
-        title: 'Bán lại',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 4,
-        title: 'Thỏa thuận & Pháp lí',
-        href: '/thoa-thuan-va-phap-li',
-    },
-    {
-        id: 5,
-        title: 'Tin tức',
-        href: '/danh-sach-tin-tuc',
-    },
-    {
-        id: 6,
-        title: 'Liên hệ',
-        href: '/lien-he',
-    },
-]
 
 export default function NavBar({ isHome = true, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
@@ -130,7 +98,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                                 <Link
                                     scroll={false}
                                     className='block title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : '/' + e.href}`}
+                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
                                 >
                                     {e.title}
                                 </Link>
@@ -150,7 +118,6 @@ export default function NavBar({ isHome = true, lang, t }) {
                     />
                 </div>
             </div>
-            {/* <div className='absolute top-0 left-0 w-screen h-screen bg-logo'></div> */}
         </nav>
     )
 }

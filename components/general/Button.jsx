@@ -8,6 +8,7 @@ export default function Button({
     stroke = '#412A1A',
     span = '',
     icon = '',
+    full = false,
     onCLick = () => {},
 }) {
     return (
@@ -15,16 +16,20 @@ export default function Button({
             {href ? (
                 <Link
                     href={href}
-                    className={`${className} flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[6.25vw] border-[0.7px] border-solid border-nu text-nu`}
+                    className={`${className} ${
+                        full ? 'w-full justify-center' : ''
+                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw]`}
                 >
-                    <span className={`${span} title16-400-150`}>{children}</span>
+                    <span className={`${span} title16-400-150 title-mb14-400-150 max-md:-tracking-[0.28px]`}>
+                        {children}
+                    </span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke={stroke}
-                        className={`${icon} w-6 h-6`}
+                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw]`}
                     >
                         <path
                             strokeLinecap='round'
@@ -35,17 +40,21 @@ export default function Button({
                 </Link>
             ) : (
                 <button
-                    className={`${className} flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[6.25vw] border-[0.7px] border-solid border-nu text-nu`}
+                    className={`${className} ${
+                        full ? 'w-full justify-center' : ''
+                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[6.25vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw]`}
                     onClick={() => onCLick()}
                 >
-                    <span className={`${span} title16-400-150`}>{children}</span>
+                    <span className={`${span} title16-400-150 title-mb14-400-150 max-md:-tracking-[0.28px]`}>
+                        {children}
+                    </span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke={stroke}
-                        className={`${icon} w-6 h-6`}
+                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw]`}
                     >
                         <path
                             strokeLinecap='round'

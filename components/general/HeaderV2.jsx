@@ -1,8 +1,6 @@
 'use client'
 import Image from 'next/image'
 import NavBar from './NavBar'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useState } from 'react'
 import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
@@ -13,8 +11,7 @@ import SlideBanner from '../home/SlideBanner'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
-
-gsap.registerPlugin(ScrollTrigger)
+import NavBarFixedRes from './NavBarFixedRes'
 
 const isCheckPathName = (pathName) => {
     switch (pathName) {
@@ -63,7 +60,7 @@ export default function HeaderV2({ lang, t }) {
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`${isHome ? 'h-screen' : 'h-[80vh]'} relative w-full`}>
+            <div className={`${isHome ? 'h-screen max-md:h-[64vh]' : 'h-[80vh]'} relative w-full`}>
                 {/* <Image
                     className='z-0 object-cover'
                     src='/images/bg-header.jpg'
@@ -75,7 +72,7 @@ export default function HeaderV2({ lang, t }) {
                 <SlideBanner />
                 {isHome && (
                     <Image
-                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[12.17vh] max-md:right-[4.8vw]'
+                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                         src='/images/big-logo.png'
                         alt='big-logo'
                         width={350}
@@ -103,10 +100,18 @@ export default function HeaderV2({ lang, t }) {
                         t={t}
                     />
                 )}
-                <NavBarFixed
-                    isHome={isHome}
-                    lang={lang}
-                />
+                {!isMobile ? (
+                    <NavBarFixed
+                        isHome={isHome}
+                        lang={lang}
+                    />
+                ) : (
+                    <NavBarFixedRes
+                        isHome={isHome}
+                        lang={lang}
+                        t={t}
+                    />
+                )}
                 {isHome ? <SearchHome /> : <ContentPageOther />}
                 <div
                     onClick={handleScrollDown}

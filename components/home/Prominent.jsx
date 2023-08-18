@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 const arrArea = [
     '01. Khu vực Bắc Từ Liêm, Hà Nội',
@@ -24,6 +25,9 @@ const arrProminent = [
 export default function Prominent() {
     const [indexSlider, setIndexSlider] = useState(0)
     const swiperRef = useRef()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
 
     const handleSlideChange = (swiper) => {
         setIndexSlider(swiper.realIndex)
@@ -38,15 +42,8 @@ export default function Prominent() {
     return (
         <section
             id='prominent'
-            className='relative flex items-end h-screen'
+            className='relative flex h-screen md:items-end max-md:mt-[13.067vw] max-md:h-[80vh]'
         >
-            {/* <Image
-                className='z-0 object-cover'
-                src='/images/bg-prominent.jpg'
-                quality={100}
-                sizes='100vw'
-                fill
-            /> */}
             <Swiper
                 slidesPerView={1}
                 loop={true}
@@ -81,11 +78,30 @@ export default function Prominent() {
                         </SwiperSlide>
                     ))}
             </Swiper>
-            <div className='absolute bottom-0 left-0 w-full h-[76vh] bg-gradient-slide z-[1]'></div>
-            <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] items-center w-full mb-[3.19vw]'>
-                <div className='flex flex-col items-center'>
-                    <h2 className='capitalize title60'>Nổi bật theo khu vực</h2>
-                    <span className='mt-[0.75vw] mb-[1.5vw] w-[21.5vw] text-24pc font-normal leading-[1.3] block text-center'>
+            <div className='absolute bottom-0 left-0 w-full h-[76vh] max-md:h-full bg-gradient-slide z-[1]'></div>
+            <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] max-md:gap-y-[30.4vw] items-center w-full mb-[3.19vw] max-md:mt-[10.4vw] max-md:px-mb10'>
+                {isMobile && (
+                    <div className='w-full'>
+                        <span className='text-white title-mb14-600-160'>{arrArea[indexSlider]}</span>
+                        <ul className='flex gap-x-[2.4vw] w-full mt-[2.67vw]'>
+                            {arrArea &&
+                                arrArea?.map((e, index) => (
+                                    <li
+                                        onClick={() => handleSlideClick(index)}
+                                        key={index}
+                                        className={`${
+                                            indexSlider === index ? 'active' : ''
+                                        } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
+                                    ></li>
+                                ))}
+                        </ul>
+                    </div>
+                )}
+                <div className='flex flex-col items-center max-md:w-[77.8vw]'>
+                    <h2 className='capitalize title60 title-mb30-800-130 max-md:-tracking-[0.9px] text-white'>
+                        Nổi bật theo khu vực
+                    </h2>
+                    <span className='mt-[0.75vw] max-md:mt-[2.13vw] mb-[1.5vw] max-md:mb-[6.4vw] w-[21.5vw] max-md:w-full text-24pc font-normal leading-[1.3] block text-center max-md:text-20mb'>
                         Căn hộ Vinhomes Grand Park hướng Bắc
                     </span>
                     <Button
@@ -96,20 +112,22 @@ export default function Prominent() {
                         Chi tiết dự án
                     </Button>
                 </div>
-                <ul className='flex gap-x-[1.5vw] w-full'>
-                    {arrArea &&
-                        arrArea?.map((e, index) => (
-                            <li
-                                onClick={() => handleSlideClick(index)}
-                                key={index}
-                                className={`${
-                                    indexSlider === index ? 'active' : ''
-                                } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
-                            >
-                                {e}
-                            </li>
-                        ))}
-                </ul>
+                {!isMobile && (
+                    <ul className='flex gap-x-[1.5vw] w-full'>
+                        {arrArea &&
+                            arrArea?.map((e, index) => (
+                                <li
+                                    onClick={() => handleSlideClick(index)}
+                                    key={index}
+                                    className={`${
+                                        indexSlider === index ? 'active' : ''
+                                    } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
+                                >
+                                    {e}
+                                </li>
+                            ))}
+                    </ul>
+                )}
             </div>
         </section>
     )

@@ -17,7 +17,7 @@ export default function SearchHome() {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
 
     return (
-        <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[35vh]'>
+        <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px]'>
                 An tâm với 100% bất động sản được xác thực tại KANGNAM
             </p>
