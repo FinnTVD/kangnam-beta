@@ -72,7 +72,7 @@ export default async function RootLayout({ children, params }) {
                     t={t}
                 />
                 {children}
-                <Footer t={t} />
+                <Footer lang={params.lang} t={t} />
                 {/* <Script
                     async
                     defer

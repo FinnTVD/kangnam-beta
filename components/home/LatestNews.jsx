@@ -55,7 +55,7 @@ export default function LatestNews ({t}) {
                     </div>
                 )}
         </div>
-        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>Xem tất cả</Button>}
+        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>{t.homepageNews.button}</Button>}
         </section>
     )
 }
