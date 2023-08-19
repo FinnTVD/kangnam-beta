@@ -37,13 +37,13 @@ export default function RelatedNews({t, relatedNews}) {
                 modules={[Autoplay]}
                 className='pt-[1.875vw] pb-[6.25vw] max-md:pl-[2.6vw] max-md:py-[4.3vw]'
         >
-            {relatedNews.map((item) => 
-                <SwiperSlide>
+            {relatedNews.map((item, index) => 
+                <SwiperSlide key={index}>
                     <NewsItem newsOtherItem={item}></NewsItem>
                 </SwiperSlide>
             )}
         </Swiper>
-        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-[91.6vw] mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw] max-md:mt-0 max-md:mb-0 max-md:ml-auto max-md:mr-auto'>Xem thêm tin tức</Button>}
+        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-[91.6vw] mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw] max-md:mt-0 max-md:mb-0 max-md:ml-auto max-md:mr-auto'>{t.newsDetailRelated.button}</Button>}
         </section>
     )
 }

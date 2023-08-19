@@ -12,7 +12,7 @@ export default function Story({ t }) {
                 <div>
                     <span
                         data-aos='fade-up'
-                        className='sub-title max-md:title-mb12-700-150 max'
+                        className='sub-title max-md:title-mb12-700-150'
                     >
                         {t.aboutUsStory.subtitle}
                     </span>
@@ -33,8 +33,8 @@ export default function Story({ t }) {
                 </span>
             </div>
             <div
-                data-aos='fade-left'
-                className='relative w-[32.125vw] h-[30.6875vw] max-md:w-full max-md:h-[86.9vw]'
+                data-aos={!isMobile? 'fade-left': 'fade-up'}
+                className='relative w-[32.125vw] h-[30.6875vw] max-md:w-full max-md:h-[86.9vw] max-md:mt-[9.3vw]'
             >
                 <Image
                     fill
@@ -45,7 +45,7 @@ export default function Story({ t }) {
             <Image
                 fill
                 src='/images/partner-bg.jpg'
-                className='top-0 left-0 z-[-2] opacity-20 object-cover'
+                className={!isMobile? 'top-0 left-0 z-[-2] opacity-20 object-cover' : 'top-0 left-0 z-[-2] opacity-10 object-cover'}
             ></Image>
             <div
                 className={

@@ -73,7 +73,7 @@ export default function Partner({t}) {
                         if(!isMobile){
                             if(index===0){
                                 return(
-                                    <div className={imgBorder[0]}>
+                                    <div className={imgBorder[0]} key={index}>
                                         <div className='w-[55%] h-[45%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
@@ -82,7 +82,7 @@ export default function Partner({t}) {
                             }
                             else if(index===4){
                                 return(
-                                    <div className={imgBorder[1]}>
+                                    <div className={imgBorder[1]} key={index}>
                                         <div className='w-[55%] h-[45%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
@@ -91,7 +91,7 @@ export default function Partner({t}) {
                             }
                             else if(index===9){
                                 return(
-                                    <div className={imgBorder[3]}>
+                                    <div className={imgBorder[3]} key={index}>
                                         <div className='w-[55%] h-[45%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
@@ -100,7 +100,7 @@ export default function Partner({t}) {
                             }
                             else if(index===5){
                                 return(
-                                    <div className={imgBorder[2]}>
+                                    <div className={imgBorder[2]} key={index}>
                                         <div className='w-[55%] h-[45%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
@@ -109,7 +109,7 @@ export default function Partner({t}) {
                             }
                             else{
                                 return(
-                                    <div className={imgBorder[4]}>
+                                    <div className={imgBorder[4]} key={index}>
                                         <div className='w-[55%] h-[45%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
@@ -120,8 +120,8 @@ export default function Partner({t}) {
                         else{
                             if(index===0){
                                 return(
-                                    <div className={imgBorder[0]}>
-                                        <div className='w-[67.7%] h-[46.6%] relative'>
+                                    <div className={imgBorder[0]} key={index}>
+                                        <div className='w-[67.7%] h-[56.6%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
                                     </div>
@@ -129,8 +129,8 @@ export default function Partner({t}) {
                             }
                             else if(index===2){
                                 return(
-                                    <div className={imgBorder[1]}>
-                                        <div className='w-[67.7%] h-[46.6%] relative'>
+                                    <div className={imgBorder[1]} key={index}>
+                                        <div className='w-[67.7%] h-[56.6%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
                                     </div>
@@ -138,8 +138,8 @@ export default function Partner({t}) {
                             }
                             else if(index===8){
                                 return(
-                                    <div className={imgBorder[3]}>
-                                        <div className='w-[67.7%] h-[46.6%] relative'>
+                                    <div className={imgBorder[3]} key={index}>
+                                        <div className='w-[67.7%] h-[56.6%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
                                     </div>
@@ -147,8 +147,8 @@ export default function Partner({t}) {
                             }
                             else if(index===6){
                                 return(
-                                    <div className={imgBorder[2]}>
-                                        <div className='w-[67.7%] h-[46.6%] relative'>
+                                    <div className={imgBorder[2]} key={index}>
+                                        <div className='w-[67.7%] h-[56.6%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
                                     </div>
@@ -156,8 +156,8 @@ export default function Partner({t}) {
                             }
                             else{
                                 return(
-                                    <div className={imgBorder[4]}>
-                                        <div className='w-[67.7%] h-[46.6%] relative'>
+                                    <div className={imgBorder[4]} key={index}>
+                                        <div className='w-[67.7%] h-[56.6%] relative'>
                                             <Image alt={`partner${index}`} fill src={item} quality={100} className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'></Image>
                                         </div>
                                     </div>
@@ -170,7 +170,7 @@ export default function Partner({t}) {
                 </SwiperSlide>
             ))}
             </Swiper>
-            {isMobile && <Button stroke='white' href={'/'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>Trở thành đối tác</Button>}
+            {isMobile && <Button stroke='white' href={'/'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>{t.homepagePartners.button}</Button>}
         </section>
     )
 }
