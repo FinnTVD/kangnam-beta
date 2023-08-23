@@ -37,7 +37,7 @@ export default function Contact({t}){
                 </button> */}
                 {!isMobile && <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center"> {t.aboutUsContact.button} </Button>}
             </div>
-            <div className='flex relative pt-[6.5vw]'>
+            <div className='flex relative pt-[6.5vw] max-md:pt-[4.2vw]'>
                 <div className="max-md:absolute max-md:top-[50%] max-md:left-[50%] max-md:z-[2] max-md:w-full max-md:translate-x-[-50%] max-md:translate-y-[-50%]">
                     <div className="max-md:relative max-md:py-[8vw] max-md:px-[4.2vw]">
                         <h3 className='title32-600-127 text-den relative max-md:z-[3] max-md:text-white max-md:text-20mb max-md:font-bold max-md:leading-[1.27] max-md:tracking-[-1px]'>{title}</h3>

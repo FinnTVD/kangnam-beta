@@ -28,7 +28,7 @@ export default function ListNews ({t}) {
     // console.log(newsArr.slice(0,12));
     const [category, setCategory] = useState('Thị trường');
     let prevCategory = 'Thị trường';
-    let pageLength = newsArr.filter((item) => item.category===category).length/9
+    let pageLength = Math.ceil(newsArr.filter((item) => item.category===category).length/9)
     const [pageNumber, setPageNumber] = useState(1);
     const [listNews, setListNews] = useState();
     const [cateIndex, setCateIndex] = useState(0);
@@ -43,7 +43,6 @@ export default function ListNews ({t}) {
         else{
             pNumber = pageNumber;
         }
-        console.log(pNumber)
         setListNews(newsArr.filter((item) => item.category===category).slice(9*(pNumber-1),9*pNumber))
         prevCategory = category;
     }, [category, pageNumber])
@@ -52,7 +51,7 @@ export default function ListNews ({t}) {
             <div className='flex items-center justify-between max-md:flex-col max-md:items-start max-md:justify-normal'>
                 <div>
                     <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px]'> {t.newsList.subtitle} {category} </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case'>{t.newsList.title}</h2>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw]'>{t.newsList.title}</h2>
                 </div>
                 {/* <div className="max-md:overflow-scroll max-md:w-full"> */}
                     <div className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] flex-nowrap max-md:overflow-scroll max-md:w-full`}>
@@ -65,7 +64,7 @@ export default function ListNews ({t}) {
             
             {listNews&& 
             <>
-                <ListNewsCategorized list={listNews}></ListNewsCategorized>
+                <ListNewsCategorized list={listNews} t={t}></ListNewsCategorized>
                 <ReactPaginate
                     breakLabel="..."
                     nextLabel="Next"

@@ -82,5 +82,8 @@
         "subtitle": "新闻聚合器",
         "title": "相关新闻",
         "button": "查看全部"
+    },
+    "newsLatestButton":{
+        "title": "细节"
     }
 }

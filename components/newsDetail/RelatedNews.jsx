@@ -43,7 +43,7 @@ export default function RelatedNews({t, relatedNews}) {
                 </SwiperSlide>
             )}
         </Swiper>
-        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-[91.6vw] mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw] max-md:mt-0 max-md:mb-0 max-md:ml-auto max-md:mr-auto'>{t.newsDetailRelated.button}</Button>}
+        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className=' bg-logo !w-[91.6vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw] mt-0 mb-0 ml-auto mr-auto'>{t.newsDetailRelated.button}</Button>}
         </section>
     )
 }
