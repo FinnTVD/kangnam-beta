@@ -61,9 +61,9 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                         className='object-contain brightness-0 invert'
                         src='/images/logo-no-bg.svg'
                         alt='logo'
-                        quality={100}
                         sizes='3.52vw'
                         fill
+                        priority
                     />
                 </Link>
                 <div className='w-[68.26vw] py-[2.65vw] px-[5vw] bg-white02 rounded-[6.25vw] flex justify-between items-center border border-solid border-white03 backdrop-blur-[11px]'>

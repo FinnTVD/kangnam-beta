@@ -72,7 +72,6 @@ export default function Prominent() {
                                     alt={e.alt}
                                     sizes='100vw'
                                     fill
-                                    quality={100}
                                 />
                             </div>
                         </SwiperSlide>

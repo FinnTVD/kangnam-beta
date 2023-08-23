@@ -4,7 +4,7 @@ export default function BoxShowMap({ handleToggleShowMap = () => {}, show = true
             onClick={handleToggleShowMap}
             className={`${
                 show ? 'bg-[#e3c9b5]' : 'bg-[#838383]'
-            } w-[2.875vw] h-[1.125vw] rounded-[6.25vw] relative transition-all duration-1000 ease-out`}
+            } w-[2.875vw] h-[1.125vw] rounded-[6.25vw] relative transition-all duration-1000 ease-out cursor-pointer`}
         >
             <div
                 className={`${

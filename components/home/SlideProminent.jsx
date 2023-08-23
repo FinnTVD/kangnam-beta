@@ -47,7 +47,6 @@ export default function SlideProminent({ setIndexSlider, indexSlider }) {
                                     alt={e.alt}
                                     sizes='100vw'
                                     fill
-                                    quality={100}
                                 />
                             </div>
                         </SwiperSlide>

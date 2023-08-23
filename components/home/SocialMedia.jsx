@@ -56,7 +56,7 @@ export default function SocialMedia() {
                                 alt={e.title}
                                 width={56}
                                 height={56}
-                                quality={100}
+                                priority
                             />
                         </Link>
                     </li>

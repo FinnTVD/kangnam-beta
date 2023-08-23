@@ -25,7 +25,6 @@ export default function BoxCurrency({ className = '' }) {
                         alt='america'
                         width={16}
                         height={16}
-                        quality={100}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
                     />
                     <select
@@ -79,7 +78,6 @@ export default function BoxCurrency({ className = '' }) {
                         alt='vn'
                         width={16}
                         height={16}
-                        quality={100}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
                     />
                     <select

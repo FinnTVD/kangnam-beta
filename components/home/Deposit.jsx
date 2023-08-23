@@ -11,7 +11,6 @@ export default function Deposit() {
                 className='z-0 object-cover max-md:hidden'
                 src='/images/bg-deposit.jpg'
                 alt='bg-deposit'
-                quality={100}
                 sizes='100vw'
                 fill
             />
@@ -19,7 +18,6 @@ export default function Deposit() {
                 className='z-0 object-cover md:hidden'
                 src='/images/bg-deposit-res.jpg'
                 alt='bg-deposit'
-                quality={100}
                 sizes='100vw'
                 fill
             />

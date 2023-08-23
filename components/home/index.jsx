@@ -25,7 +25,6 @@ export default function IndexHome({ lang, t }) {
                             alt='sky'
                             height={800}
                             width={1600}
-                            quality={100}
                             className='absolute bottom-0 left-0 object-cover w-full h-[48.625vw] z-0 max-md:hidden'
                         />
                     </ProjectProminent>

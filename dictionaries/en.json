@@ -36,8 +36,8 @@
         "title": "Select Language"
     },
     "Form1": {
-        "sell": "Desired selling price *",
-        "hire": "Desired rent *"
+        "sell": "Desired selling price",
+        "hire": "Desired rent"
     },
     "homepageNews":{
         "subtitle": "News synthesis",

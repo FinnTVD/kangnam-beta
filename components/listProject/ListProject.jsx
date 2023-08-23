@@ -6,6 +6,7 @@ import useToggleShowMap from '@/hooks/useToggleShowMap'
 import BoxFilter from '../general/filter/BoxFilter'
 import BoxSort from './BoxSort'
 import { useMediaQuery } from 'react-responsive'
+import BtnShowMap from './BtnShowMap'
 
 const listProject = new Array(16).fill(0)
 
@@ -79,7 +80,6 @@ export default function ListProject() {
                                             src='/images/itemproject.jpg'
                                             alt='itemProject'
                                             sizes='18vw'
-                                            quality={100}
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150'>
@@ -184,6 +184,7 @@ export default function ListProject() {
                     </>
                 )}
             </div>
+            {isMobile && <BtnShowMap />}
         </section>
     )
 }

@@ -2,53 +2,111 @@
 import useResizeArea from '@/hooks/useResizeArea'
 import Button from '../general/Button'
 import { useRef, useState } from 'react'
-import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import Image from 'next/image'
+import InputCustom from './InputCustom'
 
-const schema = yup
-    .object({
-        description: yup.string().required('Vui lòng mô tả thông tin về nhà đất!'),
-        // fileImage: yup
-        //     .mixed()
-        //     .test('has-files', 'Cần ít nhất 3 ảnh để xuất bản!', (value) => {
-        //         return value && value.length >= 3
-        //     })
-        //     .test('fileSize', 'File size exceeds the limit!', (value) => {
-        //         if (!value) return true
-        //         return value[0]?.size <= 10 * 1048576 // Kích thước tệp tối đa là 1MB (1048576 bytes)
-        //     })
-        //     .test('fileType', 'Vui lòng chọn hình ảnh có đuôi jpg,jpeg hoặc png!', (value) => {
-        //         if (!value) return true
-        //         const supportedFormats = ['jpg', 'jpeg', 'png']
-        //         const fileExtension = value[0]?.type.split('/').pop().toLowerCase()
-        //         return supportedFormats.includes(fileExtension)
-        //     }),
-    })
-    .required()
+// const schema = yup
+//     .object({
+//         description: yup.string().required('Vui lòng mô tả thông tin về nhà đất!'),
+//     })
+//     .required()
 
-export default function Form3({ handlePrevSlide }) {
+export default function Form3({ handlePrevSlide, isMobile }) {
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
     const [selectedImage, setSelectedImage] = useState([])
     const [files, setFiles] = useState([])
-    console.log('🚀 ~ file: Form3.jsx:35 ~ Form3 ~ setFiles:', files)
+    const [valueType, setValueType] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueArea, setValueArea] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueNumberFloors, setValueNumberFloors] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueHomeOrientation, setValueHomeOrientation] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueBuildingType, setValueBuildingType] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueBalconyOrientation, setValueBalconyOrientation] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueInterior, setValueInterior] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueLegal, setValueLegal] = useState({
+        value: '',
+        validate: '',
+    })
+    const [valueDescription, setValueDescription] = useState({
+        value: '',
+        validate: false,
+    })
     const [validateFiles, setValidateFiles] = useState({
         status: false,
         title: 'Cần ít nhất 3 ảnh để xuất bản!',
     })
     const fileRef = useRef()
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schema),
-    })
 
     const handleClickSubmit = () => {
         if (files?.length < 3 || !files) setValidateFiles((prev) => ({ ...prev, status: true }))
+    }
+    const handleChangeType = (e) => {
+        setValueType({
+            ...valueType,
+            value: e.target.value,
+        })
+    }
+    const handleChangeArea = (e) => {
+        setValueArea({
+            ...valueArea,
+            value: e.target.value,
+        })
+    }
+    const handleChangeNumberFloors = (e) => {
+        setValueNumberFloors({
+            ...valueNumberFloors,
+            value: e.target.value,
+        })
+    }
+    const handleChangeHomeOrientation = (e) => {
+        setValueHomeOrientation({
+            ...valueHomeOrientation,
+            value: e.target.value,
+        })
+    }
+    const handleChangeBuildingType = (e) => {
+        setValueBuildingType({
+            ...valueBuildingType,
+            value: e.target.value,
+        })
+    }
+    const handleChangeBalconyOrientation = (e) => {
+        setValueBalconyOrientation({
+            ...valueBalconyOrientation,
+            value: e.target.value,
+        })
+    }
+    const handleChangeInterior = (e) => {
+        setValueInterior({
+            ...valueInterior,
+            value: e.target.value,
+        })
+    }
+    const handleChangeLegal = (e) => {
+        setValueLegal({
+            ...valueLegal,
+            value: e.target.value,
+        })
     }
 
     const handleChangeFile = (e) => {
@@ -87,9 +145,16 @@ export default function Form3({ handlePrevSlide }) {
             setSelectedImage([])
         }
     }
+    const handleChangeDescription = (e) => {
+        handleResizeHeight(e)
+        setValueDescription({
+            ...valueDescription,
+            value: e.target.value,
+        })
+    }
 
-    const onSubmit = (e) => {
-        console.log('🚀 ~ file: Form2.jsx:38 ~ onSubmit ~ e:', e)
+    const handleSubmit = (e) => {
+        e.preventDefault()
     }
 
     const handleDragOver = (event) => {
@@ -103,133 +168,195 @@ export default function Form3({ handlePrevSlide }) {
 
     return (
         <>
-            <article className='relative shadow-input rounded-[1vw] w-full h-fit pt-[5.81vw] pb-[2.06vw] px-[2.5vw] '>
+            <article className='relative shadow-input rounded-[1vw] pr-[7.5vw] w-full h-fit pt-[5.81vw] pb-[2.06vw] pl-[2.5vw] max-md:px-[2.67vw] max-md:rounded-[2.13vw] max-md:pt-[14.93vw] max-md:pb-[8.53vw]'>
                 <div
                     onClick={handlePrevSlide}
-                    className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.5vw] gap-x-[0.56vw] items-center cursor-pointer pr-[1vw]'
+                    className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
+                    <span className='text-nu title14-400-150 title-mb12-400-150'>Trở lại</span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
-                        width='8'
-                        height='14'
-                        viewBox='0 0 8 14'
+                        width='11'
+                        height='7'
+                        viewBox='0 0 11 7'
                         fill='none'
-                        className='w-[0.375vw] h-[0.75vw]'
+                        className='rotate-180'
                     >
                         <path
-                            d='M7 13L1 7L7 1'
+                            d='M10.5 1L5.5 6L0.5 1'
                             stroke='#412A1A'
                             strokeLinecap='round'
                             strokeLinejoin='round'
                         />
                     </svg>
-                    <span className='text-nu title16-400-150'>Trở lại</span>
                 </div>
                 <form
                     autoComplete='false'
-                    onSubmit={handleSubmit(onSubmit)}
-                    className='flex justify-between w-full gap-x-[3.5vw]'
+                    onSubmit={handleSubmit}
+                    className='w-full gap-x-[3.5vw]'
                 >
-                    <div className='relative flex-1'>
-                        <h3 className='title45-800-150'>Thông tin bất động sản</h3>
-                        <div className='relative w-full'>
+                    <div className='relative'>
+                        <h3 className='title24-800-150 -tracking-[1.2px] text-den title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                            Thông tin bất động sản
+                        </h3>
+                        <div className='relative w-full mt-[1.25vw] max-md:mt-[4.27vw]'>
                             <textarea
                                 ref={areaRef}
-                                onChange={handleResizeHeight}
-                                className={`${
-                                    errors.description?.message
-                                        ? 'border-red-400 placeholder:text-red-400'
-                                        : 'border-[#C5C5C5] placeholder:text-[#646464]'
-                                } rounded-[0.625vw] py-[1vw] resize-none outline-none px-[1.5vw] border mt-[1.25vw] border-solid w-full placeholder:font-normal placeholder:leading-[1.5] text-den title16-600-150`}
-                                placeholder={errors.description?.message ?? 'Mô tả nhà đất *'}
+                                onChange={handleChangeDescription}
+                                className={`${valueDescription?.validate ? 'border-red-400 ' : 'border-[#C5C5C5]'} ${
+                                    valueDescription?.value ? '' : 'focus-input-active'
+                                } rounded-[0.625vw] py-[1vw] resize-none outline-none px-[1.5vw] border border-solid w-full text-den max-md:rounded-[1.067vw] max-md:p-[4.27vw] title-mb12-400-150`}
                                 style={{
-                                    height: heightArea ? `${heightArea}px` : '7.75vw',
+                                    height: heightArea ? `${heightArea}px` : `${isMobile ? '24vw' : '7.75vw'}`,
                                 }}
-                                {...register('description')}
+                                value={valueDescription?.value}
+                                id='description'
+                                name='description'
                             ></textarea>
+                            <label
+                                htmlFor='description'
+                                className={`${
+                                    valueDescription?.value ? 'top-0 -translate-y-1/2' : 'top-[1vw] max-md:top-[4.27vw]'
+                                } ${
+                                    valueDescription?.validate ? 'text-red-400 ' : 'text-[#646464]'
+                                } absolute left-[1vw] px-[0.5vw] max-md:px-[1.27vw] max-md:left-[3vw] bg-white cursor-pointer title16-400-150 title-mb12-400-150 transition-all duration-300`}
+                            >
+                                Mô tả nhà đất <span className='text-red-400'> *</span>
+                            </label>
                         </div>
-                        <span className='block mt-[1.5vw] mb-[1vw] text-black title16-600-150'>Thông tin chi tiết</span>
-                        <div className='flex gap-x-[1.25vw]'>
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Loại hình'
-                                {...register('type')}
+                        <span className='block mt-[1.5vw] max-md:mt-[4.27vw] mb-[1vw] max-md:mb-[2.67vw] text-black title16-600-150 title-mb14-600-150'>
+                            Thông tin chi tiết
+                        </span>
+                        <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Loại hình'}
+                                onChange={handleChangeType}
+                                value={valueType?.value}
+                                validate={valueType?.validate}
+                                register={'type'}
+                                required={false}
                             />
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Diện tích'
-                                {...register('area')}
-                            />
-                        </div>
-                        <div className='flex gap-x-[1.25vw] mt-[1vw]'>
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Số tầng'
-                                {...register('numberFloors')}
-                            />
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Hướng nhà'
-                                {...register('homeOrientation')}
-                            />
-                        </div>
-                        <div className='flex gap-x-[1.25vw] mt-[1vw]'>
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Loại công trình'
-                                {...register('buildingType')}
-                            />
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Hướng ban công'
-                                {...register('balconyOrientation')}
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Diện tích'}
+                                onChange={handleChangeArea}
+                                value={valueArea?.value}
+                                validate={valueArea?.validate}
+                                register={'area'}
+                                required={false}
                             />
                         </div>
-                        <div className='flex gap-x-[1.25vw] mt-[1vw]'>
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Nội thất'
-                                {...register('interior')}
+                        <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Số tầng'}
+                                onChange={handleChangeNumberFloors}
+                                value={valueNumberFloors?.value}
+                                validate={valueNumberFloors?.validate}
+                                register={'numberFloors'}
+                                required={false}
                             />
-                            <input
-                                type='text'
-                                className='flex-1 py-[1vw] px-[1.5vw] rounded-[6.25vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 placeholder:text-[#646464] placeholder:text-16pc placeholder:font-normal placeholder:leading-normal'
-                                placeholder='Pháp lý'
-                                {...register('legal')}
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Hướng nhà'}
+                                onChange={handleChangeHomeOrientation}
+                                value={valueHomeOrientation?.value}
+                                validate={valueHomeOrientation?.validate}
+                                register={'homeOrientation'}
+                                required={false}
                             />
                         </div>
-                        <Button
-                            onCLick={handleClickSubmit}
-                            stroke='white'
-                            className='bg-logo border-none ml-auto mt-[2.13vw] shadow-submit'
-                            span='text-white font-semibold -tracking-[0.32px]'
-                            icon='w-[1vw] h-[1vw]'
-                        >
-                            Gửi thông tin
-                        </Button>
+                        <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Loại công trình'}
+                                onChange={handleChangeBuildingType}
+                                value={valueBuildingType?.value}
+                                validate={valueBuildingType?.validate}
+                                register={'buildingType'}
+                                required={false}
+                            />
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Hướng ban công'}
+                                onChange={handleChangeBalconyOrientation}
+                                value={valueBalconyOrientation?.value}
+                                validate={valueBalconyOrientation?.validate}
+                                register={'balconyOrientation'}
+                                required={false}
+                            />
+                        </div>
+                        <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Nội thất'}
+                                value={valueInterior?.value}
+                                validate={valueInterior?.validate}
+                                onChange={handleChangeInterior}
+                                register={'interior'}
+                                required={false}
+                            />
+                            <InputCustom
+                                boxClass={'flex-1'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                }
+                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelContent={'Pháp lý'}
+                                onChange={handleChangeLegal}
+                                value={valueLegal?.value}
+                                validate={valueLegal?.validate}
+                                register={'legal'}
+                                required={false}
+                            />
+                        </div>
                     </div>
-                    <div className='relative w-[31.25vw] h-full mt-[5.5vw]'>
-                        <div className='flex justify-between mb-[1vw]'>
+                    <div className='relative mt-[5.5vw] max-md:mt-[4.4vw]'>
+                        <div className='flex justify-between mb-[1vw] max-md:mb-[4.13vw]'>
                             <label
                                 htmlFor='file'
                                 className={`${
                                     validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#646464]'
-                                } cursor-pointer`}
+                                } cursor-pointer title-mb14-400-150 title16-400-150`}
                             >
                                 Hình ảnh *
                             </label>
                             <div className='flex gap-x-[0.5vw] items-center title16-400-150'>
-                                <span className='border border-solid text-12pc text-black border-black rounded-full w-[1vw] h-[1vw] flex justify-center items-center'>
+                                <span className='border border-solid text-12pc text-black border-black rounded-full w-[1vw] h-[1vw] max-md:w-[3vw] max-md:h-[3vw] flex justify-center items-center max-md:text-10mb max-md:font-normal max-md:leading-normal'>
                                     !
                                 </span>
-                                <span className='text-[#313131] underline title16-600-150'>Tiêu chuẩn hình ảnh</span>
+                                <span className='text-[#313131] underline title16-600-150 title-mb14-400-150'>
+                                    Tiêu chuẩn hình ảnh
+                                </span>
                             </div>
                         </div>
                         <div
@@ -238,7 +365,7 @@ export default function Form3({ handlePrevSlide }) {
                             onClick={() => fileRef?.current.click()}
                             className={`${
                                 validateFiles.status && validateFiles.title ? 'border-red-400' : 'border-[#c5c5c5]'
-                            } w-[31.25vw] relative cursor-pointer flex items-center justify-center h-[15.5vw] outline-none rounded-[1vw] border border-dotted`}
+                            } w-full relative cursor-pointer flex items-center justify-center h-[18vw] max-md:h-[53.6vw] outline-none rounded-[1vw] max-md:rounded-[4.27vw] border border-dotted max-md:px-[4.135vw]`}
                         >
                             <input
                                 multiple
@@ -261,7 +388,7 @@ export default function Form3({ handlePrevSlide }) {
                                         height='24'
                                         viewBox='0 0 25 24'
                                         fill='none'
-                                        className='w-[1.5vw] h-[1.5vw]'
+                                        className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw]'
                                         stroke={`${validateFiles.status && validateFiles.title ? '#f87171' : ''}`}
                                     >
                                         <path
@@ -277,14 +404,14 @@ export default function Form3({ handlePrevSlide }) {
                                 <p
                                     className={`${
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#454545]'
-                                    } mt-[0.5vw] mb-[0.25vw] title14-700-150 select-none`}
+                                    } mt-[0.5vw] max-md:mt-[2.13vw] max-md:mb-[1.07vw] mb-[0.25vw] title14-700-150 select-none title-mb12-700-150 max-md:text-center`}
                                 >
                                     Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên
                                 </p>
                                 <p
                                     className={`${
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#C7C7C7]'
-                                    } title12-400-150 select-none`}
+                                    } title12-400-150 select-none title-mb10-400-150 max-md:text-center max-md:px-[6.67vw]`}
                                 >
                                     Đề xuất tỉ lệ hình ảnh tốt nhất là 1600 x 900 (16:9). Giới hạn 2MB/ ảnh
                                 </p>
@@ -299,27 +426,29 @@ export default function Form3({ handlePrevSlide }) {
                         {selectedImage?.length >= 1 && (
                             <article
                                 id='list-img-preview'
-                                className={`${selectedImage?.length>9 && 'overflow-y-scroll'} mt-[0.8vw] h-[19vw] w-full`}
+                                className={`${
+                                    selectedImage?.length > 9 && 'overflow-y-scroll'
+                                } mt-[0.8vw] h-[19vw] max-md:h-[45vw] w-full max-md:mt-[2.13vw]`}
                             >
-                                <ul className='grid grid-cols-3 gap-[0.5vw]'>
+                                <ul className='grid grid-cols-3 gap-[0.5vw] max-md:gap-[1.5vw]'>
                                     {selectedImage.map((src, index) => (
                                         <li
                                             key={index}
-                                            className='w-full !h-[6vw] relative rounded-md'
+                                            className='w-full !h-[6vw] max-md:!h-[14vw] max-md: relative rounded-md'
                                             style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
                                         >
                                             <Image
                                                 className='object-contain rounded-md z-[1]'
                                                 src={src}
                                                 alt={`image preview ${index + 1}`}
-                                                sizes='8vw'
+                                                sizes='50vw'
                                                 fill
                                             />
                                             <svg
                                                 xmlns='http://www.w3.org/2000/svg'
                                                 viewBox='0 0 20 20'
                                                 fill='#444'
-                                                className='w-[1.25vw] h-[1.25vw] cursor-pointer absolute right-0 top-0 z-10 p-[0.5vw] box-content'
+                                                className='w-[1.25vw] h-[1.25vw] max-md:w-[4vw] max-md:h-[4vw] cursor-pointer absolute right-0 top-0 z-10 p-[0.5vw] max-md:p-[1vw] box-content'
                                                 onClick={() => handleDeleteImage(index)}
                                             >
                                                 <path
@@ -333,6 +462,17 @@ export default function Form3({ handlePrevSlide }) {
                                 </ul>
                             </article>
                         )}
+                        <div className='flex justify-center'>
+                            <Button
+                                onCLick={handleClickSubmit}
+                                stroke='white'
+                                className='bg-logo border-none mt-[2.13vw] max-md:mt-[6.4vw] max-md:py-[4.13vw] max-md:w-full max-md:flex max-md:justify-center'
+                                span='text-white font-semibold -tracking-[0.32px] title-mb14-600-150 max-md:-tracking-[0.28px]'
+                                icon='w-[1vw] h-[1vw]'
+                            >
+                                Gửi thông tin
+                            </Button>
+                        </div>
                     </div>
                 </form>
             </article>

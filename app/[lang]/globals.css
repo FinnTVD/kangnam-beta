@@ -39,8 +39,24 @@
         @apply font-extrabold leading-[1.25] text-32pc -tracking-[1.6px];
     }
 
+    .title32-700-125 {
+        @apply font-bold leading-[1.25] text-32pc -tracking-[1.6px];
+    }
+
     .title32-600-127 {
         @apply font-extrabold leading-[1.27] text-32pc -tracking-[1.6px];
+    }
+
+    .title28-800-130 {
+        @apply text-28pc font-extrabold leading-[1.3];
+    }
+
+    .title24-800-130 {
+        @apply text-24pc font-extrabold leading-[1.3];
+    }
+
+    .title24-800-150 {
+        @apply text-24pc font-extrabold leading-[1.3];
     }
 
     .title20-700-150 {
@@ -99,12 +115,20 @@
         @apply text-16pc font-semibold leading-[1.3];
     }
 
+    .title16-600-125 {
+        @apply text-16pc font-semibold leading-[1.25];
+    }
+
     .title16-400-150 {
         @apply font-normal leading-normal text-16pc;
     }
 
     .title16-400-130 {
         @apply font-normal leading-[1.3] text-16pc;
+    }
+
+    .title16-400-125 {
+        @apply font-normal leading-[1.25] text-16pc;
     }
 
     .title15-500-150 {
@@ -145,6 +169,10 @@
             @apply text-30mb font-extrabold leading-[1.3];
         }
 
+        .title-mb25-700-150 {
+            @apply font-bold leading-normal text-25mb;
+        }
+
         .title-mb25-700-130 {
             @apply text-25mb font-bold leading-[1.3];
         }
@@ -159,6 +187,14 @@
 
         .title-mb20-800-140 {
             @apply text-20mb font-extrabold leading-[1.4];
+        }
+
+        .title-mb20-700-130 {
+            @apply text-20mb font-bold leading-[1.3];
+        }
+
+        .title-mb20-700-111 {
+            @apply text-20mb font-bold leading-[1.1];
         }
 
         .title-mb20-400-130 {
@@ -193,8 +229,16 @@
             @apply text-16mb font-bold leading-[1.35];
         }
 
+        .title-mb16-600-130 {
+            @apply text-16mb font-semibold leading-[1.3];
+        }
+
         .title-mb16-400-130 {
             @apply text-16mb font-normal leading-[1.3];
+        }
+
+        .title-mb16-400-125 {
+            @apply text-16mb font-normal leading-[1.25];
         }
 
         .title-mb14-400-171 {
@@ -233,7 +277,7 @@
         }
 
         .title-mb13-700-150 {
-            @apply text-13mb font-bold leading-normal;
+            @apply font-bold leading-normal text-13mb;
         }
 
         .title-mb13-600-150 {
@@ -293,7 +337,7 @@
         }
 
         .title-mb10-600-150 {
-            @apply text-10mb font-semibold leading-normal;
+            @apply font-semibold leading-normal text-10mb;
         }
 
         .title-mb10-400-150 {
@@ -330,8 +374,14 @@
 #boxMap #map,
 #boxMap #map .vietmapgl-canvas-container,
 #boxMap #map .vietmapgl-canvas-container canvas {
-    width: 35.5625vw;
-    height: 46.9375vw;
+    width: 35.5625vw !important;
+    height: 46.9375vw !important;
+}
+#box-list-project #map,
+#box-list-project #map .vietmapgl-canvas-container,
+#box-list-project #map .vietmapgl-canvas-container canvas {
+    width: 100vw !important;
+    height: 70vh !important;
 }
 
 #list-project #map,
@@ -340,6 +390,15 @@
     width: 35.5625vw;
     height: calc(100vh - 6vw) !important;
     border-radius: 0.5vw !important;
+}
+@media screen and (max-width: 767.9px) {
+    #list-project #map,
+    #list-project #map .vietmapgl-canvas-container,
+    #list-project #map .vietmapgl-canvas-container canvas {
+        width: 100vw;
+        height: calc(70vh) !important;
+        border-radius: 0 !important;
+    }
 }
 .vietmapgl-marker.mapboxgl-marker:not([aria-label='Map marker']) {
     width: 30px;
@@ -406,6 +465,15 @@ canvas.vietmapgl-canvas.mapboxgl-canvas {
 textarea::-webkit-scrollbar {
     width: 0px;
 }
+input.focus-input-active:focus + label {
+    top: 0;
+    transform: translateY(-50%);
+}
+textarea.focus-input-active:focus + label {
+    top: 0;
+    transform: translateY(-50%);
+}
+
 /* form */
 
 /* article#list-img-preview::-webkit-scrollbar {

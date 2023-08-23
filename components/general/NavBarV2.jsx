@@ -58,8 +58,8 @@ export default function NavBarV2({ lang, t }) {
                             className='object-cover max-md:object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
-                            quality={100}
                             sizes='3.52vw'
+                            priority
                             fill
                         />
                     </Link>
@@ -152,7 +152,7 @@ export default function NavBarV2({ lang, t }) {
                                     <li key={index}>
                                         <Link
                                             className='block text-den title16-600-130 whitespace-nowrap'
-                                            href={`${lang !== 'vn' ? '/' + lang + e.href : '/' + e.href}`}
+                                            href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
                                         >
                                             {e.title}
                                         </Link>

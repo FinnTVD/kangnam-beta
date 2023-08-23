@@ -60,9 +60,9 @@ export default function BoxLanguage({ type = '', lang, t }) {
                     className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px] max-md:w-[6.13vw] max-md:h-[3.73vw]'
                     src={handleCheckIcon(lang)}
                     alt='country'
-                    quality={100}
                     width={28}
                     height={18}
+                    priority
                 />
                 <span
                     className={`${

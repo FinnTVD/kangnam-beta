@@ -7,7 +7,9 @@ import { useState } from 'react'
 export default function NavBarRes({ lang, t, isHome }) {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <nav className='absolute top-0 left-0 z-[9999] w-full'>
+        <nav
+            className={`${isHome ? '' : 'border-b border-solid border-white02'} absolute top-0 left-0 z-[9999] w-full`}
+        >
             <div className='pb-[0.53vw] pt-[2.13vw] flex justify-between pl-[7.2vw] pr-[2.8vw] items-center'>
                 <Link
                     href={`/${lang !== 'vn' ? lang : ''}`}
@@ -17,7 +19,7 @@ export default function NavBarRes({ lang, t, isHome }) {
                         className='object-contain brightness-0 invert'
                         src='/images/logo-no-bg.svg'
                         alt='logo'
-                        quality={100}
+                        priority
                         sizes='3.52vw'
                         fill
                     />

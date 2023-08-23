@@ -39,6 +39,7 @@ module.exports = {
             colors: {
                 'vang-nhe': '#fcf8f5',
                 den: '#444',
+                den01: 'rgba(68,68,68,0.1)',
                 den02: 'rgba(68,68,68,0.2)',
                 den03: 'rgba(68,68,68,0.3)',
                 den05: 'rgba(68,68,68,0.5)',
@@ -66,6 +67,7 @@ module.exports = {
                 '56pc': '3.5vw',
                 '45pc': '2.8125vw',
                 '32pc': '2vw',
+                '28pc': '1.75vw',
                 '24pc': '1.5vw',
                 '20pc': '1.25vw',
                 '18pc': '1.125vw',

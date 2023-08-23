@@ -90,7 +90,6 @@ export default function NavBarFixed({ isHome = true, lang }) {
                             className='object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
-                            quality={100}
                             sizes='3.5vw'
                             fill
                         />

@@ -54,7 +54,6 @@ export default function NavBarFixedRes({ isHome = true, lang, t }) {
                         className='object-contain'
                         src='/images/logo-no-bg.svg'
                         alt='logo'
-                        quality={100}
                         sizes='3.52vw'
                         fill
                     />

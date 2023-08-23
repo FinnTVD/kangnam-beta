@@ -27,8 +27,8 @@ export default function NavBar({ isHome = true, lang, t }) {
                             className='object-cover'
                             src='/images/logo.png'
                             alt='logo'
-                            quality={100}
                             sizes='3.52vw'
+                            priority
                             fill
                         />
                     </div>
@@ -42,7 +42,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                             className='object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
-                            quality={100}
+                            priority
                             sizes='3.5vw'
                             fill
                         />

@@ -45,7 +45,7 @@ export default function SlideProjectProminent({ isMobile }) {
                 {arrProject &&
                     arrProject.map((e, index) => (
                         <SwiperSlide
-                            className='!h-[26.1825vw] max-md:!w-[78.4vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
+                            className='!h-[26.1825vw] max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
                         >
                             <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
@@ -53,7 +53,6 @@ export default function SlideProjectProminent({ isMobile }) {
                                     className='object-cover rounded-[1vw]'
                                     src='/images/slideitem.jpg'
                                     alt={`slide-${index}`}
-                                    quality={100}
                                     sizes='20.125vw'
                                     fill
                                 />
