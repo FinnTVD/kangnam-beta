@@ -47,7 +47,7 @@ export default function ListProject() {
                         <div className='pl-[7.5vw] pr-[1.25vw] max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none'>
                             <BoxFilter />
                         </div>
-                        <article className='pl-[7.5vw] pr-[1.25vw] max-md:px-mb10'>
+                        <article className='pl-[7.5vw] pr-[1.25vw] px-mb10'>
                             <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
                                 <div className='flex gap-x-[0.31vw] max-md:gap-x-[1.33vw]'>
                                     <span className='inline-block opacity-50 text-den title16-400-150 title-mb16-400-150'>

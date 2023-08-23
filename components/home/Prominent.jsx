@@ -78,7 +78,7 @@ export default function Prominent() {
                     ))}
             </Swiper>
             <div className='absolute bottom-0 left-0 w-full h-[76vh] max-md:h-full bg-gradient-slide z-[1]'></div>
-            <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] max-md:gap-y-[30.4vw] items-center w-full mb-[3.19vw] max-md:mt-[10.4vw] max-md:px-mb10'>
+            <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] max-md:gap-y-[30.4vw] items-center w-full mb-[3.19vw] max-md:mt-[10.4vw] px-mb10'>
                 {isMobile && (
                     <div className='w-full'>
                         <span className='text-white title-mb14-600-160'>{arrArea[indexSlider]}</span>

@@ -7,7 +7,7 @@ export default function Story({ t }) {
     const description =
         'Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở.'
     return (
-        <section className='relative flex justify-between items-center px-120 pt-[1.25vw] pb-[6.125vw] max-md:px-mb10 max-md:flex-col max-md:items-start max-md:pt-[10.6vw] max-md:pb-[15.2vw]'>
+        <section className='relative flex justify-between items-center px-120 pt-[1.25vw] pb-[6.125vw] px-mb10 max-md:flex-col max-md:items-start max-md:pt-[10.6vw] max-md:pb-[15.2vw]'>
             <div className='flex-col w-[41.625vw] max-md:w-full'>
                 <div>
                     <span
@@ -33,7 +33,7 @@ export default function Story({ t }) {
                 </span>
             </div>
             <div
-                data-aos={!isMobile? 'fade-left': 'fade-up'}
+                data-aos={!isMobile ? 'fade-left' : 'fade-up'}
                 className='relative w-[32.125vw] h-[30.6875vw] max-md:w-full max-md:h-[86.9vw] max-md:mt-[9.3vw]'
             >
                 <Image
@@ -45,7 +45,11 @@ export default function Story({ t }) {
             <Image
                 fill
                 src='/images/partner-bg.jpg'
-                className={!isMobile? 'top-0 left-0 z-[-2] opacity-20 object-cover' : 'top-0 left-0 z-[-2] opacity-10 object-cover'}
+                className={
+                    !isMobile
+                        ? 'top-0 left-0 z-[-2] opacity-20 object-cover'
+                        : 'top-0 left-0 z-[-2] opacity-10 object-cover'
+                }
             ></Image>
             <div
                 className={

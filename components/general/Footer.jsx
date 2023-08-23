@@ -1,20 +1,27 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'
 
-export default function Footer({lang, t}) {
+export default function Footer({ lang, t }) {
     const pathName = usePathname()
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
-    const addr = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
-    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357'];
-    const menuArr = [{url:'/', title:'Trang chủ'}, {url:'/gioi-thieu', title: 'Về KANGNAM'}, {url:'/danh-sach-du-an', title:'Dự án'}, {url:'/ky-gui-nha-dat', title:'Ký gửi nhà đất'}, {url:'/thoa-thuan-va-phap-li', title:'Thỏa thuận & pháp lý'}, {url:'/danh-sach-tin-tuc', title:'Tin tức'}];
-    const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản'];
-    const copyright= "© 2023 Copyright. Powered by OKHUB Viet Nam";
-    
+    const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
+    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
+    const menuArr = [
+        { url: '/', title: 'Trang chủ' },
+        { url: '/gioi-thieu', title: 'Về KANGNAM' },
+        { url: '/danh-sach-du-an', title: 'Dự án' },
+        { url: '/ky-gui-nha-dat', title: 'Ký gửi nhà đất' },
+        { url: '/thoa-thuan-va-phap-li', title: 'Thỏa thuận & pháp lý' },
+        { url: '/danh-sach-tin-tuc', title: 'Tin tức' },
+    ]
+    const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
+    const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
+
     const linkFacebookHandler = () => {
         window.open('https://www.facebook.com/')
     }
@@ -27,14 +34,14 @@ export default function Footer({lang, t}) {
     const linkInstaHandler = () => {
         window.open('https://www.instagram.com/')
     }
-    
-    if(!isMobile && pathName.includes('/dang-tin')){
+
+    if (!isMobile && pathName.includes('/dang-tin')) {
         return
     }
 
     return (
         <footer className='bg-[#FBF7F2]'>
-            <div className='py-[5vw] px-[7.5625vw] flex max-md:flex-col max-md:px-mb10 max-md:pt-[16vw] max-md:pb-[0]'>
+            <div className='py-[5vw] px-[7.5625vw] flex max-md:flex-col px-mb10 max-md:pt-[16vw] max-md:pb-[0]'>
                 <div>
                     <div className='relative w-[24.0625vw] h-[6.625vw] max-md:w-[87.7vw] max-md:h-[25.6vw]'>
                         <Image
@@ -270,7 +277,10 @@ export default function Footer({lang, t}) {
 
                 <div className='flex justify-between flex-grow ml-[4.625vw] max-md:flex-col max-md:justify-normal max-md:ml-0'>
                     <div className='max-w-[19.6875vw] max-md:max-w-full max-md:py-[6.4vw]'>
-                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title1} </h2>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'>
+                            {' '}
+                            {t.footer.title1}{' '}
+                        </h2>
                         <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             <div className='flex items-center'>
                                 <div className='relative w-[1.25vw] h-[2.5vw] flex max-md:w-[5.3vw] max-md:h-[10.6vw]'>
@@ -280,7 +290,10 @@ export default function Footer({lang, t}) {
                                         className='object-contain'
                                     ></Image>
                                 </div>
-                                <span className='ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%] max-md:title-mb16-400-150 max-md:ml-[2.1vw]'> {addr} </span>
+                                <span className='ml-[0.5vw] text-den-2 title16-400-150 max-w-[91%] max-md:title-mb16-400-150 max-md:ml-[2.1vw]'>
+                                    {' '}
+                                    {addr}{' '}
+                                </span>
                             </div>
                             {phoneArr.map((phone, index) => (
                                 <div
@@ -294,16 +307,23 @@ export default function Footer({lang, t}) {
                                             className='object-contain'
                                         ></Image>
                                     </div>
-                                    <span className='ml-[0.5vw] text-den-2 title16-400-130 max-md:title-mb16-400-130 max-md:ml-[2.1vw]'> {phone} </span>
+                                    <span className='ml-[0.5vw] text-den-2 title16-400-130 max-md:title-mb16-400-130 max-md:ml-[2.1vw]'>
+                                        {' '}
+                                        {phone}{' '}
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div className='max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw]'>
-                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title2} </h2>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'>
+                            {' '}
+                            {t.footer.title2}{' '}
+                        </h2>
                         <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {menuArr.map((menu, index) => (
-                                <Link href={lang==='vn'? menu.url : `/${lang+menu.url}`}
+                                <Link
+                                    href={lang === 'vn' ? menu.url : `/${lang + menu.url}`}
                                     key={index}
                                     className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130"
                                 >
@@ -313,7 +333,10 @@ export default function Footer({lang, t}) {
                         </div>
                     </div>
                     <div className='max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw]'>
-                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'> {t.footer.title3} </h2>
+                        <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130'>
+                            {' '}
+                            {t.footer.title3}{' '}
+                        </h2>
                         <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {serviceArr.map((service, index) => (
                                 <span
