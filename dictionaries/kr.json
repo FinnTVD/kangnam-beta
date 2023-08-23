@@ -81,5 +81,8 @@
         "subtitle": "일반 뉴스",
         "title": "관련 뉴스",
         "button": "모두 보기"
+    },
+    "newsLatestButton":{
+        "title": "세부 사항"
     }
 }

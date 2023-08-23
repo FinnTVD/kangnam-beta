@@ -52,7 +52,7 @@ export default function Partner({t}) {
                     <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px]'>{t.homepagePartners.subtitle}</span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case'>{t.homepagePartners.title}</h2>
                 </div>
-                {!isMobile && <Button stroke='white' href={'/'} className='bg-[#D6A279] text-white border-none'>Trở thành đối tác</Button>}
+                {!isMobile && <Button stroke='white' href={'/'} className='bg-logo text-white border-none'>{t.homepagePartners.button}</Button>}
             </div>
             <Swiper
                 slidesPerView={1}

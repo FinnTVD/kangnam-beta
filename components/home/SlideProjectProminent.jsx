@@ -48,7 +48,7 @@ export default function SlideProjectProminent({ isMobile }) {
                             className='!h-[26.1825vw] max-md:!w-[78.4vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
                         >
-                            <div className='h-full max-md:w-full relative select-none px-[4.51vw] py-[6.47vw] flex items-end '>
+                            <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
                                 <Image
                                     className='object-cover rounded-[1vw]'
                                     src='/images/slideitem.jpg'
@@ -59,7 +59,7 @@ export default function SlideProjectProminent({ isMobile }) {
                                 />
                                 <div className='absolute bottom-0 left-0 w-full h-[16.8125vw] max-md:h-[65.49vw] bg-gradient-slide z-[1]'></div>
                                 <div className='relative z-10'>
-                                    <h6 className='text-white title-mb18-700-150'>LUMIERE Boulevard</h6>
+                                    <h6 className='text-white title20-700-150 title-mb18-700-150'>LUMIERE Boulevard</h6>
                                     <address className='text-white title-mb12-600-150'>Quan 9, 시 Ho Chi Minh</address>
                                     <span className='text-white title-mb12-400-150'>값: 35tr/m2 </span>
                                 </div>

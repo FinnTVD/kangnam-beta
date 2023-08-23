@@ -16,7 +16,7 @@
 @layer components {
     /* pc */
     .sub-title {
-        @apply uppercase text-16pc font-bold tracking-[0.8px] text-nau-nhat;
+        @apply uppercase text-16pc font-bold tracking-[0.8px] text-logo;
     }
 
     .title60 {

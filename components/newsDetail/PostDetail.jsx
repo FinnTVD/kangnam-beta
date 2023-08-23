@@ -28,7 +28,7 @@ export default function PostDetail({t, post}) {
                 <span className="text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150"> {t.newsDetailDes.byAuthor} {post.author} </span>
             </div>
             <div className={`${classes['post-detail']} mt-[0.625vw] pt-[1vw] pb-[2vw] border-b border-t border-neutral-700 border-opacity-10 max-md:pt-[2.6vw] max-md:pb-[4.2vw] max-md:mt-[2.6vw]`} dangerouslySetInnerHTML={{__html: post?.content}}></div>
-            <div className="flex justify-end items-center mt-[1.625vw] max-md:mt-[4.2vw]">
+            <div className="flex justify-end items-center mt-[1.625vw] max-md:mt-[4.8vw]">
                 <span className="title14-700-150 text-[#394854] uppercase max-md:title-mb13-700-150"> {t.newsDetailDes.share}: </span>
                 <div className="flex gap-[0.5vw] ml-[0.8125vw] max-md:gap-[2.1vw] max-md:ml-[2.4vw]">
                     <div onClick={twitterShareHandler} className="cursor-pointer">

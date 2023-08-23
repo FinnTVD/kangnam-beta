@@ -79,5 +79,8 @@
         "subtitle": "News synthesis",
         "title": "Related news",
         "button": "See all"
+    },
+    "newsLatestButton":{
+        "title": "View"
     }
 }

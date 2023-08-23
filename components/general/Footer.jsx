@@ -2,9 +2,13 @@
 
 import Image from 'next/image'
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive';
 
 export default function Footer({lang, t}) {
+    const pathName = usePathname()
+    const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const addr = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357'];
     const menuArr = [{url:'/', title:'Trang chủ'}, {url:'/gioi-thieu', title: 'Về KANGNAM'}, {url:'/danh-sach-du-an', title:'Dự án'}, {url:'/ky-gui-nha-dat', title:'Ký gửi nhà đất'}, {url:'/thoa-thuan-va-phap-li', title:'Thỏa thuận & pháp lý'}, {url:'/danh-sach-tin-tuc', title:'Tin tức'}];
@@ -22,6 +26,10 @@ export default function Footer({lang, t}) {
     }
     const linkInstaHandler = () => {
         window.open('https://www.instagram.com/')
+    }
+    
+    if(!isMobile && pathName.includes('/dang-tin')){
+        return
     }
 
     return (
@@ -319,7 +327,7 @@ export default function Footer({lang, t}) {
                     </div>
                 </div>
             </div>
-            <div className='border-t border-den-2 border-opacity-40 py-[0.625vw] flex justify-center max-md:pt-[4.2vw] max-md:pb-[6.1vw]'>
+            <div className='border-t border-den-2 border-opacity-40 py-[0.625vw] flex justify-center max-md:pt-[4.2vw] max-md:pb-[6.1vw] max-md:border-opacity-40'>
                 <span className='text-center title14-400-160 text-den-2 max-md:title-mb14-400-160'>{copyright}</span>
             </div>
         </footer>

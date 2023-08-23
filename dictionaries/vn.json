@@ -79,5 +79,8 @@
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức liên quan",
         "button": "Xem tất cả"
+    },
+    "newsLatestButton":{
+        "title": "Chi tiết"
     }
 }
