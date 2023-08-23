@@ -41,11 +41,13 @@
     },
     "homepageNews":{
         "subtitle": "News synthesis",
-        "title": "Latest news"
+        "title": "Latest news",
+        "button": "See all"
     },
     "homepagePartners":{
         "subtitle": "Partners synthesis",
-        "title": "Our partners"
+        "title": "Our partners",
+        "button": "Become our partner"
     },
     "footer":{
         "title1": "Contact",
@@ -77,5 +79,8 @@
         "subtitle": "News synthesis",
         "title": "Related news",
         "button": "See all"
+    },
+    "newsLatestButton":{
+        "title": "View"
     }
 }

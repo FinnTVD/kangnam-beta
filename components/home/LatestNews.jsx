@@ -29,13 +29,13 @@ export default function LatestNews ({t}) {
     const newsArrSlice = isMobile? newsArr.slice(1, 3) : newsArr.slice(1, 6);
     
     return(
-    <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative max-md:mt-[3.7vw] max-md:px-mb10'>
+    <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative max-md:mt-[3.7vw] max-md:px-mb10 max-md:pb-[20.8vw]'>
         <div className='flex justify-between items-end'>
             <div>
-                <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px]'>{t.homepageNews.subtitle}</span>
+                <span className='sub-title max-md:title-mb12-600-160 max-md:leading-[1.5] max-md:tracking-[0.6px]'>{t.homepageNews.subtitle}</span>
                 <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-[2.1vw] max-md:normal-case'>{t.homepageNews.title}</h2>
             </div>
-            {!isMobile && <Button stroke='white' className='bg-[#D6A279] text-white border-none' href={'/danh-sach-tin-tuc'}>Xem tất cả</Button>}
+            {!isMobile && <Button stroke='white' className='bg-logo text-white border-none' href={'/danh-sach-tin-tuc'}>{t.homepageNews.button}</Button>}
         </div>
         <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw] max-md:grid-cols-1 max-md:grid-rows-[68.5vw_44.2vw_44.2vw] max-md:gap-[4.2vw] max-md:mt-[4.2vw]'>
                 <div className='col-span-2 row-span-2 max-md:col-span-1 max-md:row-span-1'>
@@ -43,6 +43,7 @@ export default function LatestNews ({t}) {
                         newsItem={newsArr[0]}
                         id={newsArr[0].id}
                         key={newsArr[0].id}
+                        t={t}
                     ></LatestNewsItem>
                 </div>
                 {newsArrSlice?.map((news) => 
@@ -55,7 +56,7 @@ export default function LatestNews ({t}) {
                     </div>
                 )}
         </div>
-        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>Xem tất cả</Button>}
+        {isMobile && <Button stroke='white' href={'/danh-sach-tin-tuc'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-logo w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw] max-md:mt-[4.2vw]'>{t.homepageNews.button}</Button>}
         </section>
     )
 }

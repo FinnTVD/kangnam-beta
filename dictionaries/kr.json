@@ -42,11 +42,13 @@
 
     "homepageNews":{
         "subtitle": "뉴스 합성",
-        "title": "최근 뉴스"
+        "title": "최근 뉴스",
+        "button": "모두 보기"
     },
     "homepagePartners":{
         "subtitle": "파트너 합성",
-        "title": "우리의 파트너들"
+        "title": "우리의 파트너들",
+        "button": "파트너가되다"
     },
     "footer":{
         "title1": "연락하다",
@@ -79,5 +81,8 @@
         "subtitle": "일반 뉴스",
         "title": "관련 뉴스",
         "button": "모두 보기"
+    },
+    "newsLatestButton":{
+        "title": "세부 사항"
     }
 }

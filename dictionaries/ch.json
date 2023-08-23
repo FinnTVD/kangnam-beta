@@ -42,11 +42,13 @@
 
     "homepageNews": {
         "subtitle": "新闻综合",
-        "title": "最新消息"
+        "title": "最新消息",
+        "button": "查看全部"
     },
     "homepagePartners": {
         "subtitle": "合作伙伴综合",
-        "title": "我们的伙伴"
+        "title": "我们的伙伴",
+        "button": "成为合伙人"
     },
     "footer": {
         "title1": "接触",
@@ -80,5 +82,8 @@
         "subtitle": "新闻聚合器",
         "title": "相关新闻",
         "button": "查看全部"
+    },
+    "newsLatestButton":{
+        "title": "细节"
     }
 }

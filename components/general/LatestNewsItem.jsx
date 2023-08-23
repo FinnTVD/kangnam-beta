@@ -2,7 +2,7 @@ import Image from "next/image"
 import Button from "./Button"
 import Link from "next/link"
 
-export default function LatestNewsItem ({newsItem, id}) {
+export default function LatestNewsItem ({newsItem, id, t}) {
     return(
         <Link href={`/danh-sach-tin-tuc/${newsItem.slug}`}>
             <div className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px]'>
@@ -34,7 +34,7 @@ export default function LatestNewsItem ({newsItem, id}) {
                             <span className="text-den-2 title16-400-150 mt-[0.75vw] line-clamp-2 max-md:title-mb12-400-150 max-md:mt-[0.5vw]">{newsItem.content.replace( /(<([^>]+)>)/ig, '')}</span>
                         </div>
                     </div>
-                    <Button className="mt-[1.375vw] max-md:border-opacity-50 max-md:py-[1.6vw] max-md:px-[4.2vw]" span="max-md:text-10mb max-md:opacity-70" icon="w-auto h-[2.6vw]" href={null}>Chi tiết</Button>
+                    <Button className="mt-[1.375vw] gap-x-[0.75vw] border-opacity-50 max-md:!gap-x-[1.3vw] max-md:!py-[1.6vw] max-md:!px-[4.2vw]" span="opacity-70 max-md:text-10mb" icon="w-[1.25vw] max-md:w-[3vw]" href={null}>{t.newsLatestButton.title}</Button>
                 </div>
             </div>
         </Link>

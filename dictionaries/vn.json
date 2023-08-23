@@ -41,11 +41,13 @@
     },
     "homepageNews": {
         "subtitle": "Tổng hợp tin tức",
-        "title": "Tin tức mới nhất"
+        "title": "Tin tức mới nhất",
+        "button": "Xem tất cả"
     },
     "homepagePartners": {
         "subtitle": "Tổng hợp các đối tác",
-        "title": "Đối tác của chúng tôi"
+        "title": "Đối tác của chúng tôi",
+        "button": "Trở thành đối tác"
     },
     "footer": {
         "title1": "Liên hệ",
@@ -77,5 +79,8 @@
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức liên quan",
         "button": "Xem tất cả"
+    },
+    "newsLatestButton":{
+        "title": "Chi tiết"
     }
 }
