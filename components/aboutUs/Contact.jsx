@@ -10,7 +10,7 @@ export default function Contact({t}){
     const address = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phone = ["+84 337858021 / +84 339625612", "+82 10-8413-1981"];
     return(
-        <section className="relative px-120 pt-[8.125vw] pb-[8.125vw] max-md:py-[13.3vw] max-md:px-mb10">
+        <section className="relative px-120 pt-[8.125vw] pb-[8.125vw] max-md:py-[13.3vw] px-mb10">
             <div className='flex justify-between items-end'>
                 <div>
                     <span data-aos="fade-up" className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6]'>{t.aboutUsContact.subtitle}</span>
