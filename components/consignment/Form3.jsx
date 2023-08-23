@@ -438,7 +438,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                             style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
                                         >
                                             <Image
-                                                className='object-contain rounded-md z-[1]'
+                                                className='object-cover rounded-md z-[1]'
                                                 src={src}
                                                 alt={`image preview ${index + 1}`}
                                                 sizes='50vw'
