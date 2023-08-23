@@ -2,10 +2,8 @@ import 'swiper/css'
 import './globals.css'
 
 import localFont from 'next/font/local'
-import Footer from '@/components/general/Footer'
-import HeaderV2 from '@/components/general/HeaderV2'
-import Script from 'next/script'
 import { getDictionary } from './dictionaries'
+import Script from 'next/script'
 
 const avertaStdCY = localFont({
     src: [
@@ -43,17 +41,8 @@ const avertaStdCY = localFont({
     display: 'swap',
 })
 
-export const metadata = {
-    title: 'KangNam',
-    description: 'KangNam by OkHub',
-}
-export async function generateStaticParams() {
-    return [{ lang: 'vn' }, { lang: 'en' }, { lang: 'kr' }, { lang: 'ch' }]
-}
-
 export default async function RootLayout({ children, params }) {
     const t = await getDictionary(params.lang)
-
     return (
         <html lang={params.lang}>
             <head>
@@ -67,15 +56,7 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
-                <HeaderV2
-                    lang={params.lang}
-                    t={t}
-                />
                 {children}
-                <Footer
-                    lang={params.lang}
-                    t={t}
-                />
                 <Script
                     async
                     defer

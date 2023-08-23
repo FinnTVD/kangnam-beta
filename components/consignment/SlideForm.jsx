@@ -60,7 +60,7 @@ export default function SlideForm({ t }) {
                         isMobile={isMobile}
                     />
                 </SwiperSlide>
-                <SwiperSlide className='!h-full max-md:!h-fit'>
+                <SwiperSlide className='!h-full max-md:!h-fit overflow-y-scroll'>
                     <Form2
                         handleNextSlide={handleNextSlide}
                         handlePrevSlide={handlePrevSlide}

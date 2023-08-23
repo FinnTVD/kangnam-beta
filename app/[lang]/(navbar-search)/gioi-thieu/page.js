@@ -1,5 +1,5 @@
 import IndexAboutUs from '@/components/aboutUs'
-import { getDictionary } from '../dictionaries'
+import { getDictionary } from '../../dictionaries'
 
 
 export default async function News({params: {lang}}) {

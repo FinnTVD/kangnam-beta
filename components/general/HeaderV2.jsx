@@ -50,27 +50,27 @@ export default function HeaderV2({ lang, t }) {
         }
     }
 
-    //trang danh sach du an khong co header
-    if (pathName.indexOf('/danh-sach-du-an') !== -1 || pathName.indexOf('/dang-tin') !== -1) {
-        return
-    }
+    // //trang danh sach du an khong co header
+    // if (pathName.indexOf('/danh-sach-du-an') !== -1 || pathName.indexOf('/dang-tin') !== -1) {
+    //     return
+    // }
 
     return (
         <header
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`${isHome ? 'h-screen max-md:h-[64vh]' : 'h-[80vh] max-md:h-[55vh]'} relative w-full`}>
-                {/* <Image
+            <div className={`h-[80vh] max-md:h-[55vh] relative w-full`}>
+                <Image
                     className='z-0 object-cover'
                     src='/images/bg-header.jpg'
                     alt='bg-header'
                     sizes='100vw'
                     quality={100}
                     fill
-                /> */}
-                <SlideBanner />
-                {isHome && (
+                />
+                {/* <SlideBanner /> */}
+                {/* {isHome && (
                     <Image
                         className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                         src='/images/big-logo.png'
@@ -79,14 +79,10 @@ export default function HeaderV2({ lang, t }) {
                         height={550}
                         priority
                     />
-                )}
-                <div
-                    className={`${
-                        isHome ? 'bg-gradient-header1' : 'bg-gradient-header-other'
-                    } absolute z-[2] top-0 left-0 w-full h-full`}
-                ></div>
+                )} */}
+                <div className={`bg-gradient-header-other absolute z-[2] top-0 left-0 w-full h-full`}></div>
                 {/* linear-white */}
-                {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>}
+                {/* {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>} */}
                 {isMobile ? (
                     <NavBarRes
                         isHome={isHome}
@@ -112,8 +108,8 @@ export default function HeaderV2({ lang, t }) {
                         t={t}
                     />
                 )}
-                {isHome ? <SearchHome /> : <ContentPageOther />}
-                {isHome && !isHome ? (
+                <ContentPageOther />
+                {isHome ? (
                     <></>
                 ) : (
                     <div
@@ -144,10 +140,10 @@ export default function HeaderV2({ lang, t }) {
                         </span>
                     </div>
                 )}
-                {isHome && (
+                {/* {isHome && (
                     <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
                 )}
-                {isHome && !isMobile && <FeatureHome />}
+                {isHome && !isMobile && <FeatureHome />} */}
             </div>
         </header>
     )
