@@ -7,14 +7,30 @@ import Button from '../general/Button'
 import BoxFilter from '../general/filter/BoxFilter'
 import { handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
+import ReactPaginate from 'react-paginate'
+import { useState } from 'react'
+import useSWR from 'swr'
+import classes from '../news/ListNewsStyles.module.css'
 
 const arrItem = new Array(8).fill(0)
-
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function MyProject({ lang }) {
+    const [pageNumber, setPageNumber] = useState(1)
     const [show, Element] = useToggleShowMap()
+    const { data, error, isLoading } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/property?page=${pageNumber}&take=${show ? 6 : 8}`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+    if (isLoading) return <div className='text-den'>Loading ...</div>
+    console.log('🚀 ~ file: MyProject.jsx:25 ~ MyProject ~ data:', data)
     if (isMobile) return <></>
 
     return (
@@ -37,8 +53,8 @@ export default function MyProject({ lang }) {
                             show ? 'grid-cols-3' : 'grid-cols-4'
                         } w-full grid grid-rows-2 gap-x-[1.25vw] gap-y-[1.87vw] h-fit`}
                     >
-                        {arrItem &&
-                            arrItem.slice(0, show ? 6 : 8).map((e, index) => (
+                        {data &&
+                            data?.data?.slice(0, show ? 6 : 8).map((e, index) => (
                                 <Link
                                     href={'/'}
                                     className='w-full'
@@ -50,7 +66,6 @@ export default function MyProject({ lang }) {
                                             src='/images/itemproject.jpg'
                                             alt='itemProject'
                                             sizes='18vw'
-                                            quality={100}
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
@@ -135,7 +150,21 @@ export default function MyProject({ lang }) {
                             ))}
                     </div>
                     <div className='flex justify-between items-center mt-[2.69vw]'>
-                        <div>123</div>
+                        {data && (
+                            <ReactPaginate
+                                breakLabel='...'
+                                nextLabel='Next'
+                                onPageChange={(e) => setPageNumber(e.selected + 1)}
+                                pageRangeDisplayed={5}
+                                pageCount={Math.ceil(data?.meta?.pageCount) || 1}
+                                renderOnZeroPageCount={null}
+                                previousLabel='Previous'
+                                forcePage={pageNumber - 1}
+                                pageClassName={classes.page}
+                                activeClassName={classes.selected}
+                                className={classes['news-pagination']}
+                            />
+                        )}
                         <Button
                             href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
                             className='border-none bg-logo'

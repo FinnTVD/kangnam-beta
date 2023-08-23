@@ -36,47 +36,47 @@
         "title": "Select Language"
     },
     "Form1": {
-        "sell": "所需销售价格 *",
-        "hire": "所需租金 *"
+        "sell": "所需销售价格",
+        "hire": "所需租金"
     },
 
-    "homepageNews":{
+    "homepageNews": {
         "subtitle": "新闻综合",
         "title": "最新消息"
     },
-    "homepagePartners":{
+    "homepagePartners": {
         "subtitle": "合作伙伴综合",
         "title": "我们的伙伴"
     },
-    "footer":{
+    "footer": {
         "title1": "接触",
         "title2": "导航",
         "title3": "服务"
     },
 
-    "aboutUsStory":{
+    "aboutUsStory": {
         "subtitle": "品牌故事",
         "title": "介绍"
     },
-    "aboutUsTeams":{
+    "aboutUsTeams": {
         "subtitle": "江南专家",
         "title": "江南专家"
     },
-    "aboutUsContact":{
+    "aboutUsContact": {
         "subtitle": "接触",
         "title": "文字信息",
         "button": "文字信息"
     },
 
-    "newsList":{
-        "subtitle" : "新闻关于",
+    "newsList": {
+        "subtitle": "新闻关于",
         "title": "消息"
     },
-    "newsDetailDes":{
+    "newsDetailDes": {
         "byAuthor": "撰写者",
         "share": "分享吧"
     },
-    "newsDetailRelated":{
+    "newsDetailRelated": {
         "subtitle": "新闻聚合器",
         "title": "相关新闻",
         "button": "查看全部"

@@ -257,7 +257,6 @@ export default function FormContact() {
                                                 alt={e.title}
                                                 width={36}
                                                 height={36}
-                                                quality={100}
                                             />
                                         </Link>
                                     </li>

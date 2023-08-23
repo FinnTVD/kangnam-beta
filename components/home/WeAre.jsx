@@ -14,7 +14,6 @@ export default function WeAre({ lang }) {
                     src='/images/bg-we.png'
                     alt='bg-we'
                     sizes='100vw'
-                    quality={100}
                     fill
                 />
                 <div className='relative z-10 flex justify-between h-full max-md:flex-col'>
@@ -38,7 +37,6 @@ export default function WeAre({ lang }) {
                                         alt='check'
                                         width={100}
                                         height={100}
-                                        quality={100}
                                         className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
@@ -51,7 +49,6 @@ export default function WeAre({ lang }) {
                                         alt='pig'
                                         width={100}
                                         height={100}
-                                        quality={100}
                                         className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
@@ -64,7 +61,6 @@ export default function WeAre({ lang }) {
                                         alt='watch'
                                         width={100}
                                         height={100}
-                                        quality={100}
                                         className='w-[4.375vw] h-[4.375vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-mb12-600-130'>
@@ -138,7 +134,6 @@ export default function WeAre({ lang }) {
                                 alt='house'
                                 className='object-fill z-[2]'
                                 sizes='48.1875vw'
-                                quality={100}
                                 fill
                             />
                             <Image
@@ -147,7 +142,6 @@ export default function WeAre({ lang }) {
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-md:w-[63.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-md:left-[23.46vw]'
                                 width={600}
                                 height={600}
-                                quality={100}
                             />
                             <Image
                                 src='/images/people.png'
@@ -155,7 +149,6 @@ export default function WeAre({ lang }) {
                                 className='object-cover w-[33.875vw] h-[38.5625vw] max-md:w-[62.62vw] max-md:h-[71.29vw] absolute bottom-0 left-[5.68vw] z-[3] max-md:left-1/2 max-md:-translate-x-1/2'
                                 width={600}
                                 height={600}
-                                quality={100}
                             />
                         </div>
                     </div>

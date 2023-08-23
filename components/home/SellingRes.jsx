@@ -56,7 +56,6 @@ export default function SellingRes() {
                                         src='/images/itemproject.jpg'
                                         alt='itemProject'
                                         sizes='50.93vw'
-                                        quality={100}
                                         fill
                                     />
                                     <div className='block absolute rounded-md bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit title-mb10-600-150'>

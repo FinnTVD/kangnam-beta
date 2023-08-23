@@ -1,5 +1,6 @@
 import NavBarV2 from '../general/NavBarV2'
 import CommentFB from './CommentFB'
+import ContentDetail from './ContentDetail'
 import RelatedProject from './RelatedProject'
 
 export default function IndexProjectDetail({ lang }) {
@@ -9,11 +10,9 @@ export default function IndexProjectDetail({ lang }) {
                 <NavBarV2 lang={lang} />
             </header>
             <main>
-                <section className='mt-[7.57vw]'>
-                    <h1 className='text-center text-den title60'>Chi tiet du an</h1>
-                </section>
-                <RelatedProject />
+                <ContentDetail />
                 <CommentFB />
+                <RelatedProject />
             </main>
         </>
     )

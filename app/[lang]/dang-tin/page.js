@@ -5,7 +5,10 @@ export default async function DepositPage({ params: { lang } }) {
     const t = await getDictionary(lang)
     return (
         <>
-            <ConsignmentIndex t={t} />
+            <ConsignmentIndex
+                t={t}
+                lang={lang}
+            />
         </>
     )
 }

@@ -1,7 +1,9 @@
 'use client'
 import Image from 'next/image'
+import 'swiper/css/free-mode'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay } from 'swiper/modules'
+import { Autoplay, FreeMode } from 'swiper/modules'
 import Link from 'next/link'
 const arrProject = new Array(6).fill(0)
 export default function SlideRelatedProject() {
@@ -9,38 +11,54 @@ export default function SlideRelatedProject() {
         <>
             <Swiper
                 loop={true}
-                slidesPerView={4}
-                spaceBetween={24}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 'auto',
+                        spaceBetween: 18,
+                        freeMode: true,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                    },
+                }}
                 autoplay={{
                     delay: 3000,
                     disableOnInteraction: false,
                 }}
                 speed={500}
-                modules={[Autoplay]}
+                modules={[Autoplay, FreeMode]}
+                className='px-mb10'
             >
                 {arrProject &&
                     arrProject.map((e, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide
+                            key={index}
+                            className='w-full !h-fit max-md:!w-[77.6vw] overflow-hidden rounded-[0.5vw] max-md:rounded-[2.13vw]'
+                        >
                             <Link
                                 href={'/'}
-                                className='w-full'
+                                className='block w-full'
                                 key={index}
                             >
-                                <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
+                                <div className='relative w-full h-[13.75vw] max-md:h-[50.94vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.13vw]'>
                                     <Image
                                         className='z-0 object-cover'
                                         src='/images/itemproject.jpg'
                                         alt='itemProject'
                                         sizes='18vw'
-                                        quality={100}
                                         fill
                                     />
                                     <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
                                         Thuê
                                     </div>
                                 </div>
-                                <div className='pt-[1.13vw]'>
-                                    <h6 className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw]'>
+                                <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
+                                    <h6 className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1'>
                                         Nhà phố Thủy Nguyên full nội thất
                                     </h6>
                                     <div className='flex items-center'>
@@ -56,12 +74,14 @@ export default function SlideRelatedProject() {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150'>
                                             Diện tích:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150'>52m2 (10m x 5.2m)</span>
+                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
+                                            52m2 (10m x 5.2m)
+                                        </span>
                                     </div>
-                                    <div className='flex items-center my-[0.5vw]'>
+                                    <div className='flex items-center my-[0.5vw] max-md:my-[2.13vw]'>
                                         <svg
                                             xmlns='http://www.w3.org/2000/svg'
                                             width='14'
@@ -85,10 +105,10 @@ export default function SlideRelatedProject() {
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150'>
                                             Địa chỉ:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150'>
+                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
                                             Tôn Đức Thắng, Hà Nội
                                         </span>
                                     </div>
@@ -105,10 +125,12 @@ export default function SlideRelatedProject() {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150'>
                                             Mức giá:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150'>25 tỷ</span>
+                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
+                                            25 tỷ
+                                        </span>
                                     </div>
                                 </div>
                             </Link>

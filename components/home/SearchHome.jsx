@@ -84,7 +84,7 @@ export default function SearchHome() {
                         alt='px'
                         width={32}
                         height={32}
-                        quality={100}
+                        priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
                     <span className='text-white title14-400-150 title-mb12-400-150'>Phân xưởng</span>
@@ -95,7 +95,7 @@ export default function SearchHome() {
                         alt='cc'
                         width={32}
                         height={32}
-                        quality={100}
+                        priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
                     <span className='text-white title14-400-150 title-mb12-400-150'>Chung cư</span>
@@ -106,7 +106,7 @@ export default function SearchHome() {
                         alt='bt'
                         width={32}
                         height={32}
-                        quality={100}
+                        priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
                     <span className='text-white title14-400-150 title-mb12-400-150'>Biệt thự</span>
@@ -117,7 +117,7 @@ export default function SearchHome() {
                         alt='nmp'
                         width={32}
                         height={32}
-                        quality={100}
+                        priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
                     <span className='text-white title14-400-150 title-mb12-400-150'>Nhà mặt phố</span>
@@ -128,7 +128,7 @@ export default function SearchHome() {
                         alt='dn'
                         width={32}
                         height={32}
-                        quality={100}
+                        priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-md:h-[4.8vw]'
                     />
                     <span className='text-white title14-400-150 title-mb12-400-150'>Đất nền</span>

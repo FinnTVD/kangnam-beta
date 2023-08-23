@@ -60,7 +60,6 @@ export default function SelectLanguage({ className, lang }) {
                     className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/vn.svg'
                     alt='viet nam'
-                    quality={100}
                     width={28}
                     height={18}
                 />
@@ -76,7 +75,6 @@ export default function SelectLanguage({ className, lang }) {
                     className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/english.svg'
                     alt='english'
-                    quality={100}
                     width={28}
                     height={18}
                 />
@@ -92,7 +90,6 @@ export default function SelectLanguage({ className, lang }) {
                     className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/korea.svg'
                     alt='korea'
-                    quality={100}
                     width={28}
                     height={18}
                 />
@@ -108,7 +105,6 @@ export default function SelectLanguage({ className, lang }) {
                     className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                     src='/images/china.svg'
                     alt='china'
-                    quality={100}
                     width={28}
                     height={18}
                 />

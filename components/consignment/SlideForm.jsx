@@ -4,10 +4,16 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import Form1 from './Form1'
 import Form2 from './Form2'
 import Form3 from './Form3'
+import { useMediaQuery } from 'react-responsive'
 
 export default function SlideForm({ t }) {
     const [indexSlider, setIndexSlider] = useState(0)
+    const [dataForm, setDataForm] = useState(null)
     const swiperRef = useRef()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
+
     const handleNextSlide = () => {
         swiperRef.current?.slideNext()
     }
@@ -21,51 +27,71 @@ export default function SlideForm({ t }) {
     }
 
     return (
-        <section className='px-120 pt-[6.37vw] w-screen h-fit'>
-            <div className='relative w-full h-fit'>
-                <Swiper
-                    slidesPerView={1}
-                    spaceBetween={60}
-                    onSlideChange={handleSlideChange}
-                    speed={1000}
-                    onBeforeInit={(swiper) => {
-                        swiperRef.current = swiper
-                    }}
-                    allowTouchMove={false}
-                >
-                    <SwiperSlide>
-                        <Form1
-                            handleNextSlide={handleNextSlide}
-                            t={t}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Form2
-                            handleNextSlide={handleNextSlide}
-                            handlePrevSlide={handlePrevSlide}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Form3
-                            handleNextSlide={handleNextSlide}
-                            handlePrevSlide={handlePrevSlide}
-                        />
-                    </SwiperSlide>
-                </Swiper>
+        <>
+            <Swiper
+                // direction={'vertical'}
+                // slidesPerView={1}
+                // spaceBetween={60}
+                breakpoints={{
+                    0: {
+                        direction: 'horizontal',
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                    },
+                    768: {
+                        direction: 'vertical',
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                    },
+                }}
+                onSlideChange={handleSlideChange}
+                speed={1000}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper
+                }}
+                allowTouchMove={false}
+                className='w-full h-full max-md:h-fit'
+            >
+                <SwiperSlide className='!h-full max-md:!h-fit'>
+                    <Form1
+                        handleNextSlide={handleNextSlide}
+                        t={t}
+                        setDataForm={setDataForm}
+                        isMobile={isMobile}
+                    />
+                </SwiperSlide>
+                <SwiperSlide className='!h-full max-md:!h-fit'>
+                    <Form2
+                        handleNextSlide={handleNextSlide}
+                        handlePrevSlide={handlePrevSlide}
+                        setDataForm={setDataForm}
+                        isMobile={isMobile}
+                    />
+                </SwiperSlide>
+                <SwiperSlide className='!h-full overflow-y-scroll !pb-[10vw] max-md:!h-fit'>
+                    <Form3
+                        handleNextSlide={handleNextSlide}
+                        handlePrevSlide={handlePrevSlide}
+                        dataForm={dataForm}
+                        isMobile={isMobile}
+                    />
+                </SwiperSlide>
+            </Swiper>
 
-                <div className='absolute top-0 -translate-y-full left-0 bg-[rgba(214,162,121,0.1)] w-full h-[0.25vw]'>
+            {!isMobile && (
+                <div className='fixed top-[19vw] z-50 -translate-y-full left-[43.5625vw] bg-[rgba(214,162,121,0.1)] w-[48.5625vw] h-[0.25vw]'>
                     <div className='relative'>
                         <div
                             className={`${
                                 indexSlider === 1 ? 'w-2/3' : indexSlider === 2 ? 'w-full' : 'w-1/3'
                             } absolute left-0 h-[0.375vw] -translate-y-1/2 opacity-100 bg-logo top-1/2 transition-all duration-[0.8s] ease-linear rounded-t-full`}
                         ></div>
-                        <span className='text-nu title16-400-150 block mb-[1.19vw] absolute -top-[0.69vw] left-0 -translate-y-full'>
+                        <span className='text-nu title16-400-150 block absolute -top-[0.69vw] right-0 -translate-y-full'>
                             Hoàn thành {indexSlider + 1}/3
                         </span>
                     </div>
                 </div>
-            </div>
-        </section>
+            )}
+        </>
     )
 }

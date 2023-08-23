@@ -33,47 +33,47 @@
             }
         ],
         "button": "Kí gửi nhà đất",
-        "title":"Chọn ngôn ngữ"
+        "title": "Chọn ngôn ngữ"
     },
     "Form1": {
-        "sell": "Giá bán mong muốn *",
-        "hire": "Giá thuê mong muốn *"
+        "sell": "Giá bán mong muốn",
+        "hire": "Giá thuê mong muốn"
     },
-    "homepageNews":{
+    "homepageNews": {
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức mới nhất"
     },
-    "homepagePartners":{
+    "homepagePartners": {
         "subtitle": "Tổng hợp các đối tác",
         "title": "Đối tác của chúng tôi"
     },
-    "footer":{
+    "footer": {
         "title1": "Liên hệ",
         "title2": "Điều hướng chung",
         "title3": "Dịch vụ"
     },
-    "aboutUsStory":{
+    "aboutUsStory": {
         "subtitle": "Câu chuyện thương hiệu",
         "title": "Giới thiệu"
     },
-    "aboutUsTeams":{
+    "aboutUsTeams": {
         "subtitle": "Đội ngũ",
         "title": "Chuyên viên Kangnam"
     },
-    "aboutUsContact":{
+    "aboutUsContact": {
         "subtitle": "Liên hệ",
         "title": "Thông tin văn phòng",
         "button": "Liên hệ ngay"
     },
-    "newsList":{
-        "subtitle" : "Tin tức về",
+    "newsList": {
+        "subtitle": "Tin tức về",
         "title": "Tin tức"
     },
-    "newsDetailDes":{
+    "newsDetailDes": {
         "byAuthor": "Viết bởi",
         "share": "Chia sẻ lên"
     },
-    "newsDetailRelated":{
+    "newsDetailRelated": {
         "subtitle": "Tổng hợp tin tức",
         "title": "Tin tức liên quan",
         "button": "Xem tất cả"

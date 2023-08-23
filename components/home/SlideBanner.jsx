@@ -33,8 +33,9 @@ export default function SlideBanner() {
                                     className='object-cover'
                                     src={e.src}
                                     alt={e.alt}
+                                    sizes='(max-width: 767px) 35vw, (max-width: 1280px) 70vw, 100vw'
                                     fill
-                                    quality={100}
+                                    priority
                                 />
                             </div>
                         </SwiperSlide>

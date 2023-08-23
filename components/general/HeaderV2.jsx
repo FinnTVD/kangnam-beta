@@ -51,7 +51,7 @@ export default function HeaderV2({ lang, t }) {
     }
 
     //trang danh sach du an khong co header
-    if (pathName.indexOf('/danh-sach-du-an') !== -1) {
+    if (pathName.indexOf('/danh-sach-du-an') !== -1 || pathName.indexOf('/dang-tin') !== -1) {
         return
     }
 
@@ -60,7 +60,7 @@ export default function HeaderV2({ lang, t }) {
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`${isHome ? 'h-screen max-md:h-[64vh]' : 'h-[80vh]'} relative w-full`}>
+            <div className={`${isHome ? 'h-screen max-md:h-[64vh]' : 'h-[80vh] max-md:h-[55vh]'} relative w-full`}>
                 {/* <Image
                     className='z-0 object-cover'
                     src='/images/bg-header.jpg'
@@ -77,7 +77,7 @@ export default function HeaderV2({ lang, t }) {
                         alt='big-logo'
                         width={350}
                         height={550}
-                        quality={100}
+                        priority
                     />
                 )}
                 <div
@@ -113,33 +113,37 @@ export default function HeaderV2({ lang, t }) {
                     />
                 )}
                 {isHome ? <SearchHome /> : <ContentPageOther />}
-                <div
-                    onClick={handleScrollDown}
-                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
-                >
-                    <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='24'
-                        height='25'
-                        viewBox='0 0 24 25'
-                        fill='none'
-                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
+                {isHome && !isHome ? (
+                    <></>
+                ) : (
+                    <div
+                        onClick={handleScrollDown}
+                        className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
                     >
-                        <path
-                            d='M1 1L12 12L23 1'
-                            stroke='white'
-                            strokeWidth='2'
-                        />
-                        <path
-                            d='M1 12L12 23L23 12'
-                            stroke='white'
-                            strokeWidth='2'
-                        />
-                    </svg>
-                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
-                        Cuộn xuống
-                    </span>
-                </div>
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='24'
+                            height='25'
+                            viewBox='0 0 24 25'
+                            fill='none'
+                            className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
+                        >
+                            <path
+                                d='M1 1L12 12L23 1'
+                                stroke='white'
+                                strokeWidth='2'
+                            />
+                            <path
+                                d='M1 12L12 23L23 12'
+                                stroke='white'
+                                strokeWidth='2'
+                            />
+                        </svg>
+                        <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
+                            Cuộn xuống
+                        </span>
+                    </div>
+                )}
                 {isHome && (
                     <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
                 )}
