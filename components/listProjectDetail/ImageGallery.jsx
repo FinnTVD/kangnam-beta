@@ -178,7 +178,7 @@ export default function ImageGallery() {
                 }
             </div>
 
-            <div className='flex mt-[1vw] gap-[3.75vw] pl-[0.625vw] pr-[7.5vw] max-md:mt-[2.6vw] max-md:pl-0 max-md:pr-0'>
+            <div className='flex gap-[3.75vw] pl-[0.625vw] pr-[7.5vw] py-[1vw] bg-maunhat max-md:pl-0 max-md:pr-0 max-md:py-[2.6vw]'>
                 <Swiper
                     loop={true}
                     onSwiper={setThumbsSwiper}
@@ -266,7 +266,7 @@ export default function ImageGallery() {
                         </svg>
                     </div>
                     <div className='absolute top-[50%] right-2 translate-y-[-50%] cursor-pointer z-[5]' onClick={nextSlideHandler}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                         </svg>
                     </div>
