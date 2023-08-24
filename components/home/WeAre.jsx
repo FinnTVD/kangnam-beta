@@ -156,7 +156,7 @@ export default function WeAre({ lang }) {
                 </div>
             </section>
             <Image
-                className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] max-md:!h-[164vh]'
+                className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] w-screen max-md:!h-[164vh]'
                 src={src}
                 alt='linear'
                 priority
