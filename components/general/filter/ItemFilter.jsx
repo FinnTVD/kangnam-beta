@@ -28,6 +28,7 @@ export default function ItemFilter({ setIndexFilter, indexFilter, index, e, isMo
             <FilterCheckBox
                 className={indexFilter !== index && 'hidden'}
                 setIndexFilter={setIndexFilter}
+                index={index}
             />
         </li>
     )

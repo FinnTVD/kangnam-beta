@@ -117,7 +117,7 @@ export default function Map() {
             .setPopup(
                 new vietmapgl.Popup().setHTML(`
 				<div style="display:flex;gap:0 20px;">
-					<img style="width:100px;height:100px;display:block" src="https://photo.rever.vn/v3/get/rvR1jXdw7H0hP421kBZHxZro33WX_3LZEyj3pgB0y3eVYSXsR5xV8shiKcRkasMNZU_1F3KsfBEMu185ODjL0WSg==/750x500/image.jpg" alt="">
+					<img style="width:100px;height:100px;display:block" src="https://photo.rever.vn/v3/get/rvR1jXdw7H0hP421kBZHxZro33WX_3LZEyj3pgB0y3eVYSXsR5xV8shiKcRkasMNZU_1F3KsfBEMu185ODjL0WSg==/750x500/image.jpg" alt="map">
 					<div style="width:200px">
 						<h2>Căn hộ 2pn 75m2 HQC Hóc Môn hướng Đông Nam, diện tích 75m²</h2>
 						<p>Nguyễn Thị Sóc, Hóc Môn</p>

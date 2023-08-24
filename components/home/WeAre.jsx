@@ -1,6 +1,7 @@
 import { handleCheckParamsLanguage } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
+import src from '../../public/images/linear.png'
 
 export default function WeAre({ lang }) {
     return (
@@ -155,11 +156,10 @@ export default function WeAre({ lang }) {
                 </div>
             </section>
             <Image
-                className='object-cover z-[3] !h-[200vh] max-md:!h-[164vh]'
-                src='/images/linear.png'
+                className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] max-md:!h-[164vh]'
+                src={src}
                 alt='linear'
-                sizes='100vw'
-                fill
+                priority
             />
         </>
     )

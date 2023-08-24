@@ -7,14 +7,31 @@ import BoxFilter from '../general/filter/BoxFilter'
 import BoxSort from './BoxSort'
 import { useMediaQuery } from 'react-responsive'
 import BtnShowMap from './BtnShowMap'
+import ReactPaginate from 'react-paginate'
+import classes from '../news/ListNewsStyles.module.css'
+import { useState } from 'react'
+import useSWR from 'swr'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const listProject = new Array(16).fill(0)
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function ListProject() {
+    const [pageNumber, setPageNumber] = useState(1)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
     const [show, Element] = useToggleShowMap()
+    const { data, error, isLoading } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/property?page=${pageNumber}&take=${show ? 12 : 16}`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
 
     return (
         <section
@@ -67,58 +84,68 @@ export default function ListProject() {
                             show ? 'grid-cols-3' : 'grid-cols-4'
                         } grid-rows-4 gap-x-[1.25vw] gap-y-[1.87vw] max-md:grid-cols-1 max-md:gap-x-0 max-md:gap-y-[5.86vw]`}
                     >
-                        {listProject &&
-                            listProject.slice(0, show ? 12 : 16).map((e, index) => (
+                        {isLoading &&
+                            listProject?.slice(0, show ? 12 : 16).map((e, index) => (
+                                <div
+                                    className='w-full'
+                                    key={index}
+                                >
+                                    <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
+                                        <Skeleton height={'13.75vw'} />
+                                    </div>
+                                    <div className='pt-[1.13vw]'>
+                                        <Skeleton height={'1.4375vw'} />
+                                    </div>
+                                    <div className='mt-[0.63vw] flex flex-col gap-y-[0.5vw]'>
+                                        <div>
+                                            <Skeleton height={'1vw'} />
+                                        </div>
+                                        <div>
+                                            <Skeleton height={'1vw'} />
+                                        </div>
+                                        <div>
+                                            <Skeleton height={'1vw'} />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        {data &&
+                            data?.data?.map((e, index) => (
                                 <Link
-                                    href={'/'}
+                                    href={'/danh-sach-du-an/' + e?.translations[0]?.slug}
                                     className='w-full'
                                     key={index}
                                 >
                                     <div className='relative w-full h-[13.75vw] max-md:h-[73.87vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.69vw]'>
                                         <Image
                                             className='z-0 object-cover'
-                                            src='/images/itemproject.jpg'
-                                            alt='itemProject'
+                                            src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
+                                            alt={e?.translations[0]?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150'>
-                                            Thuê
+                                            {e?.propertyCategory?.name}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
-                                        <h6 className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px]'>
-                                            Nhà phố Thủy Nguyên full nội thất
+                                        <h6
+                                            title={e?.translations[0]?.name}
+                                            className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1'
+                                        >
+                                            {e?.translations[0]?.name}
                                         </h6>
-                                        <div className='flex items-center'>
-                                            <svg
-                                                xmlns='http://www.w3.org/2000/svg'
-                                                width='15'
-                                                height='14'
-                                                viewBox='0 0 15 14'
-                                                fill='none'
-                                                className='max-md:w-[5vw] max-md:h-[5vw]'
-                                            >
-                                                <path
-                                                    d='M7.33422 6.8551C7.6153 6.8551 7.8555 6.75502 8.0548 6.55485C8.25411 6.35468 8.35376 6.11406 8.35376 5.83297C8.35376 5.55189 8.25367 5.3117 8.0535 5.11239C7.85334 4.91309 7.61272 4.81344 7.33163 4.81344C7.05055 4.81344 6.81036 4.91352 6.61105 5.11369C6.41175 5.31385 6.31209 5.55448 6.31209 5.83557C6.31209 6.11665 6.41218 6.35684 6.61235 6.55614C6.81251 6.75545 7.05314 6.8551 7.33422 6.8551ZM7.33293 11.6822C8.62598 10.5058 9.58119 9.43878 10.1986 8.48114C10.8159 7.52351 11.1246 6.6801 11.1246 5.95094C11.1246 4.80576 10.7586 3.86807 10.0266 3.13788C9.29459 2.4077 8.3967 2.0426 7.33293 2.0426C6.26915 2.0426 5.37126 2.4077 4.63927 3.13788C3.90726 3.86807 3.54126 4.80576 3.54126 5.95094C3.54126 6.6801 3.85723 7.52351 4.48918 8.48114C5.12112 9.43878 6.06904 10.5058 7.33293 11.6822ZM7.33293 12.8343C5.76765 11.5023 4.59855 10.2652 3.82563 9.12281C3.05272 7.98045 2.66626 6.92316 2.66626 5.95094C2.66626 4.4926 3.13536 3.3308 4.07355 2.46552C5.01175 1.60024 6.0982 1.1676 7.33293 1.1676C8.56765 1.1676 9.65411 1.60024 10.5923 2.46552C11.5305 3.3308 11.9996 4.4926 11.9996 5.95094C11.9996 6.92316 11.6131 7.98045 10.8402 9.12281C10.0673 10.2652 8.8982 11.5023 7.33293 12.8343Z'
-                                                    fill='#926B4F'
-                                                />
-                                            </svg>
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150'>
-                                                Diện tích:
-                                            </span>
-                                            <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                52m2 (10m x 5.2m)
-                                            </span>
-                                        </div>
-                                        <div className='flex items-center my-[0.5vw] max-md:my-[2.69vw]'>
+                                        <div
+                                            title={e?.address?.label}
+                                            className='flex items-center'
+                                        >
                                             <svg
                                                 xmlns='http://www.w3.org/2000/svg'
                                                 width='14'
                                                 height='14'
                                                 viewBox='0 0 14 14'
                                                 fill='none'
-                                                className='max-md:w-[5vw] max-md:h-[5vw]'
+                                                className='max-md:w-[5vw] max-md:h-[5vw] md:w-[1.7vw] h-auto'
                                             >
                                                 <g clipPath='url(#clip0_546_2319)'>
                                                     <path
@@ -136,11 +163,36 @@ export default function ListProject() {
                                                     </clipPath>
                                                 </defs>
                                             </svg>
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150'>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150 whitespace-nowrap'>
                                                 Địa chỉ:
                                             </span>
+                                            <span className='capitalize text-den title14-400-150 title-mb16-400-150 line-clamp-1'>
+                                                {e?.address?.locality +
+                                                    ', ' +
+                                                    e?.address?.county +
+                                                    ', ' +
+                                                    e?.address?.region}
+                                            </span>
+                                        </div>
+                                        <div className='flex items-center my-[0.5vw] max-md:my-[2.69vw]'>
+                                            <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='15'
+                                                height='14'
+                                                viewBox='0 0 15 14'
+                                                fill='none'
+                                                className='max-md:w-[5vw] max-md:h-[5vw]'
+                                            >
+                                                <path
+                                                    d='M7.33422 6.8551C7.6153 6.8551 7.8555 6.75502 8.0548 6.55485C8.25411 6.35468 8.35376 6.11406 8.35376 5.83297C8.35376 5.55189 8.25367 5.3117 8.0535 5.11239C7.85334 4.91309 7.61272 4.81344 7.33163 4.81344C7.05055 4.81344 6.81036 4.91352 6.61105 5.11369C6.41175 5.31385 6.31209 5.55448 6.31209 5.83557C6.31209 6.11665 6.41218 6.35684 6.61235 6.55614C6.81251 6.75545 7.05314 6.8551 7.33422 6.8551ZM7.33293 11.6822C8.62598 10.5058 9.58119 9.43878 10.1986 8.48114C10.8159 7.52351 11.1246 6.6801 11.1246 5.95094C11.1246 4.80576 10.7586 3.86807 10.0266 3.13788C9.29459 2.4077 8.3967 2.0426 7.33293 2.0426C6.26915 2.0426 5.37126 2.4077 4.63927 3.13788C3.90726 3.86807 3.54126 4.80576 3.54126 5.95094C3.54126 6.6801 3.85723 7.52351 4.48918 8.48114C5.12112 9.43878 6.06904 10.5058 7.33293 11.6822ZM7.33293 12.8343C5.76765 11.5023 4.59855 10.2652 3.82563 9.12281C3.05272 7.98045 2.66626 6.92316 2.66626 5.95094C2.66626 4.4926 3.13536 3.3308 4.07355 2.46552C5.01175 1.60024 6.0982 1.1676 7.33293 1.1676C8.56765 1.1676 9.65411 1.60024 10.5923 2.46552C11.5305 3.3308 11.9996 4.4926 11.9996 5.95094C11.9996 6.92316 11.6131 7.98045 10.8402 9.12281C10.0673 10.2652 8.8982 11.5023 7.33293 12.8343Z'
+                                                    fill='#926B4F'
+                                                />
+                                            </svg>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150'>
+                                                Diện tích:
+                                            </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                Tôn Đức Thắng, Hà Nội
+                                                {e?.translations[0]?.size + ' m²'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -161,26 +213,41 @@ export default function ListProject() {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                25 tỷ
+                                                {e?.translations[0]?.price}
                                             </span>
                                         </div>
                                     </div>
                                 </Link>
                             ))}
                     </div>
+                    <div className='mb-[6.26vw]'>
+                        <ReactPaginate
+                            breakLabel='...'
+                            nextLabel='Next'
+                            onPageChange={(e) => setPageNumber(e.selected + 1)}
+                            pageRangeDisplayed={5}
+                            pageCount={Math.ceil(data?.meta?.pageCount) || 1}
+                            renderOnZeroPageCount={null}
+                            previousLabel='Previous'
+                            forcePage={pageNumber - 1}
+                            pageClassName={classes.page}
+                            activeClassName={classes.selected}
+                            className={classes['news-pagination']}
+                        />
+                    </div>
                 </div>
                 {!isMobile && (
                     <>
                         <div
                             className={`${
-                                !show && 'hidden'
-                            } w-[35.3125vw] fixed top-[5.57vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
+                                !show ? 'hidden' : ''
+                            } w-[35.3125vw] z-[99999] fixed top-[5.57vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                                 <Map />
                             </div>
                         </div>
-                        <div className={`${!show && 'hidden'} w-[35.3125vw]`}></div>
+                        <div className={`${!show ? 'hidden' : ''} w-[35.3125vw]`}></div>
                     </>
                 )}
             </div>

@@ -30,6 +30,7 @@ module.exports = {
                 currency: '0px 2px 40px 0px rgba(0, 0, 0, 0.08)',
                 feature: '0px 2px 40px rgba(65, 42, 26, 0.10)',
                 input: '6px 0px 39.76811599731445px 0px rgba(0, 0, 0, 0.05)',
+                newsDetailMb: '4.874141693115234px 0px 32.305904388427734px 0px rgba(0, 0, 0, 0.05)',
                 submit: '0px 0px 30px 0px rgba(206, 126, 64, 0.36)',
                 viewProject: '0px 0px 1.5px 5px rgb(214,162,121,0.1)',
                 boxFilter: '0px 0px 26px 0px rgba(0, 0, 0, 0.08)',

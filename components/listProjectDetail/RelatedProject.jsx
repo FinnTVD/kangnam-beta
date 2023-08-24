@@ -3,10 +3,10 @@ import SlideRelatedNews from './SlideRelatedProject'
 
 export default function RelatedProject() {
     return (
-        <section className='w-screen h-fit px-120 py-[6.25vw] px-0'>
+        <section className='w-screen h-fit px-120 py-[6.25vw] max-md:px-0'>
             <div className='w-full'>
                 <div className='flex items-start justify-between mb-[1.87vw] max-md:mb-[6.4vw]'>
-                    <div>
+                    <div className='px-mb10 max-md:w-full'>
                         <span className='text-logo sub-title title-mb12-700-150 max-md:tracking-[0.6px]'>
                             Danh sách dự án
                         </span>
@@ -15,6 +15,7 @@ export default function RelatedProject() {
                         </h2>
                     </div>
                     <Button
+                        href='/danh-sach-du-an'
                         className='border-none bg-logo max-md:hidden'
                         span='text-white'
                         stroke='white'
