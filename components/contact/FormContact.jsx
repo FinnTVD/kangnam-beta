@@ -254,7 +254,7 @@ export default function FormContact() {
                                             <Image
                                                 className='w-[1.5vw] h-[1.5vw] max-md:w-[5vw] max-md:h-[5vw] object-contain brightness-0 invert'
                                                 src={e.src}
-                                                alt={e.title}
+                                                alt={e.title || 'icon social media'}
                                                 width={36}
                                                 height={36}
                                             />

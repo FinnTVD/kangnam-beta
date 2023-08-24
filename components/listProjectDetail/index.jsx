@@ -11,12 +11,8 @@ export default function IndexProjectDetail({ lang }) {
                 <NavBarV2 lang={lang} />
             </header>
             <main>
+                <ImageGallery />
                 <ContentDetail />
-                <section className='mt-[7.57vw]'>
-                    <h1 className='text-center text-den title60'>Chi tiet du an</h1>
-                </section>
-                <ImageGallery></ImageGallery>
-                <RelatedProject />
                 <CommentFB />
                 <RelatedProject />
             </main>

@@ -58,7 +58,7 @@ export default function Prominent() {
                     swiperRef.current = swiper
                 }}
                 modules={[EffectFade, Autoplay]}
-                className='absolute top-0 left-0 z-0 w-full h-full mySwiper'
+                className='!absolute top-0 left-0 z-0 w-full h-full mySwiper'
             >
                 {arrProminent &&
                     arrProminent?.map((e, index) => (

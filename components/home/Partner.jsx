@@ -64,20 +64,16 @@ export default function Partner({ t }) {
             ></div>
             <div className='absolute opacity-30 left-0 top-0 w-full h-full z-[-1] bg-lightgray'></div>
             <Image
-                src='/images/partner-bg.jpg'
-                fill
                 className='absolute top-0 left-0 w-full h-full object-cover z-[-2]'
-            ></Image>
+                src='/images/partner-bg.jpg'
+                sizes='100vw'
+                fill
+            />
 
             <div
                 className='absolute top-0 left-0 bg-opacity-30 h-full w-full z-[-1]'
                 style={{ background: 'linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 53.44%, #FFF 100%)' }}
             ></div>
-            <Image
-                src='/images/partner-bg.jpg'
-                fill
-                className='absolute top-0 left-0 w-full h-full object-cover z-[-2] opacity-30'
-            ></Image>
 
             <div className='flex items-end justify-between'>
                 <div className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'>
@@ -124,12 +120,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[55%] h-[45%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            src={item}
+                                                            alt={`partner${index}`}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -141,12 +138,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[55%] h-[45%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            src={item}
+                                                            alt={`partner${index}`}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -158,12 +156,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[55%] h-[45%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            src={item}
+                                                            alt={`partner${index}`}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -175,12 +174,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[55%] h-[45%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            src={item}
+                                                            alt={`partner${index}`}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -192,12 +192,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[55%] h-[45%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            src={item}
+                                                            alt={`partner${index}`}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -211,12 +212,13 @@ export default function Partner({ t }) {
                                                 >
                                                     <div className='w-[67.7%] h-[56.6%] relative'>
                                                         <Image
-                                                            alt={`partner${index}`}
-                                                            fill
-                                                            src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
+                                                            alt={`partner${index}`}
+                                                            src={item}
+                                                            sizes='50vw'
+                                                            fill
+                                                            quality={100}
+                                                        />
                                                     </div>
                                                 </div>
                                             )
@@ -229,6 +231,7 @@ export default function Partner({ t }) {
                                                     <div className='w-[67.7%] h-[56.6%] relative'>
                                                         <Image
                                                             alt={`partner${index}`}
+                                                            sizes='50vw'
                                                             fill
                                                             src={item}
                                                             quality={100}
@@ -246,6 +249,7 @@ export default function Partner({ t }) {
                                                     <div className='w-[67.7%] h-[56.6%] relative'>
                                                         <Image
                                                             alt={`partner${index}`}
+                                                            sizes='50vw'
                                                             fill
                                                             src={item}
                                                             quality={100}
@@ -263,6 +267,7 @@ export default function Partner({ t }) {
                                                     <div className='w-[67.7%] h-[56.6%] relative'>
                                                         <Image
                                                             alt={`partner${index}`}
+                                                            sizes='50vw'
                                                             fill
                                                             src={item}
                                                             quality={100}
@@ -280,6 +285,7 @@ export default function Partner({ t }) {
                                                     <div className='w-[67.7%] h-[56.6%] relative'>
                                                         <Image
                                                             alt={`partner${index}`}
+                                                            sizes='50vw'
                                                             fill
                                                             src={item}
                                                             quality={100}

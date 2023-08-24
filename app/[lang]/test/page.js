@@ -20,7 +20,6 @@ export default function TestPage() {
     })
 
     const onSubmit = (e) => {
-        console.log('🚀 ~ file: Form2.jsx:38 ~ onSubmit ~ e:', e)
         setData(e)
     }
     return (

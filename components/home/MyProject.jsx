@@ -31,7 +31,6 @@ export default function MyProject({ lang }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
-    console.log('🚀 ~ file: MyProject.jsx:25 ~ MyProject ~ data:', data)
     if (isMobile) return <></>
 
     return (
@@ -80,7 +79,7 @@ export default function MyProject({ lang }) {
                                 </div>
                             ))}
                         {data &&
-                            data?.data?.slice(0, show ? 6 : 8).map((e, index) => (
+                            data?.data?.map((e, index) => (
                                 <Link
                                     href={'/danh-sach-du-an/' + e?.translations[0]?.slug}
                                     className='w-full'
@@ -90,22 +89,25 @@ export default function MyProject({ lang }) {
                                         <Image
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
-                                            alt={e?.title}
+                                            alt={e?.translations[0]?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
-                                            {e?.propertyCategory?.name || <Skeleton />}
+                                            {e?.propertyCategory?.name}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
-                                            title={e?.title}
+                                            title={e?.translations[0]?.name}
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {e?.title}
+                                            {e?.translations[0]?.name}
                                         </h6>
-                                        <div className='flex items-center'>
+                                        <div
+                                            title={e?.address?.label}
+                                            className='flex items-center'
+                                        >
                                             <svg
                                                 xmlns='http://www.w3.org/2000/svg'
                                                 width='14'
@@ -133,10 +135,7 @@ export default function MyProject({ lang }) {
                                             <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150 whitespace-nowrap'>
                                                 Địa chỉ:
                                             </span>
-                                            <span
-                                                title={e?.address?.label}
-                                                className='capitalize text-den title14-400-150 line-clamp-1'
-                                            >
+                                            <span className='capitalize text-den title14-400-150 line-clamp-1'>
                                                 {e?.address?.locality +
                                                     ', ' +
                                                     e?.address?.county +
@@ -189,19 +188,23 @@ export default function MyProject({ lang }) {
                             ))}
                     </div>
                     <div className='flex justify-between items-center mt-[2.69vw]'>
-                        {data?(<ReactPaginate
-                            breakLabel='...'
-                            nextLabel='Next'
-                            onPageChange={(e) => setPageNumber(e.selected + 1)}
-                            pageRangeDisplayed={5}
-                            pageCount={Math.ceil(data?.meta?.pageCount) || 1}
-                            renderOnZeroPageCount={null}
-                            previousLabel='Previous'
-                            forcePage={pageNumber - 1}
-                            pageClassName={classes.page}
-                            activeClassName={classes.selected}
-                            className={classes['news-pagination']}
-                        />):<div></div>}
+                        {data ? (
+                            <ReactPaginate
+                                breakLabel='...'
+                                nextLabel='Next'
+                                onPageChange={(e) => setPageNumber(e.selected + 1)}
+                                pageRangeDisplayed={5}
+                                pageCount={Math.ceil(data?.meta?.pageCount) || 1}
+                                renderOnZeroPageCount={null}
+                                previousLabel='Previous'
+                                forcePage={pageNumber - 1}
+                                pageClassName={classes.page}
+                                activeClassName={classes.selected}
+                                className={classes['news-pagination']}
+                            />
+                        ) : (
+                            <div></div>
+                        )}
                         <Button
                             href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
                             className='border-none bg-logo'
