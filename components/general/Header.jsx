@@ -49,25 +49,12 @@ export default function Header({ lang, t }) {
         }
     }
 
-    //trang danh sach du an khong co header
-    // if (pathName.indexOf('/danh-sach-du-an') !== -1 || pathName.indexOf('/dang-tin') !== -1) {
-    //     return
-    // }
-
     return (
         <header
             id='header'
             className='relative w-screen h-fit'
         >
             <div className={`h-screen max-md:h-[64vh] relative w-full`}>
-                {/* <Image
-                    className='z-0 object-cover'
-                    src='/images/bg-header.jpg'
-                    alt='bg-header'
-                    sizes='100vw'
-                    quality={100}
-                    fill
-                /> */}
                 <SlideBanner />
                 <Image
                     className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
@@ -109,7 +96,7 @@ export default function Header({ lang, t }) {
 
                 <div
                     onClick={handleScrollDown}
-                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
+                    className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none cursor-pointer'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
