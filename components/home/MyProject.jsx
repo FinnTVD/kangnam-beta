@@ -7,27 +7,59 @@ import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
 import BoxFilter from '../general/filter/BoxFilter'
-import { handleCheckParamsLanguage } from '@/utils'
+import { handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
+import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
+import useStore from '@/app/[lang]/(store)/store'
 
 const arrItem = new Array(8).fill(0)
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 export default function MyProject({ lang }) {
+    const propertyAreaType = useStore((state) => state.propertyAreaType)
+    const propertyType = useStore((state) => state.propertyType)
+    const propertyCategory = useStore((state) => state.propertyCategory)
+
+    const propertyCategoryParams = propertyCategory.reduce(
+        (accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue,
+        '',
+    )
+    const propertyTypeParams = propertyType.reduce(
+        (accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue,
+        '',
+    )
+    const propertyAreaTypeParams = propertyAreaType.reduce(
+        (accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue,
+        '',
+    )
+
     const [pageNumber, setPageNumber] = useState(1)
     const [show, Element] = useToggleShowMap()
     const { data, error, isLoading } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/property?page=${pageNumber}&take=${show ? 6 : 8}`,
-        fetcher,
+        `${process.env.NEXT_PUBLIC_API}/property?page=${propertyAreaTypeParams ? 1 : pageNumber}&take=${show ? 6 : 8}${
+            propertyCategoryParams ? propertyCategoryParams : ''
+        }${propertyTypeParams ? propertyTypeParams : ''}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
+        (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
         },
     )
+
+    useEffect(() => {
+        mutate(
+            `${process.env.NEXT_PUBLIC_API}/property?page=${propertyAreaTypeParams ? 1 : pageNumber}&take=${
+                show ? 6 : 8
+            }${propertyCategoryParams ? propertyCategoryParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                propertyAreaTypeParams ? propertyAreaTypeParams : ''
+            }`,
+        )
+    }, [lang])
+
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
@@ -36,7 +68,7 @@ export default function MyProject({ lang }) {
     return (
         <section
             id='boxMap'
-            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[999999] relative bg-white'
+            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[999999] relative bg-white max-md:hidden'
         >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
@@ -81,7 +113,7 @@ export default function MyProject({ lang }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={'/danh-sach-du-an/' + e?.translations[0]?.slug}
+                                    href={'/danh-sach-du-an/' + e?.translation?.slug}
                                     className='w-full'
                                     key={index}
                                 >
@@ -89,7 +121,7 @@ export default function MyProject({ lang }) {
                                         <Image
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
-                                            alt={e?.translations[0]?.name || 'thumbnail project'}
+                                            alt={e?.translation?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
@@ -99,10 +131,10 @@ export default function MyProject({ lang }) {
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
-                                            title={e?.translations[0]?.name}
+                                            title={e?.translation?.name}
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {e?.translations[0]?.name}
+                                            {e?.translation?.name}
                                         </h6>
                                         <div
                                             title={e?.address?.label}
@@ -160,7 +192,7 @@ export default function MyProject({ lang }) {
                                                 Diện tích:
                                             </span>
                                             <span className=' text-den title14-400-150'>
-                                                {e?.translations[0]?.size + ' m²'}
+                                                {e?.translation?.size + ' m²'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -180,7 +212,7 @@ export default function MyProject({ lang }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
-                                                {e?.translations[0]?.price}
+                                                {e?.translation?.price}
                                             </span>
                                         </div>
                                     </div>
@@ -220,7 +252,7 @@ export default function MyProject({ lang }) {
                         !show && 'hidden'
                     } rounded-tl-[0.5vw] !w-[35.5625vw] !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    <Map />
+                    <Map listMarkers={data?.data} />
                 </div>
             </div>
         </section>

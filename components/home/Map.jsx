@@ -13,7 +13,7 @@ const arrMarker = [
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
-export default function Map() {
+export default function Map({ listMarkers }) {
     const mapRef = useRef()
     const [levelZoom, setLevelZoom] = useState(6)
     const [listMarker, setListMarker] = useState(null)
@@ -29,6 +29,10 @@ export default function Map() {
         // addMarker3();
         addGeojsonLine()
     }, [])
+
+    useEffect(() => {
+        listMarkers && listMarkers?.forEach((e, index) => addMarkerItem(e))
+    }, [listMarkers])
 
     useEffect(() => {
         value !== null && callAPI()
@@ -116,12 +120,36 @@ export default function Map() {
             .setLngLat([105.78234226958115, 20.920931262916405])
             .setPopup(
                 new vietmapgl.Popup().setHTML(`
+    			<div style="display:flex;gap:0 20px;">
+    				<img style="width:100px;height:100px;display:block" src="https://photo.rever.vn/v3/get/rvR1jXdw7H0hP421kBZHxZro33WX_3LZEyj3pgB0y3eVYSXsR5xV8shiKcRkasMNZU_1F3KsfBEMu185ODjL0WSg==/750x500/image.jpg" alt="map">
+    				<div style="width:200px">
+    					<h2>Căn hộ 2pn 75m2 HQC Hóc Môn hướng Đông Nam, diện tích 75m²</h2>
+    					<p>Nguyễn Thị Sóc, Hóc Môn</p>
+    					<h6>1.3 ty</h6>
+    				</div>
+    			</div>
+    			`),
+            )
+            .addTo(mapRef.current)
+    }
+    const addMarkerItem = (data) => {
+        const divElement = document.createElement('div')
+        divElement.textContent = '1'
+        divElement.setAttribute('data-marker', `${data?.translation?.id}`)
+        // Set options
+        new vietmapgl.Marker({
+            // scale: [0.5], //size of marker
+            element: divElement,
+        })
+            .setLngLat([...data?.address?.geometryCoordinates])
+            .setPopup(
+                new vietmapgl.Popup().setHTML(`
 				<div style="display:flex;gap:0 20px;">
-					<img style="width:100px;height:100px;display:block" src="https://photo.rever.vn/v3/get/rvR1jXdw7H0hP421kBZHxZro33WX_3LZEyj3pgB0y3eVYSXsR5xV8shiKcRkasMNZU_1F3KsfBEMu185ODjL0WSg==/750x500/image.jpg" alt="map">
+					<img style="width:100px;height:100px;display:block" src="${data?.firstImage}" alt="${data?.translation?.name}">
 					<div style="width:200px">
-						<h2>Căn hộ 2pn 75m2 HQC Hóc Môn hướng Đông Nam, diện tích 75m²</h2>
-						<p>Nguyễn Thị Sóc, Hóc Môn</p>
-						<h6>1.3 ty</h6>
+						<h2>${data?.translation?.name}</h2>
+						<p title="${data?.address?.label}">${data?.address?.label}</p>
+						<h6>${data?.translation?.price}</h6>
 					</div>
 				</div>
 				`),
@@ -255,6 +283,28 @@ export default function Map() {
                 >
                     back
                 </div>
+                <div
+                    // style={{
+                    //     position: 'absolute',
+                    //     top: 0,
+                    //     left: '100px',
+                    //     width: '50px',
+                    //     height: '50px',
+                    //     zIndex: 1000,
+                    //     display: 'flex',
+                    //     justifyContent: 'center',
+                    //     alignItems: 'center',
+                    //     backgroundColor: 'black',
+                    //     color: 'white',
+                    // }}
+                    className='absolute top-0 z-[1000] left-[100px] w-[50px] h-[50px] flex justify-center items-center bg-green-400 text-white'
+                    onClick={() => {
+                        const { lng, lat } = mapRef?.current?.getCenter()
+                        console.log(lng, lat)
+                    }}
+                >
+                    center
+                </div>
 
                 <input
                     ref={searchRef}
@@ -262,7 +312,7 @@ export default function Map() {
                         display: 'flex',
                         position: 'absolute',
                         top: 0,
-                        left: '100px',
+                        left: '150px',
                         background: 'pink',
                         width: '500px',
                         height: '50px',

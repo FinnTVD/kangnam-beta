@@ -22,4 +22,19 @@ const formatDateTime = (dateTimeString) => {
 
     return `${day}/${month}/${year} - ${hours}:${minutes}`
 }
-export { handleCheckParamsLanguage, formatDateTime }
+
+const handleCheckLangCode = (lang) => {
+    switch (lang) {
+        case 'vn':
+            return 'vi_VN'
+        case 'en':
+            return 'en_US'
+        case 'kr':
+            return 'ko_KR'
+        case 'ch':
+            return 'zh_CN'
+        default:
+            return 'vi_VN'
+    }
+}
+export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode }

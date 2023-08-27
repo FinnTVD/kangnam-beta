@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Button from '../general/Button'
+import FormNamePhone from './FormNamePhone'
 
 export default function ContentDetail() {
     return (
@@ -319,7 +319,7 @@ export default function ContentDetail() {
                             </li>
                         </ul>
                     </div>
-                    <div className='mt-[2.56vw] max-md:mt-[6.4vw]'>
+                    <div className='mt-[2.56vw] max-md:mt-[6.4vw] relative'>
                         <h2 className='title32-800-130 title-mb20-700-130 max-md:-tracking-[0.6px] text-den -tracking-[0.96px] mb-[1vw] max-md:mb-[4vw]'>
                             Nội dung dự án
                         </h2>
@@ -343,6 +343,10 @@ export default function ContentDetail() {
                             iure debitis, ipsa ipsum vel harum dolores totam iste cumque amet earum doloribus
                             consectetur fuga quos? Perspiciatis, cum natus.
                         </p>
+                        <div
+                            id='imgMapDetail'
+                            className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0'
+                        ></div>
                     </div>
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>
                         <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px]'>
@@ -613,36 +617,7 @@ export default function ContentDetail() {
                             </li>
                         </ul>
                     </div>
-                    <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw]'>
-                        <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw]'>
-                            Thông tin Liên hệ
-                        </h3>
-                        <form
-                            action=''
-                            className='w-full'
-                        >
-                            <input
-                                className='py-[0.78vw] px-[1vw] placeholder:text-14pc placeholder:font-normal placeholder:leading-normal placeholder:opacity-70 placeholder:text-den outline-none rounded-[10vw] border border-solid border-den03 w-full title14-400-150 text-den'
-                                type='text'
-                                placeholder='Họ và tên *'
-                            />
-                            <input
-                                className='py-[0.78vw] px-[1vw] placeholder:text-14pc placeholder:font-normal placeholder:leading-normal placeholder:opacity-70 placeholder:text-den mt-[1vw] mb-[1.5vw] outline-none rounded-[10vw] border border-solid border-den03 w-full title14-400-150 text-den'
-                                type='text'
-                                placeholder='Số điện thoại *'
-                            />
-
-                            <div className='flex justify-center'>
-                                <Button
-                                    className='border-none bg-logo shadow-submit'
-                                    span='text-white'
-                                    stroke='white'
-                                >
-                                    Gửi thông tin
-                                </Button>
-                            </div>
-                        </form>
-                    </div>
+                    <FormNamePhone />
                 </div>
             </div>
         </section>

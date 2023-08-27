@@ -40,6 +40,7 @@ export default function Button({
                 </Link>
             ) : (
                 <button
+                    type='button'
                     className={`${className} ${
                         full ? 'w-full justify-center' : ''
                     } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw] group`}
