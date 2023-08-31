@@ -246,7 +246,7 @@ export default function ImageGallery() {
                 )}
             </div>
 
-            <div className='flex mt-[1vw] gap-[3.75vw] pl-[0.625vw] pr-[7.5vw] max-md:mt-[2.6vw] max-md:pl-0 max-md:pr-0'>
+            <div className='flex gap-[3.75vw] pl-[0.625vw] pr-[7.5vw] py-[1vw] bg-maunhat max-md:pl-0 max-md:pr-0 max-md:py-[2.6vw]'>
                 <Swiper
                     loop={true}
                     onSwiper={setThumbsSwiper}
