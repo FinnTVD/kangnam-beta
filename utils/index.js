@@ -1,6 +1,6 @@
 const handleCheckParamsLanguage = (lang, href) => {
     switch (lang) {
-        case 'vn':
+        case 'vi':
             return href
         case 'en':
             return '/en' + href
@@ -25,7 +25,7 @@ const formatDateTime = (dateTimeString) => {
 
 const handleCheckLangCode = (lang) => {
     switch (lang) {
-        case 'vn':
+        case 'vi':
             return 'vi_VN'
         case 'en':
             return 'en_US'
@@ -37,4 +37,5 @@ const handleCheckLangCode = (lang) => {
             return 'vi_VN'
     }
 }
+
 export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode }

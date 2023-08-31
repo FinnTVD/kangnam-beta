@@ -75,7 +75,7 @@ export default function BoxCurrency({ className = '' }) {
                 <div className='flex items-center'>
                     <Image
                         src='/images/vn.png'
-                        alt='vn'
+                        alt='vi'
                         width={16}
                         height={16}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'

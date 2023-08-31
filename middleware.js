@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-const defaultLocale = 'vn'
+const defaultLocale = 'vi'
 let locales = ['en', 'kr', 'ch']
 
 export function middleware(request) {

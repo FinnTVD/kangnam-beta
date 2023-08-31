@@ -2,12 +2,9 @@
 import Image from 'next/image'
 import NavBar from './NavBar'
 import { useEffect, useState } from 'react'
-import FeatureHome from '../home/FeatureHome'
-import SearchHome from '../home/SearchHome'
 import { usePathname } from 'next/navigation'
 import ContentPageOther from './ContentPageOther'
 import classes from './headerV2.module.css'
-import SlideBanner from '../home/SlideBanner'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
@@ -49,11 +46,6 @@ export default function HeaderV2({ lang, t }) {
             })
         }
     }
-
-    // //trang danh sach du an khong co header
-    // if (pathName.indexOf('/danh-sach-du-an') !== -1 || pathName.indexOf('/dang-tin') !== -1) {
-    //     return
-    // }
 
     return (
         <header
@@ -100,6 +92,7 @@ export default function HeaderV2({ lang, t }) {
                     <NavBarFixed
                         isHome={isHome}
                         lang={lang}
+                        t={t}
                     />
                 ) : (
                     <NavBarFixedRes

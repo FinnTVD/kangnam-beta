@@ -1,14 +1,24 @@
 import { create } from 'zustand'
 const useStore = create((set, get) => ({
-    language: 'vn',
+    language: 'vi',
     propertyAreaType: [],
     propertyCategory: [],
     propertyType: [],
+    socialMedia: false,
+    slugDetailProject: null,
+    setSlugDetailProject: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                slugDetailProject: data,
+            }
+        })
+    },
     setLanguage: (lang) => {
         set((state) => {
             return {
                 ...state,
-                lang,
+                language: lang,
             }
         })
     },

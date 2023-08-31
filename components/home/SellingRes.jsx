@@ -9,6 +9,7 @@ import BoxFilter from '../general/filter/BoxFilter'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../general/Button'
+const arrFilter = ['Loại hình', 'Địa điểm', 'Hình thức']
 
 const arrSelling = new Array(20).fill(0)
 
@@ -27,7 +28,7 @@ export default function SellingRes() {
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw]'>
-                <BoxFilter />
+                <BoxFilter arrFilter={arrFilter}/>
             </div>
             <Swiper
                 slidesPerView={'auto'}

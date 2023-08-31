@@ -2,18 +2,18 @@
 
 import { useEffect, useState, useRef } from 'react'
 import useDebounce from '@/hooks/useDebounce'
-import mapJson from './map.json'
-
+import useSWR from 'swr'
+import { mutate } from 'swr'
+// import mapJson from './map.json'
 const arrMarker = [
     [105.9151962942141, 20.920931262916405],
     [106.9151962942141, 21.920931262916405],
-    [104.9151962942141, 19.920931262916405],
     [106.9151962942141, 20.920931262916405],
 ]
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
-
-export default function Map({ listMarkers }) {
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+export default function Map() {
     const mapRef = useRef()
     const [levelZoom, setLevelZoom] = useState(6)
     const [listMarker, setListMarker] = useState(null)
@@ -21,6 +21,12 @@ export default function Map({ listMarkers }) {
     const [data, setData] = useState(null)
     const debounceValue = useDebounce(value, 500)
     const searchRef = useRef()
+
+    const {
+        data: dataMap,
+        error: errorMap,
+        isLoading: isLoadingMap,
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address`, fetcher)
 
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef.current) return
@@ -31,8 +37,8 @@ export default function Map({ listMarkers }) {
     }, [])
 
     useEffect(() => {
-        listMarkers && listMarkers?.forEach((e, index) => addMarkerItem(e))
-    }, [listMarkers])
+        dataMap && dataMap?.forEach((e) => addMarkerItem(e))
+    }, [dataMap])
 
     useEffect(() => {
         value !== null && callAPI()
@@ -78,15 +84,24 @@ export default function Map({ listMarkers }) {
     const addMarker = () => {
         //add marker to map
         const listMarkerNew = []
-        arrMarker.forEach((e) => {
+        arrMarker.forEach((e, index) => {
             const markerNew = new vietmapgl.Marker({
                 color: 'red',
             })
                 .setLngLat([e[0], e[1]])
-                .setPopup(new vietmapgl.Popup().setHTML('<h1>Hello World!</h1>'))
+                .setPopup(new vietmapgl.Popup().setHTML(`<h1>Hello World! ${index}</h1>`))
                 .addTo(mapRef.current)
             listMarkerNew.push(markerNew)
         })
+        const llb = new vietmapgl.LngLatBounds([...arrMarker])
+        const center = llb.getCenter()
+        const markerNewCenter = new vietmapgl.Marker({
+            color: 'red',
+        })
+            .setLngLat([center?.lng, center?.lat])
+            .setPopup(new vietmapgl.Popup().setHTML(`<h1>center</h1>`))
+            .addTo(mapRef.current)
+        listMarkerNew.push(markerNewCenter)
         setListMarker(listMarkerNew)
     }
 
@@ -132,27 +147,34 @@ export default function Map({ listMarkers }) {
             )
             .addTo(mapRef.current)
     }
-    const addMarkerItem = (data) => {
+
+    const handleFetchDataPopup = async (id) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${id}`)
+        const { data } = await res.json()
+    }
+    const addMarkerItem = async (data) => {
         const divElement = document.createElement('div')
-        divElement.textContent = '1'
-        divElement.setAttribute('data-marker', `${data?.translation?.id}`)
+        divElement.textContent = data?.count
+        divElement.setAttribute('data-marker', `${data?.city_id}`)
         // Set options
-        new vietmapgl.Marker({
+        const marker = new vietmapgl.Marker({
             // scale: [0.5], //size of marker
             element: divElement,
         })
-            .setLngLat([...data?.address?.geometryCoordinates])
+            .setLngLat([data?.city_lng, data?.city_lat])
             .setPopup(
                 new vietmapgl.Popup().setHTML(`
-				<div style="display:flex;gap:0 20px;">
-					<img style="width:100px;height:100px;display:block" src="${data?.firstImage}" alt="${data?.translation?.name}">
-					<div style="width:200px">
-						<h2>${data?.translation?.name}</h2>
-						<p title="${data?.address?.label}">${data?.address?.label}</p>
-						<h6>${data?.translation?.price}</h6>
-					</div>
-				</div>
-				`),
+                <div style="display:flex;gap:0 20px;">
+                    <img style="width:100px;height:100px;display:block;object-fit:cover" src="${
+                        data?.firstImage ? data?.firstImage : '/images/itemproject.jpg'
+                    }" alt="${data?.translation?.name}" />
+                    <div style="width:200px">
+                        <h2>${data?.translation?.name}</h2>
+                        <p title="${data?.address?.label}">${data?.address?.label}</p>
+                        <h6>${data?.translation?.price}</h6>
+                    </div>
+                </div>
+                `),
             )
             .addTo(mapRef.current)
     }
@@ -208,11 +230,11 @@ export default function Map({ listMarkers }) {
         })
     }
 
-    const flyMap = (lat = 104.78234226958115, lon = 22.920931262916405, zoom = 9) => {
-        mapRef.current.flyTo({
-            center: [lat, lon],
+    const flyMap = (lng = 104.78234226958115, lat = 22.920931262916405, zoom = 9) => {
+        mapRef?.current.flyTo({
+            center: [lng, lat],
             zoom: zoom,
-            speed: 0.2,
+            speed: 1.2,
             curve: 1,
             easing(t) {
                 return t
@@ -245,26 +267,19 @@ export default function Map({ listMarkers }) {
                 }}
                 id='map'
             >
-                <div
-                    id='fly'
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '50px',
-                        height: '50px',
-                        zIndex: 1000,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'blue',
-                        color: 'white',
-                    }}
-                    onClick={() => flyMap()}
-                >
-                    fly
+                <div className='absolute top-0 left-0 flex w-fit h-fit z-[1000] bg-white'>
+                    {dataMap &&
+                        dataMap?.map((e) => (
+                            <div
+                                className='w-[50px] h-[50px] flex justify-center items-center text-den'
+                                onClick={() => flyMap(e?.city_lng, e?.city_lat)}
+                            >
+                                {e?.city_id === '12' ? 'HCM' : 'DN'}
+                            </div>
+                        ))}
                 </div>
-                <div
+
+                {/* <div
                     id='back'
                     style={{
                         position: 'absolute',
@@ -282,21 +297,8 @@ export default function Map({ listMarkers }) {
                     onClick={backDefault}
                 >
                     back
-                </div>
-                <div
-                    // style={{
-                    //     position: 'absolute',
-                    //     top: 0,
-                    //     left: '100px',
-                    //     width: '50px',
-                    //     height: '50px',
-                    //     zIndex: 1000,
-                    //     display: 'flex',
-                    //     justifyContent: 'center',
-                    //     alignItems: 'center',
-                    //     backgroundColor: 'black',
-                    //     color: 'white',
-                    // }}
+                </div> */}
+                {/* <div
                     className='absolute top-0 z-[1000] left-[100px] w-[50px] h-[50px] flex justify-center items-center bg-green-400 text-white'
                     onClick={() => {
                         const { lng, lat } = mapRef?.current?.getCenter()
@@ -304,9 +306,9 @@ export default function Map({ listMarkers }) {
                     }}
                 >
                     center
-                </div>
+                </div> */}
 
-                <input
+                {/* <input
                     ref={searchRef}
                     style={{
                         display: 'flex',
@@ -350,7 +352,7 @@ export default function Map({ listMarkers }) {
                             </li>
                         ))}
                     {!data && <li>Tim kiem gan day</li>}
-                </ul>
+                </ul>*/}
             </div>
         </>
     )

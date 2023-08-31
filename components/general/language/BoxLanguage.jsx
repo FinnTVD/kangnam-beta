@@ -6,7 +6,7 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 
 const handleCheckCountry = (locale) => {
     switch (locale) {
-        case 'vn':
+        case 'vi':
             return 'Việt Nam'
         case 'en':
             return 'English'
@@ -21,7 +21,7 @@ const handleCheckCountry = (locale) => {
 
 const handleCheckIcon = (locale) => {
     switch (locale) {
-        case 'vn':
+        case 'vi':
             return '/images/vn.svg'
         case 'en':
             return '/images/english.svg'

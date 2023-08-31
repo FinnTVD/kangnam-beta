@@ -9,28 +9,87 @@ import { useMediaQuery } from 'react-responsive'
 import BtnShowMap from './BtnShowMap'
 import ReactPaginate from 'react-paginate'
 import classes from '../news/ListNewsStyles.module.css'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import useStore from '@/app/[lang]/(store)/store'
+import { mutate } from 'swr'
+const arrFilter = ['Loại hình', 'Địa điểm']
 
-const listProject = new Array(16).fill(0)
+const listProject = new Array(24).fill(0)
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const handleCheckParams = (pathName) => {
+    //1c3afd45-f351-407a-96ab-0d8812047b8b - mua
+    //804e0d3c-dc23-4382-88e4-9f511341c24a - thue
+    //d47b243b-6593-4098-b99e-56151d31add8 - ban
+    if (pathName?.includes('mua')) return '&propertyCategoryIds=1c3afd45-f351-407a-96ab-0d8812047b8b'
+    if (pathName?.includes('thue')) return '&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a'
+    if (pathName?.includes('ban-lai')) return '&propertyCategoryIds=d47b243b-6593-4098-b99e-56151d31add8'
+    return ''
+}
 
-export default function ListProject() {
-    const [pageNumber, setPageNumber] = useState(1)
+export default function ListProject({ lang, t }) {
+    const pathName = usePathname()
+    // const [pageNumber, setPageNumber] = useState(1)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+    const propertyAreaType = useStore((state) => state.propertyAreaType)
+    const propertyType = useStore((state) => state.propertyType)
+    const setPropertyCategory = useStore((state) => state.setPropertyCategory)
+    const setPropertyType = useStore((state) => state.setPropertyType)
+    const setPropertyAreaType = useStore((state) => state.setPropertyAreaType)
+
+    const propertyTypeParams = propertyType.reduce(
+        (accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue,
+        '',
+    )
+    const propertyAreaTypeParams = propertyAreaType.reduce(
+        (accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue,
+        '',
+    )
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const page = searchParams.get('page')
     const [show, Element] = useToggleShowMap()
     const { data, error, isLoading } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/property?page=${pageNumber}&take=${show ? 12 : 16}`,
+        process.env.NEXT_PUBLIC_API +
+            `/property?page=${page ? page : 1}&take=24${handleCheckParams(pathName)}${
+                propertyTypeParams ? propertyTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
         fetcher,
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
         },
+    )
+
+    useEffect(() => {
+        setPropertyCategory([])
+        setPropertyType([])
+        setPropertyAreaType([])
+    }, [])
+
+    useEffect(() => {
+        mutate(
+            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${handleCheckParams(pathName)}${
+                propertyTypeParams ? propertyTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
+        )
+    }, [lang])
+
+    const createQueryString = useCallback(
+        (name, value) => {
+            const params = new URLSearchParams(searchParams)
+            params.set(name, value)
+
+            return params.toString()
+        },
+        [searchParams],
     )
 
     return (
@@ -62,7 +121,7 @@ export default function ListProject() {
                             )}
                         </div>
                         <div className='pl-[7.5vw] pr-[1.25vw] max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none'>
-                            <BoxFilter />
+                            <BoxFilter arrFilter={arrFilter} />
                         </div>
                         <article className='pl-[7.5vw] pr-[1.25vw] px-mb10'>
                             <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
@@ -71,8 +130,7 @@ export default function ListProject() {
                                         Hiển thị
                                     </span>
                                     <span className='inline-block text-den title16-600-150 title-mb16-600-150'>
-                                        {show ? 12 : 16} trong số 50{' '}
-                                        <span className='max-md:hidden'>nhà đất xác thực</span>
+                                        24 trong số 50 <span className='max-md:hidden'>nhà đất xác thực</span>
                                     </span>
                                 </div>
                                 <BoxSort />
@@ -81,11 +139,11 @@ export default function ListProject() {
                     </div>
                     <div
                         className={`grid ${
-                            show ? 'grid-cols-3' : 'grid-cols-4'
-                        } grid-rows-4 gap-x-[1.25vw] gap-y-[1.87vw] max-md:grid-cols-1 max-md:gap-x-0 max-md:gap-y-[5.86vw]`}
+                            show ? 'grid-cols-3 grid-rows-[8]' : 'grid-cols-4 grid-rows-6'
+                        } grid-row gap-x-[1.25vw] gap-y-[1.87vw] max-md:grid-cols-1 max-md:gap-x-0 max-md:gap-y-[5.86vw]`}
                     >
                         {isLoading &&
-                            listProject?.slice(0, show ? 12 : 16).map((e, index) => (
+                            listProject?.map((e, index) => (
                                 <div
                                     className='w-full'
                                     key={index}
@@ -112,7 +170,7 @@ export default function ListProject() {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={'/danh-sach-du-an/' + e?.translations[0]?.slug}
+                                    href={e?.propertyCategory?.alias + '/' + e?.translations[0]?.slug}
                                     className='w-full'
                                     key={index}
                                 >
@@ -224,12 +282,15 @@ export default function ListProject() {
                         <ReactPaginate
                             breakLabel='...'
                             nextLabel='Next'
-                            onPageChange={(e) => setPageNumber(e.selected + 1)}
+                            onPageChange={(e) => {
+                                router.push(pathname + '?' + createQueryString('page', e.selected + 1))
+                                window?.scrollTo({ top: 0, behavior: 'smooth' })
+                            }}
                             pageRangeDisplayed={5}
                             pageCount={Math.ceil(data?.meta?.pageCount) || 1}
                             renderOnZeroPageCount={null}
                             previousLabel='Previous'
-                            forcePage={pageNumber - 1}
+                            forcePage={page ? page - 1 : 0}
                             pageClassName={classes.page}
                             activeClassName={classes.selected}
                             className={classes['news-pagination']}

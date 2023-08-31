@@ -13,8 +13,8 @@ export default function PostDetail({ t, post }) {
     const linkedinShareHandler = () => {
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlRef.current}`)
     }
+
     useEffect(() => {
-        console.log(window.location.href)
         urlRef.current = window.location.href
         if (window.FB) {
             window.FB.XFBML.parse()

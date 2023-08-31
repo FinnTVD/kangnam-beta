@@ -1,4 +1,13 @@
-export default function CommentFB() {
+'use client'
+
+import { useEffect } from 'react'
+
+export default function CommentFB({ data }) {
+    useEffect(() => {
+        if (window.FB) {
+            window.FB.XFBML.parse()
+        }
+    }, [])
     return (
         <section
             id='box-comment'
@@ -8,7 +17,7 @@ export default function CommentFB() {
             <div id='fb-root'></div>
             <div
                 className='fb-comments'
-                data-href='https://developers.facebook.com/docs/plugins/comments#configurator'
+                data-href={`${process.env.NEXT_PUBLIC_DOMAIN}${data?.id}`}
                 data-width='800'
                 data-numposts='5'
             ></div>
