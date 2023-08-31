@@ -10,7 +10,7 @@ const dictionaries = {
 export const getDictionary = async (locale) => {
     switch (locale) {
         case 'vi':
-            return dictionaries.vn()
+            return dictionaries.vi()
         case 'en':
             return dictionaries.en()
         case 'kr':
@@ -18,6 +18,6 @@ export const getDictionary = async (locale) => {
         case 'ch':
             return dictionaries.ch()
         default:
-            return dictionaries.vn()
+            return dictionaries.vi()
     }
 }
