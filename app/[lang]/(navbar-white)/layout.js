@@ -7,7 +7,7 @@ export const metadata = {
     description: 'KangNam by OkHub',
 }
 export async function generateStaticParams() {
-    return [{ lang: 'vn' }, { lang: 'en' }, { lang: 'kr' }, { lang: 'ch' }]
+    return [{ lang:'vi' }, { lang: 'en' }, { lang: 'kr' }, { lang: 'ch' }]
 }
 
 export default async function RootLayout({ children, params }) {

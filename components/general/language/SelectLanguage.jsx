@@ -3,13 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
+import { useEffect } from 'react'
 
 const arrLanguage = [
     {
         id: 1,
         title: 'Việt Nam',
         src: '/images/vn.svg',
-        code: 'vn',
+        code: 'vi',
     },
     {
         id: 2,
@@ -33,18 +34,24 @@ const arrLanguage = [
 
 export default function SelectLanguage({ className, lang }) {
     const setLanguage = useStore((state) => state.setLanguage)
+    const slugDetailProject = useStore((state) => state.slugDetailProject)
+
     const pathName = usePathname()
+
     const handleHref = (lg) => {
         const path = pathName.split('/')
         const pathNew = path
-            ?.slice(lang === 'vn' ? 1 : 2)
+            ?.slice(lang === 'vi' ? 1 : 2)
             .reduce((accumulator, currentValue) => accumulator + '/' + currentValue, '')
-        if (lg === 'vn') {
-            return pathNew
-        } else {
-            return '/' + lg + pathNew
+        console.log('🚀 ~ file: SelectLanguage.jsx:44 ~ handleHref ~ pathNew:', pathNew)
+        if (slugDetailProject) {
+            const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lg))
+            return '/' + lg === 'vi' ? '' : lg + '/' + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
         }
+        if (lang === 'vi') return '/' + lg === 'vi' ? '' : lg + pathNew
+        return '/' + lg === 'vi' ? '' : lg
     }
+
     const handleChangeLanguage = (code) => {
         setLanguage(code)
     }

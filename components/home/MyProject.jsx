@@ -10,11 +10,13 @@ import BoxFilter from '../general/filter/BoxFilter'
 import { handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import useStore from '@/app/[lang]/(store)/store'
+
+const arrFilter = ['Loại hình', 'Địa điểm', 'Hình thức']
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -35,11 +37,11 @@ export default function MyProject({ lang }) {
         (accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue,
         '',
     )
-
     const [pageNumber, setPageNumber] = useState(1)
+    const projectsRef = useRef()
     const [show, Element] = useToggleShowMap()
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=${propertyAreaTypeParams ? 1 : pageNumber}&take=${show ? 6 : 8}${
+        `${process.env.NEXT_PUBLIC_API}/property?page=${pageNumber}&take=${show ? 6 : 8}${
             propertyCategoryParams ? propertyCategoryParams : ''
         }${propertyTypeParams ? propertyTypeParams : ''}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -52,11 +54,9 @@ export default function MyProject({ lang }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${propertyAreaTypeParams ? 1 : pageNumber}&take=${
-                show ? 6 : 8
-            }${propertyCategoryParams ? propertyCategoryParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }`,
+            `${process.env.NEXT_PUBLIC_API}/property?page=${pageNumber}&take=${show ? 6 : 8}${
+                propertyCategoryParams ? propertyCategoryParams : ''
+            }${propertyTypeParams ? propertyTypeParams : ''}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
         )
     }, [lang])
 
@@ -67,12 +67,13 @@ export default function MyProject({ lang }) {
 
     return (
         <section
+            ref={projectsRef}
             id='boxMap'
             className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[999999] relative bg-white max-md:hidden'
         >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
-                <BoxFilter />
+                <BoxFilter arrFilter={arrFilter} />
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <span className='text-black title16-400-150 h-fit'>Hiển thị bản đồ</span>
                     <div>{Element}</div>
@@ -113,7 +114,7 @@ export default function MyProject({ lang }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={'/danh-sach-du-an/' + e?.translation?.slug}
+                                    href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
                                     className='w-full'
                                     key={index}
                                 >
@@ -146,7 +147,7 @@ export default function MyProject({ lang }) {
                                                 height='14'
                                                 viewBox='0 0 14 14'
                                                 fill='none'
-                                                className='md:w-[1.7vw] h-auto'
+                                                className='md:w-[1.1vw] h-auto'
                                             >
                                                 <g clipPath='url(#clip0_546_2319)'>
                                                     <path
@@ -224,7 +225,10 @@ export default function MyProject({ lang }) {
                             <ReactPaginate
                                 breakLabel='...'
                                 nextLabel='Next'
-                                onPageChange={(e) => setPageNumber(e.selected + 1)}
+                                onPageChange={(e) => {
+                                    setPageNumber(e.selected + 1)
+                                    projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })
+                                }}
                                 pageRangeDisplayed={5}
                                 pageCount={Math.ceil(data?.meta?.pageCount) || 1}
                                 renderOnZeroPageCount={null}
@@ -252,7 +256,7 @@ export default function MyProject({ lang }) {
                         !show && 'hidden'
                     } rounded-tl-[0.5vw] !w-[35.5625vw] !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    <Map listMarkers={data?.data} />
+                    <Map />
                 </div>
             </div>
         </section>

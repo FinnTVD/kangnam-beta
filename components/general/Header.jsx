@@ -84,6 +84,8 @@ export default function Header({ lang, t }) {
                     <NavBarFixed
                         isHome={isHome}
                         lang={lang}
+                        t={t}
+                        isMobile={isMobile}
                     />
                 ) : (
                     <NavBarFixedRes

@@ -3,23 +3,23 @@
         "listNav": [
             {
                 "id": 1,
-                "title": "Về chúng tôi",
-                "href": "/gioi-thieu"
+                "title": "Mua",
+                "href": "/buy"
             },
             {
                 "id": 2,
-                "title": "Dự án",
-                "href": "/danh-sach-du-an"
+                "title": "Thuê",
+                "href": "/hire"
             },
             {
                 "id": 3,
                 "title": "Bán lại",
-                "href": "/danh-sach-du-an"
+                "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Thỏa thuận & Pháp lí",
-                "href": "/thoa-thuan-va-phap-li"
+                "title": "Dự án",
+                "href": "/projects"
             },
             {
                 "id": 5,
@@ -28,8 +28,24 @@
             },
             {
                 "id": 6,
-                "title": "Liên hệ",
-                "href": "/lien-he"
+                "title": "Về KangNam",
+                "branch": [
+                    {
+                        "id": 1,
+                        "title": "Giới thiệu",
+                        "href": "/gioi-thieu"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Liên hệ",
+                        "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & Pháp lí",
+                        "href": "/thoa-thuan-va-phap-li"
+                    }
+                ]
             }
         ],
         "button": "Kí gửi nhà đất",
@@ -80,7 +96,7 @@
         "title": "Tin tức liên quan",
         "button": "Xem tất cả"
     },
-    "newsLatestButton":{
+    "newsLatestButton": {
         "title": "Chi tiết"
     }
 }

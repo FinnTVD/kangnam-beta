@@ -42,12 +42,12 @@ export default function NavBarFixedRes({ isHome = true, lang, t }) {
         <div
             id='nav'
             ref={navRef}
-            className={`pl-[4vw] pr-[2.5vw] fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999]`}
+            className={`pl-[4vw] pr-[2.5vw] fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999] md:hidden`}
             style={{ boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px' }}
         >
             <div className='flex justify-between items-center my-[2.67vw]'>
                 <Link
-                    href={`/${lang !== 'vn' ? lang : ''}`}
+                    href={`/${lang !== 'vi' ? lang : ''}`}
                     className='relative w-[8.267vw] h-[11.467vw] block'
                 >
                     <Image

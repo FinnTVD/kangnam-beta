@@ -8,11 +8,13 @@ export default function NavBarRes({ lang, t, isHome }) {
     const [isOpen, setIsOpen] = useState(false)
     return (
         <nav
-            className={`${isHome ? '' : 'border-b border-solid border-white02'} absolute top-0 left-0 z-[9999] w-full`}
+            className={`${
+                isHome ? '' : 'border-b border-solid border-white02'
+            } absolute top-0 left-0 z-[9999] w-full md:hidden`}
         >
             <div className='pb-[0.53vw] pt-[2.13vw] flex justify-between pl-[7.2vw] pr-[2.8vw] items-center'>
                 <Link
-                    href={`/${lang !== 'vn' ? lang : ''}`}
+                    href={`/${lang !== 'vi' ? lang : ''}`}
                     className='relative w-[10.67vw] h-[14.13vw] block'
                 >
                     <Image
