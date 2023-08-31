@@ -3,33 +3,49 @@
         "listNav": [
             {
                 "id": 1,
-                "title": "About us",
-                "href": "/gioi-thieu"
+                "title": "Buy",
+                "href": "/buy"
             },
             {
                 "id": 2,
-                "title": "Project",
-                "href": "/danh-sach-du-an"
+                "title": "Hire",
+                "href": "/hire"
             },
             {
                 "id": 3,
                 "title": "Resale",
-                "href": "/danh-sach-du-an"
+                "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Agreement & Legal",
-                "href": "/thoa-thuan-va-phap-li"
+                "title": "Project",
+                "href": "/projects"
             },
             {
                 "id": 5,
-                "title": "News",
+                "title": "Tin tức",
                 "href": "/danh-sach-tin-tuc"
             },
             {
                 "id": 6,
-                "title": "Contact",
-                "href": "/lien-he"
+                "title": "Về KangNam",
+                "branch": [
+                    {
+                        "id": 1,
+                        "title": "Giới thiệu",
+                        "href": "/gioi-thieu"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Contact",
+                        "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & Pháp lí",
+                        "href": "/thoa-thuan-va-phap-li"
+                    }
+                ]
             }
         ],
         "button": "Land deposit",
@@ -39,48 +55,48 @@
         "sell": "Desired selling price",
         "hire": "Desired rent"
     },
-    "homepageNews":{
+    "homepageNews": {
         "subtitle": "News synthesis",
         "title": "Latest news",
         "button": "See all"
     },
-    "homepagePartners":{
+    "homepagePartners": {
         "subtitle": "Partners synthesis",
         "title": "Our partners",
         "button": "Become our partner"
     },
-    "footer":{
+    "footer": {
         "title1": "Contact",
         "title2": "Navigation",
         "title3": "Services"
     },
-    "aboutUsStory":{
+    "aboutUsStory": {
         "subtitle": "Brand story",
         "title": "Introduction"
     },
-    "aboutUsTeams":{
+    "aboutUsTeams": {
         "subtitle": "Our teams",
         "title": "Kangnam specialists"
     },
-    "aboutUsContact":{
+    "aboutUsContact": {
         "subtitle": "Contact",
         "title": "Our office",
         "button": "Contact now"
     },
-    "newsList":{
-        "subtitle" : "News about",
+    "newsList": {
+        "subtitle": "News about",
         "title": "News"
     },
-    "newsDetailDes":{
+    "newsDetailDes": {
         "byAuthor": "By",
         "share": "Share on it"
     },
-    "newsDetailRelated":{
+    "newsDetailRelated": {
         "subtitle": "News synthesis",
         "title": "Related news",
         "button": "See all"
     },
-    "newsLatestButton":{
+    "newsLatestButton": {
         "title": "View"
     }
 }
