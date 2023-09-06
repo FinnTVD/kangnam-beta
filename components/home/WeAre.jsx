@@ -92,7 +92,7 @@ export default function WeAre({ lang }) {
                                     </svg>
                                 </Link>
                                 <Link
-                                    href={handleCheckParamsLanguage(lang, '/gioi-thieu')}
+                                    href={handleCheckParamsLanguage(lang, '/about-us')}
                                     className='flex justify-center gap-x-[0.5vw] items-center group relative rounded-[10vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden title-mb14-400-150 max-md:py-[4vw] max-md:px-[6.67vw] max-md:box-content max-md:gap-x-[3.2vw]'
                                 >
                                     Về chúng tôi

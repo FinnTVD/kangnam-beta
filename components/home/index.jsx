@@ -31,7 +31,7 @@ export default function IndexHome({ lang, t }) {
                 </div>
                 <Prominent />
                 <Partner t={t} />
-                <LatestNews t={t} />
+                <LatestNews t={t} lang={lang}/>
             </main>
         </>
     )

@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive'
 
 export default function Partner({ t }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
+    const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const imgArray = [
         '/images/partnerlogo.jpg',
         '/images/partnerlogo.jpg',
@@ -77,18 +78,18 @@ export default function Partner({ t }) {
 
             <div className='flex items-end justify-between'>
                 <div className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'>
-                    <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px]'>
+                    <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px] max-lg:title-tl16'>
                         {t.homepagePartners.subtitle}
                     </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case'>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case max-lg:title-tl56'>
                         {t.homepagePartners.title}
                     </h2>
                 </div>
-                {!isMobile && (
+                {!isTablet && (
                     <Button
                         stroke='white'
                         href={'/'}
-                        className='bg-logo text-white border-none'
+                        className='bg-logo text-white border-none max-lg:title-tl16'
                     >
                         {t.homepagePartners.button}
                     </Button>
@@ -302,13 +303,13 @@ export default function Partner({ t }) {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            {isMobile && (
+            {isTablet && (
                 <Button
                     stroke='white'
                     href={'/'}
-                    span='text-14mb font-normal tracking-[-0.28px]'
-                    icon='w-auto h-[4.5vw]'
-                    className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'
+                    span='max-md:text-14mb font-normal tracking-[-0.28px] max-lg:text-16tl'
+                    icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]'
+                    className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw]'
                 >
                     {t.homepagePartners.button}
                 </Button>
