@@ -480,7 +480,7 @@
         }
     }
 
-    @media screen and (max-width: 1023px) {  
+    @media screen and (max-width: 1023px) {
         .title-tl60 {
             @apply text-60tl;
         }
@@ -492,27 +492,27 @@
         .title-tl45 {
             @apply text-45tl;
         }
-    
+
         .title-tl32 {
             @apply text-32tl;
         }
-    
+
         .title-tl28 {
             @apply text-28tl;
         }
-    
+
         .title-tl24 {
             @apply text-24tl;
         }
-    
+
         .title-tl20 {
             @apply text-20tl;
         }
-    
+
         .title-tl18 {
             @apply text-18tl;
         }
-    
+
         .title-tl16 {
             @apply text-16tl;
         }
@@ -520,15 +520,15 @@
         .title-tl15 {
             @apply text-15tl;
         }
-    
+
         .title-tl14 {
             @apply text-14tl;
         }
-    
+
         .title-tl12 {
             @apply text-12tl;
         }
-    
+
         .title-tl10 {
             @apply text-10tl;
         }

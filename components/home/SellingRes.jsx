@@ -5,11 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Grid } from 'swiper/modules'
 
 import { useMediaQuery } from 'react-responsive'
-// import BoxFilter from '../general/filter/BoxFilter'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../general/Button'
-const arrFilter = ['Loại hình', 'Địa điểm', 'Hình thức']
 
 const arrSelling = new Array(20).fill(0)
 
