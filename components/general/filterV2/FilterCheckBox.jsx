@@ -11,7 +11,6 @@ export default function FilterCheckBox({ className, setIndexFilter, index, isOut
     const setPropertyAreaType = useStore((state) => state.setPropertyAreaType)
     const setPropertyType = useStore((state) => state.setPropertyType)
     const setPropertyCategory = useStore((state) => state.setPropertyCategory)
-    const [isReset, setIsReset] = useState(false)
 
     const [area, setArea] = useState([])
     const [type, setType] = useState([])
@@ -157,14 +156,26 @@ export default function FilterCheckBox({ className, setIndexFilter, index, isOut
                                 e={e}
                                 handleCheckbox={handleCheckbox}
                                 isOutSide={isOutSide}
-                                isReset={isReset}
                             />
                         ))}
                 </div>
             </div>
             <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw] max-md:py-[5.6vw] max-md:px-[6.4vw]'>
                 <span
-                    onClick={() => setIsReset(!isReset)}
+                    onClick={() => {
+                        if (index === 0) {
+                            setPropertyType([])
+                            setType([])
+                        }
+                        if (index === 1) {
+                            setPropertyAreaType([])
+                            setArea([])
+                        }
+                        if (index === 2) {
+                            setPropertyCategory([])
+                            setCategory([])
+                        }
+                    }}
                     className='cursor-pointer title14-400-150 text-den title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw]'
                 >
                     Đặt lại

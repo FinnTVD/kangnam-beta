@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Deposit from './Deposit'
-import MyProject from './MyProject'
 import ProjectProminent from './ProjectProminent'
 import Prominent from './Prominent'
 import Partner from './Partner'
@@ -8,13 +7,14 @@ import LatestNews from './LatestNews'
 import WeAre from './WeAre'
 import SellingRes from './SellingRes'
 import Hiring from './Hiring'
+import MyProjectV2 from './MyProjectV2'
 
 export default function IndexHome({ lang, t }) {
     return (
         <>
             <main>
                 <WeAre lang={lang} />
-                {/* <MyProject lang={lang} />  */}
+                <MyProjectV2 lang={lang} />
                 <SellingRes />
                 <Hiring />
                 <div className='w-full max-md:flex max-md:flex-col-reverse'>

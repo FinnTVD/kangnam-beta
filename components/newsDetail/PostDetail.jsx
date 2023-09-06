@@ -16,7 +16,6 @@ export default function PostDetail({ t, post, translation }) {
     }
     // const translation = post?.translations?.find((item) => item.languageCode===langCode)
     useEffect(() => {
-        console.log(window.location.href)
         urlRef.current = window.location.href
         if (window.FB) {
             window.FB.XFBML.parse()

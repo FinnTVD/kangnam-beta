@@ -54,7 +54,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
         >
             <div className='flex justify-between p-[2.67vw] items-center border-b border-solid border-white01'>
                 <Link
-                    href={`/${lang !== 'vn' ? lang : ''}`}
+                    href={`/${lang !== 'vi' ? lang : ''}`}
                     className='relative w-[8.267vw] h-[11.467vw] block'
                 >
                     <Image
@@ -172,7 +172,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
             <span className='block text-white px-mb10 title-mb13-600-150'>(+84) 254 3526981</span>
             <div className='px-mb10 mt-[4.27vw]'>
                 <Link
-                    href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                    href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
                     className='bg-nu h-fit w-full text-center block rounded-[6.25vw] py-[3.82vw] text-white title-mb13-600-150'
                 >
                     {t?.Navbar?.button}

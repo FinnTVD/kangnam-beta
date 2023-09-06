@@ -6,7 +6,7 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 
 const handleCheckCountry = (locale) => {
     switch (locale) {
-        case 'vn':
+        case 'vi':
             return 'Việt Nam'
         case 'en':
             return 'English'
@@ -21,7 +21,7 @@ const handleCheckCountry = (locale) => {
 
 const handleCheckIcon = (locale) => {
     switch (locale) {
-        case 'vn':
+        case 'vi':
             return '/images/vn.svg'
         case 'en':
             return '/images/english.svg'
@@ -46,18 +46,18 @@ export default function BoxLanguage({ type = '', lang, t }) {
                 setIsShowLanguage(!isShowLanguage)
             }}
             ref={sideRef}
-            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-md:w-fit'
+            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-lg:w-[12vw] max-md:w-fit'
         >
             <span
                 className={`${
                     type === 'ds' ? 'text-den opacity-60' : 'text-white'
-                } title-language-active -tracking-[0.6px] title12-600-150 title-mb12-400-150 max-md:opacity-60 max-md:-tracking-[0.6px] max-md:whitespace-nowrap`}
+                } title-language-active -tracking-[0.6px] title12-600-150 title-mb12-400-150 max-md:opacity-60 max-md:-tracking-[0.6px] max-lg:whitespace-nowrap title-tl8-400-130`}
             >
                 {t?.Navbar?.title}
             </span>
             <div className='flex items-center gap-x-[0.5vw] max-md:gap-x-[2.4vw] select-none cursor-pointer'>
                 <Image
-                    className='w-[1.75vw] h-[1.125vw] object-cover rounded-[3px] max-md:w-[6.13vw] max-md:h-[3.73vw]'
+                    className='w-[1.75vw] h-[1.125vw] max-lg:w-[2.5vw] max-lg:h-[1.875vw] object-cover rounded-[3px] max-md:w-[6.13vw] max-md:h-[3.73vw]'
                     src={handleCheckIcon(lang)}
                     alt='country'
                     width={28}
@@ -67,7 +67,7 @@ export default function BoxLanguage({ type = '', lang, t }) {
                 <span
                     className={`${
                         type === 'ds' ? 'text-den' : 'text-white'
-                    } title-language-active title16-600-150 -tracking-[0.48px] title-mb14-600-150 max-md:-tracking-[0.42px] max-md:whitespace-nowrap`}
+                    } title-language-active title16-600-150 -tracking-[0.48px] title-tl12-600-150 title-mb14-600-150 max-md:-tracking-[0.42px] max-md:whitespace-nowrap`}
                 >
                     {handleCheckCountry(lang)}
                 </span>
@@ -77,7 +77,7 @@ export default function BoxLanguage({ type = '', lang, t }) {
                     height='7'
                     viewBox='0 0 11 7'
                     fill='none'
-                    className={`${isShowLanguage ? 'rotate-180' : ''} transition-all duration-200 ease-linear`}
+                    className={`${isShowLanguage ? 'scale-[-1]' : ''} transition-all duration-100 ease-linear`}
                 >
                     <path
                         d='M5.6 6.5L10.4497 0.5H0.750258L5.6 6.5Z'

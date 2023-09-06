@@ -37,14 +37,13 @@ const listNav = [
     },
 ]
 
-export default function NavBarFixed({ isHome = true, lang }) {
+export default function NavBarFixed({ isHome = true, lang, t, isMobile }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const [prevScrollY, setPrevScrollY] = useState(0)
     const navRef = useRef()
     useEffect(() => {
         if (typeof window === 'undefined') return
         document.addEventListener('scroll', handleScroll)
-        // window.scrollTo(0, 0);
         return () => {
             document.removeEventListener('scroll', handleScroll)
         }
@@ -74,7 +73,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
             ref={navRef}
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
-            } fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999]`}
+            } fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999] max-md:hidden`}
             style={{ boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px' }}
         >
             <div className={`${isHome ? 'gap-x-[3.12vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
@@ -83,7 +82,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                     className='justify-start flex-1 py-[0.5vw]'
                 >
                     <Link
-                        href={`/${lang !== 'vn' ? lang : ''}`}
+                        href={`/${lang !== 'vi' ? lang : ''}`}
                         className='relative w-[3.5vw] h-[4.75vw] block'
                     >
                         <Image
@@ -138,7 +137,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                         </div>
                     </div>
                 )}
-                <ul
+                {/* <ul
                     id='list-title-nav'
                     className={`${isHome ? 'gap-x-[2.5vw]' : 'gap-x-[1.88vw]'} flex`}
                 >
@@ -147,16 +146,120 @@ export default function NavBarFixed({ isHome = true, lang }) {
                             <li key={index}>
                                 <Link
                                     className='block text-den title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
+                                    href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
                                 >
                                     {e.title}
                                 </Link>
                             </li>
                         ))}
-                </ul>
-                <div className='flex gap-x-[1.5vw] items-center'>
+                </ul> */}
+                {!isMobile ? (
+                    <div className='flex gap-x-[3.13vw] items-center'>
+                        <ul className='flex'>
+                            {t &&
+                                t?.Navbar?.listNav?.map((e, index) => (
+                                    <li
+                                        key={index}
+                                        className={`relative select-none group`}
+                                    >
+                                        {e?.branch ? (
+                                            <>
+                                                <div className='px-[0.94vw] py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]'>
+                                                    <span className='whitespace-nowrap title16-600-130 inline-block text-den'>
+                                                        {e?.title}
+                                                    </span>
+                                                    <svg
+                                                        xmlns='http://www.w3.org/2000/svg'
+                                                        fill='none'
+                                                        viewBox='0 0 24 24'
+                                                        strokeWidth='3'
+                                                        stroke='#444'
+                                                        className='w-[1.2vw] h-[1.2vw]'
+                                                    >
+                                                        <path
+                                                            strokeLinecap='round'
+                                                            strokeLinejoin='round'
+                                                            d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <div
+                                                    style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
+                                                    className='absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white w-fit  after:block after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
+                                                >
+                                                    <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
+                                                        {e?.title}
+                                                    </span>
+                                                    <ul className='w-full'>
+                                                        {e?.branch?.map((item) => (
+                                                            <li
+                                                                key={item?.id}
+                                                                className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                            >
+                                                                <Link
+                                                                    className='whitespace-nowrap title16-400-130 text-den block w-full h-full'
+                                                                    href={`${
+                                                                        lang !== 'vi'
+                                                                            ? '/' + lang + item?.href
+                                                                            : item?.href
+                                                                    }`}
+                                                                >
+                                                                    {item?.title}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                scroll={false}
+                                                className='px-[0.94vw] py-[1vw] block title16-600-130 text-den whitespace-nowrap'
+                                                href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
+                                            >
+                                                {e.title}
+                                            </Link>
+                                        )}
+                                    </li>
+                                ))}
+                        </ul>
+                        <div className='flex gap-x-[1.25vw] items-center'>
+                            <Link
+                                href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                                className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
+                            >
+                                Kí gửi nhà đất
+                            </Link>
+                            <BoxLanguage
+                                type={'ds'}
+                                lang={lang}
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    <div
+                        onClick={() => setIsOpen(true)}
+                        className='relative w-fit'
+                    >
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth='1.5'
+                            stroke='#D6A279'
+                            className='w-[10.33vw] h-[8.6vw]'
+                        >
+                            <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
+                            />
+                        </svg>
+                    </div>
+                )}
+                {/* <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
-                        href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
                         className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                     >
                         Kí gửi nhà đất
@@ -165,7 +268,7 @@ export default function NavBarFixed({ isHome = true, lang }) {
                         lang={lang}
                         type='ds'
                     />
-                </div>
+                </div> */}
             </div>
         </div>
     )

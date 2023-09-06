@@ -10,26 +10,25 @@ import 'swiper/css/thumbs'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useMediaQuery } from 'react-responsive'
-
+const imagesData = [
+    '/images/imageGallery1.png',
+    '/images/imageGallery2.png',
+    '/images/imageGallery3.png',
+    '/images/imageGallery1.png',
+    '/images/imageGallery2.png',
+    '/images/imageGallery3.png',
+    '/images/imageGallery1.png',
+    '/images/imageGallery2.png',
+    '/images/imageGallery3.png',
+    '/images/partner-bg.jpg',
+    '/images/imageGallery2.png',
+    '/images/imageGallery3.png',
+    '/images/imageGallery1.png',
+    '/images/imageGallery2.png',
+    '/images/imageGallery3.png',
+]
 export default function ImageGallery() {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
-    const imagesData = [
-        '/images/imageGallery1.png',
-        '/images/imageGallery2.png',
-        '/images/imageGallery3.png',
-        '/images/imageGallery1.png',
-        '/images/imageGallery2.png',
-        '/images/imageGallery3.png',
-        '/images/imageGallery1.png',
-        '/images/imageGallery2.png',
-        '/images/imageGallery3.png',
-        '/images/partner-bg.jpg',
-        '/images/imageGallery2.png',
-        '/images/imageGallery3.png',
-        '/images/imageGallery1.png',
-        '/images/imageGallery2.png',
-        '/images/imageGallery3.png',
-    ]
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [zoomSize, setZoomSize] = useState(0)
     const swiper1Ref = useRef()
@@ -167,9 +166,10 @@ export default function ImageGallery() {
                               <SwiperSlide key={index}>
                                   <Image
                                       src={item}
+                                      alt={index}
                                       width={532}
                                       height={350}
-                                      className='w-full h-full object-cover'
+                                      className='object-cover w-full h-full'
                                   ></Image>
                               </SwiperSlide>
                           ))
@@ -179,7 +179,8 @@ export default function ImageGallery() {
                                       src={item}
                                       width={532}
                                       height={350}
-                                      className='w-full h-full object-cover'
+                                      alt={index}
+                                      className='object-cover w-full h-full'
                                   ></Image>
                               </SwiperSlide>
                           ))}
@@ -275,16 +276,18 @@ export default function ImageGallery() {
                                           src={item}
                                           width={532}
                                           height={350}
-                                          className='w-full h-full object-cover'
+                                          alt={index}
+                                          className='object-cover w-full h-full'
                                       ></Image>
                                   ) : (
                                       <div
                                           onClick={seemoreHandler}
-                                          className='relative w-full h-full flex items-center justify-center cursor-pointer'
+                                          className='relative flex items-center justify-center w-full h-full cursor-pointer'
                                       >
                                           <Image
                                               src={item}
                                               fill
+                                              alt={index}
                                               className='z-[-2]'
                                           ></Image>
                                           <span className='text-white text-12pc font-bold leading-[1.3] tracking-[-0.36px] capitalize'>
@@ -301,6 +304,7 @@ export default function ImageGallery() {
                                       src={item}
                                       width={532}
                                       height={350}
+                                      alt={index}
                                       className={
                                           index !== thumbIndex
                                               ? 'rounded-[4px] w-full h-full object-cover'
@@ -341,7 +345,7 @@ export default function ImageGallery() {
                 ref={swiperRef}
             >
                 <div
-                    className='relative w-full h-full bg-black bg-opacity-70 opacity-0 transition-all duration-300'
+                    className='relative w-full h-full transition-all duration-300 bg-black opacity-0 bg-opacity-70'
                     ref={slRef}
                 >
                     <Swiper
@@ -362,14 +366,15 @@ export default function ImageGallery() {
                                 className='relative overflow-hidden swiper-container cursor-grab'
                             >
                                 <div
-                                    className='absolute w-full h-full top-0 left-0 z-1'
+                                    className='absolute top-0 left-0 w-full h-full z-1'
                                     onClick={closeGalleryHandler}
                                 ></div>
-                                <div className='relative w-full h-full flex justify-center items-center'>
+                                <div className='relative flex items-center justify-center w-full h-full'>
                                     <Image
                                         src={item}
                                         width={1600}
                                         height={850}
+                                        alt={index}
                                         className='image-animate relative w-auto h-[37vw] z-2 transition-all duration-200'
                                     ></Image>
                                 </div>

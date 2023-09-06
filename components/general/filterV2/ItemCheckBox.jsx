@@ -2,8 +2,8 @@
 
 import useStore from '@/app/[lang]/(store)/store'
 import { useEffect, useState } from 'react'
-//property-type
-export default function ItemCheckBox({ index, e, handleCheckbox, isOutSide, isReset }) {
+
+export default function ItemCheckBox({ index, e, handleCheckbox, isOutSide }) {
     const propertyAreaType = useStore((state) => state.propertyAreaType)
     const propertyType = useStore((state) => state.propertyType)
     const propertyCategory = useStore((state) => state.propertyCategory)
@@ -31,11 +31,7 @@ export default function ItemCheckBox({ index, e, handleCheckbox, isOutSide, isRe
                 setIsCheck(false)
             }
         }
-    }, [isOutSide])
-
-    useEffect(() => {
-        setIsCheck(false)
-    }, [isReset])
+    }, [isOutSide, propertyAreaType, propertyType, propertyCategory])
 
     return (
         <div className='w-fit flex items-center gap-x-[0.75vw] max-md:gap-x-[3.2vw]'>

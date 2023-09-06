@@ -12,19 +12,19 @@ export default function NavBar({ isHome = true, lang, t }) {
         <nav
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
-            } absolute top-0 left-0 w-full z-40 py-[1.03vw] h-fit border-b border-solid border-white04`}
+            } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-md:hidden`}
         >
-            <div className={`${isHome ? 'gap-x-[3.12vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
+            <div className={`${isHome ? 'gap-x-[1.87vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
                 <Link
                     id='logo-banner'
-                    href={`/${lang !== 'vn' ? lang : ''}`}
+                    href={`/${lang !== 'vi' ? lang : ''}`}
                     className={`${
-                        isHome ? 'left-[7.5vw]' : 'left-[3.75vw]'
+                        isHome ? 'left-[7.5vw] max-lg:left-[3.2vw]' : 'left-[3.75vw]'
                     } py-[1.32vw] px-[1.95vw] bg-gradient-primary w-fit h-fit absolute top-0`}
                 >
-                    <div className='relative w-[3.52vw] h-[5.5vw] block'>
+                    <div className='relative w-[3.52vw] h-[5.5vw] max-lg:w-[6.52vw] max-lg:h-[9.5vw] block'>
                         <Image
-                            className='object-cover'
+                            className='object-cover max-lg:object-contain max-md:object-cover'
                             src='/images/logo.png'
                             alt='logo'
                             sizes='3.52vw'
@@ -35,7 +35,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                 </Link>
                 <div className='justify-start flex-1 py-[0.5vw] hidden'>
                     <Link
-                        href={`/${lang !== 'vn' ? lang : ''}`}
+                        href={`/${lang !== 'vi' ? lang : ''}`}
                         className='relative w-[3.5vw] h-[4.75vw] block'
                     >
                         <Image
@@ -48,7 +48,6 @@ export default function NavBar({ isHome = true, lang, t }) {
                         />
                     </Link>
                 </div>
-
                 {!isHome && (
                     <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[6.25vw] flex justify-between items-center shadow-input border border-solid border-white03 backdrop-blur-[11px]'>
                         <div className='flex items-center w-full'>
@@ -91,24 +90,79 @@ export default function NavBar({ isHome = true, lang, t }) {
                         </div>
                     </div>
                 )}
-                <ul className={`${isHome ? 'gap-x-[2.5vw]' : 'gap-x-[1.88vw]'} flex`}>
+                <ul className={` flex`}>
                     {t &&
                         t?.Navbar?.listNav?.map((e, index) => (
-                            <li key={index}>
-                                <Link
-                                    scroll={false}
-                                    className='block title16-600-130'
-                                    href={`${lang !== 'vn' ? '/' + lang + e.href : e.href}`}
-                                >
-                                    {e.title}
-                                </Link>
+                            <li
+                                key={index}
+                                className={`relative select-none group`}
+                            >
+                                {e?.branch ? (
+                                    <>
+                                        <div
+                                            className={`${
+                                                isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
+                                            } py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]`}
+                                        >
+                                            <span className='inline-block title16-600-130 title-tl12-600-150 whitespace-nowrap'>
+                                                {e?.title}
+                                            </span>
+                                            <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                fill='none'
+                                                viewBox='0 0 24 24'
+                                                strokeWidth='3'
+                                                stroke='currentColor'
+                                                className='w-[1.2vw] h-[1.2vw]'
+                                            >
+                                                <path
+                                                    strokeLinecap='round'
+                                                    strokeLinejoin='round'
+                                                    d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div className='absolute bottom-0 translate-y-[calc(100%+1.03vw)] right-0 rounded-[0.625vw] group-hover:block hidden bg-white w-fit before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'>
+                                            <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
+                                                {e?.title}
+                                            </span>
+                                            <ul className='w-full'>
+                                                {e?.branch?.map((item) => (
+                                                    <li
+                                                        key={item?.id}
+                                                        className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                    >
+                                                        <Link
+                                                            className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
+                                                            href={`${
+                                                                lang !== 'vi' ? '/' + lang + item?.href : item?.href
+                                                            }`}
+                                                        >
+                                                            {item?.title}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Link
+                                        scroll={false}
+                                        className={`${
+                                            isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
+                                        } py-[1vw] block title16-600-130 title-tl12-600-150 whitespace-nowrap`}
+                                        href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
+                                    >
+                                        {e.title}
+                                    </Link>
+                                )}
                             </li>
                         ))}
                 </ul>
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
-                        href={`${lang !== 'vn' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
-                        className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
+                        href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] max-lg:py-[1.5vw] max-lg:px-[2.5vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 title-tl12-600-130'
                     >
                         {t?.Navbar?.button}
                     </Link>
