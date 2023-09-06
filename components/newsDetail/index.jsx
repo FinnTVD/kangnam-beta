@@ -1,44 +1,50 @@
 'use client'
 
-import { useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import PostDetail from "./PostDetail";
 import RelatedNews from "./RelatedNews";
 import { useEffect } from "react";
+import useSWR from 'swr'
+import { handleCheckLangCode } from "@/utils";
 
-export default function IndexNewsDetail({t, slug}){
-    const content = "<img src='/images/about-us-contact-address.png'></img><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p><h2>1. Đôi nét về các dự án bất động sản</h2><p>Cụm từ bất động sản được chúng ta sử dụng nhiều và được nhắc đến nhiều lần nhưng không phải ai cũng hiểu rõ cụm từ này mang ý nghĩa gì? Bất động sản là một thuật ngữ có mang tính pháp lý trong đó mỗi quốc gia có một khái niệm riêng và không giống nhau về khái niệm bất động sản.</p>"
-    const newsArr = [{id: 0, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 1, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-1", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 2, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-2", author:"Admin", category: 'Tin nóng', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 3, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-3", author:"Admin", category: 'Dự án', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 4, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-4", author:"Admin", category: 'Dự án', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 5, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-5", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 6, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-6", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 7, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-7", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 8, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-8", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 9, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-9", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 10, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-10", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 11, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-11", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 12, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-12", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 13, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-13", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'},
-    {id: 14, slug: "nghe-an-sap-dau-gia-hon-100-lo-dat-khoi-diem-1-trieu-dong-2m2-14", author:"Admin", category: 'Thị trường', date: '21/07/2023', title: 'Nghệ An sắp đấu giá hơn 100 lô đất, khởi điểm 1 triệu đồng/m2', content: content, picture: '/images/featuredImg.jpg'}]
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcher1 = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
+export default function IndexNewsDetail({t, slug, lang}){
+    const router = useRouter()
+    const langCode = handleCheckLangCode(lang)
+    
+    const {
+        data: post,
+        error: errorPost,
+        isLoading: isLoadingPost,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post/post-by-slug/${slug}`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
 
-    // const router = useRouter()
-    // const { slug } = useParams()
-    // console.log(slug)
-    const post = newsArr.find((item) => item.slug === slug)
+    const {
+        data: newsArr,
+        error: errornewsArr,
+        isLoading: isLoadingNewsArr,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=7&postTypeIds[]=${post?.postType.id}`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
 
-    const relatedNewsArr = newsArr.filter((item) => item.category === post.category && item!==post).slice(0, 5);
-    // console.log(relatedNewsArr)
-    // useEffect(() => {
-    //     window.location.reload()
-    //     }, [slug])
+    const relatedNewsArr = newsArr?.data?.filter((item) => item.postType.id === post.postType.id && item.id!==post.id).slice(0, 6);
+    const translation = post?.translations?.find((item) => item.languageCode===langCode)
+
+    useEffect(() => {
+        if(translation)
+            router.replace(`/${lang}/news/${translation.slug}`,undefined,{shallow:true})
+    }, [translation])
 
     return(
-
         <>
-            <PostDetail t={t} post={post}></PostDetail>
-            <RelatedNews t={t} relatedNews={relatedNewsArr}></RelatedNews>
+            {(post && translation) && <PostDetail t={t} post={post} langCode={langCode} translation={translation}></PostDetail>}
+            {<RelatedNews t={t} relatedNews={relatedNewsArr? relatedNewsArr : null} lang={lang} isLoadingNewsArr={isLoadingNewsArr}></RelatedNews>}
         </>
     )
 }

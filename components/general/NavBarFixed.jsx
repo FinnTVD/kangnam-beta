@@ -8,7 +8,7 @@ const listNav = [
     {
         id: 1,
         title: 'Về chúng tôi',
-        href: '/gioi-thieu',
+        href: '/about-us',
     },
     {
         id: 2,
@@ -23,12 +23,12 @@ const listNav = [
     {
         id: 4,
         title: 'Thỏa thuận & Pháp lí',
-        href: '/thoa-thuan-va-phap-li',
+        href: '/agreement',
     },
     {
         id: 5,
         title: 'Tin tức',
-        href: '/danh-sach-tin-tuc',
+        href: '/news',
     },
     {
         id: 6,

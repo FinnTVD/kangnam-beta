@@ -8,7 +8,7 @@ import Aos from "aos";
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 
-export default function IndexAboutUs({t}) {
+export default function IndexAboutUs({t, lang}) {
     
     useEffect(() => {
         Aos.init({
@@ -38,7 +38,7 @@ export default function IndexAboutUs({t}) {
             <Story t={t}></Story>
             <Teams t={t}></Teams>
             <Mission></Mission>
-            <Contact t={t}></Contact>
+            <Contact t={t} lang={lang}></Contact>
         </>
     )
 }

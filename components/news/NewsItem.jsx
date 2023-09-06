@@ -1,32 +1,36 @@
-import { formatDateTime } from '@/utils'
+import { formatDateTime, handleCheckLangCode } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useMediaQuery } from 'react-responsive'
+import { usePathname } from 'next/navigation'
 
-export default function NewsItem({ newsOtherItem }) {
+export default function NewsItem({ newsOtherItem, lang }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
+    const languageCode = handleCheckLangCode(lang)
+
+    const translation = newsOtherItem?.translations?.find((itm) => itm.languageCode === languageCode)
 
     return (
-        <Link href={`/danh-sach-tin-tuc/${newsOtherItem?.translations[0]?.slug}`}>
+        <Link href={lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
             <div className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'>
                 {/* <div className="flex h-[11vw] items-center"> */}
-                <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw]'>
+                <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw] max-lg:h-[40vw]'>
                     <Image
                         src={newsOtherItem?.image ? newsOtherItem?.image : '/images/featuredImg.jpg'}
                         fill
-                        alt={newsOtherItem?.translations[0]?.title || 'thumbnail news'}
+                        alt={translation?.title || 'thumbnail news'}
                         className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden'
                     />
                 </div>
-                <span className='bg-nau-nhat inline-block title12-400-150 mt-[1vw] py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:pr-[2.6vw] max-md:title-mb10-400-150 max-md:mt-[3.4vw] max-md:py-[1.1vw] max-md:px-[3.7vw] max-md:rounded-[3.3px]'>
+                <span className='bg-nau-nhat inline-block title12-400-150 mt-[1vw] py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:pr-[2.6vw] max-md:title-mb10-400-150 max-md:mt-[3.4vw] max-md:py-[1.1vw] max-md:px-[3.7vw] max-md:rounded-[3.3px] max-lg:title-tl12'>
                     {newsOtherItem?.postType?.name}
                 </span>
                 <div className='w-full mt-[0.2625vw]] flex flex-col max-md:mt-[0.8vw]'>
-                    <h2 className='mt-[0.25vw] text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 max-md:title-mb16-700-135'>
-                        {newsOtherItem?.translations[0].title}
+                    <h2 className='mt-[0.25vw] text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 max-md:title-mb16-700-135 max-lg:title-tl20'>
+                        {translation?.title}
                     </h2>
-                    <span className='text-den-2 title14-400-160 mt-[0.5vw] line-clamp-2 max-md:mt-[0.8vw] max-md:title-mb12-400-150'>
-                        {newsOtherItem?.translations[0]?.descSeo}
+                    <span className='text-den-2 title14-400-160 mt-[0.5vw] line-clamp-2 max-md:mt-[0.8vw] max-md:title-mb12-400-150 max-lg:title-tl14'>
+                        {translation?.descSeo}
                     </span>
                 </div>
                 {/* </div> */}
@@ -37,7 +41,7 @@ export default function NewsItem({ newsOtherItem }) {
                         height='21'
                         viewBox='0 0 21 21'
                         fill='none'
-                        className='w-[1.3125vw] h-auto max-md:w-[4.5vw]'
+                        className='w-[1.3125vw] h-auto max-md:w-[4.5vw] max-lg:w-[2vw]'
                     >
                         <g opacity='0.7'>
                             <path
@@ -112,7 +116,7 @@ export default function NewsItem({ newsOtherItem }) {
                             />
                         </g>
                     </svg>
-                    <span className='text-[#656263] title14-400-150 ml-[0.375vw] opacity-70 max-md:title-mb12-400-150 max-md:ml-[1.3vw]'>
+                    <span className='text-[#656263] title14-400-150 ml-[0.375vw] opacity-70 max-md:title-mb12-400-150 max-md:ml-[1.3vw] max-lg:title-tl14'>
                         {formatDateTime(newsOtherItem?.createdAt)}
                     </span>
                 </div>
