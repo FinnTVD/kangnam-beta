@@ -18,7 +18,7 @@ export default function ItemFilter({ setIndexFilter, indexFilter, index, e, isMo
         <li
             className={`${indexFilter === index ? 'bg-logo' : 'bg-white'} ${
                 isMobile ? '' : 'relative'
-            } rounded-[10vw] h-fit w-fit border border-solid border-logo relative`}
+            } rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
             ref={sideRef}
         >
             <span

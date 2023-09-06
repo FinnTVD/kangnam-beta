@@ -3,64 +3,123 @@ import Image from 'next/image'
 import Map from '../home/Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
-import BoxFilter from '../general/filter/BoxFilter'
 import BoxSort from './BoxSort'
 import { useMediaQuery } from 'react-responsive'
 import BtnShowMap from './BtnShowMap'
 import ReactPaginate from 'react-paginate'
 import classes from '../news/ListNewsStyles.module.css'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect } from 'react'
 import useSWR from 'swr'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import useStore from '@/app/[lang]/(store)/store'
 import { mutate } from 'swr'
-const arrFilter = ['Loại hình', 'Địa điểm']
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
+import { handleCheckLangCode } from '@/utils'
+const arrFilter = [
+    {
+        id: 1,
+        title: 'Loại hình',
+        slug: 'propertyTypeIds',
+        api: '/property-type',
+    },
+    {
+        id: 2,
+        title: 'Địa điểm',
+        slug: 'propertyAreaTypeIds',
+        api: '/property-area-type',
+    },
+]
+const arrFilter1 = [
+    {
+        id: 1,
+        title: 'Loại hình',
+        slug: 'propertyTypeIds',
+        api: '/property-type',
+    },
+    {
+        id: 2,
+        title: 'Địa điểm',
+        slug: 'propertyAreaTypeIds',
+        api: '/property-area-type',
+    },
+    {
+        id: 3,
+        title: 'Hình thức',
+        slug: 'propertyCategoryIds',
+        api: '/property-category',
+    },
+]
 
 const listProject = new Array(24).fill(0)
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const handleCheckParams = (pathName) => {
-    //1c3afd45-f351-407a-96ab-0d8812047b8b - mua
-    //804e0d3c-dc23-4382-88e4-9f511341c24a - thue
-    //d47b243b-6593-4098-b99e-56151d31add8 - ban
-    if (pathName?.includes('mua')) return '&propertyCategoryIds=1c3afd45-f351-407a-96ab-0d8812047b8b'
-    if (pathName?.includes('thue')) return '&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a'
-    if (pathName?.includes('ban-lai')) return '&propertyCategoryIds=d47b243b-6593-4098-b99e-56151d31add8'
+    if (pathName?.includes('buy')) return '&propertyCategoryIds=1c3afd45-f351-407a-96ab-0d8812047b8b'
+    if (pathName?.includes('hire')) return '&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a'
+    if (pathName?.includes('resale')) return '&propertyCategoryIds=d47b243b-6593-4098-b99e-56151d31add8'
     return ''
 }
-
+let propertyTypeParams = ''
+let propertyAreaTypeParams = ''
+gsap.registerPlugin(ScrollTrigger)
+function initializeGSAPWithDelay(delay, selector = '') {
+    if (typeof window === 'undefined' || !selector) return
+    setTimeout(() => {
+        const box = document.querySelector(selector)
+        gsap.to(box, {
+            position: 'fixed',
+            left: '7.5vw',
+            top: '5.75vw',
+            zIndex: '999999',
+            background: 'white',
+            scrollTrigger: {
+                trigger: box,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true,
+            },
+        })
+    }, delay)
+}
 export default function ListProject({ lang, t }) {
-    const pathName = usePathname()
-    // const [pageNumber, setPageNumber] = useState(1)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
-    const propertyAreaType = useStore((state) => state.propertyAreaType)
-    const propertyType = useStore((state) => state.propertyType)
-    const setPropertyCategory = useStore((state) => state.setPropertyCategory)
-    const setPropertyType = useStore((state) => state.setPropertyType)
-    const setPropertyAreaType = useStore((state) => state.setPropertyAreaType)
-
-    const propertyTypeParams = propertyType.reduce(
-        (accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue,
-        '',
-    )
-    const propertyAreaTypeParams = propertyAreaType.reduce(
-        (accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue,
-        '',
-    )
     const router = useRouter()
-    const pathname = usePathname()
+    const pathName = usePathname()
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
+    const price = searchParams.get('price')
     const [show, Element] = useToggleShowMap()
+
+    const propertyType = searchParams.getAll('propertyTypeIds')
+    const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
+
+    if (propertyType?.length > 0 && propertyType[0]) {
+        propertyTypeParams = propertyType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+    } else {
+        propertyTypeParams = ''
+    }
+
+    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+        propertyAreaTypeParams = propertyAreaType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+    } else {
+        propertyAreaTypeParams = ''
+    }
+
     const { data, error, isLoading } = useSWR(
-        process.env.NEXT_PUBLIC_API +
-            `/property?page=${page ? page : 1}&take=24${handleCheckParams(pathName)}${
-                propertyTypeParams ? propertyTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
-        fetcher,
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+            pathName,
+        )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+            price ? '&price=' + price : ''
+        }`,
+        (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
@@ -68,17 +127,22 @@ export default function ListProject({ lang, t }) {
         },
     )
 
-    useEffect(() => {
-        setPropertyCategory([])
-        setPropertyType([])
-        setPropertyAreaType([])
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            initializeGSAPWithDelay(500, '#boxRef-filter')
+        })
+        return () => {
+            ctx.revert()
+        }
     }, [])
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${handleCheckParams(pathName)}${
-                propertyTypeParams ? propertyTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+                pathName,
+            )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                price ? '&price=' + price : ''
+            }`,
         )
     }, [lang])
 
@@ -95,16 +159,13 @@ export default function ListProject({ lang, t }) {
     return (
         <section
             id='list-project'
-            className='mt-[22vw] relative z-10 max-md:mt-[69vw]'
+            // ref={parentRef}
+            className='mt-[5.75vw] relative z-10 max-md:mt-[69vw]'
         >
-            <div className='flex'>
-                <div className={`${!isMobile ? (show ? 'pr-[1.25vw]' : 'pr-[7.5vw]') : ''} flex-1 pl-[7.5vw] px-mb10`}>
-                    <div
-                        className={`${
-                            show ? 'w-[63.75vw]' : 'w-screen pr-[7.5vw]'
-                        } fixed top-[5.75vw] left-0 z-[9999] bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-screen`}
-                    >
-                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center justify-between border-b border-solid border-line pl-[7.5vw] max-md:ml-[2.67vw] pr-[1.25vw] max-md:px-0'>
+            <div className='flex w-full justify-between'>
+                <div className={`${show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'} pl-[7.5vw] px-mb10`}>
+                    <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
+                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
                                 <span className='opacity-50 text-den title14-400-150 title-mb16-400-150 title-mb14-400-150'>
                                     100% xác thực
@@ -113,6 +174,14 @@ export default function ListProject({ lang, t }) {
                                     Mua bán nhà đất căn hộ
                                 </h3>
                             </div>
+                        </div>
+                        <div
+                            id='boxRef-filter'
+                            className={`${
+                                show ? 'w-[55.25vw]' : 'w-[84vw]'
+                            } max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
+                        >
+                            <BoxFilterV2 arrFilter={pathName?.includes('projects') ? arrFilter1 : arrFilter} />
                             {!isMobile && (
                                 <div className='flex gap-x-[1.31vw] items-center'>
                                     <span className='text-black title16-400-150 h-fit'>Bản đồ</span>
@@ -120,10 +189,7 @@ export default function ListProject({ lang, t }) {
                                 </div>
                             )}
                         </div>
-                        <div className='pl-[7.5vw] pr-[1.25vw] max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none'>
-                            <BoxFilter arrFilter={arrFilter} />
-                        </div>
-                        <article className='pl-[7.5vw] pr-[1.25vw] px-mb10'>
+                        <article className='px-mb10'>
                             <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
                                 <div className='flex gap-x-[0.31vw] max-md:gap-x-[1.33vw]'>
                                     <span className='inline-block opacity-50 text-den title16-400-150 title-mb16-400-150'>
@@ -133,7 +199,12 @@ export default function ListProject({ lang, t }) {
                                         24 trong số 50 <span className='max-md:hidden'>nhà đất xác thực</span>
                                     </span>
                                 </div>
-                                <BoxSort />
+                                <BoxSort
+                                    price={price}
+                                    createQueryString={createQueryString}
+                                    pathName={pathName}
+                                    router={router}
+                                />
                             </div>
                         </article>
                     </div>
@@ -170,7 +241,12 @@ export default function ListProject({ lang, t }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={e?.propertyCategory?.alias + '/' + e?.translations[0]?.slug}
+                                    href={
+                                        (lang === 'vi' ? '' : lang + '/') +
+                                        e?.propertyCategory?.alias +
+                                        '/' +
+                                        e?.translation?.slug
+                                    }
                                     className='w-full'
                                     key={index}
                                 >
@@ -178,7 +254,7 @@ export default function ListProject({ lang, t }) {
                                         <Image
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
-                                            alt={e?.translations[0]?.name || 'thumbnail project'}
+                                            alt={e?.translation?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
@@ -188,13 +264,13 @@ export default function ListProject({ lang, t }) {
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
                                         <h6
-                                            title={e?.translations[0]?.name}
+                                            title={e?.translation?.name}
                                             className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1'
                                         >
-                                            {e?.translations[0]?.name}
+                                            {e?.translation?.name}
                                         </h6>
                                         <div
-                                            title={e?.address?.label}
+                                            title={e?.address?.display}
                                             className='flex items-center'
                                         >
                                             <svg
@@ -225,11 +301,11 @@ export default function ListProject({ lang, t }) {
                                                 Địa chỉ:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150 line-clamp-1'>
-                                                {e?.address?.locality +
+                                                {e?.address?.ward +
                                                     ', ' +
-                                                    e?.address?.county +
+                                                    e?.address?.district +
                                                     ', ' +
-                                                    e?.address?.region}
+                                                    e?.address?.city}
                                             </span>
                                         </div>
                                         <div className='flex items-center my-[0.5vw] max-md:my-[2.69vw]'>
@@ -250,7 +326,7 @@ export default function ListProject({ lang, t }) {
                                                 Diện tích:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                {e?.translations[0]?.size + ' m²'}
+                                                {e?.translation?.size + ' m²'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -271,7 +347,7 @@ export default function ListProject({ lang, t }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                {e?.translations[0]?.price}
+                                                {e?.translation?.price}
                                             </span>
                                         </div>
                                     </div>
@@ -283,7 +359,7 @@ export default function ListProject({ lang, t }) {
                             breakLabel='...'
                             nextLabel='Next'
                             onPageChange={(e) => {
-                                router.push(pathname + '?' + createQueryString('page', e.selected + 1))
+                                router.push(pathName + '?' + createQueryString('page', e.selected + 1))
                                 window?.scrollTo({ top: 0, behavior: 'smooth' })
                             }}
                             pageRangeDisplayed={5}
@@ -302,13 +378,13 @@ export default function ListProject({ lang, t }) {
                         <div
                             className={`${
                                 !show ? 'hidden' : ''
-                            } w-[35.3125vw] z-[99999] fixed top-[5.57vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
+                            } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                                 <Map />
                             </div>
                         </div>
-                        <div className={`${!show ? 'hidden' : ''} w-[35.3125vw]`}></div>
+                        <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
                     </>
                 )}
             </div>

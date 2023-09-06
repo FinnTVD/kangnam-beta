@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
 
+const arrHref = ['/en', '/kr', '/ch']
 const arrLanguage = [
     {
         id: 1,
@@ -32,25 +33,30 @@ const arrLanguage = [
 ]
 
 export default function SelectLanguage({ className, lang }) {
+    const language = useStore((state) => state.language)
     const setLanguage = useStore((state) => state.setLanguage)
-    const slugDetailProject = useStore((state) => state.slugDetailProject)
     const pathName = usePathname()
+    console.log('🚀 ~ file: SelectLanguage.jsx:38 ~ SelectLanguage ~ pathName:', pathName)
 
     const handleHref = (lg) => {
-        const path = pathName.split('/')
-        const pathNew = path
-            ?.slice(lang === 'vi' ? 1 : 2)
-            .reduce((accumulator, currentValue) => accumulator + '/' + currentValue, '')
-        if (slugDetailProject) {
-            const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lg))
-            const lgNew = lg === 'vi' ? '' : lg + '/'
-            return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+        if (lg === 'vi') {
+            if (lang === 'vi') {
+                return pathName
+            } else if (arrHref.includes(pathName)) {
+                return '/'
+            } else {
+                return pathName.slice(3)
+            }
+        } else {
+            if (lg === lang) {
+                return pathName
+            }
+            if (lang === 'vi') {
+                return lg + pathName
+            } else {
+                return '/' + lg + pathName.slice(3)
+            }
         }
-        if (lang === 'vi') {
-            const lgNew = lg === 'vi' ? '' : '/' + lg
-            return lgNew + pathNew
-        }
-        return '/' + lg === 'vi' ? '' : lg
     }
 
     const handleChangeLanguage = (code) => {
@@ -60,7 +66,7 @@ export default function SelectLanguage({ className, lang }) {
     return (
         <ul
             id='box-select-language'
-            className={`${className} absolute flex flex-col -bottom-[0.5vw] left-0 translate-y-full bg-white rounded-md w-[8vw] h-fit py-[0.5vw] z-[99999] text-black max-md:w-[27.5vw] max-md:-left-[2.13vw] max-md:py-[1vw] max-md:-bottom-[1vw]`}
+            className={`${className} absolute flex flex-col -bottom-[0.5vw] left-0 translate-y-full bg-white rounded-md w-[8vw] max-lg:w-[12vw] h-fit py-[0.5vw] z-[99999] text-black max-md:w-[27.5vw] max-md:-left-[2.13vw] max-md:py-[1vw] max-md:-bottom-[1vw]`}
         >
             {arrLanguage &&
                 arrLanguage?.map((e) => (
@@ -73,13 +79,13 @@ export default function SelectLanguage({ className, lang }) {
                             onClick={() => handleChangeLanguage(e?.code)}
                         >
                             <Image
-                                className='w-[1.75vw] h-[1.125vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
+                                className='w-[1.75vw] h-[1.125vw] max-lg:w-[2.5vw] max-lg:h-[1.875vw] max-md:w-[6.13vw] max-md:h-[3.73vw] object-cover rounded-[3px]'
                                 src={e?.src}
                                 alt={e?.title}
                                 width={28}
                                 height={18}
                             />
-                            <span className='title16-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'>
+                            <span className='title16-600-150 title-tl12-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'>
                                 {e?.title}
                             </span>
                         </Link>

@@ -12,19 +12,19 @@ export default function NavBar({ isHome = true, lang, t }) {
         <nav
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
-            } absolute top-0 left-0 w-full z-40 py-[1.03vw] h-fit border-b border-solid border-white04 max-md:hidden`}
+            } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-md:hidden`}
         >
             <div className={`${isHome ? 'gap-x-[1.87vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
                 <Link
                     id='logo-banner'
                     href={`/${lang !== 'vi' ? lang : ''}`}
                     className={`${
-                        isHome ? 'left-[7.5vw]' : 'left-[3.75vw]'
+                        isHome ? 'left-[7.5vw] max-lg:left-[3.2vw]' : 'left-[3.75vw]'
                     } py-[1.32vw] px-[1.95vw] bg-gradient-primary w-fit h-fit absolute top-0`}
                 >
-                    <div className='relative w-[3.52vw] h-[5.5vw] block'>
+                    <div className='relative w-[3.52vw] h-[5.5vw] max-lg:w-[6.52vw] max-lg:h-[9.5vw] block'>
                         <Image
-                            className='object-cover'
+                            className='object-cover max-lg:object-contain max-md:object-cover'
                             src='/images/logo.png'
                             alt='logo'
                             sizes='3.52vw'
@@ -104,7 +104,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                                                 isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
                                             } py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]`}
                                         >
-                                            <span className='inline-block title16-600-130 whitespace-nowrap'>
+                                            <span className='inline-block title16-600-130 title-tl12-600-150 whitespace-nowrap'>
                                                 {e?.title}
                                             </span>
                                             <svg
@@ -150,7 +150,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                                         scroll={false}
                                         className={`${
                                             isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
-                                        } py-[1vw] block title16-600-130 whitespace-nowrap`}
+                                        } py-[1vw] block title16-600-130 title-tl12-600-150 whitespace-nowrap`}
                                         href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
                                     >
                                         {e.title}
@@ -162,7 +162,7 @@ export default function NavBar({ isHome = true, lang, t }) {
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
                         href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
-                        className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
+                        className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] max-lg:py-[1.5vw] max-lg:px-[2.5vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 title-tl12-600-130'
                     >
                         {t?.Navbar?.button}
                     </Link>

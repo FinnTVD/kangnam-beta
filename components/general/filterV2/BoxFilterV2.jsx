@@ -1,27 +1,21 @@
 'use client'
 
 import { useState } from 'react'
-import ItemFilter from './ItemFilter'
-import { useMediaQuery } from 'react-responsive'
+import ItemFilterV2 from './ItemFilterV2'
 
-// const arrFilter = ['Loại hình', 'Địa điểm', 'Cho thuê', 'Mua lại']
-export default function BoxFilter({ arrFilter }) {
+export default function BoxFilterV2({ arrFilter }) {
     const [indexFilter, setIndexFilter] = useState(null)
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
 
     return (
         <ul className='flex gap-x-[1.5vw] max-md:justify-between select-none relative'>
             {arrFilter &&
                 arrFilter.map((e, index) => (
-                    <ItemFilter
+                    <ItemFilterV2
                         key={index}
                         index={index}
-                        e={e}
+                        item={e}
                         setIndexFilter={setIndexFilter}
                         indexFilter={indexFilter}
-                        isMobile={isMobile}
                     />
                 ))}
         </ul>

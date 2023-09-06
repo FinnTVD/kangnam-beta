@@ -4,8 +4,13 @@ import FormNamePhone from './FormNamePhone'
 import useStore from '@/app/[lang]/(store)/store'
 import { useEffect } from 'react'
 
+const handleCheckStatus = (alias) => {
+    if (alias === 'hire') return '/tháng'
+    return ''
+}
+
 export default function ContentDetail({ data, detail }) {
-    console.log('🚀 ~ file: ContentDetail.jsx:8 ~ ContentDetail ~ detail:', detail)
+    console.log('🚀 ~ file: ContentDetail.jsx:13 ~ ContentDetail ~ detail:', detail)
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -15,7 +20,6 @@ export default function ContentDetail({ data, detail }) {
         }
     }, [])
     const dataDetail = data?.translations?.find((e) => e?.slug === detail)
-    console.log('🚀 ~ file: ContentDetail.jsx:17 ~ ContentDetail ~ dataDetail:', dataDetail)
     return (
         <section className='mt-[7.57vw] px-120 max-md:mt-[22.57vw] px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
@@ -35,7 +39,8 @@ export default function ContentDetail({ data, detail }) {
                         </h1>
                         <div className='w-fit max-md:flex max-md:gap-x-[3.2vw] max-md:mt-[1.33vw] max-md:items-center max-md:w-full'>
                             <h2 className='mb-[0.5vw] text-den title28-800-130 -tracking-[0.84px] capitalize title-mb25-700-130 max-md:text-logo max-md:-tracking-[0.75px]'>
-                                {dataDetail?.price}
+                                {dataDetail?.priceDisplay}
+                                {handleCheckStatus(data?.propertyCategory?.alias)}
                             </h2>
                             <div className='flex gap-x-[1.06vw] justify-end max-md:justify-start max-md:gap-x-[2.13vw]'>
                                 <span className='title16-400-125 title-mb16-400-125 text-[#888]'>118,280 đ/m²</span>

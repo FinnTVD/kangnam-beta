@@ -6,44 +6,95 @@ import Map from './Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
-import BoxFilter from '../general/filter/BoxFilter'
 import { handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
-import useStore from '@/app/[lang]/(store)/store'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 
-const arrFilter = ['Loại hình', 'Địa điểm', 'Hình thức']
+const arrFilter = [
+    {
+        id: 1,
+        title: 'Loại hình',
+        slug: 'propertyTypeIds',
+        api: '/property-type',
+    },
+    {
+        id: 2,
+        title: 'Địa điểm',
+        slug: 'propertyAreaTypeIds',
+        api: '/property-area-type',
+    },
+    {
+        id: 3,
+        title: 'Hình thức',
+        slug: 'propertyCategoryIds',
+        api: '/property-category',
+    },
+]
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
-export default function MyProject({ lang }) {
-    const propertyAreaType = useStore((state) => state.propertyAreaType)
-    const propertyType = useStore((state) => state.propertyType)
-    const propertyCategory = useStore((state) => state.propertyCategory)
-
-    const propertyCategoryParams = propertyCategory.reduce(
-        (accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue,
-        '',
-    )
-    const propertyTypeParams = propertyType.reduce(
-        (accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue,
-        '',
-    )
-    const propertyAreaTypeParams = propertyAreaType.reduce(
-        (accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue,
-        '',
-    )
-    const [pageNumber, setPageNumber] = useState(1)
+let propertyTypeParams = ''
+let propertyAreaTypeParams = ''
+let propertyCategoryTypeParams = ''
+export default function MyProjectV2({ lang }) {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const pathName = usePathname()
+    const page = searchParams.get('page')
     const projectsRef = useRef()
+
+    const propertyType = searchParams.getAll('propertyTypeIds')
+    const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
+    const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const createQueryString = useCallback(
+        (name, value) => {
+            const params = new URLSearchParams(searchParams)
+            params.set(name, value)
+
+            return params.toString()
+        },
+        [searchParams],
+    )
+
+    if (propertyType?.length > 0 && propertyType[0]) {
+        propertyTypeParams = propertyType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1))
+    } else {
+        propertyTypeParams = ''
+    }
+
+    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+        propertyAreaTypeParams = propertyAreaType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1))
+    } else {
+        propertyAreaTypeParams = ''
+    }
+
+    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
+        propertyCategoryTypeParams = propertyCategoryType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1))
+    } else {
+        propertyCategoryTypeParams = ''
+    }
+
     const [show, Element] = useToggleShowMap()
+    const [isToggle, setIsToggle] = useState(false)
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=${pageNumber}&take=${show ? 6 : 8}${
-            propertyCategoryParams ? propertyCategoryParams : ''
-        }${propertyTypeParams ? propertyTypeParams : ''}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -54,9 +105,9 @@ export default function MyProject({ lang }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${pageNumber}&take=${show ? 6 : 8}${
-                propertyCategoryParams ? propertyCategoryParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}`,
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
     }, [lang])
 
@@ -73,14 +124,14 @@ export default function MyProject({ lang }) {
         >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
-                <BoxFilter arrFilter={arrFilter} />
+                <BoxFilterV2 arrFilter={arrFilter} />
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <span className='text-black title16-400-150 h-fit'>Hiển thị bản đồ</span>
                     <div>{Element}</div>
                 </div>
             </div>
             <div className={`${show ? '' : 'pr-[7.5vw]'} flex gap-x-[1.88vw]`}>
-                <div className='flex-1'>
+                <div className={`${isToggle ? 'hidden' : ''} flex-1`}>
                     <div
                         className={`${
                             show ? 'grid-cols-3' : 'grid-cols-4'
@@ -143,7 +194,7 @@ export default function MyProject({ lang }) {
                                             {e?.translation?.name}
                                         </h6>
                                         <div
-                                            title={e?.address?.label}
+                                            title={e?.address?.display}
                                             className='flex items-center'
                                         >
                                             <svg
@@ -174,11 +225,11 @@ export default function MyProject({ lang }) {
                                                 Địa chỉ:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 line-clamp-1'>
-                                                {e?.address?.locality +
+                                                {e?.address?.ward +
                                                     ', ' +
-                                                    e?.address?.county +
+                                                    e?.address?.district +
                                                     ', ' +
-                                                    e?.address?.region}
+                                                    e?.address?.city}
                                             </span>
                                         </div>
                                         <div className='flex items-center my-[0.5vw]'>
@@ -231,14 +282,14 @@ export default function MyProject({ lang }) {
                                 breakLabel='...'
                                 nextLabel='Next'
                                 onPageChange={(e) => {
-                                    setPageNumber(e.selected + 1)
+                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1))
                                     projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })
                                 }}
                                 pageRangeDisplayed={5}
                                 pageCount={Math.ceil(data?.meta?.pageCount) || 1}
                                 renderOnZeroPageCount={null}
                                 previousLabel='Previous'
-                                forcePage={pageNumber - 1}
+                                forcePage={page ? page - 1 : 0}
                                 pageClassName={classes.page}
                                 activeClassName={classes.selected}
                                 className={classes['news-pagination']}
@@ -247,7 +298,7 @@ export default function MyProject({ lang }) {
                             <div></div>
                         )}
                         <Button
-                            href={handleCheckParamsLanguage(lang, '/danh-sach-du-an')}
+                            href={handleCheckParamsLanguage(lang, '/projects')}
                             className='border-none bg-logo'
                             stroke='white'
                             span='text-white font-semibold -tracking-[0.32px]'
@@ -257,11 +308,14 @@ export default function MyProject({ lang }) {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        !show && 'hidden'
-                    } rounded-tl-[0.5vw] !w-[35.5625vw] !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
+                    className={`${!show ? 'hidden' : ''} rounded-tl-[0.5vw] ${
+                        isToggle ? 'w-full' : '!w-[35.5625vw]'
+                    } !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    <Map />
+                    <Map
+                        setIsToggle={setIsToggle}
+                        isToggle={isToggle}
+                    />
                 </div>
             </div>
         </section>

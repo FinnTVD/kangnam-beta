@@ -160,7 +160,126 @@
     }
 
     .px-120 {
-        @apply px-[7.5vw];
+        @apply px-[7.5vw] max-lg:px-[3.2vw];
+    }
+
+    @media (min-width: 768px) and (max-width: 1023.9px) {
+        .title42 {
+            @apply leading-[1.3] text-42tl font-extrabold -tracking-[1.8px] text-white;
+        }
+
+        .title-tl18-700-150 {
+            @apply font-bold leading-normal text-18tl;
+        }
+
+        .title-tl18-700-130 {
+            @apply font-bold leading-[1.3] text-18tl;
+        }
+
+        .title-tl16-700-150 {
+            @apply font-bold leading-normal text-16tl;
+        }
+
+        .title-tl16-600-150 {
+            @apply font-semibold leading-normal text-16tl;
+        }
+
+        .title-tl16-400-150 {
+            @apply font-normal leading-normal text-16tl;
+        }
+
+        .title-tl16-700-135 {
+            @apply text-16tl font-bold leading-[1.35];
+        }
+
+        .title-tl16-600-130 {
+            @apply text-16tl font-semibold leading-[1.3];
+        }
+
+        .title-tl16-400-130 {
+            @apply text-16tl font-normal leading-[1.3];
+        }
+
+        .title-tl16-400-125 {
+            @apply text-16tl font-normal leading-[1.25];
+        }
+
+        .title-tl14-400-171 {
+            @apply text-14tl font-normal leading-[1.71];
+        }
+
+        .title-tl14-700-150 {
+            @apply font-bold leading-normal text-14tl;
+        }
+
+        .title-tl14-600-160 {
+            @apply font-semibold leading-[1.6] text-14tl;
+        }
+        .title-tl14-700-125 {
+            @apply text-14tl font-bold leading-[1.25];
+        }
+
+        .title-tl14-600-150 {
+            @apply font-semibold leading-normal text-14tl;
+        }
+
+        .title-tl14-400-160 {
+            @apply text-14tl font-normal leading-[1.6];
+        }
+
+        .title-tl14-400-150 {
+            @apply font-normal leading-normal text-14tl;
+        }
+
+        .title-tl14-700-130 {
+            @apply text-14tl font-bold leading-[1.3];
+        }
+
+        .title-tl14-400-130 {
+            @apply text-14tl font-normal leading-[1.3];
+        }
+
+        .title-tl12-700-150 {
+            @apply text-12tl font-bold leading-[1.5];
+        }
+
+        .title-tl12-600-160 {
+            @apply text-12tl font-semibold leading-[1.6];
+        }
+
+        .title-tl12-700-150 {
+            @apply font-bold leading-normal text-12tl;
+        }
+
+        .title-tl12-600-150 {
+            @apply font-semibold leading-normal text-12tl;
+        }
+
+        .title-tl12-600-130 {
+            @apply text-12tl font-semibold leading-[1.3];
+        }
+
+        .title-tl12-400-200 {
+            @apply text-12tl font-normal leading-[2];
+        }
+
+        .title-tl12-400-160 {
+            @apply text-12tl font-normal leading-[1.6];
+        }
+
+        .title-tl12-400-150 {
+            @apply font-normal leading-normal text-12tl;
+        }
+
+        .title-tl12-400-130 {
+            @apply text-12tl font-normal leading-[1.3];
+        }
+        .title-tl10-400-130 {
+            @apply text-12tl font-normal leading-[1.3];
+        }
+        .title-tl8-400-130 {
+            @apply text-8tl font-normal leading-[1.3];
+        }
     }
 
     @media screen and (max-width: 767.9px) {
@@ -377,6 +496,12 @@
     width: 35.5625vw !important;
     height: 46.9375vw !important;
 }
+#boxMap #map.active,
+#boxMap #map.active .vietmapgl-canvas-container,
+#boxMap #map.active .vietmapgl-canvas-container canvas {
+    width: 100% !important;
+    height: 46.9375vw !important;
+}
 #box-list-project #map,
 #box-list-project #map .vietmapgl-canvas-container,
 #box-list-project #map .vietmapgl-canvas-container canvas {
@@ -417,6 +542,10 @@
 canvas.vietmapgl-canvas.mapboxgl-canvas {
     border-top-left-radius: 0.5vw;
     overflow: hidden;
+}
+
+.vietmapgl-popup-content.mapboxgl-popup-content {
+    width: 21.25vw !important;
 }
 
 /* My Project */
