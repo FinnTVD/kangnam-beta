@@ -18,9 +18,11 @@ export default function Button({
                     href={href}
                     className={`${className} ${
                         full ? 'w-full justify-center' : ''
-                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw] group`}
+                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw] group max-lg:py-[2vw] max-lg:px-[3.5vw] max-lg:gap-x-[1vw]`}
                 >
-                    <span className={`${span} title16-400-150 title-mb14-400-150 max-md:-tracking-[0.28px]`}>
+                    <span
+                        className={`${span} title16-400-150 title-mb14-400-150 title-tl14-400-150 max-md:-tracking-[0.28px]`}
+                    >
                         {children}
                     </span>
                     <svg
@@ -29,7 +31,7 @@ export default function Button({
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke={stroke}
-                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw] group-hover:translate-x-2 transition-transform duration-300`}
+                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw] max-lg:w-[2.2vw] max-lg:h-[2.2vw] group-hover:translate-x-2 transition-transform duration-300`}
                     >
                         <path
                             strokeLinecap='round'
@@ -43,10 +45,12 @@ export default function Button({
                     type='button'
                     className={`${className} ${
                         full ? 'w-full justify-center' : ''
-                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw] group`}
+                    } flex gap-x-[0.75vw] items-center w-fit h-fit py-[1vw] px-[2.5vw] rounded-[10vw] border-[0.7px] border-solid border-nu text-nu max-md:py-[3.87vw] max-md:px-[6.4vw] max-md:gap-x-[3.2vw] group max-lg:py-[2vw] max-lg:px-[3.5vw] max-lg:gap-x-[1vw]`}
                     onClick={() => onCLick()}
                 >
-                    <span className={`${span} title16-400-150 title-mb14-400-150 max-md:-tracking-[0.28px]`}>
+                    <span
+                        className={`${span} title16-400-150 title-mb14-400-150 title-tl14-400-150 max-md:-tracking-[0.28px]`}
+                    >
                         {children}
                     </span>
                     <svg
@@ -55,7 +59,7 @@ export default function Button({
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke={stroke}
-                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw] group-hover:translate-x-2 transition-transform duration-300`}
+                        className={`${icon} w-6 h-6 max-md:h-[3.6vw] max-md:w-[3.6vw] max-lg:w-[2.2vw] max-lg:h-[2.2vw] group-hover:translate-x-2 transition-transform duration-300`}
                     >
                         <path
                             strokeLinecap='round'

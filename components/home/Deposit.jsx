@@ -5,7 +5,7 @@ export default function Deposit() {
     return (
         <section
             id='deposit'
-            className='relative h-fit pt pt-[8.44vw] pb-[7vw] max-md:pt-[13.33vw] max-md:h-screen'
+            className='relative h-fit pt-[8.44vw] pb-[7vw] max-md:pt-[13.33vw] max-lg:h-[55vh] max-md:h-screen'
         >
             <Image
                 className='z-0 object-cover max-md:hidden'
@@ -21,20 +21,20 @@ export default function Deposit() {
                 sizes='100vw'
                 fill
             />
-            <div className='w-[34.25vw] ml-[7.5vw] relative z-10 max-md:w-full max-md:mx-0 px-mb10'>
-                <h2 className='text-white title56 title-mb25-700-130'>Kí gửi nhà đất</h2>
-                <p className='title18-400-150 text-white mt-[1vw] mb-[2vw] max-md:mt-[2.13vw] title-mb14-400-150 max-md:mb-[6.4vw]'>
+            <div className='w-[34.25vw] max-lg:w-[60vw] ml-[7.5vw] relative z-10 max-md:w-full max-lg:pl-[3.2vw] max-lg:mx-0 px-mb10'>
+                <h2 className='text-white title56 title-mb25-700-130 title-tl38'>Kí gửi nhà đất</h2>
+                <p className='title18-400-150 text-white mt-[1vw] mb-[2vw] max-md:mt-[2.13vw] title-mb14-400-150 max-md:mb-[6.4vw] title-tl16-400-150'>
                     Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý
                     khách.
                 </p>
-                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] items-center'>
+                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-lg:gap-x-[1.5vw] items-center'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='32'
                         height='32'
                         viewBox='0 0 32 32'
                         fill='none'
-                        className='w-[2vw] h-[2vw] max-md:w-[8vw] max-md:h-[8vw]'
+                        className='w-[2vw] h-[2vw] max-lg:w-[4vw] max-lg:h-[4vw] max-md:w-[8vw] max-md:h-[8vw]'
                     >
                         <g clipPath='url(#clip0_546_2456)'>
                             <path
@@ -73,18 +73,18 @@ export default function Deposit() {
                             </clipPath>
                         </defs>
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150'>
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
                         Đặt khách hàng làm trọng tâm
                     </span>
                 </div>
-                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] items-center my-[1.25vw] max-md:my-[2.9vw]'>
+                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-lg:gap-x-[1.5vw] max-lg:my-[1.75vw] items-center my-[1.25vw] max-md:my-[2.9vw]'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='32'
                         height='32'
                         viewBox='0 0 32 32'
                         fill='none'
-                        className='w-[2vw] h-[2vw] max-md:w-[8vw] max-md:h-[8vw]'
+                        className='w-[2vw] h-[2vw] max-lg:w-[4vw] max-lg:h-[4vw] max-md:w-[8vw] max-md:h-[8vw]'
                     >
                         <g clipPath='url(#clip0_665_6707)'>
                             <path
@@ -158,18 +158,18 @@ export default function Deposit() {
                             </clipPath>
                         </defs>
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150'>
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
                         Đặt khách hàng làm trọng tâm
                     </span>
                 </div>
-                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] items-center'>
+                <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-lg:gap-x-[1.5vw] items-center'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='32'
                         height='32'
                         viewBox='0 0 32 32'
                         fill='none'
-                        className='w-[2vw] h-[2vw] max-md:w-[8vw] max-md:h-[8vw]'
+                        className='w-[2vw] h-[2vw] max-lg:w-[4vw] max-lg:h-[4vw] max-md:w-[8vw] max-md:h-[8vw]'
                     >
                         <path
                             d='M6.41629 17.5906C8.81165 17.5906 10.7535 15.6488 10.7535 13.2534C10.7535 10.8581 8.81165 8.91623 6.41629 8.91623C4.02093 8.91623 2.0791 10.8581 2.0791 13.2534C2.0791 15.6488 4.02093 17.5906 6.41629 17.5906Z'
@@ -196,7 +196,7 @@ export default function Deposit() {
                             strokeMiterlimit='10'
                         />
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150'>
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
                         Đặt khách hàng làm trọng tâm
                     </span>
                 </div>

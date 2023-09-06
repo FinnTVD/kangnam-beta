@@ -33,10 +33,8 @@ const arrLanguage = [
 ]
 
 export default function SelectLanguage({ className, lang }) {
-    const language = useStore((state) => state.language)
     const setLanguage = useStore((state) => state.setLanguage)
     const pathName = usePathname()
-    console.log('🚀 ~ file: SelectLanguage.jsx:38 ~ SelectLanguage ~ pathName:', pathName)
 
     const handleHref = (lg) => {
         if (lg === 'vi') {

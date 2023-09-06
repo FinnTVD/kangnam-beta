@@ -11,8 +11,8 @@ export default function ProjectProminent({ children }) {
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
             <div className='relative z-10 flex items-center justify-between'>
                 <div className='px-mb10'>
-                    <span className='sub-title max-md:hidden'>Tổng hợp các dự án</span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:mb-0 mb-[3vw] title-mb25-700-130 max-md:-tracking-[0.75px]'>
+                    <span className='sub-title max-md:hidden title-tl12-700-150'>Tổng hợp các dự án</span>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:mb-0 mb-[3vw] title-mb25-700-130 max-md:-tracking-[0.75px] title-tl38'>
                         Dự án nổi bật
                     </h2>
                     <span className='title-mb14-400-150 text-den opacity-[0.65] block mb-[4.27vw] md:hidden'>

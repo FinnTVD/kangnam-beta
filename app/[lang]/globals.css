@@ -164,8 +164,12 @@
     }
 
     @media (min-width: 768px) and (max-width: 1023.9px) {
-        .title42 {
+        .title-tl42 {
             @apply leading-[1.3] text-42tl font-extrabold -tracking-[1.8px] text-white;
+        }
+
+        .title-tl38 {
+            @apply capitalize leading-[1.3] text-38tl font-extrabold -tracking-[1.68px];
         }
 
         .title-tl18-700-150 {
@@ -190,6 +194,10 @@
 
         .title-tl16-700-135 {
             @apply text-16tl font-bold leading-[1.35];
+        }
+
+        .title-tl16-600-160 {
+            @apply text-16tl font-semibold leading-[1.6];
         }
 
         .title-tl16-600-130 {
@@ -223,6 +231,10 @@
             @apply font-semibold leading-normal text-14tl;
         }
 
+        .title-tl14-600-130 {
+            @apply font-semibold leading-[1.3] text-14tl;
+        }
+
         .title-tl14-400-160 {
             @apply text-14tl font-normal leading-[1.6];
         }
@@ -240,7 +252,7 @@
         }
 
         .title-tl12-700-150 {
-            @apply text-12tl font-bold leading-[1.5];
+            @apply text-12tl font-bold leading-normal;
         }
 
         .title-tl12-600-160 {
