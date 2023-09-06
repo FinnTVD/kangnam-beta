@@ -4,8 +4,9 @@ import Image from "next/image"
 import Button from "../general/Button";
 import { useMediaQuery } from "react-responsive";
 
-export default function Contact({t}){
+export default function Contact({t, lang}){
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
+    const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const title = "Trụ sở chính (Hà Nội)";
     const address = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phone = ["+84 337858021 / +84 339625612", "+82 10-8413-1981"];
@@ -13,8 +14,8 @@ export default function Contact({t}){
         <section className="relative px-120 pt-[8.125vw] pb-[8.125vw] max-md:py-[13.3vw] px-mb10">
             <div className='flex justify-between items-end'>
                 <div>
-                    <span data-aos="fade-up" className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6]'>{t.aboutUsContact.subtitle}</span>
-                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25] max-md:mt-[1.1vw]'>{t.aboutUsContact.title}</h2>
+                    <span data-aos="fade-up" className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6] max-lg:title-tl16'>{t?.aboutUsContact?.subtitle}</span>
+                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25] max-md:mt-[1.1vw] max-lg:title-tl56'>{t?.aboutUsContact?.title}</h2>
                 </div>
                 {/* <button className="text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" style={{boxShadow: "0px 0px 30px 0px rgba(206, 126, 64, 0.36)"}}>
 
@@ -35,12 +36,12 @@ export default function Contact({t}){
                         />
                     </svg>
                 </button> */}
-                {!isMobile && <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center"> {t.aboutUsContact.button} </Button>}
+                {!isTablet && <Button stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" span="max-lg:title-tl16"> {t.aboutUsContact.button} </Button>}
             </div>
             <div className='flex relative pt-[6.5vw] max-md:pt-[4.2vw]'>
                 <div className="max-md:absolute max-md:top-[50%] max-md:left-[50%] max-md:z-[2] max-md:w-full max-md:translate-x-[-50%] max-md:translate-y-[-50%]">
                     <div className="max-md:relative max-md:py-[8vw] max-md:px-[4.2vw]">
-                        <h3 className='title32-600-127 text-den relative max-md:z-[3] max-md:text-white max-md:text-20mb max-md:font-bold max-md:leading-[1.27] max-md:tracking-[-1px]'>{title}</h3>
+                        <h3 className='title32-600-127 text-den relative max-md:z-[3] max-md:text-white max-md:text-20mb max-md:font-bold max-md:leading-[1.27] max-md:tracking-[-1px] max-lg:title-tl32'>{title}</h3>
                         <div
                             data-aos={!isMobile? 'fade-right' : 'zoom-in'}
                             className='mt-[1.1875vw] relative max-md:z-[3] max-md:mt-[4.2vw]'
@@ -58,7 +59,7 @@ export default function Contact({t}){
                                         fill='#D6A279'
                                     />
                                 </svg>
-                                <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:max-w-[69.3vw] max-md:ml-[4.2vw]'>{address}</span>
+                                <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:max-w-[69.3vw] max-md:ml-[4.2vw] max-lg:title-tl18 max-lg:w-[50%]'>{address}</span>
                             </div>
                             {phone?.map((item, index) => (
                                 <div className='flex items-center mt-[1vw] max-md:mt-[2.6vw]' key={index}>
@@ -74,7 +75,7 @@ export default function Contact({t}){
                                             fill='#D6A279'
                                         />
                                     </svg>
-                                    <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:ml-[4.2vw]'>{item}</span>
+                                    <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:ml-[4.2vw] max-lg:title-tl18'>{item}</span>
                                 </div>
                             ))}
                         </div>
@@ -87,6 +88,7 @@ export default function Contact({t}){
                                 fill
                                 src='/images/about-us-contact-address.png'
                                 className='top-0 left-0 object-cover rounded-lg'
+                                alt="contact-address"
                             ></Image>
                             {isMobile && <div className="absolute top-0 left-0 w-full h-full bg-[#111111] bg-opacity-25"></div>}
                             {isMobile && <div className="absolute top-0 left-0 w-full h-full border-[3px] border-white border-opacity-20 rounded-none"> </div>}
@@ -98,12 +100,13 @@ export default function Contact({t}){
                     width={862}
                     height={710}
                     src={!isMobile? '/images/about-us-map.svg' : '/images/about-us-map-mobile.svg'}
-                    className='absolute right-0 top-0 w-[50.625vw] h-[44.375vw] object-contain max-md:relative max-md:w-[74.6vw] max-md:h-[114.1vw]'
+                    className='absolute right-0 top-0 w-[50.625vw] h-[44.375vw] object-contain max-md:relative max-md:w-[74.6vw] max-md:h-[114.1vw] max-lg:w-[55vw] max-lg:h-[55vw]'
+                    alt="contact-map"
                 ></Image>
             </div>
 
-            <Image fill src="/images/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06] z-[-1]"></Image>
-            {isMobile && <Button stroke='white' href={'/'} span='text-14mb font-normal tracking-[-0.28px]' icon='w-auto h-[4.5vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none gap-x-[3.2vw] py-[4.26vw]'>Liên hệ ngay</Button>}
+            <Image fill src="/images/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06] z-[-1]" alt="contact-background"></Image>
+            {isTablet && <Button stroke='white' href={lang==='vn'? `/contact` : `/${lang}/contact`} span='text-16tl text-14mb font-normal tracking-[-0.28px]' icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw] max-lg:px-[2.5vw] max-lg:py-[1vw]'>{t?.aboutUsContact?.button}</Button>}
         </section>
     )
 }

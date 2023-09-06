@@ -1,8 +1,9 @@
 'use client'
+import { formatDateTime } from '@/utils'
 import classes from './NewsDetailStyle.module.css'
 import { useEffect, useRef } from 'react'
 
-export default function PostDetail({ t, post }) {
+export default function PostDetail({ t, post, translation }) {
     const urlRef = useRef('')
     const fbShareHandler = () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlRef.current}`)
@@ -13,6 +14,7 @@ export default function PostDetail({ t, post }) {
     const linkedinShareHandler = () => {
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlRef.current}`)
     }
+    // const translation = post?.translations?.find((item) => item.languageCode===langCode)
     useEffect(() => {
         console.log(window.location.href)
         urlRef.current = window.location.href
@@ -23,24 +25,25 @@ export default function PostDetail({ t, post }) {
     return (
         <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw]'>
             <div className=''>
-                <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150'>
-                    {post.date} /
+                <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
+                    {formatDateTime(post?.createdAt).slice(0,10)} /
                 </span>
-                <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150'>
+                <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
-                    {post.category} -{' '}
+                    {post?.postType?.name} -{' '}
                 </span>
-                <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150'>
+                <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
-                    {t.newsDetailDes.byAuthor} {post.author}{' '}
+                    {t.newsDetailDes.byAuthor} {post?.user?.lastName + ' ' + post?.user?.firstName}
                 </span>
             </div>
             <div
                 className={`${classes['post-detail']} mt-[0.625vw] pt-[1vw] pb-[2vw] border-b border-t border-neutral-700 border-opacity-10 max-md:pt-[2.6vw] max-md:pb-[4.2vw] max-md:mt-[2.6vw]`}
-                dangerouslySetInnerHTML={{ __html: post?.content }}
-            ></div>
+                dangerouslySetInnerHTML={{ __html: translation?.description }}
+            >
+            </div>
             <div className='flex justify-end items-center mt-[1.625vw] max-md:mt-[4.8vw]'>
-                <span className='title14-700-150 text-[#394854] uppercase max-md:title-mb13-700-150'>
+                <span className='title14-700-150 text-[#394854] uppercase max-md:title-mb13-700-150 max-lg:title-tl14'>
                     {' '}
                     {t.newsDetailDes.share}:{' '}
                 </span>
@@ -50,7 +53,7 @@ export default function PostDetail({ t, post }) {
                         className='cursor-pointer'
                     >
                         <svg
-                            className='w-[1.5vw] max-md:w-[6.4vw]'
+                            className='w-[1.5vw] max-md:w-[6.4vw] max-lg:w-[5vw]'
                             xmlns='http://www.w3.org/2000/svg'
                             width='24'
                             height='24'
@@ -68,7 +71,7 @@ export default function PostDetail({ t, post }) {
                         className='cursor-pointer'
                     >
                         <svg
-                            className='w-[1.5vw] max-md:w-[6.4vw]'
+                            className='w-[1.5vw] max-md:w-[6.4vw] max-lg:w-[5vw]'
                             xmlns='http://www.w3.org/2000/svg'
                             width='24'
                             height='24'
@@ -86,7 +89,7 @@ export default function PostDetail({ t, post }) {
                         className='cursor-pointer'
                     >
                         <svg
-                            className='w-[1.5vw] max-md:w-[6.4vw]'
+                            className='w-[1.5vw] max-md:w-[6.4vw] max-lg:w-[5vw]'
                             xmlns='http://www.w3.org/2000/svg'
                             width='24'
                             height='24'

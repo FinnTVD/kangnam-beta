@@ -8,6 +8,7 @@ export default async function NewsDetail({ params }) {
         <IndexNewsDetail
             t={t}
             slug={params.slug}
+            lang={params.lang}
         ></IndexNewsDetail>
     )
 }

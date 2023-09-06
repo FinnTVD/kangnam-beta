@@ -4,7 +4,7 @@
             {
                 "id": 1,
                 "title": "About us",
-                "href": "/gioi-thieu"
+                "href": "/about-us"
             },
             {
                 "id": 2,
@@ -19,12 +19,12 @@
             {
                 "id": 4,
                 "title": "Agreement & Legal",
-                "href": "/thoa-thuan-va-phap-li"
+                "href": "/agreement"
             },
             {
                 "id": 5,
                 "title": "News",
-                "href": "/danh-sach-tin-tuc"
+                "href": "/news"
             },
             {
                 "id": 6,

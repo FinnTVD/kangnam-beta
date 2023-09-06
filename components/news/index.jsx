@@ -1,9 +1,10 @@
 import ListNews from './ListNews'
 
-export default function IndexNews({ t }) {
+export default function IndexNews({ t, lang }) {
+    
     return (
         <>
-            <ListNews t={t} />
+            <ListNews t={t} lang={lang}/>
         </>
     )
 }
