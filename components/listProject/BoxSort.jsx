@@ -4,21 +4,26 @@ import { useState } from 'react'
 const arrFilter = [
     {
         title: 'Mới nhất',
-        href: '/',
+        value: 'new',
     },
     {
         title: 'Giá tăng dần',
-        href: '/',
+        value: 'ASC',
     },
     {
         title: 'Giá giảm dần',
-        href: '/',
+        value: 'DESC',
     },
 ]
 
-export default function BoxSort() {
+const handleCheckStatusPrice = (price = '') => {
+    if (!price) return arrFilter[0].title
+    const a = arrFilter?.filter((e) => e?.value === price)
+    return a[0].title
+}
+
+export default function BoxSort({ price, createQueryString, pathName, router }) {
     const [isShow, setIsShow] = useState(false)
-    const [indexValue, setIndexValue] = useState(0)
     return (
         <div className='relative w-fit z-10 select-none'>
             <div
@@ -26,7 +31,7 @@ export default function BoxSort() {
                 className='gap-x-[0.63vw] max-md:gap-x-[4.27vw] flex items-center cursor-pointer'
             >
                 <span className='text-den05 text-de title16-400-150 title-mb14-400-150'>
-                    {arrFilter[indexValue].title}
+                    {handleCheckStatusPrice(price)}
                 </span>
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -51,8 +56,12 @@ export default function BoxSort() {
                     <li
                         key={index}
                         onClick={() => {
-                            setIndexValue(index)
                             setIsShow(false)
+                            if (e?.value === 'new') {
+                                router.push(pathName + '?' + createQueryString('price', ''))
+                            } else {
+                                router.push(pathName + '?' + createQueryString('price', e?.value))
+                            }
                         }}
                         className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] max-md:gap-x-[1vw] items-center max-md:text-14mb max-md:px-[2.5vw] max-md:py-[1.5vw]'
                     >
@@ -64,7 +73,7 @@ export default function BoxSort() {
                             strokeWidth='1.5'
                             stroke='black'
                             className={`${
-                                indexValue !== index && 'hidden'
+                                price && price === e?.value ? '' : !price && e?.value === 'new' ? '' : 'hidden'
                             } w-[0.8vw] h-[0.8vw] max-md:w-[3vw] max-md:h-[3vw]`}
                         >
                             <path

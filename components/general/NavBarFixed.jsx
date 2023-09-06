@@ -44,7 +44,6 @@ export default function NavBarFixed({ isHome = true, lang, t, isMobile }) {
     useEffect(() => {
         if (typeof window === 'undefined') return
         document.addEventListener('scroll', handleScroll)
-        // window.scrollTo(0, 0);
         return () => {
             document.removeEventListener('scroll', handleScroll)
         }

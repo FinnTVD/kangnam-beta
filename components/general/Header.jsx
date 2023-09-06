@@ -57,7 +57,7 @@ export default function Header({ lang, t }) {
             <div className={`h-screen max-md:h-[64vh] relative w-full`}>
                 <SlideBanner />
                 <Image
-                    className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
+                    className='object-contain z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                     src='/images/big-logo.png'
                     alt='big-logo'
                     width={350}
@@ -106,7 +106,7 @@ export default function Header({ lang, t }) {
                         height='25'
                         viewBox='0 0 24 25'
                         fill='none'
-                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
+                        className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                     >
                         <path
                             d='M1 1L12 12L23 1'
@@ -119,7 +119,7 @@ export default function Header({ lang, t }) {
                             strokeWidth='2'
                         />
                     </svg>
-                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
+                    <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white max-lg:text-14tl'>
                         Cuộn xuống
                     </span>
                 </div>
