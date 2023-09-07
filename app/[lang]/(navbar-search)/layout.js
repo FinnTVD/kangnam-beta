@@ -1,4 +1,3 @@
-import HeaderV2 from '@/components/general/HeaderV2'
 import { getDictionary } from '../dictionaries'
 import Footer from '@/components/general/Footer'
 
@@ -19,10 +18,6 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className='__className_65281d'
             >
-                <HeaderV2
-                    lang={params.lang}
-                    t={t}
-                />
                 {children}
                 <Footer
                     lang={params.lang}

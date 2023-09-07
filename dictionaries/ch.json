@@ -3,33 +3,49 @@
         "listNav": [
             {
                 "id": 1,
-                "title": "About us",
-                "href": "/about-us"
+                "title": "Mua",
+                "href": "/buy"
             },
             {
                 "id": 2,
-                "title": "Project",
-                "href": "/danh-sach-du-an"
+                "title": "Thuê",
+                "href": "/hire"
             },
             {
                 "id": 3,
-                "title": "Resale",
-                "href": "/danh-sach-du-an"
+                "title": "Bán lại",
+                "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Agreement & Legal",
-                "href": "/agreement"
+                "title": "Dự án",
+                "href": "/projects"
             },
             {
                 "id": 5,
-                "title": "News",
+                "title": "Tin tức",
                 "href": "/news"
             },
             {
                 "id": 6,
-                "title": "Contact",
-                "href": "/lien-he"
+                "title": "Về KangNam",
+                "branch": [
+                    {
+                        "id": 1,
+                        "title": "Giới thiệu",
+                        "href": "/about-us"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Liên hệ",
+                        "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & Pháp lí",
+                        "href": "/agreement"
+                    }
+                ]
             }
         ],
         "button": "Land deposit",
@@ -83,7 +99,7 @@
         "title": "相关新闻",
         "button": "查看全部"
     },
-    "newsLatestButton":{
+    "newsLatestButton": {
         "title": "细节"
     }
 }
