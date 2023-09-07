@@ -23,8 +23,8 @@
             },
             {
                 "id": 5,
-                "title": "Tin tức",
-                "href": "/danh-sach-tin-tuc"
+                "title": "News",
+                "href": "/news"
             },
             {
                 "id": 6,
@@ -32,8 +32,8 @@
                 "branch": [
                     {
                         "id": 1,
-                        "title": "Giới thiệu",
-                        "href": "/gioi-thieu"
+                        "title": "About us",
+                        "href": "/about-us"
                     },
                     {
                         "id": 2,
@@ -42,8 +42,8 @@
                     },
                     {
                         "id": 3,
-                        "title": "Thỏa thuận & Pháp lí",
-                        "href": "/thoa-thuan-va-phap-li"
+                        "title": "Agreement",
+                        "href": "/agreement"
                     }
                 ]
             }

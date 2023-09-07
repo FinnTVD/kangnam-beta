@@ -13,10 +13,10 @@ export default function Footer({ lang, t }) {
     const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
     const menuArr = [
         { url: '/', title: 'Trang chủ' },
-        { url: '/about-us', title: 'Về KANGNAM' },
+        { url: t.Navbar.listNav[5].branch[0].href, title: t.Navbar.listNav[5].branch[0].title },
         { url: '/danh-sach-du-an', title: 'Dự án' },
         { url: '/ky-gui-nha-dat', title: 'Ký gửi nhà đất' },
-        { url: '/agreement', title: 'Thỏa thuận & pháp lý' },
+        { url: t.Navbar.listNav[5].branch[2].href, title: t.Navbar.listNav[5].branch[0].title },
         { url: '/news', title: 'Tin tức' },
     ]
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
