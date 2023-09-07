@@ -12,7 +12,6 @@ const handleCheckStatus = (alias) => {
 export default function ContentDetail({ data, detail }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
-    console.log('🚀 ~ file: ContentDetail.jsx:15 ~ ContentDetail ~ data:', data)
     useEffect(() => {
         setSlugDetailProject(data)
         return () => {
