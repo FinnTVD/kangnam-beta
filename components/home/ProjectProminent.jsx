@@ -22,7 +22,7 @@ export default function ProjectProminent({ children }) {
                 {!isMobile && (
                     <Button
                         href='/danh-sach-du-an'
-                        className='border-none bg-logo'
+                        className='border-none bg-logo max-md:hidden'
                         span='text-white'
                         stroke='white'
                     >
@@ -35,7 +35,7 @@ export default function ProjectProminent({ children }) {
                 <div className='px-mb10'>
                     <Button
                         href='/danh-sach-du-an'
-                        className='border-none bg-logo max-md:mt-[6.19vw]'
+                        className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
                         span='text-white'
                         stroke='white'
                         full={true}

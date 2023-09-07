@@ -65,5 +65,19 @@ const arrFilter = [
         api: '/property-category',
     },
 ]
+const arrFilterV2 = [
+    {
+        id: 1,
+        title: 'Loại hình',
+        slug: 'propertyTypeIds',
+        api: '/property-type',
+    },
+    {
+        id: 2,
+        title: 'Địa điểm',
+        slug: 'propertyAreaTypeIds',
+        api: '/property-area-type',
+    },
+]
 
-export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode, handleCheckParams, arrFilter }
+export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode, handleCheckParams, arrFilter, arrFilterV2 }

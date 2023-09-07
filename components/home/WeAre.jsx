@@ -69,7 +69,7 @@ export default function WeAre({ lang }) {
                                     </span>
                                 </li>
                             </ul>
-                            <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw]'>
+                            <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw] relative z-[99999]'>
                                 <Link
                                     href={handleCheckParamsLanguage(lang, '/projects')}
                                     className='flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'

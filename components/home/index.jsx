@@ -16,7 +16,7 @@ export default function IndexHome({ lang, t }) {
                 <WeAre lang={lang} />
                 <MyProjectV2 lang={lang} />
                 <SellingRes lang={lang} />
-                <Hiring />
+                <Hiring lang={lang} />
                 <div className='w-full max-md:flex max-md:flex-col-reverse'>
                     <Deposit />
                     <ProjectProminent>
