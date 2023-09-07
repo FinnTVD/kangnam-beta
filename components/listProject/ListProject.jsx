@@ -376,7 +376,7 @@ export default function ListProject({ lang, t }) {
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                                <Map />
+                                {/* <Map /> */}
                             </div>
                         </div>
                         <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
