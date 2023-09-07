@@ -2,7 +2,6 @@ import 'swiper/css'
 import './globals.css'
 
 import localFont from 'next/font/local'
-import { getDictionary } from './dictionaries'
 import Script from 'next/script'
 
 const avertaStdCY = localFont({
@@ -42,7 +41,6 @@ const avertaStdCY = localFont({
 })
 
 export default async function RootLayout({ children, params }) {
-    const t = await getDictionary(params.lang)
     return (
         <html lang={params.lang}>
             <head>
