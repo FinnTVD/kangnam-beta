@@ -5,11 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Grid } from 'swiper/modules'
 
 import { useMediaQuery } from 'react-responsive'
-import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../general/Button'
-const arrFilter = ['Loại hình', 'Địa điểm', 'Hình thức']
 
 const arrSelling = new Array(20).fill(0)
 
@@ -28,9 +26,7 @@ export default function SellingRes() {
                             Hơn <span className='title-mb14-700-150'>1500</span> dự án đang được phân phối
                         </span>
                     </div>
-                    <div className='px-mb10 mb-[3.2vw]'>
-                        <BoxFilterV2 arrFilter={arrFilter} />
-                    </div>
+                    <div className='px-mb10 mb-[3.2vw]'>{/* <BoxFilter arrFilter={arrFilter} /> */}</div>
                     <Swiper
                         slidesPerView={'auto'}
                         grid={{

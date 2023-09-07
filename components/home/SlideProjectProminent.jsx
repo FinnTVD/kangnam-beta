@@ -45,7 +45,7 @@ export default function SlideProjectProminent({ isMobile }) {
                 {arrProject &&
                     arrProject.map((e, index) => (
                         <SwiperSlide
-                            className='!h-[26.1825vw] max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
+                            className='!h-[26.1825vw] max-lg:!h-[32.1825vw] max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
                         >
                             <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
@@ -69,7 +69,7 @@ export default function SlideProjectProminent({ isMobile }) {
             {!isMobile && (
                 <button
                     onClick={handlePrevSlide}
-                    className='absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20'
+                    className='absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] max-lg:w-[6vw] max-lg:h-[6vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -77,7 +77,7 @@ export default function SlideProjectProminent({ isMobile }) {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='#444'
-                        className='w-6 h-6'
+                        className='w-6 h-6 max-lg:w-[2.2vw] max-lg:h-[2.2vw]'
                     >
                         <path
                             strokeLinecap='round'
@@ -90,7 +90,7 @@ export default function SlideProjectProminent({ isMobile }) {
             {!isMobile && (
                 <button
                     onClick={handleNextSlide}
-                    className='absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20'
+                    className='absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] max-lg:w-[6vw] max-lg:h-[6vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -98,7 +98,7 @@ export default function SlideProjectProminent({ isMobile }) {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='#444'
-                        className='w-6 h-6'
+                        className='w-6 h-6 max-lg:w-[2.2vw] max-lg:h-[2.2vw]'
                     >
                         <path
                             strokeLinecap='round'

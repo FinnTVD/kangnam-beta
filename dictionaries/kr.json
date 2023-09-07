@@ -3,33 +3,49 @@
         "listNav": [
             {
                 "id": 1,
-                "title": "About us",
-                "href": "/about-us"
+                "title": "Mua",
+                "href": "/buy"
             },
             {
                 "id": 2,
-                "title": "Project",
-                "href": "/danh-sach-du-an"
+                "title": "Thuê",
+                "href": "/hire"
             },
             {
                 "id": 3,
-                "title": "Resale",
-                "href": "/danh-sach-du-an"
+                "title": "Bán lại",
+                "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Agreement & Legal",
-                "href": "/agreement"
+                "title": "Dự án",
+                "href": "/projects"
             },
             {
                 "id": 5,
-                "title": "News",
+                "title": "Tin tức",
                 "href": "/news"
             },
             {
                 "id": 6,
-                "title": "Contact",
-                "href": "/lien-he"
+                "title": "Về KangNam",
+                "branch": [
+                    {
+                        "id": 1,
+                        "title": "Giới thiệu",
+                        "href": "/about-us"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Liên hệ",
+                        "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & Pháp lí",
+                        "href": "/agreement"
+                    }
+                ]
             }
         ],
         "button": "Land deposit",
@@ -40,49 +56,49 @@
         "hire": "원하는 임대료"
     },
 
-    "homepageNews":{
+    "homepageNews": {
         "subtitle": "뉴스 합성",
         "title": "최근 뉴스",
         "button": "모두 보기"
     },
-    "homepagePartners":{
+    "homepagePartners": {
         "subtitle": "파트너 합성",
         "title": "우리의 파트너들",
         "button": "파트너가되다"
     },
-    "footer":{
+    "footer": {
         "title1": "연락하다",
         "title2": "항해",
         "title3": "서비스"
     },
-    "aboutUsStory":{
+    "aboutUsStory": {
         "subtitle": "브랜드 스토리",
         "title": "소개하다"
     },
-    "aboutUsTeams":{
+    "aboutUsTeams": {
         "subtitle": "팀",
         "title": "강남전문"
     },
-    "aboutUsContact":{
+    "aboutUsContact": {
         "subtitle": "연락하다",
         "title": "사무실 정보",
         "button": "지금 연락하세요"
     },
 
-    "newsList":{
-        "subtitle" : "에 대한 뉴스",
+    "newsList": {
+        "subtitle": "에 대한 뉴스",
         "title": "소식"
     },
-    "newsDetailDes":{
+    "newsDetailDes": {
         "byAuthor": "에 의해 작성",
         "share": "공유하다"
     },
-    "newsDetailRelated":{
+    "newsDetailRelated": {
         "subtitle": "일반 뉴스",
         "title": "관련 뉴스",
         "button": "모두 보기"
     },
-    "newsLatestButton":{
+    "newsLatestButton": {
         "title": "세부 사항"
     }
 }

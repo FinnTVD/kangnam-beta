@@ -21,7 +21,7 @@ export default function SearchHome() {
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160'>
                 An tâm với 100% bất động sản được xác thực tại KANGNAM
             </p>
-            <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 title-mb22-800-130 max-md:-tracking-[0.66px] title42'>
+            <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 title-mb22-800-130 max-md:-tracking-[0.66px] title-tl42'>
                 Lựa chọn căn nhà ưng ý của bạn
             </h1>
             <div className='w-[54vw] max-md:w-full py-[1.53vw] max-md:py-[4.27vw] max-md:px-[6.4vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'>
