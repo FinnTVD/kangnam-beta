@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, isMobile }) {
+export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index }) {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -45,7 +45,9 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
 
         let search = b.join('--')
 
-        router.push(pathName + '?' + createQueryString(item?.slug, search))
+        router.push(pathName + '?' + createQueryString(item?.slug, search), {
+            scroll: false,
+        })
         setIndexFilter(-1)
     }
 
@@ -54,7 +56,7 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             ref={sideRef}
             className={`${
                 indexFilter === index ? 'bg-logo' : 'bg-white'
-            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative relative`}
+            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
         >
             <span
                 className={`${
@@ -115,7 +117,9 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                 <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw] max-md:py-[5.6vw] max-md:px-[6.4vw]'>
                     <span
                         onClick={() => {
-                            router.push(pathName + '?' + createQueryString(item?.slug, ''))
+                            router.push(pathName + '?' + createQueryString(item?.slug, ''), {
+                                scroll: false,
+                            })
                             setIndexFilter(-1)
                         }}
                         className='cursor-pointer title14-400-150 text-den title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw]'
