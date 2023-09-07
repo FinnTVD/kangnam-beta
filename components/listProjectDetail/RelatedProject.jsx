@@ -15,7 +15,7 @@ export default function RelatedProject({ lang }) {
                         </h2>
                     </div>
                     <Button
-                        href='/project'
+                        href='/projects'
                         className='border-none bg-logo max-md:hidden'
                         span='text-white'
                         stroke='white'

@@ -1,5 +1,4 @@
 'use client'
-const arrFilter = new Array(10).fill(0)
 import useSWR from 'swr'
 import useStore from '@/app/[lang]/(store)/store'
 import { useState } from 'react'

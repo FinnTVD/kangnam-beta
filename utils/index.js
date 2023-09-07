@@ -45,4 +45,25 @@ const handleCheckParams = (pathName) => {
     return ''
 }
 
-export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode, handleCheckParams }
+const arrFilter = [
+    {
+        id: 1,
+        title: 'Loại hình',
+        slug: 'propertyTypeIds',
+        api: '/property-type',
+    },
+    {
+        id: 2,
+        title: 'Địa điểm',
+        slug: 'propertyAreaTypeIds',
+        api: '/property-area-type',
+    },
+    {
+        id: 3,
+        title: 'Hình thức',
+        slug: 'propertyCategoryIds',
+        api: '/property-category',
+    },
+]
+
+export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode, handleCheckParams, arrFilter }
