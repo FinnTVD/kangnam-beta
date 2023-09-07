@@ -568,42 +568,42 @@ export default function ContentDetail({ data, detail }) {
                                         <path
                                             d='M10.462 9.1332H10.468'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />
                                         <path
                                             d='M10.462 11.1332H10.468'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />
                                         <path
                                             d='M7.99618 9.1332H8.00216'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />
                                         <path
                                             d='M7.99618 11.1332H8.00216'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />
                                         <path
                                             d='M5.52889 9.1332H5.53488'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />
                                         <path
                                             d='M5.52889 11.1332H5.53488'
                                             stroke='#444444'
-                                            stroke-width='1.5'
+                                            strokeWidth='1.5'
                                             strokeLinecap='round'
                                             strokeLinejoin='round'
                                         />

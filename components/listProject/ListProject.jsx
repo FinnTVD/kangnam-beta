@@ -9,15 +9,14 @@ import BtnShowMap from './BtnShowMap'
 import ReactPaginate from 'react-paginate'
 import classes from '../news/ListNewsStyles.module.css'
 import { useCallback, useEffect, useLayoutEffect } from 'react'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { mutate } from 'swr'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, handleCheckParams } from '@/utils'
 const arrFilter = [
     {
         id: 1,
@@ -55,12 +54,7 @@ const arrFilter1 = [
 
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
-const handleCheckParams = (pathName) => {
-    if (pathName?.includes('buy')) return '&propertyCategoryIds=1c3afd45-f351-407a-96ab-0d8812047b8b'
-    if (pathName?.includes('hire')) return '&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a'
-    if (pathName?.includes('resale')) return '&propertyCategoryIds=d47b243b-6593-4098-b99e-56151d31add8'
-    return ''
-}
+
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 gsap.registerPlugin(ScrollTrigger)
