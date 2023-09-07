@@ -11,14 +11,7 @@ export default function Footer({ lang, t }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
     const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
-    const menuArr = [
-        { url: '/', title: 'Trang chủ' },
-        { url: t.Navbar.listNav[5].branch[0].href, title: t.Navbar.listNav[5].branch[0].title },
-        { url: '/danh-sach-du-an', title: 'Dự án' },
-        { url: '/ky-gui-nha-dat', title: 'Ký gửi nhà đất' },
-        { url: t.Navbar.listNav[5].branch[2].href, title: t.Navbar.listNav[5].branch[0].title },
-        { url: '/news', title: 'Tin tức' },
-    ]
+    const menuArr = t.footerNav
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
     const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
 
@@ -326,7 +319,7 @@ export default function Footer({ lang, t }) {
                         <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {menuArr.map((menu, index) => (
                                 <Link
-                                    href={lang === 'vi' ? menu.url : `/${lang + menu.url}`}
+                                    href={lang === 'vi' ? menu.href : `/${lang + menu.href}`}
                                     key={index}
                                     className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130 max-lg:title-tl16"
                                 >

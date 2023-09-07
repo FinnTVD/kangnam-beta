@@ -28,7 +28,7 @@
             },
             {
                 "id": 6,
-                "title": "Về KangNam",
+                "title": "About KangNam",
                 "branch": [
                     {
                         "id": 1,
@@ -98,5 +98,37 @@
     },
     "newsLatestButton": {
         "title": "View"
-    }
+    },
+    "footerNav": [
+        {
+            "id": 1,
+            "title": "Trang chủ",
+            "href": "/"
+        },
+        {
+            "id": 2,
+            "title": "Về Kangnam",
+            "href": "/about-us"
+        },
+        {
+            "id": 3,
+            "title": "Dự án",
+            "href": "/projects"
+        },
+        {
+            "id": 4,
+            "title": "Ký gửi nhà đất",
+            "href": "/dang-tin"
+        },
+        {
+            "id": 5,
+            "title": "Thỏa thuận và pháp lý",
+            "href": "/agreement"
+        },
+        {
+            "id": 6,
+            "title": "Tin tức",
+            "href": "/news"
+        }
+    ]
 }

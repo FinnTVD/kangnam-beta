@@ -282,7 +282,7 @@ export default function MyProjectV2({ lang }) {
                                 breakLabel='...'
                                 nextLabel='Next'
                                 onPageChange={(e) => {
-                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1))
+                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1), { scroll: false })
                                     projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })
                                 }}
                                 pageRangeDisplayed={5}

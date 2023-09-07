@@ -6,11 +6,24 @@ import { useMediaQuery } from 'react-responsive'
 import { Autoplay } from 'swiper/modules'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import useSWR from 'swr'
+
 
 const listNews = new Array(3).fill(0)
-export default function RelatedNews({ t, relatedNews, lang, isLoadingNewsArr }) {
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+export default function RelatedNews({ t, lang, post }) {
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-
+    const {
+        data: newsArr,
+        error: errornewsArr,
+        isLoading: isLoadingNewsArr,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=7&postTypeIds[]=${post?.postType?.id}`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+    const relatedNews = newsArr?.data?.filter((item) => item.postType.id === post.postType.id && item.id!==post.id).slice(0, 6);
+    
     return ( 
         <section className='px-120 mt-[3.75vw] max-md:mt-[13.3vw] max-lg:px-0 max-md:mb-[16vw] max-lg:mb-[8vw]'>
             <div className='flex justify-between items-end px-mb10 max-lg:px-120'>
