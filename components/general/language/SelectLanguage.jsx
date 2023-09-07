@@ -37,6 +37,12 @@ export default function SelectLanguage({ className, lang }) {
     const pathName = usePathname()
 
     const handleHref = (lg) => {
+        const slugDetailProject = useStore((state) => state.slugDetailProject)
+        if (slugDetailProject) {
+            const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lg))
+            const lgNew = lg === 'vi' ? '' : lg + '/'
+            return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+        }
         if (lg === 'vi') {
             if (lang === 'vi') {
                 return pathName
