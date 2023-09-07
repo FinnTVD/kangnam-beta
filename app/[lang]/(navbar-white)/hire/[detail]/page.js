@@ -5,7 +5,7 @@ export async function generateMetadata({ params: { lang, detail } }) {
     if (!data) return
     const dataDetail = data?.translations?.find((e) => e?.slug === detail)
     return {
-        title: dataDetail?.titleSeo,
+        title: dataDetail?.titleSeo || 'Detail Project',
         description: dataDetail?.descSeo,
         applicationName: process.env.SITE_NAME,
         openGraph: {

@@ -241,12 +241,7 @@ export default function ListProject({ lang, t }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={
-                                        (lang === 'vi' ? '' : lang + '/') +
-                                        e?.propertyCategory?.alias +
-                                        '/' +
-                                        e?.translation?.slug
-                                    }
+                                    href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
                                     className='w-full'
                                     key={index}
                                 >
