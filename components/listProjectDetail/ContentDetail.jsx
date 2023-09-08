@@ -33,7 +33,7 @@ export default function ContentDetail({ data, detail }) {
             <div className='flex gap-x-[4.87vw]'>
                 <div className='flex-1'>
                     <div className='flex items-center justify-between max-md:flex-col max-md:justify-start'>
-                        <h1 className='w-[28.8125vw] title32-800-130 text-den -tracking-[1.6px] capitalize title-mb20-700-130 max-md:-tracking-[1px] max-md:w-full'>
+                        <h1 className='w-[28.8125vw] title32-800-130 text-den -tracking-[1.6px] capitalize title-mb20-700-130 max-md:-tracking-[1px] max-md:w-full line-clamp-3'>
                             {dataDetail?.name}
                         </h1>
                         <div className='w-fit max-md:flex max-md:gap-x-[3.2vw] max-md:mt-[1.33vw] max-md:items-center max-md:w-full'>

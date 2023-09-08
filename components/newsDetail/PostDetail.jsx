@@ -2,12 +2,14 @@
 import { formatDateTime } from '@/utils'
 import classes from './NewsDetailStyle.module.css'
 import { useEffect, useRef } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-
-export default function PostDetail({ t, post, translation, lang }) {
+import { useRouter } from 'next/navigation'
+import useStore from '@/app/[lang]/(store)/store'
+export default function PostDetail({ t, post, newsDetail, lang }) {
+    console.log('🚀 ~ file: PostDetail.jsx:8 ~ PostDetail ~ post:', post)
     const router = useRouter()
-    const pathName = usePathname()
     const urlRef = useRef('')
+    const setSlugDetailNews = useStore((state) => state.setSlugDetailNews)
+
     const fbShareHandler = () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlRef.current}`)
     }
@@ -17,23 +19,28 @@ export default function PostDetail({ t, post, translation, lang }) {
     const linkedinShareHandler = () => {
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlRef.current}`)
     }
-    // const translation = post?.translations?.find((item) => item.languageCode===langCode)
     useEffect(() => {
         urlRef.current = window.location.href
         if (window.FB) {
             window.FB.XFBML.parse()
         }
-    }, [])
-    useEffect(() => {
-        if(translation){
-            router.replace(`/${lang}/news/${translation.slug}`, undefined, {shallow: true})
+        setSlugDetailNews(post)
+        return () => {
+            setSlugDetailNews(null)
         }
-    }, [translation])
+    }, [])
+
+    // useEffect(() => {
+    //     if (newsDetail) {
+    //         router.replace(`/${lang}/news/${newsDetail?.slug}`, undefined, { shallow: true })
+    //     }
+    // }, [newsDetail])
+
     return (
         <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw]'>
             <div className=''>
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
-                    {formatDateTime(post?.createdAt).slice(0,10)} /
+                    {formatDateTime(post?.createdAt).slice(0, 10)} /
                 </span>
                 <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
@@ -41,18 +48,17 @@ export default function PostDetail({ t, post, translation, lang }) {
                 </span>
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
-                    {t.newsDetailDes.byAuthor} {post?.user?.lastName + ' ' + post?.user?.firstName}
+                    {t?.newsDetailDes?.byAuthor} {post?.user?.lastName + ' ' + post?.user?.firstName}
                 </span>
             </div>
             <div
                 className={`${classes['post-detail']} mt-[0.625vw] pt-[1vw] pb-[2vw] border-b border-t border-neutral-700 border-opacity-10 max-md:pt-[2.6vw] max-md:pb-[4.2vw] max-md:mt-[2.6vw]`}
-                dangerouslySetInnerHTML={{ __html: translation?.description }}
-            >
-            </div>
+                dangerouslySetInnerHTML={{ __html: newsDetail?.description }}
+            ></div>
             <div className='flex justify-end items-center mt-[1.625vw] max-md:mt-[4.8vw]'>
                 <span className='title14-700-150 text-[#394854] uppercase max-md:title-mb13-700-150 max-lg:title-tl14'>
                     {' '}
-                    {t.newsDetailDes.share}:{' '}
+                    {t?.newsDetailDes?.share}:{' '}
                 </span>
                 <div className='flex gap-[0.5vw] ml-[0.8125vw] max-md:gap-[2.1vw] max-md:ml-[2.4vw]'>
                     <div
@@ -117,7 +123,7 @@ export default function PostDetail({ t, post, translation, lang }) {
             </div>
             <div
                 className='fb-comments mt-[2.5vw] max-md:mt-[10.6vw] !block'
-                data-href='https://www.w3schools.com/'
+                data-href={`${process.env.NEXT_PUBLIC_DOMAIN}${post?.id}`}
                 data-width='100%'
                 data-numposts='5'
             ></div>

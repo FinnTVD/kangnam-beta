@@ -6,11 +6,20 @@ const useStore = create((set, get) => ({
     propertyType: [],
     socialMedia: false,
     slugDetailProject: null,
+    slugDetailNews: null,
     setSlugDetailProject: (data) => {
         set((state) => {
             return {
                 ...state,
                 slugDetailProject: data,
+            }
+        })
+    },
+    setSlugDetailNews: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                slugDetailNews: data,
             }
         })
     },

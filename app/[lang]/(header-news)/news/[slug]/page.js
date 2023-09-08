@@ -54,17 +54,26 @@ export async function generateMetadataNews({ params: { lang, slug } }) {
     }
 }
 
-export default async function NewsDetail({ params: {lang, slug} }) {
+export default async function NewsDetail({ params: { lang, slug } }) {
     const t = await getDictionary(lang)
-
+    const post = await getData(`/post/post-by-slug/${slug}`)
+    const langCode = handleCheckLangCode(lang)
+    const newsDetail = post?.translations?.find((item) => item?.languageCode === langCode)
     return (
-        <> 
+        <>
+            <HeaderV2
+                lang={lang}
+                t={t}
+                post={post}
+                newsDetail={newsDetail}
+            />
             <IndexNewsDetail
                 t={t}
                 slug={slug}
                 lang={lang}
-            >
-            </IndexNewsDetail>
+                post={post}
+                newsDetail={newsDetail}
+            />
         </>
     )
 }

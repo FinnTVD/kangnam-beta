@@ -11,37 +11,57 @@ const arrLanguage = [
         title: 'Việt Nam',
         src: '/images/vn.svg',
         code: 'vi',
+        languageCode: 'vi_VN',
     },
     {
         id: 2,
         title: 'English',
         src: '/images/english.svg',
         code: 'en',
+        languageCode: 'en_US',
     },
     {
         id: 3,
         title: 'Korea',
         src: '/images/korea.svg',
         code: 'kr',
+        languageCode: 'ko_KR',
     },
     {
         id: 4,
         title: 'China',
         src: '/images/china.svg',
         code: 'ch',
+        languageCode: 'zh_CN',
     },
 ]
 
 export default function SelectLanguage({ className, lang }) {
     const setLanguage = useStore((state) => state.setLanguage)
+    const slugDetailProject = useStore((state) => state.slugDetailProject)
+    const slugDetailNews = useStore((state) => state.slugDetailNews)
     const pathName = usePathname()
 
-    const handleHref = (lg) => {
-        const slugDetailProject = useStore((state) => state.slugDetailProject)
+    const handleHref = (lg, lgCode) => {
         if (slugDetailProject) {
-            const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lg))
+            const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lgCode))
             const lgNew = lg === 'vi' ? '' : lg + '/'
-            return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+            if (item?.slug) {
+                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+            } else {
+                const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
+                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + itemVN?.slug
+            }
+        }
+        if (slugDetailNews) {
+            const item = slugDetailNews?.translations?.find((e) => e?.languageCode?.includes(lgCode))
+            const lgNew = lg === 'vi' ? '' : lg + '/'
+            if (item?.slug) {
+                return '/' + lgNew + 'news/' + item?.slug
+            } else {
+                const itemVN = slugDetailNews?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
+                return '/' + lgNew + 'news/' + itemVN?.slug
+            }
         }
         if (lg === 'vi') {
             if (lang === 'vi') {
@@ -77,7 +97,7 @@ export default function SelectLanguage({ className, lang }) {
                     <li key={e?.id}>
                         <Link
                             className='cursor-pointer select-none max-md:py-[1vw] flex items-center gap-x-[0.5vw] max-md:px-[2.13vw] max-md:gap-x-[2.4vw] w-full px-[0.5vw] py-[0.25vw] hover:bg-[#57534e80]'
-                            href={handleHref(e?.code)}
+                            href={handleHref(e?.code, e?.languageCode)}
                             replace
                             scroll={false}
                             onClick={() => handleChangeLanguage(e?.code)}

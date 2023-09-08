@@ -4,14 +4,15 @@ import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
+// href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
+// lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`
 export default function LatestNewsItem({ newsItem, t, lang }) {
     const languageCode = handleCheckLangCode(lang)
 
     const translation = newsItem?.translations?.find((itm) => itm.languageCode === languageCode)
 
-    return(
-        <Link href={lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
+    return (
+        <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
             <div className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'>
                 <Image
                     className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover'
