@@ -2,8 +2,11 @@
 import { formatDateTime } from '@/utils'
 import classes from './NewsDetailStyle.module.css'
 import { useEffect, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
-export default function PostDetail({ t, post, translation }) {
+export default function PostDetail({ t, post, translation, lang }) {
+    const router = useRouter()
+    const pathName = usePathname()
     const urlRef = useRef('')
     const fbShareHandler = () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlRef.current}`)
@@ -21,6 +24,11 @@ export default function PostDetail({ t, post, translation }) {
             window.FB.XFBML.parse()
         }
     }, [])
+    useEffect(() => {
+        if(translation){
+            router.replace(`/${lang}/news/${translation.slug}`, undefined, {shallow: true})
+        }
+    }, [translation])
     return (
         <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw]'>
             <div className=''>
