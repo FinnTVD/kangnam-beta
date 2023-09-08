@@ -7,7 +7,7 @@ export default function BoxFilterV2({ arrFilter }) {
     const [indexFilter, setIndexFilter] = useState(null)
 
     return (
-        <ul className='flex gap-x-[1.5vw] max-md:justify-between select-none relative'>
+        <ul className='flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative'>
             {arrFilter &&
                 arrFilter.map((e, index) => (
                     <ItemFilterV2

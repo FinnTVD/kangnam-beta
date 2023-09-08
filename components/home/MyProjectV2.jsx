@@ -6,7 +6,7 @@ import Map from './Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
-import { handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
+import { arrFilter, handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -15,27 +15,6 @@ import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-
-const arrFilter = [
-    {
-        id: 1,
-        title: 'Loại hình',
-        slug: 'propertyTypeIds',
-        api: '/property-type',
-    },
-    {
-        id: 2,
-        title: 'Địa điểm',
-        slug: 'propertyAreaTypeIds',
-        api: '/property-area-type',
-    },
-    {
-        id: 3,
-        title: 'Hình thức',
-        slug: 'propertyCategoryIds',
-        api: '/property-category',
-    },
-]
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -66,7 +45,9 @@ export default function MyProjectV2({ lang }) {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1))
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
     } else {
         propertyTypeParams = ''
     }
@@ -75,7 +56,9 @@ export default function MyProjectV2({ lang }) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1))
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
     } else {
         propertyAreaTypeParams = ''
     }
@@ -84,7 +67,9 @@ export default function MyProjectV2({ lang }) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1))
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
     } else {
         propertyCategoryTypeParams = ''
     }
@@ -114,7 +99,7 @@ export default function MyProjectV2({ lang }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
-    if (isMobile) return <></>
+    if (isMobile) return
 
     return (
         <section
@@ -282,7 +267,9 @@ export default function MyProjectV2({ lang }) {
                                 breakLabel='...'
                                 nextLabel='Next'
                                 onPageChange={(e) => {
-                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1), { scroll: false })
+                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1), {
+                                        scroll: false,
+                                    })
                                     projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })
                                 }}
                                 pageRangeDisplayed={5}
@@ -312,10 +299,10 @@ export default function MyProjectV2({ lang }) {
                         isToggle ? 'w-full' : '!w-[35.5625vw]'
                     } !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    <Map
+                    {/* <Map
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
-                    />
+                    /> */}
                 </div>
             </div>
         </section>

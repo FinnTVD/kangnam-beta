@@ -1,7 +1,7 @@
 import Button from '../general/Button'
 import SlideRelatedNews from './SlideRelatedProject'
 
-export default function RelatedProject() {
+export default function RelatedProject({ lang }) {
     return (
         <section className='w-screen h-fit px-120 py-[6.25vw] max-md:px-0'>
             <div className='w-full'>
@@ -15,7 +15,7 @@ export default function RelatedProject() {
                         </h2>
                     </div>
                     <Button
-                        href='/danh-sach-du-an'
+                        href='/projects'
                         className='border-none bg-logo max-md:hidden'
                         span='text-white'
                         stroke='white'
@@ -23,7 +23,7 @@ export default function RelatedProject() {
                         Xem tất cả
                     </Button>
                 </div>
-                <SlideRelatedNews />
+                <SlideRelatedNews lang={lang} />
             </div>
         </section>
     )

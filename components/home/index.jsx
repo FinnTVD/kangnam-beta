@@ -15,7 +15,7 @@ export default function IndexHome({ lang, t }) {
             <main>
                 <WeAre lang={lang} />
                 <MyProjectV2 lang={lang} />
-                <SellingRes />
+                <SellingRes lang={lang} />
                 <Hiring />
                 <div className='w-full max-md:flex max-md:flex-col-reverse'>
                     <Deposit />
@@ -31,7 +31,10 @@ export default function IndexHome({ lang, t }) {
                 </div>
                 <Prominent />
                 <Partner t={t} />
-                <LatestNews t={t} lang={lang}/>
+                <LatestNews
+                    t={t}
+                    lang={lang}
+                />
             </main>
         </>
     )
