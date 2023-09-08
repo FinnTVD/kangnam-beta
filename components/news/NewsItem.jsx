@@ -11,7 +11,7 @@ export default function NewsItem({ newsOtherItem, lang }) {
     const translation = newsOtherItem?.translations?.find((itm) => itm.languageCode === languageCode)
 
     return (
-        <Link href={lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
+        <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
             <div className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'>
                 {/* <div className="flex h-[11vw] items-center"> */}
                 <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw] max-lg:h-[40vw]'>

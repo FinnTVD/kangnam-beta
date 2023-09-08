@@ -336,7 +336,7 @@ export default function ListProject({ lang, t }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
-                                                {e?.translation?.price}
+                                                {e?.translation?.priceDisplay}
                                             </span>
                                         </div>
                                     </div>

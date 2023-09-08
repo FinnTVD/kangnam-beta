@@ -6,6 +6,11 @@ export default async function News({ params: { lang } }) {
     const t = await getDictionary(lang)
     return (
         <>
+            <HeaderV2
+                lang={lang}
+                t={t}
+                src='/images/bg-news.jpg'
+            />
             <IndexNews
                 t={t}
                 lang={lang}

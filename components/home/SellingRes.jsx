@@ -14,20 +14,21 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import { mutate } from 'swr'
 import { useCallback, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-const arrSelling = new Array(20).fill(0)
+const arrSelling = new Array(2).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 export default function SellingRes({ lang }) {
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
-    if (!isMobile) return
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
+    const isMobile = useMediaQuery({
+        query: '(max-width: 767.9px)',
+    })
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
@@ -87,8 +88,6 @@ export default function SellingRes({ lang }) {
         },
     )
 
-    console.log('🚀 ~ file: SellingRes.jsx:64 ~ SellingRes ~ data:', data)
-
     useEffect(() => {
         mutate(
             `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10${
@@ -96,6 +95,7 @@ export default function SellingRes({ lang }) {
             }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
     }, [lang])
+    if (!isMobile) return
 
     return (
         <section className='w-full pt-[11.11vw] md:hidden'>
@@ -108,42 +108,106 @@ export default function SellingRes({ lang }) {
             <div className='px-mb10 mb-[3.2vw]'>
                 <BoxFilterV2 arrFilter={arrFilter} />
             </div>
-            <Swiper
-                slidesPerView={'auto'}
-                grid={{
-                    rows: 2,
-                }}
-                spaceBetween={16}
-                modules={[Grid]}
-                className='mySwiper !h-[180vw] px-mb10'
-                id='selling'
-            >
-                {arrSelling &&
-                    arrSelling?.map((e, index) => (
+            {isLoading && (
+                <div className='overflow-hidden'>
+                    <div className='flex gap-x-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
+                        {arrSelling?.map((e, index) => (
+                            <div
+                                className='h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]'
+                                key={index}
+                            >
+                                <div className='relative w-full h-[50.93vw] rounded-[0.5vw] overflow-hidden'>
+                                    <Skeleton height={'50.93vw'} />
+                                </div>
+                                <div className='my-[2.67vw]'>
+                                    <Skeleton height={'6.13vw'} />
+                                </div>
+                                <div className='flex flex-col gap-y-[2.13vw]'>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className='flex gap-x-[4.27vw] mt-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
+                        {arrSelling?.map((e, index) => (
+                            <div
+                                className='h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]'
+                                key={index}
+                            >
+                                <div className='relative w-full h-[50.93vw] rounded-[0.5vw] overflow-hidden'>
+                                    <Skeleton height={'50.93vw'} />
+                                </div>
+                                <div className='my-[2.67vw]'>
+                                    <Skeleton height={'6.13vw'} />
+                                </div>
+                                <div className='flex flex-col gap-y-[2.13vw]'>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                    <div>
+                                        <Skeleton height={'4.53vw'} />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {data && (
+                <Swiper
+                    slidesPerView={'auto'}
+                    grid={{
+                        rows: 2,
+                    }}
+                    spaceBetween={16}
+                    modules={[Grid]}
+                    className='mySwiper !h-[180vw] px-mb10'
+                    id='selling'
+                >
+                    {data?.data?.map((e, index) => (
                         <SwiperSlide
                             className={`!h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]`}
                             key={index}
                         >
                             <Link
-                                href={'/'}
+                                href={
+                                    (lang === 'vi' ? '' : lang + '/') +
+                                    e?.propertyCategory?.alias +
+                                    '/' +
+                                    e?.translation?.slug
+                                }
                                 className='block w-full h-fit box-img'
                                 key={index}
                             >
                                 <div className='relative w-full h-[50.93vw] rounded-[2.13vw] overflow-hidden'>
                                     <Image
                                         className='z-0 object-cover'
-                                        src='/images/itemproject.jpg'
-                                        alt='itemProject'
+                                        src={e?.firstImage || '/images/itemproject.jpg'}
+                                        alt={e?.translation?.name || 'thumbnail project'}
                                         sizes='50.93vw'
                                         fill
                                     />
                                     <div className='block absolute rounded-md bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit title-mb10-600-150'>
-                                        Bán
+                                        {e?.propertyCategory?.name}
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
-                                    <h6 className='text-den title-mb18-700-130 mb-[2.67vw]'>
-                                        Nhà phố Thủy Nguyên full nội thất
+                                    <h6
+                                        title={e?.translation?.name}
+                                        className='text-den title-mb18-700-130 mb-[2.67vw] line-clamp-1'
+                                    >
+                                        {e?.translation?.name}
                                     </h6>
                                     <div className='flex items-center '>
                                         <svg
@@ -169,11 +233,11 @@ export default function SellingRes({ lang }) {
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150'>
+                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150 whitespace-nowrap'>
                                             Địa chỉ:
                                         </span>
-                                        <span className='capitalize text-den title-mb14-400-150'>
-                                            Tôn Đức Thắng, Hà Nội
+                                        <span className='capitalize text-den title-mb14-400-150 line-clamp-1'>
+                                            {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
                                         </span>
                                     </div>
                                     <div className='flex items-center my-[2.13vw]'>
@@ -193,7 +257,7 @@ export default function SellingRes({ lang }) {
                                             Diện tích:
                                         </span>
                                         <span className='capitalize text-den title-mb14-400-150'>
-                                            52m2 (10m x 5.2m)
+                                            {e?.translation?.size + ' m²'}
                                         </span>
                                     </div>
                                     <div className='flex items-center'>
@@ -212,16 +276,19 @@ export default function SellingRes({ lang }) {
                                         <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150'>
                                             Mức giá:
                                         </span>
-                                        <span className='capitalize text-den title-mb14-400-150'>25 tỷ</span>
+                                        <span className='capitalize text-den title-mb14-400-150'>
+                                            {e?.translation?.priceDisplay}
+                                        </span>
                                     </div>
                                 </div>
                             </Link>
                         </SwiperSlide>
                     ))}
-            </Swiper>
+                </Swiper>
+            )}
             <div className='px-mb10 mt-[6.4vw] mb-[16vw]'>
                 <Button
-                    href='/danh-sach-du-an'
+                    href='/projects'
                     full={true}
                     className='border-none bg-logo'
                     span='text-white '

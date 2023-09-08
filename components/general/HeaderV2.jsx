@@ -25,7 +25,7 @@ const isCheckPathName = (pathName) => {
     }
 }
 
-export default function HeaderV2({ lang, t }) {
+export default function HeaderV2({ lang, t, post, newsDetail, src }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
     const isMobile = useMediaQuery({
@@ -55,11 +55,12 @@ export default function HeaderV2({ lang, t }) {
             <div className={`h-[80vh] max-md:h-[55vh] relative w-full`}>
                 <Image
                     className='z-0 object-cover'
-                    src='/images/bg-header.jpg'
-                    alt='bg-header'
+                    src={post?.image || src || '/images/bg-header.jpg'}
+                    alt={newsDetail?.title || 'bg-header'}
                     sizes='100vw'
                     quality={100}
                     fill
+                    priority
                 />
                 {/* <SlideBanner /> */}
                 {/* {isHome && (
@@ -101,7 +102,11 @@ export default function HeaderV2({ lang, t }) {
                         t={t}
                     />
                 )}
-                <ContentPageOther/>
+                <ContentPageOther
+                    post={post}
+                    newsDetail={newsDetail}
+                    lang={lang}
+                />
                 {isHome ? (
                     <></>
                 ) : (

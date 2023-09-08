@@ -1,3 +1,4 @@
+import HeaderV2 from '@/components/general/HeaderV2'
 import { getDictionary } from '../dictionaries'
 import Footer from '@/components/general/Footer'
 

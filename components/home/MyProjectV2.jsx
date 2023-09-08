@@ -162,7 +162,7 @@ export default function MyProjectV2({ lang }) {
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
                                             className='z-0 object-cover'
-                                            src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
+                                            src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={e?.translation?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
@@ -254,7 +254,7 @@ export default function MyProjectV2({ lang }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
-                                                {e?.translation?.price}
+                                                {e?.translation?.priceDisplay}
                                             </span>
                                         </div>
                                     </div>
