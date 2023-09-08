@@ -101,7 +101,7 @@ export default function HeaderV2({ lang, t }) {
                         t={t}
                     />
                 )}
-                <ContentPageOther />
+                <ContentPageOther/>
                 {isHome ? (
                     <></>
                 ) : (

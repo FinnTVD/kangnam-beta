@@ -148,7 +148,7 @@ export default function ListNews({ t, lang }) {
                                 <div className='w-full h-[16.1875vw] rounded-lg max-md:h-[56vw] max-lg:h-[40vw]'>
                                     <Skeleton width={'100%'} height={'100%'}></Skeleton>
                                 </div>
-                                <div className='w-[4.4375vw] h-[1.75vw] max-lg:mt-[1vw] max-md:w-[15.2vw] max-md:h-[6.1vw]'>
+                                <div className='w-[4.4375vw] h-[1.75vw] mt-[0.5vw] max-lg:mt-[1vw] max-md:w-[15.2vw] max-md:h-[6.1vw]'>
                                     <Skeleton width={'100%'} height={'100%'}></Skeleton>
                                 </div>
                                 <div className='w-full mt-[0.2625vw] flex flex-col max-lg:mt-[0.8vw]'>
