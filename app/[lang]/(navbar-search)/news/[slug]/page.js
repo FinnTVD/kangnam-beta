@@ -55,25 +55,10 @@ export async function generateMetadataNews({ params: { lang, slug } }) {
 }
 
 export default async function NewsDetail({ params: {lang, slug} }) {
-    // let post = null
     const t = await getDictionary(lang)
-    // const langCode = handleCheckLangCode(lang)
-    // try{
-    //     const response = await fetch(NEXT_PUBLIC_API + `/post/post-by-slug/${slug}`)
-    //     const data = response.json()
-    //     post = data
-    // }
-    // catch{
-    //     throw new Error('Lỗi fetch')
-    // }
-    // const translation = post?.translations?.find((item) => item.languageCode===langCode)
 
     return (
         <> 
-            <HeaderV2
-                lang={lang}
-                t={t}
-            />
             <IndexNewsDetail
                 t={t}
                 slug={slug}

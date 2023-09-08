@@ -19,7 +19,10 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className='__className_65281d'
             >
-                <HeaderV2></HeaderV2>
+                <HeaderV2
+                    lang={params.lang}
+                    t={t}
+                />
                 {children}
                 <Footer
                     lang={params.lang}

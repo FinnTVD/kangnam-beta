@@ -6,10 +6,6 @@ export default async function News({ params: { lang } }) {
     const t = await getDictionary(lang)
     return (
         <>
-            <HeaderV2
-                lang={lang}
-                t={t}
-            />
             <IndexNews
                 t={t}
                 lang={lang}

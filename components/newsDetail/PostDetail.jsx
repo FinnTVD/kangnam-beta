@@ -26,8 +26,7 @@ export default function PostDetail({ t, post, translation, lang }) {
     }, [])
     useEffect(() => {
         if(translation){
-            router.push(`/news/${translation.slug}`, undefined, {shallow: true})
-            // pathName.slice(4)
+            router.replace(`/${lang}/news/${translation.slug}`, undefined, {shallow: true})
         }
     }, [translation])
     return (
