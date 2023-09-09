@@ -7,12 +7,13 @@ export default async function BoxHeader({ lang, t }) {
     const data = await getData('/homePage')
     const headersList = headers()
     const activePath = headersList.get('x-invoke-path')
+    const isHome = handleCheckIsHome(activePath)
     return (
         <Header
             lang={lang}
             t={t}
             data={data}
-            isHome={handleCheckIsHome(activePath)}
+            isHome={isHome}
         />
     )
 }
