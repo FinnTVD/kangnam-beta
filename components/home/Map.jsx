@@ -139,7 +139,7 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
     }, [levelZoom])
 
     const loadMap = () => {
-        if (!vietmapgl) return
+        if (!vietmapgl || typeof window === 'undefined') return
         mapRef.current = new vietmapgl.Map({
             container: 'map',
             // style: mapJson,
