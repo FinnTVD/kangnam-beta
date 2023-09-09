@@ -28,7 +28,6 @@ export default function SlideRelatedNews() {
                                         alt='itemProject'
                                         sizes='33vw'
                                         fill
-                                        quality={100}
                                     />
                                 </div>
                                 <div className='mt-[1.02vw]'>

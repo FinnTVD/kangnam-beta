@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
 export default function PostDetail({ t, post, newsDetail, lang }) {
-    console.log('🚀 ~ file: PostDetail.jsx:8 ~ PostDetail ~ post:', post)
     const router = useRouter()
     const urlRef = useRef('')
     const setSlugDetailNews = useStore((state) => state.setSlugDetailNews)

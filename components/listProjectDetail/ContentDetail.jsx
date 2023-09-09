@@ -349,7 +349,7 @@ export default function ContentDetail({ data, detail }) {
                         />
                         <div
                             id='imgMapDetail'
-                            className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0'
+                            className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0 text-den/20'
                         ></div>
                     </div>
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>

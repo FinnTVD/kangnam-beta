@@ -10,7 +10,7 @@ const arrBanner = [
     { id: 2, src: '/images/bg-header1.jfif', alt: 'bg-header1' },
     { id: 3, src: '/images/bg-header2.jfif', alt: 'bg-header2' },
 ]
-export default function SlideBanner() {
+export default function SlideBanner({ data }) {
     return (
         <>
             <Swiper
@@ -25,21 +25,20 @@ export default function SlideBanner() {
                 modules={[EffectFade, Autoplay]}
                 className='absolute top-0 left-0 z-0 w-full h-full mySwiper'
             >
-                {arrBanner &&
-                    arrBanner?.map((e, index) => (
-                        <SwiperSlide key={index}>
-                            <div className='relative w-full h-full'>
-                                <Image
-                                    className='object-cover'
-                                    src={e.src}
-                                    alt={e.alt}
-                                    sizes='(max-width: 767px) 35vw, (max-width: 1280px) 70vw, 100vw'
-                                    fill
-                                    priority
-                                />
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                {data?.slideBanner?.map((e, index) => (
+                    <SwiperSlide key={index}>
+                        <div className='relative w-full h-full'>
+                            <Image
+                                className='object-cover'
+                                src={e || arrBanner[index]?.src}
+                                alt={arrBanner[index]}
+                                sizes='(max-width: 767px) 35vw, (max-width: 1280px) 70vw, 100vw'
+                                fill
+                                priority
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </>
     )

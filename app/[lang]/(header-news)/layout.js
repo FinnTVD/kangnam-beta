@@ -1,4 +1,3 @@
-import HeaderV2 from '@/components/general/HeaderV2'
 import { getDictionary } from '../dictionaries'
 import Footer from '@/components/general/Footer'
 
@@ -9,6 +8,7 @@ export const metadata = {
 export async function generateStaticParams() {
     return [{ lang: 'vi' }, { lang: 'en' }, { lang: 'kr' }, { lang: 'ch' }]
 }
+let src = '/images/bg-news.jpg'
 
 export default async function RootLayout({ children, params }) {
     const t = await getDictionary(params.lang)
