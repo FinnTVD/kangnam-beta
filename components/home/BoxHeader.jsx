@@ -1,19 +1,19 @@
 import getData from '@/utils/getData'
 import Header from '../general/Header'
-import { headers } from 'next/headers'
-import { handleCheckIsHome } from '@/utils'
-
+// import { headers } from 'next/headers'
 export default async function BoxHeader({ lang, t }) {
     const data = await getData('/homePage')
-    const headersList = headers()
-    const activePath = headersList.get('x-invoke-path')
-    const isHome = handleCheckIsHome(activePath)
+    // const headersList = headers()
+    // const referer = headersList.get('referer')
     return (
-        <Header
-            lang={lang}
-            t={t}
-            data={data}
-            isHome={isHome}
-        />
+        <>
+            {/* <div className='text-black'>Referer: {referer}</div> */}
+            <Header
+                lang={lang}
+                t={t}
+                data={data}
+                isHome={true}
+            />
+        </>
     )
 }

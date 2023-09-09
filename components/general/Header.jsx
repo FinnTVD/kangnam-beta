@@ -11,7 +11,6 @@ import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
 
 export default function Header({ lang, t, data, isHome }) {
-    console.log('🚀 ~ file: Header.jsx:14 ~ Header ~ isHome:', isHome)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
@@ -59,7 +58,7 @@ export default function Header({ lang, t, data, isHome }) {
                 )}
                 {!isMobile ? (
                     <NavBarFixed
-                        isHome={isHome}
+                        isHome={false}
                         lang={lang}
                         t={t}
                         isMobile={isMobile}
