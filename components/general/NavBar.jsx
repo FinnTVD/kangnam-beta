@@ -5,7 +5,7 @@ import BoxLanguage from './language/BoxLanguage'
 import { useState } from 'react'
 import SelectSearch from './SelectSearch'
 
-export default function NavBar({ isHome = true, lang, t }) {
+export default function NavBar({ isHome, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
 
     return (

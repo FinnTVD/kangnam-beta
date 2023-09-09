@@ -299,10 +299,10 @@ export default function MyProjectV2({ lang }) {
                         isToggle ? 'w-full' : '!w-[35.5625vw]'
                     } !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    {/* <Map
+                    <Map
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
-                    /> */}
+                    />
                 </div>
             </div>
         </section>
