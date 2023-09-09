@@ -37,7 +37,7 @@ const listNav = [
     },
 ]
 
-export default function NavBarFixed({ isHome = true, lang, t, isMobile }) {
+export default function NavBarFixed({ isHome, lang, t, isMobile }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const [prevScrollY, setPrevScrollY] = useState(0)
     const navRef = useRef()
