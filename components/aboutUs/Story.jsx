@@ -12,14 +12,14 @@ export default function Story({ t }) {
                 <div>
                     <span
                         data-aos='fade-up'
-                        className='sub-title max-md:title-mb12-700-150 max-lg:title-tl16'
+                        className='sub-title max-md:title-mb12-700-150 max-lg:title-tl12'
                     >
                         {t.aboutUsStory.subtitle}
                     </span>
                     <h2
                         data-aos='fade-up'
                         data-aos-delay='300'
-                        className='title56 text-den mt-[0.125vw] max-md:title-mb25-700-130 max-md:mt-[1.1vw] max-lg:title-tl56'
+                        className='title56 text-den mt-[0.125vw] max-md:title-mb25-700-130 max-md:mt-[1.1vw] max-lg:title-tl38'
                     >
                         {t.aboutUsStory.title}
                     </h2>

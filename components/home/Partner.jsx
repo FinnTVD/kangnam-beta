@@ -78,10 +78,10 @@ export default function Partner({ t }) {
 
             <div className='flex items-end justify-between'>
                 <div className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'>
-                    <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px] max-lg:title-tl16'>
+                    <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px] max-lg:title-tl12'>
                         {t.homepagePartners.subtitle}
                     </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case max-lg:title-tl56'>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case max-lg:title-tl38'>
                         {t.homepagePartners.title}
                     </h2>
                 </div>
