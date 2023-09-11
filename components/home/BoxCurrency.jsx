@@ -1,11 +1,101 @@
+'use client'
+import useDebounce from '@/hooks/useDebounce'
 import Image from 'next/image'
+import { useState } from 'react'
+import useSWR from 'swr'
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+const listCurrency = [
+    {
+        id: 1,
+        code: 'VND',
+    },
+    {
+        id: 2,
+        code: 'USD',
+    },
+    {
+        id: 3,
+        code: 'KRW',
+    },
+    {
+        id: 4,
+        code: 'CNY',
+    },
+]
+
+const handleRenderCode = (codeFrom, codeTo, status) => {
+    if (status === 'from') {
+        if (codeFrom === 'USD' || codeTo === 'USD') {
+            return 'USD'
+        }
+        if (codeFrom === 'CNY' || codeTo === 'CNY') {
+            return 'CNY'
+        }
+        if (codeFrom === 'KRW' || codeTo === 'KRW') {
+            return 'KRW'
+        }
+    } else {
+        if (codeFrom === 'VND' || codeTo === 'VND') {
+            return 'VND'
+        }
+        if (codeFrom === 'KRW' || codeTo === 'KRW') {
+            return 'KRW'
+        }
+        if (codeFrom === 'CNY' || codeTo === 'CNY') {
+            return 'CNY'
+        }
+    }
+}
+
+const handleCurrency = (codeFrom, codeTo, input, value) => {
+    if (!input) return ''
+    if (codeFrom === 'VND') return (Number(input) / Number(value)).toFixed(3)
+    if (codeFrom === 'KRW' && codeTo !== 'VND') return (Number(input) / Number(value)).toFixed(3)
+    if (codeFrom === 'CNY' && codeTo !== 'KRW' && codeTo !== 'VND') return (Number(input) / Number(value)).toFixed(3)
+    if (codeFrom === 'USD') return Number(input) * Number(value)
+    if (codeFrom === 'CNY' && codeFrom !== 'USD') return Number(input) * Number(value)
+    if (codeFrom === 'KRW' && codeFrom !== 'USD' && codeFrom !== 'CNY') return Number(input) * Number(value)
+}
 
 export default function BoxCurrency({ className = '' }) {
+    const [codeFrom, setCodeFrom] = useState('VND')
+    const [codeTo, setCodeTo] = useState('USD')
+    const [value, setValue] = useState('')
+    const debounceValue = useDebounce(value, 500)
+    const { data, isLoading, error } = useSWR(
+        `${process.env.NEXT_PUBLIC_API}/currency/get-by-code?codeFrom=${handleRenderCode(
+            codeFrom,
+            codeTo,
+            'from',
+        )}&codeTo=${handleRenderCode(codeFrom, codeTo, 'to')}`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+    console.log('🚀 ~ file: BoxCurrency.jsx:70 ~ BoxCurrency ~ data:', data)
+
+    const handleSwapCurrency = () => {
+        setCodeTo(codeFrom)
+        setCodeFrom(codeTo)
+    }
+
+    const handleRenderTime = (time) => {
+        const date = new Date(time)
+        const hour = date.getHours().toString().padStart(2, '0')
+        const minus = date.getMinutes().toString().padStart(2, '0')
+        return hour + ':' + minus
+    }
+
     return (
         <div
             className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
         >
-            <span className='text-den title20-700-130 mx-auto block'>Chuyển đổi tiền tệ</span>
+            <span className='block mx-auto text-den title20-700-130'>Chuyển đổi tiền tệ</span>
             <label
                 htmlFor='currency-default'
                 className='text-den title10-400-150 opacity-50 mb-[0.31vw] cursor-pointer block'
@@ -14,15 +104,19 @@ export default function BoxCurrency({ className = '' }) {
             </label>
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
-                    type='text'
-                    id='currency-default'
+                    type='number'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5]'
+                    id='currency-default'
                     placeholder='Nhập số tiền'
+                    value={value}
+                    onChange={(e) => {
+                        setValue(e?.target?.value)
+                    }}
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/images/america.png'
-                        alt='america'
+                        src='/images/vn.jpg'
+                        alt='vi'
                         width={16}
                         height={16}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
@@ -31,14 +125,20 @@ export default function BoxCurrency({ className = '' }) {
                         name=''
                         id=''
                         className='outline-none text-den'
+                        onChange={(e) => setCodeFrom(e?.target?.value)}
+                        defaultValue={codeFrom}
+                        value={codeFrom}
                     >
-                        <option
-                            defaultChecked
-                            value=''
-                        >
-                            USD
-                        </option>
-                        <option value=''>VN</option>
+                        {listCurrency
+                            ?.filter((e) => e?.code !== codeTo)
+                            ?.map((e, index) => (
+                                <option
+                                    key={index}
+                                    value={e?.code}
+                                >
+                                    {e?.code}
+                                </option>
+                            ))}
                     </select>
                 </div>
             </div>
@@ -49,6 +149,7 @@ export default function BoxCurrency({ className = '' }) {
                 viewBox='0 0 17 13'
                 fill='none'
                 className='py-[0.75vw] px-[0.5vw] mx-auto cursor-pointer box-content'
+                onClick={handleSwapCurrency}
             >
                 <path
                     d='M3.64645 12.3536C3.84171 12.5488 4.15829 12.5488 4.35355 12.3536L7.53553 9.17157C7.7308 8.97631 7.7308 8.65973 7.53553 8.46447C7.34027 8.2692 7.02369 8.2692 6.82843 8.46447L4 11.2929L1.17157 8.46447C0.97631 8.2692 0.659728 8.2692 0.464466 8.46447C0.269204 8.65973 0.269204 8.97631 0.464466 9.17157L3.64645 12.3536ZM3.5 1L3.5 12L4.5 12L4.5 1L3.5 1Z'
@@ -65,17 +166,19 @@ export default function BoxCurrency({ className = '' }) {
             >
                 Chuyển đổi thành
             </label>
+
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
-                    type='text'
-                    className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5]'
+                    type='number'
                     placeholder='Thành tiền'
                     id='currency-new'
+                    className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5] pointer-events-none'
+                    value={handleCurrency(codeFrom, codeTo, debounceValue, data?.value)}
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/images/vn.png'
-                        alt='vi'
+                        src='/images/america.jpg'
+                        alt='america'
                         width={16}
                         height={16}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
@@ -84,24 +187,33 @@ export default function BoxCurrency({ className = '' }) {
                         name=''
                         id=''
                         className='outline-none text-den'
+                        onChange={(e) => setCodeTo(e?.target?.value)}
+                        defaultValue={codeTo}
+                        value={codeTo}
                     >
-                        <option
-                            defaultChecked
-                            value=''
-                        >
-                            VN
-                        </option>
-                        <option value=''>USD</option>
+                        {listCurrency
+                            ?.filter((e) => e?.code !== codeFrom)
+                            ?.map((e, index) => (
+                                <option
+                                    key={index}
+                                    value={e?.code}
+                                    disabled={e?.code === codeFrom}
+                                >
+                                    {e?.code}
+                                </option>
+                            ))}
                     </select>
                 </div>
             </div>
-            <div className='text-13pc text-den leading-[1.5] font-normal mt-[2vw] mb-[0.5vw]'>
-                <span>1.00000 USD</span>
+            <div className='text-13pc text-den leading-[1.5] font-normal mt-[2vw] mb-[0.5vw] flex justify-center'>
+                <span>1 {data?.codeFrom}</span>
                 <span className='mx-[0.5vw]'>=</span>
-                <span className='text-nau-nhat'>23667.00000</span>
-                <span> USD</span>
+                <span className='text-nau-nhat'>{data?.value}</span>
+                <span className='ml-[2px]'>{data?.codeTo}</span>
             </div>
-            <p className='text-den opacity-70 title10-400-150 text-center'>Tỷ giá chuyển đổi thực vào lúc 08:44 UTC</p>
+            <p className='text-center text-den opacity-70 title10-400-150'>
+                Tỷ giá chuyển đổi thực vào lúc {handleRenderTime(data?.updatedAt)} UTC
+            </p>
         </div>
     )
 }
