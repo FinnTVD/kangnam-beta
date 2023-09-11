@@ -1,6 +1,8 @@
 'use client'
+import dynamic from 'next/dynamic'
+const Map = dynamic(() => import('../home/Map'), { ssr: false })
 import Image from 'next/image'
-import Map from '../home/Map'
+// import Map from '../home/Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import BoxSort from './BoxSort'
@@ -156,7 +158,7 @@ export default function ListProject({ lang, t }) {
             // ref={parentRef}
             className='mt-[5.75vw] relative z-10 max-md:mt-[69vw]'
         >
-            <div className='flex w-full justify-between'>
+            <div className='flex justify-between w-full'>
                 <div className={`${show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'} pl-[7.5vw] px-mb10`}>
                     <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
                         <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
