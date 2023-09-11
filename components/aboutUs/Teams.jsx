@@ -13,13 +13,13 @@ export default function Teams({ t }) {
                 <div>
                     <span
                         data-aos='fade-up'
-                        className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl16'
+                        className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'
                     >
                         {t.aboutUsTeams.subtitle}
                     </span>
                     <h2
                         data-aos='fade-up'
-                        className='title56 text-den mt-[0.125vw] max-md:mt-[1.1vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-lg:title-tl56'
+                        className='title56 text-den mt-[0.125vw] max-md:mt-[1.1vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-lg:title-tl38'
                     >
                         {t.aboutUsTeams.title}
                     </h2>

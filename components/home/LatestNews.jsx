@@ -23,10 +23,10 @@ export default function LatestNews({ t, lang }) {
         <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative max-md:mt-[3.7vw] px-mb10 max-md:pb-[20.8vw]'>
             <div className='flex justify-between items-end'>
                 <div>
-                    <span className='sub-title max-md:title-mb12-600-160 max-md:leading-[1.5] max-md:tracking-[0.6px] max-lg:title-tl16'>
+                    <span className='sub-title max-md:title-mb12-600-160 max-md:leading-[1.5] max-md:tracking-[0.6px] max-lg:title-tl12'>
                         {t.homepageNews.subtitle}
                     </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-[2.1vw] max-md:normal-case max-lg:title-tl56'>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-[2.1vw] max-md:normal-case max-lg:title-tl38'>
                         {t.homepageNews.title}
                     </h2>
                 </div>

@@ -29,10 +29,10 @@ export default function RelatedNews({ t, lang, post }) {
         <section className='px-120 mt-[3.75vw] max-md:mt-[13.3vw] max-lg:px-0 max-md:mb-[16vw] max-lg:mb-[8vw]'>
             <div className='flex justify-between items-end px-mb10 max-lg:px-120'>
                 <div>
-                    <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl16'>
+                    <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'>
                         {t.newsDetailRelated.subtitle}
                     </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:normal-case max-md:mt-[1vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-lg:title-tl56'>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:normal-case max-md:mt-[1vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-lg:title-tl38'>
                         {t.newsDetailRelated.title}
                     </h2>
                 </div>
@@ -101,7 +101,7 @@ export default function RelatedNews({ t, lang, post }) {
                     }}
                     speed={600}
                     modules={[Autoplay]}
-                    className='pt-[1.875vw] pb-[6.25vw] max-md:pl-[2.6vw] max-md:py-[4.3vw] max-lg:pl-[7.5vw]'
+                    className='pt-[1.875vw] pb-[6.25vw] max-md:pl-[2.6vw] max-md:py-[4.3vw] max-lg:pl-[3.2vw]'
                 >
                     {relatedNews?.map((item, index) => (
                         <SwiperSlide

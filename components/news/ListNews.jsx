@@ -56,15 +56,15 @@ export default function ListNews({ t, lang }) {
         >
             <div className='flex items-center justify-between max-lg:flex-col max-lg:items-start max-lg:justify-normal'>
                 <div>
-                    <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl16'>
+                    <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'>
                         {t.newsList.subtitle} {category?.name}
                     </span>
-                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw] max-lg:title-tl56'>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw] max-lg:title-tl38'>
                         {t.newsList.title} {category?.name}
                     </h2>
                 </div>
                 <div
-                    className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] flex-nowrap max-md:overflow-scroll max-md:w-full`}
+                    className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] flex-nowrap max-md:overflow-scroll max-md:w-full max-lg:mt-[1vw]`}
                 >
                     {categories?.data?.map((e, index) => (
                         <span

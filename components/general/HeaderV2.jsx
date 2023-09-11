@@ -120,7 +120,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                             height='25'
                             viewBox='0 0 24 25'
                             fill='none'
-                            className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
+                            className={`${classes['btn-scroll-down']} w-[1.375vw] h-[1.375vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                         >
                             <path
                                 d='M1 1L12 12L23 1'
@@ -133,7 +133,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                                 strokeWidth='2'
                             />
                         </svg>
-                        <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white'>
+                        <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white max-lg:title-tl14'>
                             Cuộn xuống
                         </span>
                     </div>
