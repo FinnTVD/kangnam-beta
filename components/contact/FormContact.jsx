@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import useResizeArea from '@/hooks/useResizeArea'
 import SelectCategory from './SelectCategory'
 import { useState } from 'react'
+import src from '../../public/images/form-contact.jpg'
+
 const listSocial = [
     {
         id: 1,
@@ -86,11 +88,11 @@ export default function FormContact() {
             <div className='flex gap-x-[2.25vw] max-md:flex-col max-md:gap-y-[10.13vw]'>
                 <div className='w-[41vw] h-[46.8125vw] max-md:h-[102.13vw] flex items-end rounded-[1vw] max-md:rounded-[4.27vw] overflow-hidden px-[1.75vw] py-[2.44vw] relative max-md:w-full max-md:px-[4.53vw] max-md:py-[6.4vw]'>
                     <Image
-                        src='/images/form-contact.jpg'
+                        src={src}
                         alt='form-contact'
                         sizes='41vw'
                         fill
-                        quality={100}
+                        placeholder='blur'
                         className='z-0 object-cover'
                     />
                     <div className='relative z-10 px-[1.75vw] pt-[1.5vw] pb-[2.31vw] rounded-[1vw] border border-solid border-white09 backdrop-blur-[11.1199px] bg-white07 w-full h-fit max-md:px-[3.2vw] max-md:pt-[5.6vw] max-md:pb-[4.53vw]'>

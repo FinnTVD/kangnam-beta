@@ -79,5 +79,27 @@ const arrFilterV2 = [
         api: '/property-area-type',
     },
 ]
+const handleCheckIsHome = (pathName) => {
+    switch (pathName) {
+        case '/vi':
+            return true
+        case '/en':
+            return true
+        case '/kr':
+            return true
+        case '/ch':
+            return true
+        default:
+            return false
+    }
+}
 
-export { handleCheckParamsLanguage, formatDateTime, handleCheckLangCode, handleCheckParams, arrFilter, arrFilterV2 }
+export {
+    handleCheckParamsLanguage,
+    formatDateTime,
+    handleCheckLangCode,
+    handleCheckParams,
+    handleCheckIsHome,
+    arrFilter,
+    arrFilterV2,
+}

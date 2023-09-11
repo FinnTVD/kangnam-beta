@@ -3,41 +3,17 @@ import Image from 'next/image'
 import NavBar from './NavBar'
 import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
-import { usePathname } from 'next/navigation'
 import classes from './headerV2.module.css'
 import SlideBanner from '../home/SlideBanner'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
-import { useEffect, useState } from 'react'
 
-const isCheckPathName = (pathName) => {
-    switch (pathName) {
-        case '/':
-            return true
-        case '/en':
-            return true
-        case '/kr':
-            return true
-        case '/ch':
-            return true
-        default:
-            return false
-    }
-}
-
-export default function Header({ lang, t }) {
-    const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
-    const pathName = usePathname()
+export default function Header({ lang, t, data, isHome }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
-
-    useEffect(() => {
-        if (!pathName) return
-        setIsHome(isCheckPathName(pathName))
-    }, [pathName])
 
     const handleScrollDown = () => {
         if (typeof window !== 'undefined') {
@@ -55,7 +31,7 @@ export default function Header({ lang, t }) {
             className='relative w-screen h-fit'
         >
             <div className={`h-screen max-md:h-[64vh] relative w-full`}>
-                <SlideBanner />
+                <SlideBanner data={data} />
                 <Image
                     className='object-contain z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                     src='/images/big-logo.png'
@@ -82,7 +58,7 @@ export default function Header({ lang, t }) {
                 )}
                 {!isMobile ? (
                     <NavBarFixed
-                        isHome={isHome}
+                        isHome={false}
                         lang={lang}
                         t={t}
                         isMobile={isMobile}
@@ -94,7 +70,7 @@ export default function Header({ lang, t }) {
                         t={t}
                     />
                 )}
-                <SearchHome />
+                <SearchHome data={data} />
 
                 <div
                     onClick={handleScrollDown}

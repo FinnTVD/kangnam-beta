@@ -16,12 +16,12 @@ const listNav = [
     {
         id: 2,
         title: 'Dự án',
-        href: '/danh-sach-du-an',
+        href: '/projects',
     },
     {
         id: 3,
         title: 'Bán lại',
-        href: '/danh-sach-du-an',
+        href: '/resale',
     },
     {
         id: 4,
@@ -36,7 +36,7 @@ const listNav = [
     {
         id: 6,
         title: 'Liên hệ',
-        href: '/lien-he',
+        href: '/contact',
     },
 ]
 

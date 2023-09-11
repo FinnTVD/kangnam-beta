@@ -58,7 +58,6 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                     src={post?.image || src || '/images/bg-header.jpg'}
                     alt={newsDetail?.title || 'bg-header'}
                     sizes='100vw'
-                    quality={100}
                     fill
                     priority
                 />

@@ -1,6 +1,6 @@
 import Footer from '@/components/general/Footer'
-import Header from '@/components/general/Header'
 import { getDictionary } from '../dictionaries'
+import BoxHeader from '@/components/home/BoxHeader'
 
 export const metadata = {
     title: 'KangNam',
@@ -19,7 +19,7 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={'__className_65281d'}
             >
-                <Header
+                <BoxHeader
                     lang={params.lang}
                     t={t}
                 />

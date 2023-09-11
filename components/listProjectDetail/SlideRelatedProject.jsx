@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const arrProject = new Array(4).fill(0)
-export default function SlideRelatedProject({ lang }) {
+export default function SlideRelatedProject({ lang, detail }) {
     const pathName = usePathname()
     const { data, error, isLoading } = useSWR(
         `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11${handleCheckParams(pathName)}`,
@@ -27,6 +27,8 @@ export default function SlideRelatedProject({ lang }) {
     useEffect(() => {
         mutate(`${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11${handleCheckParams(pathName)}`)
     }, [lang])
+
+    const dataRelated = data?.data?.filter((e) => e?.translation?.slug !== detail)
 
     return (
         <>
@@ -84,7 +86,7 @@ export default function SlideRelatedProject({ lang }) {
                     modules={[Autoplay, FreeMode]}
                     className='px-mb10'
                 >
-                    {data?.data?.map((e, index) => (
+                    {dataRelated?.map((e, index) => (
                         <SwiperSlide
                             key={index}
                             className='w-full !h-fit max-md:!w-[77.6vw] overflow-hidden rounded-[0.5vw] max-md:rounded-[2.13vw]'

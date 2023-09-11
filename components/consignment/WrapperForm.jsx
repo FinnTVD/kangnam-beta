@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import SlideForm from './SlideForm'
+import src from '../../public/images/bg-dang-tin.jpg'
 
 export default function WrapperForm({ t }) {
     return (
@@ -8,10 +9,11 @@ export default function WrapperForm({ t }) {
                 cx
                 <Image
                     className='z-0 object-cover max-md:!h-[126.3vw]'
-                    src='/images/bg-dang-tin.jpg'
+                    src={src}
                     alt='dang tin'
                     fill
                     sizes='42vw'
+                    placeholder='blur'
                     priority
                 />
                 <div className='absolute left-0 z-10 w-full -translate-y-1/2 top-1/2'>

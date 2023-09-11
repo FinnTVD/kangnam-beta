@@ -13,16 +13,16 @@ const arrSuggest = [
         title: 'glory heights',
     },
 ]
-export default function SearchHome() {
+export default function SearchHome({ data }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
 
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160'>
-                An tâm với 100% bất động sản được xác thực tại KANGNAM
+                {data?.slogan || 'An tâm với 100% bất động sản được xác thực tại KANGNAM'}
             </p>
             <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 title-mb22-800-130 max-md:-tracking-[0.66px] title-tl42'>
-                Lựa chọn căn nhà ưng ý của bạn
+                {data?.title || 'Lựa chọn căn nhà ưng ý của bạn'}
             </h1>
             <div className='w-[54vw] max-md:w-full py-[1.53vw] max-md:py-[4.27vw] max-md:px-[6.4vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'>
                 <div className='flex items-center w-full'>
@@ -68,15 +68,14 @@ export default function SearchHome() {
                     Gợi ý:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
-                    {arrSuggest &&
-                        arrSuggest.map((e, index) => (
-                            <li
-                                key={index}
-                                className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] title14-400-150 title-mb10-400-150 title-tl12-400-150'
-                            >
-                                {e.title}
-                            </li>
-                        ))}
+                    {data?.suggest?.map((e, index) => (
+                        <li
+                            key={index}
+                            className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] title14-400-150 title-mb10-400-150 title-tl12-400-150'
+                        >
+                            {e || arrSuggest[index]?.title}
+                        </li>
+                    ))}
                 </ul>
             </div>
             <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-md:flex-wrap'>

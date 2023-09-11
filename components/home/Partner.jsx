@@ -89,7 +89,7 @@ export default function Partner({ t }) {
                     <Button
                         stroke='white'
                         href={'/'}
-                        className='bg-logo text-white border-none max-lg:title-tl16'
+                        className='text-white border-none bg-logo max-lg:title-tl16'
                     >
                         {t.homepagePartners.button}
                     </Button>
@@ -126,7 +126,6 @@ export default function Partner({ t }) {
                                                             alt={`partner${index}`}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -144,7 +143,6 @@ export default function Partner({ t }) {
                                                             alt={`partner${index}`}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -162,7 +160,6 @@ export default function Partner({ t }) {
                                                             alt={`partner${index}`}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -180,7 +177,6 @@ export default function Partner({ t }) {
                                                             alt={`partner${index}`}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -198,7 +194,6 @@ export default function Partner({ t }) {
                                                             alt={`partner${index}`}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -218,7 +213,6 @@ export default function Partner({ t }) {
                                                             src={item}
                                                             sizes='50vw'
                                                             fill
-                                                            quality={100}
                                                         />
                                                     </div>
                                                 </div>
@@ -235,7 +229,6 @@ export default function Partner({ t }) {
                                                             sizes='50vw'
                                                             fill
                                                             src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
                                                         ></Image>
                                                     </div>
@@ -253,7 +246,6 @@ export default function Partner({ t }) {
                                                             sizes='50vw'
                                                             fill
                                                             src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
                                                         ></Image>
                                                     </div>
@@ -271,7 +263,6 @@ export default function Partner({ t }) {
                                                             sizes='50vw'
                                                             fill
                                                             src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
                                                         ></Image>
                                                     </div>
@@ -289,7 +280,6 @@ export default function Partner({ t }) {
                                                             sizes='50vw'
                                                             fill
                                                             src={item}
-                                                            quality={100}
                                                             className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
                                                         ></Image>
                                                     </div>
