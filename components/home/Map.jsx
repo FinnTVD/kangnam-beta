@@ -729,13 +729,6 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
 
     return (
         <>
-            <head>
-                <script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
-                <link
-                    href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
-                    rel='stylesheet'
-                />
-            </head>
             <div
                 ref={mapRef}
                 style={{
