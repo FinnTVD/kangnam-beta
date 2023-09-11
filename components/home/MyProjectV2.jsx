@@ -170,7 +170,7 @@ export default function MyProjectV2({ lang }) {
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
-                                            {e?.propertyCategory?.name}
+                                            {e?.propertyCategory?.name || 'Chưa có thông tin!'}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw]'>
@@ -178,7 +178,7 @@ export default function MyProjectV2({ lang }) {
                                             title={e?.translation?.name}
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {e?.translation?.name}
+                                            {e?.translation?.name || 'Chưa có thông tin!'}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -236,7 +236,9 @@ export default function MyProjectV2({ lang }) {
                                                 Diện tích:
                                             </span>
                                             <span className=' text-den title14-400-150'>
-                                                {e?.translation?.size + ' m²'}
+                                                {e?.translation?.size
+                                                    ? e?.translation?.size + ' m²'
+                                                    : 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -256,7 +258,7 @@ export default function MyProjectV2({ lang }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
-                                                {e?.translation?.priceDisplay}
+                                                {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                     </div>

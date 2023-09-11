@@ -58,6 +58,22 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
 
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef.current) return
+        const loadMap = () => {
+            if (!vietmapgl || typeof window === 'undefined') return
+            mapRef.current = new vietmapgl.Map({
+                container: 'map',
+                // style: mapJson,
+                style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
+                center: [105.85379875200005, 21.028354507000074], //ha noi center
+                zoom: 9,
+                pitch: 0, // góc nhìn từ trên cao nhìn xuống
+            })
+            mapRef.current.areTilesLoaded()
+
+            mapRef.current.on('zoomend', function () {
+                setLevelZoom(mapRef.current.getZoom())
+            })
+        }
         loadMap()
         // addMarker2()
         // // addMarker3();
@@ -137,23 +153,6 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [levelZoom])
-
-    const loadMap = () => {
-        if (!vietmapgl || typeof window === 'undefined') return
-        mapRef.current = new vietmapgl.Map({
-            container: 'map',
-            // style: mapJson,
-            style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-            center: [105.85379875200005, 21.028354507000074], //ha noi center
-            zoom: 9,
-            pitch: 0, // góc nhìn từ trên cao nhìn xuống
-        })
-        mapRef.current.areTilesLoaded()
-
-        mapRef.current.on('zoomend', function () {
-            setLevelZoom(mapRef.current.getZoom())
-        })
-    }
 
     const callAPI = async () => {
         const res = await fetch(`https://maps.vietmap.vn/api/search?api-version=1.1&apikey=${apiKey}&text=${value}`)
