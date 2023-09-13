@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 const handleCheckParamsLanguage = (lang, href) => {
     switch (lang) {
         case 'vi':
@@ -39,9 +41,9 @@ const handleCheckLangCode = (lang) => {
 }
 
 const handleCheckParams = (pathName) => {
-    if (pathName?.includes('buy')) return '&propertyCategoryIds=1c3afd45-f351-407a-96ab-0d8812047b8b'
-    if (pathName?.includes('hire')) return '&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a'
-    if (pathName?.includes('resale')) return '&propertyCategoryIds=d47b243b-6593-4098-b99e-56151d31add8'
+    if (pathName?.includes('buy')) return '&propertyCategoryIds=823a2e96-0913-47a2-a25c-780eb911434f'
+    if (pathName?.includes('hire')) return '&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe'
+    if (pathName?.includes('resale')) return '&propertyCategoryIds=74caa33c-64dc-4d16-a9c7-b730ae377b75'
     return ''
 }
 
@@ -94,6 +96,29 @@ const handleCheckIsHome = (pathName) => {
     }
 }
 
+const notifySuccess = (title) =>
+    toast.success(title || 'Successful form submission!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+    })
+const notifyError = (title) =>
+    toast.error(title || 'Something went wrong!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+    })
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -102,4 +127,6 @@ export {
     handleCheckIsHome,
     arrFilter,
     arrFilterV2,
+    notifyError,
+    notifySuccess,
 }

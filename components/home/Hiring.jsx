@@ -65,7 +65,7 @@ export default function Hiring({ lang }) {
     const { data, error, isLoading } = useSWR(
         `${
             process.env.NEXT_PUBLIC_API
-        }/property?order=DESC&page=1&take=10&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a${
+        }/property?order=DESC&page=1&take=10&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe${
             propertyAreaTypeParams ? propertyAreaTypeParams : ''
         }${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -80,7 +80,7 @@ export default function Hiring({ lang }) {
         mutate(
             `${
                 process.env.NEXT_PUBLIC_API
-            }/property?order=DESC&page=1&take=10&propertyCategoryIds=804e0d3c-dc23-4382-88e4-9f511341c24a${
+            }/property?order=DESC&page=1&take=10&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
             }${propertyTypeParams ? propertyTypeParams : ''}`,
         )

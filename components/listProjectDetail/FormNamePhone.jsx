@@ -2,8 +2,10 @@
 import { useState } from 'react'
 import InputCustom from '../consignment/InputCustom'
 import Button from '../general/Button'
+import postData from '@/utils/postData'
+import { notifyError, notifySuccess } from '@/utils'
 
-export default function FormNamePhone() {
+export default function FormNamePhone({ id }) {
     const [valueName, setValueName] = useState({
         value: '',
         validate: false,
@@ -26,8 +28,18 @@ export default function FormNamePhone() {
             })
         }
     }
+
+    const handlePostDataForm = async (api, data) => {
+        const res = await postData(api, data)
+        if (res?.statusCode) {
+            return notifyError(res?.error)
+        }
+        notifySuccess()
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log('submit')
         !valueName?.value &&
             setValueName({
                 ...valueName,
@@ -39,7 +51,12 @@ export default function FormNamePhone() {
                 validate: true,
             })
         if (valueName?.value && valuePhone?.value) {
-            console.log('form:', valueName, valuePhone)
+            const dataForm = {
+                name: valueName.value,
+                phone: valuePhone.value,
+                propertyId: id,
+            }
+            handlePostDataForm('/contact', dataForm)
         }
     }
     return (
@@ -80,6 +97,7 @@ export default function FormNamePhone() {
                         className='border-none bg-logo shadow-submit'
                         span='text-white'
                         stroke='white'
+                        type='submit'
                     >
                         Gửi thông tin
                     </Button>

@@ -8,7 +8,6 @@ import { useMediaQuery } from 'react-responsive'
 
 export default function SlideForm({ t }) {
     const [indexSlider, setIndexSlider] = useState(0)
-    const [dataForm, setDataForm] = useState(null)
     const swiperRef = useRef()
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
@@ -56,7 +55,6 @@ export default function SlideForm({ t }) {
                     <Form1
                         handleNextSlide={handleNextSlide}
                         t={t}
-                        setDataForm={setDataForm}
                         isMobile={isMobile}
                     />
                 </SwiperSlide>
@@ -64,7 +62,6 @@ export default function SlideForm({ t }) {
                     <Form2
                         handleNextSlide={handleNextSlide}
                         handlePrevSlide={handlePrevSlide}
-                        setDataForm={setDataForm}
                         isMobile={isMobile}
                     />
                 </SwiperSlide>
@@ -72,7 +69,6 @@ export default function SlideForm({ t }) {
                     <Form3
                         handleNextSlide={handleNextSlide}
                         handlePrevSlide={handlePrevSlide}
-                        dataForm={dataForm}
                         isMobile={isMobile}
                     />
                 </SwiperSlide>
