@@ -7,6 +7,15 @@ const useStore = create((set, get) => ({
     socialMedia: false,
     slugDetailProject: null,
     slugDetailNews: null,
+    dataSubmitForm: null,
+    setDataSubmitForm: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataSubmitForm: data,
+            }
+        })
+    },
     setSlugDetailProject: (data) => {
         set((state) => {
             return {

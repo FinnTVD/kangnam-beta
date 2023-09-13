@@ -3,6 +3,8 @@ import './globals.css'
 
 import localFont from 'next/font/local'
 import Script from 'next/script'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const avertaStdCY = localFont({
     src: [
@@ -55,6 +57,7 @@ export default async function RootLayout({ children, params }) {
                 className={avertaStdCY.className}
             >
                 {children}
+                <ToastContainer style={{ zIndex: '999999999999999' }} />
                 <Script
                     async
                     defer

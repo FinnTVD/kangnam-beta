@@ -2,8 +2,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import InputCustom from './InputCustom'
+import useStore from '@/app/[lang]/(store)/store'
 
 export default function Form1({ t, handleNextSlide, isMobile }) {
+    const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
     const [selectedOption, setSelectedOption] = useState('sell')
     const [inputValue, setInputValue] = useState('')
     const [inputValueHire, setInputValueHire] = useState('')
@@ -109,8 +111,6 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value)
     }
-
-    const handleClickSubmit = () => {}
 
     const handleSubmit = (e) => {
         e.preventDefault()

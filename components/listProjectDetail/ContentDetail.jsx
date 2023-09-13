@@ -10,6 +10,8 @@ const handleCheckStatus = (alias) => {
 }
 
 export default function ContentDetail({ data, detail }) {
+    console.log('🚀 ~ file: ContentDetail.jsx:13 ~ ContentDetail ~ detail:', detail)
+    console.log('🚀 ~ file: ContentDetail.jsx:13 ~ ContentDetail ~ data:', data)
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -18,7 +20,8 @@ export default function ContentDetail({ data, detail }) {
             setSlugDetailProject(null)
         }
     }, [])
-    const dataDetail = data?.translations?.find((e) => e?.slug === detail)
+    const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
+    console.log('🚀 ~ file: ContentDetail.jsx:22 ~ ContentDetail ~ dataDetail:', dataDetail)
     return (
         <section className='mt-[7.57vw] px-120 max-md:mt-[22.57vw] px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
@@ -688,7 +691,7 @@ export default function ContentDetail({ data, detail }) {
                             </li>
                         </ul>
                     </div>
-                    <FormNamePhone />
+                    <FormNamePhone id={data?.id} />
                 </div>
             </div>
         </section>

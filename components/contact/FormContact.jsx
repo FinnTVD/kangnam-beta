@@ -9,6 +9,8 @@ import useResizeArea from '@/hooks/useResizeArea'
 import SelectCategory from './SelectCategory'
 import { useState } from 'react'
 import src from '../../public/images/form-contact.jpg'
+import postData from '@/utils/postData'
+import { notifyError, notifySuccess } from '@/utils'
 
 const listSocial = [
     {
@@ -45,8 +47,8 @@ const listSocial = [
 
 const schema = yup
     .object({
-        fullName: yup.string().required('Vui lòng điền họ tên!'),
-        numberPhone: yup
+        name: yup.string().required('Vui lòng điền họ tên!'),
+        phone: yup
             .string()
             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
                 if (value && isNaN(value)) {
@@ -75,12 +77,21 @@ export default function FormContact() {
         resolver: yupResolver(schema),
     })
 
+    const handlePostDataForm = async (api, data) => {
+        const res = await postData(api, data)
+        if (res?.statusCode) {
+            return notifyError(res?.error)
+        }
+        notifySuccess()
+    }
+
     const onSubmit = (e) => {
-        if (!valueCategory) return
-        console.log({
+        const dataForm = {
             ...e,
             category: valueCategory,
-        })
+        }
+        handlePostDataForm('/contact', dataForm)
+        console.log(dataForm)
     }
 
     return (
@@ -169,25 +180,25 @@ export default function FormContact() {
                             <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder={`${errors.fullName?.message ?? 'Họ và tên *'}`}
+                                    placeholder={`${errors.name?.message ?? 'Họ và tên *'}`}
                                     className={`${
-                                        errors.fullName?.message
+                                        errors.name?.message
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'placeholder:text-den border-den03 placeholder:opacity-70'
                                     } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
-                                    {...register('fullName')}
+                                    {...register('name')}
                                 />
                             </div>
                             <div className='relative flex-1'>
                                 <input
                                     type='text'
-                                    placeholder={`${errors.numberPhone?.message ?? 'Số điện thoại *'}`}
+                                    placeholder={`${errors.phone?.message ?? 'Số điện thoại *'}`}
                                     className={`${
-                                        errors.numberPhone?.message
+                                        errors.phone?.message
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'placeholder:text-den border-den03 placeholder:opacity-70'
                                     } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
-                                    {...register('numberPhone')}
+                                    {...register('phone')}
                                 />
                             </div>
                         </div>
@@ -232,6 +243,7 @@ export default function FormContact() {
                             className='border-none bg-logo md:shadow-submit'
                             stroke='white'
                             full={true}
+                            type='submit'
                         >
                             Gửi thông tin
                         </Button>

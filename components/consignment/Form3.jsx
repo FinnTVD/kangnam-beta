@@ -111,7 +111,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
 
     const handleChangeFile = (e) => {
         const file = e?.target?.files
-        if (file.length >= 1) {
+        if (file?.length >= 1) {
             handleImageChange(file)
         }
     }
@@ -138,7 +138,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                     fileNew[index] = null
                 }
             })
-            const fileResult = fileNew.filter((e) => e !== null)
+            const fileResult = fileNew?.filter((e) => e !== null)
             setSelectedImage((prev) => [...prev, ...listSrc])
             setFiles((prev) => [...prev, ...fileResult])
         } else {
@@ -164,6 +164,27 @@ export default function Form3({ handlePrevSlide, isMobile }) {
     const handleDrop = (event) => {
         event.preventDefault()
         setFiles(event.dataTransfer.files)
+    }
+
+    const handleUpLoadImage = async () => {
+        const formData = new FormData()
+        files?.forEach((e) => {
+            formData.append('files', e)
+        })
+        console.log('🚀 ~ file: Form3.jsx:175 ~ handleUpLoadImage ~ formData:', formData)
+        console.log('formData', formData.getAll('files'))
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/file/multiple`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
+        })
+        // The return value is *not* serialized
+        // You can return Date, Map, Set, etc.
+        const data = await res.json()
+        console.log('🚀 ~ file: Form3.jsx:190 ~ handleUpLoadImage ~ data:', data)
     }
 
     return (
@@ -421,6 +442,12 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     {validateFiles.status && validateFiles.title}
                                 </p>
                             </div>
+                        </div>
+                        <div
+                            onClick={handleUpLoadImage}
+                            className='text-black'
+                        >
+                            upload
                         </div>
 
                         {selectedImage?.length >= 1 && (
