@@ -176,9 +176,6 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/file/multiple`, {
             method: 'POST',
             mode: 'cors',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
             body: formData,
         })
         // The return value is *not* serialized

@@ -46,7 +46,10 @@ export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
             <head>
-                <script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
+                <script
+                    defer
+                    src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'
+                ></script>
                 <link
                     href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
                     rel='stylesheet'
