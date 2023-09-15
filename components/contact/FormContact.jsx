@@ -11,6 +11,9 @@ import { useState } from 'react'
 import src from '../../public/images/form-contact.jpg'
 import postData from '@/utils/postData'
 import { notifyError, notifySuccess } from '@/utils'
+import { ToastContainer } from 'react-toastify'
+
+
 
 const listSocial = [
     {
@@ -91,7 +94,6 @@ export default function FormContact() {
             category: valueCategory,
         }
         handlePostDataForm('/contact', dataForm)
-        console.log(dataForm)
     }
 
     return (
@@ -279,6 +281,7 @@ export default function FormContact() {
                     </div>
                 </div>
             </div>
+            <ToastContainer style={{ zIndex: '999999999999999' }} />
         </section>
     )
 }

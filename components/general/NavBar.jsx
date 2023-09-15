@@ -84,7 +84,7 @@ export default function NavBar({ isHome, lang, t }) {
                                     id='search'
                                     autoComplete='false'
                                     value={valueSearch}
-                                    onChange={(e) => setValueSearch(e.target.value)}
+                                    onChange={(e) => setValueSearch(e?.target?.value)}
                                 />
                             </div>
                         </div>

@@ -93,7 +93,7 @@ export default function NavBarFixedRes({ isHome = true, lang, t }) {
                                 id='search'
                                 autoComplete='false'
                                 value={valueSearch}
-                                onChange={(e) => setValueSearch(e.target.value)}
+                                onChange={(e) => setValueSearch(e?.target?.value)}
                             />
                         </div>
                     </div>

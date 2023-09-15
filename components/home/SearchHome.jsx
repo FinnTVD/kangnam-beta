@@ -58,7 +58,7 @@ export default function SearchHome({ data }) {
                             name='search'
                             id='search'
                             value={valueSearch}
-                            onChange={(e) => setValueSearch(e.target.value)}
+                            onChange={(e) => setValueSearch(e?.target?.value)}
                         />
                     </div>
                 </div>

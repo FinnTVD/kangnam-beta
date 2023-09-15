@@ -1,33 +1,14 @@
 'use client'
 import useResizeArea from '@/hooks/useResizeArea'
 import classes from './form2.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import InputCustom from './InputCustom'
 import useStore from '@/app/[lang]/(store)/store'
-
-// const schema = yup
-//     .object({
-//         fullName: yup.string().required('Vui lòng điền đầy đủ họ và tên!'),
-//         numberPhone: yup
-//             .string()
-//             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
-//                 if (value && isNaN(value)) {
-//                     return false
-//                 }
-//                 return true
-//             })
-//             .required('Vui lòng điền số điện thoại!'),
-//         email: yup
-//             .string()
-//             .required('Vui lòng điền email!')
-//             .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
-//     })
-//     .required()
 
 export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
     const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
-    console.log('🚀 ~ file: Form2.jsx:30 ~ Form2 ~ dataSubmitForm:', dataSubmitForm)
+    const triggerSubmit = useStore((state) => state.triggerSubmit)
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
     const [isHost, setIsHost] = useState(false)
     const [valueFullName, setValueFullName] = useState({
@@ -44,6 +25,24 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
     })
     const [valueNote, setValueNote] = useState('')
 
+
+    useEffect(()=>{
+        setIsHost(false)
+        setValueFullName({
+            value:'',
+            validate:false
+        })
+        setValuePhoneNumber({
+            value:'',
+            validate:false
+        })
+        setValueEmail({
+            value:'',
+            validate:false
+        })
+        setValueNote('')
+    },[triggerSubmit])
+
     const validateEmail = (input) => {
         // Biểu thức chính quy để kiểm tra địa chỉ email
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
@@ -52,15 +51,15 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
 
     const handleChangeFullName = (e) => {
         setValueFullName({
-            value: e.target.value,
+            value: e?.target?.value,
             validate: false,
         })
     }
 
     const handleChangePhoneNumber = (e) => {
-        if (/^\d*$/.test(e.target.value)) {
+        if (/^\d*$/.test(e?.target?.value)) {
             setValuePhoneNumber({
-                value: e.target.value,
+                value: e?.target?.value,
                 validate: false,
             })
         }
@@ -68,13 +67,13 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
 
     const handleChangeEmail = (e) => {
         setValueEmail({
-            value: e.target.value,
+            value: e?.target?.value,
             validate: false,
         })
     }
     const handleChangeNote = (e) => {
         handleResizeHeight(e)
-        setValueNote(e.target.value)
+        setValueNote(e?.target?.value)
     }
 
     const handleSubmit = (e) => {
@@ -112,7 +111,6 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
             email: valueEmail?.value,
             message: valueNote,
         }
-        console.log('🚀 ~ file: Form2.jsx:106 ~ handleSubmit ~ dataForm:', dataForm)
         setDataSubmitForm({
             ...dataSubmitForm,
             ...dataForm,
@@ -157,6 +155,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 type='checkbox'
                                 name='ourHouse'
                                 id='ourHouse'
+                                checked={isHost}
                                 onChange={() => setIsHost(!isHost)}
                                 className={`${classes['ourHouse']} cursor-pointer max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                             />
@@ -210,6 +209,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                             <textarea
                                 ref={areaRef}
                                 onChange={handleChangeNote}
+                                value={valueNote}
                                 className={`${
                                     valueNote ? '' : 'focus-input-active'
                                 } py-[1vw] px-[1.5vw] resize-none rounded-[1vw] text-den border border-solid border-[#C5C5C5] w-full outline-none title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]`}

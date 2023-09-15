@@ -1,5 +1,7 @@
 import NavBarV2 from '../general/NavBarV2'
 import WrapperForm from './WrapperForm'
+import { ToastContainer } from 'react-toastify'
+
 
 export default function ConsignmentIndex({ t, lang }) {
     return (
@@ -10,8 +12,9 @@ export default function ConsignmentIndex({ t, lang }) {
                     t={t}
                 />
             </header>
-            <main className='h-fit overflow-hidden'>
+            <main className='overflow-hidden h-fit'>
                 <WrapperForm t={t} />
+                <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>
     )

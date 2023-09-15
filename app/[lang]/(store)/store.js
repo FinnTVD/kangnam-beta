@@ -8,6 +8,15 @@ const useStore = create((set, get) => ({
     slugDetailProject: null,
     slugDetailNews: null,
     dataSubmitForm: null,
+    triggerSubmit:false,
+    setTriggerSubmit: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                triggerSubmit:data ,
+            }
+        })
+    },
     setDataSubmitForm: (data) => {
         set((state) => {
             return {

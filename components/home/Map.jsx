@@ -60,7 +60,6 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
         if (typeof window === 'undefined' || !mapRef.current) return
         const loadMap = () => {
             if (!window.vietmapgl || typeof window === 'undefined') return
-            console.log("init", window);
             mapRef.current = new window.vietmapgl.Map({
                 container: 'map',
                 // style: mapJson,
@@ -724,7 +723,7 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
     }
 
     const handleChangeSearch = (e) => {
-        setValue(e.target.value)
+        setValue(e?.target?.value)
     }
 
     return (

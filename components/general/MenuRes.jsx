@@ -104,7 +104,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                                 id='search'
                                 autoComplete='false'
                                 value={valueSearch}
-                                onChange={(e) => setValueSearch(e.target.value)}
+                                onChange={(e) => setValueSearch(e?.target?.value)}
                             />
                         </div>
                     </div>
