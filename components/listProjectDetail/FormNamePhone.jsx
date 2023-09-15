@@ -16,14 +16,14 @@ export default function FormNamePhone({ id }) {
     })
     const handleChangeName = (e) => {
         setValueName({
-            value: e.target.value,
+            value: e?.target?.value,
             validate: false,
         })
     }
     const handleChangePhone = (e) => {
-        if (/^\d*$/.test(e.target.value)) {
+        if (/^\d*$/.test(e?.target?.value)) {
             setValuePhone({
-                value: e.target.value,
+                value: e?.target?.value,
                 validate: false,
             })
         }
@@ -39,7 +39,6 @@ export default function FormNamePhone({ id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submit')
         !valueName?.value &&
             setValueName({
                 ...valueName,

@@ -1,13 +1,13 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import InputCustom from './InputCustom'
 import useStore from '@/app/[lang]/(store)/store'
 
 export default function Form1({ t, handleNextSlide, isMobile }) {
     const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
-    console.log('🚀 ~ file: Form1.jsx:10 ~ Form1 ~ dataSubmitForm:', dataSubmitForm)
+    const triggerSubmit = useStore((state) => state.triggerSubmit)
     const [selectedOption, setSelectedOption] = useState('sell')
     const [inputValue, setInputValue] = useState('')
     const [inputValueHire, setInputValueHire] = useState('')
@@ -26,6 +26,27 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
         validate: false,
         title: '',
     })
+
+    useEffect(()=>{
+        setSelectedOption('sell')
+        setInputValue('')
+        setInputValueHire('')
+        setInputValueAddress({
+            value:'',
+            validate:false
+        })
+        setInputNameHouse('')
+        setValidatePrice({
+            status: false,
+            validate: false,
+            title: '',
+        })
+        setValidatePriceHire({
+            status: false,
+            validate: false,
+            title: '',
+        })
+    },[triggerSubmit])
 
     const handleInputChange = (event) => {
         const value = event.target.value

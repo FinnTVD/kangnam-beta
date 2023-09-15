@@ -14,7 +14,6 @@ export default function FeatureHome() {
 
     const handleCurrently = () => {
         setIsShow(!isShow)
-        console.log('close')
     }
 
     return (
@@ -37,7 +36,7 @@ export default function FeatureHome() {
             >
                 <div
                     onClick={handleCurrently}
-                    className='relative flex rounded-full items-center justify-center w-full h-full cursor-pointer '
+                    className='relative flex items-center justify-center w-full h-full rounded-full cursor-pointer '
                 >
                     <Image
                         src='/images/tiente.svg'

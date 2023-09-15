@@ -1,49 +1,34 @@
 'use client'
 import useResizeArea from '@/hooks/useResizeArea'
 import Button from '../general/Button'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import InputCustom from './InputCustom'
 import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
-import { data } from 'autoprefixer'
+import postData from '@/utils/postData'
+import { notifyError, notifySuccess } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Form3({ handlePrevSlide, isMobile }) {
-    const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
+    const setTriggerSubmit = useStore((state) => state.setTriggerSubmit)
+    const triggerSubmit = useStore((state) => state.triggerSubmit)
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
     const [selectedImage, setSelectedImage] = useState([])
     const [files, setFiles] = useState([])
-    const [valueType, setValueType] = useState("Loại hình")
-    const [valueArea, setValueArea] = useState({
-        value: '',
-        validate: '',
+    const [isOpen, setIsOpen] = useState(false)
+    const [valueType, setValueType] = useState({
+        title:"Loại hình",
+        id:null
     })
-    const [valueNumberFloors, setValueNumberFloors] = useState({
-        value: '',
-        validate: '',
-    })
-    const [valueHomeOrientation, setValueHomeOrientation] = useState({
-        value: '',
-        validate: '',
-    })
-    const [valueBuildingType, setValueBuildingType] = useState({
-        value: '',
-        validate: '',
-    })
-    const [valueBalconyOrientation, setValueBalconyOrientation] = useState({
-        value: '',
-        validate: '',
-    })
-    const [valueInterior, setValueInterior] = useState({
-        value: '',
-        validate: '',
-    })
-    const [valueLegal, setValueLegal] = useState({
-        value: '',
-        validate: '',
-    })
+    const [valueArea, setValueArea] = useState('')
+    const [valueNumberFloors, setValueNumberFloors] = useState('')
+    const [valueHomeOrientation, setValueHomeOrientation] = useState('')
+    const [valueBuildingType, setValueBuildingType] = useState('')
+    const [valueBalconyOrientation, setValueBalconyOrientation] = useState('')
+    const [valueInterior, setValueInterior] = useState('')
+    const [valueLegal, setValueLegal] = useState('')
     const [valueDescription, setValueDescription] = useState({
         value: '',
         validate: false,
@@ -63,49 +48,49 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ file: Form3.jsx:68 ~ Form3 ~ dataType:', dataType)
+    
+
+    useEffect(()=>{
+        setValueArea('')
+        setSelectedImage([])
+        setFiles([])
+        setValueType({
+            title:"Loại hình",
+            id:null
+        })
+        setValueArea('')
+        setValueNumberFloors('')
+        setValueHomeOrientation('')
+        setValueBuildingType('')
+        setValueBalconyOrientation('')
+        setValueInterior('')
+        setValueLegal('')
+        setValueDescription({
+            value: '',
+            validate: false,
+        })
+    },[triggerSubmit])
 
     const handleChangeArea = (e) => {
-        setValueArea({
-            ...valueArea,
-            value: e.target.value,
-        })
+        setValueArea(e?.target?.value)
     }
     const handleChangeNumberFloors = (e) => {
-        setValueNumberFloors({
-            ...valueNumberFloors,
-            value: e.target.value,
-        })
+        setValueNumberFloors(e?.target?.value)
     }
     const handleChangeHomeOrientation = (e) => {
-        setValueHomeOrientation({
-            ...valueHomeOrientation,
-            value: e.target.value,
-        })
+        setValueHomeOrientation(e?.target?.value)
     }
     const handleChangeBuildingType = (e) => {
-        setValueBuildingType({
-            ...valueBuildingType,
-            value: e.target.value,
-        })
+        setValueBuildingType(e?.target?.value)
     }
     const handleChangeBalconyOrientation = (e) => {
-        setValueBalconyOrientation({
-            ...valueBalconyOrientation,
-            value: e.target.value,
-        })
+        setValueBalconyOrientation(e?.target?.value)
     }
     const handleChangeInterior = (e) => {
-        setValueInterior({
-            ...valueInterior,
-            value: e.target.value,
-        })
+        setValueInterior(e?.target?.value)
     }
     const handleChangeLegal = (e) => {
-        setValueLegal({
-            ...valueLegal,
-            value: e.target.value,
-        })
+        setValueLegal(e?.target?.value)
     }
 
     const handleChangeFile = (e) => {
@@ -147,8 +132,8 @@ export default function Form3({ handlePrevSlide, isMobile }) {
     const handleChangeDescription = (e) => {
         handleResizeHeight(e)
         setValueDescription({
-            ...valueDescription,
-            value: e.target.value,
+            validate:false,
+            value: e?.target?.value,
         })
     }
 
@@ -158,7 +143,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
 
     const handleDrop = (event) => {
         event.preventDefault()
-        setFiles(event.dataTransfer.files)
+        setFiles(event?.dataTransfer?.files)
     }
 
     const handleUpLoadImage = async () => {
@@ -166,8 +151,6 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         files?.forEach((e) => {
             formData.append('files', e)
         })
-        console.log('🚀 ~ file: Form3.jsx:175 ~ handleUpLoadImage ~ formData:', formData)
-        console.log('formData', formData.getAll('files'))
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/file/multiple`, {
             method: 'POST',
             mode: 'cors',
@@ -176,16 +159,52 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         // The return value is *not* serialized
         // You can return Date, Map, Set, etc.
         const data = await res.json()
-        console.log('🚀 ~ file: Form3.jsx:190 ~ handleUpLoadImage ~ data:', data)
+        if(data){
+            const listLinkImg = []
+            data?.forEach(e=>listLinkImg.push(e?.url))
+            const dataForm ={
+                propertyDescription:valueDescription?.value,
+                propertyTypeId:valueType?.id,
+                size:Number(valueArea),
+                floor:Number(valueNumberFloors),
+                orientHouse:valueHomeOrientation,
+                constructionType:valueBuildingType,
+                orientBalcony:valueBalconyOrientation,
+                furniture:valueInterior,
+                policy:valueLegal,
+                images:listLinkImg,
+            }
+            
+            const post = await postData('/deposit',{
+                ...dataSubmitForm,
+                ...dataForm,
+            })
+            if (post?.statusCode) {
+                return notifyError(post?.error)
+            }
+            notifySuccess()
+            setTriggerSubmit(!triggerSubmit)
+            handlePrevSlide()
+            handlePrevSlide()
+        }
     }
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (files?.length < 3 || !files) return setValidateFiles((prev) => ({ ...prev, status: true }))
-        const dataForm = {
-            propertyDescription: '',
+        if(!valueDescription?.value){
+            setValueDescription({
+                ...valueDescription,
+                validate:true,
+            })
         }
-        console.log('🚀 ~ file: Form3.jsx:187 ~ handleSubmit ~ dataForm:', dataForm)
+        if (files?.length < 3 || !files){
+            setValidateFiles((prev) => ({ ...prev, status: true }))
+        }
+        if(valueDescription?.value && files?.length >= 3){
+            handleUpLoadImage()
+        }
     }
 
     return (
@@ -250,9 +269,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                             Thông tin chi tiết
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
-                            <div className='flex flex-1 relative'>
-                                <div className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'>
-                                    Loại hình
+                            <div className='relative flex flex-1'>
+                                <div onClick={()=>setIsOpen(!isOpen)} className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'>
+                                    {valueType?.title}
                                 </div>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -268,10 +287,17 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                         d='M19.5 8.25l-7.5 7.5-7.5-7.5'
                                     />
                                 </svg>
-                                <ul className={`${dataType?.data ? '' : 'hidden'} z-[10] rounded-[1vw] overflow-hidden shadow-input bg-white text-den absolute bottom-[-0.5vw] translate-y-full left-0 py-[0.5vw] flex flex-col`}>
+                                <ul className={`${dataType?.data ? '' : 'hidden'} ${isOpen?'':'hidden'} z-[10] rounded-[1vw] overflow-hidden shadow-input bg-white text-den absolute bottom-[-0.5vw] translate-y-full left-0 py-[0.5vw] flex flex-col`}>
                                     {dataType?.data?.map((e, index) => (
-                                        <li className='text-den px-[1vw] py-[0.5vw] hover:bg-gray-200' key={index}>{e?.name}</li>
+                                        <li onClick={()=>{
+                                            setValueType({
+                                            title:e?.name,
+                                            id:e?.id
+                                        })
+                                        setIsOpen(false)
+                                        }} className='text-den px-[1vw] py-[0.5vw] hover:bg-gray-200' key={index}>{e?.name}</li>
                                     ))}
+                                    
                                 </ul>
                             </div>
                             
@@ -296,9 +322,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Diện tích'}
                                 onChange={handleChangeArea}
-                                value={valueArea?.value}
-                                validate={valueArea?.validate}
+                                value={valueArea}
                                 register={'area'}
+                                type='number'
                                 required={false}
                             />
                         </div>
@@ -311,9 +337,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Số tầng'}
                                 onChange={handleChangeNumberFloors}
-                                value={valueNumberFloors?.value}
-                                validate={valueNumberFloors?.validate}
+                                value={valueNumberFloors}
                                 register={'numberFloors'}
+                                type='number'
                                 required={false}
                             />
                             <InputCustom
@@ -324,8 +350,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Hướng nhà'}
                                 onChange={handleChangeHomeOrientation}
-                                value={valueHomeOrientation?.value}
-                                validate={valueHomeOrientation?.validate}
+                                value={valueHomeOrientation}
                                 register={'homeOrientation'}
                                 required={false}
                             />
@@ -339,8 +364,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Loại công trình'}
                                 onChange={handleChangeBuildingType}
-                                value={valueBuildingType?.value}
-                                validate={valueBuildingType?.validate}
+                                value={valueBuildingType}
                                 register={'buildingType'}
                                 required={false}
                             />
@@ -352,8 +376,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Hướng ban công'}
                                 onChange={handleChangeBalconyOrientation}
-                                value={valueBalconyOrientation?.value}
-                                validate={valueBalconyOrientation?.validate}
+                                value={valueBalconyOrientation}
                                 register={'balconyOrientation'}
                                 required={false}
                             />
@@ -366,8 +389,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 }
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Nội thất'}
-                                value={valueInterior?.value}
-                                validate={valueInterior?.validate}
+                                value={valueInterior}
                                 onChange={handleChangeInterior}
                                 register={'interior'}
                                 required={false}
@@ -380,8 +402,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
                                 labelContent={'Pháp lý'}
                                 onChange={handleChangeLegal}
-                                value={valueLegal?.value}
-                                validate={valueLegal?.validate}
+                                value={valueLegal}
                                 register={'legal'}
                                 required={false}
                             />
@@ -469,12 +490,6 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 </p>
                             </div>
                         </div>
-                        <div
-                            onClick={handleUpLoadImage}
-                            className='text-black'
-                        >
-                            upload
-                        </div>
 
                         {selectedImage?.length >= 1 && (
                             <article
@@ -484,7 +499,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 } mt-[0.8vw] h-[19vw] max-md:h-[45vw] w-full max-md:mt-[2.13vw]`}
                             >
                                 <ul className='grid grid-cols-3 gap-[0.5vw] max-md:gap-[1.5vw]'>
-                                    {selectedImage.map((src, index) => (
+                                    {selectedImage?.map((src, index) => (
                                         <li
                                             key={index}
                                             className='w-full !h-[6vw] max-md:!h-[14vw] max-md: relative rounded-md'

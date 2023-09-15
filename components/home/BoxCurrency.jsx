@@ -77,7 +77,6 @@ export default function BoxCurrency({ className = '' }) {
             revalidateOnReconnect: false,
         },
     )
-    console.log('🚀 ~ file: BoxCurrency.jsx:70 ~ BoxCurrency ~ data:', data)
 
     const handleSwapCurrency = () => {
         setCodeTo(codeFrom)
