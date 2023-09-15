@@ -52,7 +52,7 @@ export default async function RootLayout({ children, params }) {
                 {children}
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
                 <Script defer src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></Script>
-                <Script defer href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'></Script>
+                <Script defer src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'></Script>
                 <Script
                     async
                     defer
