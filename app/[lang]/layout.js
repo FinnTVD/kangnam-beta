@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import Script from 'next/script'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import LoadMap from '@/components/general/LoadMap'
 
 const avertaStdCY = localFont({
     src: [
@@ -45,14 +46,19 @@ const avertaStdCY = localFont({
 export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
+            <head>
+                <link
+                    href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
+                    rel='stylesheet'
+                />
+            </head>
             <body
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
+                <LoadMap/>
                 {children}
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
-                <Script defer src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></Script>
-                <Script defer src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'></Script>
                 <Script
                     async
                     defer
