@@ -4,21 +4,18 @@ import Button from '../general/Button'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import InputCustom from './InputCustom'
+import useStore from '@/app/[lang]/(store)/store'
+import useSWR from 'swr'
+import { data } from 'autoprefixer'
 
-// const schema = yup
-//     .object({
-//         description: yup.string().required('Vui lòng mô tả thông tin về nhà đất!'),
-//     })
-//     .required()
-
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Form3({ handlePrevSlide, isMobile }) {
+    const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
+    const dataSubmitForm = useStore((state) => state.dataSubmitForm)
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
     const [selectedImage, setSelectedImage] = useState([])
     const [files, setFiles] = useState([])
-    const [valueType, setValueType] = useState({
-        value: '',
-        validate: '',
-    })
+    const [valueType, setValueType] = useState("Loại hình")
     const [valueArea, setValueArea] = useState({
         value: '',
         validate: '',
@@ -57,15 +54,17 @@ export default function Form3({ handlePrevSlide, isMobile }) {
     })
     const fileRef = useRef()
 
-    const handleClickSubmit = () => {
-        if (files?.length < 3 || !files) setValidateFiles((prev) => ({ ...prev, status: true }))
-    }
-    const handleChangeType = (e) => {
-        setValueType({
-            ...valueType,
-            value: e.target.value,
-        })
-    }
+    const {
+        data: dataType,
+        isLoading: isLoadingType,
+        error: errorType,
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-type?page=1&take=50`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    console.log('🚀 ~ file: Form3.jsx:68 ~ Form3 ~ dataType:', dataType)
+
     const handleChangeArea = (e) => {
         setValueArea({
             ...valueArea,
@@ -153,10 +152,6 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
-
     const handleDragOver = (event) => {
         event.preventDefault()
     }
@@ -182,6 +177,15 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         // You can return Date, Map, Set, etc.
         const data = await res.json()
         console.log('🚀 ~ file: Form3.jsx:190 ~ handleUpLoadImage ~ data:', data)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (files?.length < 3 || !files) return setValidateFiles((prev) => ({ ...prev, status: true }))
+        const dataForm = {
+            propertyDescription: '',
+        }
+        console.log('🚀 ~ file: Form3.jsx:187 ~ handleSubmit ~ dataForm:', dataForm)
     }
 
     return (
@@ -246,7 +250,32 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                             Thông tin chi tiết
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
-                            <InputCustom
+                            <div className='flex flex-1 relative'>
+                                <div className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'>
+                                    Loại hình
+                                </div>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth='1.5'
+                                    stroke='#444'
+                                    className='w-6 h-6 absolute right-[1.5vw] top-1/2 -translate-y-1/2'
+                                >
+                                    <path
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+                                    />
+                                </svg>
+                                <ul className={`${dataType?.data ? '' : 'hidden'} z-[10] rounded-[1vw] overflow-hidden shadow-input bg-white text-den absolute bottom-[-0.5vw] translate-y-full left-0 py-[0.5vw] flex flex-col`}>
+                                    {dataType?.data?.map((e, index) => (
+                                        <li className='text-den px-[1vw] py-[0.5vw] hover:bg-gray-200' key={index}>{e?.name}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            
+                            {/* <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
@@ -258,7 +287,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 validate={valueType?.validate}
                                 register={'type'}
                                 required={false}
-                            />
+                            /> */}
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
@@ -488,7 +517,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                         )}
                         <div className='flex justify-center'>
                             <Button
-                                onCLick={handleClickSubmit}
+                                type='submit'
                                 stroke='white'
                                 className='bg-logo border-none mt-[2.13vw] max-md:mt-[6.4vw] max-md:py-[4.13vw] max-md:w-full max-md:flex max-md:justify-center'
                                 span='text-white font-semibold -tracking-[0.32px] title-mb14-600-150 max-md:-tracking-[0.28px]'
