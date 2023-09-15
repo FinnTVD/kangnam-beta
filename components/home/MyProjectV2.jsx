@@ -2,9 +2,7 @@
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Image from 'next/image'
-// import Map from './Map'
-import dynamic from 'next/dynamic'
-const Map = dynamic(() => import('./Map'), { ssr: false })
+import Map from './Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'

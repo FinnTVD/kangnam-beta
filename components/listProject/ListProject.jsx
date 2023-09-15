@@ -1,8 +1,5 @@
 'use client'
-import dynamic from 'next/dynamic'
-const Map = dynamic(() => import('../home/Map'), { ssr: false })
 import Image from 'next/image'
-// import Map from '../home/Map'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import BoxSort from './BoxSort'
@@ -19,6 +16,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { handleCheckLangCode, handleCheckParams } from '@/utils'
+import Map from '../home/Map'
 const arrFilter = [
     {
         id: 1,

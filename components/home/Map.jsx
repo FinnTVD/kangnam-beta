@@ -58,10 +58,10 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
 
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef.current) return
-        
         const loadMap = () => {
-            if (!vietmapgl || typeof window === 'undefined') return
-            mapRef.current = new vietmapgl.Map({
+            if (!window.vietmapgl || typeof window === 'undefined') return
+            console.log("init", window);
+            mapRef.current = new window.vietmapgl.Map({
                 container: 'map',
                 // style: mapJson,
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
@@ -79,8 +79,7 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
         // addMarker2()
         // // addMarker3();
         // addGeojsonLine()
-       
-    }, [])
+    }, [window?.vietmapgl])
 
     useEffect(() => {
         dataMap && dataItemMap && addMarkerItem(dataMap)
