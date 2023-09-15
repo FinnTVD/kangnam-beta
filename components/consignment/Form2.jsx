@@ -1,9 +1,9 @@
 'use client'
 import useResizeArea from '@/hooks/useResizeArea'
-import Image from 'next/image'
 import classes from './form2.module.css'
 import { useState } from 'react'
 import InputCustom from './InputCustom'
+import useStore from '@/app/[lang]/(store)/store'
 
 // const schema = yup
 //     .object({
@@ -25,7 +25,11 @@ import InputCustom from './InputCustom'
 //     .required()
 
 export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
+    const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
+    const dataSubmitForm = useStore((state) => state.dataSubmitForm)
+    console.log('🚀 ~ file: Form2.jsx:30 ~ Form2 ~ dataSubmitForm:', dataSubmitForm)
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
+    const [isHost, setIsHost] = useState(false)
     const [valueFullName, setValueFullName] = useState({
         value: '',
         validate: false,
@@ -100,6 +104,19 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
             })
             return
         }
+
+        const dataForm = {
+            isHost: isHost,
+            fullName: valueFullName?.value,
+            phone: valuePhoneNumber?.value,
+            email: valueEmail?.value,
+            message: valueNote,
+        }
+        console.log('🚀 ~ file: Form2.jsx:106 ~ handleSubmit ~ dataForm:', dataForm)
+        setDataSubmitForm({
+            ...dataSubmitForm,
+            ...dataForm,
+        })
         handleNextSlide()
     }
 
@@ -140,6 +157,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 type='checkbox'
                                 name='ourHouse'
                                 id='ourHouse'
+                                onChange={() => setIsHost(!isHost)}
                                 className={`${classes['ourHouse']} cursor-pointer max-md:w-[4.27vw] max-md:h-[4.27vw]`}
                             />
                             <label

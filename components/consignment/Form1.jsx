@@ -6,6 +6,8 @@ import useStore from '@/app/[lang]/(store)/store'
 
 export default function Form1({ t, handleNextSlide, isMobile }) {
     const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
+    const dataSubmitForm = useStore((state) => state.dataSubmitForm)
+    console.log('🚀 ~ file: Form1.jsx:10 ~ Form1 ~ dataSubmitForm:', dataSubmitForm)
     const [selectedOption, setSelectedOption] = useState('sell')
     const [inputValue, setInputValue] = useState('')
     const [inputValueHire, setInputValueHire] = useState('')
@@ -13,6 +15,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
         value: '',
         validate: false,
     })
+    const [inputNameHouse, setInputNameHouse] = useState('')
     const [validatePrice, setValidatePrice] = useState({
         status: false,
         validate: false,
@@ -112,6 +115,33 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
         setSelectedOption(event.target.value)
     }
 
+    const handleDemand = (title) => {
+        switch (title) {
+            case 'sell':
+                return 'Bán'
+            case 'hire':
+                return 'Cho thuê'
+            case 'sellandhire':
+                return 'Bán và cho thuê'
+            default:
+                break
+        }
+    }
+
+    const handlePriceWhenSubmitForm = () => {
+        if (selectedOption === 'sell') {
+            return `${inputValue ? `Giá bán: ${inputValue} (${validatePrice?.title})` : ''}`
+        }
+        if (selectedOption === 'hire') {
+            return `${inputValueHire ? `Cho thuê: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
+        }
+        if (selectedOption === 'sellandhire') {
+            return `${inputValue ? `Giá bán: ${inputValue} (${validatePrice?.title})` : ''}${
+                inputValue && inputValueHire ? ' -- ' : ''
+            }${inputValueHire ? `Cho thuê: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if (!inputValue || !inputValueAddress?.value || (!inputValueHire && selectedOption === 'sellandhire')) {
@@ -126,10 +156,15 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                 })
             return
         }
-        console.log('🚀 ~ file: Form1.jsx:130 ~ onSubmit ~ e:', {
-            sell: inputValue,
-            hire: inputValueHire,
+        const dataForm = {
+            name: inputNameHouse,
+            price: handlePriceWhenSubmitForm(),
+            demand: handleDemand(selectedOption),
             address: inputValueAddress?.value,
+        }
+        setDataSubmitForm({
+            ...dataSubmitForm,
+            ...dataForm,
         })
         handleNextSlide()
     }
@@ -166,6 +201,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                     Bán
                                 </label>
                             </div>
+
                             <div className='flex gap-x-[0.69vw] items-center max-md:gap-x-[2.93vw]'>
                                 <input
                                     type='radio'
@@ -206,22 +242,18 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                 selectedOption === 'sellandhire' ? 'flex-wrap' : ''
                             }`}
                         >
-                            <div className='w-[17.1875vw] max-md:w-full py-[1vw] px-[1.5vw] rounded-[10vw] border border-solid border-[#C5C5C5] flex justify-between items-center max-md:py-[2.93vw] max-md:px-[4.27vw]'>
-                                <span className='text-[#646464] title16-400-150 title-mb12-400-150'>Căn hộ</span>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    width='24'
-                                    height='24'
-                                    viewBox='0 0 24 24'
-                                    fill='none'
-                                    className='w-[1.5vw] h-[1.5vw]'
-                                >
-                                    <path
-                                        d='M16.1791 10.8985L15.5023 10.2217L12.0007 13.7209L8.49907 10.2217L7.82227 10.8985L12.0007 15.0793L16.1791 10.8985Z'
-                                        fill='#C5C5C5'
-                                    />
-                                </svg>
-                            </div>
+                            <InputCustom
+                                boxClass={'w-[17.1875vw] max-md:w-full flex justify-between items-center '}
+                                labelContent={'Căn hộ'}
+                                labelClass={'title16-400-150 title-mb12-400-150'}
+                                inputClass={
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                }
+                                required={false}
+                                register={'name'}
+                                value={inputNameHouse}
+                                onChange={(e) => setInputNameHouse(e?.target?.value)}
+                            />
                             <InputCustom
                                 boxClass={'flex-1'}
                                 labelContent={t?.Form1?.sell}

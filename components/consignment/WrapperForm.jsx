@@ -5,7 +5,7 @@ import src from '../../public/images/bg-dang-tin.jpg'
 export default function WrapperForm({ t }) {
     return (
         <section className='flex w-full h-screen md:overflow-hidden max-md:flex-col max-md:h-fit'>
-            <div className='h-[calc(100vh-5.8vw)] w-[42.0625vw] max-md:w-full max-md:!h-[126.3vw] md:fixed max-md:!relative z-50 md:top-[5.8vw] md:left-0 max-md:mt-[18vw]'>
+            <aside className='h-[calc(100vh-5.8vw)] w-[42.0625vw] max-md:w-full max-md:!h-[126.3vw] md:fixed max-md:!relative z-50 md:top-[5.8vw] md:left-0 max-md:mt-[18vw]'>
                 cx
                 <Image
                     className='z-0 object-cover max-md:!h-[126.3vw]'
@@ -211,7 +211,7 @@ export default function WrapperForm({ t }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </aside>
             <div className='h-full w-[42.0625vw] relative max-md:hidden'></div>
             <div className='fixed z-50 md:top-[5.8vw] md:left-[42.0625vw] w-[calc(100vw-42.0625vw)] h-fit overflow-hidden pr-[7.5vw] pl-[1.5vw] pt-[3.75vw] max-md:pt-[16.05vw] flex flex-col justify-between bg-white max-md:relative max-md:w-full max-md:px-[2.67vw]'>
                 <div>

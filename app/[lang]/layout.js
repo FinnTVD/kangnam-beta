@@ -45,12 +45,20 @@ const avertaStdCY = localFont({
 export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
+            <head>
+                <link
+                    defer
+                    href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
+                    rel='stylesheet'
+                />
+            </head>
             <body
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
                 {children}
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
+                <Script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></Script>
                 <Script
                     async
                     defer
