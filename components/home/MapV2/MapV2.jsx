@@ -1,80 +1,80 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import useSWR from "swr";
-import { ToastContainer, toast } from "react-toastify";
+import useDebounce from '@/hooks/useDebounce'
 import SelectDistrict from "./SelectDistrict";
 import SelectWard from "./SelectWard";
 import SelectCity from "./SelectCity";
 import Search from "./Search";
-import useDebounce from "@/hooks/useDebounce";
+import { toast } from "react-toastify";
 
 const apiKey = "c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e";
 
 const handlePopup = (itemProject) => {
 	if (!itemProject) return;
 	return `<div
-                            key=${itemProject?.id}
-                            class="flex gap-x-[0.88vw]"
-                        >
-                            <img
-                                class="w-[5.4375vw] h-[4.75vw] block object-cover"
-                                src=${
-									itemProject?.firstImage
-										? itemProject?.firstImage
-										: "/images/itemproject.jpg"
+			key=${itemProject?.id}
+			class="flex gap-x-[0.88vw]"
+		>
+			<img
+				class="w-[5.4375vw] h-[4.75vw] block object-cover"
+				src=${
+					itemProject?.firstImage
+						? itemProject?.firstImage
+						: "/images/itemproject.jpg"
+				}
+				alt=${itemProject?.translation?.name}
+			/>
+			<div class="w-[12.0625vw]">
+				<h2 class='line-clamp-1'>${
+					itemProject?.translation?.name ?? ""
+				}</h2>
+				<div
+							title=${
+								itemProject?.address?.display
+							}
+							class='flex items-center'
+						>
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap'>
+								Địa chỉ:
+							</span>
+							<span class='capitalize text-black title14-400-150 line-clamp-1'>
+								${
+									itemProject?.address?.name +
+									", " +
+									itemProject?.address?.ward +
+									", " +
+									itemProject?.address
+										?.district
 								}
-                                alt=${itemProject?.translation?.name}
-                            />
-                            <div class="w-[12.0625vw]">
-                                <h2 class='line-clamp-1'>${
-									itemProject?.translation?.name ?? ""
-								}</h2>
-                                <div
-                                            title=${
-												itemProject?.address?.display
-											}
-                                            class='flex items-center'
-                                        >
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap'>
-                                                Địa chỉ:
-                                            </span>
-                                            <span class='capitalize text-black title14-400-150 line-clamp-1'>
-                                                ${
-													itemProject?.address?.name +
-													", " +
-													itemProject?.address?.ward +
-													", " +
-													itemProject?.address
-														?.district
-												}
-                                            </span>
-                                        </div>
-                                        <div class='flex items-center my-[0.5vw]'>
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
-                                                Diện tích:
-                                            </span>
-                                            <span class=' text-black title14-400-150'>
-                                                ${
-													itemProject?.translation
-														?.size + " m²"
-												}
-                                            </span>
-                                        </div>
-                                        <div class='flex items-center'>
-                                            
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
-                                                Mức giá:
-                                            </span>
-                                            <span class='capitalize text-black title14-400-150'>
-                                                ${
-													itemProject?.translation
-														?.priceDisplay
-												}
-                                            </span>
-                                        </div>
-                            </div>
-                        </div>`;
-};
+							</span>
+						</div>
+						<div class='flex items-center my-[0.5vw]'>
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+								Diện tích:
+							</span>
+							<span class=' text-black title14-400-150'>
+								${
+									itemProject?.translation
+										?.size + " m²"
+								}
+							</span>
+						</div>
+						<div class='flex items-center'>
+							
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+								Mức giá:
+							</span>
+							<span class='capitalize text-black title14-400-150'>
+								${
+									itemProject?.translation
+										?.priceDisplay
+								}
+							</span>
+						</div>
+			</div>
+		</div>`;
+	};
 const initial = {
 	district: null,
 	ward: null,
@@ -97,19 +97,15 @@ const notifyError = (title) =>
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 
-export default function MapV2({isToggle,setIsToggle}) {
-
+export default function MapV2() {
 	const mapRef = useRef(); //lưu lại dom map
 	const [value, setValue] = useState("");
 	const debounceValue = useDebounce(value, 500);
 	const [isFly, setIsFly] = useState(false); // trigger sự kiện fly to
 	const [levelZoom, setLevelZoom] = useState(9); //lưu level zoom
 	const [cityId, setCityId] = useState(11); // default city id = 11 (Ha Noi)
-	console.log("🚀 ~ file: MapV2.jsx:108 ~ MapV2 ~ cityId:", cityId)
 	const [districtId, setDistrictId] = useState(null); // lưu id district
-	console.log("🚀 ~ file: MapV2.jsx:110 ~ MapV2 ~ districtId:", districtId)
 	const [wardId, setWardId] = useState(null); //  lưu id ward
-	console.log("🚀 ~ file: MapV2.jsx:112 ~ MapV2 ~ wardId:", wardId)
 	const [listMarkerDistrict, setListMarkerDistrict] = useState(initial); // lưu các marker lại đê xoá
 	const [isDeleteDistrict, setIsDeleteDistrict] = useState(false); //nếu district id thay đổi thì biến thay đổi theo
 	const [isDrag, setIsDrag] = useState(false); // trigger sự kiện drag
@@ -117,7 +113,6 @@ export default function MapV2({isToggle,setIsToggle}) {
 	const [dataDistrict, setDataDistrict] = useState(null);
 	const [dataMap, setDataMap] = useState(null);
 	const [dataProvinces, setDataProvinces] = useState(null); // trả về danh sách các tỉnh có dự án
-	console.log("🚀 ~ file: MapV2.jsx:121 ~ MapV2 ~ dataProvinces:", dataProvinces)
 	const [dataWard, setDataWard] = useState(null);
 	const [titleCity, setTitleCity] = useState({
 		title:"",
@@ -131,9 +126,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 		title:"Phường/xã",
 		id:null
 	})
-
 	const [dataProject, setDataProject] = useState([])
-	console.log("🚀 ~ file: MapV2.jsx:141 ~ MapV2 ~ dataProject:", dataProject)
 
 	const {
 		data: dataSearch,
@@ -163,34 +156,6 @@ export default function MapV2({isToggle,setIsToggle}) {
 		}
 	);
 
-
-	useEffect(()=>{
-		if(dataSearch?.length && debounceValue){
-			if(dataSearch[0]?.boundaries?.length===1){
-				const obj1 = {
-					cityIdSearch:dataSearch[0]?.boundaries[0]?.id
-				}
-				callDataProject(obj1)
-			}
-			if(dataSearch[0]?.boundaries?.length===2){
-
-				const obj2 = {
-					districtIdSearch:dataSearch[0]?.boundaries[0]?.id,
-					cityIdSearch:dataSearch[0]?.boundaries[1]?.id
-				}
-				callDataProject(obj2)
-			}
-			if(dataSearch[0]?.boundaries?.length===3){
-				const obj3 = {
-					wardIdSearch:dataSearch[0]?.boundaries[0]?.id,
-					districtIdSearch:dataSearch[0]?.boundaries[1]?.id,
-					cityIdSearch:dataSearch[0]?.boundaries[2]?.id
-				}
-				callDataProject(obj3)
-			}
-		}
-	},[dataSearch])
-	//get danh sách các tỉnh có dự án
 	useEffect(() => {
 		if (typeof window === "undefined" || !mapRef.current) return;
 		const loadMap = () => {
@@ -224,6 +189,194 @@ export default function MapV2({isToggle,setIsToggle}) {
 		fetchData();
 		loadMap(); //add map
 	}, []);
+
+
+	// nếu có data chi tiết của dự án theo cityId, districtId và wardId thì add marker tương ứng
+	useEffect(() => {
+		const addMarkerItem = (listMarker) => {
+			if (!dataItemMap || !listMarker) return;
+			if (levelZoom >= 13.5) {
+				if (
+					listMarkerDistrict?.detail?.length &&
+					listMarkerDistrict?.detail[
+						listMarkerDistrict?.detail?.length - 1
+					] == wardId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.id === e?.id
+					);
+					let childNode = null;
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.id}`);
+					// Set options
+					// if (!window.vietmapgl || typeof window === 'undefined') return
+					const marker = new window.vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.lng || 0, e?.lat || 0])
+						.setPopup(
+							new window.vietmapgl.Popup().setHTML(`
+							<div style="width:fit-content;${
+								listProjectIn?.length > 3
+									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+									: "height:fit-content;"
+							}">
+								${childNode}
+							</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					detail: [...listMarkerDistrictNew, wardId],
+				}));
+				setIsDeleteDistrict(!isDeleteDistrict);
+				return;
+			} else if (levelZoom >= 11.5) {
+				if (
+					listMarkerDistrict?.ward?.length &&
+					listMarkerDistrict?.ward[
+						listMarkerDistrict?.ward?.length - 1
+					] == districtId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.wardId === e?.ward_id
+					);
+					let childNode = "";
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.ward_id}`);
+					// Set options
+					// if (!window.vietmapgl || typeof window === 'undefined') return
+					const marker = new window.vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
+						.setPopup(
+							new window.vietmapgl.Popup().setHTML(`
+							<div style="width:fit-content;${
+								listProjectIn?.length > 3
+									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+									: "height:fit-content;"
+							}">
+								${childNode}
+							</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					ward: [...listMarkerDistrictNew, districtId],
+				}));
+				return;
+			} else {
+				if (
+					listMarkerDistrict?.district?.length &&
+					listMarkerDistrict?.district[
+						listMarkerDistrict?.district?.length - 1
+					] == cityId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.districtId === e?.district_id
+					);
+					let childNode = "";
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.district_id}`);
+					// Set options
+					// if (!window.vietmapgl || typeof window === 'undefined') return
+					const marker = new window.vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
+						.setPopup(
+							new window.vietmapgl.Popup().setHTML(`
+					<div style="width:fit-content;${
+						listProjectIn?.length > 3
+							? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+							: "height:fit-content;"
+					}">
+						${childNode}
+					</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					district: [...listMarkerDistrictNew, cityId],
+				}));
+				return;
+			}
+		};
+		dataItemMap && addMarkerItem(dataMap);
+		// if data then render marker
+	}, [dataItemMap]);
+
+	useEffect(()=>{
+		if(dataSearch?.length && debounceValue){
+			if(dataSearch[0]?.boundaries?.length===1){
+				const obj1 = {
+					cityIdSearch:dataSearch[0]?.boundaries[0]?.id
+				}
+				callDataProject(obj1)
+			}
+			if(dataSearch[0]?.boundaries?.length===2){
+
+				const obj2 = {
+					districtIdSearch:dataSearch[0]?.boundaries[0]?.id,
+					cityIdSearch:dataSearch[0]?.boundaries[1]?.id
+				}
+				callDataProject(obj2)
+			}
+			if(dataSearch[0]?.boundaries?.length===3){
+				const obj3 = {
+					wardIdSearch:dataSearch[0]?.boundaries[0]?.id,
+					districtIdSearch:dataSearch[0]?.boundaries[1]?.id,
+					cityIdSearch:dataSearch[0]?.boundaries[2]?.id
+				}
+				callDataProject(obj3)
+			}
+		}
+	},[dataSearch])
+	//get danh sách các tỉnh có dự án
+
 
 	//get count và dự án chi tiết theo cityId, districtId và wardId
 	useEffect(() => {
@@ -291,11 +444,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 		districtId && fetchDataWard();
 	}, [cityId, districtId]);
 
-	// nếu có data chi tiết của dự án theo cityId, districtId và wardId thì add marker tương ứng
-	useEffect(() => {
-		dataItemMap && addMarkerItem(dataMap);
-		// if data then render marker
-	}, [dataItemMap]);
+
 
 	// di chuyển qua các qh thì sẽ xoá các qh khác
 	useEffect(() => {
@@ -349,6 +498,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 			setDistrictId(null);
 		}
 	}, [levelZoom, isDrag]);
+
 
 	//add map vào DOM, add sự kiện zoom + drag
 
@@ -425,158 +575,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 		}, time);
 	};
 
-	const addMarkerItem = (listMarker) => {
-		if (!dataItemMap || !listMarker) return;
-		if (levelZoom >= 13.5) {
-			if (
-				listMarkerDistrict?.detail?.length &&
-				listMarkerDistrict?.detail[
-					listMarkerDistrict?.detail?.length - 1
-				] == wardId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.id === e?.id
-				);
-				let childNode = null;
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.lng || 0, e?.lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-							listProjectIn?.length > 3
-								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-								: "height:fit-content;"
-						}">
-                            ${childNode}
-                        </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				detail: [...listMarkerDistrictNew, wardId],
-			}));
-			setIsDeleteDistrict(!isDeleteDistrict);
-			return;
-		} else if (levelZoom >= 11.5) {
-			if (
-				listMarkerDistrict?.ward?.length &&
-				listMarkerDistrict?.ward[
-					listMarkerDistrict?.ward?.length - 1
-				] == districtId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.wardId === e?.ward_id
-				);
-				let childNode = "";
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.ward_id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-							listProjectIn?.length > 3
-								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-								: "height:fit-content;"
-						}">
-                            ${childNode}
-                        </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				ward: [...listMarkerDistrictNew, districtId],
-			}));
-			return;
-		} else {
-			if (
-				listMarkerDistrict?.district?.length &&
-				listMarkerDistrict?.district[
-					listMarkerDistrict?.district?.length - 1
-				] == cityId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.districtId === e?.district_id
-				);
-				let childNode = "";
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.district_id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                <div style="width:fit-content;${
-					listProjectIn?.length > 3
-						? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-						: "height:fit-content;"
-				}">
-                    ${childNode}
-                </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				district: [...listMarkerDistrictNew, cityId],
-			}));
-			return;
-		}
-	};
+
 
 	// handle change city
 	const handleChangeCity = (id) => {
@@ -720,18 +719,16 @@ export default function MapV2({isToggle,setIsToggle}) {
 
 	return (
 		<>
-			{/* <div className="h-[10vw] overflow-hidden text-black">
-				{JSON.stringify(dataProject)}
-			</div> */}
+
 			<div
 				ref={mapRef}
 				style={{
 					position: "relative",
 				}}
 				id="map"
-                className={`${isToggle ? 'active' : ''}`}
+				className="h-screen"
 			>
-				<div className="absolute w-full top-0 left-0 flex h-fit z-[1000] bg-white">
+				<div className="absolute top-0 left-0 flex w-full h-fit z-[1000] bg-white">
 					<Search 
 						handleSubmitSearch={handleSubmitSearch}
 						value={value}
@@ -776,7 +773,6 @@ export default function MapV2({isToggle,setIsToggle}) {
 					/>
 				</div>
 			</div>
-            <ToastContainer style={{ zIndex: '999999999999999' }} />
 		</>
 	);
 }

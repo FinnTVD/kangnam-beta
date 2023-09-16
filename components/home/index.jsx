@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Deposit from './Deposit'
 import ProjectProminent from './ProjectProminent'
@@ -8,6 +9,9 @@ import WeAre from './WeAre'
 import SellingRes from './SellingRes'
 import Hiring from './Hiring'
 import MyProjectV2 from './MyProjectV2'
+import { ToastContainer } from 'react-toastify'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 export default function IndexHome({ lang, t }) {
     return (
@@ -35,6 +39,7 @@ export default function IndexHome({ lang, t }) {
                     t={t}
                     lang={lang}
                 />
+                <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>
     )

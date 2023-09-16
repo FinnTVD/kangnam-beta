@@ -15,7 +15,6 @@ import useSWR from 'swr'
 import { mutate } from 'swr'
 import { useCallback, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 const arrSelling = new Array(2).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
