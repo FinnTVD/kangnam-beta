@@ -13,6 +13,16 @@ import MapV2 from './MapV2/MapV2'
 export default function IndexHome({ lang, t }) {
     return (
         <>
+                    <head>
+                <script
+                    src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"
+                >
+                </script>
+                <link
+                    href="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css"
+                    rel="stylesheet"
+                />
+			</head>
             <main>
                 <WeAre lang={lang} />
                 <MyProjectV2 lang={lang} >
