@@ -45,17 +45,21 @@ export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
             <head>
-                <link
-                    href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
-                    rel='stylesheet'
-                />
-            </head>
+				<script
+					defer
+					src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"
+				></script>
+				<link
+					href="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css"
+					rel="stylesheet"
+				/>
+			</head>
             <body
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
                 {children}
-                <Script src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"></Script>
+                {/* <Script src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"></Script> */}
                 <Script
                     async
                     defer
