@@ -194,7 +194,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 	useEffect(() => {
 		if (typeof window === "undefined" || !mapRef.current) return;
 		const loadMap = () => {
-			if (!window.vietmapgl || typeof window === 'undefined') return
+			if(!window.vietmapgl) return
 				mapRef.current = new window.vietmapgl.Map({
 				container: "map",
 				style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
@@ -202,7 +202,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 				zoom: 9,
 				pitch: 0, // góc nhìn từ trên cao nhìn xuống
 			});
-	
+			console.log(window.vietmapgl)
 			mapRef?.current?.on("zoomstart", function () {
 				setLevelZoom(mapRef?.current?.getZoom());
 			});
@@ -293,6 +293,152 @@ export default function MapV2({isToggle,setIsToggle}) {
 
 	// nếu có data chi tiết của dự án theo cityId, districtId và wardId thì add marker tương ứng
 	useEffect(() => {
+		const addMarkerItem = (listMarker) => {
+			if (!dataItemMap || !listMarker || !window.vietmapgl) return
+			if (levelZoom >= 13.5) {
+				if (
+					listMarkerDistrict?.detail?.length &&
+					listMarkerDistrict?.detail[
+						listMarkerDistrict?.detail?.length - 1
+					] == wardId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.id === e?.id
+					);
+					let childNode = null;
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.id}`);
+					// Set options
+					const marker = new vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.lng || 0, e?.lat || 0])
+						.setPopup(
+							new vietmapgl.Popup().setHTML(`
+							<div style="width:fit-content;${
+								listProjectIn?.length > 3
+									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+									: "height:fit-content;"
+							}">
+								${childNode}
+							</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					detail: [...listMarkerDistrictNew, wardId],
+				}));
+				setIsDeleteDistrict(!isDeleteDistrict);
+			} else if (levelZoom >= 11.5) {
+				if (
+					listMarkerDistrict?.ward?.length &&
+					listMarkerDistrict?.ward[
+						listMarkerDistrict?.ward?.length - 1
+					] == districtId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.wardId === e?.ward_id
+					);
+					let childNode = "";
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.ward_id}`);
+					// Set options
+					const marker = new vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
+						.setPopup(
+							new vietmapgl.Popup().setHTML(`
+							<div style="width:fit-content;${
+								listProjectIn?.length > 3
+									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+									: "height:fit-content;"
+							}">
+								${childNode}
+							</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					ward: [...listMarkerDistrictNew, districtId],
+				}));
+			} else {
+				if (
+					listMarkerDistrict?.district?.length &&
+					listMarkerDistrict?.district[
+						listMarkerDistrict?.district?.length - 1
+					] == cityId
+				)
+					return;
+				const listMarkerDistrictNew = [];
+				listMarker?.forEach((e) => {
+					const listProjectIn = dataItemMap?.data?.filter(
+						(i) => i?.address?.districtId === e?.district_id
+					);
+					let childNode = "";
+					if (listProjectIn) {
+						childNode = listProjectIn?.reduce(
+							(acc, itemProject) => acc + handlePopup(itemProject),
+							""
+						);
+					}
+					const divElement = document.createElement("div");
+					divElement.textContent = e?.count;
+					divElement.setAttribute("data-marker", `${e?.district_id}`);
+					// Set options
+					const marker = new vietmapgl.Marker({
+						// scale: [0.5], //size of marker
+						element: divElement,
+					})
+						.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
+						.setPopup(
+							new vietmapgl.Popup().setHTML(`
+					<div style="width:fit-content;${
+						listProjectIn?.length > 3
+							? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+							: "height:fit-content;"
+					}">
+						${childNode}
+					</div>
+					`)
+						)
+						.addTo(mapRef.current);
+					listMarkerDistrictNew.push(marker);
+				});
+				setListMarkerDistrict((prev) => ({
+					...prev,
+					district: [...listMarkerDistrictNew, cityId],
+				}));
+			}
+		};
 		dataItemMap && addMarkerItem(dataMap);
 		// if data then render marker
 	}, [dataItemMap]);
@@ -423,159 +569,6 @@ export default function MapV2({isToggle,setIsToggle}) {
 		setTimeout(() => {
 			setIsFly(false);
 		}, time);
-	};
-
-	const addMarkerItem = (listMarker) => {
-		if (!dataItemMap || !listMarker) return;
-		if (levelZoom >= 13.5) {
-			if (
-				listMarkerDistrict?.detail?.length &&
-				listMarkerDistrict?.detail[
-					listMarkerDistrict?.detail?.length - 1
-				] == wardId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.id === e?.id
-				);
-				let childNode = null;
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.lng || 0, e?.lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-							listProjectIn?.length > 3
-								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-								: "height:fit-content;"
-						}">
-                            ${childNode}
-                        </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				detail: [...listMarkerDistrictNew, wardId],
-			}));
-			setIsDeleteDistrict(!isDeleteDistrict);
-			return;
-		} else if (levelZoom >= 11.5) {
-			if (
-				listMarkerDistrict?.ward?.length &&
-				listMarkerDistrict?.ward[
-					listMarkerDistrict?.ward?.length - 1
-				] == districtId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.wardId === e?.ward_id
-				);
-				let childNode = "";
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.ward_id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-							listProjectIn?.length > 3
-								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-								: "height:fit-content;"
-						}">
-                            ${childNode}
-                        </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				ward: [...listMarkerDistrictNew, districtId],
-			}));
-			return;
-		} else {
-			if (
-				listMarkerDistrict?.district?.length &&
-				listMarkerDistrict?.district[
-					listMarkerDistrict?.district?.length - 1
-				] == cityId
-			)
-				return;
-			const listMarkerDistrictNew = [];
-			listMarker?.forEach((e) => {
-				const listProjectIn = dataItemMap?.data?.filter(
-					(i) => i?.address?.districtId === e?.district_id
-				);
-				let childNode = "";
-				if (listProjectIn) {
-					childNode = listProjectIn?.reduce(
-						(acc, itemProject) => acc + handlePopup(itemProject),
-						""
-					);
-				}
-				const divElement = document.createElement("div");
-				divElement.textContent = e?.count;
-				divElement.setAttribute("data-marker", `${e?.district_id}`);
-				// Set options
-				if (!window.vietmapgl || typeof window === 'undefined') return
-				const marker = new window.vietmapgl.Marker({
-					// scale: [0.5], //size of marker
-					element: divElement,
-				})
-					?.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
-					?.setPopup(
-						new vietmapgl.Popup().setHTML(`
-                <div style="width:fit-content;${
-					listProjectIn?.length > 3
-						? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-						: "height:fit-content;"
-				}">
-                    ${childNode}
-                </div>
-                `)
-					)
-					?.addTo(mapRef.current);
-				listMarkerDistrictNew.push(marker);
-			});
-			setListMarkerDistrict((prev) => ({
-				...prev,
-				district: [...listMarkerDistrictNew, cityId],
-			}));
-			return;
-		}
 	};
 
 	// handle change city

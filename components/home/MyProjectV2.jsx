@@ -15,7 +15,9 @@ import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import MapV2 from './MapV2/MapV2'
+// import MapV2 from './MapV2/MapV2'
+import dynamic from 'next/dynamic'
+const MapV2 = dynamic(() => import('./MapV2/MapV2'), { ssr: false })
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
