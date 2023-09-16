@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import Deposit from './Deposit'
 import ProjectProminent from './ProjectProminent'
@@ -8,26 +9,16 @@ import WeAre from './WeAre'
 import SellingRes from './SellingRes'
 import Hiring from './Hiring'
 import MyProjectV2 from './MyProjectV2'
-import MapV2 from './MapV2/MapV2'
+import { ToastContainer } from 'react-toastify'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 export default function IndexHome({ lang, t }) {
     return (
         <>
-                    <head>
-                <script
-                    src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"
-                >
-                </script>
-                <link
-                    href="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css"
-                    rel="stylesheet"
-                />
-			</head>
             <main>
                 <WeAre lang={lang} />
-                <MyProjectV2 lang={lang} >
-                    <MapV2/>
-                </MyProjectV2>
+                <MyProjectV2 lang={lang} />
                 <SellingRes lang={lang} />
                 <Hiring lang={lang} />
                 <div className='w-full max-md:flex max-md:flex-col-reverse'>
@@ -48,6 +39,7 @@ export default function IndexHome({ lang, t }) {
                     t={t}
                     lang={lang}
                 />
+                <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>
     )

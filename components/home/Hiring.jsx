@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 const arrHiring = new Array(2).fill(0)
 import { useMediaQuery } from 'react-responsive'
