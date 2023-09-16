@@ -2,79 +2,79 @@
 import { useEffect, useState, useRef } from "react";
 import useSWR from "swr";
 import { ToastContainer, toast } from "react-toastify";
+import useDebounce from '@/hooks/useDebounce'
 import SelectDistrict from "./SelectDistrict";
 import SelectWard from "./SelectWard";
 import SelectCity from "./SelectCity";
 import Search from "./Search";
-import useDebounce from "@/hooks/useDebounce";
 
 const apiKey = "c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e";
 
 const handlePopup = (itemProject) => {
 	if (!itemProject) return;
 	return `<div
-                            key=${itemProject?.id}
-                            class="flex gap-x-[0.88vw]"
-                        >
-                            <img
-                                class="w-[5.4375vw] h-[4.75vw] block object-cover"
-                                src=${
-									itemProject?.firstImage
-										? itemProject?.firstImage
-										: "/images/itemproject.jpg"
+			key=${itemProject?.id}
+			class="flex gap-x-[0.88vw]"
+		>
+			<img
+				class="w-[5.4375vw] h-[4.75vw] block object-cover"
+				src=${
+					itemProject?.firstImage
+						? itemProject?.firstImage
+						: "/images/itemproject.jpg"
+				}
+				alt=${itemProject?.translation?.name}
+			/>
+			<div class="w-[12.0625vw]">
+				<h2 class='line-clamp-1'>${
+					itemProject?.translation?.name ?? ""
+				}</h2>
+				<div
+							title=${
+								itemProject?.address?.display
+							}
+							class='flex items-center'
+						>
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap'>
+								Địa chỉ:
+							</span>
+							<span class='capitalize text-black title14-400-150 line-clamp-1'>
+								${
+									itemProject?.address?.name +
+									", " +
+									itemProject?.address?.ward +
+									", " +
+									itemProject?.address
+										?.district
 								}
-                                alt=${itemProject?.translation?.name}
-                            />
-                            <div class="w-[12.0625vw]">
-                                <h2 class='line-clamp-1'>${
-									itemProject?.translation?.name ?? ""
-								}</h2>
-                                <div
-                                            title=${
-												itemProject?.address?.display
-											}
-                                            class='flex items-center'
-                                        >
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap'>
-                                                Địa chỉ:
-                                            </span>
-                                            <span class='capitalize text-black title14-400-150 line-clamp-1'>
-                                                ${
-													itemProject?.address?.name +
-													", " +
-													itemProject?.address?.ward +
-													", " +
-													itemProject?.address
-														?.district
-												}
-                                            </span>
-                                        </div>
-                                        <div class='flex items-center my-[0.5vw]'>
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
-                                                Diện tích:
-                                            </span>
-                                            <span class=' text-black title14-400-150'>
-                                                ${
-													itemProject?.translation
-														?.size + " m²"
-												}
-                                            </span>
-                                        </div>
-                                        <div class='flex items-center'>
-                                            
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
-                                                Mức giá:
-                                            </span>
-                                            <span class='capitalize text-black title14-400-150'>
-                                                ${
-													itemProject?.translation
-														?.priceDisplay
-												}
-                                            </span>
-                                        </div>
-                            </div>
-                        </div>`;
-};
+							</span>
+						</div>
+						<div class='flex items-center my-[0.5vw]'>
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+								Diện tích:
+							</span>
+							<span class=' text-black title14-400-150'>
+								${
+									itemProject?.translation
+										?.size + " m²"
+								}
+							</span>
+						</div>
+						<div class='flex items-center'>
+							
+							<span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+								Mức giá:
+							</span>
+							<span class='capitalize text-black title14-400-150'>
+								${
+									itemProject?.translation
+										?.priceDisplay
+								}
+							</span>
+						</div>
+			</div>
+		</div>`;
+	};
 const initial = {
 	district: null,
 	ward: null,
@@ -97,8 +97,7 @@ const notifyError = (title) =>
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 
-export default function MapV2({isToggle,setIsToggle}) {
-
+export default function MapV2() {
 	const mapRef = useRef(); //lưu lại dom map
 	const [value, setValue] = useState("");
 	const debounceValue = useDebounce(value, 500);
@@ -194,7 +193,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 	useEffect(() => {
 		if (typeof window === "undefined" || !mapRef.current) return;
 		const loadMap = () => {
-			if(!window.vietmapgl) return
+			if (!window.vietmapgl || typeof window === 'undefined') return
 				mapRef.current = new window.vietmapgl.Map({
 				container: "map",
 				style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
@@ -202,7 +201,7 @@ export default function MapV2({isToggle,setIsToggle}) {
 				zoom: 9,
 				pitch: 0, // góc nhìn từ trên cao nhìn xuống
 			});
-			console.log(window.vietmapgl)
+	
 			mapRef?.current?.on("zoomstart", function () {
 				setLevelZoom(mapRef?.current?.getZoom());
 			});
@@ -293,152 +292,6 @@ export default function MapV2({isToggle,setIsToggle}) {
 
 	// nếu có data chi tiết của dự án theo cityId, districtId và wardId thì add marker tương ứng
 	useEffect(() => {
-		const addMarkerItem = (listMarker) => {
-			if (!dataItemMap || !listMarker || !window.vietmapgl) return
-			if (levelZoom >= 13.5) {
-				if (
-					listMarkerDistrict?.detail?.length &&
-					listMarkerDistrict?.detail[
-						listMarkerDistrict?.detail?.length - 1
-					] == wardId
-				)
-					return;
-				const listMarkerDistrictNew = [];
-				listMarker?.forEach((e) => {
-					const listProjectIn = dataItemMap?.data?.filter(
-						(i) => i?.address?.id === e?.id
-					);
-					let childNode = null;
-					if (listProjectIn) {
-						childNode = listProjectIn?.reduce(
-							(acc, itemProject) => acc + handlePopup(itemProject),
-							""
-						);
-					}
-					const divElement = document.createElement("div");
-					divElement.textContent = e?.count;
-					divElement.setAttribute("data-marker", `${e?.id}`);
-					// Set options
-					const marker = new vietmapgl.Marker({
-						// scale: [0.5], //size of marker
-						element: divElement,
-					})
-						.setLngLat([e?.lng || 0, e?.lat || 0])
-						.setPopup(
-							new vietmapgl.Popup().setHTML(`
-							<div style="width:fit-content;${
-								listProjectIn?.length > 3
-									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-									: "height:fit-content;"
-							}">
-								${childNode}
-							</div>
-					`)
-						)
-						.addTo(mapRef.current);
-					listMarkerDistrictNew.push(marker);
-				});
-				setListMarkerDistrict((prev) => ({
-					...prev,
-					detail: [...listMarkerDistrictNew, wardId],
-				}));
-				setIsDeleteDistrict(!isDeleteDistrict);
-			} else if (levelZoom >= 11.5) {
-				if (
-					listMarkerDistrict?.ward?.length &&
-					listMarkerDistrict?.ward[
-						listMarkerDistrict?.ward?.length - 1
-					] == districtId
-				)
-					return;
-				const listMarkerDistrictNew = [];
-				listMarker?.forEach((e) => {
-					const listProjectIn = dataItemMap?.data?.filter(
-						(i) => i?.address?.wardId === e?.ward_id
-					);
-					let childNode = "";
-					if (listProjectIn) {
-						childNode = listProjectIn?.reduce(
-							(acc, itemProject) => acc + handlePopup(itemProject),
-							""
-						);
-					}
-					const divElement = document.createElement("div");
-					divElement.textContent = e?.count;
-					divElement.setAttribute("data-marker", `${e?.ward_id}`);
-					// Set options
-					const marker = new vietmapgl.Marker({
-						// scale: [0.5], //size of marker
-						element: divElement,
-					})
-						.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
-						.setPopup(
-							new vietmapgl.Popup().setHTML(`
-							<div style="width:fit-content;${
-								listProjectIn?.length > 3
-									? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-									: "height:fit-content;"
-							}">
-								${childNode}
-							</div>
-					`)
-						)
-						.addTo(mapRef.current);
-					listMarkerDistrictNew.push(marker);
-				});
-				setListMarkerDistrict((prev) => ({
-					...prev,
-					ward: [...listMarkerDistrictNew, districtId],
-				}));
-			} else {
-				if (
-					listMarkerDistrict?.district?.length &&
-					listMarkerDistrict?.district[
-						listMarkerDistrict?.district?.length - 1
-					] == cityId
-				)
-					return;
-				const listMarkerDistrictNew = [];
-				listMarker?.forEach((e) => {
-					const listProjectIn = dataItemMap?.data?.filter(
-						(i) => i?.address?.districtId === e?.district_id
-					);
-					let childNode = "";
-					if (listProjectIn) {
-						childNode = listProjectIn?.reduce(
-							(acc, itemProject) => acc + handlePopup(itemProject),
-							""
-						);
-					}
-					const divElement = document.createElement("div");
-					divElement.textContent = e?.count;
-					divElement.setAttribute("data-marker", `${e?.district_id}`);
-					// Set options
-					const marker = new vietmapgl.Marker({
-						// scale: [0.5], //size of marker
-						element: divElement,
-					})
-						.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
-						.setPopup(
-							new vietmapgl.Popup().setHTML(`
-					<div style="width:fit-content;${
-						listProjectIn?.length > 3
-							? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
-							: "height:fit-content;"
-					}">
-						${childNode}
-					</div>
-					`)
-						)
-						.addTo(mapRef.current);
-					listMarkerDistrictNew.push(marker);
-				});
-				setListMarkerDistrict((prev) => ({
-					...prev,
-					district: [...listMarkerDistrictNew, cityId],
-				}));
-			}
-		};
 		dataItemMap && addMarkerItem(dataMap);
 		// if data then render marker
 	}, [dataItemMap]);
@@ -569,6 +422,159 @@ export default function MapV2({isToggle,setIsToggle}) {
 		setTimeout(() => {
 			setIsFly(false);
 		}, time);
+	};
+
+	const addMarkerItem = (listMarker) => {
+		if (!dataItemMap || !listMarker) return;
+		if (levelZoom >= 13.5) {
+			if (
+				listMarkerDistrict?.detail?.length &&
+				listMarkerDistrict?.detail[
+					listMarkerDistrict?.detail?.length - 1
+				] == wardId
+			)
+				return;
+			const listMarkerDistrictNew = [];
+			listMarker?.forEach((e) => {
+				const listProjectIn = dataItemMap?.data?.filter(
+					(i) => i?.address?.id === e?.id
+				);
+				let childNode = null;
+				if (listProjectIn) {
+					childNode = listProjectIn?.reduce(
+						(acc, itemProject) => acc + handlePopup(itemProject),
+						""
+					);
+				}
+				const divElement = document.createElement("div");
+				divElement.textContent = e?.count;
+				divElement.setAttribute("data-marker", `${e?.id}`);
+				// Set options
+				if (!window.vietmapgl || typeof window === 'undefined') return
+				const marker = new window.vietmapgl.Marker({
+					// scale: [0.5], //size of marker
+					element: divElement,
+				})
+					.setLngLat([e?.lng || 0, e?.lat || 0])
+					.setPopup(
+						new vietmapgl.Popup().setHTML(`
+                        <div style="width:fit-content;${
+							listProjectIn?.length > 3
+								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+								: "height:fit-content;"
+						}">
+                            ${childNode}
+                        </div>
+                `)
+					)
+					.addTo(mapRef.current);
+				listMarkerDistrictNew.push(marker);
+			});
+			setListMarkerDistrict((prev) => ({
+				...prev,
+				detail: [...listMarkerDistrictNew, wardId],
+			}));
+			setIsDeleteDistrict(!isDeleteDistrict);
+			return;
+		} else if (levelZoom >= 11.5) {
+			if (
+				listMarkerDistrict?.ward?.length &&
+				listMarkerDistrict?.ward[
+					listMarkerDistrict?.ward?.length - 1
+				] == districtId
+			)
+				return;
+			const listMarkerDistrictNew = [];
+			listMarker?.forEach((e) => {
+				const listProjectIn = dataItemMap?.data?.filter(
+					(i) => i?.address?.wardId === e?.ward_id
+				);
+				let childNode = "";
+				if (listProjectIn) {
+					childNode = listProjectIn?.reduce(
+						(acc, itemProject) => acc + handlePopup(itemProject),
+						""
+					);
+				}
+				const divElement = document.createElement("div");
+				divElement.textContent = e?.count;
+				divElement.setAttribute("data-marker", `${e?.ward_id}`);
+				// Set options
+				if (!window.vietmapgl || typeof window === 'undefined') return
+				const marker = new window.vietmapgl.Marker({
+					// scale: [0.5], //size of marker
+					element: divElement,
+				})
+					.setLngLat([e?.ward_lng || 0, e?.ward_lat || 0])
+					.setPopup(
+						new vietmapgl.Popup().setHTML(`
+                        <div style="width:fit-content;${
+							listProjectIn?.length > 3
+								? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+								: "height:fit-content;"
+						}">
+                            ${childNode}
+                        </div>
+                `)
+					)
+					.addTo(mapRef.current);
+				listMarkerDistrictNew.push(marker);
+			});
+			setListMarkerDistrict((prev) => ({
+				...prev,
+				ward: [...listMarkerDistrictNew, districtId],
+			}));
+			return;
+		} else {
+			if (
+				listMarkerDistrict?.district?.length &&
+				listMarkerDistrict?.district[
+					listMarkerDistrict?.district?.length - 1
+				] == cityId
+			)
+				return;
+			const listMarkerDistrictNew = [];
+			listMarker?.forEach((e) => {
+				const listProjectIn = dataItemMap?.data?.filter(
+					(i) => i?.address?.districtId === e?.district_id
+				);
+				let childNode = "";
+				if (listProjectIn) {
+					childNode = listProjectIn?.reduce(
+						(acc, itemProject) => acc + handlePopup(itemProject),
+						""
+					);
+				}
+				const divElement = document.createElement("div");
+				divElement.textContent = e?.count;
+				divElement.setAttribute("data-marker", `${e?.district_id}`);
+				// Set options
+				if (!window.vietmapgl || typeof window === 'undefined') return
+				const marker = new window.vietmapgl.Marker({
+					// scale: [0.5], //size of marker
+					element: divElement,
+				})
+					.setLngLat([e?.district_lng || 0, e?.district_lat || 0])
+					.setPopup(
+						new vietmapgl.Popup().setHTML(`
+                <div style="width:fit-content;${
+					listProjectIn?.length > 3
+						? "height:20.625vw;overflow-x:hidden;overflow-y:scroll"
+						: "height:fit-content;"
+				}">
+                    ${childNode}
+                </div>
+                `)
+					)
+					.addTo(mapRef.current);
+				listMarkerDistrictNew.push(marker);
+			});
+			setListMarkerDistrict((prev) => ({
+				...prev,
+				district: [...listMarkerDistrictNew, cityId],
+			}));
+			return;
+		}
 	};
 
 	// handle change city
@@ -713,18 +719,14 @@ export default function MapV2({isToggle,setIsToggle}) {
 
 	return (
 		<>
-			{/* <div className="h-[10vw] overflow-hidden text-black">
-				{JSON.stringify(dataProject)}
-			</div> */}
 			<div
 				ref={mapRef}
 				style={{
 					position: "relative",
 				}}
 				id="map"
-                className={`${isToggle ? 'active' : ''}`}
 			>
-				<div className="absolute w-full top-0 left-0 flex h-fit z-[1000] bg-white">
+				<div className="absolute top-0 left-0 flex w-full h-fit z-[1000] bg-white">
 					<Search 
 						handleSubmitSearch={handleSubmitSearch}
 						value={value}

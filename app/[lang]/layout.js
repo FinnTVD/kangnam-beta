@@ -45,11 +45,10 @@ export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
             <head>
-				{/* <script
-					defer
+                <script
 					src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"
 				>
-                </script> */}
+                </script>
 				<link
 					href="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css"
 					rel="stylesheet"
@@ -59,17 +58,10 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
+
                 {children}
-                <Script 
-                    defer
-                    crossOrigin='anonymous'
-                    src="https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js"
-                    strategy='beforeInteractive'
-                    >
-                    </Script>
                 <Script
                     async
-                    defer
                     crossOrigin='anonymous'
                     src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=969348797395616&autoLogAppEvents=1'
                     nonce='OlcKjsAi'
