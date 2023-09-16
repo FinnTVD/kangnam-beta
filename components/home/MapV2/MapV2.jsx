@@ -133,7 +133,7 @@ export default function MapV2() {
 		isLoading: isLoadingSearch,
 		error: errorSearch,
 	} = useSWR(
-		`https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}&text=${debounceValue || 'ha noi'}`,
+		`https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}&text=${debounceValue}`,
 		fetcher,
 		{
 			revalidateIfStale: false,
