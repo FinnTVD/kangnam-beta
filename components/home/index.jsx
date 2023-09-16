@@ -8,13 +8,16 @@ import WeAre from './WeAre'
 import SellingRes from './SellingRes'
 import Hiring from './Hiring'
 import MyProjectV2 from './MyProjectV2'
+import MapV2 from './MapV2/MapV2'
 
 export default function IndexHome({ lang, t }) {
     return (
         <>
             <main>
                 <WeAre lang={lang} />
-                <MyProjectV2 lang={lang} />
+                <MyProjectV2 lang={lang} >
+                    <MapV2/>
+                </MyProjectV2>
                 <SellingRes lang={lang} />
                 <Hiring lang={lang} />
                 <div className='w-full max-md:flex max-md:flex-col-reverse'>

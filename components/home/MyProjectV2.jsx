@@ -15,14 +15,13 @@ import { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import MapV2 from './MapV2/MapV2'
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
-export default function MyProjectV2({ lang }) {
+export default function MyProjectV2({ children,lang }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -306,9 +305,7 @@ export default function MyProjectV2({ lang }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV2 
-                        setIsToggle={setIsToggle}
-                        isToggle={isToggle}/>
+                    {children}
                 </div>
             </div>
         </section>
