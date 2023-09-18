@@ -85,13 +85,13 @@ export default function LatestNews({ t, lang }) {
                         </div>
                     ))}
                 {!isTablet ?
-                    data?.data?.slice(1, 6)?.map((news) => (
+                    data?.data?.slice(1, 6)?.map((news, index) => (
                         <div key={news?.id}>
-                            <OtherNewsItem newsOtherItem={news} lang={lang}/>
+                            <OtherNewsItem newsOtherItem={news} lang={lang} index={index}/>
                         </div>
                     ))
                     :
-                    data?.data?.slice(1, 3)?.map((news) => (
+                    data?.data?.slice(1, 3)?.map((news, index) => (
                         <div key={news?.id}>
                             <OtherNewsItem newsOtherItem={news} lang={lang}/>
                         </div>
