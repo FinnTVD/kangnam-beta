@@ -164,6 +164,8 @@ export default function MyProjectV2({ lang }) {
                                 >
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
+                                            data-aos='zoom-out'
+                                            data-aos-delay={`${(index%3)*300}`}
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={e?.translation?.name || 'thumbnail project'}

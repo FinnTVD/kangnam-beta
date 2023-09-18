@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import { usePathname } from 'next/navigation'
 
-export default function OtherNewsItem({ newsOtherItem, lang }) {
+export default function OtherNewsItem({ newsOtherItem, lang, index }) {
     const languageCode = handleCheckLangCode(lang)
 
     const translation = newsOtherItem?.translations?.find((itm) => itm.languageCode === languageCode)
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'>
+            <div data-aos='fade' data-aos-delay={index<=1 ? `${(index+1)*300}` : `${((index+1)%3)*300}`} className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'>
                 <div className='flex h-[11vw] items-center max-md:h-[30.1vw] max-lg:h-[20vw]'>
                     <div className='w-[45%] h-full relative rounded-lg overflow-hidden max-md:rounded-[6.5px]'>
                         <Image

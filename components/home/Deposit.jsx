@@ -4,6 +4,8 @@ import Button from '../general/Button'
 export default function Deposit() {
     return (
         <section
+            data-aos='fade-up'
+            data-aos-duration='1000'
             id='deposit'
             className='relative h-fit pt-[8.44vw] pb-[7vw] max-md:pt-[13.33vw] max-lg:h-[55vh] max-md:h-screen'
         >
