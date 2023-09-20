@@ -5,7 +5,6 @@ import Button from '../general/Button'
 import { useMediaQuery } from 'react-responsive'
 import { Autoplay } from 'swiper/modules'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import useSWR from 'swr'
 
 const listNews = new Array(3).fill(0)

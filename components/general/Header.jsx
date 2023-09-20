@@ -9,10 +9,17 @@ import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
+import { useEffect } from 'react'
+import useStore from '@/app/[lang]/(store)/store'
 
 export default function Header({ lang, t, data, isHome }) {
+    const setDataHomePage = useStore((state) => state.setDataHomePage)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
+    })
+
+    useEffect(() => {
+        data && setDataHomePage(data)
     })
 
     const handleScrollDown = () => {
@@ -73,7 +80,10 @@ export default function Header({ lang, t, data, isHome }) {
                         t={t}
                     />
                 )}
-                <SearchHome data={data} />
+                <SearchHome
+                    data={data}
+                    lang={lang}
+                />
 
                 <div
                     onClick={handleScrollDown}

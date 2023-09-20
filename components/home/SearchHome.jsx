@@ -1,7 +1,13 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SelectSearch from '../general/SelectSearch'
+import useDebounce from '@/hooks/useDebounce'
+import useSWR from 'swr'
+import useStore from '@/app/[lang]/(store)/store'
+import { handleCheckLangCode, notifyError, scrollToSection } from '@/utils'
+import useClickOutSide from '@/hooks/useClickOutSide'
+
 const arrSuggest = [
     {
         title: 'vinhomes central park',
@@ -13,8 +19,171 @@ const arrSuggest = [
         title: 'glory heights',
     },
 ]
-export default function SearchHome({ data }) {
-    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+
+const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const fetcherLang = (url, langCode) =>
+    fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
+
+export default function SearchHome({ data, lang }) {
+    const [isClose, setIsClose] = useState(false)
+    const [dataProject, setDataProject] = useState([])
+    const valueSearch = useStore((state) => state.valueSearch)
+    const setValueSearch = useStore((state) => state.setValueSearch)
+    const setValueSearchPrev = useStore((state) => state.setValueSearchPrev)
+    const debounceValue = useDebounce(valueSearch, 500)
+    const cityId = useStore((state) => state.cityId)
+    const districtId = useStore((state) => state.districtId)
+    const wardId = useStore((state) => state.wardId)
+    const setCityId = useStore((state) => state.setCityId)
+    const setDistrictId = useStore((state) => state.setDistrictId)
+    const setWardId = useStore((state) => state.setWardId)
+    const handleChangeCity = useStore((state) => state.handleChangeCity)
+    const handleChangeDistrict = useStore((state) => state.handleChangeDistrict)
+    const handleChangeWard = useStore((state) => state.handleChangeWard)
+    const handleFlyMap = useStore((state) => state.handleFlyMap)
+    const setSelectSearch = useStore((state) => state.setSelectSearch)
+    const boxMap = useStore((state) => state.boxMap)
+    const setIsSubmit = useStore((state) => state.setIsSubmit)
+    const isSubmit = useStore((state) => state.isSubmit)
+    const dataDistrict = useStore((state) => state.dataDistrict)
+    const dataProvinces = useStore((state) => state.dataProvinces)
+    const dataWard = useStore((state) => state.dataWard)
+
+    const [sideRef, isOutSide] = useClickOutSide()
+    console.log('🚀 ~ file: SearchHome.jsx:55 ~ SearchHome ~ isOutSide:', isOutSide)
+
+    const {
+        data: dataSearch,
+        isLoading: isLoadingSearch,
+        error: errorSearch,
+    } = useSWR(
+        `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${debounceValue ? '&text=' + debounceValue : ''}`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+    console.log('🚀 ~ file: SearchHome.jsx:60 ~ SearchHome ~ dataSearch:', dataSearch)
+
+    const {
+        data: dataProjectCode,
+        isLoading: isLoadingProjectCode,
+        error: errorProjectCode,
+    } = useSWR(
+        `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}`,
+        (url) => fetcherLang(url, handleCheckLangCode(lang)),
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+
+    useEffect(() => {
+        if (dataSearch?.length && debounceValue) {
+            if (dataSearch[0]?.boundaries?.length === 1) {
+                const obj1 = {
+                    cityIdSearch: dataSearch[0]?.boundaries[0]?.id,
+                }
+                callDataProject(obj1)
+            }
+            if (dataSearch[0]?.boundaries?.length === 2) {
+                const obj2 = {
+                    districtIdSearch: dataSearch[0]?.boundaries[0]?.id,
+                    cityIdSearch: dataSearch[0]?.boundaries[1]?.id,
+                }
+                callDataProject(obj2)
+            }
+            if (dataSearch[0]?.boundaries?.length === 3) {
+                const obj3 = {
+                    wardIdSearch: dataSearch[0]?.boundaries[0]?.id,
+                    districtIdSearch: dataSearch[0]?.boundaries[1]?.id,
+                    cityIdSearch: dataSearch[0]?.boundaries[2]?.id,
+                }
+                callDataProject(obj3)
+            }
+        }
+    }, [dataSearch])
+
+    useEffect(() => {
+        isOutSide && setIsClose(false)
+    }, [isOutSide])
+
+    const callDataProject = async ({ cityIdSearch, districtIdSearch, wardIdSearch }) => {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API}/property?page=1&take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
+                districtIdSearch ? '&districtId=' + districtIdSearch : ''
+            }${wardIdSearch ? '&wardId=' + wardIdSearch : ''}`,
+        )
+        const data = await res.json()
+        setDataProject(data)
+    }
+
+    const handleSubmit = (e) => {
+        e?.preventDefault()
+        console.log('submit')
+        setIsSubmit(!isSubmit)
+        if (dataSearch?.length) {
+            handleSelectValueSearch(dataSearch[0])
+        } else if (dataProjectCode?.data?.length) {
+            handleSelectValueProject(dataProjectCode?.data[0])
+        } else if (dataProject?.data?.length) {
+            handleSelectValueProject(dataProject?.data[0])
+        }
+        setIsClose(true)
+        scrollToSection(boxMap)
+    }
+
+    const handleSelectValueSearch = (e) => {
+        setValueSearch(e?.address)
+        if (e?.ref_id?.includes('CITY')) {
+            //nếu đang ở tỉnh đó và ở level zoom city thì không fly
+            // if (e?.boundaries[0]?.id === cityId && !cityId && !wardId) return notifyError('Now, in current city!')
+            // if (e?.boundaries[0]?.id === cityId && !districtId) return notifyError('Now, in current city!')
+            handleChangeCity(e?.boundaries[0]?.id, dataProvinces)
+        }
+        if (e?.ref_id?.includes('DIST')) {
+            // if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
+            if (e?.boundaries[1]?.id !== cityId) {
+                setCityId(e?.boundaries[1]?.id)
+            }
+            setDistrictId(e?.boundaries[0]?.id)
+            handleChangeDistrict(e?.boundaries[0]?.id, dataDistrict)
+        }
+        if (e?.ref_id?.includes('WARD')) {
+            // if (e?.boundaries[0]?.id === wardId) return notifyError('Now, in current ward!')
+            if (e?.boundaries[2]?.id !== cityId) {
+                setCityId(e?.boundaries[2]?.id)
+            }
+            if (e?.boundaries[1]?.id !== districtId) {
+                setDistrictId(e?.boundaries[1]?.id)
+            }
+            setWardId(e?.boundaries[0]?.id)
+            handleChangeWard(e?.boundaries[0]?.id, dataWard)
+        }
+    }
+
+    const handleSelectValueProject = (e) => {
+        setValueSearch(e?.address?.display)
+        if (Number(e?.address?.cityId) !== cityId) {
+            setCityId(Number(e?.address?.cityId))
+        }
+        if (Number(e?.address?.districtId) !== districtId) {
+            setDistrictId(Number(e?.address?.districtId))
+        }
+        if (Number(e?.address?.wardId) !== wardId) {
+            setWardId(Number(e?.address?.wardId))
+        }
+        // setIsSelectProject(!isSelectProject)
+        // setTimeout(() => {
+        // 	handleChangeWard(e?.address?.wardId);
+        // }, 1000);
+        handleFlyMap(Number(e?.address?.lng), Number(e?.address?.lat), 17, 2000)
+    }
 
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
@@ -28,7 +197,10 @@ export default function SearchHome({ data }) {
                 <div className='flex items-center w-full'>
                     <SelectSearch />
                     <div className='border-l border-solid border-[#57534E] max-md:border-den02 opacity-30 h-[1.6875vw] max-md:h-[4.53vw] mx-[1vw] max-md:mx-[4.27vw]'></div>
-                    <div className='flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw]'>
+                    <form
+                        onSubmit={handleSubmit}
+                        className='flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw] relative'
+                    >
                         <label htmlFor='search'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -53,14 +225,89 @@ export default function SearchHome({ data }) {
                             </svg>
                         </label>
                         <input
-                            className='outline-none text-den title16-400-130 title-mb14-400-130'
+                            className='w-full outline-none text-den title16-400-130 title-mb14-400-130'
                             type='text'
                             name='search'
                             id='search'
+                            placeholder='Thành phố Hà Nội'
                             value={valueSearch}
-                            onChange={(e) => setValueSearch(e?.target?.value)}
+                            onFocus={() => {
+                                setIsClose(false)
+                            }}
+                            onChange={(e) => {
+                                e?.target?.value && setIsClose(false)
+                                setValueSearch(e?.target?.value)
+                                setValueSearchPrev(e?.target?.value)
+                            }}
                         />
-                    </div>
+                        {dataSearch && valueSearch && (
+                            <ul
+                                ref={sideRef}
+                                className={`${
+                                    isClose ? 'hidden' : ''
+                                } absolute bottom-0 left-0 translate-y-full z-[1000] bg-white text-black w-full`}
+                            >
+                                {dataSearch && <li className='font-bold text-black'>Khu vực</li>}
+                                {Array.isArray(dataSearch) &&
+                                    dataSearch?.slice(0, 3)?.map((e, index) => (
+                                        <li
+                                            className='pl-[0.5vw]'
+                                            onClick={() => {
+                                                setIsSubmit(!isSubmit)
+                                                setIsClose(true)
+                                                handleSelectValueSearch(e)
+                                                scrollToSection(boxMap)
+                                                setSelectSearch('area')
+                                            }}
+                                            key={index}
+                                        >
+                                            {e?.address}
+                                        </li>
+                                    ))}
+                                {Array.isArray(dataProjectCode?.data) && (
+                                    <li className='font-bold text-black'>Từ khoá</li>
+                                )}
+                                {Array.isArray(dataProjectCode?.data) &&
+                                    dataProjectCode?.data?.map((e, index) => (
+                                        <li
+                                            className='pl-[0.5vw] line-clamp-1'
+                                            title={e?.translation?.name}
+                                            onClick={() => {
+                                                setIsSubmit(!isSubmit)
+                                                setIsClose(true)
+                                                handleSelectValueProject(e)
+                                                scrollToSection(boxMap)
+                                                setSelectSearch('word')
+                                            }}
+                                            key={index}
+                                        >
+                                            {e?.translation?.name}
+                                        </li>
+                                    ))}
+                                {Array.isArray(dataProjectCode?.data) && (
+                                    <li className='font-bold text-black'>Dự án</li>
+                                )}
+                                {Array.isArray(dataProject?.data) &&
+                                    dataSearch?.length &&
+                                    dataProject?.data?.map((e, index) => (
+                                        <li
+                                            className='pl-[0.5vw] line-clamp-1'
+                                            title={e?.translation?.name}
+                                            onClick={() => {
+                                                setIsSubmit(!isSubmit)
+                                                setIsClose(true)
+                                                handleSelectValueProject(e)
+                                                scrollToSection(boxMap)
+                                                setSelectSearch(e?.translation?.name)
+                                            }}
+                                            key={index}
+                                        >
+                                            {e?.translation?.name}
+                                        </li>
+                                    ))}
+                            </ul>
+                        )}
+                    </form>
                 </div>
             </div>
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw] max-md:justify-between'>
@@ -68,10 +315,14 @@ export default function SearchHome({ data }) {
                     Gợi ý:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
-                    {data?.suggest?.map((e, index) => (
+                    {data?.suggest?.slice(0, 6)?.map((e, index) => (
                         <li
                             key={index}
                             className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] title14-400-150 title-mb10-400-150 title-tl12-400-150'
+                            onClick={() => {
+                                setValueSearch(e)
+                                setIsClose(false)
+                            }}
                         >
                             {e || arrSuggest[index]?.title}
                         </li>

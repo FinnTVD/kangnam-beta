@@ -10,18 +10,22 @@ const listCurrency = [
     {
         id: 1,
         code: 'VND',
+        src: '/images/vnd.svg',
     },
     {
         id: 2,
         code: 'USD',
+        src: '/images/usd.svg',
     },
     {
         id: 3,
         code: 'KRW',
+        src: '/images/krw.png',
     },
     {
         id: 4,
         code: 'CNY',
+        src: '/images/cny.png',
     },
 ]
 
@@ -51,12 +55,17 @@ const handleRenderCode = (codeFrom, codeTo, status) => {
 
 const handleCurrency = (codeFrom, codeTo, input, value) => {
     if (!input) return ''
-    if (codeFrom === 'VND') return (Number(input) / Number(value)).toFixed(3)
-    if (codeFrom === 'KRW' && codeTo !== 'VND') return (Number(input) / Number(value)).toFixed(3)
-    if (codeFrom === 'CNY' && codeTo !== 'KRW' && codeTo !== 'VND') return (Number(input) / Number(value)).toFixed(3)
-    if (codeFrom === 'USD') return Number(input) * Number(value)
-    if (codeFrom === 'CNY' && codeFrom !== 'USD') return Number(input) * Number(value)
-    if (codeFrom === 'KRW' && codeFrom !== 'USD' && codeFrom !== 'CNY') return Number(input) * Number(value)
+    if (codeFrom === 'VND') {
+        return handleFormat((Number(input) / Number(value)).toFixed(3))
+    }
+    if (codeFrom === 'KRW' && codeTo !== 'VND') return handleFormat((Number(input) / Number(value)).toFixed(3))
+    if (codeFrom === 'CNY' && codeTo !== 'KRW' && codeTo !== 'VND')
+        return handleFormat((Number(input) / Number(value)).toFixed(3))
+    if (codeFrom === 'USD') return handleFormat(Number(input) * Number(value))
+    if (codeFrom === 'CNY' && codeFrom !== 'USD') return handleFormat(Number(input) * Number(value))
+    if (codeFrom === 'KRW' && codeFrom !== 'USD' && codeFrom !== 'CNY') {
+        return handleFormat(Number(input) * Number(value))
+    }
 }
 
 export default function BoxCurrency({ className = '' }) {
@@ -90,6 +99,28 @@ export default function BoxCurrency({ className = '' }) {
         return hour + ':' + minus
     }
 
+    const handleFormat = (value) => {
+        if (!value) return
+        let a = value?.toString()?.split('.')
+        let b = a[0].split('').reverse()
+        const str = []
+        for (let i = 0; i < b.length; i++) {
+            if (i % 3 === 2 && b.length - 1 > i) {
+                str.push(b[i])
+                str.push(',')
+            } else {
+                str.push(b[i])
+            }
+        }
+        let c = str.reverse()
+        let d = a?.length === 1 ? '' : '.' + a[1]
+        return c.join('') + d
+    }
+
+    const handleSrcIcon = (code) => {
+        let a = listCurrency?.find((e) => e?.code === code)
+        return a?.src
+    }
     return (
         <div
             className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
@@ -114,8 +145,8 @@ export default function BoxCurrency({ className = '' }) {
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/images/vn.jpg'
-                        alt='vi'
+                        src={handleSrcIcon(codeFrom)}
+                        alt={codeFrom}
                         width={16}
                         height={16}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
@@ -168,7 +199,7 @@ export default function BoxCurrency({ className = '' }) {
 
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
-                    type='number'
+                    type='text'
                     placeholder='Thành tiền'
                     id='currency-new'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5] pointer-events-none'
@@ -176,8 +207,8 @@ export default function BoxCurrency({ className = '' }) {
                 />
                 <div className='flex items-center'>
                     <Image
-                        src='/images/america.jpg'
-                        alt='america'
+                        src={handleSrcIcon(codeTo)}
+                        alt={codeTo}
                         width={16}
                         height={16}
                         className='object-cover w-[1vw] h-[1vw] rounded-full'
@@ -207,8 +238,8 @@ export default function BoxCurrency({ className = '' }) {
             <div className='text-13pc text-den leading-[1.5] font-normal mt-[2vw] mb-[0.5vw] flex justify-center'>
                 <span>1 {data?.codeFrom}</span>
                 <span className='mx-[0.5vw]'>=</span>
-                <span className='text-nau-nhat'>{data?.value}</span>
-                <span className='ml-[2px]'>{data?.codeTo}</span>
+                <span className='text-nau-nhat'>{handleFormat(data?.value)}</span>
+                <span className='ml-[2px] text-nau-nhat'>{data?.codeTo}</span>
             </div>
             <p className='text-center text-den opacity-70 title10-400-150'>
                 Tỷ giá chuyển đổi thực vào lúc {handleRenderTime(data?.updatedAt)} UTC
