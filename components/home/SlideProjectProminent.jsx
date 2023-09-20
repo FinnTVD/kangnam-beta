@@ -71,6 +71,8 @@ export default function SlideProjectProminent() {
                             <Link href={false || '/'}>
                                 <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
                                     <Image
+                                        data-aos='zoom-out'
+                                        data-aos-delay={`${index * 300}`}
                                         className='object-cover rounded-[1vw]'
                                         src={e?.firstImage || '/images/slideitem.jpg'}
                                         alt={`slide-${index}`}

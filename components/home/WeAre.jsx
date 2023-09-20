@@ -8,7 +8,7 @@ export default function WeAre({ lang }) {
         <>
             <section
                 id='weAre'
-                className='relative w-full h-screen bg-den-2 '
+                className='relative w-full h-screen bg-den-2 overflow-hidden'
             >
                 <Image
                     className='z-0 object-cover'
@@ -19,7 +19,7 @@ export default function WeAre({ lang }) {
                 />
                 <div className='relative z-10 flex justify-between h-full max-lg:flex-col'>
                     <div className='flex items-center pl-[7.5vw] px-mb10 max-lg:px-[3.2vw] max-md:pt-[13.33vw] max-lg:pt-[6vw]'>
-                        <div className='w-[40.2vw] h-fit max-lg:w-full'>
+                        <div data-aos="fade-right" data-aos-duration="1000" className='w-[40.2vw] h-fit max-lg:w-full'>
                             <span className='sub-title max-lg:tracking-[0.5px] max-lg:uppercase title-mb10-700-150 title-tl12-700-150'>
                                 Câu chuyện thương hiệu
                             </span>
@@ -131,6 +131,8 @@ export default function WeAre({ lang }) {
                     <div className='flex items-end'>
                         <div className='h-[77.5vh] max-lg:h-[59.8vh] max-md:h-[38.8vh] w-[48.1875vw] max-lg:w-full relative z-10'>
                             <Image
+                                data-aos="fade-up"
+                                data-aos-delay="600"
                                 src='/images/house.png'
                                 alt='house'
                                 className='object-fill z-[2]'
@@ -138,6 +140,8 @@ export default function WeAre({ lang }) {
                                 fill
                             />
                             <Image
+                                data-aos="fade-down"
+                                data-aos-delay="600"
                                 src='/images/circle-house.png'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-lg:w-[44.6vw] max-md:w-[63.6vw] max-lg:h-[44.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-lg:top-[4.49vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-lg:left-[38.46vw] max-md:left-[23.46vw]'
@@ -145,6 +149,9 @@ export default function WeAre({ lang }) {
                                 height={600}
                             />
                             <Image
+                                data-aos="fade"
+                                data-aos-duration='500'
+                                data-aos-delay="1000"
                                 src='/images/people.png'
                                 alt='people'
                                 className='object-cover w-[33.875vw] h-[38.5625vw] max-lg:w-[47.62vw] max-md:w-[62.62vw] max-lg:h-[53.29vw] max-md:h-[71.29vw] absolute bottom-0 left-[5.68vw] z-[3] max-lg:left-[37%] max-md:left-1/2 max-md:-translate-x-1/2'

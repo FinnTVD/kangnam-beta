@@ -40,6 +40,9 @@ export default function Header({ lang, t, data, isHome }) {
             <div className={`h-screen max-md:h-[64vh] relative w-full`}>
                 <SlideBanner data={data} />
                 <Image
+                    data-aos='fade-left'
+                    data-aos-delay='1800'
+                    data-aos-duration='1500'
                     className='object-contain z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                     src='/images/big-logo.png'
                     alt='big-logo'

@@ -55,7 +55,12 @@ export default function Partner({ t }) {
     }
 
     return (
-        <section className='w-full px-120 pb-[15.625vw] pt-[9.625vw] relative px-mb10 max-md:pt-[17.06vw] max-md:pb-[27.2vw]'>
+        <section
+            data-aos='fade-up'
+            data-aos-duration='1000'
+            data-aos-offset='250'
+            className='w-full px-120 pb-[15.625vw] pt-[9.625vw] relative px-mb10 max-md:pt-[17.06vw] max-md:pb-[27.2vw]'
+        >
             <div
                 className='absolute bottom-[0.5vw] left-0 h-[6.25vw] w-full z-[-1]'
                 style={{ background: 'linear-gradient(0deg, #fff, #ffffff00)' }}
@@ -103,10 +108,10 @@ export default function Partner({ t }) {
                 spaceBetween={24}
                 loop={true}
                 autoplay={{
-                    delay: 4000,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
-                speed={800}
+                speed={1000}
                 modules={[Autoplay]}
                 className='mt-[3.5vw] max-md:mt-[6.4vw]'
             >
