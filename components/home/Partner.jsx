@@ -1,12 +1,13 @@
 'use client'
-import Link from 'next/link'
 import Button from '../general/Button'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import { useMediaQuery } from 'react-responsive'
+import useStore from '@/app/[lang]/(store)/store'
 
 export default function Partner({ t }) {
+    const dataHomePage = useStore((state) => state.dataHomePage)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const imgArray = [
@@ -41,10 +42,12 @@ export default function Partner({ t }) {
               'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5',
           ]
     const arrPartner = []
-    const numberOfPartner = isMobile ? Math.ceil(imgArray.length / 9) : Math.ceil(imgArray.length / 10)
+    const numberOfPartner = isMobile
+        ? Math.ceil(dataHomePage?.partners?.length / 9)
+        : Math.ceil(dataHomePage?.partners?.length / 10)
     for (let i = 0; i < numberOfPartner; i++) {
         if (i === numberOfPartner.length - 1) {
-            arrPartner.push(imgArray.length - 1)
+            arrPartner.push(dataHomePage?.partners?.length - 1)
         } else {
             if (isMobile) arrPartner.push(9 * (i + 1))
             else arrPartner.push(10 * (i + 1))
@@ -107,188 +110,189 @@ export default function Partner({ t }) {
                 modules={[Autoplay]}
                 className='mt-[3.5vw] max-md:mt-[6.4vw]'
             >
-                {arrPartner?.map((a, pIndex) => (
+                {arrPartner.map((a, pIndex) => (
                     <SwiperSlide key={pIndex}>
                         <div className='grid grid-cols-5 max-md:grid-cols-3'>
-                            {(isMobile ? imgArray.slice(9 * pIndex, a) : imgArray.slice(10 * pIndex, a)).map(
-                                (item, index) => {
-                                    if (!isMobile) {
-                                        if (index === 0) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[0]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[55%] h-[45%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            src={item}
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
+                            {(isMobile
+                                ? dataHomePage?.partners?.slice(9 * pIndex, a)
+                                : dataHomePage?.partners?.slice(10 * pIndex, a)
+                            ).map((item, index) => {
+                                if (!isMobile) {
+                                    if (index === 0) {
+                                        return (
+                                            <div
+                                                className={imgBorder[0]}
+                                                key={index}
+                                            >
+                                                <div className='w-[55%] h-[45%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
                                                 </div>
-                                            )
-                                        } else if (index === 4) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[1]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[55%] h-[45%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            src={item}
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
+                                            </div>
+                                        )
+                                    } else if (index === 4) {
+                                        return (
+                                            <div
+                                                className={imgBorder[1]}
+                                                key={index}
+                                            >
+                                                <div className='w-[55%] h-[45%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
                                                 </div>
-                                            )
-                                        } else if (index === 9) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[3]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[55%] h-[45%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            src={item}
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
+                                            </div>
+                                        )
+                                    } else if (index === 9) {
+                                        return (
+                                            <div
+                                                className={imgBorder[3]}
+                                                key={index}
+                                            >
+                                                <div className='w-[55%] h-[45%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
                                                 </div>
-                                            )
-                                        } else if (index === 5) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[2]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[55%] h-[45%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            src={item}
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
+                                            </div>
+                                        )
+                                    } else if (index === 5) {
+                                        return (
+                                            <div
+                                                className={imgBorder[2]}
+                                                key={index}
+                                            >
+                                                <div className='w-[55%] h-[45%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
                                                 </div>
-                                            )
-                                        } else {
-                                            return (
-                                                <div
-                                                    className={imgBorder[4]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[55%] h-[45%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            src={item}
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
+                                            </div>
+                                        )
                                     } else {
-                                        if (index === 0) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[0]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[67.7%] h-[56.6%] relative'>
-                                                        <Image
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                            alt={`partner${index}`}
-                                                            src={item}
-                                                            sizes='50vw'
-                                                            fill
-                                                        />
-                                                    </div>
+                                        return (
+                                            <div
+                                                className={imgBorder[4]}
+                                                key={index}
+                                            >
+                                                <div className='w-[55%] h-[45%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
                                                 </div>
-                                            )
-                                        } else if (index === 2) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[1]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[67.7%] h-[56.6%] relative'>
-                                                        <Image
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                            src={item}
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
-                                                    </div>
-                                                </div>
-                                            )
-                                        } else if (index === 8) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[3]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[67.7%] h-[56.6%] relative'>
-                                                        <Image
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                            src={item}
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
-                                                    </div>
-                                                </div>
-                                            )
-                                        } else if (index === 6) {
-                                            return (
-                                                <div
-                                                    className={imgBorder[2]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[67.7%] h-[56.6%] relative'>
-                                                        <Image
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                            src={item}
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
-                                                    </div>
-                                                </div>
-                                            )
-                                        } else {
-                                            return (
-                                                <div
-                                                    className={imgBorder[4]}
-                                                    key={index}
-                                                >
-                                                    <div className='w-[67.7%] h-[56.6%] relative'>
-                                                        <Image
-                                                            alt={`partner${index}`}
-                                                            sizes='50vw'
-                                                            fill
-                                                            src={item}
-                                                            className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
-                                                        ></Image>
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
+                                            </div>
+                                        )
                                     }
-                                },
-                            )}
+                                } else {
+                                    if (index === 0) {
+                                        return (
+                                            <div
+                                                className={imgBorder[0]}
+                                                key={index}
+                                            >
+                                                <div className='w-[67.7%] h-[56.6%] relative'>
+                                                    <Image
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        alt={`partner${index}`}
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        sizes='50vw'
+                                                        fill
+                                                    />
+                                                </div>
+                                            </div>
+                                        )
+                                    } else if (index === 2) {
+                                        return (
+                                            <div
+                                                className={imgBorder[1]}
+                                                key={index}
+                                            >
+                                                <div className='w-[67.7%] h-[56.6%] relative'>
+                                                    <Image
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                    ></Image>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else if (index === 8) {
+                                        return (
+                                            <div
+                                                className={imgBorder[3]}
+                                                key={index}
+                                            >
+                                                <div className='w-[67.7%] h-[56.6%] relative'>
+                                                    <Image
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                    ></Image>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else if (index === 6) {
+                                        return (
+                                            <div
+                                                className={imgBorder[2]}
+                                                key={index}
+                                            >
+                                                <div className='w-[67.7%] h-[56.6%] relative'>
+                                                    <Image
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                    ></Image>
+                                                </div>
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div
+                                                className={imgBorder[4]}
+                                                key={index}
+                                            >
+                                                <div className='w-[67.7%] h-[56.6%] relative'>
+                                                    <Image
+                                                        alt={`partner${index}`}
+                                                        sizes='50vw'
+                                                        fill
+                                                        src={item || '/images/partnerlogo.jpg'}
+                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                    ></Image>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                }
+                            })}
                         </div>
                     </SwiperSlide>
                 ))}

@@ -8,12 +8,156 @@ const useStore = create((set, get) => ({
     slugDetailProject: null,
     slugDetailNews: null,
     dataSubmitForm: null,
-    triggerSubmit:false,
+    triggerSubmit: false,
+    cityId: 11,
+    districtId: null,
+    wardId: null,
+    handleChangeCity: null,
+    handleChangeDistrict: null,
+    handleChangeWard: null,
+    handleFlyMap: null,
+    dataHomePage: null,
+    valueSearch: '',
+    valueSearchPrev: '',
+    boxMap: null,
+    isSubmit: false,
+    selectSearch: '',
+    dataProvinces: null,
+    dataDistrict: null,
+    dataWard: null,
+    setDataWard: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataWard: data,
+            }
+        })
+    },
+    setDataDistrict: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataDistrict: data,
+            }
+        })
+    },
+    setDataProvinces: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataProvinces: data,
+            }
+        })
+    },
+    setValueSearchPrev: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                valueSearchPrev: data,
+            }
+        })
+    },
+    setSelectSearch: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                selectSearch: data,
+            }
+        })
+    },
+    setIsSubmit: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isSubmit: data,
+            }
+        })
+    },
+    setBoxMap: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                boxMap: data,
+            }
+        })
+    },
+    setValueSearch: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                valueSearch: data,
+            }
+        })
+    },
+    setDataHomePage: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataHomePage: data,
+            }
+        })
+    },
+    setHandleFlyMap: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                handleFlyMap: data,
+            }
+        })
+    },
+    setHandleChangeCity: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                handleChangeCity: data,
+            }
+        })
+    },
+    setHandleChangeDistrict: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                handleChangeDistrict: data,
+            }
+        })
+    },
+    setHandleChangeWard: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                handleChangeWard: data,
+            }
+        })
+    },
+    setCityId: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                cityId: data,
+            }
+        })
+    },
+    setDistrictId: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                districtId: data,
+            }
+        })
+    },
+    setWardId: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                wardId: data,
+            }
+        })
+    },
     setTriggerSubmit: (data) => {
         set((state) => {
             return {
                 ...state,
-                triggerSubmit:data ,
+                triggerSubmit: data,
             }
         })
     },

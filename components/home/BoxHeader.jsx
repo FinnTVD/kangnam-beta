@@ -2,7 +2,7 @@ import getData from '@/utils/getData'
 import Header from '../general/Header'
 // import { headers } from 'next/headers'
 export default async function BoxHeader({ lang, t }) {
-    const data = await getData('/homePage')
+    const data = await getData('/home-page')
     // const headersList = headers()
     // const referer = headersList.get('referer')
     return (

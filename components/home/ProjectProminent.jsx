@@ -1,12 +1,8 @@
 'use client'
 import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
-import { useMediaQuery } from 'react-responsive'
 
 export default function ProjectProminent({ children }) {
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
     return (
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
             <div className='relative z-10 flex items-center justify-between'>
@@ -19,31 +15,27 @@ export default function ProjectProminent({ children }) {
                         Hơn <span className='title-mb14-700-150'>20</span> dự án đang được phân phối
                     </span>
                 </div>
-                {!isMobile && (
-                    <Button
-                        href='/danh-sach-du-an'
-                        className='border-none bg-logo max-md:hidden'
-                        span='text-white'
-                        stroke='white'
-                    >
-                        Xem tất cả
-                    </Button>
-                )}
+                <Button
+                    href='/projects'
+                    className='border-none bg-logo max-md:hidden max-md:hidden'
+                    span='text-white'
+                    stroke='white'
+                >
+                    Xem tất cả
+                </Button>
             </div>
-            <SlideProjectProminent isMobile={isMobile} />
-            {isMobile && (
-                <div className='px-mb10'>
-                    <Button
-                        href='/danh-sach-du-an'
-                        className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
-                        span='text-white'
-                        stroke='white'
-                        full={true}
-                    >
-                        Tất cả dự án
-                    </Button>
-                </div>
-            )}
+            <SlideProjectProminent />
+            <div className='px-mb10 md:hidden'>
+                <Button
+                    href='/projects'
+                    className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
+                    span='text-white'
+                    stroke='white'
+                    full={true}
+                >
+                    Tất cả dự án
+                </Button>
+            </div>
             {children}
         </section>
     )
