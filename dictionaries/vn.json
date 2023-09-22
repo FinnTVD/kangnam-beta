@@ -39,11 +39,6 @@
                         "id": 2,
                         "title": "Liên hệ",
                         "href": "/contact"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Thỏa thuận & Pháp lí",
-                        "href": "/agreement"
                     }
                 ]
             }
@@ -122,13 +117,44 @@
         },
         {
             "id": 5,
-            "title": "Thỏa thuận và pháp lý",
-            "href": "/agreement"
-        },
-        {
-            "id": 6,
             "title": "Tin tức",
             "href": "/news"
         }
-    ]
+    ],
+    "menuNav": {
+        "nav1": [
+            {
+                "id": 1,
+                "title": "Trang chủ",
+                "href": "/"
+            },
+            {
+                "id": 2,
+                "title": "Dự án",
+                "href": "/projects"
+            },
+            {
+                "id": 3,
+                "title": "Bán lại",
+                "href": "/resale"
+            }
+        ],
+        "nav2": [
+            {
+                "id": 1,
+                "title": "Về Kangnam",
+                "href": "/about-us"
+            },
+            {
+                "id": 2,
+                "title": "Tin tức",
+                "href": "/news"
+            },
+            {
+                "id": 3,
+                "title": "Liên hệ",
+                "href": "/contact"
+            }
+        ]
+    }
 }

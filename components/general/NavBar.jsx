@@ -4,10 +4,32 @@ import Link from 'next/link'
 import BoxLanguage from './language/BoxLanguage'
 import { useState } from 'react'
 import SelectSearch from './SelectSearch'
+import { useEffect } from 'react'
+import useSWR from 'swr'
+import { handleCheckLangCode } from '@/utils'
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBar({ isHome, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
-
+    const languageCode = handleCheckLangCode(lang)
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoading,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+    let agreementDataTranslation = []
+    if(agreementData){
+        agreementData.data.forEach((item) => {
+            item.translations.forEach((itm) => {
+                if(itm.languageCode === languageCode)
+                    agreementDataTranslation.push({title: itm.title, slug: itm.slug})
+            })
+        })
+    }
     return (
         <nav
             className={`${
@@ -141,6 +163,21 @@ export default function NavBar({ isHome, lang, t }) {
                                                             {item?.title}
                                                         </Link>
                                                     </li>
+                                                ))}
+                                                {agreementDataTranslation.map((item) => (
+                                                   <li 
+                                                        key={item?.id}
+                                                        className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                    >             
+                                                        <Link
+                                                            className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
+                                                            href={`${
+                                                                lang !== 'vi' ? '/' + lang + '/' + item?.slug : item?.slug
+                                                            }`}
+                                                        >
+                                                            {item?.title}
+                                                        </Link>                               
+                                                   </li> 
                                                 ))}
                                             </ul>
                                         </div>

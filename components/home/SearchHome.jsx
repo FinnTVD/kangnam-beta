@@ -36,7 +36,7 @@ export default function SearchHome({ data }) {
                                 height='17'
                                 viewBox='0 0 16 17'
                                 fill='none'
-                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw]'
+                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw] max-lg:w-[1.8vw] max-lg:h-[1.8vw]'
                             >
                                 <path
                                     fillRule='evenodd'
@@ -53,7 +53,7 @@ export default function SearchHome({ data }) {
                             </svg>
                         </label>
                         <input
-                            className='outline-none text-den title16-400-130 title-mb14-400-130'
+                            className='outline-none text-den title16-400-130 title-mb14-400-130 title-tl12'
                             type='text'
                             name='search'
                             id='search'

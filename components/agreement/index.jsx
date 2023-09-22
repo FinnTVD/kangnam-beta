@@ -1,10 +1,10 @@
 import Description from "./Description";
 
+export default function IndexAgreement({agreementDetail, post, lang}) {
 
-export default function IndexAgreement() {
     return(
         <>
-            <Description></Description>
+            <Description data={agreementDetail} post={post} lang={lang}></Description>
         </>
     )
 }

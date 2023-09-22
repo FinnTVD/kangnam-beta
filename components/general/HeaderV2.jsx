@@ -9,6 +9,8 @@ import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 const isCheckPathName = (pathName) => {
     switch (pathName) {
@@ -25,17 +27,44 @@ const isCheckPathName = (pathName) => {
     }
 }
 
-export default function HeaderV2({ lang, t, post, newsDetail, src }) {
+export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
+    })
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
     })
 
     useEffect(() => {
         if (!pathName) return
         setIsHome(isCheckPathName(pathName))
     }, [pathName])
+
+    useEffect(() => {
+        Aos.init({
+            disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+            startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+            initClassName: 'aos-init', // class applied after initialization
+            animatedClassName: 'aos-animate', // class applied on animation
+            useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+            disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+            debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+            throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+            
+
+            // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+            offset: 120, // offset (in px) from the original trigger point
+            delay: 0, // values from 0 to 3000, with step 50ms
+            duration: 1500, // values from 0 to 3000, with step 50ms
+            easing: 'ease', // default easing for AOS animations
+            once: true, // whether animation should happen only once - while scrolling down
+            mirror: false, // whether elements should animate out while scrolling past them
+            anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+    });
+        Aos.refresh();
+      }, []);
 
     const handleScrollDown = () => {
         if (typeof window !== 'undefined') {
@@ -52,8 +81,9 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`h-[80vh] max-md:h-[55vh] relative w-full`}>
+            <div className={`h-[80vh] max-md:h-[55vh] relative w-full overflow-hidden`}>
                 <Image
+                    data-aos='zoom-out'
                     className='z-0 object-cover'
                     src={post?.image || src || '/images/bg-header.jpg'}
                     alt={newsDetail?.title || 'bg-header'}
@@ -75,7 +105,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                 <div className={`bg-gradient-header-other absolute z-[2] top-0 left-0 w-full h-full`}></div>
                 {/* linear-white */}
                 {/* {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>} */}
-                {isMobile ? (
+                {isTablet ? (
                     <NavBarRes
                         isHome={isHome}
                         lang={lang}
@@ -88,7 +118,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                         t={t}
                     />
                 )}
-                {!isMobile ? (
+                {!isTablet ? (
                     <NavBarFixed
                         isHome={isHome}
                         lang={lang}
@@ -105,6 +135,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src }) {
                     post={post}
                     newsDetail={newsDetail}
                     lang={lang}
+                    breadcrumb={breadcrumb}
                 />
                 {isHome ? (
                     <></>

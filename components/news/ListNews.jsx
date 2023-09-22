@@ -6,6 +6,8 @@ import classes from './ListNewsStyles.module.css'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import useSWR from 'swr'
+import { data } from 'autoprefixer'
+import { handleCheckLangCode } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const listNews = new Array(12).fill(0)
@@ -13,6 +15,7 @@ const listNews = new Array(12).fill(0)
 export default function ListNews({ t, lang }) {
     const [category, setCategory] = useState(null)
     const [pageNumber, setPageNumber] = useState(1)
+    const langCode = handleCheckLangCode(lang)
 
     const {
         data: categories,
@@ -25,20 +28,61 @@ export default function ListNews({ t, lang }) {
     })
 
     const {
-        data: dataNews,
-        error: errorNews,
-        isLoading: isLoadingNews,
-    } = category? useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&postTypeIds[]=${category?.id}`, fetcher, {
+        data: dataNewsCategorized,
+        error: errorNewsCategorized,
+        isLoading: isLoadingNewsCategorized,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&postTypeIds[]=${category?.id}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
         })
-        :
-        useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12`, fetcher, {
+    
+    const {
+        data: allDataNews,
+        error: errorAllNews,
+        isLoading: isLoadingAllNews,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=500`, fetcher, {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
         })
+    
+    let newsCategorized
+    let pageCount
+    let categoryTranslation = []
+    let cTr 
+    
+    if(allDataNews){
+        newsCategorized = allDataNews.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0')
+        pageCount = Math.ceil(newsCategorized.length/12)
+    }
+    if(categories){
+        categories.data.forEach((item, index) => {
+            if(item.id!=='95438eda-0e44-439c-96fd-343301f8b3f0'){
+                if(item.translations.length>0){
+                    item.translations.forEach((itm) => {
+                        if(itm.languageCode === langCode )
+                            categoryTranslation.push({id: item.id, title: itm.name})
+                    })
+                }
+                else{
+                    categoryTranslation.push({id: item.id, title: item.title})
+                }
+            }
+        })
+    }
+
+    // let newsCategorized
+    // let pageCount
+    // if(dataNews){
+    //     newsCategorized = dataNews.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0')
+    //     pageCount = Math.ceil(newsCategorized.length/12)
+    // }
+        // useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12`, fetcher, {
+        //     revalidateIfStale: false,
+        //     revalidateOnFocus: false,
+        //     revalidateOnReconnect: false,
+        // })
 
     // useEffect(() => {
     //     if(categories){
@@ -57,20 +101,20 @@ export default function ListNews({ t, lang }) {
             <div className='flex items-center justify-between max-lg:flex-col max-lg:items-start max-lg:justify-normal'>
                 <div>
                     <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'>
-                        {t.newsList.subtitle} {category?.name}
+                        {t.newsList.subtitle} {category?.title}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw] max-lg:title-tl38'>
-                        {t.newsList.title} {category?.name}
+                        {t.newsList.title} {category?.title} 
                     </h2>
                 </div>
                 <div
-                    className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] flex-nowrap max-md:overflow-scroll max-md:w-full max-lg:mt-[1vw]`}
+                    className={`${classes['news-categories']} flex gap-[1.5vw] max-md:gap-[2.6vw] max-md:mt-[2.6vw] max-w-[60%] flex-wrap max-lg:flex-nowrap max-lg:max-w-full max-lg:overflow-scroll max-lg:w-full max-lg:mt-[1vw]`}
                 >
-                    {categories?.data?.map((e, index) => (
+                    {categoryTranslation?.map((e, index) => (
                         <span
                             key={index}
                             className={
-                                e?.name === category?.name
+                                e?.title === category?.title
                                     ? `${categoryStyle} bg-[#D6A279] text-white`
                                     : `${categoryStyle} bg-transparent text-den`
                             }
@@ -79,12 +123,12 @@ export default function ListNews({ t, lang }) {
                                 setPageNumber(1)
                             }}
                         >
-                            {e?.name}
+                            {e?.title}
                         </span>
                     ))}
                 </div>
             </div>
-            {isLoadingNews && (
+            {(isLoadingAllNews || isLoadingNewsCategorized) && (
                 // <div className='mt-[2.5vw] max-md:mt-[4.2vw] max-md:pr-[2.6vw]'>
                 //     <div className='flex gap-x-[1.5vw] h-[35.25vw] mb-[3.75vw] max-md:w-full max-md:h-[165.6vw] max-md:flex-col max-md:gap-y-[4.2vw]'>
                 //         <div className=' w-[56.1875vw] h-full max-md:h-[68.5vw] max-md:w-full'>
@@ -166,11 +210,11 @@ export default function ListNews({ t, lang }) {
                     </div>
                 </div>
             )}
-            {dataNews && (
-                <>
-                    {dataNews && 
+            {/* {category && (
+                <> */}
+                    {(dataNewsCategorized && newsCategorized) && 
                         <ListNewsCategorized
-                            list={dataNews.data}
+                            list={category ? dataNewsCategorized?.data : newsCategorized?.slice((pageNumber-1)*12, pageNumber*12)}
                             t={t}
                             lang={lang}
                         />
@@ -180,7 +224,7 @@ export default function ListNews({ t, lang }) {
                         nextLabel='Next'
                         onPageChange={(e) => setPageNumber(e.selected + 1)}
                         pageRangeDisplayed={5}
-                        pageCount={Math.ceil(dataNews?.meta?.pageCount) || 1}
+                        pageCount={category ? dataNewsCategorized?.meta?.pageCount : pageCount}
                         renderOnZeroPageCount={null}
                         previousLabel='Previous'
                         forcePage={pageNumber - 1}
@@ -191,8 +235,8 @@ export default function ListNews({ t, lang }) {
                         }}
                         className={classes['news-pagination']}
                     />
-                </>
-            )}
+                {/* </>
+            )} */}
         </section>
     )
 }

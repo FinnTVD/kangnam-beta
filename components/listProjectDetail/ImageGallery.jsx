@@ -29,6 +29,7 @@ const imagesData = [
 ]
 export default function ImageGallery() {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
+    const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [zoomSize, setZoomSize] = useState(0)
     const swiper1Ref = useRef()
@@ -138,7 +139,7 @@ export default function ImageGallery() {
 
     return (
         <>
-            <div className='h-[5.75vw]'></div>
+            <div className='h-[5.75vw] max-lg:h-[10vw] max-md:h-[18vw]'></div>
             <div className='relative'>
                 <Swiper
                     onBeforeInit={(swiper) => {
@@ -152,6 +153,10 @@ export default function ImageGallery() {
                             spaceBetween: 0,
                         },
                         768: {
+                            slidesPerView: 2,
+                            spaceBetween: 4,
+                        },
+                        1024: {
                             slidesPerView: 3,
                             spaceBetween: 4,
                         },
@@ -159,9 +164,9 @@ export default function ImageGallery() {
                     speed={600}
                     thumbs={{ swiper: thumbsSwiper }}
                     modules={[FreeMode, Thumbs]}
-                    className='h-[21.875vw] max-md:h-[82.9vw]'
+                    className='h-[21.875vw] max-md:h-[82.9vw] max-lg:h-[30vw]'
                 >
-                    {!isMobile
+                    {!isTablet
                         ? imagesData?.slice(0, 9).map((item, index) => (
                               <SwiperSlide key={index}>
                                   <Image
@@ -256,6 +261,10 @@ export default function ImageGallery() {
                             spaceBetween: 6,
                         },
                         768: {
+                            slidesPerView: 5,
+                            spaceBetween: 8,
+                        },
+                        1024: {
                             slidesPerView: 10,
                             spaceBetween: 8,
                         },
@@ -263,9 +272,9 @@ export default function ImageGallery() {
                     freeMode={true}
                     watchSlidesProgress={true}
                     modules={[FreeMode, Thumbs]}
-                    className='h-[5vw] flex-grow max-md:h-[16.8vw] max-md:!pl-[2.7vw]'
+                    className='h-[5vw] flex-grow max-md:h-[16.8vw] max-md:!pl-[2.7vw] max-lg:h-[10vw]'
                 >
-                    {!isMobile
+                    {!isTablet
                         ? imagesData?.slice(0, 10).map((item, index) => (
                               <SwiperSlide
                                   key={index}
@@ -316,7 +325,7 @@ export default function ImageGallery() {
                 </Swiper>
                 <div
                     onClick={handleScrollDownMap}
-                    className='flex flex-col items-center justify-center bg-logo rounded-[10px] gap-[0.375vw] w-[5vw] h-[5vw] max-md:hidden cursor-pointer'
+                    className='flex flex-col items-center justify-center bg-logo rounded-[10px] gap-[0.375vw] w-[5vw] h-[5vw] max-lg:hidden cursor-pointer'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'

@@ -46,12 +46,12 @@ export default function BoxLanguage({ type = '', lang, t }) {
                 setIsShowLanguage(!isShowLanguage)
             }}
             ref={sideRef}
-            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-lg:w-[12vw] max-md:w-fit'
+            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-lg:w-fit'
         >
             <span
                 className={`${
                     type === 'ds' ? 'text-den opacity-60' : 'text-white'
-                } title-language-active -tracking-[0.6px] title12-600-150 title-mb12-400-150 max-md:opacity-60 max-md:-tracking-[0.6px] max-lg:whitespace-nowrap title-tl8-400-130`}
+                } title-language-active -tracking-[0.6px] title12-600-150 max-md:title-mb12-400-150 max-md:opacity-60 max-md:-tracking-[0.6px] max-lg:whitespace-nowrap max-lg:title-tl12`}
             >
                 {t?.Navbar?.title}
             </span>

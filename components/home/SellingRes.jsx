@@ -25,8 +25,8 @@ export default function SellingRes({ lang }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
     })
 
     const propertyType = searchParams.getAll('propertyTypeIds')
@@ -94,17 +94,17 @@ export default function SellingRes({ lang }) {
             }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
     }, [lang])
-    if (!isMobile) return
+    if (!isTablet) return
 
     return (
-        <section className='w-full pt-[11.11vw] md:hidden'>
-            <div className='px-mb10'>
-                <h2 className='text-den title-mb25-700-130 -tracking-[1.25px]'>Đang được rao bán</h2>
-                <span className='title-mb14-400-150 text-den opacity-[0.65] block mb-[3.2vw]'>
-                    Hơn <span className='title-mb14-700-150'>1500</span> dự án đang được phân phối
+        <section className='w-full pt-[11.11vw]'>
+            <div className='px-mb10 max-lg:pl-[3.2vw]'>
+                <h2 className='text-den font-bold max-lg:title-tl25 max-md:title-mb25-700-130 -tracking-[1.25px]'>Đang được rao bán</h2>
+                <span className='max-lg:title-tl14 max-md:title-mb14-400-150 text-den opacity-[0.65] block mb-[3.2vw]'>
+                    Hơn <span className='title-mb14-700-150 max-lg:font-bold'>1500</span> dự án đang được phân phối
                 </span>
             </div>
-            <div className='px-mb10 mb-[3.2vw]'>
+            <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
                 <BoxFilterV2 arrFilter={arrFilter} />
             </div>
             {isLoading && (
@@ -171,12 +171,12 @@ export default function SellingRes({ lang }) {
                     }}
                     spaceBetween={16}
                     modules={[Grid]}
-                    className='mySwiper !h-[180vw] px-mb10'
+                    className='mySwiper max-md:!h-[180vw] px-mb10 max-lg:!pl-[3.2vw] max-lg:!h-[150vw]'
                     id='selling'
                 >
                     {data?.data?.map((e, index) => (
                         <SwiperSlide
-                            className={`!h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]`}
+                            className={`max-md:!h-[calc(180vw/2-16px)] max-md:!w-[77.6vw] overflow-hidden rounded-[2.13vw] max-lg:!h-auto max-lg:!w-[57.6vw]`}
                             key={index}
                         >
                             <Link
@@ -197,14 +197,14 @@ export default function SellingRes({ lang }) {
                                         sizes='50.93vw'
                                         fill
                                     />
-                                    <div className='block absolute rounded-md bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit title-mb10-600-150'>
+                                    <div className='block absolute rounded-md bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit max-md:title-mb10-600-150 max-lg:title-tl10'>
                                         {e?.propertyCategory?.name}
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
                                     <h6
                                         title={e?.translation?.name}
-                                        className='text-den title-mb18-700-130 mb-[2.67vw] line-clamp-1'
+                                        className='text-den max-md:title-mb18-700-130 mb-[2.67vw] line-clamp-1 max-lg:title-tl18 font-bold'
                                     >
                                         {e?.translation?.name}
                                     </h6>
@@ -232,10 +232,10 @@ export default function SellingRes({ lang }) {
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150 whitespace-nowrap'>
+                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 whitespace-nowrap max-lg:title-tl14 font-bold'>
                                             Địa chỉ:
                                         </span>
-                                        <span className='capitalize text-den title-mb14-400-150 line-clamp-1'>
+                                        <span className='capitalize text-den max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
                                         </span>
                                     </div>
@@ -252,10 +252,10 @@ export default function SellingRes({ lang }) {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150'>
+                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
                                             Diện tích:
                                         </span>
-                                        <span className='capitalize text-den title-mb14-400-150'>
+                                        <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                             {e?.translation?.size + ' m²'}
                                         </span>
                                     </div>
@@ -272,10 +272,10 @@ export default function SellingRes({ lang }) {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat title-mb14-700-150'>
+                                        <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
                                             Mức giá:
                                         </span>
-                                        <span className='capitalize text-den title-mb14-400-150'>
+                                        <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                             {e?.translation?.priceDisplay}
                                         </span>
                                     </div>
@@ -285,7 +285,7 @@ export default function SellingRes({ lang }) {
                     ))}
                 </Swiper>
             )}
-            <div className='px-mb10 mt-[6.4vw] mb-[16vw]'>
+            <div className='px-mb10 mt-[6.4vw] mb-[16vw] max-lg:px-[3.2vw] max-lg:mt-[5vw] max-lg:mb-[8vw]'>
                 <Button
                     href='/projects'
                     full={true}

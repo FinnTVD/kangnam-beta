@@ -60,9 +60,9 @@ export default function SlideProjectProminent({ isMobile }) {
                                 />
                                 <div className='absolute bottom-0 left-0 w-full h-[16.8125vw] max-md:h-[65.49vw] bg-gradient-slide z-[1]'></div>
                                 <div className='relative z-10'>
-                                    <h6 className='text-white title20-700-150 title-mb18-700-150'>LUMIERE Boulevard</h6>
-                                    <address className='text-white title-mb12-600-150'>Quan 9, 시 Ho Chi Minh</address>
-                                    <span className='text-white title-mb12-400-150'>값: 35tr/m2 </span>
+                                    <h6 className='text-white title20-700-150 max-md:title-mb18-700-150 max-lg:title-tl18'>LUMIERE Boulevard</h6>
+                                    <address className='text-white max-md:title-mb12-600-150 max-lg:title-tl12'>Quan 9, 시 Ho Chi Minh</address>
+                                    <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>값: 35tr/m2 </span>
                                 </div>
                             </div>
                         </SwiperSlide>

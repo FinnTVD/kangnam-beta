@@ -12,6 +12,9 @@ export default function SlideForm({ t }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
 
     const handleNextSlide = () => {
         swiperRef.current?.slideNext()
@@ -74,7 +77,7 @@ export default function SlideForm({ t }) {
                 </SwiperSlide>
             </Swiper>
 
-            {!isMobile && (
+            {!isTablet && (
                 <div className='fixed top-[19vw] z-50 -translate-y-full left-[43.5625vw] bg-[rgba(214,162,121,0.1)] w-[48.5625vw] h-[0.25vw]'>
                     <div className='relative'>
                         <div

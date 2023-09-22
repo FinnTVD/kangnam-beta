@@ -98,8 +98,8 @@ export default function FormContact() {
 
     return (
         <section className='px-120 pt-[8.12vw] pb-[6.88vw] px-mb10 max-md:pb-[16vw]'>
-            <div className='flex gap-x-[2.25vw] max-md:flex-col max-md:gap-y-[10.13vw]'>
-                <div className='w-[41vw] h-[46.8125vw] max-md:h-[102.13vw] flex items-end rounded-[1vw] max-md:rounded-[4.27vw] overflow-hidden px-[1.75vw] py-[2.44vw] relative max-md:w-full max-md:px-[4.53vw] max-md:py-[6.4vw]'>
+            <div className='flex gap-x-[2.25vw] max-lg:flex-col max-md:gap-y-[10.13vw] max-lg:gap-y-[5vw]'>
+                <div className='w-[41vw] h-[46.8125vw] max-md:h-[102.13vw] flex items-end rounded-[1vw] max-md:rounded-[4.27vw] overflow-hidden px-[1.75vw] py-[2.44vw] relative max-lg:w-full max-md:px-[4.53vw] max-md:py-[6.4vw] max-lg:h-[70vw]'>
                     <Image
                         src={src}
                         alt='form-contact'
@@ -109,7 +109,7 @@ export default function FormContact() {
                         className='z-0 object-cover'
                     />
                     <div className='relative z-10 px-[1.75vw] pt-[1.5vw] pb-[2.31vw] rounded-[1vw] border border-solid border-white09 backdrop-blur-[11.1199px] bg-white07 w-full h-fit max-md:px-[3.2vw] max-md:pt-[5.6vw] max-md:pb-[4.53vw]'>
-                        <span className='sub-title block mb-[1.25vw] max-md:mb-[4.27vw] title-mb14-700-130'>
+                        <span className='sub-title block mb-[1.25vw] max-md:mb-[4.27vw] max-md:title-mb14-700-130 max-lg:title-tl14'>
                             Thông tin liên hệ
                         </span>
                         <ul className='flex flex-col gap-y-[1vw] max-md:gap-y-[3.2vw]'>
@@ -120,14 +120,14 @@ export default function FormContact() {
                                     height='20'
                                     viewBox='0 0 20 20'
                                     fill='none'
-                                    className='w-[1.25vw] h-[1.25vw] max-md:w-[5vw] max-md:h-[5vw]'
+                                    className='w-[1.25vw] h-[1.25vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2.5vw] max-lg:h-[2.5vw]'
                                 >
                                     <path
                                         d='M10.0006 9.79297C10.4021 9.79297 10.7452 9.64999 11.0299 9.36403C11.3147 9.07809 11.457 8.73434 11.457 8.33278C11.457 7.93124 11.3141 7.58811 11.0281 7.30339C10.7422 7.01866 10.3984 6.8763 9.99684 6.8763C9.5953 6.8763 9.25217 7.01928 8.96745 7.30524C8.68273 7.59118 8.54037 7.93493 8.54037 8.33649C8.54037 8.73803 8.68334 9.08116 8.9693 9.36588C9.25525 9.65061 9.599 9.79297 10.0006 9.79297ZM9.9987 16.6888C11.8459 15.0082 13.2105 13.4839 14.0924 12.1159C14.9744 10.7478 15.4154 9.54297 15.4154 8.5013C15.4154 6.86533 14.8925 5.52578 13.8468 4.48266C12.8011 3.43953 11.5184 2.91797 9.9987 2.91797C8.47902 2.91797 7.19632 3.43953 6.15061 4.48266C5.10489 5.52578 4.58203 6.86533 4.58203 8.5013C4.58203 9.54297 5.03342 10.7478 5.9362 12.1159C6.83898 13.4839 8.19314 15.0082 9.9987 16.6888ZM9.9987 18.3346C7.76259 16.4319 6.09245 14.6645 4.98828 13.0326C3.88411 11.4006 3.33203 9.89019 3.33203 8.5013C3.33203 6.41797 4.00217 4.75825 5.34245 3.52214C6.68273 2.28602 8.23481 1.66797 9.9987 1.66797C11.7626 1.66797 13.3147 2.28602 14.6549 3.52214C15.9952 4.75825 16.6654 6.41797 16.6654 8.5013C16.6654 9.89019 16.1133 11.4006 15.0091 13.0326C13.9049 14.6645 12.2348 16.4319 9.9987 18.3346Z'
                                         fill='#57534E'
                                     />
                                 </svg>
-                                <span className='text-den-2 title16-400-150 title-mb14-400-150'>
+                                <span className='text-den-2 title16-400-150 max-md:title-mb14-400-150 max-lg:title-tl14'>
                                     Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội
                                 </span>
                             </li>
@@ -145,7 +145,7 @@ export default function FormContact() {
                                         fill='#57534E'
                                     />
                                 </svg>
-                                <span className='text-den-2 title16-400-130 title-mb14-400-130'>
+                                <span className='text-den-2 title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'>
                                     +84 337858021 / +84 339625612
                                 </span>
                             </li>
@@ -163,14 +163,14 @@ export default function FormContact() {
                                         fill='#57534E'
                                     />
                                 </svg>
-                                <span className='text-den-2 title16-400-130 title-mb14-400-130'>+82 10-8413-1981</span>
+                                <span className='text-den-2 title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'>+82 10-8413-1981</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div className='flex-1'>
-                    <span className='sub-title title-mb12-700-150 max-md:tracking-[0.6px]'>Kết nối với chúng tôi</span>
-                    <h2 className='text-den title56 max-md:mt-[1.07vw] title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>Kết nối với chúng tôi</span>
+                    <h2 className='text-den title56 max-md:mt-[1.07vw] max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
                         Điền thông tin
                     </h2>
                     <form
@@ -187,7 +187,7 @@ export default function FormContact() {
                                         errors.name?.message
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'placeholder:text-den border-den03 placeholder:opacity-70'
-                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14 max-md:placeholder:text-14mb max-lg:placeholder:text-[1.8vw]`}
                                     {...register('name')}
                                 />
                             </div>
@@ -199,7 +199,7 @@ export default function FormContact() {
                                         errors.phone?.message
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'placeholder:text-den border-den03 placeholder:opacity-70'
-                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14 max-md:placeholder:text-14mb max-lg:placeholder:text-[1.8vw]`}
                                     {...register('phone')}
                                 />
                             </div>
@@ -213,7 +213,7 @@ export default function FormContact() {
                                         errors.email?.message
                                             ? 'border-red-400 placeholder:text-red-400'
                                             : 'placeholder:text-den border-den03 placeholder:opacity-70'
-                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
+                                    } w-full placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14 max-md:placeholder:text-14mb max-lg:placeholder:text-[1.8vw]`}
                                     {...register('email')}
                                 />
                             </div>
@@ -225,7 +225,7 @@ export default function FormContact() {
                         <input
                             type='text'
                             placeholder='Địa chỉ'
-                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb'
+                            className='placeholder:text-16pc placeholder:font-normal text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input border border-solid border-den03 focus:border-[#d6a279] max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14 max-md:placeholder:text-14mb max-lg:placeholder:text-[1.8vw]'
                             {...register('address')}
                         />
                         <textarea
@@ -234,7 +234,7 @@ export default function FormContact() {
                             placeholder='Nội dung'
                             className={`${
                                 heightArea ? 'h-[' + heightArea + 'px]' : 'h-[10.375vw] max-md:h-[42.93vw]'
-                            } placeholder:text-16pc placeholder:font-normal border border-solid border-den03 text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] w-full rounded-[1vw] outline-none shadow-input focus:border-[#d6a279] resize-none max-md:py-[4.27vw] max-md:px-[6.4vw] title-mb14-400-150 max-md:placeholder:text-14mb`}
+                            } placeholder:text-16pc placeholder:font-normal border border-solid border-den03 text-den title16-600-150 placeholder:leading-normal placeholder:opacity-70 placeholder:text-den py-[1vw] px-[2vw] w-full rounded-[1vw] outline-none shadow-input focus:border-[#d6a279] resize-none max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14 max-md:placeholder:text-14mb max-lg:placeholder:text-[1.8vw]`}
                             // style={{
                             //     height: heightArea ? `${heightArea}px` : '10.375vw',
                             // }}
@@ -250,9 +250,9 @@ export default function FormContact() {
                             Gửi thông tin
                         </Button>
                     </form>
-                    <hr className='bg-[#D9D9D9] mt-[2.13vw] mb-[1.5vw] max-md:mb-[6.4vw] max-md:mt-[4.27vw]' />
+                    <hr className='bg-[#D9D9D9] mt-[2.13vw] mb-[1.5vw] max-md:mb-[6.4vw] max-md:mt-[4.27vw] max-lg:mt-[4vw] max-lg:mb-[3vw]' />
                     <div className='flex items-start justify-between max-md:flex-col'>
-                        <span className='w-fit text-20pc leading-[1.4] font-extrabold text-den max-md:text-20mb'>
+                        <span className='w-fit text-20pc leading-[1.4] font-extrabold text-den max-md:text-20mb max-lg:title-tl20'>
                             Liên hệ ngay:
                         </span>
                         <ul className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-md:mt-[2.67vw]'>
@@ -260,7 +260,7 @@ export default function FormContact() {
                                 listSocial?.map((e, index) => (
                                     <li
                                         key={index}
-                                        className='overflow-hidden rounded-full bg-logo w-[2.6875vw] h-[2.6875vw] max-md:w-[10.67vw] max-md:h-[10.67vw]'
+                                        className='overflow-hidden rounded-full bg-logo w-[2.6875vw] h-[2.6875vw] max-md:w-[10.67vw] max-md:h-[10.67vw] max-lg:w-[5vw] max-lg:h-[5vw]'
                                         title={e.title}
                                     >
                                         <Link
@@ -268,7 +268,7 @@ export default function FormContact() {
                                             className='flex items-center justify-center w-full h-full '
                                         >
                                             <Image
-                                                className='w-[1.5vw] h-[1.5vw] max-md:w-[5vw] max-md:h-[5vw] object-contain brightness-0 invert'
+                                                className='w-[1.5vw] h-[1.5vw] max-md:w-[5vw] max-md:h-[5vw] object-contain brightness-0 invert max-lg:w-[3vw] max-lg:h-[3vw]'
                                                 src={e.src}
                                                 alt={e.title || 'icon social media'}
                                                 width={36}

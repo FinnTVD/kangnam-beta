@@ -99,10 +99,10 @@ export default function MyProjectV2({ lang }) {
         )
     }, [lang])
 
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
     })
-    if (isMobile) return
+    if (isTablet) return
 
     return (
         <section

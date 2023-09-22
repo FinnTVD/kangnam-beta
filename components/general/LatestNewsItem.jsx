@@ -4,18 +4,40 @@ import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 // href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
 // lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function LatestNewsItem({ newsItem, t, lang }) {
     const languageCode = handleCheckLangCode(lang)
 
     const translation = newsItem?.translations?.find((itm) => itm.languageCode === languageCode)
+    const {
+        data: categories,
+        error: errorCategories,
+        isLoading: isLoadingCategories,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post-type`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    let category
+    let categoryTranslation
+    if(categories && newsItem){       
+        category = categories.data.find((item) => item.id === newsItem.postType.id)
+        if(category.translations.length>0){
+            categoryTranslation = category.translations?.find((itm) => itm.languageCode===languageCode).name
+        }
+        else{
+            categoryTranslation = category.title
+        }
+    }
+    
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'>
+            <div data-aos='fade' className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'>
                 <Image
-                    data-aos='fade'
                     className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover'
                     src={newsItem?.image ? newsItem?.image : '/images/featuredImg.jpg'}
                     alt={translation?.title || 'thumbnail news'}
@@ -31,7 +53,7 @@ export default function LatestNewsItem({ newsItem, t, lang }) {
                 >
                     <div className='flex'>
                         <div className='bg-nau-nhat title12-400-150 py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:text-[2.1vw] max-md:py-[1.1vw] max-md:px-[2.4vw] max-lg:title-tl12'>
-                            {newsItem?.postType?.name}
+                            {categoryTranslation}
                         </div>
                         <div className='ml-[1.125vw] flex items-center max-md:ml-[2.6vw]'>
                             <svg
