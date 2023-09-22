@@ -1,5 +1,4 @@
 'use client'
-import 'swiper/css/free-mode'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'

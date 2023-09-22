@@ -1,5 +1,4 @@
 'use client'
-'use client'
 import Image from 'next/image'
 import Deposit from './Deposit'
 import ProjectProminent from './ProjectProminent'
@@ -11,11 +10,10 @@ import SellingRes from './SellingRes'
 import Hiring from './Hiring'
 import MyProjectV2 from './MyProjectV2'
 import { ToastContainer } from 'react-toastify'
-import 'react-loading-skeleton/dist/skeleton.css'
 
-import Aos from "aos";
-import 'aos/dist/aos.css';
-import { useEffect } from "react";
+import Aos from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
 
 export default function IndexHome({ lang, t }) {
     useEffect(() => {
@@ -28,7 +26,6 @@ export default function IndexHome({ lang, t }) {
             disableMutationObserver: false, // disables automatic mutations' detections (advanced)
             debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
             throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-            
 
             // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
             offset: 120, // offset (in px) from the original trigger point
@@ -38,18 +35,18 @@ export default function IndexHome({ lang, t }) {
             once: true, // whether animation should happen only once - while scrolling down
             mirror: false, // whether elements should animate out while scrolling past them
             anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
-    });
-        Aos.refresh();
-      }, []);
+        })
+        Aos.refresh()
+    }, [])
 
     return (
         <>
             <main>
-                <WeAre lang={lang} />
+                {/* <WeAre lang={lang} /> */}
                 <MyProjectV2 lang={lang} />
-                <SellingRes lang={lang} />
-                <Hiring lang={lang} />
-                <div className='w-full max-md:flex max-md:flex-col-reverse'>
+                {/* <SellingRes lang={lang} />
+                <Hiring lang={lang} /> */}
+                {/* <div className='w-full max-md:flex max-md:flex-col-reverse'>
                     <Deposit />
                     <ProjectProminent>
                         <Image
@@ -66,7 +63,7 @@ export default function IndexHome({ lang, t }) {
                 <LatestNews
                     t={t}
                     lang={lang}
-                />
+                /> */}
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>

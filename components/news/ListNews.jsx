@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import classes from './ListNewsStyles.module.css'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import useSWR from 'swr'
 import { data } from 'autoprefixer'
 import { handleCheckLangCode } from '@/utils'
@@ -159,51 +158,90 @@ export default function ListNews({ t, lang }) {
                     <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw] gap-[1.5vw] max-md:grid-cols-1 max-md:grid-rows-[68.5vw_44.2vw_44.2vw] max-md:gap-[4.2vw] max-lg:grid-cols-1 max-lg:grid-rows-[66.6vw_28.2vw_28.2vw]'>
                         <div className='col-span-2 row-span-2 max-lg:col-span-1 max-lg:row-span-1'>
                             <div className='h-full'>
-                                <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                <Skeleton
+                                    width={'100%'}
+                                    height={'100%'}
+                                ></Skeleton>
                             </div>
                         </div>
-                        {listNews.slice(1,3).map((item, index) => 
-                            <div key={index} className='w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'>
+                        {listNews.slice(1, 3).map((item, index) => (
+                            <div
+                                key={index}
+                                className='w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'
+                            >
                                 <div className='flex h-[11vw] items-center max-md:h-[30.1vw] max-lg:h-[20vw]'>
                                     <div className='w-[45%] h-full rounded-lg max-md:rounded-[6.5px]'>
-                                        <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                        <Skeleton
+                                            width={'100%'}
+                                            height={'100%'}
+                                        ></Skeleton>
                                     </div>
                                     <div className='w-[50%] ml-[5%] flex flex-col'>
-                                        <Skeleton count={2} width={'100%'}></Skeleton>
+                                        <Skeleton
+                                            count={2}
+                                            width={'100%'}
+                                        ></Skeleton>
                                         <div className='mt-[0.5vw]'>
-                                            <Skeleton count={3} width={'100%'}></Skeleton>
+                                            <Skeleton
+                                                count={3}
+                                                width={'100%'}
+                                            ></Skeleton>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='flex justify-between mt-[1.125vw] max-md:mt-[2.1vw]'>
                                     <div className='w-[4.437vw] h-[1.75vw] max-md:h-[6.1vw] max-md:w-[18.4vw]'>
-                                        <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                        <Skeleton
+                                            width={'100%'}
+                                            height={'100%'}
+                                        ></Skeleton>
                                     </div>
                                     <div className='w-[8.625vw] h-[1.3125vw] max-md:h-[4.5vw] max-md:w-[29.8vw]'>
-                                        <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                        <Skeleton
+                                            width={'100%'}
+                                            height={'100%'}
+                                        ></Skeleton>
                                     </div>
                                 </div>
                             </div>
-                        )}
+                        ))}
                     </div>
                     <div className='mt-[3.75vw] grid grid-cols-3 gap-[1.5vw] max-lg:grid-cols-1 max-md:gap-[4.2vw] max-md:mt-[4.2vw]'>
                         {listNews?.slice(3, 12)?.map((item, index) => (
-                            <div key={index} className='w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'>
+                            <div
+                                key={index}
+                                className='w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'
+                            >
                                 <div className='w-full h-[16.1875vw] rounded-lg max-md:h-[56vw] max-lg:h-[40vw]'>
-                                    <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                    <Skeleton
+                                        width={'100%'}
+                                        height={'100%'}
+                                    ></Skeleton>
                                 </div>
                                 <div className='w-[4.4375vw] h-[1.75vw] mt-[0.5vw] max-lg:mt-[1vw] max-md:w-[15.2vw] max-md:h-[6.1vw]'>
-                                    <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                    <Skeleton
+                                        width={'100%'}
+                                        height={'100%'}
+                                    ></Skeleton>
                                 </div>
                                 <div className='w-full mt-[0.2625vw] flex flex-col max-lg:mt-[0.8vw]'>
-                                    <Skeleton width={'100%'} count={2}></Skeleton>
+                                    <Skeleton
+                                        width={'100%'}
+                                        count={2}
+                                    ></Skeleton>
                                     <div className='mt-[0.8vw]'>
-                                        <Skeleton width={'100%'} count={2}></Skeleton>
+                                        <Skeleton
+                                            width={'100%'}
+                                            count={2}
+                                        ></Skeleton>
                                     </div>
                                 </div>
                                 {/* </div> */}
                                 <div className='w-[8.625vw] h-[1.3125vw] mt-[0.5vw] max-md:mt-[1.7vw] max-md:w-[29.8vw] max-md:h-[4.5vw]'>
-                                    <Skeleton width={'100%'} height={'100%'}></Skeleton>
+                                    <Skeleton
+                                        width={'100%'}
+                                        height={'100%'}
+                                    ></Skeleton>
                                 </div>
                             </div>
                         ))}
@@ -218,7 +256,7 @@ export default function ListNews({ t, lang }) {
                             t={t}
                             lang={lang}
                         />
-                    }
+                    )}
                     <ReactPaginate
                         breakLabel='...'
                         nextLabel='Next'

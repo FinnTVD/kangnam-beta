@@ -119,6 +119,12 @@ const notifyError = (title) =>
         theme: 'colored',
     })
 
+const scrollToSection = (element) => {
+    element.scrollIntoView({
+        behavior: 'smooth',
+    })
+}
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -129,4 +135,5 @@ export {
     arrFilterV2,
     notifyError,
     notifySuccess,
+    scrollToSection,
 }

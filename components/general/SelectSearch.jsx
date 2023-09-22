@@ -6,22 +6,24 @@ import { useEffect, useState } from 'react'
 const listSearch = [
     {
         id: 1,
-        title: 'Mua nhà',
+        title: 'Dự án',
     },
     {
         id: 2,
         title: 'Thuê nhà',
+        id: '013b523f-e340-4e7e-80a6-99096a7ce3fe',
     },
     {
         id: 3,
-        title: 'Dự án',
+        title: 'Mua nhà',
+        id: '823a2e96-0913-47a2-a25c-780eb911434f',
     },
 ]
 export default function SelectSearch({ type = 'dark', menu = false }) {
     const [isOpen, setIsOpen] = useState(false)
     const [arrSearch, setArrSearch] = useState({
         id: 1,
-        title: 'Mua nhà',
+        title: 'Dự án',
         list: [
             {
                 id: 2,
@@ -29,7 +31,7 @@ export default function SelectSearch({ type = 'dark', menu = false }) {
             },
             {
                 id: 3,
-                title: 'Dự án',
+                title: 'Mua nhà',
             },
         ],
     })

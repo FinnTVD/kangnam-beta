@@ -13,8 +13,9 @@ export default async function getData(api, langCode) {
 
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
-        throw new Error('Failed to fetch data')
+        // throw new Error('Failed to fetch data')
         // console.log('Failed to fetch data')
+        console.log('Failed to fetch data', res)
     }
 
     return res.json()

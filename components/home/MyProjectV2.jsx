@@ -8,23 +8,50 @@ import { arrFilter, handleCheckLangCode, handleCheckParamsLanguage } from '@/uti
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import useSWR from 'swr'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-// import MapV2 from './MapV2/MapV2'
-import dynamic from 'next/dynamic'
-const MapV2 = dynamic(() => import('./MapV2/MapV2'), {
-    ssr: false,
-  })
+import MapV2 from './MapV2/MapV2'
+import useStore from '@/app/[lang]/(store)/store'
+// import dynamic from 'next/dynamic'
+// const MapV2 = dynamic(() => import('./MapV2/MapV2'), {
+//     ssr: false,
+//   })
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
+
+const handleFilterSlug = (selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId) => {
+    if (valueSearch && selectSearch) {
+        if (selectSearch === 'area') {
+            return `${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
+                wardId ? '&wardId=' + wardId : ''
+            }`
+        }
+        if (selectSearch === 'word') {
+            return '&q=' + valueSearchPrev
+        }
+        return '&q=' + selectSearch
+    }
+    return ''
+}
 export default function MyProjectV2({ lang }) {
+    const setBoxMap = useStore((state) => state.setBoxMap)
+    const valueSearch = useStore((state) => state.valueSearch)
+    const selectSearch = useStore((state) => state.selectSearch)
+    const valueSearchPrev = useStore((state) => state.valueSearchPrev)
+    const cityId = useStore((state) => state.cityId)
+    console.log('🚀 ~ file: MyProjectV2.jsx:48 ~ MyProjectV2 ~ cityId:', cityId)
+    const districtId = useStore((state) => state.districtId)
+    console.log('🚀 ~ file: MyProjectV2.jsx:50 ~ MyProjectV2 ~ districtId:', districtId)
+    const wardId = useStore((state) => state.wardId)
+    console.log('🚀 ~ file: MyProjectV2.jsx:52 ~ MyProjectV2 ~ wardId:', wardId)
+    const isSubmit = useStore((state) => state.isSubmit)
+    console.log('🚀 ~ file: MyProjectV2.jsx:54 ~ MyProjectV2 ~ isSubmit:', isSubmit)
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -82,7 +109,9 @@ export default function MyProjectV2({ lang }) {
     const { data, error, isLoading } = useSWR(
         `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
             propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+            propertyTypeParams ? propertyTypeParams : ''
+        }${handleFilterSlug(selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId)}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -90,14 +119,22 @@ export default function MyProjectV2({ lang }) {
             revalidateOnReconnect: false,
         },
     )
+    console.log('🚀 ~ file: MyProjectV2.jsx:109 ~ MyProjectV2 ~ data:', data)
 
     useEffect(() => {
         mutate(
             `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+                propertyTypeParams ? propertyTypeParams : ''
+            }${handleFilterSlug(selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId)}`,
         )
-    }, [lang])
+    }, [lang, isSubmit])
+    console.log('🚀 ~ file: MyProjectV2.jsx:137 ~ MyProjectV2 ~ isSubmit:', isSubmit)
+
+    useEffect(() => {
+        projectsRef?.current && setBoxMap(projectsRef.current)
+    }, [])
 
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
@@ -310,7 +347,7 @@ export default function MyProjectV2({ lang }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV2/>
+                    <MapV2 />
                 </div>
             </div>
         </section>

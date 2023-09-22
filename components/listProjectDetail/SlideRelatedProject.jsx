@@ -2,13 +2,11 @@
 import { usePathname } from 'next/navigation'
 import useSWR, { mutate } from 'swr'
 import Image from 'next/image'
-import 'swiper/css/free-mode'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, FreeMode } from 'swiper/modules'
 import Link from 'next/link'
 import { handleCheckLangCode, handleCheckParams } from '@/utils'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { useEffect } from 'react'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
