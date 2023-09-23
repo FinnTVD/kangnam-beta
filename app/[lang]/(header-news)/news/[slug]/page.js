@@ -57,8 +57,11 @@ export async function generateMetadataNews({ params: { lang, slug } }) {
 export default async function NewsDetail({ params: { lang, slug } }) {
     const t = await getDictionary(lang)
     const post = await getData(`/post/post-by-slug/${slug}`)
+    const categories = await getData('/post-type')
     const langCode = handleCheckLangCode(lang)
     const newsDetail = post?.translations?.find((item) => item?.languageCode === langCode)
+    const category = categories?.data?.find((item) => item.id===post.postType.id)
+
     return (
         <>
             <HeaderV2
@@ -67,13 +70,16 @@ export default async function NewsDetail({ params: { lang, slug } }) {
                 post={post}
                 newsDetail={newsDetail}
             />
-            <IndexNewsDetail
-                t={t}
-                slug={slug}
-                lang={lang}
-                post={post}
-                newsDetail={newsDetail}
-            />
+            {(post && category && newsDetail) &&
+                <IndexNewsDetail
+                    t={t}
+                    slug={slug}
+                    lang={lang}
+                    post={post}
+                    newsDetail={newsDetail}
+                    category={category}
+                />
+            }
         </>
     )
 }

@@ -19,6 +19,9 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
 
     useEffect(() => {
         data && setDataHomePage(data)
@@ -68,8 +71,8 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 ></iframe> */}
                 <Image
                     data-aos='fade-left'
-                    data-aos-delay='1800'
-                    data-aos-duration='1500'
+                    data-aos-delay='1500'
+                    data-aos-duration='1200'
                     className='object-contain z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
                     src='/images/big-logo.png'
                     alt='big-logo'
@@ -80,7 +83,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div>
                 {/* linear-white */}
                 <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>
-                {isMobile ? (
+                {isTablet ? (
                     <NavBarRes
                         isHome={isHome}
                         lang={lang}
@@ -93,7 +96,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                         t={t}
                     />
                 )}
-                {!isMobile ? (
+                {!isTablet ? (
                     <NavBarFixed
                         isHome={false}
                         lang={lang}

@@ -4,6 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import BoxLanguage from './language/BoxLanguage'
+import useSWR from 'swr'
+import { handleCheckLangCode } from '@/utils'
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const listNavRes = [
     {
         id: 1,
@@ -19,11 +22,6 @@ const listNavRes = [
         id: 3,
         title: 'Bán lại',
         href: '/danh-sach-du-an',
-    },
-    {
-        id: 4,
-        title: 'Thỏa thuận & Pháp lí',
-        href: '/agreement',
     },
 ]
 const listNavRes2 = [
@@ -45,6 +43,25 @@ const listNavRes2 = [
 ]
 export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+    const languageCode = handleCheckLangCode(lang)
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoading,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+    let agreementDataTranslation = []
+    if(agreementData){
+        agreementData.data.forEach((item) => {
+            item.translations.forEach((itm) => {
+                if(itm.languageCode === languageCode)
+                    agreementDataTranslation.push({title: itm.title, slug: itm.slug})
+            })
+        })
+    }
 
     return (
         <div
@@ -82,7 +99,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                                     height='17'
                                     viewBox='0 0 16 17'
                                     fill='none'
-                                    className='w-[1vw] h-[1vw] max-md:w-[4vw] max-md:h-[4vw]'
+                                    className='w-[1vw] h-[1vw] max-md:w-[4vw] max-md:h-[4vw] max-lg:w-[2.5vw] max-lg:h-[2.5vw]'
                                 >
                                     <path
                                         fillRule='evenodd'
@@ -99,7 +116,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                                 </svg>
                             </label>
                             <input
-                                className='bg-transparent outline-none text-den max-md:text-white title16-400-130 title-mb12-400-130'
+                                className='bg-transparent outline-none text-den max-lg:text-white title16-400-130 max-md:title-mb12-400-130 max-lg:title-tl12'
                                 type='text'
                                 name='search'
                                 id='search'
@@ -130,28 +147,42 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                     </svg>
                 </div>
             </div>
-            <ul className='px-mb10 flex flex-col mt-[8vw] mb-[13.33vw] text-white'>
-                {listNavRes &&
-                    listNavRes?.map((e, index) => (
+            <ul className='max-md:px-mb10 flex flex-col mt-[8vw] mb-[13.33vw] text-white max-lg:px-[3.2vw]'>
+                {
+                    t?.menuNav?.nav1.map((e, index) => (
                         <li
-                            className='w-full py-[2.67vw] title-mb20-400-120 border-b borders-solid border-white01 last:border-none'
+                            onClick={() => setIsOpen(false)}
+                            className='w-full py-[2.67vw] max-md:title-mb20-400-120 border-b borders-solid border-white01 last:border-none max-lg:title-tl20'
                             key={index}
+                        >
+                            <Link href={e.href}>
+                                {e.title}
+                            </Link>
+                        </li>
+                    ))}
+            </ul>
+            <div className='max-md:px-mb10 mt-[13.33vw] flex justify-between items-end max-lg:px-[3.2vw]'>
+                <ul className='flex flex-col text-white gap-y-[1.07vw] w-full max-lg:w-auto'>
+                    {
+                        t?.menuNav?.nav2.map((e, index) => (
+                            <li
+                                onClick={() => setIsOpen(false)}
+                                className='max-md:title-mb14-400-171 opacity-80 max-lg:title-tl14'
+                                key={index}
+                            >
+                                <Link href={e.href}>
+                                    {e.title}
+                                </Link>
+                            </li>
+                        ))}
+                    {agreementDataTranslation?.map((e,index) => (
+                        <li
+                        className='max-md:title-mb14-400-171 opacity-80 max-lg:title-tl14'
+                        key={index}
                         >
                             {e.title}
                         </li>
                     ))}
-            </ul>
-            <div className='px-mb10 mt-[13.33vw] flex justify-between items-end'>
-                <ul className='flex flex-col text-white gap-y-[1.07vw] w-full'>
-                    {listNavRes2 &&
-                        listNavRes2?.map((e, index) => (
-                            <li
-                                className='title-mb14-400-171 opacity-80'
-                                key={index}
-                            >
-                                {e.title}
-                            </li>
-                        ))}
                 </ul>
                 <BoxLanguage
                     lang={lang}
@@ -161,20 +192,20 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
             <div className='px-mb10 my-[4.27vw]'>
                 <div className='border border-t border-white01'></div>
             </div>
-            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50'>Email:</span>
-            <span className='block text-white px-mb10 title-mb13-400-184 opacity-95 -mt-[1.6vw]'>
+            <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 max-lg:title-tl12 max-lg:px-[3.2vw]'>Email:</span>
+            <span className='block text-white max-md:px-mb10 max-md:title-mb13-400-184 opacity-95 max-md:-mt-[1.6vw] max-lg:title-tl13 max-lg:px-[3.2vw] max-lg:mt-0'>
                 kangnam@gmail.com.vn
             </span>
-            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Địa chỉ:</span>
-            <address className='block text-white px-mb10 title-mb13-400-130 opacity-95 not-italic'>
+            <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>Địa chỉ:</span>
+            <address className='block text-white max-md:px-mb10 max-md:title-mb13-400-130 opacity-95 not-italic max-lg:title-tl13 max-lg:px-[3.2vw]'>
                 Villa E11, The Manor, kdt mới Mỹ Đình - Mễ Trì, Nam Từ Liêm, Hà Nội.
             </address>
-            <span className='block text-white px-mb10 title-mb12-400-200 opacity-50 mt-[2.13vw]'>Hotline:</span>
-            <span className='block text-white px-mb10 title-mb13-600-150'>(+84) 254 3526981</span>
-            <div className='px-mb10 mt-[4.27vw]'>
+            <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>Hotline:</span>
+            <span className='block text-white max-md:px-mb10 max-md:title-mb13-600-150 max-lg:title-tl13 max-lg:px-[3.2vw]'>(+84) 254 3526981</span>
+            <div className='max-md:px-mb10 mt-[4.27vw] max-lg:px-[3.2vw]'>
                 <Link
                     href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
-                    className='bg-nu h-fit w-full text-center block rounded-[6.25vw] py-[3.82vw] text-white title-mb13-600-150'
+                    className='bg-nu h-fit w-full text-center block rounded-[6.25vw] py-[3.82vw] text-white max-md:title-mb13-600-150 max-lg:title-tl13'
                 >
                     {t?.Navbar?.button}
                 </Link>

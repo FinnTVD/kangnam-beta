@@ -501,6 +501,10 @@
             @apply text-28tl;
         }
 
+        .title-tl25 {
+            @apply text-25tl;
+        }
+
         .title-tl24 {
             @apply text-24tl;
         }
@@ -522,6 +526,10 @@
         }
 
         .title-tl14 {
+            @apply text-14tl;
+        }
+
+        .title-tl13 {
             @apply text-14tl;
         }
 

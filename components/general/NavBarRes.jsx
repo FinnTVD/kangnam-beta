@@ -10,7 +10,7 @@ export default function NavBarRes({ lang, t, isHome }) {
         <nav
             className={`${
                 isHome ? '' : 'border-b border-solid border-white02'
-            } absolute top-0 left-0 z-[9999] w-full md:hidden`}
+            } absolute top-0 left-0 z-[9999] w-full lg:hidden`}
         >
             <div className='pb-[0.53vw] pt-[2.13vw] flex justify-between pl-[7.2vw] pr-[2.8vw] items-center'>
                 <Link
@@ -36,7 +36,7 @@ export default function NavBarRes({ lang, t, isHome }) {
                         viewBox='0 0 24 24'
                         strokeWidth='1.5'
                         stroke='white'
-                        className='w-[10.33vw] h-[8.6vw]'
+                        className='max-md:w-[10.33vw] max-md:h-[8.6vw] max-lg:w-[5.2vw] max-lg:auto'
                     >
                         <path
                             strokeLinecap='round'

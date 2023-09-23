@@ -68,7 +68,7 @@ export default function SlideRelatedProject({ lang, detail }) {
                             freeMode: true,
                         },
                         768: {
-                            slidesPerView: 3,
+                            slidesPerView: 2,
                             spaceBetween: 20,
                         },
                         1024: {
@@ -94,7 +94,7 @@ export default function SlideRelatedProject({ lang, detail }) {
                                 className='block w-full'
                                 key={index}
                             >
-                                <div className='relative w-full h-[13.75vw] max-md:h-[50.94vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.13vw]'>
+                                <div className='relative w-full h-[13.75vw] max-md:h-[50.94vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.13vw] max-lg:h-[25vw]'>
                                     <Image
                                         className='z-0 object-cover'
                                         src={e?.firstImage || '/images/itemproject.jpg'}
@@ -102,12 +102,12 @@ export default function SlideRelatedProject({ lang, detail }) {
                                         sizes='18vw'
                                         fill
                                     />
-                                    <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
+                                    <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-lg:title-tl10 max-md:text-10tl'>
                                         {e?.propertyCategory?.name}
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
-                                    <h6 className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1'>
+                                    <h6 className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1 max-lg:title-tl18'>
                                         {e?.translation?.name}
                                     </h6>
                                     <div className='flex items-center'>
@@ -134,10 +134,10 @@ export default function SlideRelatedProject({ lang, detail }) {
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 whitespace-nowrap'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 whitespace-nowrap max-lg:title-tl14'>
                                             Địa chỉ:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
+                                        <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
                                         </span>
                                     </div>
@@ -154,10 +154,10 @@ export default function SlideRelatedProject({ lang, detail }) {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 max-lg:title-tl14'>
                                             Diện tích:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
+                                        <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.translation?.size + ' m²'}
                                         </span>
                                     </div>
@@ -175,10 +175,10 @@ export default function SlideRelatedProject({ lang, detail }) {
                                                 fill='#926B4F'
                                             />
                                         </svg>
-                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150'>
+                                        <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 max-lg:title-tl14'>
                                             Mức giá:
                                         </span>
-                                        <span className='capitalize text-den title14-400-150 title-mb14-400-150 line-clamp-1'>
+                                        <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.translation?.price}
                                         </span>
                                     </div>

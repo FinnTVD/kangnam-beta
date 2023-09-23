@@ -169,6 +169,10 @@ export default function MyProjectV2({ lang }) {
     })
 
     if (isMobile) return
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
+    if (isTablet) return
 
     return (
         <section

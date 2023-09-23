@@ -214,7 +214,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                     onClick={handlePrevSlide}
                     className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
-                    <span className='text-nu title14-400-150 title-mb12-400-150'>Trở lại</span>
+                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>Trở lại</span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='11'
@@ -237,7 +237,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                     className='w-full gap-x-[3.5vw]'
                 >
                     <div className='relative'>
-                        <h3 className='title24-800-150 -tracking-[1.2px] text-den title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                        <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
                             Thông tin bất động sản
                         </h3>
                         <div className='relative w-full mt-[1.25vw] max-md:mt-[4.27vw]'>
@@ -246,7 +246,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 onChange={handleChangeDescription}
                                 className={`${valueDescription?.validate ? 'border-red-400 ' : 'border-[#C5C5C5]'} ${
                                     valueDescription?.value ? '' : 'focus-input-active'
-                                } rounded-[0.625vw] py-[1vw] resize-none outline-none px-[1.5vw] border border-solid w-full text-den max-md:rounded-[1.067vw] max-md:p-[4.27vw] title-mb12-400-150`}
+                                } rounded-[0.625vw] py-[1vw] resize-none outline-none px-[1.5vw] border border-solid w-full text-den max-md:rounded-[1.067vw] max-md:p-[4.27vw] max-md:title-mb12-400-150 max-lg:title-tl12`}
                                 style={{
                                     height: heightArea ? `${heightArea}px` : `${isMobile ? '24vw' : '7.75vw'}`,
                                 }}
@@ -260,17 +260,17 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     valueDescription?.value ? 'top-0 -translate-y-1/2' : 'top-[1vw] max-md:top-[4.27vw]'
                                 } ${
                                     valueDescription?.validate ? 'text-red-400 ' : 'text-[#646464]'
-                                } absolute left-[1vw] px-[0.5vw] max-md:px-[1.27vw] max-md:left-[3vw] bg-white cursor-pointer title16-400-150 title-mb12-400-150 transition-all duration-300`}
+                                } absolute left-[1vw] px-[0.5vw] max-md:px-[1.27vw] max-md:left-[3vw] bg-white cursor-pointer title16-400-150 max-md:title-mb12-400-150 transition-all duration-300 max-lg:title-tl12`}
                             >
                                 Mô tả nhà đất <span className='text-red-400'> *</span>
                             </label>
                         </div>
-                        <span className='block mt-[1.5vw] max-md:mt-[4.27vw] mb-[1vw] max-md:mb-[2.67vw] text-black title16-600-150 title-mb14-600-150'>
+                        <span className='block mt-[1.5vw] max-md:mt-[4.27vw] mb-[1vw] max-md:mb-[2.67vw] text-black title16-600-150 max-md:title-mb14-600-150 max-lg:title-tl14'>
                             Thông tin chi tiết
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
                             <div className='relative flex flex-1'>
-                                <div onClick={()=>setIsOpen(!isOpen)} className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'>
+                                <div onClick={()=>setIsOpen(!isOpen)} className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'>
                                     {valueType?.title}
                                 </div>
                                 <svg
@@ -317,9 +317,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Diện tích'}
                                 onChange={handleChangeArea}
                                 value={valueArea}
@@ -334,7 +334,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Số tầng'}
                                 onChange={handleChangeNumberFloors}
                                 value={valueNumberFloors}
@@ -347,7 +347,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Hướng nhà'}
                                 onChange={handleChangeHomeOrientation}
                                 value={valueHomeOrientation}
@@ -361,7 +361,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Loại công trình'}
                                 onChange={handleChangeBuildingType}
                                 value={valueBuildingType}
@@ -371,9 +371,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Hướng ban công'}
                                 onChange={handleChangeBalconyOrientation}
                                 value={valueBalconyOrientation}
@@ -385,9 +385,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Nội thất'}
                                 value={valueInterior}
                                 onChange={handleChangeInterior}
@@ -399,7 +399,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw]'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
                                 labelContent={'Pháp lý'}
                                 onChange={handleChangeLegal}
                                 value={valueLegal}
@@ -414,15 +414,15 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 htmlFor='file'
                                 className={`${
                                     validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#646464]'
-                                } cursor-pointer title-mb14-400-150 title16-400-150`}
+                                } cursor-pointer max-md:title-mb14-400-150 title16-400-150 max-lg:title-tl14`}
                             >
                                 Hình ảnh *
                             </label>
                             <div className='flex gap-x-[0.5vw] items-center title16-400-150'>
-                                <span className='border border-solid text-12pc text-black border-black rounded-full w-[1vw] h-[1vw] max-md:w-[3vw] max-md:h-[3vw] flex justify-center items-center max-md:text-10mb max-md:font-normal max-md:leading-normal'>
+                                <span className='border border-solid text-12pc text-black border-black rounded-full w-[1vw] h-[1vw] max-md:w-[3vw] max-md:h-[3vw] flex justify-center items-center max-md:text-10mb max-md:font-normal max-md:leading-normal max-lg:title-tl10 max-lg:w-[2vw] max-lg:h-[2vw]'>
                                     !
                                 </span>
-                                <span className='text-[#313131] underline title16-600-150 title-mb14-400-150'>
+                                <span className='text-[#313131] underline title16-600-150 max-md:title-mb14-400-150 max-lg:title-tl14'>
                                     Tiêu chuẩn hình ảnh
                                 </span>
                             </div>
@@ -456,7 +456,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                         height='24'
                                         viewBox='0 0 25 24'
                                         fill='none'
-                                        className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw]'
+                                        className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] max-lg:w-[2.5vw] max-lg:h-[2.5vw]'
                                         stroke={`${validateFiles.status && validateFiles.title ? '#f87171' : ''}`}
                                     >
                                         <path
@@ -472,14 +472,14 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 <p
                                     className={`${
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#454545]'
-                                    } mt-[0.5vw] max-md:mt-[2.13vw] max-md:mb-[1.07vw] mb-[0.25vw] title14-700-150 select-none title-mb12-700-150 max-md:text-center`}
+                                    } mt-[0.5vw] max-md:mt-[2.13vw] max-md:mb-[1.07vw] mb-[0.25vw] title14-700-150 select-none max-md:title-mb12-700-150 max-md:text-center max-lg:title-tl12`}
                                 >
                                     Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên
                                 </p>
                                 <p
                                     className={`${
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#C7C7C7]'
-                                    } title12-400-150 select-none title-mb10-400-150 max-md:text-center max-md:px-[6.67vw]`}
+                                    } title12-400-150 select-none max-md:title-mb10-400-150 max-md:text-center max-md:px-[6.67vw] max-lg:title-tl10`}
                                 >
                                     Đề xuất tỉ lệ hình ảnh tốt nhất là 1600 x 900 (16:9). Giới hạn 2MB/ ảnh
                                 </p>

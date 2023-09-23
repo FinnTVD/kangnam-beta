@@ -194,10 +194,10 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
         <>
             <article className='flex shadow-input rounded-[0.5vw] max-md:rounded-[2.13vw] max-md:pt-[8.53vw] max-md:px-[2.67vw] w-full h-fit pt-[2.5vw]  pr-[7.5vw] pb-[2.19vw] px-[1.5vw] max-md:pb-[9.6vw]'>
                 <div className='flex-1'>
-                    <h3 className='title24-800-150 -tracking-[1.2px] text-den title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                    <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
                         Thông tin cơ bản
                     </h3>
-                    <span className='text-black mt-[1.5vw] mb-[1vw] max-md:mt-[5.33vw] max-md:mb-[4.27vw] title16-400-150 title-mb14-400-150 block'>
+                    <span className='text-black mt-[1.5vw] mb-[1vw] max-md:mt-[5.33vw] max-md:mb-[4.27vw] title16-400-150 max-md:title-mb14-400-150 block max-lg:title-tl16'>
                         Nhu cầu của bạn là gì?
                     </span>
                     <form
@@ -217,7 +217,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                 />
                                 <label
                                     htmlFor='sell'
-                                    className='text-black cursor-pointer title16-400-150 title-mb12-400-150'
+                                    className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
                                     Bán
                                 </label>
@@ -235,7 +235,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                 />
                                 <label
                                     htmlFor='hire'
-                                    className='text-black cursor-pointer title16-400-150 title-mb12-400-150'
+                                    className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
                                     Cho thuê
                                 </label>
@@ -252,7 +252,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                 />
                                 <label
                                     htmlFor='sellandhire'
-                                    className='text-black cursor-pointer title16-400-150 title-mb12-400-150'
+                                    className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
                                     Bán và cho thuê
                                 </label>
@@ -266,9 +266,9 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'w-[17.1875vw] max-md:w-full flex justify-between items-center '}
                                 labelContent={'Căn hộ'}
-                                labelClass={'title16-400-150 title-mb12-400-150'}
+                                labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                 }
                                 required={false}
                                 register={'name'}
@@ -278,11 +278,11 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 labelContent={t?.Form1?.sell}
-                                labelClass={'title16-400-150 title-mb12-400-150'}
+                                labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 status={validatePrice?.status}
                                 title={validatePrice?.title}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                 }
                                 register={'price'}
                                 value={inputValue}
@@ -293,11 +293,11 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                 <InputCustom
                                     boxClass={'flex-1'}
                                     labelContent={t?.Form1?.hire}
-                                    labelClass={'title16-400-150 title-mb12-400-150'}
+                                    labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                     status={validatePriceHire?.status}
                                     title={validatePriceHire?.title}
                                     inputClass={
-                                        'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                        'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                     }
                                     register={'priceHire'}
                                     value={inputValueHire}
@@ -309,9 +309,9 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                         <InputCustom
                             boxClass={'w-full h-fit mt-[1.5vw] max-md:mt-[4.27vw] '}
                             labelContent={'Địa chỉ'}
-                            labelClass={'title16-400-150 title-mb12-400-150'}
+                            labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                             inputClass={
-                                'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den focus:border-logo title16-400-150 title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den focus:border-logo title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                             }
                             register={'address'}
                             value={inputValueAddress?.value}
@@ -330,7 +330,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                         )}
                         <div className='flex justify-center'>
                             <button className='flex gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center py-[0.56vw] px-[1.09vw] mt-[2.44vw] max-md:mt-[5.33vw] max-md:py-[1.56vw] max-md:px-[3.09vw] w-fit h-fit border border-solid border-nu rounded-[10vw]'>
-                                <span className='text-nu title14-400-150 title-mb16-600-150'>Bước 2</span>
+                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>Bước 2</span>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     width='11'

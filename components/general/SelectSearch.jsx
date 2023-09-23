@@ -87,8 +87,8 @@ export default function SelectSearch({ type = 'dark', menu = false, lang }) {
             ref={sideRef}
             onClick={() => setIsOpen(!isOpen)}
             className={`${type === 'white' ? 'text-white' : 'text-den'} ${
-                menu ? 'title-mb12-400-130' : 'title-mb14-400-130'
-            } gap-x-[0.13vw] select-none cursor-pointer flex items-center title-tl12-400-130 title14-400-130 whitespace-nowrap relative`}
+                menu ? 'max-md:title-mb12-400-130' : 'max-md:title-mb14-400-130'
+            } gap-x-[0.13vw] select-none cursor-pointer flex items-center max-lg:title-tl12-400-130 title14-400-130 whitespace-nowrap relative`}
         >
             {listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name}
             <svg
@@ -97,7 +97,7 @@ export default function SelectSearch({ type = 'dark', menu = false, lang }) {
                 viewBox='0 0 24 24'
                 strokeWidth='1.5'
                 stroke={`${type === 'white' ? 'white' : '#D6A279'}`}
-                className='w-[1vw] h-[1vw] max-lg:h-[1.5vw] max-lg:w-[1.5vw] max-md:w-[5vw] max-md:h-[3vw]'
+                className='w-[1vw] h-[1vw] max-lg:h-[1.5vw] max-lg:w-[1.5vw] max-md:w-[5vw] max-md:h-[3vw] max-lg:w-[2.5vw] max-lg:h-auto'
             >
                 <path
                     strokeLinecap='round'

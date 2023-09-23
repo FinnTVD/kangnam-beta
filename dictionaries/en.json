@@ -24,11 +24,6 @@
                         "id": 2,
                         "title": "Contact",
                         "href": "/contact"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Agreement",
-                        "href": "/agreement"
                     }
                 ]
             }
@@ -107,13 +102,44 @@
         },
         {
             "id": 5,
-            "title": "Thỏa thuận và pháp lý",
-            "href": "/agreement"
-        },
-        {
-            "id": 6,
             "title": "Tin tức",
             "href": "/news"
         }
-    ]
+    ],
+    "menuNav": {
+        "nav1": [
+            {
+                "id": 1,
+                "title": "Homepage",
+                "href": "/"
+            },
+            {
+                "id": 2,
+                "title": "Projects",
+                "href": "/projects"
+            },
+            {
+                "id": 3,
+                "title": "Resale",
+                "href": "/resale"
+            }
+        ],
+        "nav2": [
+            {
+                "id": 1,
+                "title": "About us",
+                "href": "/about-us"
+            },
+            {
+                "id": 2,
+                "title": "News",
+                "href": "/news"
+            },
+            {
+                "id": 3,
+                "title": "Contact",
+                "href": "/contact"
+            }
+        ]
+    }
 }

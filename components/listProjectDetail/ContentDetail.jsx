@@ -27,7 +27,7 @@ export default function ContentDetail({ data, detail, lang }) {
     return (
         <section className='mt-[7.57vw] px-120 max-md:mt-[22.57vw] px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
-                <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden'>
+                <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
                     Trang chủ /{' '}
                     {
                         data?.propertyCategory?.translations?.find((e) =>
@@ -35,19 +35,19 @@ export default function ContentDetail({ data, detail, lang }) {
                         )?.name
                     }
                 </span>
-                {/* <span className='title16-600-150 text-den max-md:hidden'>{dataDetail?.name}</span> */}
-                <address className='not-italic title16-600-150 title-mb14-400-150 text-den mb-[1vw] md:hidden max-md:opacity-50'>
+                {/* <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14>{dataDetail?.name}</span> */}
+                <address className='not-italic title16-600-150 max-lg:title-tl14 title-mb14-400-150 text-den mb-[1vw] md:hidden max-md:opacity-50'>
                     {data?.address?.display}
                 </address>
             </div>
             <div className='flex gap-x-[4.87vw]'>
                 <div className='flex-1'>
-                    <div className='flex items-center justify-between max-md:flex-col max-md:justify-start'>
-                        <h1 className='w-[28.8125vw] title32-800-130 text-den -tracking-[1.6px] capitalize title-mb20-700-130 max-md:-tracking-[1px] max-md:w-full line-clamp-3'>
+                    <div className='flex items-center justify-between max-lg:flex-col max-md:justify-start'>
+                        <h1 className='w-[28.8125vw] title32-800-130 text-den -tracking-[1.6px] capitalize max-md:title-mb20-700-130 max-md:-tracking-[1px] max-lg:w-full line-clamp-3 max-lg:title-tl20'>
                             {dataDetail?.name}
                         </h1>
-                        <div className='w-fit max-md:flex max-md:gap-x-[3.2vw] max-md:mt-[1.33vw] max-md:items-center max-md:w-full'>
-                            <h2 className='mb-[0.5vw] text-den title28-800-130 -tracking-[0.84px] capitalize title-mb25-700-130 max-md:text-logo max-md:-tracking-[0.75px]'>
+                        <div className='w-fit max-lg:flex max-md:gap-x-[3.2vw] max-md:mt-[1.33vw] max-lg:items-center max-lg:w-full max-lg:gap-x-[2vw]'>
+                            <h2 className='mb-[0.5vw] text-den title28-800-130 -tracking-[0.84px] capitalize max-md:title-mb25-700-130 max-md:text-logo max-md:-tracking-[0.75px] max-lg:title-tl25'>
                                 {dataDetail?.priceDisplay}
                                 {handleCheckStatus(data?.propertyCategory?.alias)}
                             </h2>
@@ -58,14 +58,17 @@ export default function ContentDetail({ data, detail, lang }) {
                                     lang={lang}
                                     size={dataDetail?.size}
                                 />
-                                <span className='title16-400-125 title-mb16-400-125 text-[#888]'>
+                                <span className='title16-400-125 title-mb16-400-125 text-[#888] max-lg:title-tl16'>
+                                    118,280 đ/m²
+                                </span>
+                                <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] max-lg:title-tl16'>
                                     {dataDetail?.size} m²
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div className='mt-[1.5vw] max-md:mt-[4.27vw] border border-dashed border-logo rounded-[0.625vw] bg-[#FFFBF5] pt-[1.25vw] px-[1.69vw] max-md:py-[6.4vw] max-md:px-[4.27vw] pb-[1.81vw]'>
-                        <address className='not-italic title16-600-150 text-den mb-[1vw] max-md:hidden'>
+                        <address className='not-italic title16-600-150 text-den mb-[1vw] max-md:hidden max-lg:title-tl16'>
                             {data?.address?.display}
                         </address>
                         <ul className='flex gap-x-[2.5vw] max-md:flex-wrap max-md:gap-x-[10.61vw] max-md:gap-y-[4.27vw]'>
@@ -77,7 +80,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14]'>
+                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
                                     {dataDetail?.bedRoom} ngủ
                                 </span>
                             </li>
@@ -89,7 +92,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14]'>
+                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
                                     {dataDetail?.bathRoom} tắm
                                 </span>
                             </li>
@@ -101,7 +104,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14]'>
+                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
                                     {dataDetail?.size} m²
                                 </span>
                             </li>
@@ -113,7 +116,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14]'>
+                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
                                     {dataDetail?.orientHouse}
                                 </span>
                             </li>
@@ -125,14 +128,14 @@ export default function ContentDetail({ data, detail, lang }) {
                                     width={24}
                                     height={24}
                                 />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14]'>
+                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
                                     Năm xây dựng: {dataDetail?.constructionYear}
                                 </span>
                             </li>
                         </ul>
                     </div>
-                    <div className='md:hidden'>
-                        <h4 className='text-den mt-[6.4vw] mb-[3.47vw] title-mb20-700-130 -tracking-[0.6px]'>
+                    <div className='lg:hidden'>
+                        <h4 className='text-den mt-[6.4vw] mb-[3.47vw] max-md:title-mb20-700-130 -tracking-[0.6px] max-lg:title-tl20'>
                             Thông tin chi tiết
                         </h4>
                         <ul className='flex flex-col gap-y-[4.27vw] py-[6.4vw] px-[4.27vw] border border-solid border-den01 rounded-[2.67vw]'>
@@ -152,11 +155,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -176,11 +179,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -200,11 +203,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -224,11 +227,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -248,11 +251,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -272,11 +275,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -296,11 +299,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -320,11 +323,11 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
@@ -344,18 +347,18 @@ export default function ContentDetail({ data, detail, lang }) {
                                             fill='#444444'
                                         />
                                     </svg>
-                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
+                                    <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71] max-lg:title-tl16'>
                                         Loại hình:
                                     </span>
                                 </div>
-                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
+                                <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
                                     Chung cư
                                 </span>
                             </li>
                         </ul>
                     </div>
                     <div className='mt-[2.56vw] max-md:mt-[6.4vw] relative'>
-                        <h2 className='title32-800-130 title-mb20-700-130 max-md:-tracking-[0.6px] text-den -tracking-[0.96px] mb-[1vw] max-md:mb-[4vw]'>
+                        <h2 className='title32-800-130 max-md:title-mb20-700-130 max-md:-tracking-[0.6px] text-den -tracking-[0.96px] mb-[1vw] max-md:mb-[4vw] max-lg:title-tl20'>
                             Nội dung dự án
                         </h2>
                         <div
@@ -372,41 +375,41 @@ export default function ContentDetail({ data, detail, lang }) {
                     </div>
 
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>
-                        <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px]'>
+                        <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px] max-lg:title-tl20'>
                             Vị trí
                         </h2>
                         <div className='flex mb-[0.75vw] gap-x-[1vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 title-mb16-600-130 text-den '>
+                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Địa chỉ:
                                 </span>
-                                <span className='title16-400-130 title-mb16-400-130 text-den'>
-                                    {data?.address?.display}
+                                <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
+                                    {data?.address?.address}
                                 </span>
                             </div>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 title-mb16-600-130 text-den '>
+                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Phường/Xã:
                                 </span>
-                                <span className='title16-400-130 title-mb16-400-130 text-den'>
+                                <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.ward}
                                 </span>
                             </div>
                         </div>
                         <div className='flex max-md:gap-y-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 title-mb16-600-130 text-den '>
+                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Quận/Huyện:
                                 </span>
-                                <span className='title16-400-130 title-mb16-400-130 text-den'>
+                                <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.district}
                                 </span>
                             </div>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 title-mb16-600-130 text-den '>
+                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Thành phố/Tỉnh:
                                 </span>
-                                <span className='title16-400-130 title-mb16-400-130 text-den'>
+                                <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.city}
                                 </span>
                             </div>
@@ -424,7 +427,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         />
                     </div>
                 </div>
-                <div className='w-[23.9375vw] max-md:hidden'>
+                <div className='w-[23.9375vw] max-lg:hidden'>
                     <div className='rounded-[0.625vw] border border-solid border-den01 pt-[1.88vw] pb-[3.63vw] px-[1.58vw]'>
                         <h4 className='text-den'>Thông tin chi tiết</h4>
                         <ul className='flex flex-col gap-y-[1vw] mt-[1vw]'>

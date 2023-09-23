@@ -82,8 +82,8 @@ function initializeGSAPWithDelay(delay, selector = '') {
     }, delay)
 }
 export default function ListProject({ lang, t, dataSlug }) {
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
     })
     const router = useRouter()
     const pathName = usePathname()
@@ -164,17 +164,21 @@ export default function ListProject({ lang, t, dataSlug }) {
         <section
             id='list-project'
             // ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[69vw]'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[69vw] max-lg:mt-[10vw]'
         >
             <div className='flex justify-between w-full'>
-                <div className={`${show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'} pl-[7.5vw] px-mb10`}>
+                <div
+                    className={`${
+                        show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'
+                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw]`}
+                >
                     <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
                         <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
-                                <span className='opacity-50 text-den title14-400-150 title-mb16-400-150 title-mb14-400-150'>
+                                <span className='opacity-50 text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                     100% xác thực
                                 </span>
-                                <h3 className='text-den title32-800-130 title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                                <h3 className='text-den title32-800-130 max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl32'>
                                     Mua bán nhà đất căn hộ
                                 </h3>
                             </div>
@@ -188,9 +192,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
                             />
-                            {!isMobile && (
+                            {!isTablet && (
                                 <div className='flex gap-x-[1.31vw] items-center'>
-                                    <span className='text-black title16-400-150 h-fit'>Bản đồ</span>
+                                    <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>Bản đồ</span>
                                     <div>{Element}</div>
                                 </div>
                             )}
@@ -198,10 +202,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                         <article className='px-mb10'>
                             <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
                                 <div className='flex gap-x-[0.31vw] max-md:gap-x-[1.33vw]'>
-                                    <span className='inline-block opacity-50 text-den title16-400-150 title-mb16-400-150'>
+                                    <span className='inline-block opacity-50 text-den title16-400-150 max-md:title-mb16-400-150 max-lg:title-tl16'>
                                         Hiển thị
                                     </span>
-                                    <span className='inline-block text-den title16-600-150 title-mb16-600-150'>
+                                    <span className='inline-block text-den title16-600-150 max-md:title-mb16-600-150 max-lg:title-tl16'>
                                         24 trong số 50 <span className='max-md:hidden'>nhà đất xác thực</span>
                                     </span>
                                 </div>
@@ -217,7 +221,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                     <div
                         className={`grid ${
                             show ? 'grid-cols-3 grid-rows-[8]' : 'grid-cols-4 grid-rows-6'
-                        } grid-row gap-x-[1.25vw] gap-y-[1.87vw] max-md:grid-cols-1 max-md:gap-x-0 max-md:gap-y-[5.86vw]`}
+                        } grid-row gap-x-[1.25vw] gap-y-[1.87vw] max-md:grid-cols-1 max-md:gap-x-0 max-md:gap-y-[5.86vw] max-lg:grid-cols-2`}
                     >
                         {isLoading &&
                             listProject?.map((e, index) => (
@@ -258,15 +262,17 @@ export default function ListProject({ lang, t, dataSlug }) {
                                     className='w-full'
                                     key={index}
                                 >
-                                    <div className='relative w-full h-[13.75vw] max-md:h-[73.87vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.69vw]'>
+                                    <div className='relative w-full h-[13.75vw] max-md:h-[73.87vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.69vw] max-lg:h-[30vw]'>
                                         <Image
+                                            data-aos='zoom-out'
+                                            data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={e?.translation?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
-                                        <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150'>
+                                        <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150 max-lg:title-tl10'>
                                             {e?.propertyCategory?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                             )?.name || ''}
@@ -275,7 +281,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
                                         <h6
                                             title={e?.translation?.name}
-                                            className='text-den title18-700-130 title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1'
+                                            className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
                                         >
                                             {e?.translation?.name}
                                         </h6>
@@ -307,10 +313,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                     </clipPath>
                                                 </defs>
                                             </svg>
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150 whitespace-nowrap'>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 whitespace-nowrap max-lg:title-tl14'>
                                                 Địa chỉ:
                                             </span>
-                                            <span className='capitalize text-den title14-400-150 title-mb16-400-150 line-clamp-1'>
+                                            <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 line-clamp-1 max-lg:title-tl14'>
                                                 {e?.address?.ward +
                                                     ', ' +
                                                     e?.address?.district +
@@ -332,10 +338,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                     fill='#926B4F'
                                                 />
                                             </svg>
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150'>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14'>
                                                 Diện tích:
                                             </span>
-                                            <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
+                                            <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.size + ' m²'}
                                             </span>
                                         </div>
@@ -353,10 +359,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                     fill='#926B4F'
                                                 />
                                             </svg>
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 title-mb16-700-150'>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14'>
                                                 Mức giá:
                                             </span>
-                                            <span className='capitalize text-den title14-400-150 title-mb16-400-150'>
+                                            <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.priceDisplay}
                                             </span>
                                         </div>
@@ -383,7 +389,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                         />
                     </div>
                 </div>
-                {!isMobile && (
+                {!isTablet && (
                     <>
                         <div
                             className={`${
@@ -398,7 +404,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                     </>
                 )}
             </div>
-            {isMobile && <BtnShowMap />}
+            {isTablet && <BtnShowMap />}
         </section>
     )
 }

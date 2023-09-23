@@ -19,7 +19,7 @@ export default function SearchHome({ data, lang }) {
                 lang={lang}
             />
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw] max-md:justify-between'>
-                <span className='mr-[0.81vw] text-white title16-600-160 title-tl14-600-160 title-mb12-600-160'>
+                <span className='mr-[0.81vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
                     Gợi ý:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>

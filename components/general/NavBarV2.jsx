@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import MenuRes from './MenuRes'
 import SearchGlobal from '../home/SearchGlobal'
 import useSWR from 'swr'
-import { listIdNav } from '@/utils'
+import { listIdNav, handleCheckLangCode } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const objClass = {
@@ -24,6 +24,30 @@ const objClass = {
 }
 
 export default function NavBarV2({ lang, t }) {
+    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+    const languageCode = handleCheckLangCode(lang)
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoadingNews,
+    } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+    let agreementDataTranslation = []
+    if (agreementData) {
+        agreementData.data.forEach((item) => {
+            item.translations.forEach((itm) => {
+                if (itm.languageCode === languageCode)
+                    agreementDataTranslation.push({ title: itm.title, slug: itm.slug })
+            })
+        })
+    }
     const [isOpen, setIsOpen] = useState(false)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
@@ -54,16 +78,19 @@ export default function NavBarV2({ lang, t }) {
     }, [lang, data])
     if (!listNav?.length) return
 
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04 max-md:pl-[4vw] max-md:pr-[2.5vw]'>
             <div className='flex items-center justify-between w-full gap-x-[2.5vw] max-md:my-[2.67vw]'>
                 <div className='flex gap-x-[1.92vw] items-center'>
                     <Link
                         href={`/${lang !== 'vi' ? lang : ''}`}
-                        className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw] max-md:w-[8.267vw] max-md:h-[11.467vw]'
+                        className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw] max-md:w-[8.267vw] max-md:h-[11.467vw] max-lg:w-[6vw] max-lg:h-[8vw]'
                     >
                         <Image
-                            className='object-cover max-md:object-contain'
+                            className='object-cover max-lg:object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
                             sizes='3.52vw'
@@ -74,6 +101,7 @@ export default function NavBarV2({ lang, t }) {
                 </div>
 
                 {/* <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo'>
+                <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo max-lg:w-[35vw]'>
                     <div className='flex items-center w-full'>
                         <SelectSearch />
                         <div className='border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]'></div>
@@ -85,7 +113,7 @@ export default function NavBarV2({ lang, t }) {
                                     height='17'
                                     viewBox='0 0 16 17'
                                     fill='none'
-                                    className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw]'
+                                    className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw] max-lg:w-[1.8vw] max-lg:h-[1.8vw]'
                                 >
                                     <path
                                         fillRule='evenodd'
@@ -102,7 +130,7 @@ export default function NavBarV2({ lang, t }) {
                                 </svg>
                             </label>
                             <input
-                                className='outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 title-mb12-400-130 max-md:w-[29vw]'
+                                className='outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl12'
                                 type='text'
                                 name='search'
                                 id='search'
@@ -124,7 +152,7 @@ export default function NavBarV2({ lang, t }) {
                     isHome={false}
                     classList={objClass.classList}
                 />
-                {!isMobile ? (
+                {!isTablet ? (
                     <div className='flex gap-x-[3.13vw] items-center'>
                         <ul className='flex'>
                             {listNav?.length > 0 &&
@@ -179,6 +207,23 @@ export default function NavBarV2({ lang, t }) {
                                                                 </Link>
                                                             </li>
                                                         ))}
+                                                        {agreementDataTranslation.map((item) => (
+                                                            <li
+                                                                key={item?.id}
+                                                                className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                            >
+                                                                <Link
+                                                                    className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
+                                                                    href={`${
+                                                                        lang !== 'vi'
+                                                                            ? '/' + lang + item?.slug
+                                                                            : item?.slug
+                                                                    }`}
+                                                                >
+                                                                    {item?.title}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
                                                     </ul>
                                                 </div>
                                             </>
@@ -218,7 +263,7 @@ export default function NavBarV2({ lang, t }) {
                             viewBox='0 0 24 24'
                             strokeWidth='1.5'
                             stroke='#D6A279'
-                            className='w-[10.33vw] h-[8.6vw]'
+                            className='max-md:w-[10.33vw] max-md:h-[8.6vw] max-lg:w-[5.2vw] max-lg:auto'
                         >
                             <path
                                 strokeLinecap='round'

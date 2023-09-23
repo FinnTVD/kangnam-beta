@@ -5,7 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useMediaQuery } from 'react-responsive'
+import { handleCheckLangCode } from '@/utils'
+import useSWR from 'swr'
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Footer({ lang, t, dataInfo }) {
     const pathName = usePathname()
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
@@ -14,6 +17,29 @@ export default function Footer({ lang, t, dataInfo }) {
     const menuArr = t.footerNav
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
     const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
+    const languageCode = handleCheckLangCode(lang)
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoading,
+    } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+    let agreementDataTranslation = []
+    if (agreementData) {
+        agreementData.data.forEach((item) => {
+            item.translations.forEach((itm) => {
+                if (itm.languageCode === languageCode)
+                    agreementDataTranslation.push({ title: itm.title, slug: itm.slug })
+            })
+        })
+    }
 
     const linkTalk = () => {
         window.open(dataInfo?.kakaotalk)
@@ -273,6 +299,15 @@ export default function Footer({ lang, t, dataInfo }) {
                             {menuArr.map((menu, index) => (
                                 <Link
                                     href={lang === 'vi' ? menu.href : `/${lang + menu.href}`}
+                                    key={index}
+                                    className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130 max-lg:title-tl16"
+                                >
+                                    {menu.title}
+                                </Link>
+                            ))}
+                            {agreementDataTranslation?.map((menu, index) => (
+                                <Link
+                                    href={lang === 'vi' ? menu.slug : `/${lang + menu.slug}`}
                                     key={index}
                                     className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130 max-lg:title-tl16"
                                 >

@@ -2,11 +2,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import { usePathname } from 'next/navigation'
+import useSWR from 'swr'
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function OtherNewsItem({ newsOtherItem, lang, index }) {
     const languageCode = handleCheckLangCode(lang)
 
     const translation = newsOtherItem?.translations?.find((itm) => itm.languageCode === languageCode)
+
+    const {
+        data: categories,
+        error: errorCategories,
+        isLoading: isLoadingCategories,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post-type`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    let category
+    let categoryTranslation
+    if(categories){       
+        category = categories.data.find((item) => item.id === newsOtherItem.postType.id)
+        if(category.translations.length>0){
+            categoryTranslation = category.translations?.find((itm) => itm.languageCode===languageCode).name
+        }
+        else{
+            categoryTranslation = category.title
+        }
+    }
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
@@ -32,7 +55,7 @@ export default function OtherNewsItem({ newsOtherItem, lang, index }) {
                 </div>
                 <div className='flex justify-between mt-[1.125vw] max-md:mt-[2.1vw]'>
                     <div className='bg-nau-nhat title12-400-150 py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:title-mb10-400-150 max-md:py-[1.1vw] max-md:px-[3.73vw] max-lg:title-tl12'>
-                        {newsOtherItem?.postType?.name}
+                        {categoryTranslation}
                     </div>
                     <div className='flex items-center'>
                         <svg

@@ -173,6 +173,23 @@ export default function NavBar({ isHome, lang, t }) {
                                                         </Link>
                                                     </li>
                                                 ))}
+                                                {agreementDataTranslation.map((item) => (
+                                                    <li
+                                                        key={item?.id}
+                                                        className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                    >
+                                                        <Link
+                                                            className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
+                                                            href={`${
+                                                                lang !== 'vi'
+                                                                    ? '/' + lang + '/' + item?.slug
+                                                                    : item?.slug
+                                                            }`}
+                                                        >
+                                                            {item?.title}
+                                                        </Link>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </>
