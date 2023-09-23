@@ -60,7 +60,10 @@ export default function NavBarFixedRes({ isHome = true, lang, t }) {
                 </Link>
                 <div className='w-[68.267vw] py-[3.06vw] px-[5.07vw] rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo'>
                     <div className='flex items-center w-full'>
-                        <SelectSearch menu={true} />
+                        <SelectSearch
+                            lang={lang}
+                            menu={true}
+                        />
                         <div className='border-l border-solid border-logo opacity-50 h-[2.67vw] mx-[3.2vw]'></div>
                         <div className='flex-1 flex items-center gap-x-[0.5vw]'>
                             <label htmlFor='search'>

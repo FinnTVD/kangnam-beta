@@ -2,21 +2,6 @@
     "Navbar": {
         "listNav": [
             {
-                "id": 1,
-                "title": "Buy",
-                "href": "/buy"
-            },
-            {
-                "id": 2,
-                "title": "Hire",
-                "href": "/hire"
-            },
-            {
-                "id": 3,
-                "title": "Resale",
-                "href": "/resale"
-            },
-            {
                 "id": 4,
                 "title": "Project",
                 "href": "/projects"

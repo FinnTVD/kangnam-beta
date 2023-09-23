@@ -5,14 +5,16 @@ import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
 import classes from './headerV2.module.css'
 import SlideBanner from '../home/SlideBanner'
+// import video from '../../public/images/videoTest.mp4'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
 
-export default function Header({ lang, t, data, isHome }) {
+export default function Header({ lang, t, data, isHome, dataInfo }) {
+    const videoRef = useRef(null)
     const setDataHomePage = useStore((state) => state.setDataHomePage)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
@@ -20,7 +22,10 @@ export default function Header({ lang, t, data, isHome }) {
 
     useEffect(() => {
         data && setDataHomePage(data)
-    })
+        // if (videoRef.current) {
+        //     videoRef.current.src = 'https://youtu.be/RTd5mvn-4Is?si=_EHyyl4myQfA8G5p'
+        // }
+    }, [])
 
     const handleScrollDown = () => {
         if (typeof window !== 'undefined') {
@@ -39,6 +44,28 @@ export default function Header({ lang, t, data, isHome }) {
         >
             <div className={`h-screen max-md:h-[64vh] relative w-full`}>
                 <SlideBanner data={data} />
+                {/* <video
+                    ref={videoRef}
+                    autoPlay
+                    // poster='/images/bg-header.jpg'
+                    loop
+                    className='top-0 left-0 z-[99999] w-full h-full'
+                    type='video/mp4'
+                    playsInline
+                    muted
+                >
+                    <source src='/images/videoTest.mp4'></source>
+                </video> */}
+                {/* <iframe
+                    width='1600'
+                    height='800'
+                    src='https://www.youtube.com/embed/7PIji8OubXU?si=3L0siIEBNN6UXnLu'
+                    title='YouTube video player'
+                    frameborder='0'
+                    a
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                    allowfullscreen
+                ></iframe> */}
                 <Image
                     data-aos='fade-left'
                     data-aos-delay='1800'
@@ -113,7 +140,7 @@ export default function Header({ lang, t, data, isHome }) {
                     </span>
                 </div>
                 <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
-                {!isMobile && <FeatureHome />}
+                {!isMobile && <FeatureHome dataInfo={dataInfo} />}
             </div>
         </header>
     )

@@ -4,16 +4,14 @@ import InputCustom from '../consignment/InputCustom'
 import Button from '../general/Button'
 import postData from '@/utils/postData'
 import { notifyError, notifySuccess } from '@/utils'
+const initial = {
+    value: '',
+    validate: false,
+}
 
 export default function FormNamePhone({ id }) {
-    const [valueName, setValueName] = useState({
-        value: '',
-        validate: false,
-    })
-    const [valuePhone, setValuePhone] = useState({
-        value: '',
-        validate: false,
-    })
+    const [valueName, setValueName] = useState(initial)
+    const [valuePhone, setValuePhone] = useState(initial)
     const handleChangeName = (e) => {
         setValueName({
             value: e?.target?.value,
@@ -34,6 +32,8 @@ export default function FormNamePhone({ id }) {
         if (res?.statusCode) {
             return notifyError(res?.error)
         }
+        setValuePhone(initial)
+        setValueName(initial)
         notifySuccess()
     }
 

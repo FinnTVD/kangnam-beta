@@ -2,12 +2,40 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import BoxLanguage from './language/BoxLanguage'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SelectSearch from './SelectSearch'
+import useSWR from 'swr'
+import { listIdNav } from '@/utils'
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBar({ isHome, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
 
+    const [listNav, setListNav] = useState([])
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    useEffect(() => {
+        if (!data) return
+        let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
+        let b = []
+        a.forEach((e, index) => {
+            b.push({
+                id: index + 1,
+                title: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.name,
+                href: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.alias,
+            })
+        })
+        setListNav([...b, ...t?.Navbar?.listNav])
+    }, [lang, data])
+
+    if (!listNav?.length) return
     return (
         <nav
             className={`${
@@ -51,7 +79,10 @@ export default function NavBar({ isHome, lang, t }) {
                 {!isHome && (
                     <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[6.25vw] flex justify-between items-center shadow-input border border-solid border-white03 backdrop-blur-[11px]'>
                         <div className='flex items-center w-full'>
-                            <SelectSearch type='white' />
+                            <SelectSearch
+                                type='white'
+                                lang={lang}
+                            />
                             <div className='border-l border-solid border-white opacity-40 h-[1.0625vw] mx-[0.63vw]'></div>
                             <div className='flex-1 flex items-center gap-x-[0.5vw]'>
                                 <label htmlFor='search'>
@@ -91,8 +122,8 @@ export default function NavBar({ isHome, lang, t }) {
                     </div>
                 )}
                 <ul className={` flex`}>
-                    {t &&
-                        t?.Navbar?.listNav?.map((e, index) => (
+                    {listNav?.length > 0 &&
+                        listNav?.map((e, index) => (
                             <li
                                 key={index}
                                 className={`relative select-none group`}

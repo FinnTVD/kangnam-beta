@@ -25,6 +25,33 @@ const useStore = create((set, get) => ({
     dataProvinces: null,
     dataDistrict: null,
     dataWard: null,
+    listData: '',
+    isFeatureHome: false,
+    listNav: [],
+    setListData: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                listData: data,
+            }
+        })
+    },
+    setListNav: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                listNav: data,
+            }
+        })
+    },
+    setIsFeatureHome: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isFeatureHome: data,
+            }
+        })
+    },
     setDataWard: (data) => {
         set((state) => {
             return {

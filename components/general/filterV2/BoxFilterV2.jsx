@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import ItemFilterV2 from './ItemFilterV2'
 
-export default function BoxFilterV2({ arrFilter }) {
+export default function BoxFilterV2({ arrFilter, lang }) {
     const [indexFilter, setIndexFilter] = useState(null)
 
     return (
@@ -16,6 +16,7 @@ export default function BoxFilterV2({ arrFilter }) {
                         item={e}
                         setIndexFilter={setIndexFilter}
                         indexFilter={indexFilter}
+                        lang={lang}
                     />
                 ))}
         </ul>

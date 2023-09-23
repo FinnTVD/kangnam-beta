@@ -2,7 +2,7 @@
 import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
 
-export default function ProjectProminent({ children }) {
+export default function ProjectProminent({ children, lang }) {
     return (
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
             <div className='relative z-10 flex items-center justify-between'>
@@ -17,14 +17,14 @@ export default function ProjectProminent({ children }) {
                 </div>
                 <Button
                     href='/projects'
-                    className='border-none bg-logo max-md:hidden max-md:hidden'
+                    className='border-none bg-logo max-md:hidden'
                     span='text-white'
                     stroke='white'
                 >
                     Xem tất cả
                 </Button>
             </div>
-            <SlideProjectProminent />
+            <SlideProjectProminent lang={lang} />
             <div className='px-mb10 md:hidden'>
                 <Button
                     href='/projects'

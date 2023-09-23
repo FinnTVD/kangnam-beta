@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index }) {
+export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, lang }) {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -108,7 +108,9 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index 
                                         className='title14-400-150 text-den cursor-pointer title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal'
                                         htmlFor={e?.id}
                                     >
-                                        {e?.name}
+                                        {e?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name || e?.title}
                                     </label>
                                 </div>
                             ))}

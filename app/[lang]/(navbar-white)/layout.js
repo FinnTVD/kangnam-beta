@@ -18,7 +18,7 @@ export default async function RootLayout({ children, params }) {
                     t={t}
                 />
             </header>
-                {children}
+            {children}
             <Footer
                 lang={params.lang}
                 t={t}

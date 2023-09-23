@@ -252,7 +252,7 @@
         }
 
         .title-tl12-700-150 {
-            @apply text-12tl font-bold leading-normal;
+            @apply font-bold leading-normal text-12tl;
         }
 
         .title-tl12-600-160 {
@@ -682,3 +682,16 @@ article#list-img-preview::-webkit-scrollbar-track {
 article#list-img-preview::-webkit-scrollbar-thumb {
     @apply bg-logo rounded-full !h-[32px];
 } */
+
+#listFeature .active1{
+    transition: all 1s;
+    transform: translateX(9vw) translateY(6vw);
+}
+#listFeature .active2{
+    transition: all 1s;
+    transform: translateX(9vw);
+}
+#listFeature .active3{
+    transition: all 1s;
+    transform: translateX(9vw) translateY(-6vw);
+}

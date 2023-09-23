@@ -1,51 +1,59 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BoxLanguage from './language/BoxLanguage'
-import SelectSearch from './SelectSearch'
 import { useMediaQuery } from 'react-responsive'
 import MenuRes from './MenuRes'
+import SearchGlobal from '../home/SearchGlobal'
+import useSWR from 'swr'
+import { listIdNav } from '@/utils'
 
-const listNav = [
-    {
-        id: 1,
-        title: 'Về chúng tôi',
-        href: '/about-us',
-    },
-    {
-        id: 2,
-        title: 'Dự án',
-        href: '/projects',
-    },
-    {
-        id: 3,
-        title: 'Bán lại',
-        href: '/resale',
-    },
-    {
-        id: 4,
-        title: 'Thỏa thuận & Pháp lí',
-        href: '/agreement',
-    },
-    {
-        id: 5,
-        title: 'Tin tức',
-        href: '/news',
-    },
-    {
-        id: 6,
-        title: 'Liên hệ',
-        href: '/contact',
-    },
-]
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+const objClass = {
+    classContainer:
+        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo',
+    classLine:
+        'border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]',
+    classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
+    isIcon: false,
+    iconSmall: true,
+    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 title-mb12-400-130 max-md:w-[29vw]',
+    classList:
+        'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input',
+}
 
 export default function NavBarV2({ lang, t }) {
-    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const [isOpen, setIsOpen] = useState(false)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+    const [listNav, setListNav] = useState([])
+
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    useEffect(() => {
+        if (!data) return
+        let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
+        let b = []
+        a.forEach((e, index) => {
+            b.push({
+                id: index + 1,
+                title: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.name,
+                href: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.alias,
+            })
+        })
+        setListNav([...b, ...t?.Navbar?.listNav])
+    }, [lang, data])
+    if (!listNav?.length) return
+
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04 max-md:pl-[4vw] max-md:pr-[2.5vw]'>
             <div className='flex items-center justify-between w-full gap-x-[2.5vw] max-md:my-[2.67vw]'>
@@ -65,7 +73,7 @@ export default function NavBarV2({ lang, t }) {
                     </Link>
                 </div>
 
-                <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo'>
+                {/* <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo'>
                     <div className='flex items-center w-full'>
                         <SelectSearch />
                         <div className='border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]'></div>
@@ -104,12 +112,23 @@ export default function NavBarV2({ lang, t }) {
                             />
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <SearchGlobal
+                    lang={lang}
+                    classContainer={objClass.classContainer}
+                    classLine={objClass.classLine}
+                    classForm={objClass.classForm}
+                    isIcon={objClass.isIcon}
+                    iconSmall={objClass.iconSmall}
+                    classInput={objClass.classInput}
+                    isHome={false}
+                    classList={objClass.classList}
+                />
                 {!isMobile ? (
                     <div className='flex gap-x-[3.13vw] items-center'>
                         <ul className='flex'>
-                            {t &&
-                                t?.Navbar?.listNav?.map((e, index) => (
+                            {listNav?.length > 0 &&
+                                listNav?.map((e, index) => (
                                     <li
                                         key={index}
                                         className={`relative select-none group`}

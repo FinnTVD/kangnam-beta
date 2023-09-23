@@ -71,6 +71,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                         <SelectSearch
                             type='white'
                             menu={true}
+                            lang={lang}
                         />
                         <div className='border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:opacity-10 max-md:border-white max-md:h-[2.67vw] max-md:mx-[3.2vw]'></div>
                         <div className='flex-1 flex items-center gap-x-[0.5vw]'>

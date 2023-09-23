@@ -14,7 +14,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import { handleCheckLangCode, handleCheckParams } from '@/utils'
+import { findIdByAlias, handleCheckLangCode, handleCheckParams } from '@/utils'
+import MapV2 from '../home/MapV2/MapV2'
+import useStore from '@/app/[lang]/(store)/store'
+import MapV3 from '../home/MapV2/MapV3'
 // import Map from '../home/Map'
 const arrFilter = [
     {
@@ -51,6 +54,8 @@ const arrFilter1 = [
     },
 ]
 
+const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 
@@ -76,7 +81,7 @@ function initializeGSAPWithDelay(delay, selector = '') {
         })
     }, delay)
 }
-export default function ListProject({ lang, t }) {
+export default function ListProject({ lang, t, dataSlug }) {
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
@@ -86,6 +91,10 @@ export default function ListProject({ lang, t }) {
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const [show, Element] = useToggleShowMap()
+    const valueSearch = useStore((state) => state.valueSearch)
+    const cityId = useStore((state) => state.cityId)
+    const districtId = useStore((state) => state.districtId)
+    const wardId = useStore((state) => state.wardId)
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
@@ -107,8 +116,9 @@ export default function ListProject({ lang, t }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
             pathName,
+            dataSlug,
         )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
             price ? '&price=' + price : ''
         }`,
@@ -131,8 +141,9 @@ export default function ListProject({ lang, t }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
                 pathName,
+                dataSlug,
             )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
                 price ? '&price=' + price : ''
             }`,
@@ -174,7 +185,9 @@ export default function ListProject({ lang, t }) {
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
                             } max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
-                            <BoxFilterV2 arrFilter={pathName?.includes('projects') ? arrFilter1 : arrFilter} />
+                            <BoxFilterV2
+                                arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
+                            />
                             {!isMobile && (
                                 <div className='flex gap-x-[1.31vw] items-center'>
                                     <span className='text-black title16-400-150 h-fit'>Bản đồ</span>
@@ -234,7 +247,14 @@ export default function ListProject({ lang, t }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
+                                    href={
+                                        '/' +
+                                        e?.propertyCategory?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.alias +
+                                        '/' +
+                                        e?.translation?.slug
+                                    }
                                     className='w-full'
                                     key={index}
                                 >
@@ -247,7 +267,9 @@ export default function ListProject({ lang, t }) {
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150'>
-                                            {e?.propertyCategory?.name}
+                                            {e?.propertyCategory?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name || ''}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
@@ -369,7 +391,7 @@ export default function ListProject({ lang, t }) {
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                                {/* <Map /> */}
+                                <MapV3 />
                             </div>
                         </div>
                         <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>

@@ -7,13 +7,17 @@ import Button from '../general/Button'
 import { arrFilter, handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import MapV2 from './MapV2/MapV2'
 import useStore from '@/app/[lang]/(store)/store'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import MapV3 from './MapV2/MapV3'
+
 // import dynamic from 'next/dynamic'
 // const MapV2 = dynamic(() => import('./MapV2/MapV2'), {
 //     ssr: false,
@@ -24,34 +28,32 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
+// const handleFilterSlug = (selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId) => {
+//     if (valueSearch && selectSearch) {
+//         if (selectSearch === 'area') {
+//             return `${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
+//                 wardId ? '&wardId=' + wardId : ''
+//             }`
+//         }
+//         if (selectSearch === 'word') {
+//             return '&q=' + valueSearchPrev
+//         }
+//         return '&q=' + selectSearch
+//     }
+//     return ''
+// }
 
-const handleFilterSlug = (selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId) => {
-    if (valueSearch && selectSearch) {
-        if (selectSearch === 'area') {
-            return `${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
-                wardId ? '&wardId=' + wardId : ''
-            }`
-        }
-        if (selectSearch === 'word') {
-            return '&q=' + valueSearchPrev
-        }
-        return '&q=' + selectSearch
-    }
-    return ''
-}
+gsap.registerPlugin(ScrollTrigger)
 export default function MyProjectV2({ lang }) {
     const setBoxMap = useStore((state) => state.setBoxMap)
     const valueSearch = useStore((state) => state.valueSearch)
     const selectSearch = useStore((state) => state.selectSearch)
     const valueSearchPrev = useStore((state) => state.valueSearchPrev)
     const cityId = useStore((state) => state.cityId)
-    console.log('🚀 ~ file: MyProjectV2.jsx:48 ~ MyProjectV2 ~ cityId:', cityId)
     const districtId = useStore((state) => state.districtId)
-    console.log('🚀 ~ file: MyProjectV2.jsx:50 ~ MyProjectV2 ~ districtId:', districtId)
     const wardId = useStore((state) => state.wardId)
-    console.log('🚀 ~ file: MyProjectV2.jsx:52 ~ MyProjectV2 ~ wardId:', wardId)
     const isSubmit = useStore((state) => state.isSubmit)
-    console.log('🚀 ~ file: MyProjectV2.jsx:54 ~ MyProjectV2 ~ isSubmit:', isSubmit)
+    const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -109,9 +111,7 @@ export default function MyProjectV2({ lang }) {
     const { data, error, isLoading } = useSWR(
         `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
             propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
-            propertyTypeParams ? propertyTypeParams : ''
-        }${handleFilterSlug(selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId)}`,
+        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -119,37 +119,69 @@ export default function MyProjectV2({ lang }) {
             revalidateOnReconnect: false,
         },
     )
-    console.log('🚀 ~ file: MyProjectV2.jsx:109 ~ MyProjectV2 ~ data:', data)
 
     useEffect(() => {
+        // mutate(
+        //     `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+        //         propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+        //     }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+        //         propertyTypeParams ? propertyTypeParams : ''
+        //     }${handleFilterSlug(selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId)}`,
+        // )
         mutate(
             `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=${show ? 6 : 8}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
-                propertyTypeParams ? propertyTypeParams : ''
-            }${handleFilterSlug(selectSearch, valueSearch, valueSearchPrev, cityId, districtId, wardId)}`,
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
     }, [lang, isSubmit])
-    console.log('🚀 ~ file: MyProjectV2.jsx:137 ~ MyProjectV2 ~ isSubmit:', isSubmit)
 
     useEffect(() => {
         projectsRef?.current && setBoxMap(projectsRef.current)
     }, [])
 
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            setTimeout(() => {
+                gsap.to(projectsRef.current, {
+                    scrollTrigger: {
+                        trigger: projectsRef.current,
+                        start: 'top bottom',
+                        end: 'bottom 65%',
+                        scrub: true,
+                        onToggle: (self) => {
+                            if (self.isActive) {
+                                setIsFeatureHome(true)
+                            } else {
+                                setIsFeatureHome(false)
+                            }
+                        },
+                    },
+                })
+            }, 500)
+        }, projectsRef)
+        return () => {
+            ctx.revert()
+        }
+    }, [])
+
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
+
     if (isMobile) return
 
     return (
         <section
             ref={projectsRef}
             id='boxMap'
-            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[999999] relative bg-white max-md:hidden'
+            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[9] relative bg-white max-md:hidden'
         >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
-                <BoxFilterV2 arrFilter={arrFilter} />
+                <BoxFilterV2
+                    arrFilter={arrFilter}
+                    lang={lang}
+                />
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <span className='text-black title16-400-150 h-fit'>Hiển thị bản đồ</span>
                     <div>{Element}</div>
@@ -192,7 +224,9 @@ export default function MyProjectV2({ lang }) {
                                 <Link
                                     href={
                                         (lang === 'vi' ? '' : lang + '/') +
-                                        e?.propertyCategory?.alias +
+                                        e?.propertyCategory?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.alias +
                                         '/' +
                                         e?.translation?.slug
                                     }
@@ -202,7 +236,7 @@ export default function MyProjectV2({ lang }) {
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
                                             data-aos='zoom-out'
-                                            data-aos-delay={`${(index%3)*300}`}
+                                            data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={e?.translation?.name || 'thumbnail project'}
@@ -210,7 +244,7 @@ export default function MyProjectV2({ lang }) {
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
-                                            {e?.propertyCategory?.name || 'Chưa có thông tin!'}
+                                            {e?.propertyCategory?.title || 'Chưa có thông tin!'}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw]'>
@@ -347,7 +381,7 @@ export default function MyProjectV2({ lang }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV2 />
+                    <MapV3 />
                 </div>
             </div>
         </section>
