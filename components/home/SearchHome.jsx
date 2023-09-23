@@ -187,10 +187,10 @@ export default function SearchHome({ data, lang }) {
 
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
-            <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160'>
+            <p className='title18-400-160 max-md:title-mb12-400-160 text-white max-md:-tracking-[0.6px] max-lg:title-tl14-400-160'>
                 {data?.slogan || 'An tâm với 100% bất động sản được xác thực tại KANGNAM'}
             </p>
-            <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 title-mb22-800-130 max-md:-tracking-[0.66px] title-tl42'>
+            <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 max-md:title-mb22-800-130 max-md:-tracking-[0.66px] max-lg:title-tl42'>
                 {data?.title || 'Lựa chọn căn nhà ưng ý của bạn'}
             </h1>
             <div className='w-[54vw] max-md:w-full py-[1.53vw] max-md:py-[4.27vw] max-md:px-[6.4vw] px-[2.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'>
@@ -208,7 +208,7 @@ export default function SearchHome({ data, lang }) {
                                 height='17'
                                 viewBox='0 0 16 17'
                                 fill='none'
-                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw]'
+                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw] max-lg:w-[1.8vw] max-lg:h-[1.8vw]'
                             >
                                 <path
                                     fillRule='evenodd'
@@ -225,7 +225,7 @@ export default function SearchHome({ data, lang }) {
                             </svg>
                         </label>
                         <input
-                            className='w-full outline-none text-den title16-400-130 title-mb14-400-130'
+                            className='w-full outline-none text-den title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'
                             type='text'
                             name='search'
                             id='search'
@@ -311,7 +311,7 @@ export default function SearchHome({ data, lang }) {
                 </div>
             </div>
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw] max-md:justify-between'>
-                <span className='mr-[0.81vw] text-white title16-600-160 title-tl14-600-160 title-mb12-600-160'>
+                <span className='mr-[0.81vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
                     Gợi ý:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
@@ -339,7 +339,7 @@ export default function SearchHome({ data, lang }) {
                         priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>Phân xưởng</span>
+                    <span className='text-white title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12-400-150'>Phân xưởng</span>
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
@@ -350,7 +350,7 @@ export default function SearchHome({ data, lang }) {
                         priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>Chung cư</span>
+                    <span className='text-white title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12-400-150'>Chung cư</span>
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
@@ -361,7 +361,7 @@ export default function SearchHome({ data, lang }) {
                         priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>Biệt thự</span>
+                    <span className='text-white title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12-400-150'>Biệt thự</span>
                 </div>
                 <div className='py-[0.97vw] h-fit w-fit px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'>
                     <Image
@@ -372,7 +372,7 @@ export default function SearchHome({ data, lang }) {
                         priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>
+                    <span className='text-white title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12-400-150'>
                         Nhà mặt phố
                     </span>
                 </div>
@@ -385,7 +385,7 @@ export default function SearchHome({ data, lang }) {
                         priority
                         className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                     />
-                    <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>Đất nền</span>
+                    <span className='text-white title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12-400-150'>Đất nền</span>
                 </div>
             </div>
         </div>

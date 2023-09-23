@@ -247,7 +247,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                             viewBox='0 0 24 24'
                             strokeWidth='1.5'
                             stroke='#D6A279'
-                            className='w-[10.33vw] h-[8.6vw]'
+                            className='max-md:w-[10.33vw] max-md:h-[8.6vw] max-lg:w-[5.2vw] max-lg:auto'
                         >
                             <path
                                 strokeLinecap='round'

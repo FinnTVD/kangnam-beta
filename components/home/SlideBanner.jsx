@@ -15,7 +15,7 @@ export default function SlideBanner({ data }) {
         <>
             <Swiper
                 data-aos='zoom-out'
-                data-aos-delay='500'
+                // data-aos-delay='500'
                 data-aos-duration='1500'
                 slidesPerView={1}
                 loop={true}

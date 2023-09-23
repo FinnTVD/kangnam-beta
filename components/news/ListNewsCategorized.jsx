@@ -17,18 +17,19 @@ export default function ListNewsCategorized({ list, t, lang }) {
                         ></LatestNewsItem>
                     </div>
                 }
-                {list?.slice(1, 3)?.map((news) => (
+                {list?.slice(1, 3)?.map((news, index) => (
                     <div key={news.id}>
-                        <OtherNewsItem newsOtherItem={news} lang={lang}/>
+                        <OtherNewsItem newsOtherItem={news} lang={lang} index={index}/>
                     </div>
                 ))}
             </div>
             <div className='mt-[3.75vw] grid grid-cols-3 gap-[1.5vw] max-lg:grid-cols-1 max-md:gap-[4.2vw] max-md:mt-[4.2vw]'>
-                {list?.slice(3, 12)?.map((item) => (
+                {list?.slice(3, 12)?.map((item, index) => (
                     <NewsItem
                         key={item.id}
                         newsOtherItem={item}
                         lang={lang}
+                        index={index}
                     />
                 ))}
             </div>

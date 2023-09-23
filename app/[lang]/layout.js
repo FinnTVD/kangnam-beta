@@ -59,7 +59,6 @@ export default async function RootLayout({ children, params }) {
                 className={avertaStdCY.className}
             >
                 {children}
-                <div className='text-black'>home page</div>
                 <Script
                     async
                     crossOrigin='anonymous'

@@ -109,7 +109,7 @@ export default function SelectLanguage({ className, lang }) {
                                 width={28}
                                 height={18}
                             />
-                            <span className='title16-600-150 title-tl12-600-150 title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block'>
+                            <span className='title16-600-150 max-md:title-mb14-600-150 whitespace-nowrap -tracking-[0.48px] block max-lg:title-tl12'>
                                 {e?.title}
                             </span>
                         </Link>

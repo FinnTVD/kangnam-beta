@@ -120,12 +120,12 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
 
     return (
         <>
-            <article className='flex relative items-center shadow-input rounded-[1vw] w-full h-fit gap-x-[3.5vw] pt-[5.81vw] pb-[7.69vw] max-md:pb-[8.53vw] px-[2.5vw] pr-[7.5vw] max-md:pt-[14.93vw] max-md:px-[2.67vw] max-md:rounded-[2.13vw]'>
+            <article className='flex relative items-center shadow-input rounded-[1vw] w-full h-fit gap-x-[3.5vw] pt-[5.81vw] pb-[7.69vw] max-md:pb-[8.53vw] px-[2.5vw] pr-[7.5vw] max-md:pt-[14.93vw] max-md:px-[2.67vw] max-md:rounded-[2.13vw] max-lg:gap-y-[3vw]'>
                 <div
                     onClick={handlePrevSlide}
                     className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
-                    <span className='text-nu title14-400-150 title-mb12-400-150'>Trở lại</span>
+                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>Trở lại</span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='11'
@@ -142,8 +142,8 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                         />
                     </svg>
                 </div>
-                <div className='relative flex-1'>
-                    <h3 className='title24-800-150 -tracking-[1.2px] text-den title-mb25-700-130 max-md:-tracking-[1.25px]'>
+                <div className='relative flex-1 max-lg:mt-[2vw] max-md:mt-0'>
+                    <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
                         Thông tin liên hệ
                     </h3>
                     <form
@@ -161,7 +161,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                             />
                             <label
                                 htmlFor='ourHouse'
-                                className={`${classes['label-ourHouse']} select-none text-[#9E9E9E] cursor-pointer title16-400-150 title-mb14-400-150 focus:text-den`}
+                                className={`${classes['label-ourHouse']} select-none text-[#9E9E9E] cursor-pointer title16-400-150 max-md:title-mb14-400-150 focus:text-den max-lg:title-tl14`}
                             >
                                 Tôi là chủ nhà
                             </label>
@@ -170,9 +170,9 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-150 title-mb12-400-150'}
+                                labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Họ và tên'}
                                 register={'fullName'}
                                 value={valueFullName?.value}
@@ -182,10 +182,10 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
-                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                    'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                 }
                                 register={'numberPhone'}
-                                labelClass={'title16-400-150 title-mb12-400-150'}
+                                labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Số điện thoại'}
                                 value={valuePhoneNumber?.value}
                                 validate={valuePhoneNumber?.validate}
@@ -196,9 +196,9 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                         <InputCustom
                             boxClass={'w-full my-[1vw] max-md:my-[4.27vw]'}
                             inputClass={
-                                'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
+                                'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                             }
-                            labelClass={'title16-400-150 title-mb12-400-150'}
+                            labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                             labelContent={'Email'}
                             register={'email'}
                             value={valueEmail?.value}
@@ -212,7 +212,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 value={valueNote}
                                 className={`${
                                     valueNote ? '' : 'focus-input-active'
-                                } py-[1vw] px-[1.5vw] resize-none rounded-[1vw] text-den border border-solid border-[#C5C5C5] w-full outline-none title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]`}
+                                } py-[1vw] px-[1.5vw] resize-none rounded-[1vw] text-den border border-solid border-[#C5C5C5] w-full outline-none max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12`}
                                 id='note'
                                 name='note'
                                 style={{
@@ -223,14 +223,14 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 htmlFor='note'
                                 className={`${
                                     valueNote ? 'top-0 -translate-y-1/2' : 'top-[1vw]'
-                                } absolute text-[#646464] left-[1vw] max-md:left-[3vw] max-md:px-[1.27vw] px-[0.5vw] bg-white cursor-pointer title16-400-150 title-mb12-400-150 transition-all duration-300`}
+                                } absolute text-[#646464] left-[1vw] max-md:left-[3vw] max-md:px-[1.27vw] px-[0.5vw] bg-white cursor-pointer title16-400-150 max-md:title-mb12-400-150 transition-all duration-300 max-lg:title-tl12`}
                             >
                                 Lời nhắn
                             </label>
                         </div>
                         <div className='flex justify-center'>
                             <button className='flex gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center py-[0.56vw] px-[1.09vw] mt-[2.44vw] w-fit h-fit border border-solid border-nu rounded-[10vw] max-md:mt-[4.27vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'>
-                                <span className='text-nu title14-400-150 title-mb16-600-150'>Bước 3</span>
+                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>Bước 3</span>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     width='11'

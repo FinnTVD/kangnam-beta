@@ -1,7 +1,7 @@
 import PostDetail from './PostDetail'
 import RelatedNews from './RelatedNews'
 
-export default function IndexNewsDetail({ lang, t, post, newsDetail }) {
+export default function IndexNewsDetail({ lang, t, post, newsDetail, category }) {
     return (
         <>
             {post && (
@@ -10,6 +10,7 @@ export default function IndexNewsDetail({ lang, t, post, newsDetail }) {
                     post={post}
                     newsDetail={newsDetail}
                     lang={lang}
+                    category={category}
                 ></PostDetail>
             )}
             {post && (

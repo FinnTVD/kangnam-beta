@@ -39,11 +39,6 @@
                         "id": 2,
                         "title": "Liên hệ",
                         "href": "/contact"
-                    },
-                    {
-                        "id": 3,
-                        "title": "Thỏa thuận & Pháp lí",
-                        "href": "/agreement"
                     }
                 ]
             }
@@ -125,11 +120,6 @@
         },
         {
             "id": 5,
-            "title": "Thỏa thuận và pháp lý",
-            "href": "/agreement"
-        },
-        {
-            "id": 6,
             "title": "Tin tức",
             "href": "/news"
         }

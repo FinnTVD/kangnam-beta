@@ -12,11 +12,15 @@ const arrItem = new Array(5).fill(0)
 export default function LatestNews({ t, lang }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=6`, fetcher, {
+    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+    let dataCategorized
+    if(data){
+        dataCategorized = data.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0').slice(0,6)
+    }
     // const newsArrSlice = isMobile ? newsArr.slice(1, 3) : newsArr.slice(1, 6)
 
     return (
@@ -42,9 +46,9 @@ export default function LatestNews({ t, lang }) {
             </div>
             <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw] max-md:grid-cols-1 max-md:grid-rows-[68.5vw_44.2vw_44.2vw] max-md:gap-[4.2vw] max-md:mt-[4.2vw] max-lg:grid-cols-1 max-lg:grid-rows-[66.6vw_28.2vw_28.2vw]'>
                 <div className='col-span-2 row-span-2 max-lg:col-span-1 max-lg:row-span-1'>
-                    {data && (
+                    {dataCategorized && (
                         <LatestNewsItem
-                            newsItem={data?.data[0]}
+                            newsItem={dataCategorized[0]}
                             t={t}
                             lang={lang}
                         />
@@ -85,13 +89,13 @@ export default function LatestNews({ t, lang }) {
                         </div>
                     ))}
                 {!isTablet ?
-                    data?.data?.slice(1, 6)?.map((news, index) => (
+                    dataCategorized?.slice(1, 6)?.map((news, index) => (
                         <div key={news?.id}>
                             <OtherNewsItem newsOtherItem={news} lang={lang} index={index}/>
                         </div>
                     ))
                     :
-                    data?.data?.slice(1, 3)?.map((news, index) => (
+                    dataCategorized?.slice(1, 3)?.map((news, index) => (
                         <div key={news?.id}>
                             <OtherNewsItem newsOtherItem={news} lang={lang}/>
                         </div>

@@ -30,7 +30,7 @@ export default function BoxSort({ price, createQueryString, pathName, router }) 
                 onClick={() => setIsShow(!isShow)}
                 className='gap-x-[0.63vw] max-md:gap-x-[4.27vw] flex items-center cursor-pointer'
             >
-                <span className='text-den05 text-de title16-400-150 title-mb14-400-150'>
+                <span className='text-den05 text-de title16-400-150 max-md:title-mb14-400-150 max-lg:title-tl16'>
                     {handleCheckStatusPrice(price)}
                 </span>
                 <svg
@@ -63,7 +63,7 @@ export default function BoxSort({ price, createQueryString, pathName, router }) 
                                 router.push(pathName + '?' + createQueryString('price', e?.value))
                             }
                         }}
-                        className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] max-md:gap-x-[1vw] items-center max-md:text-14mb max-md:px-[2.5vw] max-md:py-[1.5vw]'
+                        className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] max-md:gap-x-[1vw] items-center max-md:text-14mb max-md:px-[2.5vw] max-md:py-[1.5vw] max-lg:title-tl14'
                     >
                         {e.title}
                         <svg

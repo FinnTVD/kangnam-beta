@@ -13,7 +13,7 @@ export default function BtnShowMap() {
                     isOpen ? 'py-[3.6vw] px-[4.67vw] gap-x-[1.87vw]' : 'gap-x-[1.07vw] py-[3.47vw] px-[6.27vw]'
                 } fixed bottom-[10vw] left-1/2 -translate-x-1/2 w-fit flex items-center z-50 bg-logo rounded-[10vw]`}
             >
-                <span className='text-white title-mb14-400-150 -tracking-[0.28px]'>
+                <span className='text-white max-md:title-mb14-400-150 -tracking-[0.28px] max-lg:title-tl14'>
                     {isOpen ? 'Danh sách' : 'Bản đồ'}
                 </span>
                 <svg

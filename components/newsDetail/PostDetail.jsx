@@ -1,10 +1,15 @@
 'use client'
-import { formatDateTime } from '@/utils'
+import { formatDateTime, handleCheckLangCode } from '@/utils'
 import classes from './NewsDetailStyle.module.css'
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
-export default function PostDetail({ t, post, newsDetail, lang }) {
+export default function PostDetail({ t, post, newsDetail, lang, category }) {
+    const langCode = handleCheckLangCode(lang)
+    let categoryTranslation
+    if(category){
+        categoryTranslation = category.translations.length>0 ? category.translations.find((item) => item.langCode===langCode).name : category.title
+    }
     const router = useRouter()
     const urlRef = useRef('')
     const setSlugDetailNews = useStore((state) => state.setSlugDetailNews)
@@ -43,7 +48,7 @@ export default function PostDetail({ t, post, newsDetail, lang }) {
                 </span>
                 <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
-                    {post?.postType?.name} -{' '}
+                    {categoryTranslation} -{' '}
                 </span>
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
