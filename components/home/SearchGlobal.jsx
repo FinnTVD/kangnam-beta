@@ -419,7 +419,7 @@ export default function SearchGlobal({
                         className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
                         <Image
-                            className='object-cover h-[2.3125vw] w-[2.3125vw]'
+                            className='object-cover h-[1.625vw] w-[1.625vw]'
                             src={'/images/marker-search.svg'}
                             alt='marker search'
                             width={40}

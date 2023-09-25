@@ -89,7 +89,13 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                                             {e?.address?.display}
                                         </address>
                                         <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>
-                                            35tr/m2{' '}
+                                            {
+                                                e?.translations?.find((i) =>
+                                                    i?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.priceDisplay
+                                            }
                                         </span>
                                     </div>
                                 </div>

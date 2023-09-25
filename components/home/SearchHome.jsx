@@ -49,14 +49,20 @@ export default function SearchHome({ data, lang }) {
                         >
                             <Image
                                 src={e?.icon || '/images/px.png'}
-                                alt={e?.title}
+                                alt={
+                                    e?.translations?.find((i) =>
+                                        i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    )?.name || e?.title
+                                }
                                 width={40}
                                 height={40}
                                 priority
                                 className='object-cover w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                             />
                             <span className='text-white title14-400-150 title-mb12-400-150 title-tl12-400-150'>
-                                {e?.title}
+                                {e?.translations?.find((i) =>
+                                    i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                )?.name || e?.title}
                             </span>
                         </div>
                     ))}

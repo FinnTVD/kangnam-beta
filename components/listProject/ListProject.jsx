@@ -271,8 +271,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={e?.translation?.name || 'thumbnail project'}
-                                            sizes='18vw'
+                                            sizes='33vw'
                                             fill
+                                            quality={100}
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150 max-lg:title-tl10'>
                                             {e?.propertyCategory?.translations?.find((e) =>
