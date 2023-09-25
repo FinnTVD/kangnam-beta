@@ -15,6 +15,7 @@ export default function Deposit() {
                 alt='bg-deposit'
                 sizes='100vw'
                 fill
+                quality={100}
             />
             <Image
                 className='z-0 object-cover md:hidden'
@@ -22,6 +23,7 @@ export default function Deposit() {
                 alt='bg-deposit'
                 sizes='100vw'
                 fill
+                quality={100}
             />
             <div className='w-[34.25vw] max-lg:w-[60vw] ml-[7.5vw] relative z-10 max-md:w-full max-lg:pl-[3.2vw] max-lg:mx-0 px-mb10'>
                 <h2 className='text-white title56 title-mb25-700-130 title-tl38'>Kí gửi nhà đất</h2>

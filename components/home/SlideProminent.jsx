@@ -6,9 +6,9 @@ import Image from 'next/image'
 import { useRef } from 'react'
 const arrProminent = [
     { id: 1, src: '/images/bg-prominent.jpg', alt: 'bg header primary' },
-    { id: 2, src: '/images/bg-header.jpg', alt: 'bg header' },
-    { id: 3, src: '/images/bg-header1.jfif', alt: 'bg-header1' },
-    { id: 4, src: '/images/bg-header2.jfif', alt: 'bg-header2' },
+    { id: 2, src: '/images/bg-prominent2.jpeg', alt: 'bg-prominent1' },
+    { id: 3, src: '/images/bg-prominent3.jpeg', alt: 'bg-prominent3' },
+    { id: 4, src: '/images/bg-prominent4.jpeg', alt: 'bg-prominent4' },
 ]
 export default function SlideProminent({ setIndexSlider, indexSlider }) {
     const swiperRef = useRef()

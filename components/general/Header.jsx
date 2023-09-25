@@ -52,7 +52,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     autoPlay
                     // poster='/images/bg-header.jpg'
                     loop
-                    className='absolute top-0 left-0'
+                    className='absolute top-0 left-0 min-w-full min-h-full object-cover'
                     id='videoBanner'
                     type='video/mp4'
                     playsInline
