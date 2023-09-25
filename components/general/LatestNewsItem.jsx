@@ -23,20 +23,21 @@ export default function LatestNewsItem({ newsItem, t, lang }) {
     })
     let category
     let categoryTranslation
-    if(categories && newsItem){       
-        category = categories.data.find((item) => item.id === newsItem.postType.id)
-        if(category.translations.length>0){
-            categoryTranslation = category.translations?.find((itm) => itm.languageCode===languageCode).name
-        }
-        else{
+    if (categories && newsItem) {
+        category = categories?.data?.find((item) => item?.id === newsItem?.postType?.id)
+        if (category?.translations?.length > 0) {
+            categoryTranslation = category?.translations?.find((itm) => itm?.languageCode === languageCode)?.name
+        } else {
             categoryTranslation = category.title
         }
     }
-    
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div data-aos='fade' className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'>
+            <div
+                data-aos='fade'
+                className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'
+            >
                 <Image
                     className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover'
                     src={newsItem?.image ? newsItem?.image : '/images/featuredImg.jpg'}

@@ -11,10 +11,11 @@ export default async function IndexProjectDetail({ lang, detail }) {
     return (
         <>
             <main>
-                <ImageGallery />
+                <ImageGallery data={data} />
                 <ContentDetail
                     data={data}
                     detail={detail}
+                    lang={lang}
                 />
                 <CommentFB data={data} />
                 <RelatedProject
