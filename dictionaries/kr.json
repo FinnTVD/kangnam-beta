@@ -95,12 +95,12 @@
         {
             "id": 3,
             "title": "Dự án",
-            "href": "/projects"
+            "href": "/프로젝트"
         },
         {
             "id": 4,
             "title": "Ký gửi nhà đất",
-            "href": "/dang-tin"
+            "href": "/deposit"
         },
         {
             "id": 5,

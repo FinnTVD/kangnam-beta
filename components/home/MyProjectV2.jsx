@@ -12,16 +12,10 @@ import useSWR, { mutate } from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import MapV2 from './MapV2/MapV2'
 import useStore from '@/app/[lang]/(store)/store'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MapV3 from './MapV2/MapV3'
-
-// import dynamic from 'next/dynamic'
-// const MapV2 = dynamic(() => import('./MapV2/MapV2'), {
-//     ssr: false,
-//   })
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -54,6 +48,9 @@ export default function MyProjectV2({ lang }) {
     const wardId = useStore((state) => state.wardId)
     const isSubmit = useStore((state) => state.isSubmit)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -164,21 +161,13 @@ export default function MyProjectV2({ lang }) {
         }
     }, [])
 
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
-
-    if (isMobile) return
-    const isTablet = useMediaQuery({
-        query: '(max-width: 1023px)',
-    })
     if (isTablet) return
 
     return (
         <section
             ref={projectsRef}
             id='boxMap'
-            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[9] relative bg-white max-md:hidden'
+            className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[9] relative bg-white max-lg:hidden'
         >
             <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
@@ -248,7 +237,9 @@ export default function MyProjectV2({ lang }) {
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
-                                            {e?.propertyCategory?.title || 'Chưa có thông tin!'}
+                                            {e?.propertyCategory?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name || 'Dự án'}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw]'>

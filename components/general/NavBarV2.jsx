@@ -25,6 +25,9 @@ const objClass = {
 
 export default function NavBarV2({ lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
     const languageCode = handleCheckLangCode(lang)
     const {
         data: agreementData,
@@ -49,9 +52,6 @@ export default function NavBarV2({ lang, t }) {
         })
     }
     const [isOpen, setIsOpen] = useState(false)
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
     const [listNav, setListNav] = useState([])
 
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
@@ -78,9 +78,6 @@ export default function NavBarV2({ lang, t }) {
     }, [lang, data])
     if (!listNav?.length) return
 
-    const isTablet = useMediaQuery({
-        query: '(max-width: 1023px)',
-    })
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04 max-md:pl-[4vw] max-md:pr-[2.5vw]'>
             <div className='flex items-center justify-between w-full gap-x-[2.5vw] max-md:my-[2.67vw]'>
@@ -241,7 +238,7 @@ export default function NavBarV2({ lang, t }) {
                         </ul>
                         <div className='flex gap-x-[1.25vw] items-center'>
                             <Link
-                                href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                                href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                                 className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
                             >
                                 Kí gửi nhà đất

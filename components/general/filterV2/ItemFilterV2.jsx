@@ -1,23 +1,22 @@
 'use client'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, lang }) {
+
+let dataNew = []
+export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, lang, isMobile }) {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const [sideRef, isOutSide] = useClickOutSide()
-
-    const lh = searchParams.get(item?.slug)
-    const lhNew = lh?.split('--')
+    const lh = searchParams.get(item?.slug)?.split('--')
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}${item?.api}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    useEffect(() => {}, [lh])
 
     useEffect(() => {
         isOutSide && setIndexFilter(-1)
@@ -51,6 +50,18 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
         setIndexFilter(-1)
     }
 
+    const handleResetCheckBox = () => {
+        const arrCheckBox = document.querySelectorAll('input[type=checkbox]')
+        arrCheckBox.forEach((e) => {
+            e?.setAttribute('checked', false)
+        })
+    }
+
+    if (item?.api === '/property-category' && isMobile) {
+        dataNew = data?.data?.filter((e) => e?.id !== '05d52397-71a8-4ecf-9a86-ee37965332ef')
+    } else {
+        dataNew = data?.data
+    }
     return (
         <li
             ref={sideRef}
@@ -73,10 +84,10 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             </span>
             <span
                 className={`${
-                    lhNew?.length && lhNew[0] ? '' : 'hidden'
+                    lh?.length && lh[0] ? '' : 'hidden'
                 } bg-logo w-[1.5vw] h-[1.5vw] flex justify-center items-center rounded-full title14-400-150 text-white absolute top-0 right-0 -translate-y-1/2 border border-solid border-white`}
             >
-                {lhNew?.length && lhNew[0] ? lhNew?.length : ''}
+                {lh?.length && lh[0] ? lh?.length : ''}
             </span>
             <form
                 onSubmit={handleCheckValueInput}
@@ -92,8 +103,8 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                     <div
                         className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
                     >
-                        {data &&
-                            data?.data?.map((e, index) => (
+                        {Array.isArray(dataNew) &&
+                            dataNew?.map((e, index) => (
                                 <div
                                     key={index}
                                     className='w-fit flex items-center gap-x-[0.75vw] max-md:gap-x-[3.2vw]'
@@ -102,8 +113,8 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                                         type='checkbox'
                                         id={e?.id}
                                         className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] outline-none border border-solid border-den02 cursor-pointer'
-                                        defaultChecked={lhNew?.includes(e?.id)}
                                     />
+
                                     <label
                                         className='title14-400-150 text-den cursor-pointer title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal'
                                         htmlFor={e?.id}
@@ -123,6 +134,7 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                                 scroll: false,
                             })
                             setIndexFilter(-1)
+                            handleResetCheckBox()
                         }}
                         className='cursor-pointer title14-400-150 text-den title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw]'
                     >

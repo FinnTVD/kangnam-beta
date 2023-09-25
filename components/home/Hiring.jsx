@@ -63,7 +63,7 @@ export default function Hiring({ lang }) {
     const { data, error, isLoading } = useSWR(
         `${
             process.env.NEXT_PUBLIC_API
-        }/property?order=DESC&page=1&take=10&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe${
+        }/property?order=DESC&page=1&take=10&propertyCategoryIds=05d52397-71a8-4ecf-9a86-ee37965332ef${
             propertyAreaTypeParams ? propertyAreaTypeParams : ''
         }${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -78,7 +78,7 @@ export default function Hiring({ lang }) {
         mutate(
             `${
                 process.env.NEXT_PUBLIC_API
-            }/property?order=DESC&page=1&take=10&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe${
+            }/property?order=DESC&page=1&take=10&propertyCategoryIds=05d52397-71a8-4ecf-9a86-ee37965332ef${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
             }${propertyTypeParams ? propertyTypeParams : ''}`,
         )
@@ -88,9 +88,12 @@ export default function Hiring({ lang }) {
     return (
         <section className='w-full'>
             <div className='px-mb10 max-lg:px-[3.2vw]'>
-                <h2 className='text-den max-md:title-mb25-700-130 -tracking-[1.25px] max-lg:title-tl25 font-bold'>Dự án cho thuê</h2>
+                <h2 className='text-den max-md:title-mb25-700-130 -tracking-[1.25px] max-lg:title-tl25 font-bold'>
+                    Dự án cho thuê
+                </h2>
                 <span className='max-lg:title-tl14 max-md:title-mb14-400-150 text-den opacity-[0.65] block mb-[3.2vw]'>
-                    Hơn <span className='title-mb14-700-150 max-lg:font-bold'>1500</span> dự án đang được phân phối
+                    Hơn <span className='title-mb14-700-150 max-lg:font-bold'>{data?.meta?.itemCount || '500'}</span> dự
+                    án đang được phân phối
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
@@ -138,8 +141,10 @@ export default function Hiring({ lang }) {
                         >
                             <Link
                                 href={
-                                    (lang === 'vi' ? '' : lang + '/') +
-                                    e?.propertyCategory?.alias +
+                                    '/' +
+                                    e?.propertyCategory?.translations?.find((e) =>
+                                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    )?.alias +
                                     '/' +
                                     e?.translation?.slug
                                 }
@@ -155,7 +160,9 @@ export default function Hiring({ lang }) {
                                         fill
                                     />
                                     <div className='block absolute rounded-md bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit max-md:title-mb10-600-150'>
-                                        {e?.propertyCategory?.name}
+                                        {e?.propertyCategory?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name || 'Dự án'}
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>

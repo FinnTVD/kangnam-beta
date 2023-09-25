@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import BtnShowMap from './BtnShowMap'
 import ReactPaginate from 'react-paginate'
 import classes from '../news/ListNewsStyles.module.css'
-import { useCallback, useEffect, useLayoutEffect } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import useSWR, { mutate } from 'swr'
 import Skeleton from 'react-loading-skeleton'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -15,7 +15,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { findIdByAlias, handleCheckLangCode, handleCheckParams } from '@/utils'
-import MapV2 from '../home/MapV2/MapV2'
+// import MapV2 from '../home/MapV2/MapV2'
 import useStore from '@/app/[lang]/(store)/store'
 import MapV3 from '../home/MapV2/MapV3'
 // import Map from '../home/Map'
@@ -62,26 +62,8 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 gsap.registerPlugin(ScrollTrigger)
-function initializeGSAPWithDelay(delay, selector = '') {
-    if (typeof window === 'undefined' || !selector) return
-    setTimeout(() => {
-        const box = document.querySelector(selector)
-        gsap.to(box, {
-            position: 'fixed',
-            left: '7.5vw',
-            top: '5.75vw',
-            zIndex: '999999',
-            background: 'white',
-            scrollTrigger: {
-                trigger: box,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
-            },
-        })
-    }, delay)
-}
 export default function ListProject({ lang, t, dataSlug }) {
+    const parentRef = useRef(null)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
@@ -121,7 +103,9 @@ export default function ListProject({ lang, t, dataSlug }) {
             dataSlug,
         )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
             price ? '&price=' + price : ''
-        }`,
+        }${valueSearch && cityId ? '&cityId=' + cityId : ''}${
+            valueSearch && districtId ? '&districtId=' + districtId : ''
+        }${valueSearch && wardId ? '&wardId=' + wardId : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -131,9 +115,26 @@ export default function ListProject({ lang, t, dataSlug }) {
     )
 
     useLayoutEffect(() => {
+        if (typeof window === 'undefined') return
         let ctx = gsap.context(() => {
-            initializeGSAPWithDelay(500, '#boxRef-filter')
-        })
+            const vw = window.innerWidth
+            setTimeout(() => {
+                gsap.to('#boxRef-filter', {
+                    position: 'fixed',
+                    left: '7.5vw',
+                    top: '5.75vw',
+                    zIndex: '999999',
+                    background: 'white',
+                    scrollTrigger: {
+                        trigger: '#boxRef-filter',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                        markers: true,
+                    },
+                })
+            }, 500)
+        }, parentRef)
         return () => {
             ctx.revert()
         }
@@ -146,7 +147,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                 dataSlug,
             )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
                 price ? '&price=' + price : ''
-            }`,
+            }${valueSearch && cityId ? '&cityId=' + cityId : ''}${
+                valueSearch && districtId ? '&districtId=' + districtId : ''
+            }${valueSearch && wardId ? '&wardId=' + wardId : ''}`,
         )
     }, [lang])
 
@@ -163,7 +166,7 @@ export default function ListProject({ lang, t, dataSlug }) {
     return (
         <section
             id='list-project'
-            // ref={parentRef}
+            ref={parentRef}
             className='mt-[5.75vw] relative z-10 max-md:mt-[69vw] max-lg:mt-[10vw]'
         >
             <div className='flex justify-between w-full'>
@@ -275,7 +278,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150 max-lg:title-tl10'>
                                             {e?.propertyCategory?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                            )?.name || ''}
+                                            )?.name || 'Dự án'}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
@@ -370,7 +373,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                                 </Link>
                             ))}
                     </div>
-                    <div className='mb-[6.26vw]'>
+                    <div
+                        id='boxPagination'
+                        className='mb-[6.26vw]'
+                    >
                         <ReactPaginate
                             breakLabel='...'
                             nextLabel='Next'
@@ -392,6 +398,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                 {!isTablet && (
                     <>
                         <div
+                            id='boxMap'
                             className={`${
                                 !show ? 'hidden' : ''
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}

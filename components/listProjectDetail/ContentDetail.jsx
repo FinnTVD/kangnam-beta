@@ -13,7 +13,6 @@ const handleCheckStatus = (alias) => {
 }
 
 export default function ContentDetail({ data, detail, lang }) {
-    console.log('🚀 ~ file: ContentDetail.jsx:15 ~ ContentDetail ~ data:', data)
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -25,7 +24,7 @@ export default function ContentDetail({ data, detail, lang }) {
     const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
 
     return (
-        <section className='mt-[7.57vw] px-120 max-md:mt-[22.57vw] px-mb10'>
+        <section className='mt-[7.57vw] max-md:mt-[4.27vw] px-120 px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
                 <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
                     Trang chủ /{' '}
@@ -36,7 +35,7 @@ export default function ContentDetail({ data, detail, lang }) {
                     }
                 </span>
                 {/* <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14>{dataDetail?.name}</span> */}
-                <address className='not-italic title16-600-150 max-lg:title-tl14 title-mb14-400-150 text-den mb-[1vw] md:hidden max-md:opacity-50'>
+                <address className='not-italic title16-600-150 title-tl14 title-mb14-400-150 text-den lg:mb-[1vw] md:hidden max-md:opacity-50'>
                     {data?.address?.display}
                 </address>
             </div>
@@ -370,7 +369,7 @@ export default function ContentDetail({ data, detail, lang }) {
                             className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0 text-den/20'
                         ></div>
                     </div>
-                    <div className='text-den mt-[1.5vw] text-[1vw] font-semibold leading-normal'>
+                    <div className='text-den mt-[1.5vw] text-[1vw] font-semibold leading-normal max-md:text-14mb max-lg:text-14tl'>
                         Mã dự án: <span className=' text-nau-nhat tracking-[0.5px]'>{data?.propertyCode}</span>
                     </div>
 

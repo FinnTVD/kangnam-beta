@@ -97,7 +97,7 @@ export default function SelectSearch({ type = 'dark', menu = false, lang }) {
                 viewBox='0 0 24 24'
                 strokeWidth='1.5'
                 stroke={`${type === 'white' ? 'white' : '#D6A279'}`}
-                className='w-[1vw] h-[1vw] max-lg:h-[1.5vw] max-lg:w-[1.5vw] max-md:w-[5vw] max-md:h-[3vw] max-lg:w-[2.5vw] max-lg:h-auto'
+                className='w-[1vw] h-[1vw] max-md:w-[5vw] max-md:h-[3vw] max-lg:w-[2.5vw] max-lg:h-auto'
             >
                 <path
                     strokeLinecap='round'

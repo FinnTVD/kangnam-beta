@@ -6,17 +6,31 @@ import { useEffect, useState } from 'react'
 import SelectSearch from './SelectSearch'
 import useSWR from 'swr'
 import { listIdNav } from '@/utils'
-
+import { handleCheckLangCode } from '@/utils'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBar({ isHome, lang, t }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
-
+    const languageCode = handleCheckLangCode(lang)
     const [listNav, setListNav] = useState([])
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoadingData,
+    } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+
     useEffect(() => {
         if (!data) return
         let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
@@ -34,6 +48,15 @@ export default function NavBar({ isHome, lang, t }) {
         })
         setListNav([...b, ...t?.Navbar?.listNav])
     }, [lang, data])
+    let agreementDataTranslation = []
+    if (agreementData) {
+        agreementData?.data?.forEach((item) => {
+            item?.translations?.forEach((itm) => {
+                if (itm?.languageCode === languageCode)
+                    agreementDataTranslation?.push({ title: itm.title, slug: itm.slug })
+            })
+        })
+    }
 
     if (!listNav?.length) return
     return (
@@ -173,7 +196,7 @@ export default function NavBar({ isHome, lang, t }) {
                                                         </Link>
                                                     </li>
                                                 ))}
-                                                {agreementDataTranslation.map((item) => (
+                                                {agreementDataTranslation?.map((item) => (
                                                     <li
                                                         key={item?.id}
                                                         className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
@@ -209,7 +232,7 @@ export default function NavBar({ isHome, lang, t }) {
                 </ul>
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
-                        href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                         className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] max-lg:py-[1.5vw] max-lg:px-[2.5vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 title-tl12-600-130'
                     >
                         {t?.Navbar?.button}

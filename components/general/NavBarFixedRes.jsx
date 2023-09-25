@@ -103,7 +103,7 @@ export default function NavBarFixedRes({ isHome = true, lang, t }) {
                 </div>
                 <div
                     onClick={() => setIsOpen(true)}
-                    className='relative w-fit'
+                    className='relative w-fit cursor-pointer'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'

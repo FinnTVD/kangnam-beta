@@ -206,7 +206,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                         </ul>
                         <div className='flex gap-x-[1.25vw] items-center'>
                             <Link
-                                href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                                href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                                 className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
                             >
                                 Kí gửi nhà đất
@@ -240,7 +240,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                 )}
                 {/* <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
-                        href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                         className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                     >
                         Kí gửi nhà đất

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Map from '../home/Map'
+import MapV3 from '../home/MapV2/MapV3'
 
 export default function BtnShowMap() {
     const [isOpen, setIsOpen] = useState(false)
@@ -13,7 +13,7 @@ export default function BtnShowMap() {
                     isOpen ? 'py-[3.6vw] px-[4.67vw] gap-x-[1.87vw]' : 'gap-x-[1.07vw] py-[3.47vw] px-[6.27vw]'
                 } fixed bottom-[10vw] left-1/2 -translate-x-1/2 w-fit flex items-center z-50 bg-logo rounded-[10vw]`}
             >
-                <span className='text-white max-md:title-mb14-400-150 -tracking-[0.28px] max-lg:title-tl14'>
+                <span className='text-white max-md:title-mb14-400-150 -tracking-[0.28px] max-lg:title-tl14 whitespace-nowrap'>
                     {isOpen ? 'Danh sách' : 'Bản đồ'}
                 </span>
                 <svg
@@ -65,9 +65,9 @@ export default function BtnShowMap() {
                 id='box-list-project'
                 className={`${
                     isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
-                } fixed bottom-0 left-0 z-40 w-full h-[70vh] transition-all duration-500`}
+                } fixed bottom-0 left-0 z-40 w-full h-[70vh] transition-all duration-500 max-md:w-full`}
             >
-                <Map />
+                <MapV3 />
             </div>
         </>
     )

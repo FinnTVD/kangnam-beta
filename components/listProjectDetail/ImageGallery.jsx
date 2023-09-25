@@ -27,7 +27,7 @@ import { useMediaQuery } from 'react-responsive'
 // ]
 export default function ImageGallery({ data }) {
     console.log('🚀 ~ file: ImageGallery.jsx:29 ~ ImageGallery ~ data:', data)
-    const listImage = [data?.firstImage, ...data?.images]
+    const listImage = [data?.firstImage, ...(data?.images || '')]?.filter((e) => e)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -140,6 +140,7 @@ export default function ImageGallery({ data }) {
         }
     }
 
+    if (!listImage?.length) return
     return (
         <>
             <div className='h-[5.75vw] max-lg:h-[10vw] max-md:h-[18vw]'></div>
@@ -172,7 +173,7 @@ export default function ImageGallery({ data }) {
                     className='h-[21.875vw] max-md:h-[82.9vw] max-lg:h-[30vw]'
                 >
                     {!isTablet
-                        ? imagesData?.slice(0, 9).map((item, index) => (
+                        ? listImage?.slice(0, 9).map((item, index) => (
                               <SwiperSlide key={index}>
                                   <Image
                                       src={item}
@@ -255,7 +256,6 @@ export default function ImageGallery({ data }) {
                     </div>
                 )}
             </div>
-
             <div className='flex gap-[3.75vw] pl-[0.625vw] pr-[7.5vw] py-[1vw] bg-maunhat max-md:pl-0 max-md:pr-0 max-md:py-[2.6vw]'>
                 <Swiper
                     loop={true}
@@ -280,7 +280,7 @@ export default function ImageGallery({ data }) {
                     className='h-[5vw] flex-grow max-md:h-[16.8vw] max-md:!pl-[2.7vw] max-lg:h-[10vw]'
                 >
                     {!isTablet
-                        ? imagesData?.slice(0, 10).map((item, index) => (
+                        ? listImage?.slice(0, 10).map((item, index) => (
                               <SwiperSlide
                                   key={index}
                                   className='rounded-[4px] overflow-hidden'

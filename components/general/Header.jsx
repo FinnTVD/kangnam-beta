@@ -98,7 +98,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 )}
                 {!isTablet ? (
                     <NavBarFixed
-                        isHome={false}
+                        isHome={true}
                         lang={lang}
                         t={t}
                         isMobile={isMobile}

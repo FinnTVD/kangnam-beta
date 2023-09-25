@@ -12,10 +12,6 @@ const useStore = create((set, get) => ({
     cityId: 11,
     districtId: null,
     wardId: null,
-    handleChangeCity: null,
-    handleChangeDistrict: null,
-    handleChangeWard: null,
-    handleFlyMap: null,
     dataHomePage: null,
     valueSearch: '',
     valueSearchPrev: '',
@@ -28,6 +24,33 @@ const useStore = create((set, get) => ({
     listData: '',
     isFeatureHome: false,
     listNav: [],
+    mapRef: null,
+    levelZoom: 9,
+    isClose: true,
+    setIsClose: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isClose: data,
+            }
+        })
+    },
+    setLevelZoom: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                levelZoom: data,
+            }
+        })
+    },
+    setMapRef: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                mapRef: data,
+            }
+        })
+    },
     setListData: (data) => {
         set((state) => {
             return {
@@ -121,38 +144,6 @@ const useStore = create((set, get) => ({
             return {
                 ...state,
                 dataHomePage: data,
-            }
-        })
-    },
-    setHandleFlyMap: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                handleFlyMap: data,
-            }
-        })
-    },
-    setHandleChangeCity: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                handleChangeCity: data,
-            }
-        })
-    },
-    setHandleChangeDistrict: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                handleChangeDistrict: data,
-            }
-        })
-    },
-    setHandleChangeWard: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                handleChangeWard: data,
             }
         })
     },

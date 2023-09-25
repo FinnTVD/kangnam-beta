@@ -6,6 +6,7 @@ import SearchGlobal from './SearchGlobal'
 export default function SearchHome({ data, lang }) {
     const setValueSearch = useStore((state) => state.setValueSearch)
     const dataHomePage = useStore((state) => state.dataHomePage)
+    const setIsClose = useStore((state) => state.setIsClose)
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160'>
@@ -18,8 +19,8 @@ export default function SearchHome({ data, lang }) {
                 isIcon={true}
                 lang={lang}
             />
-            <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw] max-md:justify-between'>
-                <span className='mr-[0.81vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
+            <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw]'>
+                <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
                     Gợi ý:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
@@ -29,6 +30,9 @@ export default function SearchHome({ data, lang }) {
                             className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150'
                             onClick={() => {
                                 setValueSearch(e)
+                                setTimeout(() => {
+                                    setIsClose(false)
+                                }, 500)
                             }}
                         >
                             {e || arrSuggest[index]?.title}

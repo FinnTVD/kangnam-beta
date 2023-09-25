@@ -40,31 +40,29 @@ export default function SearchGlobal({
 }) {
     const router = useRouter()
     const pathName = usePathname()
-
-    const [isClose, setIsClose] = useState(false)
     const [dataProject, setDataProject] = useState([])
-
     const valueSearch = useStore((state) => state.valueSearch)
+    const debounceValue = useDebounce(valueSearch, 500)
+
+    const isClose = useStore((state) => state.isClose)
+    const setIsClose = useStore((state) => state.setIsClose)
     const setValueSearch = useStore((state) => state.setValueSearch)
     const setValueSearchPrev = useStore((state) => state.setValueSearchPrev)
-    const debounceValue = useDebounce(valueSearch, 500)
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
     const wardId = useStore((state) => state.wardId)
     const setCityId = useStore((state) => state.setCityId)
     const setDistrictId = useStore((state) => state.setDistrictId)
     const setWardId = useStore((state) => state.setWardId)
-    const handleChangeCity = useStore((state) => state.handleChangeCity)
-    const handleChangeDistrict = useStore((state) => state.handleChangeDistrict)
-    const handleChangeWard = useStore((state) => state.handleChangeWard)
-    const handleFlyMap = useStore((state) => state.handleFlyMap)
     const setSelectSearch = useStore((state) => state.setSelectSearch)
-    const boxMap = useStore((state) => state.boxMap)
+    const dataDistrict = useStore((state) => state.dataDistrict)
+    const dataProvinces = useStore((state) => state.dataProvinces)
+    const levelZoom = useStore((state) => state.levelZoom)
+    const setLevelZoom = useStore((state) => state.setLevelZoom)
     const setIsSubmit = useStore((state) => state.setIsSubmit)
     const isSubmit = useStore((state) => state.isSubmit)
-    const dataDistrict = useStore((state) => state.dataDistrict)
-    const dataWard = useStore((state) => state.dataWard)
     const listData = useStore((state) => state.listData)
+    const mapRef = useStore((state) => state.mapRef)
 
     const [sideRef, isOutSide] = useClickOutSide()
 
@@ -135,8 +133,26 @@ export default function SearchGlobal({
         setDataProject(data)
     }
 
+    const callDataWard = async (cityIdWard, districtIdWard, wardIdWard) => {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityIdWard}&districtId=${districtIdWard}`,
+        )
+        const data = await res.json()
+        const itemWard = data?.find((i) => i?.ward_id == wardIdWard)
+        if (!itemWard) {
+            return notifyError('No data project in address ward search!')
+        }
+        //delete marker before fly to city other
+        mapRef?.flyTo({
+            center: [Number(itemWard?.ward_lng), Number(itemWard?.ward_lat)],
+            zoom: 13.5,
+            curve: 1,
+        })
+        levelZoom !== 13.5 && setLevelZoom(13.5)
+    }
+
     const handleSubmit = (e) => {
-        e && e?.preventDefault()
+        e?.preventDefault()
         if (!valueSearch) {
             notifyError('Vui lòng nhập dữ liệu để tìm kiếm!')
             return
@@ -149,35 +165,61 @@ export default function SearchGlobal({
                     )?.alias,
             )
         setIsSubmit(!isSubmit)
-        if (dataSearch?.length) {
+        if (dataSearch?.length >= 0) {
             handleSelectValueSearch(dataSearch[0])
-        } else if (dataProjectCode?.data?.length) {
+        } else if (dataProjectCode?.data?.length >= 0) {
             handleSelectValueProject(dataProjectCode?.data[0])
-        } else if (dataProject?.data?.length) {
+        } else if (dataProject?.data?.length >= 0) {
             handleSelectValueProject(dataProject?.data[0])
         }
         setIsClose(true)
     }
 
     const handleSelectValueSearch = (e) => {
-        console.log('🚀 ~ file: SearchGlobal.jsx:190 ~ handleSelectValueSearch ~ e:', e)
-        setValueSearch(e?.address)
+        if (!e) return
         if (e?.ref_id?.includes('CITY')) {
+            //set lại cityid
+            cityId !== Number(e?.boundaries[0]?.id) && setCityId(Number(e?.boundaries[0]?.id))
+            // khi chuyển city thì setDistrictId và setWardId về null
+            setDistrictId(null)
+            setWardId(null)
+            setValueSearch(e?.address)
+            if (!dataProvinces || !e?.boundaries[0]?.id) return
             //nếu đang ở tỉnh đó và ở level zoom city thì không fly
             // if (e?.boundaries[0]?.id === cityId && !cityId && !wardId) return notifyError('Now, in current city!')
             // if (e?.boundaries[0]?.id === cityId && !districtId) return notifyError('Now, in current city!')
-            handleChangeCity(e?.boundaries[0]?.id, dataProvinces)
+            const itemCity = dataProvinces?.find((i) => i?.city_id == e?.boundaries[0]?.id)
+            if (!itemCity) {
+                return notifyError('No data project in address city search!')
+            }
+            mapRef?.flyTo({
+                center: [Number(itemCity?.city_lng), Number(itemCity?.city_lat)],
+                zoom: 9,
+                curve: 1,
+            })
+            levelZoom !== 9 && setLevelZoom(9)
+            return
         }
         if (e?.ref_id?.includes('DIST')) {
-            // if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
-            if (e?.boundaries[1]?.id !== cityId) {
-                setCityId(e?.boundaries[1]?.id)
-            }
             setDistrictId(e?.boundaries[0]?.id)
-            handleChangeDistrict(e?.boundaries[0]?.id)
+            e?.boundaries[1]?.id !== cityId && setCityId(e?.boundaries[1]?.id)
+            !wardId && setWardId(null)
+            if (!dataDistrict || !e?.boundaries[0]?.id) return
+            // nếu đang là districtid đó và đang ở cấp quận thì return
+            // if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
+            const itemDistrict = dataDistrict?.find((i) => i?.district_id == e?.boundaries[0]?.id)
+            if (typeof itemDistrict !== 'object') {
+                return notifyError('No data project in address district search!')
+            }
+            mapRef?.flyTo({
+                center: [Number(itemDistrict?.district_lng), Number(itemDistrict?.district_lat)],
+                zoom: 11.5,
+                curve: 1,
+            })
+            levelZoom !== 11.5 && setLevelZoom(11.5)
+            return
         }
         if (e?.ref_id?.includes('WARD')) {
-            // if (e?.boundaries[0]?.id === wardId) return notifyError('Now, in current ward!')
             if (e?.boundaries[2]?.id !== cityId) {
                 setCityId(e?.boundaries[2]?.id)
             }
@@ -185,7 +227,8 @@ export default function SearchGlobal({
                 setDistrictId(e?.boundaries[1]?.id)
             }
             setWardId(e?.boundaries[0]?.id)
-            handleChangeWard(e?.boundaries[0]?.id, dataWard)
+            callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id)
+            return
         }
     }
 
@@ -200,11 +243,12 @@ export default function SearchGlobal({
         if (Number(e?.address?.wardId) !== wardId) {
             setWardId(Number(e?.address?.wardId))
         }
-        // setIsSelectProject(!isSelectProject)
-        // setTimeout(() => {
-        // 	handleChangeWard(e?.address?.wardId);
-        // }, 1000);
-        handleFlyMap(Number(e?.address?.lng), Number(e?.address?.lat), 17, 2000)
+        mapRef?.flyTo({
+            center: [Number(e?.address?.lng), Number(e?.address?.lat)],
+            zoom: 17,
+            curve: 1,
+        })
+        levelZoom !== 17 && setLevelZoom(17)
     }
 
     return (
@@ -276,14 +320,14 @@ export default function SearchGlobal({
                         <ul
                             className={`${isClose ? 'hidden' : ''} ${
                                 classList ||
-                                'absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input'
+                                'absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150'
                             }`}
                         >
-                            {dataSearch && <li className='font-bold text-black'>Khu vực</li>}
+                            {dataSearch && <li className='font-bold text-black max-md:my-[1vw]'>Khu vực</li>}
                             {Array.isArray(dataSearch) &&
                                 dataSearch?.slice(0, 3)?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw]'
+                                        className='pl-[0.5vw] line-clamp-2 py-[1vw]'
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
@@ -294,9 +338,9 @@ export default function SearchGlobal({
                                                                 ?.includes(lang === 'ch' ? 'cn' : lang),
                                                         )?.alias,
                                                 )
+                                            handleSelectValueSearch(e)
                                             setIsSubmit(!isSubmit)
                                             setIsClose(true)
-                                            handleSelectValueSearch(e)
                                             setSelectSearch('area')
                                         }}
                                         key={index}
@@ -304,11 +348,13 @@ export default function SearchGlobal({
                                         {e?.address}
                                     </li>
                                 ))}
-                            {Array.isArray(dataProjectCode?.data) && <li className='font-bold text-black'>Từ khoá</li>}
+                            {Array.isArray(dataProjectCode?.data) && (
+                                <li className='font-bold text-black max-md:my-[1vw]'>Từ khoá</li>
+                            )}
                             {Array.isArray(dataProjectCode?.data) &&
                                 dataProjectCode?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:py-[1vw]'
                                         title={e?.translation?.name}
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
@@ -320,9 +366,9 @@ export default function SearchGlobal({
                                                                 ?.includes(lang === 'ch' ? 'cn' : lang),
                                                         )?.alias,
                                                 )
+                                            handleSelectValueProject(e)
                                             setIsSubmit(!isSubmit)
                                             setIsClose(true)
-                                            handleSelectValueProject(e)
                                             setSelectSearch('word')
                                         }}
                                         key={index}
@@ -330,12 +376,14 @@ export default function SearchGlobal({
                                         {e?.translation?.name}
                                     </li>
                                 ))}
-                            {Array.isArray(dataProjectCode?.data) && <li className='font-bold text-black'>Dự án</li>}
+                            {Array.isArray(dataProjectCode?.data) && (
+                                <li className='font-bold text-black max-md:my-[1vw]'>Dự án</li>
+                            )}
                             {Array.isArray(dataProject?.data) &&
-                                dataSearch?.length &&
+                                dataSearch?.length > 0 &&
                                 dataProject?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:py-[1vw]'
                                         title={e?.translation?.name}
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
@@ -364,7 +412,7 @@ export default function SearchGlobal({
                 {isIcon && (
                     <div
                         onClick={() => handleSubmit()}
-                        className='w-[3.125vw] cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
+                        className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
                         <Image
                             className='object-cover h-[2.3125vw] w-[2.3125vw]'

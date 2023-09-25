@@ -60,12 +60,12 @@ export default function Footer({ lang, t, dataInfo }) {
         window.open(dataInfo?.linkedIn)
     }
 
-    if (!isMobile && pathName.includes('/dang-tin')) {
+    if (!isMobile && pathName.includes('/deposit')) {
         return
     }
 
     return (
-        <footer className='bg-[#FBF7F2]'>
+        <footer className='bg-[#FBF7F2] relative z-[999]'>
             <div className='py-[5vw] px-[7.5625vw] flex max-md:flex-col px-mb10 max-md:pt-[16vw] max-md:pb-[0] max-lg:flex-col max-lg:px-120'>
                 <div>
                     <div className='relative w-[24.0625vw] h-[6.625vw] max-md:w-[87.7vw] max-md:h-[25.6vw] max-lg:w-[70vw] max-lg:h-[20vw]'>

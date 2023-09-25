@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
-import useStore from '@/app/[lang]/(store)/store'
 import Link from 'next/link'
 
 const arrLink = [
@@ -28,8 +27,7 @@ const handleRenderItem = (data, key, lang) => {
     }
     return slug?.name || data?.title
 }
-export default function SlideProjectProminent({ lang }) {
-    const dataHomePage = useStore((state) => state.dataHomePage)
+export default function SlideProjectProminent({ lang, dataHomePage }) {
     const swiperRef = useRef()
 
     const handleNextSlide = () => {
@@ -43,7 +41,6 @@ export default function SlideProjectProminent({ lang }) {
     return (
         <div className='relative'>
             <Swiper
-                loop={true}
                 breakpoints={{
                     0: {
                         slidesPerView: 'auto',
@@ -63,7 +60,7 @@ export default function SlideProjectProminent({ lang }) {
                     swiperRef.current = swiper
                 }}
                 modules={[FreeMode]}
-                className='max-md:pl-[2.67vw]'
+                className='max-md:px-[2.67vw]'
             >
                 {Array.isArray(dataHomePage?.properties) &&
                     dataHomePage?.properties?.map((e, index) => (
