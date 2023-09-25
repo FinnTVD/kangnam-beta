@@ -45,20 +45,22 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`h-screen max-md:h-[64vh] relative w-full`}>
-                <SlideBanner data={data} />
-                {/* <video
+            <div className={`h-screen max-md:h-[82vh] relative w-full`}>
+                {/* <SlideBanner data={data} /> */}
+                <video
                     ref={videoRef}
                     autoPlay
                     // poster='/images/bg-header.jpg'
                     loop
-                    className='top-0 left-0 z-[99999] w-full h-full'
+                    className='absolute top-0 left-0'
+                    id='videoBanner'
                     type='video/mp4'
                     playsInline
                     muted
                 >
-                    <source src='/images/videoTest.mp4'></source>
-                </video> */}
+                    {/* <source src='/images/videoTest.mp4'></source> */}
+                    <source src='/images/videotest2.mp4'></source>
+                </video>
                 {/* <iframe
                     width='1600'
                     height='800'
