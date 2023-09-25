@@ -12,17 +12,17 @@ import useDebounce from '@/hooks/useDebounce'
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
 const handleCheckPage = (pathName, listData) => {
-    if (!pathName) return true
+    if (pathName === '/') return true
     //nếu ko đứng ỏ các page nằm ở listPage thì sẽ chuyển sang page có maphandleCheckPage
     for (const item of listData) {
         for (const translation of item?.translations) {
             if (translation?.alias?.toLowerCase()?.includes(pathName?.slice(1))) {
-                return true
+                return false
             }
         }
     }
     // Trường hợp không tìm thấy khớp nào
-    return false
+    return true
 }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -40,6 +40,7 @@ export default function SearchGlobal({
 }) {
     const router = useRouter()
     const pathName = usePathname()
+    console.log('🚀 ~ file: SearchGlobal.jsx:43 ~ pathName:', pathName)
     const [dataProject, setDataProject] = useState([])
     const valueSearch = useStore((state) => state.valueSearch)
     const debounceValue = useDebounce(valueSearch, 500)
@@ -62,6 +63,7 @@ export default function SearchGlobal({
     const setIsSubmit = useStore((state) => state.setIsSubmit)
     const isSubmit = useStore((state) => state.isSubmit)
     const listData = useStore((state) => state.listData)
+    console.log('🚀 ~ file: SearchGlobal.jsx:66 ~ listData:', listData)
     const mapRef = useStore((state) => state.mapRef)
 
     const [sideRef, isOutSide] = useClickOutSide()
@@ -150,6 +152,10 @@ export default function SearchGlobal({
         })
         levelZoom !== 13.5 && setLevelZoom(13.5)
     }
+    console.log(
+        listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+            ?.alias,
+    )
 
     const handleSubmit = (e) => {
         e?.preventDefault()
@@ -157,13 +163,24 @@ export default function SearchGlobal({
             notifyError('Vui lòng nhập dữ liệu để tìm kiếm!')
             return
         }
+        // handleCheckPage(pathName, listData) &&
+        //     router.push(
+        //         '/' +
+        //             listData[0]?.translations?.find((e) =>
+        //                 e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+        //             )?.alias,
+        //     )
+        console.log(handleCheckPage(pathName, listData))
         handleCheckPage(pathName, listData) &&
-            router.push(
+            router.replace(
                 '/' +
                     listData[0]?.translations?.find((e) =>
                         e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                     )?.alias,
+                undefined,
+                { shallow: true },
             )
+
         setIsSubmit(!isSubmit)
         if (dataSearch?.length >= 0) {
             handleSelectValueSearch(dataSearch[0])
@@ -327,7 +344,7 @@ export default function SearchGlobal({
                             {Array.isArray(dataSearch) &&
                                 dataSearch?.slice(0, 3)?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-2 py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-2 max-md:py-[1vw]'
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
@@ -398,7 +415,6 @@ export default function SearchGlobal({
                                             setIsSubmit(!isSubmit)
                                             setIsClose(true)
                                             handleSelectValueProject(e)
-
                                             setSelectSearch(e?.translation?.name)
                                         }}
                                         key={index}

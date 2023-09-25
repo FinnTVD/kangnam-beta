@@ -130,7 +130,6 @@ export default function ListProject({ lang, t, dataSlug }) {
                         start: 'top top',
                         end: 'bottom top',
                         scrub: true,
-                        markers: true,
                     },
                 })
             }, 500)

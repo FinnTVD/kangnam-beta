@@ -352,6 +352,9 @@ export default function MapV3() {
 
     const handleAddMarker = (dataMap, levelZoom) => {
         const a = []
+        const divElement = document.createElement('div')
+        divElement.textContent = 1
+        divElement.setAttribute('data-marker', '1')
         dataMap?.forEach((e) => {
             if (levelZoom >= 13.5) {
                 a?.push({
@@ -362,6 +365,14 @@ export default function MapV3() {
                     },
                     properties: {
                         // Các thuộc tính của marker 1
+                        element: divElement,
+                        options: {
+                            element: divElement,
+                        },
+                    },
+                    element: divElement,
+                    options: {
+                        element: divElement,
                     },
                 })
             }
@@ -374,6 +385,14 @@ export default function MapV3() {
                     },
                     properties: {
                         // Các thuộc tính của marker 1
+                        element: divElement,
+                        options: {
+                            element: divElement,
+                        },
+                    },
+                    element: divElement,
+                    options: {
+                        element: divElement,
                     },
                 })
             }
@@ -386,6 +405,14 @@ export default function MapV3() {
                     },
                     properties: {
                         // Các thuộc tính của marker 1
+                        element: divElement,
+                        options: {
+                            element: divElement,
+                        },
+                    },
+                    element: divElement,
+                    options: {
+                        element: divElement,
                     },
                 })
             }
