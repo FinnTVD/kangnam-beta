@@ -3,8 +3,24 @@
 import Image from "next/image"
 import Button from "../general/Button";
 import { useMediaQuery } from "react-responsive";
+import useSWR from "swr";
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Contact({t, lang}){
+    const {
+        data: dataHomePage,
+        error: errorHomePage,
+        isLoading: isLoadingHomePage,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/home-page`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+
+    let phoneArr = []
+    if(dataHomePage){
+        phoneArr.push(dataHomePage.phone)
+    }
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const title = "Trụ sở chính (Hà Nội)";
@@ -42,7 +58,7 @@ export default function Contact({t, lang}){
                                 </svg>
                                 <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:max-w-[69.3vw] max-md:ml-[4.2vw] max-lg:title-tl18 max-lg:w-[50%]'>{address}</span>
                             </div>
-                            {phone?.map((item, index) => (
+                            {phoneArr?.map((item, index) => (
                                 <div className='flex items-center mt-[1vw] max-md:mt-[2.6vw]' key={index}>
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'

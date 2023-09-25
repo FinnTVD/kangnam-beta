@@ -52,12 +52,12 @@ export default function ListNews({ t, lang }) {
     let cTr 
     
     if(allDataNews){
-        newsCategorized = allDataNews.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0')
+        newsCategorized = allDataNews.data.filter((item) => item.postType.id!=='645dc0f1-091a-4ead-87f2-fce21d843c72')
         pageCount = Math.ceil(newsCategorized.length/12)
     }
     if(categories){
         categories.data.forEach((item, index) => {
-            if(item.id!=='95438eda-0e44-439c-96fd-343301f8b3f0'){
+            if(item.id!=='645dc0f1-091a-4ead-87f2-fce21d843c72'){
                 if(item.translations.length>0){
                     item.translations.forEach((itm) => {
                         if(itm.languageCode === langCode )

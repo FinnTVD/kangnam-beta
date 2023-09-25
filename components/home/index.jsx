@@ -42,11 +42,11 @@ export default function IndexHome({ lang, t }) {
     return (
         <>
             <main>
-                {/* <WeAre lang={lang} /> */}
+                <WeAre lang={lang} />
                 <MyProjectV2 lang={lang} />
-                {/* <SellingRes lang={lang} />
-                <Hiring lang={lang} /> */}
-                {/* <div className='w-full max-md:flex max-md:flex-col-reverse'>
+                <SellingRes lang={lang} />
+                <Hiring lang={lang} />
+                <div className='w-full max-md:flex max-md:flex-col-reverse'>
                     <Deposit />
                     <ProjectProminent>
                         <Image
@@ -63,7 +63,7 @@ export default function IndexHome({ lang, t }) {
                 <LatestNews
                     t={t}
                     lang={lang}
-                /> */}
+                />
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>

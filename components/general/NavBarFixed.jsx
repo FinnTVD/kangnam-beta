@@ -4,6 +4,8 @@ import Link from 'next/link'
 import BoxLanguage from './language/BoxLanguage'
 import { useEffect, useRef, useState } from 'react'
 import SelectSearch from './SelectSearch'
+import { handleCheckLangCode } from '@/utils'
+import useSWR from 'swr'
 const listNav = [
     {
         id: 1,
@@ -37,6 +39,7 @@ const listNav = [
     },
 ]
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBarFixed({ isHome, lang, t, isMobile }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const [prevScrollY, setPrevScrollY] = useState(0)
@@ -66,6 +69,25 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
             }
         }
         setPrevScrollY(scrollTop)
+    }
+    const languageCode = handleCheckLangCode(lang)
+    const {
+        data: agreementData,
+        error: errorNews,
+        isLoading: isLoading,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=645dc0f1-091a-4ead-87f2-fce21d843c72`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+    let agreementDataTranslation = []
+    if(agreementData){
+        agreementData.data.forEach((item) => {
+            item.translations.forEach((itm) => {
+                if(itm.languageCode === languageCode)
+                    agreementDataTranslation.push({title: itm.title, slug: itm.slug})
+            })
+        })
     }
     return (
         <div
@@ -207,6 +229,21 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                                                                     {item?.title}
                                                                 </Link>
                                                             </li>
+                                                        ))}
+                                                        {agreementDataTranslation.map((item) => (
+                                                            <li 
+                                                                    key={item?.id}
+                                                                    className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
+                                                                >             
+                                                                    <Link
+                                                                        className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
+                                                                        href={`${
+                                                                            lang !== 'vi' ? '/' + lang + '/' + item?.slug : item?.slug
+                                                                        }`}
+                                                                    >
+                                                                        {item?.title}
+                                                                    </Link>                               
+                                                            </li> 
                                                         ))}
                                                     </ul>
                                                 </div>

@@ -48,7 +48,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
         data: agreementData,
         error: errorNews,
         isLoading: isLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=645dc0f1-091a-4ead-87f2-fce21d843c72`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

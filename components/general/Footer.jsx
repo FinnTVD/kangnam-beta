@@ -13,7 +13,7 @@ export default function Footer({ lang, t }) {
     const pathName = usePathname()
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
-    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
+    // const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
     const menuArr = t.footerNav
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
     const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
@@ -22,7 +22,7 @@ export default function Footer({ lang, t }) {
         data: agreementData,
         error: errorNews,
         isLoading: isLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=645dc0f1-091a-4ead-87f2-fce21d843c72`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -35,6 +35,20 @@ export default function Footer({ lang, t }) {
                     agreementDataTranslation.push({title: itm.title, slug: itm.slug})
             })
         })
+    }
+    const {
+        data: dataHomePage,
+        error: errorHomePage,
+        isLoading: isLoadingHomePage,
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/home-page`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        })
+
+    let phoneArr = []
+    if(dataHomePage){
+        phoneArr.push(dataHomePage.phone)
     }
 
     const linkFacebookHandler = () => {

@@ -17,7 +17,7 @@ export default async function Agreement({ params }) {
                 t={t}
                 post={post}
                 newsDetail={agreementDetail}
-                breadcrumb={agreementDetail.title}
+                breadcrumb={agreementDetail?.title}
             />
             {agreementDetail && <IndexAgreement agreementDetail={agreementDetail} post={post} lang={params.lang}/>}
         </>
