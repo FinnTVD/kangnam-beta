@@ -47,7 +47,10 @@ export default function IndexHome({ lang, t }) {
             <Hiring lang={lang} />
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
                 <Deposit />
-                <ProjectProminent lang={lang}>
+                <ProjectProminent
+                    lang={lang}
+                    t={t}
+                >
                     <Image
                         src='/images/bg-sky.png'
                         alt='sky'

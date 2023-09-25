@@ -701,3 +701,15 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     transition: all 1s;
     transform: translateX(9vw) translateY(-6vw);
 }
+
+#contentNewsDetail h1,
+#contentNewsDetail h2,
+#contentNewsDetail h3,
+#contentNewsDetail h4,
+#contentNewsDetail h5,
+#contentNewsDetail h6{
+    color: #444;
+    font-size: 1.5vw;
+    font-weight: 700;
+    line-height: 1.375;
+}

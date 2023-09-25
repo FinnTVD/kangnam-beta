@@ -130,7 +130,6 @@ export default function ListProject({ lang, t, dataSlug }) {
                         start: 'top top',
                         end: 'bottom top',
                         scrub: true,
-                        markers: true,
                     },
                 })
             }, 500)
@@ -167,7 +166,7 @@ export default function ListProject({ lang, t, dataSlug }) {
         <section
             id='list-project'
             ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[69vw] max-lg:mt-[10vw]'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw]'
         >
             <div className='flex justify-between w-full'>
                 <div

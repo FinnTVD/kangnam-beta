@@ -73,6 +73,7 @@ export default function Hiring({ lang }) {
             revalidateOnReconnect: false,
         },
     )
+    console.log('🚀 ~ file: Hiring.jsx:64 ~ Hiring ~ data:', data)
 
     useEffect(() => {
         mutate(
@@ -251,7 +252,7 @@ export default function Hiring({ lang }) {
             )}
             <div className='px-mb10 mt-[8.53vw] mb-[16vw] max-lg:px-[3.2vw] max-lg:mt-[5vw] max-lg:mb-[8vw]'>
                 <Button
-                    href='/projects'
+                    href={'' || '/projects'}
                     full={true}
                     className='border-none bg-logo'
                     span='text-white '

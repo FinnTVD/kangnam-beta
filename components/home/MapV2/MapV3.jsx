@@ -352,16 +352,16 @@ export default function MapV3() {
 
     const handleAddMarker = (dataMap, levelZoom) => {
         const a = []
+        const divElement = document.createElement('div')
+        divElement.textContent = 1
+        divElement.setAttribute('data-marker', '1')
         dataMap?.forEach((e) => {
             if (levelZoom >= 13.5) {
                 a?.push({
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.lng, e?.lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
+                        coordinates: [Number(e?.lng), Number(e?.lat)], // Tọa độ của marker 1
                     },
                 })
             }
@@ -370,10 +370,7 @@ export default function MapV3() {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.ward_lng, e?.ward_lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
+                        coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)], // Tọa độ của marker 1
                     },
                 })
             }
@@ -382,10 +379,7 @@ export default function MapV3() {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.district_lng, e?.district_lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
+                        coordinates: [Number(e?.district_lng), Number(e?.district_lat)], // Tọa độ của marker 1
                     },
                 })
             }

@@ -36,7 +36,7 @@ const arrLanguage = [
     },
 ]
 
-export default function SelectLanguage({ className, lang }) {
+export default function SelectLanguage({ className, lang, t }) {
     const setLanguage = useStore((state) => state.setLanguage)
     const slugDetailProject = useStore((state) => state.slugDetailProject)
     const slugDetailNews = useStore((state) => state.slugDetailNews)
@@ -47,10 +47,26 @@ export default function SelectLanguage({ className, lang }) {
             const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lgCode))
             const lgNew = lg === 'vi' ? '' : lg + '/'
             if (item?.slug) {
-                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+                return (
+                    '/' +
+                    lgNew +
+                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                    )?.alias +
+                    '/' +
+                    item?.slug
+                )
             } else {
                 const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
-                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + itemVN?.slug
+                return (
+                    '/' +
+                    lgNew +
+                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                    )?.alias +
+                    '/' +
+                    itemVN?.slug
+                )
             }
         }
         if (slugDetailNews) {

@@ -159,6 +159,8 @@ const listIdNav = [
     '05d52397-71a8-4ecf-9a86-ee37965332ef',
 ]
 
+const postTypeIdAgreement = '645dc0f1-091a-4ead-87f2-fce21d843c72'
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -173,4 +175,5 @@ export {
     handleListPhone,
     listIdNav,
     findIdByAlias,
+    postTypeIdAgreement,
 }

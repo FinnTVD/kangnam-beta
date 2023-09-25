@@ -1,12 +1,11 @@
 'use client'
 import ListNewsCategorized from './ListNewsCategorized'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import classes from './ListNewsStyles.module.css'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
-import { data } from 'autoprefixer'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const listNews = new Array(12).fill(0)
@@ -30,42 +29,43 @@ export default function ListNews({ t, lang }) {
         data: dataNewsCategorized,
         error: errorNewsCategorized,
         isLoading: isLoadingNewsCategorized,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&postTypeIds[]=${category?.id}`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-        })
-    
+    } = useSWR(
+        process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&postTypeIds[]=${category?.id}`,
+        fetcher,
+        {
+            revalidateIfStale: false,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false,
+        },
+    )
+
     const {
         data: allDataNews,
         error: errorAllNews,
         isLoading: isLoadingAllNews,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=500`, fetcher, {
-            revalidateIfStale: false,
-            revalidateOnFocus: false,
-            revalidateOnReconnect: false,
-        })
-    
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=50`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+
     let newsCategorized
     let pageCount
     let categoryTranslation = []
-    let cTr 
-    
-    if(allDataNews){
-        newsCategorized = allDataNews.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0')
-        pageCount = Math.ceil(newsCategorized.length/12)
+
+    if (allDataNews) {
+        newsCategorized = allDataNews.data.filter((item) => item.postType.id !== postTypeIdAgreement)
+        pageCount = Math.ceil(newsCategorized.length / 12)
     }
-    if(categories){
+    if (categories) {
         categories.data.forEach((item, index) => {
-            if(item.id!=='95438eda-0e44-439c-96fd-343301f8b3f0'){
-                if(item.translations.length>0){
+            if (item.id !== postTypeIdAgreement) {
+                if (item.translations.length > 0) {
                     item.translations.forEach((itm) => {
-                        if(itm.languageCode === langCode )
-                            categoryTranslation.push({id: item.id, title: itm.name})
+                        if (itm.languageCode === langCode) categoryTranslation.push({ id: item.id, title: itm.name })
                     })
-                }
-                else{
-                    categoryTranslation.push({id: item.id, title: item.title})
+                } else {
+                    categoryTranslation.push({ id: item.id, title: item.title })
                 }
             }
         })
@@ -74,14 +74,14 @@ export default function ListNews({ t, lang }) {
     // let newsCategorized
     // let pageCount
     // if(dataNews){
-    //     newsCategorized = dataNews.data.filter((item) => item.postType.id!=='95438eda-0e44-439c-96fd-343301f8b3f0')
+    //     newsCategorized = dataNews.data.filter((item) => item.postType.id!==postTypeIdAgreement)
     //     pageCount = Math.ceil(newsCategorized.length/12)
     // }
-        // useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12`, fetcher, {
-        //     revalidateIfStale: false,
-        //     revalidateOnFocus: false,
-        //     revalidateOnReconnect: false,
-        // })
+    // useSWR(process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12`, fetcher, {
+    //     revalidateIfStale: false,
+    //     revalidateOnFocus: false,
+    //     revalidateOnReconnect: false,
+    // })
 
     // useEffect(() => {
     //     if(categories){
@@ -103,7 +103,7 @@ export default function ListNews({ t, lang }) {
                         {t.newsList.subtitle} {category?.title}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw] max-lg:title-tl38'>
-                        {t.newsList.title} {category?.title} 
+                        {t.newsList.title} {category?.title}
                     </h2>
                 </div>
                 <div
@@ -250,30 +250,34 @@ export default function ListNews({ t, lang }) {
             )}
             {/* {category && (
                 <> */}
-                    {(dataNewsCategorized && newsCategorized) && 
-                        <ListNewsCategorized
-                            list={category ? dataNewsCategorized?.data : newsCategorized?.slice((pageNumber-1)*12, pageNumber*12)}
-                            t={t}
-                            lang={lang}
-                        />
+            {dataNewsCategorized && newsCategorized && (
+                <ListNewsCategorized
+                    list={
+                        category
+                            ? dataNewsCategorized?.data
+                            : newsCategorized?.slice((pageNumber - 1) * 12, pageNumber * 12)
                     }
-                    <ReactPaginate
-                        breakLabel='...'
-                        nextLabel='Next'
-                        onPageChange={(e) => setPageNumber(e.selected + 1)}
-                        pageRangeDisplayed={5}
-                        pageCount={category ? dataNewsCategorized?.meta?.pageCount : pageCount}
-                        renderOnZeroPageCount={null}
-                        previousLabel='Previous'
-                        forcePage={pageNumber - 1}
-                        pageClassName={classes.page}
-                        activeClassName={classes.selected}
-                        onClick={() => {
-                            newsCategorizedRef?.current?.scrollIntoView({ behavior: 'smooth' })
-                        }}
-                        className={classes['news-pagination']}
-                    />
-                {/* </>
+                    t={t}
+                    lang={lang}
+                />
+            )}
+            <ReactPaginate
+                breakLabel='...'
+                nextLabel='Next'
+                onPageChange={(e) => setPageNumber(e.selected + 1)}
+                pageRangeDisplayed={5}
+                pageCount={category ? dataNewsCategorized?.meta?.pageCount : pageCount}
+                renderOnZeroPageCount={null}
+                previousLabel='Previous'
+                forcePage={pageNumber - 1}
+                pageClassName={classes.page}
+                activeClassName={classes.selected}
+                onClick={() => {
+                    newsCategorizedRef?.current?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className={classes['news-pagination']}
+            />
+            {/* </>
             )} */}
         </section>
     )

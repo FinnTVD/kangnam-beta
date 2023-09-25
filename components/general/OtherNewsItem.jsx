@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
-import { usePathname } from 'next/navigation'
 import useSWR from 'swr'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -21,25 +20,28 @@ export default function OtherNewsItem({ newsOtherItem, lang, index }) {
     })
     let category
     let categoryTranslation
-    if(categories){       
-        category = categories.data.find((item) => item.id === newsOtherItem.postType.id)
-        if(category.translations.length>0){
-            categoryTranslation = category.translations?.find((itm) => itm.languageCode===languageCode).name
-        }
-        else{
-            categoryTranslation = category.title
+    if (categories) {
+        category = categories?.data?.find((item) => item.id === newsOtherItem?.postType.id)
+        if (category?.translations?.length > 0) {
+            categoryTranslation = category.translations?.find((itm) => itm?.languageCode === languageCode)?.name
+        } else {
+            categoryTranslation = category?.title
         }
     }
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div data-aos='fade' data-aos-delay={index<=1 ? `${(index+1)*300}` : `${((index+1)%3)*300}`} className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'>
+            <div
+                data-aos='fade'
+                data-aos-delay={index <= 1 ? `${(index + 1) * 300}` : `${((index + 1) % 3) * 300}`}
+                className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'
+            >
                 <div className='flex h-[11vw] items-center max-md:h-[30.1vw] max-lg:h-[20vw]'>
                     <div className='w-[45%] h-full relative rounded-lg overflow-hidden max-md:rounded-[6.5px]'>
                         <Image
                             src={newsOtherItem?.image ? newsOtherItem?.image : '/images/featuredImg.jpg'}
                             fill
-                            sizes='12.5vw'
+                            sizes='30vw'
                             alt={translation?.title || 'thumbnail news'}
                             className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden'
                         />

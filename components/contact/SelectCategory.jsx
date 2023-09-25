@@ -20,6 +20,10 @@ const selectCategory = [
         id: 4,
         title: 'Cho Thuê',
     },
+    {
+        id: 5,
+        title: 'Trở thành đối tác',
+    },
 ]
 export default function SelectCategory({ setValueCategory, valueCategory }) {
     const [isOpen, setIsOpen] = useState(false)
