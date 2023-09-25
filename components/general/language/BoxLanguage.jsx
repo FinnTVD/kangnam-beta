@@ -88,6 +88,7 @@ export default function BoxLanguage({ type = '', lang, t }) {
             <SelectLanguage
                 className={!isShowLanguage || isOutSide ? 'hidden' : ''}
                 lang={lang}
+                t={t}
             />
         </div>
     )

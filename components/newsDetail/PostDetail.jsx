@@ -7,8 +7,11 @@ import useStore from '@/app/[lang]/(store)/store'
 export default function PostDetail({ t, post, newsDetail, lang, category }) {
     const langCode = handleCheckLangCode(lang)
     let categoryTranslation
-    if(category){
-        categoryTranslation = category.translations.length>0 ? category.translations.find((item) => item.langCode===langCode).name : category.title
+    if (category) {
+        categoryTranslation =
+            category?.translations?.length > 0
+                ? category?.translations?.find((item) => item?.langCode === langCode)?.name
+                : category?.title
     }
     const router = useRouter()
     const urlRef = useRef('')
@@ -56,6 +59,7 @@ export default function PostDetail({ t, post, newsDetail, lang, category }) {
                 </span>
             </div>
             <div
+                id='contentNewsDetail'
                 className={`${classes['post-detail']} mt-[0.625vw] pt-[1vw] pb-[2vw] border-b border-t border-neutral-700 border-opacity-10 max-md:pt-[2.6vw] max-md:pb-[4.2vw] max-md:mt-[2.6vw]`}
                 dangerouslySetInnerHTML={{ __html: newsDetail?.description }}
             ></div>

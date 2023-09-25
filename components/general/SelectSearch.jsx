@@ -39,7 +39,7 @@ const objProject = {
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-export default function SelectSearch({ type = 'dark', menu = false, lang }) {
+export default function SelectSearch({ type = 'dark', menu = false, lang, dark }) {
     // const router = useRouter()
     const pathName = usePathname()
     // const searchParams = useSearchParams()

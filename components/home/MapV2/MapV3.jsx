@@ -361,18 +361,7 @@ export default function MapV3() {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.lng, e?.lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
-                        element: divElement,
-                        options: {
-                            element: divElement,
-                        },
-                    },
-                    element: divElement,
-                    options: {
-                        element: divElement,
+                        coordinates: [Number(e?.lng), Number(e?.lat)], // Tọa độ của marker 1
                     },
                 })
             }
@@ -381,18 +370,7 @@ export default function MapV3() {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.ward_lng, e?.ward_lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
-                        element: divElement,
-                        options: {
-                            element: divElement,
-                        },
-                    },
-                    element: divElement,
-                    options: {
-                        element: divElement,
+                        coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)], // Tọa độ của marker 1
                     },
                 })
             }
@@ -401,18 +379,7 @@ export default function MapV3() {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [e?.district_lng, e?.district_lat], // Tọa độ của marker 1
-                    },
-                    properties: {
-                        // Các thuộc tính của marker 1
-                        element: divElement,
-                        options: {
-                            element: divElement,
-                        },
-                    },
-                    element: divElement,
-                    options: {
-                        element: divElement,
+                        coordinates: [Number(e?.district_lng), Number(e?.district_lat)], // Tọa độ của marker 1
                     },
                 })
             }

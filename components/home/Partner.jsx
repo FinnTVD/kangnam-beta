@@ -5,41 +5,40 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import { useMediaQuery } from 'react-responsive'
 import useStore from '@/app/[lang]/(store)/store'
-
+// const imgArray = [
+//     '/images/partnerlogo.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/logoVin.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/logoVin.jpg',
+//     '/images/partnerlogo.jpg',
+//     '/images/logoVin.jpg',
+//     '/images/logoVin.jpg',
+//     '/images/logoVin.jpg',
+//     '/images/logoVin.jpg',
+// ]
 export default function Partner({ t }) {
     const dataHomePage = useStore((state) => state.dataHomePage)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-    const imgArray = [
-        '/images/partnerlogo.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/logoVin.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/logoVin.jpg',
-        '/images/partnerlogo.jpg',
-        '/images/logoVin.jpg',
-        '/images/logoVin.jpg',
-        '/images/logoVin.jpg',
-        '/images/logoVin.jpg',
-    ]
 
     const imgBorder = !isMobile
         ? [
-              'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tl-2xl',
-              'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tr-2xl',
-              'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-bl-2xl',
-              'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-br-2xl',
-              'bg-white h-[13.5625vw] flex justify-center items-center border border-0.5',
+              'bg-white group h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tl-2xl',
+              'bg-white group h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-tr-2xl',
+              'bg-white group h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-bl-2xl',
+              'bg-white group h-[13.5625vw] flex justify-center items-center border border-0.5 rounded-br-2xl',
+              'bg-white group h-[13.5625vw] flex justify-center items-center border border-0.5',
           ]
         : [
-              'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-tl-[16px]',
-              'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-tr-[16px]',
-              'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-bl-[16px]',
-              'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-br-[16px]',
-              'bg-white bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5',
+              'bg-white group bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-tl-[16px]',
+              'bg-white group bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-tr-[16px]',
+              'bg-white group bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-bl-[16px]',
+              'bg-white group bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5 rounded-br-[16px]',
+              'bg-white group bg-opacity-80 h-[22.6vw] flex justify-center items-center border border-0.5',
           ]
     const arrPartner = []
     const numberOfPartner = isMobile
@@ -131,7 +130,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[55%] h-[45%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         alt={`partner${index}`}
                                                         sizes='50vw'
@@ -148,7 +147,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[55%] h-[45%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         alt={`partner${index}`}
                                                         sizes='50vw'
@@ -165,7 +164,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[55%] h-[45%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         alt={`partner${index}`}
                                                         sizes='50vw'
@@ -182,7 +181,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[55%] h-[45%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         alt={`partner${index}`}
                                                         sizes='50vw'
@@ -199,7 +198,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[55%] h-[45%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         alt={`partner${index}`}
                                                         sizes='50vw'
@@ -218,7 +217,7 @@ export default function Partner({ t }) {
                                             >
                                                 <div className='w-[67.7%] h-[56.6%] relative'>
                                                     <Image
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                         alt={`partner${index}`}
                                                         src={item || '/images/partnerlogo.jpg'}
                                                         sizes='50vw'
@@ -239,7 +238,7 @@ export default function Partner({ t }) {
                                                         sizes='50vw'
                                                         fill
                                                         src={item || '/images/partnerlogo.jpg'}
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                     ></Image>
                                                 </div>
                                             </div>
@@ -256,7 +255,7 @@ export default function Partner({ t }) {
                                                         sizes='50vw'
                                                         fill
                                                         src={item || '/images/partnerlogo.jpg'}
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                     ></Image>
                                                 </div>
                                             </div>
@@ -273,7 +272,7 @@ export default function Partner({ t }) {
                                                         sizes='50vw'
                                                         fill
                                                         src={item || '/images/partnerlogo.jpg'}
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                     ></Image>
                                                 </div>
                                             </div>
@@ -290,7 +289,7 @@ export default function Partner({ t }) {
                                                         sizes='50vw'
                                                         fill
                                                         src={item || '/images/partnerlogo.jpg'}
-                                                        className='object-contain duration-300 grayscale hover:grayscale-0 transition-grayscale'
+                                                        className='object-contain duration-300 lg:grayscale lg:group-hover:grayscale-0 lg:transition-grayscale'
                                                     ></Image>
                                                 </div>
                                             </div>
@@ -305,7 +304,7 @@ export default function Partner({ t }) {
             {isTablet && (
                 <Button
                     stroke='white'
-                    href={'/'}
+                    href={'/contact'}
                     span='max-md:text-14mb font-normal tracking-[-0.28px] max-lg:text-16tl'
                     icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]'
                     className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw]'

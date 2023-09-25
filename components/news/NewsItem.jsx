@@ -2,15 +2,13 @@ import { formatDateTime, handleCheckLangCode } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useMediaQuery } from 'react-responsive'
-import { usePathname } from 'next/navigation'
 import useSWR from 'swr'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NewsItem({ newsOtherItem, lang, index }) {
-    const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const languageCode = handleCheckLangCode(lang)
 
-    const translation = newsOtherItem?.translations?.find((itm) => itm.languageCode === languageCode)
+    const translation = newsOtherItem?.translations?.find((itm) => itm?.languageCode === languageCode)
     const {
         data: categories,
         error: errorCategories,
@@ -22,19 +20,22 @@ export default function NewsItem({ newsOtherItem, lang, index }) {
     })
     let category
     let categoryTranslation
-    if(categories){       
-        category = categories.data.find((item) => item.id === newsOtherItem.postType.id)
-        if(category.translations.length>0){
-            categoryTranslation = category.translations?.find((itm) => itm.languageCode===languageCode).name
-        }
-        else{
-            categoryTranslation = category.title
+    if (categories) {
+        category = categories?.data?.find((item) => item?.id === newsOtherItem?.postType?.id)
+        if (category?.translations?.length > 0) {
+            categoryTranslation = category?.translations?.find((itm) => itm?.languageCode === languageCode)?.name
+        } else {
+            categoryTranslation = category?.title
         }
     }
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div data-aos='fade' data-aos-delay={`${(index%3)*300}`} className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'>
+            <div
+                data-aos='fade'
+                data-aos-delay={`${(index % 3) * 300}`}
+                className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'
+            >
                 {/* <div className="flex h-[11vw] items-center"> */}
                 <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw] max-lg:h-[40vw]'>
                     <Image

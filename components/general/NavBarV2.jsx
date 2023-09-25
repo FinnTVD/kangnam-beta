@@ -1,15 +1,13 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BoxLanguage from './language/BoxLanguage'
 import { useMediaQuery } from 'react-responsive'
 import MenuRes from './MenuRes'
 import SearchGlobal from '../home/SearchGlobal'
-import useSWR from 'swr'
-import { listIdNav, handleCheckLangCode } from '@/utils'
+import MegaMenu from './MegaMenu'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const objClass = {
     classContainer:
         'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo',
@@ -24,59 +22,10 @@ const objClass = {
 }
 
 export default function NavBarV2({ lang, t }) {
-    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
-    const languageCode = handleCheckLangCode(lang)
-    const {
-        data: agreementData,
-        error: errorNews,
-        isLoading: isLoadingNews,
-    } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`,
-        fetcher,
-        {
-            revalidateIfStale: false,
-            revalidateOnFocus: false,
-            revalidateOnReconnect: false,
-        },
-    )
-    let agreementDataTranslation = []
-    if (agreementData) {
-        agreementData.data.forEach((item) => {
-            item.translations.forEach((itm) => {
-                if (itm.languageCode === languageCode)
-                    agreementDataTranslation.push({ title: itm.title, slug: itm.slug })
-            })
-        })
-    }
     const [isOpen, setIsOpen] = useState(false)
-    const [listNav, setListNav] = useState([])
-
-    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-    useEffect(() => {
-        if (!data) return
-        let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
-        let b = []
-        a.forEach((e, index) => {
-            b.push({
-                id: index + 1,
-                title: e?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.name,
-                href: e?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.alias,
-            })
-        })
-        setListNav([...b, ...t?.Navbar?.listNav])
-    }, [lang, data])
-    if (!listNav?.length) return
 
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04 max-md:pl-[4vw] max-md:pr-[2.5vw]'>
@@ -110,91 +59,11 @@ export default function NavBarV2({ lang, t }) {
                 />
                 {!isTablet ? (
                     <div className='flex gap-x-[3.13vw] items-center'>
-                        <ul className='flex'>
-                            {listNav?.length > 0 &&
-                                listNav?.map((e, index) => (
-                                    <li
-                                        key={index}
-                                        className={`relative select-none group`}
-                                    >
-                                        {e?.branch ? (
-                                            <>
-                                                <div className='px-[0.94vw] py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]'>
-                                                    <span className='inline-block whitespace-nowrap title16-600-130 text-den'>
-                                                        {e?.title}
-                                                    </span>
-                                                    <svg
-                                                        xmlns='http://www.w3.org/2000/svg'
-                                                        fill='none'
-                                                        viewBox='0 0 24 24'
-                                                        strokeWidth='3'
-                                                        stroke='#444'
-                                                        className='w-[1.2vw] h-[1.2vw]'
-                                                    >
-                                                        <path
-                                                            strokeLinecap='round'
-                                                            strokeLinejoin='round'
-                                                            d='M19.5 8.25l-7.5 7.5-7.5-7.5'
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <div
-                                                    style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
-                                                    className='absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white w-fit  after:block after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
-                                                >
-                                                    <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
-                                                        {e?.title}
-                                                    </span>
-                                                    <ul className='w-full'>
-                                                        {e?.branch?.map((item) => (
-                                                            <li
-                                                                key={item?.id}
-                                                                className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
-                                                            >
-                                                                <Link
-                                                                    className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                                    href={`${
-                                                                        lang !== 'vi'
-                                                                            ? '/' + lang + item?.href
-                                                                            : item?.href
-                                                                    }`}
-                                                                >
-                                                                    {item?.title}
-                                                                </Link>
-                                                            </li>
-                                                        ))}
-                                                        {agreementDataTranslation.map((item) => (
-                                                            <li
-                                                                key={item?.id}
-                                                                className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
-                                                            >
-                                                                <Link
-                                                                    className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                                    href={`${
-                                                                        lang !== 'vi'
-                                                                            ? '/' + lang + item?.slug
-                                                                            : item?.slug
-                                                                    }`}
-                                                                >
-                                                                    {item?.title}
-                                                                </Link>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <Link
-                                                scroll={false}
-                                                className='px-[0.94vw] py-[1vw] block title16-600-130 text-den whitespace-nowrap'
-                                                href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
-                                            >
-                                                {e.title}
-                                            </Link>
-                                        )}
-                                    </li>
-                                ))}
-                        </ul>
+                        <MegaMenu
+                            lang={lang}
+                            t={t}
+                            fixed={true}
+                        />
                         <div className='flex gap-x-[1.25vw] items-center'>
                             <Link
                                 href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}

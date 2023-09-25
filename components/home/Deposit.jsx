@@ -207,6 +207,7 @@ export default function Deposit() {
                     span='-tracking-[0.32px] font-semibold max-md:-tracking-[0.28px]'
                     icon='w-[1.2vw] h-[1.2vw]'
                     stroke='white'
+                    href='/deposit'
                 >
                     Đăng kí ngay
                 </Button>
