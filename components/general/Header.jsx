@@ -82,9 +82,9 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     height={550}
                     priority
                 />
-                <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div>
+                {/* <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div> */}
                 {/* linear-white */}
-                <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>
+                {/* <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div> */}
                 {isTablet ? (
                     <NavBarRes
                         isHome={isHome}
