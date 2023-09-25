@@ -41,14 +41,14 @@ export default function SelectDistrict({
                                     : 'cursor-pointer'
                             } whitespace-nowrap`}
                             onClick={() => {
-                                if (districtId && !wardId) return
+                                if (districtId === e?.district_id) return
                                 setTitleDistrict({
                                     title: e?.district,
                                     id: e?.district_id,
                                 })
                                 setIsOpen(false)
                                 setDistrictId(Number(e?.district_id))
-                                handleChangeDistrict(e?.district_id, data)
+                                handleChangeDistrict(e?.district_id)
                             }}
                             key={index}
                         >

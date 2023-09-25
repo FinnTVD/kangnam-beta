@@ -4,46 +4,38 @@ import Link from 'next/link'
 import BoxLanguage from './language/BoxLanguage'
 import { useEffect, useRef, useState } from 'react'
 import SelectSearch from './SelectSearch'
-import { handleCheckLangCode } from '@/utils'
 import useSWR from 'swr'
-const listNav = [
-    {
-        id: 1,
-        title: 'Về chúng tôi',
-        href: '/about-us',
-    },
-    {
-        id: 2,
-        title: 'Dự án',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 3,
-        title: 'Bán lại',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 4,
-        title: 'Thỏa thuận & Pháp lí',
-        href: '/agreement',
-    },
-    {
-        id: 5,
-        title: 'Tin tức',
-        href: '/news',
-    },
-    {
-        id: 6,
-        title: 'Liên hệ',
-        href: '/lien-he',
-    },
-]
+import { listIdNav } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBarFixed({ isHome, lang, t, isMobile }) {
     const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
     const [prevScrollY, setPrevScrollY] = useState(0)
     const navRef = useRef()
+    const [listNav, setListNav] = useState([])
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+    useEffect(() => {
+        if (!data) return
+        let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
+        let b = []
+        a.forEach((e, index) => {
+            b.push({
+                id: index + 1,
+                title: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.name,
+                href: e?.translations?.find((e) =>
+                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                )?.alias,
+            })
+        })
+        setListNav([...b, ...t?.Navbar?.listNav])
+    }, [lang, data])
+
     useEffect(() => {
         if (typeof window === 'undefined') return
         document.addEventListener('scroll', handleScroll)
@@ -70,25 +62,8 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
         }
         setPrevScrollY(scrollTop)
     }
-    const languageCode = handleCheckLangCode(lang)
-    const {
-        data: agreementData,
-        error: errorNews,
-        isLoading: isLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=645dc0f1-091a-4ead-87f2-fce21d843c72`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-        })
-    let agreementDataTranslation = []
-    if(agreementData){
-        agreementData.data.forEach((item) => {
-            item.translations.forEach((itm) => {
-                if(itm.languageCode === languageCode)
-                    agreementDataTranslation.push({title: itm.title, slug: itm.slug})
-            })
-        })
-    }
+    if (!listNav?.length) return
+
     return (
         <div
             id='nav'
@@ -120,7 +95,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                 {!isHome && (
                     <div className='w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo backdrop-blur-[11px] mr-[0.5vw]'>
                         <div className='flex items-center w-full'>
-                            <SelectSearch />
+                            <SelectSearch lang={lang} />
                             <div className='border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw]'></div>
                             <div className='flex-1 flex items-center gap-x-[0.5vw]'>
                                 <label htmlFor='search'>
@@ -159,27 +134,11 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                         </div>
                     </div>
                 )}
-                {/* <ul
-                    id='list-title-nav'
-                    className={`${isHome ? 'gap-x-[2.5vw]' : 'gap-x-[1.88vw]'} flex`}
-                >
-                    {listNav &&
-                        listNav?.map((e, index) => (
-                            <li key={index}>
-                                <Link
-                                    className='block text-den title16-600-130'
-                                    href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
-                                >
-                                    {e.title}
-                                </Link>
-                            </li>
-                        ))}
-                </ul> */}
                 {!isMobile ? (
                     <div className='flex gap-x-[3.13vw] items-center'>
                         <ul className='flex'>
-                            {t &&
-                                t?.Navbar?.listNav?.map((e, index) => (
+                            {listNav?.length > 0 &&
+                                listNav?.map((e, index) => (
                                     <li
                                         key={index}
                                         className={`relative select-none group`}
@@ -230,21 +189,6 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                                                                 </Link>
                                                             </li>
                                                         ))}
-                                                        {agreementDataTranslation.map((item) => (
-                                                            <li 
-                                                                    key={item?.id}
-                                                                    className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
-                                                                >             
-                                                                    <Link
-                                                                        className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                                        href={`${
-                                                                            lang !== 'vi' ? '/' + lang + '/' + item?.slug : item?.slug
-                                                                        }`}
-                                                                    >
-                                                                        {item?.title}
-                                                                    </Link>                               
-                                                            </li> 
-                                                        ))}
                                                     </ul>
                                                 </div>
                                             </>
@@ -262,7 +206,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                         </ul>
                         <div className='flex gap-x-[1.25vw] items-center'>
                             <Link
-                                href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                                href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                                 className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
                             >
                                 Kí gửi nhà đất
@@ -296,7 +240,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                 )}
                 {/* <div className='flex gap-x-[1.5vw] items-center'>
                     <Link
-                        href={`${lang !== 'vi' ? '/' + lang + '/dang-tin' : '/dang-tin'}`}
+                        href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                         className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[6.25vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150'
                     >
                         Kí gửi nhà đất

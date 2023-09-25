@@ -5,7 +5,7 @@ const listSocial = [
     {
         id: 1,
         src: '/images/talk.svg',
-        title: 'kakao talk',
+        title: 'kakaotalk',
     },
     {
         id: 2,
@@ -30,11 +30,11 @@ const listSocial = [
     {
         id: 6,
         src: '/images/linkedin.svg',
-        title: 'linkedin',
+        title: 'linkedIn',
     },
 ]
 
-export default function SocialMedia() {
+export default function SocialMedia({ dataInfo }) {
     return (
         <ul
             id='list-social'
@@ -47,7 +47,8 @@ export default function SocialMedia() {
                         className='relative group/item w-fit h-fit before:w-[3.5vw] before:h-[3.5vw] before:absolute before:transition-all before:duration-300 before:rounded-full before:bg-logo before:z-10 rounded-full overflow-hidden before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:scale-0 hover:before:scale-110 border-[2px] border-solid border-[#D6A279] hover:border-white'
                     >
                         <Link
-                            href={`/${e.title}`}
+                            href={dataInfo[e?.title] || '/'}
+                            target='_blank'
                             className='flex group justify-center items-center w-[3.5vw] h-[3.5vw] bg-white rounded-full relative'
                         >
                             <Image

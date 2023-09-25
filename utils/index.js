@@ -40,10 +40,30 @@ const handleCheckLangCode = (lang) => {
     }
 }
 
-const handleCheckParams = (pathName) => {
-    if (pathName?.includes('buy')) return '&propertyCategoryIds=823a2e96-0913-47a2-a25c-780eb911434f'
-    if (pathName?.includes('hire')) return '&propertyCategoryIds=013b523f-e340-4e7e-80a6-99096a7ce3fe'
-    if (pathName?.includes('resale')) return '&propertyCategoryIds=74caa33c-64dc-4d16-a9c7-b730ae377b75'
+const handleCheckParams = (pathName, dataSlug) => {
+    if (!dataSlug || !pathName) return
+    let pathNew = pathName?.toString()?.slice(1)?.toLowerCase()
+
+    dataSlug?.data?.forEach((e) => {
+        if (e?.translations?.find((i) => i?.alias?.toLowerCase()?.includes(pathNew))) {
+            return '&propertyCategoryIds=' + e?.id
+        }
+    })
+    // if (pathName?.includes('buy')) return '&propertyCategoryIds=87dd143a-695b-44f9-94a1-c8a9af862154'
+    // if (pathName?.includes('hire')) return '&propertyCategoryIds=05d52397-71a8-4ecf-9a86-ee37965332ef'
+    // if (pathName?.includes('resale')) return '&propertyCategoryIds=7fec6f07-be5c-49e1-8ceb-d87ebccaf9a6'
+    // return ''
+}
+
+const findIdByAlias = (pathName, dataSlug) => {
+    for (const item of dataSlug) {
+        for (const translation of item?.translations) {
+            if (translation?.alias?.toLowerCase()?.includes(pathName?.slice(1))) {
+                return '&propertyCategoryIds=' + item?.id
+            }
+        }
+    }
+    // Trường hợp không tìm thấy khớp nào
     return ''
 }
 
@@ -125,6 +145,20 @@ const scrollToSection = (element) => {
     })
 }
 
+const handleListPhone = (str) => {
+    if (!str) return
+    if (str.split('|')?.length) return str.split('|')
+    if (str.split('/')?.length) return str.split('/')
+    if (str.split('--')?.length) return str.split('--')
+    if (str.split('-')?.length) return str.split('-')
+}
+
+const listIdNav = [
+    '87dd143a-695b-44f9-94a1-c8a9af862154',
+    '7fec6f07-be5c-49e1-8ceb-d87ebccaf9a6',
+    '05d52397-71a8-4ecf-9a86-ee37965332ef',
+]
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -136,4 +170,7 @@ export {
     notifyError,
     notifySuccess,
     scrollToSection,
+    handleListPhone,
+    listIdNav,
+    findIdByAlias,
 }

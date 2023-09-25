@@ -62,7 +62,7 @@ export default function SelectCity({
                                     id: e?.city_id,
                                 })
                                 setIsOpen(false)
-                                handleChangeCity(e?.city_id, data)
+                                handleChangeCity(e?.city_id)
                             }}
                             key={index}
                         >

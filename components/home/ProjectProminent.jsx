@@ -1,8 +1,10 @@
 'use client'
 import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
+import useStore from '@/app/[lang]/(store)/store'
 
-export default function ProjectProminent({ children }) {
+export default function ProjectProminent({ children, lang }) {
+    const dataHomePage = useStore((state) => state.dataHomePage)
     return (
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
             <div className='relative z-10 flex items-center justify-between'>
@@ -12,19 +14,23 @@ export default function ProjectProminent({ children }) {
                         Dự án nổi bật
                     </h2>
                     <span className='title-mb14-400-150 text-den opacity-[0.65] block mb-[4.27vw] md:hidden'>
-                        Hơn <span className='title-mb14-700-150'>20</span> dự án đang được phân phối
+                        Hơn <span className='title-mb14-700-150'>{dataHomePage?.properties?.length || '0'}</span> dự án
+                        đang được phân phối
                     </span>
                 </div>
                 <Button
                     href='/projects'
-                    className='border-none bg-logo max-md:hidden max-md:hidden'
+                    className='border-none bg-logo max-md:hidden'
                     span='text-white'
                     stroke='white'
                 >
                     Xem tất cả
                 </Button>
             </div>
-            <SlideProjectProminent />
+            <SlideProjectProminent
+                lang={lang}
+                dataHomePage={dataHomePage}
+            />
             <div className='px-mb10 md:hidden'>
                 <Button
                     href='/projects'

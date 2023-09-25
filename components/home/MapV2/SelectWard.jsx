@@ -31,7 +31,7 @@ export default function SelectWard({ className, data, wardId, setWardId, handleC
                                 })
                                 setIsOpen(false)
                                 setWardId(Number(e?.ward_id))
-                                handleChangeWard(e?.ward_id, data)
+                                handleChangeWard(e?.ward_id)
                             }}
                             key={index}
                         >

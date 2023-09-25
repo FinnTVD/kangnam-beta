@@ -7,14 +7,17 @@ import { useMediaQuery } from 'react-responsive'
 import BtnShowMap from './BtnShowMap'
 import ReactPaginate from 'react-paginate'
 import classes from '../news/ListNewsStyles.module.css'
-import { useCallback, useEffect, useLayoutEffect } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import useSWR, { mutate } from 'swr'
 import Skeleton from 'react-loading-skeleton'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
-import { handleCheckLangCode, handleCheckParams } from '@/utils'
+import { findIdByAlias, handleCheckLangCode, handleCheckParams } from '@/utils'
+// import MapV2 from '../home/MapV2/MapV2'
+import useStore from '@/app/[lang]/(store)/store'
+import MapV3 from '../home/MapV2/MapV3'
 // import Map from '../home/Map'
 const arrFilter = [
     {
@@ -51,32 +54,16 @@ const arrFilter1 = [
     },
 ]
 
+const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 gsap.registerPlugin(ScrollTrigger)
-function initializeGSAPWithDelay(delay, selector = '') {
-    if (typeof window === 'undefined' || !selector) return
-    setTimeout(() => {
-        const box = document.querySelector(selector)
-        gsap.to(box, {
-            position: 'fixed',
-            left: '7.5vw',
-            top: '5.75vw',
-            zIndex: '999999',
-            background: 'white',
-            scrollTrigger: {
-                trigger: box,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
-            },
-        })
-    }, delay)
-}
-export default function ListProject({ lang, t }) {
+export default function ListProject({ lang, t, dataSlug }) {
+    const parentRef = useRef(null)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
@@ -86,6 +73,10 @@ export default function ListProject({ lang, t }) {
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const [show, Element] = useToggleShowMap()
+    const valueSearch = useStore((state) => state.valueSearch)
+    const cityId = useStore((state) => state.cityId)
+    const districtId = useStore((state) => state.districtId)
+    const wardId = useStore((state) => state.wardId)
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
@@ -107,11 +98,14 @@ export default function ListProject({ lang, t }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
             pathName,
+            dataSlug,
         )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
             price ? '&price=' + price : ''
-        }`,
+        }${valueSearch && cityId ? '&cityId=' + cityId : ''}${
+            valueSearch && districtId ? '&districtId=' + districtId : ''
+        }${valueSearch && wardId ? '&wardId=' + wardId : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -121,9 +115,26 @@ export default function ListProject({ lang, t }) {
     )
 
     useLayoutEffect(() => {
+        if (typeof window === 'undefined') return
         let ctx = gsap.context(() => {
-            initializeGSAPWithDelay(500, '#boxRef-filter')
-        })
+            const vw = window.innerWidth
+            setTimeout(() => {
+                gsap.to('#boxRef-filter', {
+                    position: 'fixed',
+                    left: '7.5vw',
+                    top: '5.75vw',
+                    zIndex: '999999',
+                    background: 'white',
+                    scrollTrigger: {
+                        trigger: '#boxRef-filter',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true,
+                        markers: true,
+                    },
+                })
+            }, 500)
+        }, parentRef)
         return () => {
             ctx.revert()
         }
@@ -131,11 +142,14 @@ export default function ListProject({ lang, t }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${handleCheckParams(
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
                 pathName,
+                dataSlug,
             )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
                 price ? '&price=' + price : ''
-            }`,
+            }${valueSearch && cityId ? '&cityId=' + cityId : ''}${
+                valueSearch && districtId ? '&districtId=' + districtId : ''
+            }${valueSearch && wardId ? '&wardId=' + wardId : ''}`,
         )
     }, [lang])
 
@@ -152,11 +166,15 @@ export default function ListProject({ lang, t }) {
     return (
         <section
             id='list-project'
-            // ref={parentRef}
+            ref={parentRef}
             className='mt-[5.75vw] relative z-10 max-md:mt-[69vw] max-lg:mt-[10vw]'
         >
             <div className='flex justify-between w-full'>
-                <div className={`${show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'} pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw]`}>
+                <div
+                    className={`${
+                        show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'
+                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw]`}
+                >
                     <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
                         <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
@@ -174,7 +192,9 @@ export default function ListProject({ lang, t }) {
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
                             } max-md:pl-0 max-md:ml-[2.67vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
-                            <BoxFilterV2 arrFilter={pathName?.includes('projects') ? arrFilter1 : arrFilter} />
+                            <BoxFilterV2
+                                arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
+                            />
                             {!isTablet && (
                                 <div className='flex gap-x-[1.31vw] items-center'>
                                     <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>Bản đồ</span>
@@ -234,22 +254,31 @@ export default function ListProject({ lang, t }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
+                                    href={
+                                        '/' +
+                                        e?.propertyCategory?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.alias +
+                                        '/' +
+                                        e?.translation?.slug
+                                    }
                                     className='w-full'
                                     key={index}
                                 >
                                     <div className='relative w-full h-[13.75vw] max-md:h-[73.87vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.69vw] max-lg:h-[30vw]'>
                                         <Image
                                             data-aos='zoom-out'
-                                            data-aos-delay={`${(index%3)*300}`}
+                                            data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={e?.translation?.name || 'thumbnail project'}
                                             sizes='18vw'
                                             fill
                                         />
-                                        <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] max-md:title-mb10-600-150 max-lg:title-tl10'>
-                                            {e?.propertyCategory?.name}
+                                        <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150 max-lg:title-tl10'>
+                                            {e?.propertyCategory?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name || 'Dự án'}
                                         </div>
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
@@ -344,7 +373,10 @@ export default function ListProject({ lang, t }) {
                                 </Link>
                             ))}
                     </div>
-                    <div className='mb-[6.26vw]'>
+                    <div
+                        id='boxPagination'
+                        className='mb-[6.26vw]'
+                    >
                         <ReactPaginate
                             breakLabel='...'
                             nextLabel='Next'
@@ -366,12 +398,13 @@ export default function ListProject({ lang, t }) {
                 {!isTablet && (
                     <>
                         <div
+                            id='boxMap'
                             className={`${
                                 !show ? 'hidden' : ''
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                                {/* <Map /> */}
+                                <MapV3 />
                             </div>
                         </div>
                         <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>

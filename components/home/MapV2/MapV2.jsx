@@ -1,13 +1,23 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
-import useDebounce from '@/hooks/useDebounce'
 import SelectDistrict from './SelectDistrict'
 import SelectWard from './SelectWard'
 import SelectCity from './SelectCity'
 import { toast } from 'react-toastify'
 import useStore from '@/app/[lang]/(store)/store'
+import useSWR from 'swr'
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+
+const handleGeoWKT = (str) => {
+    return str
+        ?.slice(16, str?.length - 3)
+        ?.split(', ')
+        ?.map((capSo) => {
+            let [so1, so2] = capSo?.split(' ')?.map(parseFloat)
+            return [so1, so2]
+        })
+}
 
 const handlePopup = (itemProject) => {
     if (!itemProject) return
@@ -70,7 +80,7 @@ const notifyError = (title) =>
         progress: undefined,
         theme: 'colored',
     })
-
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function MapV2() {
     const mapRef = useRef() //lưu lại dom map
     const cityId = useStore((state) => state.cityId)
@@ -96,6 +106,8 @@ export default function MapV2() {
     const dataDistrict = useStore((state) => state.dataDistrict)
     const dataProvinces = useStore((state) => state.dataProvinces)
     const dataWard = useStore((state) => state.dataWard)
+    const [isFirst, setIsFirst] = useState(true)
+    const [isTest, setIsTest] = useState(false)
 
     // const [dataDistrict, setDataDistrict] = useState(null)
     // const [dataProvinces, setDataProvinces] = useState(null) // trả về danh sách các tỉnh có dự án
@@ -113,6 +125,11 @@ export default function MapV2() {
         id: null,
     })
 
+    const { data, error, isLoading } = useSWR(
+        `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId}?apikey=${apiKey}`,
+        fetcher,
+    )
+
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef.current) return
         const loadMap = () => {
@@ -122,7 +139,8 @@ export default function MapV2() {
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
                 center: [105.85379875200005, 21.028354507000074], //ha noi center
                 zoom: 9,
-                pitch: 0, // góc nhìn từ trên cao nhìn xuống
+                pitch: 0, // góc nhìn từ trên cao nhìn xuống,
+                // bearing: 90,
             })
 
             mapRef?.current?.on('zoomstart', function () {
@@ -141,16 +159,77 @@ export default function MapV2() {
                 console.log(error)
             }
         }
+
         fetchData()
         loadMap() //add map
+        addTileMap()
         let a = setTimeout(() => {
             setHandleChangeCity(handleChangeCity)
             setHandleChangeDistrict(handleChangeDistrict)
             setHandleChangeWard(handleChangeWard)
             setHandleFlyMap(flyMap)
         }, 500)
-        return () => clearTimeout(a)
+        return () => {
+            clearTimeout(a)
+            setCityId(11)
+            setDistrictId(null)
+            setWardId(null)
+        }
     }, [])
+    useEffect(() => {
+        if (data) {
+            // addGeojsonLine(handleGeoWKT(data?.geo_wkt))
+            setIsFirst(false)
+        }
+    }, [data])
+
+    useEffect(() => {
+        !isTest && addMarkerTest()
+        if (mapRef.current && isTest) {
+            const markerData = {
+                type: 'FeatureCollection',
+                features: [
+                    {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [105.84600288768753, 20.992231231173637], // Tọa độ của marker 1
+                        },
+                        properties: {
+                            onclick: new window.vietmapgl.Marker()
+                                .setLngLat([105.84600288768753, 20.992231231173637])
+                                .setPopup(
+                                    new window.vietmapgl.Popup().setHTML(`
+                                        <div>
+                                            sads
+                                        </div>
+                                `),
+                                )
+                                .addTo(mapRef.current),
+                        },
+                    },
+                ],
+            }
+            mapRef.current?.getSource('marker1')?.setData(markerData)
+        }
+    }, [isTest])
+
+    // useEffect(() => {
+    //     if (mapRef.current && !isFirst) {
+    //         const polygon = handleGeoWKT(data?.geo_wkt)
+    //         if (polygon) {
+    //             const newData = {
+    //                 type: 'Feature',
+    //                 properties: {},
+    //                 geometry: {
+    //                     type: 'LineString',
+    //                     coordinates: polygon,
+    //                 },
+    //             }
+    //             mapRef.current?.getSource('marker-source')?.setData(newData)
+    //         }
+    //     }
+    // }, [data, cityId, districtId, cityId])
 
     // nếu có data chi tiết của dự án theo cityId, districtId và wardId thì add marker tương ứng
     useEffect(() => {
@@ -173,7 +252,7 @@ export default function MapV2() {
                     divElement.textContent = e?.count
                     divElement.setAttribute('data-marker', `${e?.id}`)
                     // Set options
-                    // if (!window.vietmapgl || typeof window === 'undefined') return
+                    if (!window.vietmapgl || typeof window === 'undefined') return
                     const marker = new window.vietmapgl.Marker({
                         // scale: [0.5], //size of marker
                         element: divElement,
@@ -216,7 +295,7 @@ export default function MapV2() {
                     divElement.textContent = e?.count
                     divElement.setAttribute('data-marker', `${e?.ward_id}`)
                     // Set options
-                    // if (!window.vietmapgl || typeof window === 'undefined') return
+                    if (!window.vietmapgl || typeof window === 'undefined') return
                     const marker = new window.vietmapgl.Marker({
                         // scale: [0.5], //size of marker
                         element: divElement,
@@ -258,7 +337,7 @@ export default function MapV2() {
                     divElement.textContent = e?.count
                     divElement.setAttribute('data-marker', `${e?.district_id}`)
                     // Set options
-                    // if (!window.vietmapgl || typeof window === 'undefined') return
+                    if (!window.vietmapgl || typeof window === 'undefined') return
                     const marker = new window.vietmapgl.Marker({
                         // scale: [0.5], //size of marker
                         element: divElement,
@@ -418,6 +497,124 @@ export default function MapV2() {
         }
     }, [levelZoom, isDrag])
 
+    const addTileMap = () => {
+        mapRef.current.on('load', function () {
+            mapRef.current.addSource('traffic-tiles', {
+                type: 'raster',
+                // tiles: [`https://maps.vietmap.vn/api/dm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`],
+                // tiles: [`https://maps.vietmap.vn/api/tm/{z}/{x}/{y}@2x.png?apikey=${apiKey}`],
+                tiles: [`https://maps.vietmap.vn/api/tf/{z}/{x}/{y}.png?apikey=${apiKey}`],
+                tileSize: 256,
+                // attribution: 'Map',
+                id: 'vietmap.streets',
+            })
+            mapRef.current.addLayer({
+                id: 'traffic-tiles',
+                type: 'raster',
+                source: 'traffic-tiles',
+                minZoom: 8,
+                maxZoom: 20,
+            })
+        })
+    }
+
+    const addGeojsonLine = (dataPolygon) => {
+        if (!dataPolygon) return
+        mapRef.current.on('load', function () {
+            mapRef.current.addSource('marker-source', {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: dataPolygon,
+                    },
+                },
+            })
+            mapRef.current.addLayer({
+                id: 'marker-layer',
+                type: 'line',
+                source: 'marker-source',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round',
+                },
+                paint: {
+                    'line-color': 'red',
+                    'line-width': 1,
+                },
+            })
+            //     // // mapRef.current.addSource('some id', {
+            //     //     type: 'geojson',
+            //     //     data: {
+            //     //         type: 'FeatureCollection',
+            //     //         features: [
+            //     //             {
+            //     //                 type: 'Feature',
+            //     //                 properties: { name: 'Null Island' },
+            //     //                 geometry: {
+            //     //                     type: 'Point',
+            //     //                     coordinates: [105.78234226958115, 21.920931262916405],
+            //     //                 },
+            //     //             },
+            //     //         ],
+            //     //     },
+            //     // })
+        })
+    }
+
+    const addMarkerTest = () => {
+        mapRef.current.on('load', function () {
+            const markerData = {
+                type: 'FeatureCollection',
+                features: [
+                    {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [105.81922371274908, 21.02171763717562], // Tọa độ của marker 1
+                        },
+                        properties: {
+                            // Các thuộc tính của marker 1
+                            onclick: new window.vietmapgl.Marker()
+                                .setLngLat([105.81922371274908, 21.02171763717562])
+                                .setPopup(
+                                    new window.vietmapgl.Popup().setHTML(`
+                                        <div>
+                                            asdsa
+                                        </div>
+                                `),
+                                )
+                                .addTo(mapRef.current),
+                        },
+                    },
+                ],
+            }
+            mapRef.current.addSource('marker1', {
+                type: 'geojson',
+                data: markerData,
+            })
+
+            mapRef.current.addLayer({
+                id: 'marker-point',
+                type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
+                source: 'marker1', // ID của nguồn dữ liệu
+                paint: {
+                    'circle-radius': 8, // Kích thước của marker
+                    'circle-color': 'black', // Màu sắc của marker
+                },
+            })
+
+            mapRef.current.on('click', 'marker1', function (e) {
+                new vietmapgl.Popup()
+                    .setLngLat([105.81922371274908, 21.02171763717562])
+                    .setHTML(`Country name: test`)
+                    .addTo(mapRef.current)
+            })
+        })
+    }
+
     // kiểm tra xem điểm giữa của khung hình đang là quân/huyện nào hay là phường/xã nào
     const getLocationCurrent = async () => {
         try {
@@ -569,7 +766,7 @@ export default function MapV2() {
                 id='map'
                 className='h-screen'
             >
-                <div className='absolute top-0 -translate-y-full left-0 flex w-full h-fit z-[1000] bg-white'>
+                <div className='absolute top-0 left-0 flex w-full h-fit z-[1000] bg-white'>
                     <SelectCity
                         data={dataProvinces}
                         handleChangeCity={handleChangeCity}
@@ -599,6 +796,12 @@ export default function MapV2() {
                         titleWard={titleWard}
                         setTitleWard={setTitleWard}
                     />
+                    <button
+                        onClick={() => setIsTest(!isTest)}
+                        className='bg-black text-white'
+                    >
+                        test marker
+                    </button>
                 </div>
             </div>
         </>

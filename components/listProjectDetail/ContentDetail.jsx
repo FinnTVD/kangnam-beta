@@ -4,13 +4,15 @@ import FormNamePhone from './FormNamePhone'
 import useStore from '@/app/[lang]/(store)/store'
 import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
+import MapProjectDetail from './MapProjectDetail'
+import PriceDetail from './PriceDetail'
 
 const handleCheckStatus = (alias) => {
     if (alias === 'hire') return '/tháng'
     return ''
 }
 
-export default function ContentDetail({ data, detail }) {
+export default function ContentDetail({ data, detail, lang }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -20,14 +22,20 @@ export default function ContentDetail({ data, detail }) {
         }
     }, [])
     const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
+
     return (
-        <section className='mt-[7.57vw] px-120 max-md:mt-[22.57vw] px-mb10'>
+        <section className='mt-[7.57vw] max-md:mt-[4.27vw] px-120 px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
-                <span className='mr-[0.25vw] inline-block max-mb:title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
-                    Trang chủ / {data?.propertyCategory?.name} /
+                <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
+                    Trang chủ /{' '}
+                    {
+                        data?.propertyCategory?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                        )?.name
+                    }
                 </span>
-                <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14'>{dataDetail?.name}</span>
-                <address className='not-italic title16-600-150 max-md:title-mb14-400-150 text-den mb-[1vw] md:hidden max-md:opacity-50 max-lg:title-tl14'>
+                {/* <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14>{dataDetail?.name}</span> */}
+                <address className='not-italic title16-600-150 title-tl14 title-mb14-400-150 text-den lg:mb-[1vw] md:hidden max-md:opacity-50'>
                     {data?.address?.display}
                 </address>
             </div>
@@ -43,7 +51,15 @@ export default function ContentDetail({ data, detail }) {
                                 {handleCheckStatus(data?.propertyCategory?.alias)}
                             </h2>
                             <div className='flex gap-x-[1.06vw] justify-end max-md:justify-start max-md:gap-x-[2.13vw]'>
-                                <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] max-lg:title-tl16'>118,280 đ/m²</span>
+                                {/* <span className='title16-400-125 title-mb16-400-125 text-[#888]'>118,280 đ/m²</span> */}
+                                <PriceDetail
+                                    price={data?.price}
+                                    lang={lang}
+                                    size={dataDetail?.size}
+                                />
+                                <span className='title16-400-125 title-mb16-400-125 text-[#888] max-lg:title-tl16'>
+                                    118,280 đ/m²
+                                </span>
                                 <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] max-lg:title-tl16'>
                                     {dataDetail?.size} m²
                                 </span>
@@ -353,11 +369,15 @@ export default function ContentDetail({ data, detail }) {
                             className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0 text-den/20'
                         ></div>
                     </div>
+                    <div className='text-den mt-[1.5vw] text-[1vw] font-semibold leading-normal max-md:text-14mb max-lg:text-14tl'>
+                        Mã dự án: <span className=' text-nau-nhat tracking-[0.5px]'>{data?.propertyCode}</span>
+                    </div>
+
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>
                         <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px] max-lg:title-tl20'>
                             Vị trí
                         </h2>
-                        <div className='flex mb-[0.75vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
+                        <div className='flex mb-[0.75vw] gap-x-[1vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
                                 <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Địa chỉ:
@@ -393,12 +413,16 @@ export default function ContentDetail({ data, detail }) {
                                 </span>
                             </div>
                         </div>
-                        <Image
-                            className='object-cover w-[56.1875vw] h-[25.3125vw] rounded-[1vw] mt-[1vw] max-md:mt-[4.27vw] max-md:h-[66.93vw] max-lg:w-full max-md:rounded-[3.73vw] max-lg:h-[85vw]'
+                        {/* <Image
+                            className='object-cover w-[56.1875vw] h-[25.3125vw] rounded-[1vw] mt-[1vw] max-md:mt-[4.27vw] max-md:h-[66.93vw] max-md:w-full max-md:rounded-[3.73vw]'
                             src='/images/map-detail.jpg'
                             alt='map-detail'
                             width={900}
                             height={450}
+                        /> */}
+                        <MapProjectDetail
+                            dataDetail={dataDetail}
+                            data={data}
                         />
                     </div>
                 </div>
@@ -427,7 +451,11 @@ export default function ContentDetail({ data, detail }) {
                                     </span>
                                 </div>
                                 <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
-                                    {data?.propertyType?.name}
+                                    {
+                                        data?.propertyType?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name
+                                    }
                                 </span>
                             </li>
                             <li className='flex items-center justify-between'>

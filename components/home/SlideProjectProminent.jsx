@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode } from 'swiper/modules'
-import useStore from '@/app/[lang]/(store)/store'
 import Link from 'next/link'
 
 const arrLink = [
@@ -20,14 +19,15 @@ const arrLink = [
         slug: 'hire',
     },
 ]
-
-const handleRenderLink = (id) => {
-    return arrLink.find((e) => e?.id === id)?.slug
+const handleRenderItem = (data, key, lang) => {
+    if (!data) return
+    let slug = data?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+    if (key === 'slug') {
+        return arrLink?.find((e) => e?.id === data?.propertyCategoryId)?.slug + '/' + slug?.slug
+    }
+    return slug?.name || data?.title
 }
-
-export default function SlideProjectProminent() {
-    const dataHomePage = useStore((state) => state.dataHomePage)
-
+export default function SlideProjectProminent({ lang, dataHomePage }) {
     const swiperRef = useRef()
 
     const handleNextSlide = () => {
@@ -37,10 +37,10 @@ export default function SlideProjectProminent() {
     const handlePrevSlide = () => {
         swiperRef.current?.slidePrev()
     }
+
     return (
         <div className='relative'>
             <Swiper
-                loop={true}
                 breakpoints={{
                     0: {
                         slidesPerView: 'auto',
@@ -60,7 +60,7 @@ export default function SlideProjectProminent() {
                     swiperRef.current = swiper
                 }}
                 modules={[FreeMode]}
-                className='max-md:pl-[2.67vw]'
+                className='max-md:px-[2.67vw]'
             >
                 {Array.isArray(dataHomePage?.properties) &&
                     dataHomePage?.properties?.map((e, index) => (
@@ -68,7 +68,7 @@ export default function SlideProjectProminent() {
                             className='!h-[26.1825vw] max-lg:!h-[32.1825vw] max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
                         >
-                            <Link href={false || '/'}>
+                            <Link href={handleRenderItem(e, 'slug', lang) || '/'}>
                                 <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
                                     <Image
                                         data-aos='zoom-out'
@@ -82,15 +82,20 @@ export default function SlideProjectProminent() {
                                     <div className='absolute bottom-0 left-0 w-full h-[16.8125vw] max-md:h-[65.49vw] bg-gradient-slide z-[1]'></div>
                                     <div className='relative z-10'>
                                         <h2
-                                            title={e?.title}
-                                            className='text-white title20-700-150 max-md:title-mb18-700-150 line-clamp-2 max-lg:title-tl18'
+                                            title={handleRenderItem(e, 'name', lang)}
+                                            className='text-white title20-700-150 title-mb18-700-150 line-clamp-2 max-lg:title-tl18'
                                         >
-                                            {e?.title || 'No data'}
+                                            {handleRenderItem(e, 'name', lang) || 'No data'}
                                         </h2>
-                                        <address className='text-white max-md:title-mb12-600-150 max-lg:title-tl12'>
-                                            Quan 9, 시 Ho Chi Minh
+                                        <address
+                                            title={e?.address?.display}
+                                            className='text-white title-mb12-600-150 line-clamp-2 max-lg:title-tl12'
+                                        >
+                                            {e?.address?.display}
                                         </address>
-                                        <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>값: 35tr/m2 </span>
+                                        <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>
+                                            값: 35tr/m2{' '}
+                                        </span>
                                     </div>
                                 </div>
                             </Link>

@@ -1,9 +1,8 @@
-
 const apiHomePage = {
     meta: {
         title: '',
         description: '',
-        backgroundImage:{
+        backgroundImage: {
             src: '/image',
             alt: 'name image',
         },
@@ -117,3 +116,4 @@ const apiDetailNews = [
 // -zoom marker
 // -danh sách dự án trong bán kính đấy
 // -Dự án nổi bật - cms có chọn được bài tuỳ ý ko
+;('https://mtf.onepay.vn/paygate/vpcpay.op?vpc_Version=2&vpc_Currency=VND&vpc_Command=pay&vpc_AccessCode=6BEB2566&vpc_Merchant=TESTONEPAY32&vpc_Locale=vn&vpc_ReturnURL=http://localhost:3000/&vpc_MerchTxnRef=duc210601&vpc_OrderInfo=ducmuaquanao&vpc_Amount=1000000&vpc_TicketNo=113.23.74.46&AgainLink=http://localhost:3000/&Title=KANGNAMPAY&vpc_SecureHash=6D0870CDE5F24F34F3915FB0045120D6')
