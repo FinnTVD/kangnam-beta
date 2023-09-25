@@ -52,6 +52,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
     }
 
     if (!listNav?.length) return
+    console.log('🚀 ~ file: MegaMenu.jsx:55 ~ MegaMenu ~ listNav:', listNav)
     if (fixed)
         return (
             <ul className='flex'>
@@ -125,7 +126,11 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                 <Link
                                     scroll={false}
                                     className='px-[0.94vw] py-[1vw] block title16-600-130 text-den whitespace-nowrap'
-                                    href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
+                                    href={`${
+                                        lang !== 'vi'
+                                            ? '/' + lang + (e?.href?.startsWith('/') ? e?.href : '/' + e?.href)
+                                            : e?.href
+                                    }`}
                                 >
                                     {e.title}
                                 </Link>
@@ -210,7 +215,11 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                 className={`${
                                     isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
                                 } py-[1vw] block title16-600-130 title-tl12-600-150 whitespace-nowrap`}
-                                href={`${lang !== 'vi' ? '/' + lang + e.href : e.href}`}
+                                href={`${
+                                    lang !== 'vi'
+                                        ? '/' + lang + (e?.href?.startsWith('/') ? e?.href : '/' + e?.href)
+                                        : e.href
+                                }`}
                             >
                                 {e.title}
                             </Link>
