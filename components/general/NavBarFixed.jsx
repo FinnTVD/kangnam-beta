@@ -106,6 +106,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                             <BoxLanguage
                                 type={'ds'}
                                 lang={lang}
+                                t={t}
                             />
                         </div>
                     </div>

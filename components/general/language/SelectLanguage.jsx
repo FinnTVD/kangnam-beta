@@ -35,11 +35,32 @@ const arrLanguage = [
         languageCode: 'zh_CN',
     },
 ]
+const slugProject = [
+    {
+        code: 'vi',
+        href: '/du-an',
+    },
+    {
+        code: 'en',
+        href: '/projects',
+    },
+    {
+        code: 'kr',
+        href: '/项目',
+    },
+    {
+        code: 'ch',
+        href: '/프로젝트',
+    },
+]
 
 export default function SelectLanguage({ className, lang, t }) {
     const setLanguage = useStore((state) => state.setLanguage)
     const slugDetailProject = useStore((state) => state.slugDetailProject)
     const slugDetailNews = useStore((state) => state.slugDetailNews)
+    const listNav = useStore((state) => state.listNav)
+    console.log('🚀 ~ file: SelectLanguage.jsx:62 ~ SelectLanguage ~ listNav:', listNav)
+
     const pathName = usePathname()
 
     const handleHref = (lg, lgCode) => {
@@ -80,6 +101,7 @@ export default function SelectLanguage({ className, lang, t }) {
             }
         }
         if (lg === 'vi') {
+            if (pathName === t?.Navbar?.listNav[0]?.href) return slugProject?.find((e) => e?.code === lg)?.href
             if (lang === 'vi') {
                 return pathName
             } else if (arrHref.includes(pathName)) {
@@ -88,6 +110,8 @@ export default function SelectLanguage({ className, lang, t }) {
                 return pathName.slice(3)
             }
         } else {
+            if (pathName === t?.Navbar?.listNav[0]?.href)
+                return '/' + lg + slugProject?.find((e) => e?.code === lg)?.href
             if (lg === lang) {
                 return pathName
             }

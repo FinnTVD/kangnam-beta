@@ -74,6 +74,7 @@ export default function NavBarV2({ lang, t }) {
                             <BoxLanguage
                                 type={'ds'}
                                 lang={lang}
+                                t={t}
                             />
                         </div>
                     </div>
