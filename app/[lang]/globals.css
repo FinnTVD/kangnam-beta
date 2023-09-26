@@ -712,6 +712,7 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     font-size: 1.5vw;
     font-weight: 700;
     line-height: 1.375;
+    margin-top: 1.5vw;
 }
 
 @media (min-aspect-ratio:16/9){

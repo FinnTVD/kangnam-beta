@@ -1,18 +1,21 @@
 'use client'
+import useStore from '@/app/[lang]/(store)/store'
 import { handleCheckLangCode, listIdNav, postTypeIdAgreement } from '@/utils'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MegaMenu({ isHome, lang, t, fixed }) {
-    const [listNav, setListNav] = useState([])
+    const listNav = useStore((state) => state.listNav)
+    const setListNav = useStore((state) => state.setListNav)
     const languageCode = handleCheckLangCode(lang)
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+    console.log('🚀 ~ file: MegaMenu.jsx:15 ~ MegaMenu ~ data:', data)
     const {
         data: agreementData,
         error: agreementError,
@@ -52,7 +55,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
     }
 
     if (!listNav?.length) return
-    console.log('🚀 ~ file: MegaMenu.jsx:55 ~ MegaMenu ~ listNav:', listNav)
     if (fixed)
         return (
             <ul className='flex'>
@@ -91,9 +93,9 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                             {e?.title}
                                         </span>
                                         <ul className='w-full'>
-                                            {e?.branch?.map((item) => (
+                                            {e?.branch?.map((item, index) => (
                                                 <li
-                                                    key={item?.id}
+                                                    key={index}
                                                     className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                                 >
                                                     <Link
@@ -104,9 +106,9 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                                     </Link>
                                                 </li>
                                             ))}
-                                            {agreementDataTranslation?.map((item) => (
+                                            {agreementDataTranslation?.map((item, index) => (
                                                 <li
-                                                    key={item?.id}
+                                                    key={index}
                                                     className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                                 >
                                                     <Link
@@ -178,9 +180,9 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                         {e?.title}
                                     </span>
                                     <ul className='w-full'>
-                                        {e?.branch?.map((item) => (
+                                        {e?.branch?.map((item, index) => (
                                             <li
-                                                key={item?.id}
+                                                key={index}
                                                 className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                             >
                                                 <Link
@@ -191,9 +193,9 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                                 </Link>
                                             </li>
                                         ))}
-                                        {agreementDataTranslation?.map((item) => (
+                                        {agreementDataTranslation?.map((item, index) => (
                                             <li
-                                                key={item?.id}
+                                                key={index}
                                                 className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                             >
                                                 <Link
