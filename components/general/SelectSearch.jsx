@@ -72,7 +72,6 @@ export default function SelectSearch({ type = 'dark', menu = false, lang, dark }
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ file: SelectSearch.jsx:74 ~ SelectSearch ~ data:', data)
 
     useEffect(() => {
         // data && setListData([objProject, ...data?.data])
@@ -80,7 +79,6 @@ export default function SelectSearch({ type = 'dark', menu = false, lang, dark }
             const dataNew = data?.data?.filter((e) =>
                 e?.translations?.find((i) => i?.alias?.includes(pathName?.slice(1))),
             )
-            console.log('🚀 ~ file: SelectSearch.jsx:81 ~ useEffect ~ dataNew:', dataNew)
             dataNew?.length === 1 ? setListData(dataNew) : setListData([objProject, ...data?.data])
         }
     }, [data, pathName])

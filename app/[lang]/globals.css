@@ -728,3 +728,12 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         height: auto;
     }
 }
+
+#showFeature{
+    transition: all 1s;
+    transform: translateX(110%);
+}
+
+#showFeature.active{
+    transform: translateX(0);
+}

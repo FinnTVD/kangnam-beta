@@ -38,6 +38,7 @@ export default function SearchGlobal({
     classInput,
     classList,
     dark,
+    t,
 }) {
     const router = useRouter()
     const pathName = usePathname()
@@ -155,11 +156,15 @@ export default function SearchGlobal({
     const handleSubmit = (e) => {
         e?.preventDefault()
         if (!valueSearch) {
-            notifyError('Vui lòng nhập dữ liệu để tìm kiếm!')
-            return
+            router.push(
+                '/' +
+                    listData[0]?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                    )?.alias,
+            )
         }
         handleCheckPage(pathName, listData) &&
-            router.psuh(
+            router.push(
                 '/' +
                     listData[0]?.translations?.find((e) =>
                         e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
@@ -418,13 +423,65 @@ export default function SearchGlobal({
                         onClick={() => handleSubmit()}
                         className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
-                        <Image
+                        {/* <Image
                             className='object-cover h-[1.625vw] w-[1.625vw]'
                             src={'/images/marker-search.svg'}
                             alt='marker search'
                             width={40}
                             height={40}
-                        />
+                        /> */}
+                        <div className='relative w-fit h-fit'>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='26'
+                                height='26'
+                                viewBox='0 0 26 26'
+                                fill='none'
+                                className='object-cover h-[1.625vw] w-[1.625vw]'
+                            >
+                                <path
+                                    d='M13.5417 22.75C7.85773 22.75 3.25 18.1423 3.25 12.4583C3.25 6.77439 7.85773 2.16666 13.5417 2.16666C19.2256 2.16666 23.8333 6.77439 23.8333 12.4583C23.8333 18.1423 19.2256 22.75 13.5417 22.75Z'
+                                    stroke='white'
+                                    strokeWidth='1.5'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                />
+                                <path
+                                    d='M2.16666 23.8333L4.33333 21.6667'
+                                    stroke='white'
+                                    stroke-width='1.5'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                />
+                            </svg>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='11'
+                                height='11'
+                                viewBox='0 0 11 11'
+                                fill='none'
+                                className={`${
+                                    valueSearch ? 'hidden' : ''
+                                } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw]`}
+                            >
+                                <g clipPath='url(#clip0_2399_2436)'>
+                                    <path
+                                        d='M5.59091 0.0909119C7.78998 0.0909119 9.57954 1.89289 9.57954 4.10836C9.57954 7.25628 5.96584 10.5066 5.81205 10.6431C5.75127 10.6975 5.67257 10.7276 5.59099 10.7277C5.50941 10.7278 5.43065 10.6978 5.36976 10.6435C5.21598 10.5066 1.60227 7.25628 1.60227 4.10836C1.60227 1.89289 3.39184 0.0909119 5.59091 0.0909119ZM5.59091 6.29546C6.81276 6.29546 7.80682 5.3014 7.80682 4.07955C7.80682 2.8577 6.81276 1.86364 5.59091 1.86364C4.36905 1.86364 3.375 2.8577 3.375 4.07955C3.375 5.3014 4.36905 6.29546 5.59091 6.29546Z'
+                                        fill='white'
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id='clip0_2399_2436'>
+                                        <rect
+                                            width='10.6364'
+                                            height='10.6364'
+                                            fill='white'
+                                            transform='matrix(-1 0 0 1 10.9091 0.0909119)'
+                                        />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
                     </div>
                 )}
             </div>

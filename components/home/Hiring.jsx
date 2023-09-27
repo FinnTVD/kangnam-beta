@@ -73,7 +73,6 @@ export default function Hiring({ lang }) {
             revalidateOnReconnect: false,
         },
     )
-    console.log('🚀 ~ file: Hiring.jsx:64 ~ Hiring ~ data:', data)
 
     useEffect(() => {
         mutate(
