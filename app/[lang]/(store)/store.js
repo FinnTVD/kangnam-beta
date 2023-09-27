@@ -22,8 +22,11 @@ const useStore = create((set, get) => ({
     dataDistrict: null,
     dataWard: null,
     listData: '',
-    isFeatureHome: false,
-    listNav: [],
+    isFeatureHome: {
+        isContain: false,
+        isStandMap: false,
+    },
+    categoryNav: [],
     mapRef: null,
     levelZoom: 9,
     isClose: true,
@@ -59,11 +62,11 @@ const useStore = create((set, get) => ({
             }
         })
     },
-    setListNav: (data) => {
+    setCategoryNav: (data) => {
         set((state) => {
             return {
                 ...state,
-                listNav: data,
+                categoryNav: data,
             }
         })
     },

@@ -1,14 +1,13 @@
-import { handleCheckParamsLanguage } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import src from '../../public/images/linear.png'
 
-export default function WeAre({ lang }) {
+export default function WeAre({ lang, t }) {
     return (
         <>
             <section
                 id='weAre'
-                className='relative w-full h-screen bg-den-2 overflow-hidden'
+                className='relative w-full h-screen overflow-hidden bg-den-2'
             >
                 <Image
                     className='z-0 object-cover'
@@ -75,7 +74,7 @@ export default function WeAre({ lang }) {
                             </ul>
                             <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw] relative z-[99999]'>
                                 <Link
-                                    href={handleCheckParamsLanguage(lang, '/projects')}
+                                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                                     className='flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'
                                 >
                                     Xem dự án
@@ -96,7 +95,7 @@ export default function WeAre({ lang }) {
                                     </svg>
                                 </Link>
                                 <Link
-                                    href={handleCheckParamsLanguage(lang, '/about-us')}
+                                    href={'/' + lang + '/about-us'}
                                     className='flex justify-center gap-x-[0.5vw] max-lg:gap-x-[1vw] items-center group relative rounded-[10vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden title-mb14-400-150 max-lg:py-[2vw] max-lg:px-[4.67vw] title-tl14-400-150 max-md:py-[4vw] max-md:px-[6.67vw] max-md:box-content max-md:gap-x-[3.2vw] h-fit'
                                 >
                                     Về chúng tôi

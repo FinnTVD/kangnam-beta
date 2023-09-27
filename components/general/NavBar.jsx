@@ -26,7 +26,7 @@ export default function NavBar({ isHome, lang, t }) {
             } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-md:hidden`}
         >
             <div className={`${isHome ? 'gap-x-[1.87vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
-                <Link
+                {/* <Link
                     id='logo-banner'
                     href={`/${lang !== 'vi' ? lang : ''}`}
                     className={`${
@@ -43,6 +43,19 @@ export default function NavBar({ isHome, lang, t }) {
                             fill
                         />
                     </div>
+                </Link> */}
+                <Link
+                    href={`/${lang !== 'vi' ? lang : ''}`}
+                    className='relative w-[3.52vw] brightness-0 invert mr-auto h-[4.5vw] block max-md:w-[8.267vw] max-md:h-[11.467vw] max-lg:w-[6vw] max-lg:h-[8vw]'
+                >
+                    <Image
+                        className='object-cover max-lg:object-contain'
+                        src='/images/logo-no-bg.svg'
+                        alt='logo'
+                        sizes='3.52vw'
+                        priority
+                        fill
+                    />
                 </Link>
                 <div className='justify-start flex-1 py-[0.5vw] hidden'>
                     <Link

@@ -19,7 +19,7 @@ export default function ProjectProminent({ children, lang, t }) {
                     </span>
                 </div>
                 <Button
-                    href='/projects'
+                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                     className='border-none bg-logo max-md:hidden'
                     span='text-white'
                     stroke='white'
@@ -33,7 +33,7 @@ export default function ProjectProminent({ children, lang, t }) {
             />
             <div className='px-mb10 md:hidden'>
                 <Button
-                    href={t.Navbar.listNav[0].href || '/projects'}
+                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                     className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
                     span='text-white'
                     stroke='white'

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Button from '../general/Button'
 
-export default function Deposit() {
+export default function Deposit({ lang }) {
     return (
         <section
             data-aos='fade-up'
@@ -209,7 +209,7 @@ export default function Deposit() {
                     span='-tracking-[0.32px] font-semibold max-md:-tracking-[0.28px]'
                     icon='w-[1.2vw] h-[1.2vw]'
                     stroke='white'
-                    href='/deposit'
+                    href={'/' + lang + '/deposit'}
                 >
                     Đăng kí ngay
                 </Button>

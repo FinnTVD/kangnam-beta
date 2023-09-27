@@ -2,20 +2,19 @@
 import useStore from '@/app/[lang]/(store)/store'
 import { handleCheckLangCode, listIdNav, postTypeIdAgreement } from '@/utils'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MegaMenu({ isHome, lang, t, fixed }) {
-    const listNav = useStore((state) => state.listNav)
-    const setListNav = useStore((state) => state.setListNav)
+    const setCategoryNav = useStore((state) => state.setCategoryNav)
+    const [listNav, setListNav] = useState([])
     const languageCode = handleCheckLangCode(lang)
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ file: MegaMenu.jsx:15 ~ MegaMenu ~ data:', data)
     const {
         data: agreementData,
         error: agreementError,
@@ -28,6 +27,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
 
     useEffect(() => {
         if (!data) return
+        setCategoryNav(data?.data)
         let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
         let b = []
         a.forEach((e, index) => {
@@ -126,7 +126,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                 </>
                             ) : (
                                 <Link
-                                    scroll={false}
                                     className='px-[0.94vw] py-[1vw] block title16-600-130 text-den whitespace-nowrap'
                                     href={`${
                                         lang !== 'vi'
@@ -213,7 +212,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                             </>
                         ) : (
                             <Link
-                                scroll={false}
                                 className={`${
                                     isHome ? 'px-[1.25vw]' : 'px-[0.94vw]'
                                 } py-[1vw] block title16-600-130 title-tl12-600-150 whitespace-nowrap`}

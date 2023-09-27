@@ -41,12 +41,27 @@ export default function IndexHome({ lang, t }) {
 
     return (
         <main>
-            <WeAre lang={lang} />
-            <MyProjectV2 lang={lang} />
-            <SellingRes lang={lang} />
-            <Hiring lang={lang} />
+            <WeAre
+                lang={lang}
+                t={t}
+            />
+            <MyProjectV2
+                lang={lang}
+                t={t}
+            />
+            <SellingRes
+                lang={lang}
+                t={t}
+            />
+            <Hiring
+                lang={lang}
+                t={t}
+            />
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
-                <Deposit />
+                <Deposit
+                    lang={lang}
+                    t={t}
+                />
                 <ProjectProminent
                     lang={lang}
                     t={t}
@@ -60,8 +75,14 @@ export default function IndexHome({ lang, t }) {
                     />
                 </ProjectProminent>
             </div>
-            <Prominent />
-            <Partner t={t} />
+            <Prominent
+                t={t}
+                lang={lang}
+            />
+            <Partner
+                t={t}
+                lang={lang}
+            />
             <LatestNews
                 t={t}
                 lang={lang}

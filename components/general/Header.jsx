@@ -4,7 +4,7 @@ import NavBar from './NavBar'
 import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
 import classes from './headerV2.module.css'
-import SlideBanner from '../home/SlideBanner'
+// import SlideBanner from '../home/SlideBanner'
 // import video from '../../public/images/videoTest.mp4'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
@@ -25,6 +25,10 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
 
     useEffect(() => {
         data && setDataHomePage(data)
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: 'smooth',
+        // })
         // if (videoRef.current) {
         //     videoRef.current.src = 'https://youtu.be/RTd5mvn-4Is?si=_EHyyl4myQfA8G5p'
         // }
@@ -47,12 +51,19 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
         >
             <div className={`h-screen max-md:h-[82vh] relative w-full`}>
                 {/* <SlideBanner data={data} /> */}
+                <Image
+                    className='absolute top-0 left-0 object-cover w-full h-full z-1'
+                    src={'/images/bg-header3.jpeg'}
+                    alt='banner header'
+                    width={1600}
+                    height={800}
+                />
                 <video
                     ref={videoRef}
                     autoPlay
                     // poster='/images/bg-header.jpg'
                     loop
-                    className='absolute top-0 left-0 min-w-full min-h-full object-cover'
+                    className='absolute top-0 left-0 object-cover min-w-full min-h-full'
                     id='videoBanner'
                     type='video/mp4'
                     playsInline
@@ -115,6 +126,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 <SearchHome
                     data={data}
                     lang={lang}
+                    t={t}
                 />
 
                 <div

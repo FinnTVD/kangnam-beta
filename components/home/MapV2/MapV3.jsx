@@ -45,11 +45,8 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function MapV3() {
     const mapRef = useRef(null) //lưu lại dom map
     const cityId = useStore((state) => state.cityId)
-    console.log('🚀 ~ file: MapV3.jsx:87 ~ MapV3 ~ cityId:', cityId)
     const districtId = useStore((state) => state.districtId)
-    console.log('🚀 ~ file: MapV3.jsx:89 ~ MapV3 ~ districtId:', districtId)
     const wardId = useStore((state) => state.wardId)
-    console.log('🚀 ~ file: MapV3.jsx:91 ~ MapV3 ~ wardId:', wardId)
     const setCityId = useStore((state) => state.setCityId)
     const setDistrictId = useStore((state) => state.setDistrictId)
     const setWardId = useStore((state) => state.setWardId)
@@ -67,29 +64,6 @@ export default function MapV3() {
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
 
-    if (propertyType?.length > 0 && propertyType[0]) {
-        propertyTypeParams = propertyType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-    } else {
-        propertyTypeParams = ''
-    }
-
-    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
-        propertyAreaTypeParams = propertyAreaType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-    } else {
-        propertyAreaTypeParams = ''
-    }
-
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-    } else {
-        propertyCategoryTypeParams = ''
-    }
     const [titleCity, setTitleCity] = useState({
         title: '',
         id: null,
@@ -102,6 +76,41 @@ export default function MapV3() {
         title: 'Phường/xã',
         id: null,
     })
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || !mapRef?.current) return
+        const loadMap = () => {
+            if (!window.vietmapgl || typeof window === 'undefined') return
+            mapRef.current = new window.vietmapgl.Map({
+                container: 'map',
+                style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
+                center: [105.85379875200005, 21.028354507000074], //ha noi center
+                zoom: 9,
+                pitch: 0, // góc nhìn từ trên cao nhìn xuống,
+                // bearing: 90,
+            })
+
+            //add event zoom
+            mapRef.current?.on('zoomstart', function () {
+                setLevelZoom(mapRef?.current?.getZoom())
+            })
+            //add event drag
+            mapRef.current?.on('dragstart', () => {
+                setIsDrag((prev) => !prev)
+            })
+        }
+
+        loadMap() //add map
+        // addTileMap()
+        setMapRef(mapRef.current)
+        return () => {
+            setCityId(11)
+            setDistrictId(null)
+            setWardId(null)
+            setMapRef(null)
+            setLevelZoom(9)
+        }
+    }, [])
 
     // //get polyon build boundary
     // const {
@@ -126,7 +135,6 @@ export default function MapV3() {
         error: errorDistrict,
         isLoading: isLoadingDistrict,
     } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || 11}`, fetcher)
-    console.log('🚀 ~ file: MapV3.jsx:94 ~ MapV3 ~ dataDistrict:', dataDistrict)
 
     // get list ward count
     const {
@@ -162,41 +170,6 @@ export default function MapV3() {
         }${wardId ? '&wardId=' + wardId : ''}`,
         fetcher,
     )
-
-    useEffect(() => {
-        if (typeof window === 'undefined' || !mapRef.current) return
-        const loadMap = () => {
-            if (!window.vietmapgl || typeof window === 'undefined') return
-            mapRef.current = new window.vietmapgl.Map({
-                container: 'map',
-                style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-                center: [105.85379875200005, 21.028354507000074], //ha noi center
-                zoom: 9,
-                pitch: 0, // góc nhìn từ trên cao nhìn xuống,
-                // bearing: 90,
-            })
-
-            //add event zoom
-            mapRef?.current?.on('zoomstart', function () {
-                setLevelZoom(mapRef?.current?.getZoom())
-            })
-            //add event drag
-            mapRef?.current?.on('dragstart', () => {
-                setIsDrag((prev) => !prev)
-            })
-        }
-
-        loadMap() //add map
-        // addTileMap()
-        setMapRef(mapRef.current)
-        return () => {
-            setCityId(11)
-            setDistrictId(null)
-            setWardId(null)
-            setMapRef(null)
-            setLevelZoom(9)
-        }
-    }, [])
 
     useEffect(() => {
         // if (dataVietMap && dataMap && isFirst) {
@@ -299,6 +272,29 @@ export default function MapV3() {
         }
     }, [levelZoom, isDrag])
 
+    if (propertyType?.length > 0 && propertyType[0]) {
+        propertyTypeParams = propertyType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+    } else {
+        propertyTypeParams = ''
+    }
+
+    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+        propertyAreaTypeParams = propertyAreaType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+    } else {
+        propertyAreaTypeParams = ''
+    }
+
+    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
+        propertyCategoryTypeParams = propertyCategoryType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
+    } else {
+        propertyCategoryTypeParams = ''
+    }
     // const addTileMap = () => {
     //     mapRef.current.on('load', function () {
     //         mapRef.current.addSource('traffic-tiles', {
@@ -390,26 +386,27 @@ export default function MapV3() {
     const addMarkerTest = (dataMap, levelZoom) => {
         if (!dataMap || !levelZoom || !mapRef.current) return
         const a = handleAddMarker(dataMap, levelZoom)
-        mapRef.current?.on('load', function () {
-            const markerData = {
-                type: 'FeatureCollection',
-                features: a,
-            }
-            mapRef.current.addSource('marker1', {
-                type: 'geojson',
-                data: markerData,
-            })
+        // typeof mapRef.current?.on === 'function' &&
+            mapRef.current?.on('load', function () {
+                const markerData = {
+                    type: 'FeatureCollection',
+                    features: a,
+                }
+                mapRef.current.addSource('marker1', {
+                    type: 'geojson',
+                    data: markerData,
+                })
 
-            mapRef.current.addLayer({
-                id: 'marker-point',
-                type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
-                source: 'marker1', // ID của nguồn dữ liệu
-                paint: {
-                    'circle-radius': 8, // Kích thước của marker
-                    'circle-color': 'red', // Màu sắc của marker
-                },
+                mapRef.current.addLayer({
+                    id: 'marker-point',
+                    type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
+                    source: 'marker1', // ID của nguồn dữ liệu
+                    paint: {
+                        'circle-radius': 8, // Kích thước của marker
+                        'circle-color': 'red', // Màu sắc của marker
+                    },
+                })
             })
-        })
     }
 
     // fly đến tỉnh/quận/xa
@@ -425,7 +422,6 @@ export default function MapV3() {
     // handle change city
     const handleChangeCity = (id) => {
         if (!dataProvinces || !id) return
-        console.log('handle city')
         const itemCity = dataProvinces?.find((i) => i?.city_id == id)
         if (!itemCity) {
             return notifyError('No data project in address city search!')

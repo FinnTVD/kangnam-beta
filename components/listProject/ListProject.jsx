@@ -117,7 +117,6 @@ export default function ListProject({ lang, t, dataSlug }) {
     useLayoutEffect(() => {
         if (typeof window === 'undefined') return
         let ctx = gsap.context(() => {
-            const vw = window.innerWidth
             setTimeout(() => {
                 gsap.to('#boxRef-filter', {
                     position: 'fixed',
