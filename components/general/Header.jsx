@@ -53,7 +53,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 {/* <SlideBanner data={data} /> */}
                 <Image
                     className='absolute top-0 left-0 object-cover w-full h-full z-1'
-                    src={'/images/bg-header3.jpeg'}
+                    src={'/images/thumnail.jpg'}
                     alt='banner header'
                     width={1600}
                     height={800}
@@ -70,7 +70,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     muted
                 >
                     {/* <source src='/images/videoTest.mp4'></source> */}
-                    <source src='/images/videotest2.mp4'></source>
+                    <source src='/images/videotest22.mp4'></source>
                 </video>
                 {/* <iframe
                     width='1600'

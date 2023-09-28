@@ -1,47 +1,12 @@
 'use client'
-import SelectSearch from './SelectSearch'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
 import BoxLanguage from './language/BoxLanguage'
 import useSWR from 'swr'
-import { handleCheckLangCode } from '@/utils'
+import { postTypeIdAgreement } from '@/utils'
 import SearchGlobal from '../home/SearchGlobal'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const listNavRes = [
-    {
-        id: 1,
-        title: 'Trang chủ',
-        href: '/',
-    },
-    {
-        id: 2,
-        title: 'Dự án',
-        href: '/danh-sach-du-an',
-    },
-    {
-        id: 3,
-        title: 'Bán lại',
-        href: '/danh-sach-du-an',
-    },
-]
-const listNavRes2 = [
-    {
-        id: 1,
-        title: 'Về chúng tôi',
-        href: '/about-us',
-    },
-    {
-        id: 2,
-        title: 'Tin tức',
-        href: '/news',
-    },
-    {
-        id: 3,
-        title: 'Liên hệ',
-        href: '/lien-he',
-    },
-]
+
 const objClass = {
     classContainer:
         'w-[68.26vw] py-[2.65vw] px-[5vw] bg-white02 rounded-[6.25vw] flex justify-between items-center border border-solid border-white03 backdrop-blur-[11px]',
@@ -54,28 +19,22 @@ const objClass = {
         'bg-transparent outline-none text-den max-lg:text-white title16-400-130 max-md:title-mb12-400-130 max-lg:title-tl12 placeholder:text-white/50',
 }
 
-export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
-    const [valueSearch, setValueSearch] = useState('Thành phố Hà Nội')
-    const languageCode = handleCheckLangCode(lang)
+export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
     const {
         data: agreementData,
         error: errorNews,
         isLoading: isLoading,
-    } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=95438eda-0e44-439c-96fd-343301f8b3f0`,
-        fetcher,
-        {
-            revalidateIfStale: false,
-            revalidateOnFocus: false,
-            revalidateOnReconnect: false,
-        },
-    )
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
     let agreementDataTranslation = []
     if (agreementData) {
-        agreementData.data.forEach((item) => {
-            item.translations.forEach((itm) => {
-                if (itm.languageCode === languageCode)
-                    agreementDataTranslation.push({ title: itm.title, slug: itm.slug })
+        agreementData?.data?.forEach((item) => {
+            item?.translations?.forEach((itm) => {
+                if (itm?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+                    agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug })
             })
         })
     }
@@ -161,14 +120,13 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                             className='max-md:title-mb14-400-171 opacity-80 max-lg:title-tl14'
                             key={index}
                         >
-                            {e.title}
+                            <Link href={`${lang !== 'vi' ? '/' + lang + '/' + e?.slug : e?.slug}`}>{e?.title}</Link>
                         </li>
                     ))}
                 </ul>
                 <BoxLanguage
                     lang={lang}
                     t={t}
-                    type={'mb'}
                 />
             </div>
             <div className='px-mb10 my-[4.27vw]'>
@@ -178,19 +136,19 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen }) {
                 Email:
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb13-400-184 opacity-95 max-md:-mt-[1.6vw] max-lg:title-tl13 max-lg:px-[3.2vw] max-lg:mt-0'>
-                kangnam@gmail.com.vn
+                {data?.email}
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>
                 Địa chỉ:
             </span>
             <address className='block text-white max-md:px-mb10 max-md:title-mb13-400-130 opacity-95 not-italic max-lg:title-tl13 max-lg:px-[3.2vw]'>
-                Villa E11, The Manor, kdt mới Mỹ Đình - Mễ Trì, Nam Từ Liêm, Hà Nội.
+                {data?.address}
             </address>
             <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>
                 Hotline:
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb13-600-150 max-lg:title-tl13 max-lg:px-[3.2vw]'>
-                (+84) 254 3526981
+                {data?.phone}
             </span>
             <div className='max-md:px-mb10 mt-[4.27vw] max-lg:px-[3.2vw]'>
                 <Link

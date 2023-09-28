@@ -12,7 +12,7 @@ import MyProjectV2 from './MyProjectV2'
 import { ToastContainer } from 'react-toastify'
 
 import Aos from 'aos'
-import 'aos/dist/aos.css'
+// import 'aos/dist/aos.css'
 import { useEffect } from 'react'
 
 export default function IndexHome({ lang, t }) {

@@ -59,6 +59,7 @@ export default function SelectLanguage({ className, lang, t }) {
     const slugDetailProject = useStore((state) => state.slugDetailProject)
     const slugDetailNews = useStore((state) => state.slugDetailNews)
     const categoryNav = useStore((state) => state.categoryNav)
+    console.log('🚀 ~ file: SelectLanguage.jsx:62 ~ SelectLanguage ~ categoryNav:', categoryNav)
     const pathName = usePathname()
 
     const handleHref = (lg, lgCode) => {
@@ -100,9 +101,9 @@ export default function SelectLanguage({ className, lang, t }) {
         }
         if (lg === 'vi') {
             if (pathName === t?.Navbar?.listNav[0]?.href) return slugProject?.find((e) => e?.code === lg)?.href
-            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias?.includes(pathName.slice(1))))) {
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
                 return categoryNav
-                    ?.find((e) => e?.translations?.find((i) => i?.alias?.includes(pathName.slice(1))))
+                    ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
                     ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg))
                     ?.alias
             }
@@ -119,13 +120,13 @@ export default function SelectLanguage({ className, lang, t }) {
             if (pathName === t?.Navbar?.listNav[0]?.href)
                 return '/' + lg + slugProject?.find((e) => e?.code === lg)?.href
             // check category
-            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias?.includes(pathName.slice(1))))) {
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
                 return (
                     '/' +
                     lg +
                     '/' +
                     categoryNav
-                        ?.find((e) => e?.translations?.find((i) => i?.alias?.includes(pathName.slice(1))))
+                        ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
                         ?.translations?.find((item) =>
                             item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
                         )?.alias
