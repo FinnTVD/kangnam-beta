@@ -1,7 +1,7 @@
 'use client'
 import ListProject from './ListProject'
 import Aos from 'aos'
-import 'aos/dist/aos.css'
+// import 'aos/dist/aos.css'
 import { useEffect } from 'react'
 
 export default function IndexListProject({ lang, t, dataSlug }) {

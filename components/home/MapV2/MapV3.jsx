@@ -77,41 +77,6 @@ export default function MapV3() {
         id: null,
     })
 
-    useEffect(() => {
-        if (typeof window === 'undefined' || !mapRef?.current) return
-        const loadMap = () => {
-            if (!window.vietmapgl || typeof window === 'undefined') return
-            mapRef.current = new window.vietmapgl.Map({
-                container: 'map',
-                style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-                center: [105.85379875200005, 21.028354507000074], //ha noi center
-                zoom: 9,
-                pitch: 0, // góc nhìn từ trên cao nhìn xuống,
-                // bearing: 90,
-            })
-
-            //add event zoom
-            mapRef.current?.on('zoomstart', function () {
-                setLevelZoom(mapRef?.current?.getZoom())
-            })
-            //add event drag
-            mapRef.current?.on('dragstart', () => {
-                setIsDrag((prev) => !prev)
-            })
-        }
-
-        loadMap() //add map
-        // addTileMap()
-        setMapRef(mapRef.current)
-        return () => {
-            setCityId(11)
-            setDistrictId(null)
-            setWardId(null)
-            setMapRef(null)
-            setLevelZoom(9)
-        }
-    }, [])
-
     // //get polyon build boundary
     // const {
     //     data: dataVietMap,
@@ -170,6 +135,60 @@ export default function MapV3() {
         }${wardId ? '&wardId=' + wardId : ''}`,
         fetcher,
     )
+    console.log('🚀 ~ file: MapV3.jsx:168 ~ MapV3 ~ dataMap:', dataMap)
+
+    useEffect(() => {
+        if (typeof window === 'undefined' || !mapRef?.current) return
+        const loadMap = () => {
+            if (!window.vietmapgl || typeof window === 'undefined') return
+            mapRef.current = new window.vietmapgl.Map({
+                container: 'map',
+                style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
+                center: [105.85379875200005, 21.028354507000074], //ha noi center
+                zoom: 9,
+                pitch: 0, // góc nhìn từ trên cao nhìn xuống,
+                // bearing: 90,
+            })
+
+            //add event zoom
+            // mapRef.current?.on('zoomstart', function () {
+            //     setLevelZoom(mapRef?.current?.getZoom())
+            // })
+            //add event drag
+            // mapRef.current?.on('dragstart', () => {
+            //     setIsDrag((prev) => !prev)
+            // })
+
+            mapRef.current?.on('click', (e) => {
+                console.log('🚀 ~ file: MapV3.jsx:103 ~ mapRef.current?.on ~ e:', e)
+                if (e) {
+                    // let features = mapRef.current?.queryRenderedFeatures(e.point, {
+                    //     layers: ['marker-circles'],
+                    // })
+
+                    // if (!features.length) {
+                    //     return
+                    // }
+                    // let popupHtmlString = '<p>Nội dung popup</p>'
+                    // new window.vietmapgl.Popup().setLngLat(e.lngLat).setHTML(popupHtmlString).addTo(mapRef.current)
+                    var div = document.createElement('div')
+                    div.innerHTML = 'Hello, world!'
+                    var popup = new vietmapgl.Popup().setLngLat(e.lngLat).setDOMContent(div).addTo(mapRef.current)
+                }
+            })
+        }
+
+        loadMap() //add map
+        // addTileMap()
+        setMapRef(mapRef.current)
+        return () => {
+            setCityId(11)
+            setDistrictId(null)
+            setWardId(null)
+            setMapRef(null)
+            setLevelZoom(9)
+        }
+    }, [])
 
     useEffect(() => {
         // if (dataVietMap && dataMap && isFirst) {
@@ -199,21 +218,136 @@ export default function MapV3() {
         //         mapRef.current?.getSource('marker1')?.setData(markerData)
         //     }
         // }
-        if (dataMap && isFirst) {
-            addMarkerTest(dataMap, levelZoom)
-            setIsFirst(false)
-        }
-        if (mapRef.current && !isFirst && dataMap) {
-            const a = handleAddMarker(dataMap, levelZoom)
-            if (a) {
-                const markerData = {
-                    type: 'FeatureCollection',
-                    features: a,
+        const callApi = async () => {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
+                    districtId ? '&districtId=' + districtId : ''
+                }${wardId ? '&wardId=' + wardId : ''}`,
+            )
+            const dataMap = await res.json()
+            if (dataMap && isFirst) {
+                // addMarkerTest(dataMap, levelZoom)
+                setIsFirst(false)
+                const addMarkerV2 = (dataMap, levelZoom) => {
+                    const a = []
+                    dataMap?.forEach((e) => {
+                        if (levelZoom >= 13.5) {
+                            a?.push({
+                                type: 'Feature',
+                                properties: {
+                                    id: e?.id,
+                                    mag: Number(e?.count),
+                                    time: 1507425650893,
+                                    felt: null,
+                                    tsunami: 0,
+                                },
+                                geometry: {
+                                    type: 'Point',
+                                    coordinates: [Number(e?.lng), Number(e?.lat)],
+                                },
+                            })
+                        }
+                        if (levelZoom >= 11.5 && levelZoom < 13.5) {
+                            a?.push({
+                                type: 'Feature',
+                                properties: {
+                                    id: e?.ward_id,
+                                    mag: Number(e?.count),
+                                    time: 1507425650893,
+                                    felt: null,
+                                    tsunami: 0,
+                                },
+                                geometry: {
+                                    type: 'Point',
+                                    coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)],
+                                },
+                            })
+                        }
+                        if (levelZoom < 11.5) {
+                            a?.push({
+                                type: 'Feature',
+                                properties: {
+                                    id: e?.district_id,
+                                    mag: Number(e?.count),
+                                    time: 1507425650893,
+                                    felt: null,
+                                    tsunami: 0,
+                                },
+                                geometry: {
+                                    type: 'Point',
+                                    coordinates: [Number(e?.district_lng), Number(e?.district_lat)],
+                                },
+                            })
+                        }
+                    })
+                    // dataMap?.map(e=>a.push({
+                    //             type: 'Feature',
+                    //             properties: {
+                    //                 id: 'ak16994521',
+                    //                 mag: Number(e?.count),
+                    //                 time: 1507425650893,
+                    //                 felt: null,
+                    //                 tsunami: 0,
+                    //             },
+                    //             geometry: {
+                    //                 type: 'Point',
+                    //                 coordinates: [106.67381138433618, 10.838876987799098],
+                    //             },
+                    //         }))
+                    let geoJSON = {
+                        type: 'FeatureCollection',
+                        features: a,
+                    }
+
+                    mapRef.current.addSource('cluster-source', {
+                        type: 'geojson',
+                        data: geoJSON,
+                    })
+
+                    mapRef.current.addLayer({
+                        id: 'marker-circles',
+                        type: 'circle',
+                        source: 'cluster-source',
+                        paint: {
+                            'circle-color': '#51bbd6', // Màu sắc của circle
+                            'circle-radius': 18, // Đường kính của circle
+                            'circle-opacity': 0.6, // Độ mờ của circle
+                            'circle-stroke-width': 3, // Độ dày của viền
+                            'circle-stroke-color': 'red', // Màu sắc của viền
+                            'circle-stroke-opacity': 0.6,
+                        },
+                    })
+                    mapRef.current.addLayer({
+                        id: 'marker-circles-text',
+                        type: 'symbol',
+                        source: 'cluster-source',
+                        layout: {
+                            // 'text-field': '100', // Bạn truyền số bạn muốn vào đây
+                            'text-field': ['get', 'mag'],
+                            'text-size': 12, // Kích thước của văn bản
+                            'text-anchor': 'center', // Giữ văn bản ở giữa của circle
+                            'text-allow-overlap': true, // Cho phép văn bản chồng lấn lên nhau
+                        },
+                        paint: {
+                            'text-color': '#000', // Màu sắc của văn bản
+                        },
+                    })
                 }
-                mapRef.current?.getSource('marker1')?.setData(markerData)
+                addMarkerV2(dataMap, levelZoom)
+            }
+            if (mapRef.current && !isFirst && dataMap) {
+                const a = handleAddMarker(dataMap, levelZoom)
+                if (a) {
+                    const markerData = {
+                        type: 'FeatureCollection',
+                        features: a,
+                    }
+                    mapRef.current?.getSource('marker1')?.setData(markerData)
+                }
             }
         }
-    }, [dataMap, cityId, districtId, wardId])
+        callApi()
+    }, [cityId, districtId, wardId])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -387,26 +521,26 @@ export default function MapV3() {
         if (!dataMap || !levelZoom || !mapRef.current) return
         const a = handleAddMarker(dataMap, levelZoom)
         // typeof mapRef.current?.on === 'function' &&
-            mapRef.current?.on('load', function () {
-                const markerData = {
-                    type: 'FeatureCollection',
-                    features: a,
-                }
-                mapRef.current.addSource('marker1', {
-                    type: 'geojson',
-                    data: markerData,
-                })
-
-                mapRef.current.addLayer({
-                    id: 'marker-point',
-                    type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
-                    source: 'marker1', // ID của nguồn dữ liệu
-                    paint: {
-                        'circle-radius': 8, // Kích thước của marker
-                        'circle-color': 'red', // Màu sắc của marker
-                    },
-                })
+        mapRef.current?.on('load', function () {
+            const markerData = {
+                type: 'FeatureCollection',
+                features: a,
+            }
+            mapRef.current?.addSource('marker1', {
+                type: 'geojson',
+                data: markerData,
             })
+
+            mapRef.current?.addLayer({
+                id: 'marker-point',
+                type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
+                source: 'marker1', // ID của nguồn dữ liệu
+                paint: {
+                    'circle-radius': 8, // Kích thước của marker
+                    'circle-color': 'red', // Màu sắc của marker
+                },
+            })
+        })
     }
 
     // fly đến tỉnh/quận/xa

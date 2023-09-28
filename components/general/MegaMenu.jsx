@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/[lang]/(store)/store'
-import { handleCheckLangCode, listIdNav, postTypeIdAgreement } from '@/utils'
+import { listIdNav, postTypeIdAgreement } from '@/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
@@ -9,7 +9,6 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function MegaMenu({ isHome, lang, t, fixed }) {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
     const [listNav, setListNav] = useState([])
-    const languageCode = handleCheckLangCode(lang)
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
@@ -48,8 +47,8 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
     if (agreementData) {
         agreementData?.data?.forEach((item) => {
             item?.translations?.forEach((itm) => {
-                if (itm?.languageCode === languageCode)
-                    agreementDataTranslation?.push({ title: itm.title, slug: itm.slug })
+                if (itm?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+                    agreementDataTranslation?.push({ title: itm?.title, slug: itm?.slug })
             })
         })
     }
@@ -67,7 +66,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                             {e?.branch ? (
                                 <>
                                     <div className='px-[0.94vw] py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]'>
-                                        <span className='whitespace-nowrap title16-600-130 inline-block text-den'>
+                                        <span className='inline-block whitespace-nowrap title16-600-130 text-den'>
                                             {e?.title}
                                         </span>
                                         <svg
@@ -99,7 +98,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                                     className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                                 >
                                                     <Link
-                                                        className='whitespace-nowrap title16-400-130 text-den block w-full h-full'
+                                                        className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
                                                         href={`${lang !== 'vi' ? '/' + lang + item?.href : item?.href}`}
                                                     >
                                                         {item?.title}

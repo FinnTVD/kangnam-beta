@@ -34,7 +34,7 @@ const handleCheckIcon = (locale) => {
     }
 }
 
-export default function BoxLanguage({ type = '', lang, t }) {
+export default function BoxLanguage({ type = 'white', lang, t }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
     useEffect(() => {

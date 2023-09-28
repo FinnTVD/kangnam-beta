@@ -12,7 +12,7 @@ export default async function Page({ params: { lang, project } }) {
     const data = await getData('/property-category')
     const data1 = await getData(`/post?page=1&take=12&postTypeIds=${postTypeIdAgreement}`)
     if (data1) {
-        const post = data1?.data?.find((e) => e?.translations?.find((i) => i?.slug === project))
+        const post = data1?.data?.find((e) => e?.translations?.find((i) => i?.slug === decodeURIComponent(project)))
         const agreementDetail = post?.translations?.find((e) =>
             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
         )

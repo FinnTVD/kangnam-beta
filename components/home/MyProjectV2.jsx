@@ -15,11 +15,9 @@ import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import useStore from '@/app/[lang]/(store)/store'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import dynamic from 'next/dynamic'
+import MapV3 from './MapV2/MapV3'
 
-const MapV3 = dynamic(() => import('./MapV2/MapV3'), {
-    ssr: false,
-})
+
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 let propertyTypeParams = ''

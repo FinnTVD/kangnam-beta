@@ -3,7 +3,6 @@
 import 'swiper/css/grid'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Grid } from 'swiper/modules'
-
 import { useMediaQuery } from 'react-responsive'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -25,7 +24,6 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
 gsap.registerPlugin(ScrollTrigger)
-
 export default function SellingRes({ lang }) {
     const router = useRouter()
     const searchParams = useSearchParams()
@@ -96,14 +94,6 @@ export default function SellingRes({ lang }) {
     )
 
     useEffect(() => {
-        mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10${
-                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
-        )
-    }, [lang])
-
-    useEffect(() => {
         if (!boxSellRef.current) return
         let ctx = gsap.context(() => {
             setTimeout(() => {
@@ -113,6 +103,7 @@ export default function SellingRes({ lang }) {
                         start: 'top center',
                         end: 'bottom center',
                         scrub: true,
+                        markers: true,
                         onToggle: (self) => {
                             if (self.isActive) {
                                 setIsShow(true)
@@ -122,12 +113,21 @@ export default function SellingRes({ lang }) {
                         },
                     },
                 })
-            }, 500)
+            }, 5000)
         }, boxSellRef)
         return () => {
             ctx.revert()
         }
     }, [])
+
+    useEffect(() => {
+        mutate(
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10${
+                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+        )
+    }, [lang])
+
     if (!isTablet || !data) return
     const dataNew = data?.data?.filter((item) => item?.propertyCategory?.id !== '05d52397-71a8-4ecf-9a86-ee37965332ef')
     return (
@@ -149,7 +149,7 @@ export default function SellingRes({ lang }) {
                 <BoxFilterV2 arrFilter={arrFilter} />
             </div>
             {isLoading && (
-                <div className='overflow-hidden flex flex-col'>
+                <div className='flex flex-col overflow-hidden'>
                     <div className='flex gap-x-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
                         {arrSelling?.map((e, index) => (
                             <div

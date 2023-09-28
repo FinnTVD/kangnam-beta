@@ -2,6 +2,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-toastify/dist/ReactToastify.css'
+import 'aos/dist/aos.css'
 
 import './globals.css'
 
