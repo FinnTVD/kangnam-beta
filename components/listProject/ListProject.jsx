@@ -17,7 +17,12 @@ import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { findIdByAlias, handleCheckLangCode, handleCheckParams } from '@/utils'
 // import MapV2 from '../home/MapV2/MapV2'
 import useStore from '@/app/[lang]/(store)/store'
-import MapV3 from '../home/MapV2/MapV3'
+// import MapV3 from '../home/MapV2/MapV3'
+// import Map from '../home/Map'
+// import MapV4 from '../home/MapV2/MapV4'
+
+import dynamic from 'next/dynamic'
+const MapV4 = dynamic(() => import('../home/MapV2/MapV3'))
 // import Map from '../home/Map'
 const arrFilter = [
     {
@@ -403,7 +408,8 @@ export default function ListProject({ lang, t, dataSlug }) {
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                                <MapV3 />
+                                {/* <MapV3 /> */}
+                                <MapV4 />
                             </div>
                         </div>
                         <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>

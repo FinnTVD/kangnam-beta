@@ -11,12 +11,14 @@ const objClass = {
     classContainer:
         'w-[68.26vw] py-[2.65vw] px-[5vw] bg-white02 rounded-[6.25vw] flex justify-between items-center border border-solid border-white03 backdrop-blur-[11px]',
     classLine:
-        'border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:opacity-10 max-md:border-white max-md:h-[2.67vw] max-md:mx-[3.2vw]',
+        'border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:opacity-10 max-md:border-white max-md:h-[2.67vw] max-md:mx-[2.2vw]',
     classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
     isIcon: false,
     iconSmall: true,
     classInput:
-        'bg-transparent outline-none text-den max-lg:text-white title16-400-130 max-md:title-mb12-400-130 max-lg:title-tl12 placeholder:text-white/50',
+        'bg-transparent outline-none text-den max-lg:text-white title16-400-130 max-md:title-mb12-400-130 max-lg:title-tl12 placeholder:text-white/50 max-md:w-full',
+    classList:
+        'absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black w-[50vw] px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150',
 }
 
 export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
@@ -69,8 +71,8 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
                     isIcon={objClass.isIcon}
                     iconSmall={objClass.iconSmall}
                     classInput={objClass.classInput}
-                    isHome={false}
                     classList={objClass.classList}
+                    isHome={false}
                     dark={'white'}
                 />
                 <div
@@ -127,6 +129,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
                 <BoxLanguage
                     lang={lang}
                     t={t}
+                    isMenu={true}
                 />
             </div>
             <div className='px-mb10 my-[4.27vw]'>

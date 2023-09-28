@@ -34,7 +34,7 @@ const handleCheckIcon = (locale) => {
     }
 }
 
-export default function BoxLanguage({ type = 'white', lang, t }) {
+export default function BoxLanguage({ type = 'white', lang, t, isMenu = false }) {
     const [isShowLanguage, setIsShowLanguage] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
     useEffect(() => {
@@ -46,7 +46,7 @@ export default function BoxLanguage({ type = 'white', lang, t }) {
                 setIsShowLanguage(!isShowLanguage)
             }}
             ref={sideRef}
-            className='flex flex-col gap-y-[0.56vw] relative z-[99999] w-[8vw] max-lg:w-fit'
+            className={`${isMenu ? 'z-10' : 'z-[99999]'} flex flex-col gap-y-[0.56vw] relative w-[8vw] max-lg:w-fit`}
         >
             <span
                 className={`${
