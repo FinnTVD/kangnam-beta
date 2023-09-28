@@ -3,11 +3,10 @@
 import 'swiper/css/grid'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Grid } from 'swiper/modules'
-import { useMediaQuery } from 'react-responsive'
 import Link from 'next/link'
 import Image from 'next/image'
 import Button from '../general/Button'
-import { arrFilter, handleCheckLangCode } from '@/utils'
+import { arrFilter, categoryHireId, handleCheckLangCode } from '@/utils'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useSWR, { mutate } from 'swr'
@@ -29,9 +28,6 @@ export default function SellingRes({ lang }) {
     const searchParams = useSearchParams()
     const pathName = usePathname()
     const boxSellRef = useRef(null)
-    const isTablet = useMediaQuery({
-        query: '(max-width: 1023px)',
-    })
 
     const [isShow, setIsShow] = useState(false)
 
@@ -128,12 +124,13 @@ export default function SellingRes({ lang }) {
         )
     }, [lang])
 
-    if (!isTablet || !data) return
-    const dataNew = data?.data?.filter((item) => item?.propertyCategory?.id !== '05d52397-71a8-4ecf-9a86-ee37965332ef')
+    if (!data) return
+    const dataNew = data?.data?.filter((item) => item?.propertyCategory?.id !== categoryHireId)
     return (
         <section
             ref={boxSellRef}
-            className='w-full pt-[11.11vw] h-fit relative'
+            id='selling'
+            className='w-full pt-[11.11vw] h-fit relative lg:hidden'
         >
             {isShow && <BtnShowMap />}
             <div className='px-mb10 max-lg:pl-[3.2vw]'>

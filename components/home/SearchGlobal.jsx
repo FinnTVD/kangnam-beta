@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import SelectSearch from '../general/SelectSearch'
 import useSWR from 'swr'
@@ -449,7 +448,7 @@ export default function SearchGlobal({
                                 <path
                                     d='M2.16666 23.8333L4.33333 21.6667'
                                     stroke='white'
-                                    stroke-width='1.5'
+                                    strokeWidth='1.5'
                                     strokeLinecap='round'
                                     strokeLinejoin='round'
                                 />

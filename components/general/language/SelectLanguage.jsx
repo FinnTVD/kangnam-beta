@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
+import { memo } from 'react'
 
 const arrHref = ['/en', '/kr', '/ch']
 const arrLanguage = [
@@ -54,12 +55,11 @@ const slugProject = [
     },
 ]
 
-export default function SelectLanguage({ className, lang, t }) {
+const SelectLanguage = ({ className, lang, t }) => {
     const setLanguage = useStore((state) => state.setLanguage)
     const slugDetailProject = useStore((state) => state.slugDetailProject)
     const slugDetailNews = useStore((state) => state.slugDetailNews)
     const categoryNav = useStore((state) => state.categoryNav)
-    console.log('🚀 ~ file: SelectLanguage.jsx:62 ~ SelectLanguage ~ categoryNav:', categoryNav)
     const pathName = usePathname()
 
     const handleHref = (lg, lgCode) => {
@@ -178,3 +178,4 @@ export default function SelectLanguage({ className, lang, t }) {
         </ul>
     )
 }
+export default memo(SelectLanguage)

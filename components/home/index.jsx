@@ -14,8 +14,13 @@ import { ToastContainer } from 'react-toastify'
 import Aos from 'aos'
 // import 'aos/dist/aos.css'
 import { useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 export default function IndexHome({ lang, t }) {
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
+
     useEffect(() => {
         Aos.init({
             disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -49,14 +54,18 @@ export default function IndexHome({ lang, t }) {
                 lang={lang}
                 t={t}
             />
-            <SellingRes
-                lang={lang}
-                t={t}
-            />
-            <Hiring
-                lang={lang}
-                t={t}
-            />
+            {isTablet && (
+                <SellingRes
+                    lang={lang}
+                    t={t}
+                />
+            )}
+            {isTablet && (
+                <Hiring
+                    lang={lang}
+                    t={t}
+                />
+            )}
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
                 <Deposit
                     lang={lang}

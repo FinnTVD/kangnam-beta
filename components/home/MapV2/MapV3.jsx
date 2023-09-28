@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, memo } from 'react'
 import SelectDistrict from './SelectDistrict'
 import SelectWard from './SelectWard'
 import SelectCity from './SelectCity'
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
 import { useSearchParams } from 'next/navigation'
+import useDebounce from '@/hooks/useDebounce'
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
@@ -42,7 +43,7 @@ let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function MapV3() {
+const MapV3 = ({ lang }) => {
     const mapRef = useRef(null) //lưu lại dom map
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
@@ -55,10 +56,13 @@ export default function MapV3() {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
+    const levelZoomDebounce = useDebounce(levelZoom, 500)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
     const [isDrag, setIsDrag] = useState(false) // trigger sự kiện drag
+    const isDragDebounce = useDebounce(isDrag, 500) // trigger sự kiện drag
     const [isFirst, setIsFirst] = useState(true)
     const [isFly, setIsFly] = useState(false)
+    const [dataMap, setDataMap] = useState(null)
     const searchParams = useSearchParams()
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
@@ -76,16 +80,6 @@ export default function MapV3() {
         title: 'Phường/xã',
         id: null,
     })
-
-    // //get polyon build boundary
-    // const {
-    //     data: dataVietMap,
-    //     error: errorVietMap,
-    //     isLoading: isLoadingVietMap,
-    // } = useSWR(
-    //     `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId}?apikey=${apiKey}`,
-    //     fetcher,
-    // )
 
     // get list provinces count
     const {
@@ -111,31 +105,31 @@ export default function MapV3() {
         fetcher,
     )
     //
-    // const {
-    //     data: dataItemMap,
-    //     error: errorItemMap,
-    //     isLoading: isLoadingItemMap,
-    // } = useSWR(
-    //     `${process.env.NEXT_PUBLIC_API}/property?cityId=${cityId}${districtId ? '&districtId=' + districtId : ''}${
-    //         wardId ? '&wardId=' + wardId : ''
-    //     }${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-    //         propertyAreaTypeParams ? propertyAreaTypeParams : ''
-    //     }${propertyTypeParams ? propertyTypeParams : ''}`,
-    //     fetcher,
-    // )
-
-    //
     const {
-        data: dataMap,
-        error: errorMap,
-        isLoading: isLoadingMap,
+        data: dataItemMap,
+        error: errorItemMap,
+        isLoading: isLoadingItemMap,
     } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
-            districtId ? '&districtId=' + districtId : ''
-        }${wardId ? '&wardId=' + wardId : ''}`,
+        `${process.env.NEXT_PUBLIC_API}/property?cityId=${cityId}${districtId ? '&districtId=' + districtId : ''}${
+            wardId ? '&wardId=' + wardId : ''
+        }${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
+            propertyAreaTypeParams ? propertyAreaTypeParams : ''
+        }${propertyTypeParams ? propertyTypeParams : ''}`,
         fetcher,
     )
-    console.log('🚀 ~ file: MapV3.jsx:168 ~ MapV3 ~ dataMap:', dataMap)
+
+    //
+    // const {
+    //     data: dataMap,
+    //     error: errorMap,
+    //     isLoading: isLoadingMap,
+    // } = useSWR(
+    //     `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
+    //         districtId ? '&districtId=' + districtId : ''
+    //     }${wardId ? '&wardId=' + wardId : ''}`,
+    //     fetcher,
+    // )
+    // console.log('🚀 ~ file: MapV3.jsx:168 ~ MapV3 ~ dataMap:', dataMap)
 
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef?.current) return
@@ -149,38 +143,28 @@ export default function MapV3() {
                 pitch: 0, // góc nhìn từ trên cao nhìn xuống,
                 // bearing: 90,
             })
+            mapRef.current?.scrollZoom.disable()
+            mapRef.current?.addControl(
+                new window.vietmapgl.NavigationControl({
+                    visualizePitch: true,
+                    showZoom: true,
+                    showCompass: true,
+                }),
+            )
 
             //add event zoom
-            // mapRef.current?.on('zoomstart', function () {
-            //     setLevelZoom(mapRef?.current?.getZoom())
-            // })
+            mapRef.current?.on('zoomstart', function () {
+                setLevelZoom(mapRef?.current?.getZoom())
+            })
             //add event drag
-            // mapRef.current?.on('dragstart', () => {
-            //     setIsDrag((prev) => !prev)
-            // })
-
-            mapRef.current?.on('click', (e) => {
-                console.log('🚀 ~ file: MapV3.jsx:103 ~ mapRef.current?.on ~ e:', e)
-                if (e) {
-                    // let features = mapRef.current?.queryRenderedFeatures(e.point, {
-                    //     layers: ['marker-circles'],
-                    // })
-
-                    // if (!features.length) {
-                    //     return
-                    // }
-                    // let popupHtmlString = '<p>Nội dung popup</p>'
-                    // new window.vietmapgl.Popup().setLngLat(e.lngLat).setHTML(popupHtmlString).addTo(mapRef.current)
-                    var div = document.createElement('div')
-                    div.innerHTML = 'Hello, world!'
-                    var popup = new vietmapgl.Popup().setLngLat(e.lngLat).setDOMContent(div).addTo(mapRef.current)
-                }
+            mapRef.current?.on('dragstart', () => {
+                setIsDrag((prev) => !prev)
             })
         }
 
         loadMap() //add map
-        // addTileMap()
         setMapRef(mapRef.current)
+        // addTileMap()
         return () => {
             setCityId(11)
             setDistrictId(null)
@@ -191,159 +175,44 @@ export default function MapV3() {
     }, [])
 
     useEffect(() => {
-        // if (dataVietMap && dataMap && isFirst) {
-        //     addGeojsonLine(handleGeoWKT(dataVietMap?.geo_wkt))
-        //     addMarkerTest(dataMap, levelZoom)
-        //     setIsFirst(false)
-        // }
-        // if (mapRef.current && !isFirst && dataVietMap && dataMap) {
-        //     const polygon = handleGeoWKT(dataVietMap?.geo_wkt)
-        //     const a = handleAddMarker(dataMap, levelZoom)
-        //     if (polygon) {
-        //         const newData = {
-        //             type: 'Feature',
-        //             properties: {},
-        //             geometry: {
-        //                 type: 'LineString',
-        //                 coordinates: polygon,
-        //             },
-        //         }
-        //         mapRef.current?.getSource('marker-source')?.setData(newData)
-        //     }
-        //     if (a) {
-        //         const markerData = {
-        //             type: 'FeatureCollection',
-        //             features: a,
-        //         }
-        //         mapRef.current?.getSource('marker1')?.setData(markerData)
-        //     }
-        // }
+        const callApiBorder = async () => {
+            const res = await fetch(
+                `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId}?apikey=${apiKey}`,
+            )
+            const data = await res.json()
+            if (data && isFirst) {
+                addGeojsonLine(handleGeoWKT(data?.geo_wkt))
+            }
+            if (!isFirst && data) {
+                const polygon = handleGeoWKT(data?.geo_wkt)
+                let newPolygon = polygon.filter((e) => !isNaN(e[0] && !isNaN(e[1])))
+                if (newPolygon) {
+                    const newData = {
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: newPolygon,
+                        },
+                    }
+                    mapRef.current?.getSource('marker-source')?.setData(newData)
+                }
+            }
+        }
+        callApiBorder()
+        setIsFirst(false)
+
         const callApi = async () => {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
                     districtId ? '&districtId=' + districtId : ''
                 }${wardId ? '&wardId=' + wardId : ''}`,
             )
-            const dataMap = await res.json()
-            if (dataMap && isFirst) {
-                // addMarkerTest(dataMap, levelZoom)
+            const data = await res.json()
+            if (data) {
+                addMarkerV2(data, levelZoomDebounce)
                 setIsFirst(false)
-                const addMarkerV2 = (dataMap, levelZoom) => {
-                    const a = []
-                    dataMap?.forEach((e) => {
-                        if (levelZoom >= 13.5) {
-                            a?.push({
-                                type: 'Feature',
-                                properties: {
-                                    id: e?.id,
-                                    mag: Number(e?.count),
-                                    time: 1507425650893,
-                                    felt: null,
-                                    tsunami: 0,
-                                },
-                                geometry: {
-                                    type: 'Point',
-                                    coordinates: [Number(e?.lng), Number(e?.lat)],
-                                },
-                            })
-                        }
-                        if (levelZoom >= 11.5 && levelZoom < 13.5) {
-                            a?.push({
-                                type: 'Feature',
-                                properties: {
-                                    id: e?.ward_id,
-                                    mag: Number(e?.count),
-                                    time: 1507425650893,
-                                    felt: null,
-                                    tsunami: 0,
-                                },
-                                geometry: {
-                                    type: 'Point',
-                                    coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)],
-                                },
-                            })
-                        }
-                        if (levelZoom < 11.5) {
-                            a?.push({
-                                type: 'Feature',
-                                properties: {
-                                    id: e?.district_id,
-                                    mag: Number(e?.count),
-                                    time: 1507425650893,
-                                    felt: null,
-                                    tsunami: 0,
-                                },
-                                geometry: {
-                                    type: 'Point',
-                                    coordinates: [Number(e?.district_lng), Number(e?.district_lat)],
-                                },
-                            })
-                        }
-                    })
-                    // dataMap?.map(e=>a.push({
-                    //             type: 'Feature',
-                    //             properties: {
-                    //                 id: 'ak16994521',
-                    //                 mag: Number(e?.count),
-                    //                 time: 1507425650893,
-                    //                 felt: null,
-                    //                 tsunami: 0,
-                    //             },
-                    //             geometry: {
-                    //                 type: 'Point',
-                    //                 coordinates: [106.67381138433618, 10.838876987799098],
-                    //             },
-                    //         }))
-                    let geoJSON = {
-                        type: 'FeatureCollection',
-                        features: a,
-                    }
-
-                    mapRef.current.addSource('cluster-source', {
-                        type: 'geojson',
-                        data: geoJSON,
-                    })
-
-                    mapRef.current.addLayer({
-                        id: 'marker-circles',
-                        type: 'circle',
-                        source: 'cluster-source',
-                        paint: {
-                            'circle-color': '#51bbd6', // Màu sắc của circle
-                            'circle-radius': 18, // Đường kính của circle
-                            'circle-opacity': 0.6, // Độ mờ của circle
-                            'circle-stroke-width': 3, // Độ dày của viền
-                            'circle-stroke-color': 'red', // Màu sắc của viền
-                            'circle-stroke-opacity': 0.6,
-                        },
-                    })
-                    mapRef.current.addLayer({
-                        id: 'marker-circles-text',
-                        type: 'symbol',
-                        source: 'cluster-source',
-                        layout: {
-                            // 'text-field': '100', // Bạn truyền số bạn muốn vào đây
-                            'text-field': ['get', 'mag'],
-                            'text-size': 12, // Kích thước của văn bản
-                            'text-anchor': 'center', // Giữ văn bản ở giữa của circle
-                            'text-allow-overlap': true, // Cho phép văn bản chồng lấn lên nhau
-                        },
-                        paint: {
-                            'text-color': '#000', // Màu sắc của văn bản
-                        },
-                    })
-                }
-                addMarkerV2(dataMap, levelZoom)
-            }
-            if (mapRef.current && !isFirst && dataMap) {
-                const a = handleAddMarker(dataMap, levelZoom)
-                if (a) {
-                    const markerData = {
-                        type: 'FeatureCollection',
-                        features: a,
-                    }
-                    mapRef.current?.getSource('marker1')?.setData(markerData)
-                }
+                setDataMap(data)
             }
         }
         callApi()
@@ -374,37 +243,33 @@ export default function MapV3() {
     useEffect(() => {
         // kiểm tra xem điểm giữa của khung hình đang là quân/huyện nào hay là phường/xã nào
         const getLocationCurrent = async () => {
-            try {
-                const ct = await mapRef.current?.getCenter()
-                // call api theo tạo độ center của view map
-                const res = await fetch(
-                    `https://maps.vietmap.vn/api/reverse/v3?apikey=${apiKey}&lng=${ct?.lng}&lat=${ct?.lat}`,
-                )
-                // get data follow center viewport
-                const data = await res.json()
-                const one = dataMap?.find(
-                    (e) => Number(e?.district_id) === data[0]?.boundaries[1]?.id, // boundaries[1]<=> district
-                )
-                if (Number(one?.count) <= 1) return
-                if (levelZoom >= 11.5) {
-                    setDistrictId(data[0]?.boundaries[1]?.id)
-                }
-                if (levelZoom >= 13.5) {
-                    setWardId(data[0]?.boundaries[0]?.id) // boundaries[1]<=> ward
-                }
-            } catch (error) {
-                console.log('error', error)
+            const ct = await mapRef.current?.getCenter()
+            // call api theo tạo độ center của view map
+            const res = await fetch(
+                `https://maps.vietmap.vn/api/reverse/v3?apikey=${apiKey}&lng=${ct?.lng}&lat=${ct?.lat}`,
+            )
+            // get data follow center viewport
+            const data = await res.json()
+            const one = dataMap?.find(
+                (e) => Number(e?.district_id) === data[0]?.boundaries[1]?.id, // boundaries[1]<=> district
+            )
+            if (Number(one?.count) <= 1) return
+            if (levelZoomDebounce >= 11.5) {
+                setDistrictId(data[0]?.boundaries[1]?.id)
+            }
+            if (levelZoomDebounce >= 13.5) {
+                setWardId(data[0]?.boundaries[0]?.id) // boundaries[1]<=> ward
             }
         }
         getLocationCurrent()
-        if (levelZoom >= 11.5 && levelZoom < 13.5) {
+        if (levelZoomDebounce >= 11.5 && levelZoomDebounce < 13.5) {
             setWardId(null)
         }
-        if (districtId && levelZoom < 11.5) {
+        if (districtId && levelZoomDebounce < 11.5) {
             setDistrictId(null)
             wardId && setWardId(null)
         }
-    }, [levelZoom, isDrag])
+    }, [levelZoomDebounce, isDragDebounce])
 
     if (propertyType?.length > 0 && propertyType[0]) {
         propertyTypeParams = propertyType[0]
@@ -450,35 +315,243 @@ export default function MapV3() {
     //     })
     // }
 
-    // const addGeojsonLine = (dataPolygon) => {
-    //     if (!dataPolygon) return
-    //     mapRef.current.on('load', function () {
-    //         mapRef.current.addSource('marker-source', {
-    //             type: 'geojson',
-    //             data: {
-    //                 type: 'Feature',
-    //                 properties: {},
-    //                 geometry: {
-    //                     type: 'LineString',
-    //                     coordinates: dataPolygon,
-    //                 },
-    //             },
-    //         })
-    //         mapRef.current.addLayer({
-    //             id: 'marker-layer',
-    //             type: 'line',
-    //             source: 'marker-source',
-    //             layout: {
-    //                 'line-join': 'round',
-    //                 'line-cap': 'round',
-    //             },
-    //             paint: {
-    //                 'line-color': 'red',
-    //                 'line-width': 1,
-    //             },
-    //         })
-    //     })
-    // }
+    const addGeojsonLine = (dataPolygon) => {
+        if (!dataPolygon) return
+        mapRef.current.on('load', function () {
+            mapRef.current.addSource('marker-source', {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: dataPolygon,
+                    },
+                },
+            })
+            mapRef.current.addLayer({
+                id: 'marker-layer',
+                type: 'line',
+                source: 'marker-source',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round',
+                },
+                paint: {
+                    'line-color': 'red',
+                    'line-width': 1,
+                },
+            })
+        })
+    }
+
+    const handleSelectId = (e, levelZoom) => {
+        if (levelZoom >= 11.5) {
+            return 'wardId=' + e?.id
+        }
+        return 'districtId=' + e?.id
+    }
+
+    const callDataPopup = async (e, levelZoom) => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?${handleSelectId(e, levelZoom)}`)
+        const data = await res.json()
+        let childNode = ''
+        if (data) {
+            childNode = data?.data?.reduce(
+                (acc, itemProject) =>
+                    acc +
+                    `<div
+                            key=${itemProject?.id}
+                            class="flex gap-x-[0.88vw] mt-[0.5vw]"
+                        >
+                            <a class="outline-none" href="/${
+                                itemProject?.propertyCategory?.translations?.find((e) =>
+                                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                )?.alias || itemProject?.propertyCategory?.translations[0]?.alias
+                            }/${
+                        itemProject?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                        )?.slug || itemProject?.translations[0]?.slug
+                    }">
+                                <img
+                                    class="w-[5.4375vw] h-full block object-cover"
+                                    src=${itemProject?.firstImage ? itemProject?.firstImage : '/images/itemproject.jpg'}
+                                    alt=${itemProject?.translation?.name}
+                                />
+                            </a>
+                            <div class="w-[12.0625vw]">
+                            <a href="/${
+                                itemProject?.propertyCategory?.translations?.find((e) =>
+                                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                )?.alias || itemProject?.propertyCategory?.translations[0]?.alias
+                            }/${
+                        itemProject?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                        )?.slug || itemProject?.translations[0]?.slug
+                    }">
+                                <h2 class='line-clamp-1'>${itemProject?.translation?.name ?? ''}</h2>
+                                </a>
+                                <div
+                                            title=${itemProject?.address?.display}
+                                            class='flex items-center'
+                                        >
+                                        <svg
+                                        xmlns='http://www.w3.org/2000/svg'
+                                        width='15'
+                                        height='14'
+                                        viewBox='0 0 15 14'
+                                        fill='none'
+                                        class="h-[1vw] w-[2vw]"
+                                    >
+                                        <path
+                                            d='M7.33422 6.8551C7.6153 6.8551 7.8555 6.75502 8.0548 6.55485C8.25411 6.35468 8.35376 6.11406 8.35376 5.83297C8.35376 5.55189 8.25367 5.3117 8.0535 5.11239C7.85334 4.91309 7.61272 4.81344 7.33163 4.81344C7.05055 4.81344 6.81036 4.91352 6.61105 5.11369C6.41175 5.31385 6.31209 5.55448 6.31209 5.83557C6.31209 6.11665 6.41218 6.35684 6.61235 6.55614C6.81251 6.75545 7.05314 6.8551 7.33422 6.8551ZM7.33293 11.6822C8.62598 10.5058 9.58119 9.43878 10.1986 8.48114C10.8159 7.52351 11.1246 6.6801 11.1246 5.95094C11.1246 4.80576 10.7586 3.86807 10.0266 3.13788C9.29459 2.4077 8.3967 2.0426 7.33293 2.0426C6.26915 2.0426 5.37126 2.4077 4.63927 3.13788C3.90726 3.86807 3.54126 4.80576 3.54126 5.95094C3.54126 6.6801 3.85723 7.52351 4.48918 8.48114C5.12112 9.43878 6.06904 10.5058 7.33293 11.6822ZM7.33293 12.8343C5.76765 11.5023 4.59855 10.2652 3.82563 9.12281C3.05272 7.98045 2.66626 6.92316 2.66626 5.95094C2.66626 4.4926 3.13536 3.3308 4.07355 2.46552C5.01175 1.60024 6.0982 1.1676 7.33293 1.1676C8.56765 1.1676 9.65411 1.60024 10.5923 2.46552C11.5305 3.3308 11.9996 4.4926 11.9996 5.95094C11.9996 6.92316 11.6131 7.98045 10.8402 9.12281C10.0673 10.2652 8.8982 11.5023 7.33293 12.8343Z'
+                                            fill='#926B4F'
+                                        />
+                                    </svg>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150 whitespace-nowrap'>
+                                                Địa chỉ:
+                                            </span>
+                                            <span class='capitalize text-den title14-400-150 line-clamp-1'>
+                                                ${
+                                                    itemProject?.address?.name +
+                                                    ', ' +
+                                                    itemProject?.address?.ward +
+                                                    ', ' +
+                                                    itemProject?.address?.district
+                                                }
+                                            </span>
+                                        </div>
+                                        <div class='flex items-center my-[0.5vw]'>
+                                        <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='14'
+                                                height='14'
+                                                viewBox='0 0 14 14'
+                                                fill='none'
+                                            >
+                                                <g clipPath='url(#clip0_546_2319)'>
+                                                    <path
+                                                        d='M10.1351 13.4157V11.0095H3.86426C3.63092 11.0095 3.42676 10.922 3.25176 10.747C3.07676 10.572 2.98926 10.3678 2.98926 10.1345V3.86365H0.583008V2.98865H2.98926V0.582397H3.86426V10.1345H13.4163V11.0095H11.0101V13.4157H10.1351ZM10.1351 9.25948V3.86365H4.73926V2.98865H10.1351C10.3684 2.98865 10.5726 3.07615 10.7476 3.25115C10.9226 3.42615 11.0101 3.63031 11.0101 3.86365V9.25948H10.1351Z'
+                                                        fill='#926B4F'
+                                                    />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id='clip0_546_2319'>
+                                                        <rect
+                                                            width='14'
+                                                            height='14'
+                                                            fill='white'
+                                                        />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                                Diện tích:
+                                            </span>
+                                            <span class=' text-den title14-400-150'>
+                                                ${itemProject?.translation?.size + ' m²'}
+                                            </span>
+                                        </div>
+                                        <div class='flex items-center'>
+                                            <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='14'
+                                                height='14'
+                                                viewBox='0 0 14 14'
+                                                fill='none'
+                                            >
+                                                <path
+                                                    d='M6.57741 11.1862H7.37949V10.4279C7.97255 10.3598 8.43435 10.1775 8.76491 9.88102C9.09546 9.58449 9.26074 9.18831 9.26074 8.69248C9.26074 8.19665 9.11977 7.79317 8.83783 7.48206C8.55588 7.17095 8.07949 6.87442 7.40866 6.59248C6.84477 6.35915 6.43644 6.15012 6.18366 5.9654C5.93088 5.78067 5.80449 5.53276 5.80449 5.22165C5.80449 4.92026 5.91387 4.68206 6.13262 4.50706C6.35137 4.33206 6.65033 4.24456 7.02949 4.24456C7.32116 4.24456 7.57394 4.31262 7.78783 4.44873C8.00171 4.58484 8.18158 4.78901 8.32741 5.06123L9.02741 4.72581C8.86213 4.38554 8.64338 4.11817 8.37116 3.92373C8.09894 3.72929 7.7781 3.61262 7.40866 3.57373V2.82998H6.60658V3.57373C6.11074 3.64179 5.71942 3.82408 5.43262 4.12061C5.14581 4.41713 5.00241 4.78415 5.00241 5.22165C5.00241 5.69804 5.14824 6.0772 5.43991 6.35915C5.73158 6.64109 6.16908 6.90359 6.75241 7.14665C7.4038 7.41887 7.85102 7.66436 8.09408 7.88311C8.33713 8.10186 8.45866 8.37165 8.45866 8.69248C8.45866 9.00359 8.32984 9.25394 8.0722 9.44352C7.81456 9.63311 7.4913 9.7279 7.10241 9.7279C6.72324 9.7279 6.38539 9.62095 6.08887 9.40706C5.79234 9.19317 5.58574 8.90151 5.46908 8.53206L4.72533 8.77998C4.92949 9.2272 5.17984 9.57963 5.47637 9.83727C5.77289 10.0949 6.13991 10.2821 6.57741 10.3987V11.1862ZM7.00033 12.8341C6.2031 12.8341 5.44963 12.681 4.73991 12.3748C4.03019 12.0685 3.41039 11.6505 2.88053 11.1206C2.35067 10.5907 1.93262 9.97095 1.62637 9.26123C1.32012 8.55151 1.16699 7.79804 1.16699 7.00081C1.16699 6.19387 1.32012 5.43554 1.62637 4.72581C1.93262 4.01609 2.35067 3.39873 2.88053 2.87373C3.41039 2.34873 4.03019 1.93311 4.73991 1.62686C5.44963 1.32061 6.2031 1.16748 7.00033 1.16748C7.80727 1.16748 8.5656 1.32061 9.27532 1.62686C9.98505 1.93311 10.6024 2.34873 11.1274 2.87373C11.6524 3.39873 12.068 4.01609 12.3743 4.72581C12.6805 5.43554 12.8337 6.19387 12.8337 7.00081C12.8337 7.79804 12.6805 8.55151 12.3743 9.26123C12.068 9.97095 11.6524 10.5907 11.1274 11.1206C10.6024 11.6505 9.98505 12.0685 9.27532 12.3748C8.5656 12.681 7.80727 12.8341 7.00033 12.8341ZM7.00033 11.9591C8.38088 11.9591 9.55241 11.4755 10.5149 10.5081C11.4774 9.54074 11.9587 8.37165 11.9587 7.00081C11.9587 5.62026 11.4774 4.44873 10.5149 3.48623C9.55241 2.52373 8.38088 2.04248 7.00033 2.04248C5.62949 2.04248 4.46039 2.52373 3.49303 3.48623C2.52567 4.44873 2.04199 5.62026 2.04199 7.00081C2.04199 8.37165 2.52567 9.54074 3.49303 10.5081C4.46039 11.4755 5.62949 11.9591 7.00033 11.9591Z'
+                                                    fill='#926B4F'
+                                                />
+                                            </svg>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                                Mức giá:
+                                            </span>
+                                            <span class='capitalize text-den title14-400-150'>
+                                                ${itemProject?.translation?.priceDisplay}
+                                            </span>
+                                        </div>
+                            </div>
+                        </div>`,
+                '',
+            )
+        }
+        const marker = new vietmapgl.Marker()
+            .setLngLat(e.coor)
+            .addTo(mapRef.current)
+            .setPopup(
+                new vietmapgl.Popup().setHTML(`
+                        <div style="width:fit-content;${
+                            data?.data?.length > 3
+                                ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
+                                : 'height:fit-content;'
+                        }">
+                            ${childNode}
+                        </div>
+                `),
+            )
+
+        const customIcon = document.createElement('img')
+        customIcon.src = '/images/cluster.png' // Đường dẫn đến biểu tượng tùy chỉnh
+        customIcon.style.width = '40px' // Điều chỉnh kích thước tùy ý
+        customIcon.style.height = '40px'
+
+        const textElm = document.createElement('p')
+        textElm.innerText = e.count.toString()
+        textElm.className = 'text-cluster'
+        // Đặt nội dung DOM của marker là biểu tượng tùy chỉnh
+
+        const markerElement = marker.getElement()
+
+        // Lấy danh sách tất cả các phần tử con của marker
+        const childElements = markerElement.children
+
+        // Tìm và xóa phần tử SVG con (ví dụ: xóa phần tử có class "svg-class-name")
+        for (let i = 0; i < childElements.length; i++) {
+            const childElement = childElements[i]
+
+            // Kiểm tra nếu phần tử con là một phần tử SVG và có class bạn muốn xóa
+            if (childElement.tagName === 'svg') {
+                // Xóa phần tử SVG khỏi marker
+                markerElement.removeChild(childElement)
+                break // Thoát khỏi vòng lặp sau khi xóa
+            }
+        }
+        marker.getElement().appendChild(customIcon)
+        marker.getElement().appendChild(textElm)
+    }
+    const addMarkerV2 = (dataMap, levelZoom) => {
+        if (!dataMap || !levelZoom) return
+        const listMarker = []
+        dataMap?.forEach((e, levelZoom) => {
+            if (levelZoom >= 13.5) {
+                listMarker?.push({
+                    coor: [Number(e?.lng), Number(e?.lat)],
+                    count: Number(e?.count),
+                    id: e?.id,
+                })
+            }
+            if (levelZoom >= 11.5 && levelZoom < 13.5) {
+                listMarker?.push({
+                    coor: [Number(e?.ward_lng), Number(e?.ward_lat)],
+                    count: Number(e?.count),
+                    id: e?.ward_id,
+                })
+            }
+            if (levelZoom < 11.5) {
+                listMarker?.push({
+                    coor: [Number(e?.district_lng), Number(e?.district_lat)],
+                    count: Number(e?.count),
+                    id: e?.district_id,
+                })
+            }
+        })
+
+        listMarker?.forEach((e) => {
+            callDataPopup(e)
+        })
+    }
 
     const handleAddMarker = (dataMap, levelZoom) => {
         const a = []
@@ -636,3 +709,4 @@ export default function MapV3() {
         </>
     )
 }
+export default memo(MapV3)

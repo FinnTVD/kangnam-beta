@@ -5,21 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import { useMediaQuery } from 'react-responsive'
 import useStore from '@/app/[lang]/(store)/store'
-// const imgArray = [
-//     '/images/partnerlogo.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/logoVin.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/logoVin.jpg',
-//     '/images/partnerlogo.jpg',
-//     '/images/logoVin.jpg',
-//     '/images/logoVin.jpg',
-//     '/images/logoVin.jpg',
-//     '/images/logoVin.jpg',
-// ]
+
 export default function Partner({ t }) {
     const dataHomePage = useStore((state) => state.dataHomePage)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })

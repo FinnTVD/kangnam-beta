@@ -13,7 +13,7 @@ const arrMarker = [
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function Map({ setIsToggle = () => {}, isToggle = false }) {
+export default function Map({ setIsToggle, isToggle }) {
     const mapRef = useRef()
     const [levelZoom, setLevelZoom] = useState(9)
     const [cityId, setCityId] = useState(11)
@@ -78,7 +78,7 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
         // addMarker2()
         // // addMarker3();
         // addGeojsonLine()
-    }, [window?.vietmapgl])
+    }, [])
 
     useEffect(() => {
         dataMap && dataItemMap && addMarkerItem(dataMap)
@@ -150,8 +150,6 @@ export default function Map({ setIsToggle = () => {}, isToggle = false }) {
             setDistrictId(null)
             return
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [levelZoom])
 
     const callAPI = async () => {

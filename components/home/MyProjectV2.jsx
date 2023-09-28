@@ -15,8 +15,9 @@ import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import useStore from '@/app/[lang]/(store)/store'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import MapV3 from './MapV2/MapV3'
-
+// import MapV3 from './MapV2/MapV3'
+import dynamic from 'next/dynamic'
+const MapV3 = dynamic(() => import('./MapV2/MapV3'))
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -384,7 +385,7 @@ export default function MyProjectV2({ lang, t }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV3 />
+                    <MapV3 lang={lang} />
                     <div
                         onClick={() =>
                             setIsFeatureHome({

@@ -32,7 +32,12 @@ export default function SearchHome({ data, lang, t }) {
         })
         if (typeof window !== 'undefined') {
             const imgMapDetail = document.getElementById('boxMap')
-            imgMapDetail?.scrollIntoView({ behavior: 'smooth' })
+            if (imgMapDetail) {
+                imgMapDetail?.scrollIntoView({ behavior: 'smooth' })
+            } else {
+                const selling = document.getElementById('selling')
+                selling?.scrollIntoView({ behavior: 'smooth' })
+            }
         }
     }
     return (

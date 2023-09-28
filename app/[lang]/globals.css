@@ -737,3 +737,11 @@ article#list-img-preview::-webkit-scrollbar-thumb {
 #showFeature.active{
     transform: translateX(0);
 }
+
+#map .text-cluster {
+        position: absolute;
+        z-index: 9999999;
+        top: 0.6vw;
+        left: 1.1vw;
+        color: black;
+      }
