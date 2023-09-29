@@ -26,7 +26,6 @@ import { useMediaQuery } from 'react-responsive'
 //     '/images/imageGallery3.png',
 // ]
 export default function ImageGallery({ data }) {
-    console.log('🚀 ~ file: ImageGallery.jsx:29 ~ ImageGallery ~ data:', data)
     const listImage = [data?.firstImage, ...(data?.images || '')]?.filter((e) => e)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })

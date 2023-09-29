@@ -1,14 +1,13 @@
-import { handleCheckParamsLanguage } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import src from '../../public/images/linear.png'
 
-export default function WeAre({ lang }) {
+export default function WeAre({ lang, t }) {
     return (
         <>
             <section
                 id='weAre'
-                className='relative w-full h-screen bg-den-2 overflow-hidden'
+                className='relative w-full h-screen overflow-hidden bg-den-2'
             >
                 <Image
                     className='z-0 object-cover'
@@ -19,7 +18,11 @@ export default function WeAre({ lang }) {
                 />
                 <div className='relative z-10 flex justify-between h-full max-lg:flex-col'>
                     <div className='flex items-center pl-[7.5vw] px-mb10 max-lg:px-[3.2vw] max-md:pt-[13.33vw] max-lg:pt-[6vw]'>
-                        <div data-aos="fade-right" data-aos-duration="1000" className='w-[40.2vw] h-fit max-lg:w-full'>
+                        <div
+                            data-aos='fade-right'
+                            data-aos-duration='1000'
+                            className='w-[40.2vw] h-fit max-lg:w-full'
+                        >
                             <span className='sub-title max-lg:tracking-[0.5px] max-lg:uppercase title-mb10-700-150 title-tl12-700-150'>
                                 Câu chuyện thương hiệu
                             </span>
@@ -71,7 +74,7 @@ export default function WeAre({ lang }) {
                             </ul>
                             <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw] relative z-[99999]'>
                                 <Link
-                                    href={handleCheckParamsLanguage(lang, '/projects')}
+                                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                                     className='flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'
                                 >
                                     Xem dự án
@@ -92,7 +95,7 @@ export default function WeAre({ lang }) {
                                     </svg>
                                 </Link>
                                 <Link
-                                    href={handleCheckParamsLanguage(lang, '/about-us')}
+                                    href={'/' + lang + '/about-us'}
                                     className='flex justify-center gap-x-[0.5vw] max-lg:gap-x-[1vw] items-center group relative rounded-[10vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden title-mb14-400-150 max-lg:py-[2vw] max-lg:px-[4.67vw] title-tl14-400-150 max-md:py-[4vw] max-md:px-[6.67vw] max-md:box-content max-md:gap-x-[3.2vw] h-fit'
                                 >
                                     Về chúng tôi
@@ -131,8 +134,8 @@ export default function WeAre({ lang }) {
                     <div className='flex items-end'>
                         <div className='h-[77.5vh] max-lg:h-[59.8vh] max-md:h-[38.8vh] w-[48.1875vw] max-lg:w-full relative z-10'>
                             <Image
-                                data-aos="fade-up"
-                                data-aos-delay="600"
+                                data-aos='fade-up'
+                                data-aos-delay='600'
                                 src='/images/house.png'
                                 alt='house'
                                 className='object-fill z-[2]'
@@ -140,8 +143,8 @@ export default function WeAre({ lang }) {
                                 fill
                             />
                             <Image
-                                data-aos="fade-down"
-                                data-aos-delay="600"
+                                data-aos='fade-down'
+                                data-aos-delay='600'
                                 src='/images/circle-house.png'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-lg:w-[44.6vw] max-md:w-[63.6vw] max-lg:h-[44.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-lg:top-[4.49vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-lg:left-[38.46vw] max-md:left-[23.46vw]'
@@ -149,23 +152,24 @@ export default function WeAre({ lang }) {
                                 height={600}
                             />
                             <Image
-                                data-aos="fade"
+                                data-aos='fade'
                                 data-aos-duration='500'
-                                data-aos-delay="1000"
+                                data-aos-delay='1000'
                                 src='/images/people.png'
                                 alt='people'
                                 className='object-cover w-[33.875vw] h-[38.5625vw] max-lg:w-[47.62vw] max-md:w-[62.62vw] max-lg:h-[53.29vw] max-md:h-[71.29vw] absolute bottom-0 left-[5.68vw] z-[3] max-lg:left-[37%] max-md:left-1/2 max-md:-translate-x-1/2'
-                                width={600}
-                                height={600}
+                                width={1000}
+                                height={1000}
+                                quality={100}
                             />
                         </div>
                     </div>
                 </div>
                 <Image
-                className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] w-screen max-lg:!h-[164vh]'
-                src={src}
-                alt='linear'
-                priority
+                    className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] w-screen max-lg:!h-[164vh]'
+                    src={src}
+                    alt='linear'
+                    priority
                 />
             </section>
         </>

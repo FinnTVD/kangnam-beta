@@ -65,7 +65,8 @@ export default function Footer({ lang, t, dataInfo }) {
     }
 
     return (
-        <footer className='bg-[#FBF7F2] relative z-[999]'>
+        //relative z-[999]
+        <footer className='bg-[#FBF7F2] '>
             <div className='py-[5vw] px-[7.5625vw] flex max-md:flex-col px-mb10 max-md:pt-[16vw] max-md:pb-[0] max-lg:flex-col max-lg:px-120'>
                 <div>
                     <div className='relative w-[24.0625vw] h-[6.625vw] max-md:w-[87.7vw] max-md:h-[25.6vw] max-lg:w-[70vw] max-lg:h-[20vw]'>
@@ -298,7 +299,7 @@ export default function Footer({ lang, t, dataInfo }) {
                         <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             {menuArr.map((menu, index) => (
                                 <Link
-                                    href={lang === 'vi' ? menu.href : `/${lang + menu.href}`}
+                                    href={lang === 'vi' ? menu?.href : `/${lang + menu?.href}`}
                                     key={index}
                                     className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130 max-lg:title-tl16"
                                 >
@@ -307,11 +308,11 @@ export default function Footer({ lang, t, dataInfo }) {
                             ))}
                             {agreementDataTranslation?.map((menu, index) => (
                                 <Link
-                                    href={lang === 'vi' ? menu.slug : `/${lang + menu.slug}`}
+                                    href={lang === 'vi' ? menu?.slug : `/${lang + menu?.slug}`}
                                     key={index}
                                     className="cursor-pointer inline-flex relative text-den-2 title16-400-130 before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-den-2 before:scale-x-0 before:origin-right before:transition-transform before:duration-300 hover:before:scale-x-100 hover:before:origin-left max-md:title-mb16-400-130 max-lg:title-tl16"
                                 >
-                                    {menu.title}
+                                    {menu?.title}
                                 </Link>
                             ))}
                         </div>

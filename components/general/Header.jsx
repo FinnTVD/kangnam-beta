@@ -4,7 +4,7 @@ import NavBar from './NavBar'
 import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
 import classes from './headerV2.module.css'
-import SlideBanner from '../home/SlideBanner'
+// import SlideBanner from '../home/SlideBanner'
 // import video from '../../public/images/videoTest.mp4'
 import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
@@ -25,6 +25,10 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
 
     useEffect(() => {
         data && setDataHomePage(data)
+        // window.scrollTo({
+        //     top: 0,
+        //     behavior: 'smooth',
+        // })
         // if (videoRef.current) {
         //     videoRef.current.src = 'https://youtu.be/RTd5mvn-4Is?si=_EHyyl4myQfA8G5p'
         // }
@@ -45,20 +49,29 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
             id='header'
             className='relative w-screen h-fit'
         >
-            <div className={`h-screen max-md:h-[64vh] relative w-full`}>
-                <SlideBanner data={data} />
-                {/* <video
+            <div className={`h-screen max-md:h-[82vh] relative w-full`}>
+                {/* <SlideBanner data={data} /> */}
+                <Image
+                    className='absolute top-0 left-0 object-cover w-full h-full z-1'
+                    src={'/images/thumnail.jpg'}
+                    alt='banner header'
+                    width={1600}
+                    height={800}
+                />
+                <video
                     ref={videoRef}
                     autoPlay
                     // poster='/images/bg-header.jpg'
                     loop
-                    className='top-0 left-0 z-[99999] w-full h-full'
+                    className='absolute top-0 left-0 object-cover min-w-full min-h-full'
+                    id='videoBanner'
                     type='video/mp4'
                     playsInline
                     muted
                 >
-                    <source src='/images/videoTest.mp4'></source>
-                </video> */}
+                    {/* <source src='/images/videoTest.mp4'></source> */}
+                    <source src='/images/videotest22.mp4'></source>
+                </video>
                 {/* <iframe
                     width='1600'
                     height='800'
@@ -80,9 +93,9 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     height={550}
                     priority
                 />
-                <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div>
+                {/* <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div> */}
                 {/* linear-white */}
-                <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>
+                {/* <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div> */}
                 {isTablet ? (
                     <NavBarRes
                         isHome={isHome}
@@ -113,6 +126,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 <SearchHome
                     data={data}
                     lang={lang}
+                    t={t}
                 />
 
                 <div

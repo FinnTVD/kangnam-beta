@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import SelectSearch from '../general/SelectSearch'
 import useSWR from 'swr'
@@ -12,17 +11,17 @@ import useDebounce from '@/hooks/useDebounce'
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
 const handleCheckPage = (pathName, listData) => {
-    if (!pathName) return true
+    if (pathName === '/') return true
     //nếu ko đứng ỏ các page nằm ở listPage thì sẽ chuyển sang page có maphandleCheckPage
     for (const item of listData) {
         for (const translation of item?.translations) {
             if (translation?.alias?.toLowerCase()?.includes(pathName?.slice(1))) {
-                return true
+                return false
             }
         }
     }
     // Trường hợp không tìm thấy khớp nào
-    return false
+    return true
 }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -37,6 +36,8 @@ export default function SearchGlobal({
     isIcon = false,
     classInput,
     classList,
+    dark,
+    t,
 }) {
     const router = useRouter()
     const pathName = usePathname()
@@ -154,8 +155,12 @@ export default function SearchGlobal({
     const handleSubmit = (e) => {
         e?.preventDefault()
         if (!valueSearch) {
-            notifyError('Vui lòng nhập dữ liệu để tìm kiếm!')
-            return
+            router.push(
+                '/' +
+                    listData[0]?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                    )?.alias,
+            )
         }
         handleCheckPage(pathName, listData) &&
             router.push(
@@ -164,6 +169,7 @@ export default function SearchGlobal({
                         e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                     )?.alias,
             )
+
         setIsSubmit(!isSubmit)
         if (dataSearch?.length >= 0) {
             handleSelectValueSearch(dataSearch[0])
@@ -177,13 +183,13 @@ export default function SearchGlobal({
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
+        setValueSearch(e?.address)
         if (e?.ref_id?.includes('CITY')) {
             //set lại cityid
             cityId !== Number(e?.boundaries[0]?.id) && setCityId(Number(e?.boundaries[0]?.id))
             // khi chuyển city thì setDistrictId và setWardId về null
             setDistrictId(null)
             setWardId(null)
-            setValueSearch(e?.address)
             if (!dataProvinces || !e?.boundaries[0]?.id) return
             //nếu đang ở tỉnh đó và ở level zoom city thì không fly
             // if (e?.boundaries[0]?.id === cityId && !cityId && !wardId) return notifyError('Now, in current city!')
@@ -259,7 +265,10 @@ export default function SearchGlobal({
             }`}
         >
             <div className='flex items-center w-full'>
-                <SelectSearch lang={lang} />
+                <SelectSearch
+                    type={dark}
+                    lang={lang}
+                />
                 <div
                     className={`${
                         classLine ||
@@ -287,13 +296,13 @@ export default function SearchGlobal({
                                     fillRule='evenodd'
                                     clipRule='evenodd'
                                     d='M7.19929 2.72722C6.58212 2.72003 5.96965 2.83469 5.39737 3.06456C4.82509 3.29442 4.30438 3.63492 3.8654 4.06632C3.42642 4.49773 3.0779 5.01146 2.84003 5.57776C2.60217 6.14405 2.47969 6.75165 2.47969 7.36536C2.47969 7.97906 2.60217 8.58666 2.84003 9.15296C3.0779 9.71925 3.42642 10.233 3.8654 10.6644C4.30438 11.0958 4.82509 11.4363 5.39737 11.6662C5.96965 11.896 6.58212 12.0107 7.19929 12.0035C8.42696 11.9892 9.59947 11.4942 10.4625 10.626C11.3256 9.75771 11.8096 8.58614 11.8096 7.36536C11.8096 6.14457 11.3256 4.973 10.4625 4.10474C9.59947 3.23647 8.42696 2.74152 7.19929 2.72722ZM1.57497 7.36631C1.56703 6.62685 1.70666 5.89316 1.98577 5.20771C2.26487 4.52226 2.67792 3.89864 3.201 3.37295C3.72409 2.84726 4.34682 2.42994 5.03318 2.14512C5.71953 1.8603 6.45588 1.71365 7.19961 1.71365C7.94333 1.71365 8.67968 1.8603 9.36603 2.14512C10.0524 2.42994 10.6751 2.84726 11.1982 3.37295C11.7213 3.89864 12.1343 4.52226 12.4134 5.20771C12.6926 5.89316 12.8322 6.62685 12.8242 7.36631C12.8084 8.83925 12.2089 10.2465 11.1558 11.2825C10.1027 12.3186 8.68104 12.8997 7.19961 12.8997C5.71817 12.8997 4.29654 12.3186 3.24343 11.2825C2.19032 10.2465 1.59077 8.83925 1.57497 7.36631Z'
-                                    fill='#D6A279'
+                                    fill={dark === 'white' ? 'white' : '#D6A279'}
                                 />
                                 <path
                                     fillRule='evenodd'
                                     clipRule='evenodd'
                                     d='M10.7105 10.4576L14.3041 14.0212L13.6263 14.6977L10.0327 11.1334L10.7105 10.4576Z'
-                                    fill='#D6A279'
+                                    fill={dark === 'white' ? 'white' : '#D6A279'}
                                 />
                             </svg>
                         )}
@@ -327,7 +336,7 @@ export default function SearchGlobal({
                             {Array.isArray(dataSearch) &&
                                 dataSearch?.slice(0, 3)?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-2 py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-2 max-md:py-[1vw]'
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
@@ -354,7 +363,7 @@ export default function SearchGlobal({
                             {Array.isArray(dataProjectCode?.data) &&
                                 dataProjectCode?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1 max-md:py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
                                         title={e?.translation?.name}
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
@@ -383,7 +392,7 @@ export default function SearchGlobal({
                                 dataSearch?.length > 0 &&
                                 dataProject?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1 max-md:py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
                                         title={e?.translation?.name}
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
@@ -398,7 +407,6 @@ export default function SearchGlobal({
                                             setIsSubmit(!isSubmit)
                                             setIsClose(true)
                                             handleSelectValueProject(e)
-
                                             setSelectSearch(e?.translation?.name)
                                         }}
                                         key={index}
@@ -414,13 +422,65 @@ export default function SearchGlobal({
                         onClick={() => handleSubmit()}
                         className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
-                        <Image
-                            className='object-cover h-[2.3125vw] w-[2.3125vw]'
+                        {/* <Image
+                            className='object-cover h-[1.625vw] w-[1.625vw]'
                             src={'/images/marker-search.svg'}
                             alt='marker search'
                             width={40}
                             height={40}
-                        />
+                        /> */}
+                        <div className='relative w-fit h-fit'>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='26'
+                                height='26'
+                                viewBox='0 0 26 26'
+                                fill='none'
+                                className='object-cover h-[1.625vw] w-[1.625vw]'
+                            >
+                                <path
+                                    d='M13.5417 22.75C7.85773 22.75 3.25 18.1423 3.25 12.4583C3.25 6.77439 7.85773 2.16666 13.5417 2.16666C19.2256 2.16666 23.8333 6.77439 23.8333 12.4583C23.8333 18.1423 19.2256 22.75 13.5417 22.75Z'
+                                    stroke='white'
+                                    strokeWidth='1.5'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                />
+                                <path
+                                    d='M2.16666 23.8333L4.33333 21.6667'
+                                    stroke='white'
+                                    strokeWidth='1.5'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                />
+                            </svg>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='11'
+                                height='11'
+                                viewBox='0 0 11 11'
+                                fill='none'
+                                className={`${
+                                    valueSearch ? 'hidden' : ''
+                                } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw]`}
+                            >
+                                <g clipPath='url(#clip0_2399_2436)'>
+                                    <path
+                                        d='M5.59091 0.0909119C7.78998 0.0909119 9.57954 1.89289 9.57954 4.10836C9.57954 7.25628 5.96584 10.5066 5.81205 10.6431C5.75127 10.6975 5.67257 10.7276 5.59099 10.7277C5.50941 10.7278 5.43065 10.6978 5.36976 10.6435C5.21598 10.5066 1.60227 7.25628 1.60227 4.10836C1.60227 1.89289 3.39184 0.0909119 5.59091 0.0909119ZM5.59091 6.29546C6.81276 6.29546 7.80682 5.3014 7.80682 4.07955C7.80682 2.8577 6.81276 1.86364 5.59091 1.86364C4.36905 1.86364 3.375 2.8577 3.375 4.07955C3.375 5.3014 4.36905 6.29546 5.59091 6.29546Z'
+                                        fill='white'
+                                    />
+                                </g>
+                                <defs>
+                                    <clipPath id='clip0_2399_2436'>
+                                        <rect
+                                            width='10.6364'
+                                            height='10.6364'
+                                            fill='white'
+                                            transform='matrix(-1 0 0 1 10.9091 0.0909119)'
+                                        />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
                     </div>
                 )}
             </div>

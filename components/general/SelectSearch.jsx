@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 // import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
+import { usePathname } from 'next/navigation'
 
 const objProject = {
     id: '',
@@ -38,9 +39,9 @@ const objProject = {
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-export default function SelectSearch({ type = 'dark', menu = false, lang }) {
+export default function SelectSearch({ type = 'dark', menu = false, lang, dark }) {
     // const router = useRouter()
-    // const pathName = usePathname()
+    const pathName = usePathname()
     // const searchParams = useSearchParams()
     const setListData = useStore((state) => state.setListData)
     const listData = useStore((state) => state.listData)
@@ -73,8 +74,14 @@ export default function SelectSearch({ type = 'dark', menu = false, lang }) {
     })
 
     useEffect(() => {
-        data && setListData([objProject, ...data?.data])
-    }, [data])
+        // data && setListData([objProject, ...data?.data])
+        if (data) {
+            const dataNew = data?.data?.filter((e) =>
+                e?.translations?.find((i) => i?.alias?.includes(pathName?.slice(1))),
+            )
+            dataNew?.length === 1 ? setListData(dataNew) : setListData([objProject, ...data?.data])
+        }
+    }, [data, pathName])
 
     const handleChangeSearch = (item) => {
         setListData([listData?.find((e) => e.id === item.id), ...listData?.filter((e) => e.id !== item.id)])
@@ -91,27 +98,29 @@ export default function SelectSearch({ type = 'dark', menu = false, lang }) {
             } gap-x-[0.13vw] select-none cursor-pointer flex items-center max-lg:title-tl12-400-130 title14-400-130 whitespace-nowrap relative`}
         >
             {listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name}
-            <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke={`${type === 'white' ? 'white' : '#D6A279'}`}
-                className='w-[1vw] h-[1vw] max-md:w-[5vw] max-md:h-[3vw] max-lg:w-[2.5vw] max-lg:h-auto'
-            >
-                <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M19.5 8.25l-7.5 7.5-7.5-7.5'
-                />
-            </svg>
+            {listData?.length > 1 && (
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth='1.5'
+                    stroke={`${type === 'white' ? 'white' : '#D6A279'}`}
+                    className='w-[1vw] h-[1vw] max-md:w-[5vw] max-md:h-[3vw] max-lg:w-[2.5vw] max-lg:h-auto'
+                >
+                    <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+                    />
+                </svg>
+            )}
             <ul
                 style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
                 className={`${
                     !isOpen || isOutSide ? 'hidden' : ''
                 } absolute top-[2.5vw] -left-[1vw] rounded-md bg-white py-[0.5vw] text-den max-md:top-[7.5vw] max-md:-left-[3vw] max-md:py-[1vw]`}
             >
-                {listData?.length > 0 &&
+                {listData?.length > 1 &&
                     listData?.slice(1)?.map((e, index) => (
                         <li
                             onClick={() => handleChangeSearch(e)}

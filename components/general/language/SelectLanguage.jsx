@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
+import { memo } from 'react'
 
 const arrHref = ['/en', '/kr', '/ch']
 const arrLanguage = [
@@ -35,11 +36,30 @@ const arrLanguage = [
         languageCode: 'zh_CN',
     },
 ]
+const slugProject = [
+    {
+        code: 'vi',
+        href: '/du-an',
+    },
+    {
+        code: 'en',
+        href: '/projects',
+    },
+    {
+        code: 'kr',
+        href: '/项目',
+    },
+    {
+        code: 'ch',
+        href: '/프로젝트',
+    },
+]
 
-export default function SelectLanguage({ className, lang }) {
+const SelectLanguage = ({ className, lang, t }) => {
     const setLanguage = useStore((state) => state.setLanguage)
     const slugDetailProject = useStore((state) => state.slugDetailProject)
     const slugDetailNews = useStore((state) => state.slugDetailNews)
+    const categoryNav = useStore((state) => state.categoryNav)
     const pathName = usePathname()
 
     const handleHref = (lg, lgCode) => {
@@ -47,10 +67,26 @@ export default function SelectLanguage({ className, lang }) {
             const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lgCode))
             const lgNew = lg === 'vi' ? '' : lg + '/'
             if (item?.slug) {
-                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + item?.slug
+                return (
+                    '/' +
+                    lgNew +
+                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                    )?.alias +
+                    '/' +
+                    item?.slug
+                )
             } else {
                 const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
-                return '/' + lgNew + slugDetailProject?.propertyCategory?.alias + '/' + itemVN?.slug
+                return (
+                    '/' +
+                    lgNew +
+                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                    )?.alias +
+                    '/' +
+                    itemVN?.slug
+                )
             }
         }
         if (slugDetailNews) {
@@ -64,6 +100,14 @@ export default function SelectLanguage({ className, lang }) {
             }
         }
         if (lg === 'vi') {
+            if (pathName === t?.Navbar?.listNav[0]?.href) return slugProject?.find((e) => e?.code === lg)?.href
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
+                return categoryNav
+                    ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
+                    ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg))
+                    ?.alias
+            }
+
             if (lang === 'vi') {
                 return pathName
             } else if (arrHref.includes(pathName)) {
@@ -72,6 +116,22 @@ export default function SelectLanguage({ className, lang }) {
                 return pathName.slice(3)
             }
         } else {
+            // check projects
+            if (pathName === t?.Navbar?.listNav[0]?.href)
+                return '/' + lg + slugProject?.find((e) => e?.code === lg)?.href
+            // check category
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
+                return (
+                    '/' +
+                    lg +
+                    '/' +
+                    categoryNav
+                        ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
+                        ?.translations?.find((item) =>
+                            item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                        )?.alias
+                )
+            }
             if (lg === lang) {
                 return pathName
             }
@@ -118,3 +178,4 @@ export default function SelectLanguage({ className, lang }) {
         </ul>
     )
 }
+export default memo(SelectLanguage)

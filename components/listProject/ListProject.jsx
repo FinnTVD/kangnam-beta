@@ -17,7 +17,12 @@ import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { findIdByAlias, handleCheckLangCode, handleCheckParams } from '@/utils'
 // import MapV2 from '../home/MapV2/MapV2'
 import useStore from '@/app/[lang]/(store)/store'
-import MapV3 from '../home/MapV2/MapV3'
+// import MapV3 from '../home/MapV2/MapV3'
+// import Map from '../home/Map'
+// import MapV4 from '../home/MapV2/MapV4'
+
+import dynamic from 'next/dynamic'
+const MapV4 = dynamic(() => import('../home/MapV2/MapV3'))
 // import Map from '../home/Map'
 const arrFilter = [
     {
@@ -117,7 +122,6 @@ export default function ListProject({ lang, t, dataSlug }) {
     useLayoutEffect(() => {
         if (typeof window === 'undefined') return
         let ctx = gsap.context(() => {
-            const vw = window.innerWidth
             setTimeout(() => {
                 gsap.to('#boxRef-filter', {
                     position: 'fixed',
@@ -130,7 +134,6 @@ export default function ListProject({ lang, t, dataSlug }) {
                         start: 'top top',
                         end: 'bottom top',
                         scrub: true,
-                        markers: true,
                     },
                 })
             }, 500)
@@ -167,7 +170,7 @@ export default function ListProject({ lang, t, dataSlug }) {
         <section
             id='list-project'
             ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[69vw] max-lg:mt-[10vw]'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw]'
         >
             <div className='flex justify-between w-full'>
                 <div
@@ -272,8 +275,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={e?.translation?.name || 'thumbnail project'}
-                                            sizes='18vw'
+                                            sizes='33vw'
                                             fill
+                                            quality={100}
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:rounded-md max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] title-mb10-600-150 max-lg:title-tl10'>
                                             {e?.propertyCategory?.translations?.find((e) =>
@@ -404,7 +408,8 @@ export default function ListProject({ lang, t, dataSlug }) {
                             } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
                         >
                             <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                                <MapV3 />
+                                {/* <MapV3 /> */}
+                                <MapV4 />
                             </div>
                         </div>
                         <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>

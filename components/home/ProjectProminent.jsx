@@ -3,7 +3,7 @@ import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
 import useStore from '@/app/[lang]/(store)/store'
 
-export default function ProjectProminent({ children, lang }) {
+export default function ProjectProminent({ children, lang, t }) {
     const dataHomePage = useStore((state) => state.dataHomePage)
     return (
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
@@ -19,7 +19,7 @@ export default function ProjectProminent({ children, lang }) {
                     </span>
                 </div>
                 <Button
-                    href='/projects'
+                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                     className='border-none bg-logo max-md:hidden'
                     span='text-white'
                     stroke='white'
@@ -33,7 +33,7 @@ export default function ProjectProminent({ children, lang }) {
             />
             <div className='px-mb10 md:hidden'>
                 <Button
-                    href='/projects'
+                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                     className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
                     span='text-white'
                     stroke='white'

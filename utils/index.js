@@ -159,6 +159,10 @@ const listIdNav = [
     '05d52397-71a8-4ecf-9a86-ee37965332ef',
 ]
 
+const postTypeIdAgreement = '645dc0f1-091a-4ead-87f2-fce21d843c72'
+const categoryHireId = '05d52397-71a8-4ecf-9a86-ee37965332ef'
+const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -173,4 +177,7 @@ export {
     handleListPhone,
     listIdNav,
     findIdByAlias,
+    postTypeIdAgreement,
+    categoryHireId,
+    apiKey,
 }

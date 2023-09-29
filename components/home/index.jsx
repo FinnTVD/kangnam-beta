@@ -12,10 +12,15 @@ import MyProjectV2 from './MyProjectV2'
 import { ToastContainer } from 'react-toastify'
 
 import Aos from 'aos'
-import 'aos/dist/aos.css'
+// import 'aos/dist/aos.css'
 import { useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 export default function IndexHome({ lang, t }) {
+    const isTablet = useMediaQuery({
+        query: '(max-width: 1023px)',
+    })
+
     useEffect(() => {
         Aos.init({
             disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -41,13 +46,35 @@ export default function IndexHome({ lang, t }) {
 
     return (
         <main>
-            <WeAre lang={lang} />
-            <MyProjectV2 lang={lang} />
-            <SellingRes lang={lang} />
-            <Hiring lang={lang} />
+            <WeAre
+                lang={lang}
+                t={t}
+            />
+            <MyProjectV2
+                lang={lang}
+                t={t}
+            />
+            {isTablet && (
+                <SellingRes
+                    lang={lang}
+                    t={t}
+                />
+            )}
+            {isTablet && (
+                <Hiring
+                    lang={lang}
+                    t={t}
+                />
+            )}
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
-                <Deposit />
-                <ProjectProminent lang={lang}>
+                <Deposit
+                    lang={lang}
+                    t={t}
+                />
+                <ProjectProminent
+                    lang={lang}
+                    t={t}
+                >
                     <Image
                         src='/images/bg-sky.png'
                         alt='sky'
@@ -57,8 +84,14 @@ export default function IndexHome({ lang, t }) {
                     />
                 </ProjectProminent>
             </div>
-            <Prominent />
-            <Partner t={t} />
+            <Prominent
+                t={t}
+                lang={lang}
+            />
+            <Partner
+                t={t}
+                lang={lang}
+            />
             <LatestNews
                 t={t}
                 lang={lang}

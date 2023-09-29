@@ -3,9 +3,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import MenuRes from './MenuRes'
 import { useState } from 'react'
+import useSWR from 'swr'
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function NavBarRes({ lang, t, isHome }) {
     const [isOpen, setIsOpen] = useState(false)
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/site-infor`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
     return (
         <nav
             className={`${
@@ -51,6 +58,7 @@ export default function NavBarRes({ lang, t, isHome }) {
                 t={t}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
+                data={data}
             />
         </nav>
     )

@@ -1,3 +1,4 @@
+import { getDictionary } from '@/app/[lang]/dictionaries'
 import IndexProjectDetail from '@/components/listProjectDetail'
 import getData from '@/utils/getData'
 export async function generateMetadata({ params: { lang, detail } }) {
@@ -49,11 +50,14 @@ export async function generateMetadata({ params: { lang, detail } }) {
         },
     }
 }
-export default function DetailPage({ params: { lang, detail } }) {
+export default async function DetailPage({ params: { lang, detail } }) {
+    const t = await getDictionary(lang)
+
     return (
         <IndexProjectDetail
             lang={lang}
             detail={detail}
+            t={t}
         />
     )
 }

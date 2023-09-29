@@ -5,10 +5,9 @@ import { FreeMode } from 'swiper/modules'
 import Skeleton from 'react-loading-skeleton'
 
 const arrHiring = new Array(2).fill(0)
-import { useMediaQuery } from 'react-responsive'
 import Link from 'next/link'
 import Button from '../general/Button'
-import { arrFilterV2, handleCheckLangCode } from '@/utils'
+import { arrFilterV2, categoryHireId, handleCheckLangCode } from '@/utils'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { useCallback, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
@@ -22,10 +21,6 @@ export default function Hiring({ lang }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
-    const isTablet = useMediaQuery({
-        query: '(max-width: 1023px)',
-    })
-
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const createQueryString = useCallback(
@@ -61,9 +56,7 @@ export default function Hiring({ lang }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${
-            process.env.NEXT_PUBLIC_API
-        }/property?order=DESC&page=1&take=10&propertyCategoryIds=05d52397-71a8-4ecf-9a86-ee37965332ef${
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
             propertyAreaTypeParams ? propertyAreaTypeParams : ''
         }${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -76,17 +69,14 @@ export default function Hiring({ lang }) {
 
     useEffect(() => {
         mutate(
-            `${
-                process.env.NEXT_PUBLIC_API
-            }/property?order=DESC&page=1&take=10&propertyCategoryIds=05d52397-71a8-4ecf-9a86-ee37965332ef${
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
             }${propertyTypeParams ? propertyTypeParams : ''}`,
         )
     }, [lang])
-    if (!isTablet) return
 
     return (
-        <section className='w-full'>
+        <section className='w-full lg:hidden'>
             <div className='px-mb10 max-lg:px-[3.2vw]'>
                 <h2 className='text-den max-md:title-mb25-700-130 -tracking-[1.25px] max-lg:title-tl25 font-bold'>
                     Dự án cho thuê
@@ -251,7 +241,7 @@ export default function Hiring({ lang }) {
             )}
             <div className='px-mb10 mt-[8.53vw] mb-[16vw] max-lg:px-[3.2vw] max-lg:mt-[5vw] max-lg:mb-[8vw]'>
                 <Button
-                    href='/projects'
+                    href={'' || '/projects'}
                     full={true}
                     className='border-none bg-logo'
                     span='text-white '

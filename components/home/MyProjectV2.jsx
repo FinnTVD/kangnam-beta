@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
-import { arrFilter, handleCheckLangCode, handleCheckParamsLanguage } from '@/utils'
+import { arrFilter, handleCheckLangCode } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -15,7 +15,9 @@ import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import useStore from '@/app/[lang]/(store)/store'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import MapV3 from './MapV2/MapV3'
+// import MapV3 from './MapV2/MapV3'
+import dynamic from 'next/dynamic'
+const MapV3 = dynamic(() => import('./MapV2/MapV3'))
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -38,7 +40,7 @@ let propertyCategoryTypeParams = ''
 // }
 
 gsap.registerPlugin(ScrollTrigger)
-export default function MyProjectV2({ lang }) {
+export default function MyProjectV2({ lang, t }) {
     const setBoxMap = useStore((state) => state.setBoxMap)
     const valueSearch = useStore((state) => state.valueSearch)
     const selectSearch = useStore((state) => state.selectSearch)
@@ -48,6 +50,7 @@ export default function MyProjectV2({ lang }) {
     const wardId = useStore((state) => state.wardId)
     const isSubmit = useStore((state) => state.isSubmit)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
+    const isFeatureHome = useStore((state) => state.isFeatureHome)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
@@ -147,9 +150,15 @@ export default function MyProjectV2({ lang }) {
                         scrub: true,
                         onToggle: (self) => {
                             if (self.isActive) {
-                                setIsFeatureHome(true)
+                                setIsFeatureHome({
+                                    isStandMap: true,
+                                    isContain: true,
+                                })
                             } else {
-                                setIsFeatureHome(false)
+                                setIsFeatureHome({
+                                    isStandMap: false,
+                                    isContain: false,
+                                })
                             }
                         },
                     },
@@ -180,7 +189,7 @@ export default function MyProjectV2({ lang }) {
                     <div>{Element}</div>
                 </div>
             </div>
-            <div className={`${show ? '' : 'pr-[7.5vw]'} flex gap-x-[1.88vw]`}>
+            <div className={`${show ? '' : 'pr-[7.5vw]'} flex gap-x-[1.88vw] relative`}>
                 <div className={`${isToggle ? 'hidden' : ''} flex-1`}>
                     <div
                         className={`${
@@ -228,8 +237,8 @@ export default function MyProjectV2({ lang }) {
                                 >
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
-                                            data-aos='zoom-out'
-                                            data-aos-delay={`${(index % 3) * 300}`}
+                                            // data-aos='zoom-out'
+                                            // data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={e?.translation?.name || 'thumbnail project'}
@@ -358,7 +367,7 @@ export default function MyProjectV2({ lang }) {
                             <div></div>
                         )}
                         <Button
-                            href={handleCheckParamsLanguage(lang, '/projects')}
+                            href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
                             className='border-none bg-logo'
                             stroke='white'
                             span='text-white font-semibold -tracking-[0.32px]'
@@ -376,7 +385,39 @@ export default function MyProjectV2({ lang }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV3 />
+                    <MapV3 lang={lang} />
+                    <div
+                        onClick={() =>
+                            setIsFeatureHome({
+                                isStandMap: true,
+                                isContain: false,
+                            })
+                        }
+                        id='showFeature'
+                        className={`${
+                            isFeatureHome?.isContain ? 'active' : ''
+                        } absolute top-1/2 right-0 -translate-y-1/2 w-[3vw] h-[6vw] bg-white z-50  rounded-tl-full rounded-bl-full flex justify-center items-center`}
+                    >
+                        <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            width='24'
+                            height='25'
+                            viewBox='0 0 24 25'
+                            fill='none'
+                            className={`w-[1.375vw] h-[1.375vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:w-[4.27vw] max-md:h-[4.27vw] rotate-90`}
+                        >
+                            <path
+                                d='M1 1L12 12L23 1'
+                                stroke='black'
+                                strokeWidth='2'
+                            />
+                            <path
+                                d='M1 12L12 23L23 12'
+                                stroke='black'
+                                strokeWidth='2'
+                            />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </section>
