@@ -1,16 +1,17 @@
 'use client'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
-export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, lang, isMobile }) {
+const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const [sideRef, isOutSide] = useClickOutSide()
+    // const [listId, setListId] = []
     const lh = searchParams.get(item?.slug)?.split('--')
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}${item?.api}`, fetcher, {
         revalidateIfStale: false,
@@ -27,6 +28,7 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             const params = new URLSearchParams(searchParams)
             params.set(name, value)
 
+            if (!value) return params.toString().replace(name + '=', '')
             return params.toString()
         },
         [searchParams],
@@ -48,13 +50,6 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             scroll: false,
         })
         setIndexFilter(-1)
-    }
-
-    const handleResetCheckBox = () => {
-        const arrCheckBox = document.querySelectorAll('input[type=checkbox]')
-        arrCheckBox.forEach((e) => {
-            e?.setAttribute('checked', false)
-        })
     }
 
     if (item?.api === '/property-category' && isMobile) {
@@ -113,7 +108,12 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                                         type='checkbox'
                                         id={e?.id}
                                         className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] outline-none border border-solid border-den02 cursor-pointer'
+                                        checked={lh?.find((item) => e?.id === item)}
                                     />
+                                    <div
+                                        onClick={() => set}
+                                        className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] outline-none border border-solid border-den02 cursor-pointer'
+                                    ></div>
 
                                     <label
                                         className='title14-400-150 text-den cursor-pointer title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal'
@@ -130,11 +130,11 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                 <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw] max-md:py-[5.6vw] max-md:px-[6.4vw]'>
                     <span
                         onClick={() => {
+                            console.log(pathName + '?')
                             router.push(pathName + '?' + createQueryString(item?.slug, ''), {
                                 scroll: false,
                             })
                             setIndexFilter(-1)
-                            handleResetCheckBox()
                         }}
                         className='cursor-pointer title14-400-150 text-den title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw]'
                     >
@@ -156,3 +156,4 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
         </li>
     )
 }
+export default memo(ItemFilterV2)
