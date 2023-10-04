@@ -9,7 +9,9 @@ export default function IconBigLogo({ className }) {
             className={className}
         >
             <g
-                style='mix-blend-mode:color-dodge'
+                style={{
+                    mixBlendMode: 'color-dodge',
+                }}
                 opacity='0.16'
             >
                 <path

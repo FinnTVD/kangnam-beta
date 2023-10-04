@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import MapV3 from '../home/MapV2/MapV3'
+import MapV4 from '../home/MapV2/MapV4'
 
 export default function BtnShowMap() {
     const [isOpen, setIsOpen] = useState(false)
@@ -65,10 +65,16 @@ export default function BtnShowMap() {
                 id='box-list-project'
                 className={`${
                     isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
-                } fixed bottom-0 left-0 z-40 w-full h-[70vh] transition-all duration-500 max-md:w-full bg-white rounded-lg p-[0.5vw]`}
+                } fixed bottom-0 left-0 z-40 w-full h-[72vh] transition-all duration-500 max-md:w-full bg-white rounded-lg p-[2vw]`}
             >
-                <MapV3 />
+                <MapV4 />
             </div>
+            <div
+                onClick={() => setIsOpen(false)}
+                className={`${
+                    isOpen ? 'block opacity-100' : 'hidden opacity-0'
+                } fixed top-0 left-0 z-30 w-full h-screen transition-all duration-500 max-md:w-full bg-black/20 rounded-lg p-[0.5vw]`}
+            ></div>
         </>
     )
 }
