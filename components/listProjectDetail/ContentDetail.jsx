@@ -24,7 +24,7 @@ export default function ContentDetail({ data, detail, lang }) {
     const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
 
     return (
-        <section className='mt-[7.57vw] max-md:mt-[4.27vw] px-120 px-mb10'>
+        <section className='mt-[3.875vw] max-md:mt-[4.27vw] px-120 px-mb10'>
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
                 <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
                     Trang chủ /{' '}
@@ -34,7 +34,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         )?.name
                     }
                 </span>
-                {/* <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14>{dataDetail?.name}</span> */}
+                <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14'> / {dataDetail?.name}</span>
                 <address className='not-italic title16-600-150 title-tl14 title-mb14-400-150 text-den lg:mb-[1vw] md:hidden max-md:opacity-50'>
                     {data?.address?.display}
                 </address>
@@ -134,7 +134,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         </ul>
                     </div>
                     <div className='lg:hidden'>
-                        <h4 className='text-den mt-[6.4vw] mb-[3.47vw] max-md:title-mb20-700-130 -tracking-[0.6px] max-lg:title-tl20'>
+                        <h4 className='text-den text-[1.5vw] mt-[6.4vw] mb-[3.47vw] max-md:title-mb20-700-130 -tracking-[0.6px] max-lg:title-tl20'>
                             Thông tin chi tiết
                         </h4>
                         <ul className='flex flex-col gap-y-[4.27vw] py-[6.4vw] px-[4.27vw] border border-solid border-den01 rounded-[2.67vw]'>
@@ -379,7 +379,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         </h2>
                         <div className='flex mb-[0.75vw] gap-x-[1vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
+                                <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Địa chỉ:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
@@ -387,7 +387,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                 </span>
                             </div>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
+                                <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Phường/Xã:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
@@ -397,7 +397,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         </div>
                         <div className='flex max-md:gap-y-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
+                                <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Quận/Huyện:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
@@ -405,7 +405,7 @@ export default function ContentDetail({ data, detail, lang }) {
                                 </span>
                             </div>
                             <div className='flex-1'>
-                                <span className='mr-[3.25vw] max-md:mr-[12vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
+                                <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
                                     Thành phố/Tỉnh:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
@@ -428,7 +428,7 @@ export default function ContentDetail({ data, detail, lang }) {
                 </div>
                 <div className='w-[23.9375vw] max-lg:hidden'>
                     <div className='rounded-[0.625vw] border border-solid border-den01 pt-[1.88vw] pb-[3.63vw] px-[1.58vw]'>
-                        <h4 className='text-den'>Thông tin chi tiết</h4>
+                        <h4 className='text-den font-extrabold leading-[1.3] tracking-[-0.72px] text-[1.5vw]'>Thông tin chi tiết</h4>
                         <ul className='flex flex-col gap-y-[1vw] mt-[1vw]'>
                             <li className='flex items-center justify-between'>
                                 <div className='flex items-center gap-x-[0.56vw] max-md:gap-x-[3.73vw]'>

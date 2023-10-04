@@ -46,11 +46,11 @@ export default function RelatedNews({ t, lang, post }) {
                 )}
             </div>
             {isLoadingNewsArr && (
-                <div className='pt-[1.875vw] pb-[6.25vw] max-md:pl-[2.6vw] max-md:py-[4.3vw] max-lg:pl-[7.5vw] flex gap-x-[1.5vw] max-md:gap-x-[4.27vw]'>
+                <div className='pt-[1.875vw] pb-[6.25vw] max-md:pl-[2.6vw] max-md:py-[4.3vw] max-lg:pl-[4.2vw] flex gap-x-[1.5vw] max-md:gap-x-[4.27vw] max-lg:w-full max-lg:flex-nowrap'>
                     {listNews?.map((item, index) => (
                         <div
                             key={index}
-                            className='flex-1 bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'
+                            className='bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb max-lg:w-[77.8vw] max-lg:flex-shrink-0'
                         >
                             <div className='w-full h-[16.1875vw] rounded-lg max-md:h-[56vw] max-lg:h-[40vw]'>
                                 <Skeleton
@@ -58,7 +58,13 @@ export default function RelatedNews({ t, lang, post }) {
                                     height={'100%'}
                                 ></Skeleton>
                             </div>
-                            <div className='w-[4.4375vw] h-[1.75vw] max-md:mt-[1vw] max-md:w-[15.2vw] max-md:h-[6.1vw]'></div>
+                            <div className='w-[4.4375vw] h-[1.75vw] max-md:mt-[1vw] max-md:w-[15.2vw] max-md:h-[6.1vw]'>
+                                <Skeleton
+                                    width={'100%'}
+                                    height={'100%'}
+                                >
+                                </Skeleton>
+                            </div>
                             <div className='w-full mt-[0.2625vw] flex flex-col max-md:mt-[0.8vw]'>
                                 <Skeleton
                                     width={'100%'}

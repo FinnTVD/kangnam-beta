@@ -13,7 +13,7 @@ const objClass = {
     classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
     isIcon: false,
     iconSmall: true,
-    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 title-mb12-400-130 max-md:w-[29vw]',
+    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl16',
     classList:
         'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input',
 }
@@ -23,7 +23,7 @@ export default function NavBar({ isHome, lang, t }) {
         <nav
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
-            } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-md:hidden`}
+            } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-lg:hidden`}
         >
             <div className={`${isHome ? 'gap-x-[1.87vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
                 {/* <Link

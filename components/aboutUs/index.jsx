@@ -8,7 +8,7 @@ import Aos from 'aos'
 // import 'aos/dist/aos.css';
 import { useEffect } from 'react'
 
-export default function IndexAboutUs({ t, lang }) {
+export default function IndexAboutUs({ t, lang, dataInfo }) {
     useEffect(() => {
         Aos.init({
             disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -39,6 +39,7 @@ export default function IndexAboutUs({ t, lang }) {
             <Contact
                 t={t}
                 lang={lang}
+                dataInfo={dataInfo}
             ></Contact>
         </>
     )

@@ -111,7 +111,7 @@ export default function WrapperForm({ t }) {
                             </li>
                         </ul>
                     </div>
-                    <div className='pl-[4.5vw] pr-[2.31vw] relative z-10 mt-[2.19vw] max-md:mt-[4.46vw]'>
+                    <div className='pl-[4.5vw] pr-[2.31vw] relative z-10 mt-[2.19vw] max-md:mt-[4.46vw] max-md:px-[2.6vw]'>
                         <span className='text-white title16-600-150 max-md:title-mb12-600-150 max-lg:title-tl12'>
                             Miễn phí các dịch vụ bổ sung
                         </span>

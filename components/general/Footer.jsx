@@ -45,7 +45,7 @@ export default function Footer({ lang, t, dataInfo }) {
         window.open(dataInfo?.kakaotalk)
     }
     const linkWeChat = () => {
-        window.open(dataInfo?.kakaotalk)
+        window.open(dataInfo?.wechat)
     }
     const linkZalo = () => {
         window.open(dataInfo?.zalo)

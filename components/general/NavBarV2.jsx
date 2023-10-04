@@ -7,25 +7,33 @@ import { useMediaQuery } from 'react-responsive'
 import MenuRes from './MenuRes'
 import SearchGlobal from '../home/SearchGlobal'
 import MegaMenu from './MegaMenu'
+import useSWR from 'swr'
 
 const objClass = {
     classContainer:
-        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo',
+        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo max-lg:w-fit',
     classLine:
         'border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]',
     classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
     isIcon: false,
     iconSmall: true,
-    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 title-mb12-400-130 max-md:w-[29vw]',
+    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl12',
     classList:
         'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input',
 }
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function NavBarV2({ lang, t }) {
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
     const [isOpen, setIsOpen] = useState(false)
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/site-infor`, fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
 
     return (
         <nav className='relative z-[9999] border-b border-solid px-[3.75vw] h-fit border-white04 max-md:pl-[4vw] max-md:pr-[2.5vw]'>
@@ -57,8 +65,8 @@ export default function NavBarV2({ lang, t }) {
                     isHome={false}
                     classList={objClass.classList}
                 />
-                {!isTablet ? (
-                    <div className='flex gap-x-[3.13vw] items-center'>
+                {/* {!isTablet ? ( */}
+                    <div className='flex gap-x-[3.13vw] items-center max-lg:hidden'>
                         <MegaMenu
                             lang={lang}
                             t={t}
@@ -78,10 +86,10 @@ export default function NavBarV2({ lang, t }) {
                             />
                         </div>
                     </div>
-                ) : (
+                {/* ) : ( */}
                     <div
                         onClick={() => setIsOpen(true)}
-                        className='relative w-fit'
+                        className='relative w-fit lg:hidden'
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -98,13 +106,14 @@ export default function NavBarV2({ lang, t }) {
                             />
                         </svg>
                     </div>
-                )}
+                {/* )} */}
             </div>
             <MenuRes
                 lang={lang}
                 t={t}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
+                data={data}
             />
         </nav>
     )

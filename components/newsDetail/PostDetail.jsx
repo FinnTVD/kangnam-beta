@@ -44,7 +44,7 @@ export default function PostDetail({ t, post, newsDetail, lang, category }) {
     // }, [newsDetail])
 
     return (
-        <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw]'>
+        <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw] max-lg:px-[10vw]'>
             <div className=''>
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {formatDateTime(post?.createdAt).slice(0, 10)} /

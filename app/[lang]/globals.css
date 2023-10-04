@@ -745,3 +745,24 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         left: 1.1vw;
         color: black;
       }
+
+@media only screen and (max-width: 1024px) {
+    #contentNewsDetail h1,
+    #contentNewsDetail h2,
+    #contentNewsDetail h3,
+    #contentNewsDetail h4,
+    #contentNewsDetail h5,
+    #contentNewsDetail h6{
+        font-size: 3.125vw;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #contentNewsDetail h1,
+    #contentNewsDetail h2,
+    #contentNewsDetail h3,
+    #contentNewsDetail h4,
+    #contentNewsDetail h5,
+    #contentNewsDetail h6{
+        font-size: 4.8vw;
+    }
+}

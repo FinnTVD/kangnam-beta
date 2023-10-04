@@ -27,7 +27,7 @@ export default function Deposit({ lang }) {
             />
             <div className='w-[34.25vw] max-lg:w-[60vw] ml-[7.5vw] relative z-10 max-md:w-full max-lg:pl-[3.2vw] max-lg:mx-0 px-mb10'>
                 <h2 className='text-white title56 title-mb25-700-130 title-tl38'>Kí gửi nhà đất</h2>
-                <p className='title18-400-150 text-white mt-[1vw] mb-[2vw] max-md:mt-[2.13vw] title-mb14-400-150 max-md:mb-[6.4vw] title-tl16-400-150'>
+                <p className='title18-400-150 text-white mt-[1vw] mb-[2vw] max-md:mt-[2.13vw] title-mb14-400-150 max-md:mb-[6.4vw] title-tl16-400-150 opacity-80'>
                     Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý
                     khách.
                 </p>
@@ -77,7 +77,7 @@ export default function Deposit({ lang }) {
                             </clipPath>
                         </defs>
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150 opacity-90'>
                         Đặt khách hàng làm trọng tâm
                     </span>
                 </div>
@@ -162,8 +162,8 @@ export default function Deposit({ lang }) {
                             </clipPath>
                         </defs>
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
-                        Đặt khách hàng làm trọng tâm
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150 opacity-90'>
+                        Dịch vụ nhanh chóng
                     </span>
                 </div>
                 <div className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-lg:gap-x-[1.5vw] items-center'>
@@ -200,8 +200,8 @@ export default function Deposit({ lang }) {
                             strokeMiterlimit='10'
                         />
                     </svg>
-                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150'>
-                        Đặt khách hàng làm trọng tâm
+                    <span className='title18-600-150 max-md:opacity-90 title-mb16-600-150 title-tl16-600-150 opacity-90'>
+                        Đảm bảo thực thi
                     </span>
                 </div>
                 <Button
