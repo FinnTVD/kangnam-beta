@@ -3,8 +3,11 @@
 import Image from "next/image"
 import Button from "../general/Button";
 import { useMediaQuery } from "react-responsive";
+import useSWR from "swr";
+import { handleListPhone } from "@/utils";
 
-export default function Contact({t, lang}){
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+export default function Contact({t, lang, dataInfo}){
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const title = "Trụ sở chính (Hà Nội)";
@@ -40,9 +43,9 @@ export default function Contact({t, lang}){
                                         fill='#D6A279'
                                     />
                                 </svg>
-                                <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:max-w-[69.3vw] max-md:ml-[4.2vw] max-lg:title-tl18 max-lg:w-[50%]'>{address}</span>
+                                <span className='ml-[1vw] text-den title18-400-140 max-md:text-white max-md:text-16mb max-md:font-normal max-md:leading-[1.4] max-md:max-w-[69.3vw] max-md:ml-[4.2vw] max-lg:title-tl18 max-lg:w-[50%] max-md:w-auto'>{dataInfo?.address}</span>
                             </div>
-                            {phone?.map((item, index) => (
+                            {handleListPhone(dataInfo?.phone)?.map((item, index) => (
                                 <div className='flex items-center mt-[1vw] max-md:mt-[2.6vw]' key={index}>
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
@@ -87,7 +90,7 @@ export default function Contact({t, lang}){
             </div>
 
             <Image fill src="/images/about-us-contact-bg.png" className="top-0 left-0 opacity-[0.06] z-[-1]" alt="contact-background"></Image>
-            {isTablet && <Button stroke='white' href={lang==='vn'? `/contact` : `/${lang}/contact`} span='text-16tl text-14mb font-normal tracking-[-0.28px]' icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw] max-lg:px-[2.5vw] max-lg:py-[1vw]'>{t?.aboutUsContact?.button}</Button>}
+            {isTablet && <Button stroke='white' href={lang==='vn'? `/contact` : `/${lang}/contact`} span='max-lg:title-tl16 max-md:text-14mb font-normal tracking-[-0.28px]' icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]' className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw] max-lg:px-[2.5vw] max-lg:py-[1vw]'>{t?.aboutUsContact?.button}</Button>}
         </section>
     )
 }

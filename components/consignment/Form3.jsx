@@ -270,8 +270,9 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
                             <div className='relative flex flex-1'>
-                                <div onClick={()=>setIsOpen(!isOpen)} className='w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'>
-                                    {valueType?.title}
+                                <div onClick={()=>setIsOpen(!isOpen)} className='flex gap-[0.28vw] w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] max-md:py-[2.93vw] max-md:px-[4.2vw]'>
+                                    <Image src={'/images/loaihinh.svg'} width={16} height={16} className='w-[1vw] max-lg:hidden'></Image>
+                                    <span className='text-den title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'> {valueType?.title} </span>
                                 </div>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -319,13 +320,14 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Diện tích'}
                                 onChange={handleChangeArea}
                                 value={valueArea}
                                 register={'area'}
                                 type='number'
                                 required={false}
+                                icon={'/images/dientich.svg'}
                             />
                         </div>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
@@ -334,25 +336,27 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Số tầng'}
                                 onChange={handleChangeNumberFloors}
                                 value={valueNumberFloors}
                                 register={'numberFloors'}
                                 type='number'
                                 required={false}
+                                icon={'/images/sotang.svg'}
                             />
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Hướng nhà'}
                                 onChange={handleChangeHomeOrientation}
                                 value={valueHomeOrientation}
                                 register={'homeOrientation'}
                                 required={false}
+                                icon={'/images/huongnha.svg'}
                             />
                         </div>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
@@ -361,24 +365,26 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Loại công trình'}
                                 onChange={handleChangeBuildingType}
                                 value={valueBuildingType}
                                 register={'buildingType'}
                                 required={false}
+                                icon={'/images/loaicongtrinh.svg'}
                             />
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Hướng ban công'}
                                 onChange={handleChangeBalconyOrientation}
                                 value={valueBalconyOrientation}
                                 register={'balconyOrientation'}
                                 required={false}
+                                icon={'/images/huongbancong.svg'}
                             />
                         </div>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw] mt-[1vw] max-md:mt-[2.67vw]'>
@@ -387,24 +393,26 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Nội thất'}
                                 value={valueInterior}
                                 onChange={handleChangeInterior}
                                 register={'interior'}
                                 required={false}
+                                icon={'/images/noithat.svg'}
                             />
                             <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
-                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-md:px-[1.4vw] max-md:left-[5vw] max-lg:title-tl12'}
+                                labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 labelContent={'Pháp lý'}
                                 onChange={handleChangeLegal}
                                 value={valueLegal}
                                 register={'legal'}
                                 required={false}
+                                icon={'/images/phaply.svg'}
                             />
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import Footer from '@/components/general/Footer'
 import { getDictionary } from '../dictionaries'
+import getData from '@/utils/getData'
 
 export const metadata = {
     title: 'Danh sách dự án',
@@ -7,6 +8,7 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children, params }) {
+    const data = await getData('/site-infor')
     const t = await getDictionary(params.lang)
 
     return (
@@ -15,6 +17,7 @@ export default async function RootLayout({ children, params }) {
             <Footer
                 lang={params.lang}
                 t={t}
+                dataInfo={data}
             />
         </>
     )

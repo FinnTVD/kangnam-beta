@@ -98,19 +98,19 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                 {/* <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div> */}
                 {/* linear-white */}
                 {/* <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div> */}
-                {isTablet ? (
+                {/* {isTablet ? ( */}
                     <NavBarRes
                         isHome={isHome}
                         lang={lang}
                         t={t}
                     />
-                ) : (
+                {/* ) : ( */}
                     <NavBar
                         isHome={isHome}
                         lang={lang}
                         t={t}
                     />
-                )}
+                {/* )} */}
                 {!isTablet ? (
                     <NavBarFixed
                         isHome={true}

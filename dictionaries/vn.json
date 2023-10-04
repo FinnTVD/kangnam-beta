@@ -24,6 +24,11 @@
                         "id": 2,
                         "title": "Liên hệ",
                         "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & pháp lý",
+                        "href": "/agreements"
                     }
                 ]
             }
@@ -122,6 +127,11 @@
                 "id": 3,
                 "title": "Bán lại",
                 "href": "/resale"
+            },
+            {
+                "id": 4,
+                "title": "Thỏa thuận & pháp lý",
+                "href": "/agreements"
             }
         ],
         "nav2": [

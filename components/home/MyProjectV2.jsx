@@ -343,7 +343,7 @@ export default function MyProjectV2({ lang, t }) {
                                 </Link>
                             ))}
                     </div>
-                    <div className='flex justify-between items-center mt-[2.69vw]'>
+                    <div className='flex justify-between items-center mt-[0.69vw]'>
                         {data ? (
                             <ReactPaginate
                                 breakLabel='...'
@@ -368,7 +368,7 @@ export default function MyProjectV2({ lang, t }) {
                         )}
                         <Button
                             href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
-                            className='border-none bg-logo'
+                            className='border-none bg-logo mt-[2.5vw]'
                             stroke='white'
                             span='text-white font-semibold -tracking-[0.32px]'
                         >

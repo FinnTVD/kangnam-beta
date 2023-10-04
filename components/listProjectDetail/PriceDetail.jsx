@@ -47,7 +47,7 @@ export default function PriceDetail({ price, size, lang }) {
     }
 
     return (
-        <span className='title16-400-125 title-mb16-400-125 text-[#888] relative inline-block tracking-[0.5px]'>
+        <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] relative inline-block tracking-[0.5px] max-lg:title-tl16'>
             {/* {callApi(handleCheckCode(lang))} */}
             {value}
             <span></span>

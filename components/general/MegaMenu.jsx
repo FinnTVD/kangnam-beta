@@ -105,21 +105,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                                     </Link>
                                                 </li>
                                             ))}
-                                            {agreementDataTranslation?.map((item, index) => (
-                                                <li
-                                                    key={index}
-                                                    className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
-                                                >
-                                                    <Link
-                                                        className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                        href={`${
-                                                            lang !== 'vi' ? '/' + lang + '/' + item?.slug : item?.slug
-                                                        }`}
-                                                    >
-                                                        {item?.title}
-                                                    </Link>
-                                                </li>
-                                            ))}
                                         </ul>
                                     </div>
                                 </>
@@ -129,7 +114,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                     href={`${
                                         lang !== 'vi'
                                             ? '/' + lang + (e?.href?.startsWith('/') ? e?.href : '/' + e?.href)
-                                            : e?.href
+                                            : (e?.href.includes('/') ? e?.href : `/${e?.href}`)
                                     }`}
                                 >
                                     {e.title}
@@ -186,21 +171,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                                 <Link
                                                     className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
                                                     href={`${lang !== 'vi' ? '/' + lang + item?.href : item?.href}`}
-                                                >
-                                                    {item?.title}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                        {agreementDataTranslation?.map((item, index) => (
-                                            <li
-                                                key={index}
-                                                className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
-                                            >
-                                                <Link
-                                                    className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                    href={`${
-                                                        lang !== 'vi' ? '/' + lang + '/' + item?.slug : item?.slug
-                                                    }`}
                                                 >
                                                     {item?.title}
                                                 </Link>

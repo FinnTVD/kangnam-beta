@@ -290,7 +290,7 @@ export default function SearchGlobal({
                                 height='17'
                                 viewBox='0 0 16 17'
                                 fill='none'
-                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw]'
+                                className='w-[1vw] h-[1vw] max-md:w-[4.2vw] max-md:h-[4.2vw] max-lg:w-[2vw] max-lg:h-[2vw]'
                             >
                                 <path
                                     fillRule='evenodd'

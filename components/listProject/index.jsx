@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 export default function IndexListProject({ lang, t, dataSlug }) {
     useEffect(() => {
         Aos.init({
-            disable: 'tablet', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+            disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
             startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
             initClassName: 'aos-init', // class applied after initialization
             animatedClassName: 'aos-animate', // class applied on animation

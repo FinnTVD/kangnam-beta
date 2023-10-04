@@ -47,7 +47,7 @@ export default function ItemCheckBox({ index, e, handleCheckbox, isOutSide }) {
                 checked={isCheck}
             />
             <label
-                className='title14-400-150 text-den cursor-pointer title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal'
+                className='title14-400-150 text-den cursor-pointer max-md:title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal max-lg:title-tl14'
                 htmlFor={`filter${index}${e?.name}`}
             >
                 {e?.name}

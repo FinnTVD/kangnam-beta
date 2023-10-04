@@ -117,14 +117,6 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
                             <Link href={e.href}>{e.title}</Link>
                         </li>
                     ))}
-                    {agreementDataTranslation?.map((e, index) => (
-                        <li
-                            className='max-md:title-mb14-400-171 opacity-80 max-lg:title-tl14'
-                            key={index}
-                        >
-                            <Link href={`${lang !== 'vi' ? '/' + lang + '/' + e?.slug : e?.slug}`}>{e?.title}</Link>
-                        </li>
-                    ))}
                 </ul>
                 <BoxLanguage
                     lang={lang}

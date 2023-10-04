@@ -44,7 +44,7 @@ export default function LatestNews({ t, lang }) {
             </div>
             <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw] max-md:grid-cols-1 max-md:grid-rows-[68.5vw_44.2vw_44.2vw] max-md:gap-[4.2vw] max-md:mt-[4.2vw] max-lg:grid-cols-1 max-lg:grid-rows-[66.6vw_28.2vw_28.2vw]'>
                 <div className='col-span-2 row-span-2 max-lg:col-span-1 max-lg:row-span-1'>
-                    {dataCategorized && (
+                    {(dataCategorized && dataCategorized.length>0) && (
                         <LatestNewsItem
                             newsItem={dataCategorized[0]}
                             t={t}

@@ -13,7 +13,7 @@ export default function Footer({ lang, t, dataInfo }) {
     const pathName = usePathname()
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
-    const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
+    // const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
     const menuArr = t.footerNav
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
     const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
@@ -45,7 +45,7 @@ export default function Footer({ lang, t, dataInfo }) {
         window.open(dataInfo?.kakaotalk)
     }
     const linkWeChat = () => {
-        window.open(dataInfo?.kakaotalk)
+        window.open(dataInfo?.wechat)
     }
     const linkZalo = () => {
         window.open(dataInfo?.zalo)
