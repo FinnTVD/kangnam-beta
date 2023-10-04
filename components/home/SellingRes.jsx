@@ -10,7 +10,7 @@ import { arrFilter, categoryHireId, handleCheckLangCode } from '@/utils'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useSWR, { mutate } from 'swr'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BtnShowMap from '../listProject/BtnShowMap'
 import { gsap } from 'gsap'
@@ -29,7 +29,7 @@ export default function SellingRes({ lang }) {
     const pathName = usePathname()
     const boxSellRef = useRef(null)
 
-    const [isShow, setIsShow] = useState(false)
+    const [isShow, setIsShow] = useState(true)
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
@@ -99,7 +99,6 @@ export default function SellingRes({ lang }) {
                         start: 'top center',
                         end: 'bottom center',
                         scrub: true,
-                        markers: true,
                         onToggle: (self) => {
                             if (self.isActive) {
                                 setIsShow(true)
@@ -109,12 +108,12 @@ export default function SellingRes({ lang }) {
                         },
                     },
                 })
-            }, 5000)
+            }, 500)
         }, boxSellRef)
         return () => {
             ctx.revert()
         }
-    }, [])
+    }, [boxSellRef.current])
 
     useEffect(() => {
         mutate(

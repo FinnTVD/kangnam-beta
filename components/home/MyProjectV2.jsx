@@ -17,7 +17,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 // import MapV3 from './MapV2/MapV3'
 import dynamic from 'next/dynamic'
-const MapV3 = dynamic(() => import('./MapV2/MapV3'))
+// import MapV4 from './MapV2/MapV4'
+// const MapV3 = dynamic(() => import('./MapV2/MapV3'))
+const MapV4 = dynamic(() => import('./MapV2/MapV4'))
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -385,7 +387,8 @@ export default function MyProjectV2({ lang, t }) {
                         setIsToggle={setIsToggle}
                         isToggle={isToggle}
                     /> */}
-                    <MapV3 lang={lang} />
+                    {/* <MapV3 lang={lang} /> */}
+                    <MapV4 lang={lang} />
                     <div
                         onClick={() =>
                             setIsFeatureHome({
@@ -396,7 +399,7 @@ export default function MyProjectV2({ lang, t }) {
                         id='showFeature'
                         className={`${
                             isFeatureHome?.isContain ? 'active' : ''
-                        } absolute top-1/2 right-0 -translate-y-1/2 w-[3vw] h-[6vw] bg-white z-50  rounded-tl-full rounded-bl-full flex justify-center items-center`}
+                        } fixed top-1/2 right-0 -translate-y-1/2 w-[3vw] h-[6vw] bg-white z-50  rounded-tl-full rounded-bl-full flex justify-center items-center`}
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'

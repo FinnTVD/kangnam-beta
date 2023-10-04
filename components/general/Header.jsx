@@ -12,6 +12,7 @@ import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
 import { useEffect, useRef } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
+import IconBigLogo from '../icons/IconBigLogo'
 
 export default function Header({ lang, t, data, isHome, dataInfo }) {
     const videoRef = useRef(null)
@@ -51,17 +52,17 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
         >
             <div className={`h-screen max-md:h-[82vh] relative w-full`}>
                 {/* <SlideBanner data={data} /> */}
-                <Image
+                {/* <Image
                     className='absolute top-0 left-0 object-cover w-full h-full z-1'
                     src={'/images/thumnail.jpg'}
                     alt='banner header'
                     width={1600}
                     height={800}
-                />
+                /> */}
                 <video
                     ref={videoRef}
                     autoPlay
-                    // poster='/images/bg-header.jpg'
+                    poster='/images/thumnail.jpg'
                     loop
                     className='absolute top-0 left-0 object-cover min-w-full min-h-full'
                     id='videoBanner'
@@ -69,7 +70,6 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     playsInline
                     muted
                 >
-                    {/* <source src='/images/videoTest.mp4'></source> */}
                     <source src='/images/videotest22.mp4'></source>
                 </video>
                 {/* <iframe
@@ -82,7 +82,7 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowfullscreen
                 ></iframe> */}
-                <Image
+                {/* <Image
                     data-aos='fade-left'
                     data-aos-delay='1500'
                     data-aos-duration='1200'
@@ -92,22 +92,23 @@ export default function Header({ lang, t, data, isHome, dataInfo }) {
                     width={350}
                     height={550}
                     priority
-                />
+                /> */}
+                <IconBigLogo className='z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]' />
                 {/* <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div> */}
                 {/* linear-white */}
                 {/* <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div> */}
                 {/* {isTablet ? ( */}
-                    <NavBarRes
-                        isHome={isHome}
-                        lang={lang}
-                        t={t}
-                    />
+                <NavBarRes
+                    isHome={isHome}
+                    lang={lang}
+                    t={t}
+                />
                 {/* ) : ( */}
-                    <NavBar
-                        isHome={isHome}
-                        lang={lang}
-                        t={t}
-                    />
+                <NavBar
+                    isHome={isHome}
+                    lang={lang}
+                    t={t}
+                />
                 {/* )} */}
                 {!isTablet ? (
                     <NavBarFixed

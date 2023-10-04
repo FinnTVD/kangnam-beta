@@ -1,7 +1,7 @@
 import Button from '../general/Button'
 import SlideRelatedNews from './SlideRelatedProject'
 
-export default function RelatedProject({ lang, detail }) {
+export default function RelatedProject({ lang, detail, data }) {
     return (
         <section className='w-screen h-fit px-120 py-[6.25vw] max-md:px-0'>
             <div className='w-full'>
@@ -26,6 +26,7 @@ export default function RelatedProject({ lang, detail }) {
                 <SlideRelatedNews
                     lang={lang}
                     detail={detail}
+                    dataDetail={data}
                 />
             </div>
         </section>

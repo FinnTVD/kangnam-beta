@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import MapProjectDetail from './MapProjectDetail'
 import PriceDetail from './PriceDetail'
+import { categoryHireId } from '@/utils'
 
 const handleCheckStatus = (alias) => {
     if (alias === 'hire') return '/tháng'
@@ -13,6 +14,7 @@ const handleCheckStatus = (alias) => {
 }
 
 export default function ContentDetail({ data, detail, lang }) {
+    console.log('🚀 ~ file: ContentDetail.jsx:16 ~ ContentDetail ~ data:', data)
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -22,6 +24,7 @@ export default function ContentDetail({ data, detail, lang }) {
         }
     }, [])
     const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
+    console.log('🚀 ~ file: ContentDetail.jsx:27 ~ ContentDetail ~ dataDetail:', dataDetail)
 
     return (
         <section className='mt-[3.875vw] max-md:mt-[4.27vw] px-120 px-mb10'>
@@ -49,20 +52,23 @@ export default function ContentDetail({ data, detail, lang }) {
                             <h2 className='mb-[0.5vw] text-den title28-800-130 -tracking-[0.84px] capitalize max-md:title-mb25-700-130 max-md:text-logo max-md:-tracking-[0.75px] max-lg:title-tl25'>
                                 {dataDetail?.priceDisplay}
                                 {handleCheckStatus(data?.propertyCategory?.alias)}
+                                {data?.propertyCategory?.id === categoryHireId ? ' /Tháng' : ''}
                             </h2>
                             <div className='flex gap-x-[1.06vw] justify-end max-md:justify-start max-md:gap-x-[2.13vw]'>
                                 {/* <span className='title16-400-125 title-mb16-400-125 text-[#888]'>118,280 đ/m²</span> */}
-                                <PriceDetail
-                                    price={data?.price}
-                                    lang={lang}
-                                    size={dataDetail?.size}
-                                />
-                                <span className='title16-400-125 title-mb16-400-125 text-[#888] max-lg:title-tl16'>
+                                {data?.propertyCategory?.id !== categoryHireId && (
+                                    <PriceDetail
+                                        price={data?.price}
+                                        lang={lang}
+                                        size={dataDetail?.size}
+                                    />
+                                )}
+                                {/* <span className='title16-400-125 title-mb16-400-125 text-[#888] max-lg:title-tl16'>
                                     118,280 đ/m²
-                                </span>
-                                <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] max-lg:title-tl16'>
+                                </span> */}
+                                {/* <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] max-lg:title-tl16'>
                                     {dataDetail?.size} m²
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                     </div>
@@ -428,7 +434,9 @@ export default function ContentDetail({ data, detail, lang }) {
                 </div>
                 <div className='w-[23.9375vw] max-lg:hidden'>
                     <div className='rounded-[0.625vw] border border-solid border-den01 pt-[1.88vw] pb-[3.63vw] px-[1.58vw]'>
-                        <h4 className='text-den font-extrabold leading-[1.3] tracking-[-0.72px] text-[1.5vw]'>Thông tin chi tiết</h4>
+                        <h4 className='text-den font-extrabold leading-[1.3] tracking-[-0.72px] text-[1.5vw]'>
+                            Thông tin chi tiết
+                        </h4>
                         <ul className='flex flex-col gap-y-[1vw] mt-[1vw]'>
                             <li className='flex items-center justify-between'>
                                 <div className='flex items-center gap-x-[0.56vw] max-md:gap-x-[3.73vw]'>

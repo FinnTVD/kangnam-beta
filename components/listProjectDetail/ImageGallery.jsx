@@ -8,34 +8,78 @@ import 'swiper/css/thumbs'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useMediaQuery } from 'react-responsive'
-// const imagesData = [
-//     '/images/imageGallery1.png',
-//     '/images/imageGallery2.png',
-//     '/images/imageGallery3.png',
-//     '/images/imageGallery1.png',
-//     '/images/imageGallery2.png',
-//     '/images/imageGallery3.png',
-//     '/images/imageGallery1.png',
-//     '/images/imageGallery2.png',
-//     '/images/imageGallery3.png',
-//     '/images/partner-bg.jpg',
-//     '/images/imageGallery2.png',
-//     '/images/imageGallery3.png',
-//     '/images/imageGallery1.png',
-//     '/images/imageGallery2.png',
-//     '/images/imageGallery3.png',
-// ]
+
 export default function ImageGallery({ data }) {
-    const listImage = [data?.firstImage, ...(data?.images || '')]?.filter((e) => e)
+    const images = data?.images || []
+    const listImage = [data?.firstImage, ...images]?.filter((e) => e)
+    const [thumbsSwiper, setThumbsSwiper] = useState(null)
+    console.log('🚀 ~ file: ImageGallery.jsx:16 ~ ImageGallery ~ thumbsSwiper:', thumbsSwiper)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-    const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [zoomSize, setZoomSize] = useState(0)
     const swiper1Ref = useRef()
     const swiperRef = useRef()
+    const swiperRef2 = useRef()
     const swiperSlideShowRef = useRef()
     const slRef = useRef()
     const [thumbIndex, setThumbIndex] = useState(0)
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        const containers = document.querySelectorAll('.swiper-container')
+        if (!containers) return
+        containers.forEach((container) => {
+            if (!container) return
+            let startY
+            let startX
+            let scrollLeft
+            let scrollTop
+            let isDown
+            function mouseIsDown(e) {
+                if (!e) return
+
+                isDown = true
+                startY = e.pageY - container.offsetTop
+                startX = e.pageX - container.offsetLeft
+                scrollLeft = container.scrollLeft
+                scrollTop = container.scrollTop
+            }
+            function mouseUp(e) {
+                isDown = false
+            }
+            function mouseLeave(e) {
+                isDown = false
+            }
+            function mouseMove(e) {
+                if (!e) return
+                if (isDown) {
+                    e.preventDefault()
+                    //Move vertcally
+                    const y = e.pageY - container.offsetTop
+                    const walkY = y - startY
+                    container.scrollTop = scrollTop - walkY
+
+                    //Move Horizontally
+                    const x = e.pageX - container.offsetLeft
+                    const walkX = x - startX
+                    container.scrollLeft = scrollLeft - walkX
+                }
+            }
+            container.addEventListener('mousedown', (e) => mouseIsDown(e))
+            container.addEventListener('mouseup', (e) => mouseUp(e))
+            container.addEventListener('mouseleave', (e) => mouseLeave(e))
+            container.addEventListener('mousemove', (e) => mouseMove(e))
+        })
+    }, [])
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        const imgArray = document.querySelectorAll('.image-animate')
+        if (!imgArray) return
+        imgArray.forEach((item) => {
+            item.style.transform = `scale(${1 + 0.2 * zoomSize})`
+        })
+    }, [zoomSize])
 
     const seemoreHandler = () => {
         if (!swiperRef.current || !slRef.current) return
@@ -45,18 +89,22 @@ export default function ImageGallery({ data }) {
     }
 
     const nextSlideHandler = () => {
+        if (!swiperSlideShowRef.current) return
         swiperSlideShowRef.current?.slideNext()
     }
 
     const prevSlideHandler = () => {
+        if (!swiperSlideShowRef.current) return
         swiperSlideShowRef.current?.slidePrev()
     }
 
     const nextSlide1Handler = () => {
+        if (!swiper1Ref.current) return
         swiper1Ref.current?.slideNext()
     }
 
     const prevSlide1Handler = () => {
+        if (!swiper1Ref.current) return
         swiper1Ref.current?.slidePrev()
     }
 
@@ -81,56 +129,6 @@ export default function ImageGallery({ data }) {
     const slideThumbIndex = (swiper) => {
         setThumbIndex(swiper.realIndex)
     }
-    useEffect(() => {
-        const containers = document.querySelectorAll('.swiper-container')
-        containers.forEach((container) => {
-            let startY
-            let startX
-            let scrollLeft
-            let scrollTop
-            let isDown
-
-            container.addEventListener('mousedown', (e) => mouseIsDown(e))
-            container.addEventListener('mouseup', (e) => mouseUp(e))
-            container.addEventListener('mouseleave', (e) => mouseLeave(e))
-            container.addEventListener('mousemove', (e) => mouseMove(e))
-
-            function mouseIsDown(e) {
-                isDown = true
-                startY = e.pageY - container.offsetTop
-                startX = e.pageX - container.offsetLeft
-                scrollLeft = container.scrollLeft
-                scrollTop = container.scrollTop
-            }
-            function mouseUp(e) {
-                isDown = false
-            }
-            function mouseLeave(e) {
-                isDown = false
-            }
-            function mouseMove(e) {
-                if (isDown) {
-                    e.preventDefault()
-                    //Move vertcally
-                    const y = e.pageY - container.offsetTop
-                    const walkY = y - startY
-                    container.scrollTop = scrollTop - walkY
-
-                    //Move Horizontally
-                    const x = e.pageX - container.offsetLeft
-                    const walkX = x - startX
-                    container.scrollLeft = scrollLeft - walkX
-                }
-            }
-        })
-    }, [])
-
-    useEffect(() => {
-        const imgArray = document.querySelectorAll('.image-animate')
-        imgArray.forEach((item) => {
-            item.style.transform = `scale(${1 + 0.2 * zoomSize})`
-        })
-    }, [zoomSize])
 
     const handleScrollDownMap = () => {
         if (typeof window !== 'undefined') {
@@ -145,10 +143,6 @@ export default function ImageGallery({ data }) {
             <div className='h-[5.75vw] max-lg:h-[10vw] max-md:h-[18vw]'></div>
             <div className='relative'>
                 <Swiper
-                    onBeforeInit={(swiper) => {
-                        swiper1Ref.current = swiper
-                    }}
-                    onSlideChange={slideThumbIndex}
                     // loop={true}
                     breakpoints={{
                         0: {
@@ -167,7 +161,12 @@ export default function ImageGallery({ data }) {
                     speed={600}
                     freeMode={true}
                     grabCursor={true}
-                    thumbs={{ swiper: thumbsSwiper }}
+                    onBeforeInit={(swiper) => {
+                        swiper1Ref.current = swiper
+                    }}
+                    onSlideChange={slideThumbIndex}
+                    thumbs={{ swiper: swiperRef2?.current }}
+                    // thumbs={{ swiper: thumbsSwiper }}
                     modules={[FreeMode, Thumbs]}
                     className='h-[21.875vw] max-md:h-[82.9vw] max-lg:h-[30vw]'
                 >
@@ -175,23 +174,23 @@ export default function ImageGallery({ data }) {
                         ? listImage?.slice(0, 9).map((item, index) => (
                               <SwiperSlide key={index}>
                                   <Image
-                                      src={item}
+                                      src={item || '/images/itemproject.jpg'}
                                       alt={index}
                                       width={532}
                                       height={350}
                                       className='object-cover w-full h-full'
-                                  ></Image>
+                                  />
                               </SwiperSlide>
                           ))
                         : listImage?.map((item, index) => (
                               <SwiperSlide key={index}>
                                   <Image
-                                      src={item}
+                                      src={item || '/images/itemproject.jpg'}
                                       width={532}
                                       height={350}
                                       alt={index}
                                       className='object-cover w-full h-full'
-                                  ></Image>
+                                  />
                               </SwiperSlide>
                           ))}
                 </Swiper>
@@ -273,6 +272,9 @@ export default function ImageGallery({ data }) {
                             spaceBetween: 8,
                         },
                     }}
+                    onBeforeInit={(swiper) => {
+                        swiperRef2.current = swiper
+                    }}
                     freeMode={true}
                     watchSlidesProgress={true}
                     modules={[FreeMode, Thumbs]}
@@ -350,7 +352,9 @@ export default function ImageGallery({ data }) {
                             fill='#D6A279'
                         />
                     </svg>
-                    <span className='text-white text-14pc font-semibold leading-[1.14286] max-lg:title-tl14'>Vị trí</span>
+                    <span className='text-white text-14pc font-semibold leading-[1.14286] max-lg:title-tl14'>
+                        Vị trí
+                    </span>
                 </div>
             </div>
             <div
@@ -362,18 +366,18 @@ export default function ImageGallery({ data }) {
                     ref={slRef}
                 >
                     <Swiper
-                        onBeforeInit={(swiper) => {
-                            swiperSlideShowRef.current = swiper
-                        }}
                         initialSlide={9}
                         // loop={true}
                         navigation={true}
                         allowTouchMove={false}
+                        onBeforeInit={(swiper) => {
+                            swiperSlideShowRef.current = swiper
+                        }}
                         modules={[Navigation]}
                         speed={800}
                         className='w-full h-full'
                     >
-                        {listImage.map((item, index) => (
+                        {listImage?.map((item, index) => (
                             <SwiperSlide
                                 key={index}
                                 className='relative overflow-hidden swiper-container cursor-grab'

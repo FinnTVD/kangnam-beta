@@ -1,22 +1,28 @@
 'use client'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import useSWR from 'swr'
+import InputCheckBox from './InputCheckBox'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
-export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index, lang, isMobile }) {
+const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const [sideRef, isOutSide] = useClickOutSide()
-    const lh = searchParams.get(item?.slug)?.split('--')
+    // const lh = searchParams.get(item?.slug)?.split('--')
+    const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}${item?.api}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+
+    useEffect(() => {
+        setLh(searchParams.get(item?.slug)?.split('--'))
+    }, [searchParams])
 
     useEffect(() => {
         isOutSide && setIndexFilter(-1)
@@ -27,6 +33,7 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             const params = new URLSearchParams(searchParams)
             params.set(name, value)
 
+            if (!value) return params.toString().replace(name + '=', '')
             return params.toString()
         },
         [searchParams],
@@ -48,13 +55,6 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
             scroll: false,
         })
         setIndexFilter(-1)
-    }
-
-    const handleResetCheckBox = () => {
-        const arrCheckBox = document.querySelectorAll('input[type=checkbox]')
-        arrCheckBox.forEach((e) => {
-            e?.setAttribute('checked', false)
-        })
     }
 
     if (item?.api === '/property-category' && isMobile) {
@@ -105,25 +105,13 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                     >
                         {Array.isArray(dataNew) &&
                             dataNew?.map((e, index) => (
-                                <div
+                                <InputCheckBox
                                     key={index}
-                                    className='w-fit flex items-center gap-x-[0.75vw] max-md:gap-x-[3.2vw]'
-                                >
-                                    <input
-                                        type='checkbox'
-                                        id={e?.id}
-                                        className='w-[1.5vw] h-[1.5vw] max-md:w-[6.4vw] max-md:h-[6.4vw] outline-none border border-solid border-den02 cursor-pointer'
-                                    />
-
-                                    <label
-                                        className='title14-400-150 text-den cursor-pointer max-md:title-mb14-400-150 w-[5.5625vw] max-md:w-[23.74vw] max-md:whitespace-normal max-lg:title-tl14 max-lg:w-[20vw]'
-                                        htmlFor={e?.id}
-                                    >
-                                        {e?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.name || e?.title}
-                                    </label>
-                                </div>
+                                    e={e}
+                                    lang={lang}
+                                    lh={lh}
+                                    searchParams={searchParams}
+                                />
                             ))}
                     </div>
                 </div>
@@ -134,7 +122,6 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
                                 scroll: false,
                             })
                             setIndexFilter(-1)
-                            handleResetCheckBox()
                         }}
                         className='cursor-pointer title14-400-150 text-den max-md:title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw] max-lg:title-tl14'
                     >
@@ -156,3 +143,4 @@ export default function ItemFilterV2({ item, indexFilter, setIndexFilter, index,
         </li>
     )
 }
+export default memo(ItemFilterV2)

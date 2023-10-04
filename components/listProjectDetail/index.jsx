@@ -28,6 +28,7 @@ export default async function IndexProjectDetail({ lang, detail, t }) {
                 <RelatedProject
                     lang={lang}
                     detail={detail}
+                    data={data}
                 />
             </main>
         </>

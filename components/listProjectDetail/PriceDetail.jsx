@@ -14,31 +14,32 @@ const handleCheckCode = (lang) => {
             return 'VND'
     }
 }
-const handleFormat = (value, lang) => {
-    if (!value) return
-    let a = value?.toString()?.split('.')
-    let b = a[0].split('').reverse()
-    const str = []
-    for (let i = 0; i < b.length; i++) {
-        if (i % 3 === 2 && b.length - 1 > i) {
-            str.push(b[i])
-            str.push(',')
-        } else {
-            str.push(b[i])
-        }
-    }
-    let c = str.reverse()
-    // let d = a?.length === 1 ? '' : '.' + a[1]
-    let e = handleCheckCode(lang)
-    return '≈ ' + c.join('') + ' ' + e + '/m²'
-}
 
 export default function PriceDetail({ price, size, lang }) {
     const [value, setValue] = useState('')
     useEffect(() => {
-        const data = callApi(handleCheckCode(lang))
-        setValue(data)
+        if (!size) return
+        callApi(handleCheckCode(lang))
     }, [lang])
+
+    const handleFormat = (value, lang) => {
+        if (!value) return
+        let a = value?.toString()?.split('.')
+        let b = a[0].split('').reverse()
+        const str = []
+        for (let i = 0; i < b.length; i++) {
+            if (i % 3 === 2 && b.length - 1 > i) {
+                str.push(b[i])
+                str.push(',')
+            } else {
+                str.push(b[i])
+            }
+        }
+        let c = str.reverse()
+        // let d = a?.length === 1 ? '' : '.' + a[1]
+        let e = handleCheckCode(lang)
+        return setValue('≈ ' + c.join('') + ' ' + e + '/m²')
+    }
     const callApi = async (code) => {
         if (code === 'VND') return handleFormat(Number(price) / Number(size), lang)
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/currency/get-by-code?codeFrom=${code}&codeTo=VND`)
@@ -49,8 +50,7 @@ export default function PriceDetail({ price, size, lang }) {
     return (
         <span className='title16-400-125 max-md:title-mb16-400-125 text-[#888] relative inline-block tracking-[0.5px] max-lg:title-tl16'>
             {/* {callApi(handleCheckCode(lang))} */}
-            {value}
-            <span></span>
+            {size ? value : ''}
         </span>
     )
 }

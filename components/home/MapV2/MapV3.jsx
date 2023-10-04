@@ -42,6 +42,7 @@ const notifyError = (title) =>
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
+let listMarkerOut = []
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const MapV3 = ({ lang }) => {
     const mapRef = useRef(null) //lưu lại dom map
@@ -56,7 +57,7 @@ const MapV3 = ({ lang }) => {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
-    const levelZoomDebounce = useDebounce(levelZoom, 500)
+    // const levelZoomDebounce = useDebounce(levelZoom, 500)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
     const [isDrag, setIsDrag] = useState(false) // trigger sự kiện drag
     const isDragDebounce = useDebounce(isDrag, 500) // trigger sự kiện drag
@@ -118,7 +119,6 @@ const MapV3 = ({ lang }) => {
         fetcher,
     )
 
-    //
     // const {
     //     data: dataMap,
     //     error: errorMap,
@@ -210,7 +210,7 @@ const MapV3 = ({ lang }) => {
             )
             const data = await res.json()
             if (data) {
-                addMarkerV2(data, levelZoomDebounce)
+                addMarkerV2(data, mapRef.current?.getZoom() || 9)
                 setIsFirst(false)
                 setDataMap(data)
             }
@@ -224,20 +224,20 @@ const MapV3 = ({ lang }) => {
         dataWard && setDataWard(dataWard)
     }, [dataProvinces, dataDistrict, dataWard])
 
-    useEffect(() => {
-        if (!districtId) {
-            setTitleDistrict({
-                title: 'Quận/huyện',
-                id: null,
-            })
-        }
-        if (!wardId) {
-            setTitleWard({
-                title: 'Phường/xã',
-                id: null,
-            })
-        }
-    }, [cityId, districtId, wardId])
+    // useEffect(() => {
+    //     if (!districtId) {
+    //         setTitleDistrict({
+    //             title: 'Quận/huyện',
+    //             id: null,
+    //         })
+    //     }
+    //     if (!wardId) {
+    //         setTitleWard({
+    //             title: 'Phường/xã',
+    //             id: null,
+    //         })
+    //     }
+    // }, [cityId, districtId, wardId])
 
     // xử lý các marker theo sự kiên zoom và drag
     useEffect(() => {
@@ -254,22 +254,22 @@ const MapV3 = ({ lang }) => {
                 (e) => Number(e?.district_id) === data[0]?.boundaries[1]?.id, // boundaries[1]<=> district
             )
             if (Number(one?.count) <= 1) return
-            if (levelZoomDebounce >= 11.5) {
+            if (levelZoom >= 11.5) {
                 setDistrictId(data[0]?.boundaries[1]?.id)
             }
-            if (levelZoomDebounce >= 13.5) {
+            if (levelZoom >= 13.5) {
                 setWardId(data[0]?.boundaries[0]?.id) // boundaries[1]<=> ward
             }
         }
         getLocationCurrent()
-        if (levelZoomDebounce >= 11.5 && levelZoomDebounce < 13.5) {
+        if (levelZoom >= 11.5 && levelZoom < 13.5) {
             setWardId(null)
         }
-        if (districtId && levelZoomDebounce < 11.5) {
+        if (districtId && levelZoom < 11.5) {
             setDistrictId(null)
             wardId && setWardId(null)
         }
-    }, [levelZoomDebounce, isDragDebounce])
+    }, [levelZoom, isDragDebounce])
 
     if (propertyType?.length > 0 && propertyType[0]) {
         propertyTypeParams = propertyType[0]
@@ -345,16 +345,16 @@ const MapV3 = ({ lang }) => {
         })
     }
 
-    const handleSelectId = (e, levelZoom) => {
-        if (levelZoom >= 11.5) {
-            return 'wardId=' + e?.id
-        }
-        return 'districtId=' + e?.id
-    }
-
-    const callDataPopup = async (e, levelZoom) => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?${handleSelectId(e, levelZoom)}`)
+    const callDataPopup = async (e) => {
+        console.log('🚀 ~ file: MapV3.jsx:362 ~ callDataPopup ~ e:', e)
+        // const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?${handleSelectId(e, levelZoom)}`)
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API}/property?cityId=${cityId}${districtId ? '&districtId=' + districtId : ''}${
+                wardId ? '&wardId=' + wardId : ''
+            }`,
+        )
         const data = await res.json()
+        console.log('🚀 ~ file: MapV3.jsx:363 ~ callDataPopup ~ data:', data)
         let childNode = ''
         if (data) {
             childNode = data?.data?.reduce(
@@ -401,7 +401,7 @@ const MapV3 = ({ lang }) => {
                                         height='14'
                                         viewBox='0 0 15 14'
                                         fill='none'
-                                        class="h-[1vw] w-[2vw]"
+                                        class="h-[1vw] w-[3vw]"
                                     >
                                         <path
                                             d='M7.33422 6.8551C7.6153 6.8551 7.8555 6.75502 8.0548 6.55485C8.25411 6.35468 8.35376 6.11406 8.35376 5.83297C8.35376 5.55189 8.25367 5.3117 8.0535 5.11239C7.85334 4.91309 7.61272 4.81344 7.33163 4.81344C7.05055 4.81344 6.81036 4.91352 6.61105 5.11369C6.41175 5.31385 6.31209 5.55448 6.31209 5.83557C6.31209 6.11665 6.41218 6.35684 6.61235 6.55614C6.81251 6.75545 7.05314 6.8551 7.33422 6.8551ZM7.33293 11.6822C8.62598 10.5058 9.58119 9.43878 10.1986 8.48114C10.8159 7.52351 11.1246 6.6801 11.1246 5.95094C11.1246 4.80576 10.7586 3.86807 10.0266 3.13788C9.29459 2.4077 8.3967 2.0426 7.33293 2.0426C6.26915 2.0426 5.37126 2.4077 4.63927 3.13788C3.90726 3.86807 3.54126 4.80576 3.54126 5.95094C3.54126 6.6801 3.85723 7.52351 4.48918 8.48114C5.12112 9.43878 6.06904 10.5058 7.33293 11.6822ZM7.33293 12.8343C5.76765 11.5023 4.59855 10.2652 3.82563 9.12281C3.05272 7.98045 2.66626 6.92316 2.66626 5.95094C2.66626 4.4926 3.13536 3.3308 4.07355 2.46552C5.01175 1.60024 6.0982 1.1676 7.33293 1.1676C8.56765 1.1676 9.65411 1.60024 10.5923 2.46552C11.5305 3.3308 11.9996 4.4926 11.9996 5.95094C11.9996 6.92316 11.6131 7.98045 10.8402 9.12281C10.0673 10.2652 8.8982 11.5023 7.33293 12.8343Z'
@@ -520,149 +520,152 @@ const MapV3 = ({ lang }) => {
         }
         marker.getElement().appendChild(customIcon)
         marker.getElement().appendChild(textElm)
+        listMarkerOut?.push(marker)
     }
-    const addMarkerV2 = (dataMap, levelZoom) => {
-        if (!dataMap || !levelZoom) return
+
+    const addMarkerV2 = (data, levelZoom) => {
+        if (!data || !levelZoom) return
         const listMarker = []
-        dataMap?.forEach((e, levelZoom) => {
+        listMarkerOut?.forEach((e) => e?.remove())
+        // listMarkerOut = new Array()
+        data?.forEach((e) => {
             if (levelZoom >= 13.5) {
                 listMarker?.push({
-                    coor: [Number(e?.lng), Number(e?.lat)],
-                    count: Number(e?.count),
+                    coor: [parseFloat(e?.lng), parseFloat(e?.lat)],
+                    count: parseFloat(e?.count),
                     id: e?.id,
                 })
             }
             if (levelZoom >= 11.5 && levelZoom < 13.5) {
                 listMarker?.push({
-                    coor: [Number(e?.ward_lng), Number(e?.ward_lat)],
-                    count: Number(e?.count),
+                    coor: [parseFloat(e?.ward_lng), parseFloat(e?.ward_lat)],
+                    count: parseFloat(e?.count),
                     id: e?.ward_id,
                 })
             }
             if (levelZoom < 11.5) {
                 listMarker?.push({
-                    coor: [Number(e?.district_lng), Number(e?.district_lat)],
-                    count: Number(e?.count),
+                    coor: [parseFloat(e?.district_lng), parseFloat(e?.district_lat)],
+                    count: parseFloat(e?.count),
                     id: e?.district_id,
                 })
             }
         })
-
         listMarker?.forEach((e) => {
             callDataPopup(e)
         })
     }
 
-    const handleAddMarker = (dataMap, levelZoom) => {
-        const a = []
-        const divElement = document.createElement('div')
-        divElement.textContent = 1
-        divElement.setAttribute('data-marker', '1')
-        dataMap?.forEach((e) => {
-            if (levelZoom >= 13.5) {
-                a?.push({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [Number(e?.lng), Number(e?.lat)], // Tọa độ của marker 1
-                    },
-                })
-            }
-            if (levelZoom >= 11.5 && levelZoom < 13.5) {
-                a?.push({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)], // Tọa độ của marker 1
-                    },
-                })
-            }
-            if (levelZoom < 11.5) {
-                a?.push({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [Number(e?.district_lng), Number(e?.district_lat)], // Tọa độ của marker 1
-                    },
-                })
-            }
-        })
-        return a
-    }
+    // const handleAddMarker = (dataMap, levelZoom) => {
+    //     const a = []
+    //     const divElement = document.createElement('div')
+    //     divElement.textContent = 1
+    //     divElement.setAttribute('data-marker', '1')
+    //     dataMap?.forEach((e) => {
+    //         if (levelZoom >= 13.5) {
+    //             a?.push({
+    //                 type: 'Feature',
+    //                 geometry: {
+    //                     type: 'Point',
+    //                     coordinates: [Number(e?.lng), Number(e?.lat)], // Tọa độ của marker 1
+    //                 },
+    //             })
+    //         }
+    //         if (levelZoom >= 11.5 && levelZoom < 13.5) {
+    //             a?.push({
+    //                 type: 'Feature',
+    //                 geometry: {
+    //                     type: 'Point',
+    //                     coordinates: [Number(e?.ward_lng), Number(e?.ward_lat)], // Tọa độ của marker 1
+    //                 },
+    //             })
+    //         }
+    //         if (levelZoom < 11.5) {
+    //             a?.push({
+    //                 type: 'Feature',
+    //                 geometry: {
+    //                     type: 'Point',
+    //                     coordinates: [Number(e?.district_lng), Number(e?.district_lat)], // Tọa độ của marker 1
+    //                 },
+    //             })
+    //         }
+    //     })
+    //     return a
+    // }
 
-    const addMarkerTest = (dataMap, levelZoom) => {
-        if (!dataMap || !levelZoom || !mapRef.current) return
-        const a = handleAddMarker(dataMap, levelZoom)
-        // typeof mapRef.current?.on === 'function' &&
-        mapRef.current?.on('load', function () {
-            const markerData = {
-                type: 'FeatureCollection',
-                features: a,
-            }
-            mapRef.current?.addSource('marker1', {
-                type: 'geojson',
-                data: markerData,
-            })
+    // const addMarkerTest = (dataMap, levelZoom) => {
+    //     if (!dataMap || !levelZoom || !mapRef.current) return
+    //     const a = handleAddMarker(dataMap, levelZoom)
+    //     // typeof mapRef.current?.on === 'function' &&
+    //     mapRef.current?.on('load', function () {
+    //         const markerData = {
+    //             type: 'FeatureCollection',
+    //             features: a,
+    //         }
+    //         mapRef.current?.addSource('marker1', {
+    //             type: 'geojson',
+    //             data: markerData,
+    //         })
 
-            mapRef.current?.addLayer({
-                id: 'marker-point',
-                type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
-                source: 'marker1', // ID của nguồn dữ liệu
-                paint: {
-                    'circle-radius': 8, // Kích thước của marker
-                    'circle-color': 'red', // Màu sắc của marker
-                },
-            })
-        })
-    }
+    //         mapRef.current?.addLayer({
+    //             id: 'marker-point',
+    //             type: 'circle', // Loại layer (có thể là 'symbol', 'circle', 'line', hoặc 'fill' tùy vào nhu cầu)
+    //             source: 'marker1', // ID của nguồn dữ liệu
+    //             paint: {
+    //                 'circle-radius': 8, // Kích thước của marker
+    //                 'circle-color': 'red', // Màu sắc của marker
+    //             },
+    //         })
+    //     })
+    // }
 
     // fly đến tỉnh/quận/xa
-    const flyMap = (lat = 104.78234226958115, lon = 22.920931262916405, zoom = 9) => {
-        mapRef.current?.flyTo({
-            center: [Number(lat), Number(lon)],
-            zoom: zoom,
-            curve: 1,
-        })
-        setLevelZoom(zoom)
-    }
+    // const flyMap = (lat = 104.78234226958115, lon = 22.920931262916405, zoom = 9) => {
+    //     mapRef.current?.flyTo({
+    //         center: [Number(lat), Number(lon)],
+    //         zoom: zoom,
+    //         curve: 1,
+    //     })
+    //     setLevelZoom(zoom)
+    // }
 
-    // handle change city
-    const handleChangeCity = (id) => {
-        if (!dataProvinces || !id) return
-        const itemCity = dataProvinces?.find((i) => i?.city_id == id)
-        if (!itemCity) {
-            return notifyError('No data project in address city search!')
-        }
-        //set lại cityid
-        cityId !== Number(id) && setCityId(Number(id))
-        // khi chuyển city thì setDistrictId và setWardId về null
-        setDistrictId(null)
-        setWardId(null)
-        flyMap(itemCity?.city_lng, itemCity?.city_lat)
-        // fly zoom to city
-    }
+    // // handle change city
+    // const handleChangeCity = (id) => {
+    //     if (!dataProvinces || !id) return
+    //     const itemCity = dataProvinces?.find((i) => i?.city_id == id)
+    //     if (!itemCity) {
+    //         return notifyError('No data project in address city search!')
+    //     }
+    //     //set lại cityid
+    //     cityId !== Number(id) && setCityId(Number(id))
+    //     // khi chuyển city thì setDistrictId và setWardId về null
+    //     setDistrictId(null)
+    //     setWardId(null)
+    //     flyMap(itemCity?.city_lng, itemCity?.city_lat)
+    //     // fly zoom to city
+    // }
 
-    //handle change district
-    const handleChangeDistrict = (id) => {
-        if (!dataDistrict || !id) return
-        const itemDistrict = dataDistrict?.find((e) => e?.district_id == id)
-        if (typeof itemDistrict !== 'object') {
-            return notifyError('No data project in address district search!')
-        }
-        !wardId && setWardId(null)
-        flyMap(itemDistrict?.district_lng, itemDistrict?.district_lat, 11.5)
-    }
+    // //handle change district
+    // const handleChangeDistrict = (id) => {
+    //     if (!dataDistrict || !id) return
+    //     const itemDistrict = dataDistrict?.find((e) => e?.district_id == id)
+    //     if (typeof itemDistrict !== 'object') {
+    //         return notifyError('No data project in address district search!')
+    //     }
+    //     !wardId && setWardId(null)
+    //     flyMap(itemDistrict?.district_lng, itemDistrict?.district_lat, 11.5)
+    // }
 
-    //handle change ward
-    const handleChangeWard = (id) => {
-        if (!dataWard || !id) return
-        const itemCity = dataWard?.find((i) => i?.ward_id == id)
-        if (!itemCity) {
-            return notifyError('No data project in address ward search!')
-        }
-        flyMap(itemCity?.ward_lng, itemCity?.ward_lat, 13.5)
-        // fly zoom to ward
-    }
+    // //handle change ward
+    // const handleChangeWard = (id) => {
+    //     if (!dataWard || !id) return
+    //     const itemCity = dataWard?.find((i) => i?.ward_id == id)
+    //     if (!itemCity) {
+    //         return notifyError('No data project in address ward search!')
+    //     }
+    //     flyMap(itemCity?.ward_lng, itemCity?.ward_lat, 13.5)
+    //     // fly zoom to ward
+    // }
 
     return (
         <>
@@ -674,6 +677,15 @@ const MapV3 = ({ lang }) => {
                 id='map'
                 className=''
             >
+                <div
+                    onClick={() => {
+                        console.log('listMarkerOut', listMarkerOut)
+                        listMarkerOut?.forEach((e) => e?.remove())
+                    }}
+                    className='absolute top-0 left-0 w-[50px] h-[50px] bg-black text-white flex items-center justify-center z-[9999] cursor-pointer'
+                >
+                    Remove Maker
+                </div>
                 {/* <div className='absolute top-0 left-0 flex w-full h-fit z-[1000] bg-white'>
                     <SelectCity
                         data={dataProvinces}

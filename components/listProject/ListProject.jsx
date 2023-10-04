@@ -22,7 +22,7 @@ import useStore from '@/app/[lang]/(store)/store'
 // import MapV4 from '../home/MapV2/MapV4'
 
 import dynamic from 'next/dynamic'
-const MapV4 = dynamic(() => import('../home/MapV2/MapV3'))
+const MapV4 = dynamic(() => import('../home/MapV2/MapV4'))
 // import Map from '../home/Map'
 const arrFilter = [
     {

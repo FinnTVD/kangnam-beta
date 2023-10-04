@@ -1,20 +1,18 @@
 'use client'
-import { usePathname } from 'next/navigation'
 import useSWR, { mutate } from 'swr'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, FreeMode } from 'swiper/modules'
 import Link from 'next/link'
-import { handleCheckLangCode, handleCheckParams } from '@/utils'
 import Skeleton from 'react-loading-skeleton'
 import { useEffect } from 'react'
+import { handleCheckLangCode } from '@/utils'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const arrProject = new Array(4).fill(0)
-export default function SlideRelatedProject({ lang, detail }) {
-    const pathName = usePathname()
+export default function SlideRelatedProject({ lang, detail, dataDetail }) {
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11${handleCheckParams(pathName)}`,
+        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -22,8 +20,11 @@ export default function SlideRelatedProject({ lang, detail }) {
             revalidateOnReconnect: false,
         },
     )
+
     useEffect(() => {
-        mutate(`${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11${handleCheckParams(pathName)}`)
+        mutate(
+            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+        )
     }, [lang])
 
     const dataRelated = data?.data?.filter((e) => e?.translation?.slug !== detail)
@@ -103,7 +104,9 @@ export default function SlideRelatedProject({ lang, detail }) {
                                         fill
                                     />
                                     <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-lg:title-tl10 max-md:text-10tl'>
-                                        {e?.propertyCategory?.name}
+                                        {e?.propertyCategory?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name || 'Dự án'}
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
