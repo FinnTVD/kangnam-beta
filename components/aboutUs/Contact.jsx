@@ -14,11 +14,11 @@ export default function Contact({t, lang, dataInfo}){
     const address = "Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội";
     const phone = ["+84 337858021 / +84 339625612", "+82 10-8413-1981"];
     return(
-        <section className="relative px-120 pt-[8.125vw] pb-[8.125vw] max-md:py-[13.3vw] px-mb10">
+        <section className="relative px-120 pt-[8.125vw] pb-[8.125vw] max-md:py-[13.3vw] px-mb10" data-aos="fade-up">
             <div className='flex justify-between items-end'>
                 <div>
-                    <span data-aos="fade-up" className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6] max-lg:title-tl12'>{t?.aboutUsContact?.subtitle}</span>
-                    <h2 data-aos="fade-up" className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25] max-md:mt-[1.1vw] max-lg:title-tl38'>{t?.aboutUsContact?.title}</h2>
+                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6] max-lg:title-tl12'>{t?.aboutUsContact?.subtitle}</span>
+                    <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25] max-md:mt-[1.1vw] max-lg:title-tl38'>{t?.aboutUsContact?.title}</h2>
                 </div>
                 {!isTablet && <Button href={lang==='vn'? `/contact` : `/${lang}/contact`} stroke="white" className="border-none text-white px-[2.5vw] py-[1vw] bg-[#D6A279] rounded-full flex items-center" span="max-lg:title-tl16"> {t.aboutUsContact.button} </Button>}
             </div>
@@ -27,7 +27,6 @@ export default function Contact({t, lang, dataInfo}){
                     <div className="max-md:relative max-md:py-[8vw] max-md:px-[4.2vw]">
                         <h3 className='title32-600-127 text-den relative max-md:z-[3] max-md:text-white max-md:text-20mb max-md:font-bold max-md:leading-[1.27] max-md:tracking-[-1px] max-lg:title-tl24'>{title}</h3>
                         <div
-                            data-aos={!isTablet? 'fade-right' : 'zoom-in'}
                             className='mt-[1.1875vw] relative max-md:z-[3] max-md:mt-[4.2vw]'
                         >
                             <div className='flex items-center'>
@@ -65,7 +64,6 @@ export default function Contact({t, lang, dataInfo}){
                         </div>
                     <div className="max-md:absolute max-md:top-0 max-md:left-0 max-md:w-full max-md:h-full">
                         <div
-                            data-aos='zoom-in'
                             className='relative w-[41.25vw] h-[25.3125vw] mt-[2vw] max-md:mt-0 max-md:w-full max-md:h-full'
                         >
                             <Image

@@ -41,7 +41,7 @@ export default function IndexAgreements({ lang }) {
             <ul className='flex flex-col bg-[#F4F4F4] sticky top-[5.5vw] left-0 flex flex-col gap-[1vw] px-[3.75vw] py-[3vw] max-lg:py-[7.5vw] max-lg:flex-row max-lg:bg-transparent max-lg:justify-end max-lg:flex-nowrap max-lg:px-[8.25vw] max-lg:pt-[4.5vw] max-lg:pb-[0] max-lg:static max-lg:gap-[2vw] max-md:pt-[6vw]'>
                 {agreementDataTranslation?.map((e, indx) => (
                     <li
-                        className={`${indx===index ? 'text-[#d4a47c] font-semibold' : ''} text-[1.125vw] text-den max-md:title-mb14-400-171 opacity-80 max-lg:title-tl18 cursor-pointer max-lg:whitespace-nowrap`}
+                        className={`${indx===index ? 'text-[#d4a47c] font-semibold' : 'text-den'} text-[1.125vw] max-md:title-mb14-400-171 opacity-80 max-lg:title-tl18 cursor-pointer max-lg:whitespace-nowrap`}
                         key={indx}
                         onClick={() => setIndex(indx)}
                     >

@@ -271,8 +271,6 @@ export default function ListProject({ lang, t, dataSlug }) {
                                 >
                                     <div className='relative w-full h-[13.75vw] max-md:h-[73.87vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.69vw] max-lg:h-[30vw]'>
                                         <Image
-                                            data-aos='zoom-out'
-                                            data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={e?.translation?.name || 'thumbnail project'}

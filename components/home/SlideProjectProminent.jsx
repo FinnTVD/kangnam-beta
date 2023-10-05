@@ -66,8 +66,8 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                             <Link href={handleRenderItem(e, lang) || '/'}>
                                 <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
                                     <Image
-                                        data-aos='zoom-out'
-                                        data-aos-delay={`${index * 300}`}
+                                        // data-aos='zoom-out'
+                                        // data-aos-delay={`${index * 300}`}
                                         className='object-cover rounded-[1vw]'
                                         src={e?.firstImage || '/images/slideitem.jpg'}
                                         alt={`slide-${index}`}
