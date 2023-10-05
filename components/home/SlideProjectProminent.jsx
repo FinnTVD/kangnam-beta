@@ -13,7 +13,8 @@ const handleRenderItem = (data, lang) => {
     let slug = data?.translations?.find((e) =>
         e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
     )?.slug
-    return `/${alias || '/projects'}/${slug || data?.translations[0]?.slug}`
+    // return `/${alias || '/projects'}/${slug || data?.translations[0]?.slug}`
+    return `/${alias || '/projects'}`
 }
 
 const handleTitle = (data, lang) => {

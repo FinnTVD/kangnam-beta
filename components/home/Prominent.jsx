@@ -71,6 +71,7 @@ export default function Prominent() {
                                     alt={e.alt}
                                     sizes='100vw'
                                     fill
+                                    quality={100}
                                 />
                             </div>
                         </SwiperSlide>
@@ -96,7 +97,11 @@ export default function Prominent() {
                     </div>
                 )}
                 <div className='flex flex-col items-center max-md:w-[77.8vw]'>
-                    <h2 className='capitalize title60 title-tl42 title-mb30-800-130 max-md:-tracking-[0.9px] text-white'>
+                    <h2
+                        data-aos='fade-right'
+                        data-aos-duration='1000'
+                        className='capitalize title60 title-tl42 title-mb30-800-130 max-md:-tracking-[0.9px] text-white'
+                    >
                         Nổi bật theo khu vực
                     </h2>
                     <span className='mt-[0.75vw] max-md:mt-[2.13vw] mb-[1.5vw] max-lg:mt-[1.75vw] max-lg:max-lg:mb-[2.5vw] max-md:mb-[6.4vw] w-[21.5vw] max-md:w-full max-lg:w-[34.5vw] text-24pc max-lg:text-20tl font-normal leading-[1.3] block text-center max-md:text-20mb'>
