@@ -163,7 +163,13 @@ export default function MyProjectV2({ lang, t }) {
             id='boxMap'
             className='pl-[7.5vw] text-den pt-[9.13vw] pb-[10.06vw] z-[9] relative bg-white max-lg:hidden'
         >
-            <h2 className='pr-[7.5vw] title56'>Dự án của chúng tôi</h2>
+            <h2
+                data-aos='fade-right'
+                data-aos-duration='1000'
+                className='pr-[7.5vw] title56'
+            >
+                Dự án của chúng tôi
+            </h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
                 <BoxFilterV2
                     arrFilter={arrFilter}
@@ -227,7 +233,7 @@ export default function MyProjectV2({ lang, t }) {
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={e?.translation?.name || 'thumbnail project'}
-                                            sizes='18vw'
+                                            sizes='100vw'
                                             fill
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>

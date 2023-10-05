@@ -7,8 +7,8 @@ import IconDeposit3 from '../icons/IconDeposit3'
 export default function Deposit({ lang }) {
     return (
         <section
-            data-aos='fade-up'
-            data-aos-duration='1000'
+            // data-aos='fade-up'
+            // data-aos-duration='1000'
             id='deposit'
             className='relative h-fit pt-[8.44vw] pb-[7vw] max-md:pt-[13.33vw] max-lg:h-[55vh] max-md:h-screen'
         >
@@ -28,7 +28,11 @@ export default function Deposit({ lang }) {
                 fill
                 quality={100}
             />
-            <div className='w-[34.25vw] max-lg:w-[60vw] ml-[7.5vw] relative z-10 max-md:w-full max-lg:pl-[3.2vw] max-lg:mx-0 px-mb10'>
+            <div
+                data-aos='fade-right'
+                data-aos-duration='1000'
+                className='w-[34.25vw] max-lg:w-[60vw] ml-[7.5vw] relative z-10 max-md:w-full max-lg:pl-[3.2vw] max-lg:mx-0 px-mb10'
+            >
                 <h2 className='text-white title56 title-mb25-700-130 title-tl38'>Kí gửi nhà đất</h2>
                 <p className='title18-400-150 text-white mt-[1vw] mb-[2vw] max-md:mt-[2.13vw] title-mb14-400-150 max-md:mb-[6.4vw] title-tl16-400-150 opacity-80'>
                     Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý

@@ -41,9 +41,9 @@ export default function Partner({ t }) {
 
     return (
         <section
-            data-aos='fade-up'
-            data-aos-duration='1000'
-            data-aos-offset='250'
+            // data-aos='fade-up'
+            // data-aos-duration='1000'
+            // data-aos-offset='250'
             className='w-full px-120 pb-[15.625vw] pt-[9.625vw] relative px-mb10 max-md:pt-[17.06vw] max-md:pb-[27.2vw]'
         >
             <div
@@ -70,7 +70,11 @@ export default function Partner({ t }) {
             ></div>
 
             <div className='flex items-end justify-between'>
-                <div className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'>
+                <div
+                    data-aos='fade-right'
+                    data-aos-duration='1000'
+                    className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'
+                >
                     <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px] max-lg:title-tl12'>
                         {t.homepagePartners.subtitle}
                     </span>
