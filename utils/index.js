@@ -56,6 +56,7 @@ const handleCheckParams = (pathName, dataSlug) => {
 }
 
 const findIdByAlias = (pathName, dataSlug) => {
+    if (!dataSlug) return ''
     for (const item of dataSlug) {
         for (const translation of item?.translations) {
             if (translation?.alias?.toLowerCase()?.includes(pathName?.slice(1))) {

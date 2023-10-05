@@ -47,7 +47,7 @@ export default function MapProjectDetail({ dataDetail, data }) {
                                 alt=${dataDetail?.name || 'marker'}
                             />
                             <div class="w-[12.0625vw]">
-                                <h2 class='line-clamp-1'>${dataDetail.name ?? ''}</h2>
+                                <h2 class='line-clamp-1 text-den'>${dataDetail.name ?? ''}</h2>
                                 <div
                                             title=${data?.address?.display}
                                             class='flex items-center'

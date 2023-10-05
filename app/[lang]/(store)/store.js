@@ -21,6 +21,7 @@ const useStore = create((set, get) => ({
     dataProvinces: null,
     dataDistrict: null,
     dataWard: null,
+    isFly: false,
     listData: '',
     isFeatureHome: {
         isContain: false,
@@ -30,6 +31,14 @@ const useStore = create((set, get) => ({
     mapRef: null,
     levelZoom: 9,
     isClose: true,
+    setIsFly: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isFly: data,
+            }
+        })
+    },
     setIsClose: (data) => {
         set((state) => {
             return {
