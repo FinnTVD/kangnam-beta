@@ -141,7 +141,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb })
                 ) : (
                     <div
                         onClick={handleScrollDown}
-                        className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none'
+                        className='absolute bottom-[2vw] opacity-50 w-fit h-fit left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-y-[0.94vw] max-md:gap-y-[4vw] select-none cursor-pointer'
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
