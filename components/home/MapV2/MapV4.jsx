@@ -1,9 +1,10 @@
 'use client'
-import { useEffect, useState, useRef, memo } from 'react'
+import { useEffect, useState, useRef, memo, useCallback } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
+import { findIdByAlias } from '@/utils'
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
@@ -22,7 +23,8 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 let listMarkerOut = []
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV4 = ({ lang }) => {
+const MapV4 = ({ lang, dataSlug = '' }) => {
+    const router = useRouter()
     const mapRef = useRef(null) //lưu lại dom map
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
@@ -35,16 +37,60 @@ const MapV4 = ({ lang }) => {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
+    const isFly = useStore((state) => state.isFly)
+    const setIsFly = useStore((state) => state.setIsFly)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
     const [isDrag, setIsDrag] = useState(false) // trigger sự kiện drag
     const isDragDebounce = useDebounce(isDrag, 500) // trigger sự kiện drag
     const [isFirst, setIsFirst] = useState(true)
-    const [isFly, setIsFly] = useState(false)
     const [dataMap, setDataMap] = useState(null)
     const searchParams = useSearchParams()
+    const pathName = usePathname()
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+
+    const createQueryString = useCallback(
+        (name, value) => {
+            const params = new URLSearchParams(searchParams)
+            params.set(name, value)
+
+            return params.toString()
+        },
+        [searchParams],
+    )
+    if (propertyType?.length > 0 && propertyType[0]) {
+        propertyTypeParams = propertyType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyTypeParams = ''
+    }
+
+    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+        propertyAreaTypeParams = propertyAreaType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyAreaTypeParams = ''
+    }
+
+    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
+        propertyCategoryTypeParams = propertyCategoryType[0]
+            .split('--')
+            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyCategoryTypeParams = ''
+    }
 
     // get list provinces count
     const {
@@ -145,21 +191,21 @@ const MapV4 = ({ lang }) => {
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
                     districtId ? '&districtId=' + districtId : ''
-                }${wardId ? '&wardId=' + wardId : ''}`,
+                }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
+                    propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+                }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+                    propertyTypeParams ? propertyTypeParams : ''
+                }`,
             )
             const data = await res.json()
             if (data) {
                 setIsFirst(false)
                 setDataMap(data)
+                addMarkerV2(data, mapRef.current?.getZoom() || 9)
             }
         }
         callApi()
-    }, [cityId, districtId, wardId])
-
-    useEffect(() => {
-        if (!dataMap || !mapRef.current) return
-        addMarkerV2(dataMap, mapRef.current?.getZoom() || 9)
-    }, [dataMap])
+    }, [cityId, districtId, wardId, searchParams])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -169,6 +215,7 @@ const MapV4 = ({ lang }) => {
 
     // xử lý các marker theo sự kiên zoom và drag
     useEffect(() => {
+        if (isFly) return
         // kiểm tra xem điểm giữa của khung hình đang là quân/huyện nào hay là phường/xã nào
         const getLocationCurrent = async () => {
             const ct = await mapRef.current?.getCenter()
@@ -425,7 +472,9 @@ const MapV4 = ({ lang }) => {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API}/property?cityId=${cityId}${districtId ? '&districtId=' + districtId : ''}${
                 wardId ? '&wardId=' + wardId : ''
-            }`,
+            }${findIdByAlias(pathName, dataSlug)}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
+                propertyAreaTypeParams ? propertyAreaTypeParams : ''
+            }${propertyTypeParams ? propertyTypeParams : ''}`,
         )
         const data = await res.json()
 
@@ -767,25 +816,26 @@ const MapV4 = ({ lang }) => {
 
     const addMarkerV2 = (data, levelZoom) => {
         if (!data || !levelZoom) return
+        console.log('add')
         const listMarker = []
         listMarkerOut?.forEach((e) => e?.remove())
         listMarkerOut = new Array()
         data?.forEach((e) => {
-            if (levelZoom >= 13.5) {
+            if (e?.ref_id) {
                 listMarker?.push({
                     coor: [parseFloat(e?.lng), parseFloat(e?.lat)],
                     count: parseFloat(e?.count),
                     id: e?.ref_id,
                 })
             }
-            if (levelZoom >= 11.5 && levelZoom < 13.5) {
+            if (e?.ward_id) {
                 listMarker?.push({
                     coor: [parseFloat(e?.ward_lng), parseFloat(e?.ward_lat)],
                     count: parseFloat(e?.count),
                     id: e?.ward_id,
                 })
             }
-            if (levelZoom < 11.5) {
+            if (e?.district_id) {
                 listMarker?.push({
                     coor: [parseFloat(e?.district_lng), parseFloat(e?.district_lat)],
                     count: parseFloat(e?.count),
@@ -793,10 +843,9 @@ const MapV4 = ({ lang }) => {
                 })
             }
         })
+
         callDataPopup(listMarker)
-        // listMarker?.forEach((e) => {
-        //     callDataPopup(e)
-        // })
+        setIsFly(false)
     }
 
     return (

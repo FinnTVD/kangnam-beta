@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import SelectSearch from '../general/SelectSearch'
 import useSWR from 'swr'
 import useStore from '@/app/[lang]/(store)/store'
@@ -27,7 +27,7 @@ const handleCheckPage = (pathName, listData) => {
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const fetcherLang = (url, langCode) =>
     fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
-export default function SearchGlobal({
+const SearchGlobal = ({
     lang,
     iconSmall = false,
     classContainer,
@@ -37,12 +37,13 @@ export default function SearchGlobal({
     classInput,
     classList,
     dark,
-    t,
-}) {
+}) => {
     const router = useRouter()
     const pathName = usePathname()
     const [dataProject, setDataProject] = useState([])
     const valueSearch = useStore((state) => state.valueSearch)
+    const [dataSearch, setDataSearch] = useState([])
+    const [dataProjectCode, setDataProjectCode] = useState([])
     const debounceValue = useDebounce(valueSearch, 500)
 
     const isClose = useStore((state) => state.isClose)
@@ -54,6 +55,7 @@ export default function SearchGlobal({
     const wardId = useStore((state) => state.wardId)
     const setCityId = useStore((state) => state.setCityId)
     const setDistrictId = useStore((state) => state.setDistrictId)
+    const setIsFly = useStore((state) => state.setIsFly)
     const setWardId = useStore((state) => state.setWardId)
     const setSelectSearch = useStore((state) => state.setSelectSearch)
     const dataDistrict = useStore((state) => state.dataDistrict)
@@ -67,56 +69,102 @@ export default function SearchGlobal({
 
     const [sideRef, isOutSide] = useClickOutSide()
 
-    const {
-        data: dataSearch,
-        isLoading: isLoadingSearch,
-        error: errorSearch,
-    } = useSWR(
-        `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${debounceValue ? '&text=' + debounceValue : ''}`,
-        fetcher,
-    )
+    // const {
+    //     data: dataSearch,
+    //     isLoading: isLoadingSearch,
+    //     error: errorSearch,
+    // } = useSWR(
+    //     `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${debounceValue ? '&text=' + debounceValue : ''}`,
+    //     fetcher,
+    // )
 
-    const {
-        data: dataProjectCode,
-        isLoading: isLoadingProjectCode,
-        error: errorProjectCode,
-    } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
-            listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
-        }`,
-        (url) => fetcherLang(url, handleCheckLangCode(lang)),
-        {
-            revalidateIfStale: false,
-            revalidateOnFocus: false,
-            revalidateOnReconnect: false,
-        },
-    )
+    // const {
+    //     data: dataProjectCode,
+    //     isLoading: isLoadingProjectCode,
+    //     error: errorProjectCode,
+    // } = useSWR(
+    //     `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
+    //         listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
+    //     }`,
+    //     (url) => fetcherLang(url, handleCheckLangCode(lang)),
+    //     {
+    //         revalidateIfStale: false,
+    //         revalidateOnFocus: false,
+    //         revalidateOnReconnect: false,
+    //     },
+    // )
 
     useEffect(() => {
-        if (dataSearch?.length && debounceValue) {
-            if (dataSearch[0]?.boundaries?.length === 1) {
-                const obj1 = {
-                    cityIdSearch: dataSearch[0]?.boundaries[0]?.id,
+        const callDataSearch = async () => {
+            const res = await fetch(
+                `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${
+                    debounceValue ? '&text=' + debounceValue : ''
+                }`,
+            )
+            const data = await res.json()
+            if (data?.length && debounceValue) {
+                if (data[0]?.boundaries?.length === 1) {
+                    const obj1 = {
+                        cityIdSearch: data[0]?.boundaries[0]?.id,
+                    }
+                    callDataProject(obj1)
                 }
-                callDataProject(obj1)
-            }
-            if (dataSearch[0]?.boundaries?.length === 2) {
-                const obj2 = {
-                    districtIdSearch: dataSearch[0]?.boundaries[0]?.id,
-                    cityIdSearch: dataSearch[0]?.boundaries[1]?.id,
+                if (data[0]?.boundaries?.length === 2) {
+                    const obj2 = {
+                        districtIdSearch: data[0]?.boundaries[0]?.id,
+                        cityIdSearch: data[0]?.boundaries[1]?.id,
+                    }
+                    callDataProject(obj2)
                 }
-                callDataProject(obj2)
-            }
-            if (dataSearch[0]?.boundaries?.length === 3) {
-                const obj3 = {
-                    wardIdSearch: dataSearch[0]?.boundaries[0]?.id,
-                    districtIdSearch: dataSearch[0]?.boundaries[1]?.id,
-                    cityIdSearch: dataSearch[0]?.boundaries[2]?.id,
+                if (data[0]?.boundaries?.length === 3) {
+                    const obj3 = {
+                        wardIdSearch: data[0]?.boundaries[0]?.id,
+                        districtIdSearch: data[0]?.boundaries[1]?.id,
+                        cityIdSearch: data[0]?.boundaries[2]?.id,
+                    }
+                    callDataProject(obj3)
                 }
-                callDataProject(obj3)
             }
+            setDataSearch(data)
         }
-    }, [dataSearch])
+        const callDataProjectCode = async () => {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
+                    listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
+                }`,
+            )
+            const data = await res.json()
+            setDataProjectCode(data)
+        }
+        callDataSearch()
+        callDataProjectCode()
+    }, [debounceValue])
+
+    // useEffect(() => {
+    //     if (dataSearch?.length && debounceValue) {
+    //         if (dataSearch[0]?.boundaries?.length === 1) {
+    //             const obj1 = {
+    //                 cityIdSearch: dataSearch[0]?.boundaries[0]?.id,
+    //             }
+    //             callDataProject(obj1)
+    //         }
+    //         if (dataSearch[0]?.boundaries?.length === 2) {
+    //             const obj2 = {
+    //                 districtIdSearch: dataSearch[0]?.boundaries[0]?.id,
+    //                 cityIdSearch: dataSearch[0]?.boundaries[1]?.id,
+    //             }
+    //             callDataProject(obj2)
+    //         }
+    //         if (dataSearch[0]?.boundaries?.length === 3) {
+    //             const obj3 = {
+    //                 wardIdSearch: dataSearch[0]?.boundaries[0]?.id,
+    //                 districtIdSearch: dataSearch[0]?.boundaries[1]?.id,
+    //                 cityIdSearch: dataSearch[0]?.boundaries[2]?.id,
+    //             }
+    //             callDataProject(obj3)
+    //         }
+    //     }
+    // }, [dataSearch])
 
     useEffect(() => {
         isOutSide && setIsClose(true)
@@ -144,6 +192,7 @@ export default function SearchGlobal({
             return notifyError('No data project in address ward search!')
         }
         //delete marker before fly to city other
+        setIsFly(true)
         mapRef?.flyTo({
             center: [Number(itemWard?.ward_lng), Number(itemWard?.ward_lat)],
             zoom: 13.5,
@@ -183,6 +232,8 @@ export default function SearchGlobal({
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
+        console.log('🚀 ~ file: SearchGlobal.jsx:293 ~ handleSelectValueSearch ~ e:', e)
+
         setValueSearch(e?.address)
         if (e?.ref_id?.includes('CITY')) {
             //set lại cityid
@@ -198,18 +249,19 @@ export default function SearchGlobal({
             if (!itemCity) {
                 return notifyError('No data project in address city search!')
             }
+            setIsFly(true)
+
             mapRef?.flyTo({
                 center: [Number(itemCity?.city_lng), Number(itemCity?.city_lat)],
                 zoom: 9,
                 curve: 1,
             })
-            levelZoom !== 9 && setLevelZoom(9)
-            return
+            setLevelZoom(9)
+            setIsSubmit(!isSubmit)
         }
         if (e?.ref_id?.includes('DIST')) {
             setDistrictId(e?.boundaries[0]?.id)
             e?.boundaries[1]?.id !== cityId && setCityId(e?.boundaries[1]?.id)
-            !wardId && setWardId(null)
             if (!dataDistrict || !e?.boundaries[0]?.id) return
             // nếu đang là districtid đó và đang ở cấp quận thì return
             // if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
@@ -217,13 +269,15 @@ export default function SearchGlobal({
             if (typeof itemDistrict !== 'object') {
                 return notifyError('No data project in address district search!')
             }
+            setIsFly(true)
             mapRef?.flyTo({
                 center: [Number(itemDistrict?.district_lng), Number(itemDistrict?.district_lat)],
                 zoom: 11.5,
                 curve: 1,
             })
-            levelZoom !== 11.5 && setLevelZoom(11.5)
-            return
+            setLevelZoom(11.5)
+            !wardId && setWardId(null)
+            setIsSubmit(!isSubmit)
         }
         if (e?.ref_id?.includes('WARD')) {
             if (e?.boundaries[2]?.id !== cityId) {
@@ -234,12 +288,20 @@ export default function SearchGlobal({
             }
             setWardId(e?.boundaries[0]?.id)
             callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id)
-            return
+            setIsSubmit(!isSubmit)
         }
     }
 
     const handleSelectValueProject = (e) => {
         setValueSearch(e?.address?.display)
+        setIsFly(true)
+        mapRef?.flyTo({
+            center: [Number(e?.address?.lng), Number(e?.address?.lat)],
+            zoom: 17,
+            curve: 1,
+        })
+        setLevelZoom(17)
+        setIsSubmit(!isSubmit)
         if (Number(e?.address?.cityId) !== cityId) {
             setCityId(Number(e?.address?.cityId))
         }
@@ -249,12 +311,6 @@ export default function SearchGlobal({
         if (Number(e?.address?.wardId) !== wardId) {
             setWardId(Number(e?.address?.wardId))
         }
-        mapRef?.flyTo({
-            center: [Number(e?.address?.lng), Number(e?.address?.lat)],
-            zoom: 17,
-            curve: 1,
-        })
-        levelZoom !== 17 && setLevelZoom(17)
     }
 
     return (
@@ -338,6 +394,7 @@ export default function SearchGlobal({
                                     <li
                                         className='pl-[0.5vw] line-clamp-2 max-md:py-[1vw]'
                                         onClick={() => {
+                                            // Redirects page
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
                                                     '/' +
@@ -347,8 +404,9 @@ export default function SearchGlobal({
                                                                 ?.includes(lang === 'ch' ? 'cn' : lang),
                                                         )?.alias,
                                                 )
+
                                             handleSelectValueSearch(e)
-                                            setIsSubmit(!isSubmit)
+
                                             setIsClose(true)
                                             setSelectSearch('area')
                                         }}
@@ -404,7 +462,6 @@ export default function SearchGlobal({
                                                                 ?.includes(lang === 'ch' ? 'cn' : lang),
                                                         )?.alias,
                                                 )
-                                            setIsSubmit(!isSubmit)
                                             setIsClose(true)
                                             handleSelectValueProject(e)
                                             setSelectSearch(e?.translation?.name)
@@ -422,13 +479,6 @@ export default function SearchGlobal({
                         onClick={() => handleSubmit()}
                         className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
-                        {/* <Image
-                            className='object-cover h-[1.625vw] w-[1.625vw]'
-                            src={'/images/marker-search.svg'}
-                            alt='marker search'
-                            width={40}
-                            height={40}
-                        /> */}
                         <div className='relative w-fit h-fit'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -487,3 +537,4 @@ export default function SearchGlobal({
         </div>
     )
 }
+export default memo(SearchGlobal)
