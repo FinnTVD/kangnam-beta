@@ -8,19 +8,18 @@ export default function WeAre({ lang, t }) {
             <section
                 id='weAre'
                 className='relative w-full h-screen overflow-hidden bg-den-2'
+                data-aos='fade-up'
             >
                 <Image
                     className='z-0 object-cover'
                     src='/images/bg-we.png'
                     alt='bg-we'
                     sizes='100vw'
-                    fill
+                    fill 
                 />
                 <div className='relative z-10 flex justify-between h-full max-lg:flex-col'>
                     <div className='flex items-center pl-[7.5vw] px-mb10 max-lg:px-[3.2vw] max-md:pt-[13.33vw] max-lg:pt-[6vw]'>
                         <div
-                            data-aos='fade-right'
-                            data-aos-duration='1000'
                             className='w-[40.2vw] h-fit max-lg:w-full'
                         >
                             <span className='sub-title max-lg:tracking-[0.5px] max-lg:uppercase title-mb10-700-150 title-tl12-700-150'>
@@ -75,7 +74,7 @@ export default function WeAre({ lang, t }) {
                             <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw] relative z-[99999]'>
                                 <Link
                                     href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
-                                    className='flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 hover:shadow-viewProject max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'
+                                    className='group flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'
                                 >
                                     Xem dự án
                                     <svg
@@ -84,7 +83,7 @@ export default function WeAre({ lang, t }) {
                                         height='14'
                                         viewBox='0 0 8 14'
                                         fill='none'
-                                        className=''
+                                        className='w-[0.6vw] h-auto group-hover:translate-x-2 transition-all duration-300 max-lg:w-[1.2vw] max-md:w-[1.6vw]'
                                     >
                                         <path
                                             d='M1 1L7 7L1 13'
@@ -105,6 +104,7 @@ export default function WeAre({ lang, t }) {
                                         height='14'
                                         viewBox='0 0 8 14'
                                         fill='none'
+                                        className='w-[0.6vw] h-auto group-hover:translate-x-2 transition-all duration-300 max-lg:w-[1.2vw] max-md:w-[1.6vw]'
                                     >
                                         <path
                                             d='M1 1L7 7L1 13'
@@ -113,7 +113,7 @@ export default function WeAre({ lang, t }) {
                                             strokeLinejoin='round'
                                         />
                                     </svg>
-                                    <svg
+                                    {/* <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='28'
                                         height='36'
@@ -126,7 +126,7 @@ export default function WeAre({ lang, t }) {
                                             d='M22.9201 14.1638V9.30395L18.866 6.677H18.9378V3.19984L14.0003 0L9.06277 3.19984V6.677H9.13459L5.08055 9.30395V14.1638L0 17.4559V35.9983L7.47348 35.9994V35.2603V34.5211V26.3498L9.91903 27.9346V35.9994H12.6983V13.5459L9.91903 15.3477V26.122L7.62331 24.634L7.47348 24.5372V16.932L4.69422 18.7338V24.5503L5.99253 25.3914L4.69422 25.9939V34.5217H1.62273V18.2184L6.68966 14.9348H6.70328V14.9257L13.9997 10.1974L21.2961 14.9257V14.9348H21.3097L26.3766 18.2184V34.5211H23.3052V25.9939L22.0069 25.3914L23.3052 24.5503V18.7338L20.5259 16.932V24.5372L20.3761 24.634L18.0804 26.122V15.3477L15.3011 13.5459V36H18.0804V27.9352L20.5259 26.3504V34.5217V35.9994L28 35.9983V17.4559L22.9194 14.1632L22.9201 14.1638ZM10.6861 3.96178L14.0003 1.81432L17.3145 3.96178V5.67189L14.0003 3.52386L10.6861 5.67189V3.96178ZM14.0003 8.38369L6.7039 13.112V10.0659L14.0003 5.33762L21.2967 10.0659V13.112L14.0003 8.38369Z'
                                             fill='#D6A279'
                                         />
-                                    </svg>
+                                    </svg> */}
                                 </Link>
                             </div>
                         </div>
@@ -134,8 +134,6 @@ export default function WeAre({ lang, t }) {
                     <div className='flex items-end'>
                         <div className='h-[77.5vh] max-lg:h-[59.8vh] max-md:h-[38.8vh] w-[48.1875vw] max-lg:w-full relative z-10'>
                             <Image
-                                data-aos='fade-up'
-                                data-aos-delay='600'
                                 src='/images/house.png'
                                 alt='house'
                                 className='object-fill z-[2]'
@@ -143,8 +141,6 @@ export default function WeAre({ lang, t }) {
                                 fill
                             />
                             <Image
-                                data-aos='fade-down'
-                                data-aos-delay='600'
                                 src='/images/circle-house.png'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-lg:w-[44.6vw] max-md:w-[63.6vw] max-lg:h-[44.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-lg:top-[4.49vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-lg:left-[38.46vw] max-md:left-[23.46vw]'
@@ -152,9 +148,6 @@ export default function WeAre({ lang, t }) {
                                 height={600}
                             />
                             <Image
-                                data-aos='fade'
-                                data-aos-duration='500'
-                                data-aos-delay='1000'
                                 src='/images/people.png'
                                 alt='people'
                                 className='object-cover w-[33.875vw] h-[38.5625vw] max-lg:w-[47.62vw] max-md:w-[62.62vw] max-lg:h-[53.29vw] max-md:h-[71.29vw] absolute bottom-0 left-[5.68vw] z-[3] max-lg:left-[37%] max-md:left-1/2 max-md:-translate-x-1/2'
