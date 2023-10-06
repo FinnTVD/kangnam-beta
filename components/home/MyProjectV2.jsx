@@ -28,7 +28,7 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
 gsap.registerPlugin(ScrollTrigger)
-export default function MyProjectV2({ lang, t, isHome }) {
+export default function MyProjectV2({ lang, t }) {
     const setBoxMap = useStore((state) => state.setBoxMap)
     // const valueSearch = useStore((state) => state.valueSearch)
     // const selectSearch = useStore((state) => state.selectSearch)
@@ -125,7 +125,6 @@ export default function MyProjectV2({ lang, t, isHome }) {
     }, [])
 
     useLayoutEffect(() => {
-        if (!isHome) return
         let ctx = gsap.context(() => {
             setTimeout(() => {
                 gsap.to(projectsRef.current, {
@@ -136,17 +135,15 @@ export default function MyProjectV2({ lang, t, isHome }) {
                         scrub: true,
                         onToggle: (self) => {
                             if (self.isActive) {
-                                isHome &&
-                                    setIsFeatureHome({
-                                        isStandMap: true,
-                                        isContain: true,
-                                    })
+                                setIsFeatureHome({
+                                    isStandMap: true,
+                                    isContain: true,
+                                })
                             } else {
-                                isHome &&
-                                    setIsFeatureHome({
-                                        isStandMap: false,
-                                        isContain: false,
-                                    })
+                                setIsFeatureHome({
+                                    isStandMap: false,
+                                    isContain: false,
+                                })
                             }
                         },
                     },

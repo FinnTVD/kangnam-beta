@@ -1,6 +1,7 @@
 import getData from '@/utils/getData'
 import { getDictionary } from '../dictionaries'
 import Footer from '@/components/general/Footer'
+import FeatureHome from '@/components/home/FeatureHome'
 
 export const metadata = {
     title: 'Danh sách dự án',
@@ -14,6 +15,10 @@ export default async function RootLayout({ children, params }) {
     return (
         <>
             {children}
+            <FeatureHome
+                dataInfo={data}
+                isOther={true}
+            />
             <Footer
                 lang={params.lang}
                 t={t}
