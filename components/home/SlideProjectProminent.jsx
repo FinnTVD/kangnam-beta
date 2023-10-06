@@ -61,7 +61,7 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                 {Array.isArray(dataHomePage?.properties) &&
                     dataHomePage?.properties?.map((e, index) => (
                         <SwiperSlide
-                            className='!h-[26.1825vw] max-lg:!h-[32.1825vw] max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
+                            className='!h-[26.1825vw] max-lg:!h-[32.1825vw] gr max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
                         >
                             <Link href={handleRenderItem(e, lang) || '/'}>

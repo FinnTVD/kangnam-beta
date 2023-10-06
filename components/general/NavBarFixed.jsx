@@ -54,7 +54,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
             className={`${
                 isHome ? 'px-120' : 'px-[3.75vw]'
             } fixed top-0 left-0 -translate-y-[110%] h-fit border-b border-solid border-white04 bg-white transition-all duration-500 w-screen z-[99999999] max-md:hidden`}
-            style={{ boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px' }}
+            style={{ boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 11px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px' }}
         >
             <div className={`${isHome ? 'gap-x-[3.12vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
                 <div

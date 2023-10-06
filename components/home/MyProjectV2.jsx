@@ -221,7 +221,9 @@ export default function MyProjectV2({ lang, t }) {
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.alias +
                                         '/' +
-                                        e?.translation?.slug
+                                        (e?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.slug || e?.translations[0]?.slug)
                                     }
                                     className='w-full'
                                     key={index}
@@ -232,7 +234,15 @@ export default function MyProjectV2({ lang, t }) {
                                             // data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
-                                            alt={e?.translation?.name || 'thumbnail project'}
+                                            alt={
+                                                e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.name ||
+                                                e?.translations[0]?.name ||
+                                                'thumbnail project'
+                                            }
                                             sizes='100vw'
                                             fill
                                         />
@@ -244,10 +254,20 @@ export default function MyProjectV2({ lang, t }) {
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
-                                            title={e?.translation?.name}
+                                            title={
+                                                e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.name || e?.translations[0]?.name
+                                            }
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {e?.translation?.name || 'Chưa có thông tin!'}
+                                            {e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name ||
+                                                e?.translations[0]?.name ||
+                                                'Chưa có thông tin!'}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -279,8 +299,18 @@ export default function MyProjectV2({ lang, t }) {
                                                 Diện tích:
                                             </span>
                                             <span className=' text-den title14-400-150'>
-                                                {e?.translation?.size
-                                                    ? e?.translation?.size + ' m²'
+                                                {e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.size
+                                                    ? e?.translations?.find((e) =>
+                                                          e?.languageCode
+                                                              ?.toLowerCase()
+                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                      )?.size + ' m²'
+                                                    : e?.translations[0]?.size
+                                                    ? e?.translations[0]?.size + ' m²'
                                                     : 'Chưa có thông tin!'}
                                             </span>
                                         </div>
@@ -294,7 +324,11 @@ export default function MyProjectV2({ lang, t }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
-                                                {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                                {e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.priceDisplay || 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                     </div>

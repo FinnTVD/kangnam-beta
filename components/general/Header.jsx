@@ -1,7 +1,7 @@
 'use client'
-import Image from 'next/image'
+// import Image from 'next/image'
 import NavBar from './NavBar'
-import FeatureHome from '../home/FeatureHome'
+// import FeatureHome from '../home/FeatureHome'
 import SearchHome from '../home/SearchHome'
 import classes from './headerV2.module.css'
 // import SlideBanner from '../home/SlideBanner'
@@ -13,6 +13,7 @@ import NavBarFixedRes from './NavBarFixedRes'
 import { useEffect, useRef } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
 import IconBigLogo from '../icons/IconBigLogo'
+import FeatureHome from '../home/FeatureHome'
 
 export default function Header({ lang, t, data, isHome, dataInfo }) {
     const videoRef = useRef(null)

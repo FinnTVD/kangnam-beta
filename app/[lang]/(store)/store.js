@@ -31,6 +31,15 @@ const useStore = create((set, get) => ({
     mapRef: null,
     levelZoom: 9,
     isClose: true,
+    isRedirect: false,
+    setIsRedirect: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isRedirect: data,
+            }
+        })
+    },
     setIsFly: (data) => {
         set((state) => {
             return {

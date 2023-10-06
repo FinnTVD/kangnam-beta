@@ -17,9 +17,10 @@ const objClass = {
     classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
     isIcon: false,
     iconSmall: true,
-    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl12',
+    classInput:
+        'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl12',
     classList:
-        'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input',
+        'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:w-[50vw] max-md:title-mb12-400-150',
 }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -44,7 +45,7 @@ export default function NavBarV2({ lang, t }) {
                         className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw] max-md:w-[8.267vw] max-md:h-[11.467vw] max-lg:w-[6vw] max-lg:h-[8vw]'
                     >
                         <Image
-                            className='object-cover max-lg:object-contain'
+                            className='object-cover max-lg:object-contain select-none'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
                             sizes='3.52vw'
@@ -66,46 +67,46 @@ export default function NavBarV2({ lang, t }) {
                     classList={objClass.classList}
                 />
                 {/* {!isTablet ? ( */}
-                    <div className='flex gap-x-[3.13vw] items-center max-lg:hidden'>
-                        <MegaMenu
+                <div className='flex gap-x-[3.13vw] items-center max-lg:hidden'>
+                    <MegaMenu
+                        lang={lang}
+                        t={t}
+                        fixed={true}
+                    />
+                    <div className='flex gap-x-[1.25vw] items-center'>
+                        <Link
+                            href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
+                            className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
+                        >
+                            Kí gửi nhà đất
+                        </Link>
+                        <BoxLanguage
+                            type={'ds'}
                             lang={lang}
                             t={t}
-                            fixed={true}
                         />
-                        <div className='flex gap-x-[1.25vw] items-center'>
-                            <Link
-                                href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
-                                className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
-                            >
-                                Kí gửi nhà đất
-                            </Link>
-                            <BoxLanguage
-                                type={'ds'}
-                                lang={lang}
-                                t={t}
-                            />
-                        </div>
                     </div>
+                </div>
                 {/* ) : ( */}
-                    <div
-                        onClick={() => setIsOpen(true)}
-                        className='relative w-fit lg:hidden'
+                <div
+                    onClick={() => setIsOpen(true)}
+                    className='relative w-fit lg:hidden'
+                >
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth='1.5'
+                        stroke='#D6A279'
+                        className='max-md:w-[10.33vw] max-md:h-[8.6vw] max-lg:w-[5.2vw] max-lg:auto'
                     >
-                        <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth='1.5'
-                            stroke='#D6A279'
-                            className='max-md:w-[10.33vw] max-md:h-[8.6vw] max-lg:w-[5.2vw] max-lg:auto'
-                        >
-                            <path
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
-                            />
-                        </svg>
-                    </div>
+                        <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
+                        />
+                    </svg>
+                </div>
                 {/* )} */}
             </div>
             <MenuRes
