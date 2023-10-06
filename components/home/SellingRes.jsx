@@ -23,7 +23,7 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
 gsap.registerPlugin(ScrollTrigger)
-export default function SellingRes({ lang }) {
+export default function SellingRes({ lang, isTablet }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -90,7 +90,7 @@ export default function SellingRes({ lang }) {
     )
 
     useEffect(() => {
-        if (!boxSellRef.current) return
+        // if (!boxSellRef.current) return
         let ctx = gsap.context(() => {
             setTimeout(() => {
                 gsap.to(boxSellRef.current, {
@@ -108,7 +108,7 @@ export default function SellingRes({ lang }) {
                         },
                     },
                 })
-            }, 500)
+            }, 5000)
         }, boxSellRef)
         return () => {
             ctx.revert()
@@ -123,7 +123,7 @@ export default function SellingRes({ lang }) {
         )
     }, [lang])
 
-    if (!data) return
+    if (!data || !isTablet) return
     const dataNew = data?.data?.filter((item) => item?.propertyCategory?.id !== categoryHireId)
     return (
         <section

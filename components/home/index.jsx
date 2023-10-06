@@ -54,12 +54,11 @@ export default function IndexHome({ lang, t }) {
                 lang={lang}
                 t={t}
             />
-            {isTablet && (
-                <SellingRes
-                    lang={lang}
-                    t={t}
-                />
-            )}
+            <SellingRes
+                lang={lang}
+                t={t}
+                isTablet={isTablet}
+            />
             {isTablet && (
                 <Hiring
                     lang={lang}
