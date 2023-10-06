@@ -8,7 +8,9 @@ import { apiKey, findIdByAlias, slugProject } from '@/utils'
 
 const handleRenderPopup = (itemProject, lang, acc) => {
     return `<div>
-            <div class='${acc ? '' : 'hidden'} w-full border border-t border-[#656263] opacity-30 mt-[0.88vw] max-md:mt-[2.46vw]'></div>
+            <div class='${
+                acc ? '' : 'hidden'
+            } w-full border border-t border-[#656263] opacity-30 mt-[0.88vw] max-md:mt-[2.46vw]'></div>
             <div
                             key=${itemProject?.id}
                             class="flex gap-x-[0.88vw] mt-[0.88vw] max-md:mt-[2.46vw] max-md:gap-x-[2.46vw]"
@@ -443,6 +445,11 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         })
     }
 
+    // style="width:fit-content;${
+    //     data?.length > 3
+    //         ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
+    //         : 'height:fit-content;'
+    // }"
     //call data + add marker detail project
     const callDataAddressDetail = async (e) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property/property-by-refid/${e?.id}`)
@@ -454,11 +461,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 .addTo(mapRef.current)
                 .setPopup(
                     new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-                            data?.length > 3
-                                ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
-                                : 'height:fit-content;'
-                        }">
+                        <div class="${data?.length > 3 ? 'popupMarkerKNList' : 'popupMarkerKN'}">
                             ${childNode}
                         </div>
                         `),
@@ -520,10 +523,10 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                         .addTo(mapRef.current)
                         .setPopup(
                             new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
-                            data?.data?.filter((item) => item?.address?.wardId?.includes(e?.id))?.length > 3
-                                ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
-                                : 'height:fit-content;'
+                        <div class="${
+                            ata?.data?.filter((item) => item?.address?.wardId?.includes(e?.id))?.length > 3
+                                ? 'popupMarkerKNList'
+                                : 'popupMarkerKN'
                         }">
                             ${childNode}
                         </div>
@@ -568,10 +571,10 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                         .addTo(mapRef.current)
                         .setPopup(
                             new vietmapgl.Popup().setHTML(`
-                        <div style="width:fit-content;${
+                        <div class="${
                             data?.data?.filter((item) => item?.address?.districtId?.includes(e?.id))?.length > 3
-                                ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
-                                : 'height:fit-content;'
+                                ? 'popupMarkerKNList'
+                                : 'popupMarkerKN'
                         }">
                             ${childNode}
                         </div>
