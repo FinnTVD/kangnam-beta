@@ -132,7 +132,7 @@ export default function ListProject({ lang, t, dataSlug }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
+        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=24${findIdByAlias(
             pathName,
             dataSlug,
         )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
@@ -174,7 +174,7 @@ export default function ListProject({ lang, t, dataSlug }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=${page ? page : 1}&take=24${findIdByAlias(
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=24${findIdByAlias(
                 pathName,
                 dataSlug,
             )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${

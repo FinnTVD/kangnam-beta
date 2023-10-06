@@ -78,7 +78,7 @@ export default function SellingRes({ lang }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10${
+        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=10${
             propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
         }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -117,7 +117,7 @@ export default function SellingRes({ lang }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10${
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=10${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
             }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )

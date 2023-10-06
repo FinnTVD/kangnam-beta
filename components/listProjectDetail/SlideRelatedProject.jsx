@@ -12,7 +12,7 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 const arrProject = new Array(4).fill(0)
 export default function SlideRelatedProject({ lang, detail, dataDetail }) {
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -23,7 +23,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         )
     }, [lang])
 

@@ -153,6 +153,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
+    console.log('🚀 ~ file: MapV4.jsx:156 ~ MapV4 ~ levelZoom:', levelZoom)
     const isFly = useStore((state) => state.isFly)
     const setIsFly = useStore((state) => state.setIsFly)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
