@@ -3,13 +3,13 @@ import { memo, useEffect, useState } from 'react'
 import SelectSearch from '../general/SelectSearch'
 import useSWR from 'swr'
 import useStore from '@/app/[lang]/(store)/store'
-import { handleCheckLangCode, notifyError } from '@/utils'
+import { apiKey, notifyError, slugProject } from '@/utils'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
 
-const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
-const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+// const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+// const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
@@ -26,8 +26,8 @@ const handleCheckPage = (pathName, listData) => {
 }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const fetcherLang = (url, langCode) =>
-    fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
+// const fetcherLang = (url, langCode) =>
+//     fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const SearchGlobal = ({
     lang,
     iconSmall = false,

@@ -1,7 +1,7 @@
 'use client'
 import { postTypeIdAgreement } from '@/utils'
 import useSWR from 'swr'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import AgreementItem from './AgreementItem'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())

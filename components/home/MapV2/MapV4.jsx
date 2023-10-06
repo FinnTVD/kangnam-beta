@@ -4,10 +4,7 @@ import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
-import { findIdByAlias } from '@/utils'
-
-const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
-const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+import { apiKey, findIdByAlias, slugProject } from '@/utils'
 
 const handleRenderPopup = (itemProject, lang, acc) => {
     return `<div>
@@ -143,6 +140,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
     const router = useRouter()
     const mapRef = useRef(null) //lưu lại dom map
     const isRedirect = useStore((state) => state.isRedirect)
+    const setIsRedirect = useStore((state) => state.setIsRedirect)
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
     const wardId = useStore((state) => state.wardId)
@@ -241,7 +239,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             mapRef.current = new window.vietmapgl.Map({
                 container: 'map',
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-                center: [defaultMap?.center[0] ||105.85379875200005, defaultMap?.center[1] || 21.028354507000074], //ha noi center
+                center: [defaultMap?.center[0] || 105.85379875200005, defaultMap?.center[1] || 21.028354507000074], //ha noi center
                 zoom: defaultMap?.zoom || 9,
                 pitch: 0, // góc nhìn từ trên cao nhìn xuống,
                 // bearing: 90,
@@ -267,7 +265,11 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
 
         loadMap() //add map
         setMapRef(mapRef.current)
-        // addTileMap()
+        const mapKN = document.getElementById('mapKN')
+        mapKN &&
+            mapKN.addEventListener('mouseover', () => {
+                setIsRedirect(false)
+            })
         return () => {
             if (!dataSlug || !Array.isArray(dataSlug)) return
             if (isRedirect) return
@@ -629,20 +631,21 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 })
             }
         })
-
         callDataPopup(listMarker)
         setIsFly(false)
     }
 
     return (
-        <div
-            ref={mapRef}
-            style={{
-                position: 'relative',
-            }}
-            id='map'
-            className=''
-        ></div>
+        <div id='mapKN'>
+            <div
+                ref={mapRef}
+                style={{
+                    position: 'relative',
+                }}
+                id='map'
+                className=''
+            ></div>
+        </div>
     )
 }
 export default memo(MapV4)
