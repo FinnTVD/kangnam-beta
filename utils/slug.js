@@ -1,6 +1,6 @@
-const slugProject = '/du-an'
-const slugBuy = '/buy'
-const slugHire = '/hire'
-const slugResale = '/resale'
+// const slugProject = '/du-an'
+// const slugBuy = '/buy'
+// const slugHire = '/hire'
+// const slugResale = '/resale'
 
-export { slugProject, slugBuy, slugHire, slugResale }
+// export { slugProject, slugBuy, slugHire, slugResale }

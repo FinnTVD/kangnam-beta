@@ -1,6 +1,7 @@
 'use client'
+import { apiKey } from '@/utils'
 import { useEffect, useRef, useState } from 'react'
-const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+// const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
 export default function MapProjectDetail({ dataDetail, data }) {
     const mapRef = useRef(null)
