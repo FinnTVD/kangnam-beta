@@ -103,7 +103,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
                                         sizes='18vw'
                                         fill
                                     />
-                                    <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-lg:title-tl10 max-md:text-10tl'>
+                                    <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-lg:title-tl10 max-md:text-10mb max-md:top-[2.67vw] max-md:left-[2.92vw] max-md:py-[1.6vw] max-md:px-[4vw] max-md:rounded-[1.067vw]'>
                                         {e?.propertyCategory?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.name || 'Dự án'}

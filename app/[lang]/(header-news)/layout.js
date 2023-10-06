@@ -1,5 +1,6 @@
 import { getDictionary } from '../dictionaries'
 import Footer from '@/components/general/Footer'
+import FeatureHome from '@/components/home/FeatureHome'
 import getData from '@/utils/getData'
 
 export const metadata = {
@@ -14,6 +15,7 @@ export default async function RootLayout({ children, params }) {
     return (
         <>
             {children}
+            <FeatureHome dataInfo={data} />
             <Footer
                 lang={params.lang}
                 t={t}

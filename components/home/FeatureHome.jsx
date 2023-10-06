@@ -80,7 +80,7 @@ export default function FeatureHome({ dataInfo }) {
             <li
                 className={`${
                     isFeatureHome?.isContain ? 'active3' : ''
-                } target:item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
+                } item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
             >
                 <IconCall className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
             </li>

@@ -147,6 +147,7 @@ export default function ListProject({ lang, t, dataSlug }) {
             revalidateOnReconnect: false,
         },
     )
+    console.log('🚀 ~ file: ListProject.jsx:135 ~ ListProject ~ data:', data)
 
     useLayoutEffect(() => {
         if (typeof window === 'undefined') return
@@ -275,12 +276,14 @@ export default function ListProject({ lang, t, dataSlug }) {
                             data?.data?.map((e, index) => (
                                 <Link
                                     href={
-                                        '/' +
+                                        (lang === 'vi' ? '' : lang + '/') +
                                         e?.propertyCategory?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.alias +
                                         '/' +
-                                        e?.translation?.slug
+                                        (e?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.slug || e?.translations[0]?.slug)
                                     }
                                     className='w-full'
                                     key={index}
@@ -289,7 +292,15 @@ export default function ListProject({ lang, t, dataSlug }) {
                                         <Image
                                             className='z-0 object-cover'
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
-                                            alt={e?.translation?.name || 'thumbnail project'}
+                                            alt={
+                                                e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.name ||
+                                                e?.translations[0]?.name ||
+                                                'thumbnail project'
+                                            }
                                             sizes='33vw'
                                             fill
                                             quality={100}
@@ -302,10 +313,20 @@ export default function ListProject({ lang, t, dataSlug }) {
                                     </div>
                                     <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
                                         <h6
-                                            title={e?.translation?.name}
+                                            title={
+                                                e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.name || e?.translations[0]?.name
+                                            }
                                             className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
                                         >
-                                            {e?.translation?.name}
+                                            {e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name ||
+                                                e?.translations[0]?.name ||
+                                                'Chưa có thông tin!'}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -337,7 +358,19 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 Diện tích:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.size + ' m²'}
+                                                {e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.size
+                                                    ? e?.translations?.find((e) =>
+                                                          e?.languageCode
+                                                              ?.toLowerCase()
+                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                      )?.size + ' m²'
+                                                    : e?.translations[0]?.size
+                                                    ? e?.translations[0]?.size + ' m²'
+                                                    : 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -350,7 +383,11 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 Mức giá:
                                             </span>
                                             <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.priceDisplay}
+                                                {e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.priceDisplay || 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                     </div>

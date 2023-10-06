@@ -1,5 +1,6 @@
 'use client'
 
+import FeatureHome from '../home/FeatureHome'
 import Contact from './Contact'
 import Mission from './Mission'
 import Story from './Story'
@@ -33,6 +34,7 @@ export default function IndexAboutUs({ t, lang, dataInfo }) {
     }, [])
     return (
         <>
+            <FeatureHome dataInfo={dataInfo} />
             <Story t={t}></Story>
             <Teams t={t}></Teams>
             <Mission></Mission>

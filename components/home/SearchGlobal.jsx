@@ -40,9 +40,11 @@ const SearchGlobal = ({
 }) => {
     const router = useRouter()
     const pathName = usePathname()
+    console.log('🚀 ~ file: SearchGlobal.jsx:43 ~ pathName:', pathName)
     const [dataProject, setDataProject] = useState([])
     const valueSearch = useStore((state) => state.valueSearch)
     const [dataSearch, setDataSearch] = useState([])
+    console.log('🚀 ~ file: SearchGlobal.jsx:47 ~ dataSearch:', dataSearch)
     const [dataProjectCode, setDataProjectCode] = useState([])
     const debounceValue = useDebounce(valueSearch, 500)
 
@@ -50,6 +52,7 @@ const SearchGlobal = ({
     const setIsClose = useStore((state) => state.setIsClose)
     const setValueSearch = useStore((state) => state.setValueSearch)
     const setValueSearchPrev = useStore((state) => state.setValueSearchPrev)
+    const setIsRedirect = useStore((state) => state.setIsRedirect)
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
     const wardId = useStore((state) => state.wardId)
@@ -203,6 +206,9 @@ const SearchGlobal = ({
 
     const handleSubmit = (e) => {
         e?.preventDefault()
+        if (pathName === '/') {
+            setIsRedirect(true)
+        }
         if (!valueSearch) {
             router.push(
                 '/' +
@@ -385,7 +391,7 @@ const SearchGlobal = ({
                         <ul
                             className={`${isClose ? 'hidden' : ''} ${
                                 classList ||
-                                'absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150'
+                                'absolute bottom-0 left-[-1.5vw] translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150'
                             }`}
                         >
                             {dataSearch && <li className='font-bold text-black max-md:my-[1vw]'>Khu vực</li>}

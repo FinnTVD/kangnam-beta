@@ -13,7 +13,8 @@ const objClass = {
     classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
     isIcon: false,
     iconSmall: true,
-    classInput: 'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl16',
+    classInput:
+        'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl16',
     classList:
         'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input',
 }
@@ -26,30 +27,12 @@ export default function NavBar({ isHome, lang, t }) {
             } absolute top-0 left-0 w-full z-40 py-[1.03vw] max-lg:py-[1.5vw] h-fit border-b border-solid border-white04 max-lg:hidden`}
         >
             <div className={`${isHome ? 'gap-x-[1.87vw]' : 'gap-x-[1.5vw]'} flex items-center justify-end w-full`}>
-                {/* <Link
-                    id='logo-banner'
-                    href={`/${lang !== 'vi' ? lang : ''}`}
-                    className={`${
-                        isHome ? 'left-[7.5vw] max-lg:left-[3.2vw]' : 'left-[3.75vw]'
-                    } py-[1.32vw] px-[1.95vw] bg-gradient-primary w-fit h-fit absolute top-0`}
-                >
-                    <div className='relative w-[3.52vw] h-[5.5vw] max-lg:w-[6.52vw] max-lg:h-[9.5vw] block'>
-                        <Image
-                            className='object-cover max-lg:object-contain max-md:object-cover'
-                            src='/images/logo.png'
-                            alt='logo'
-                            sizes='3.52vw'
-                            priority
-                            fill
-                        />
-                    </div>
-                </Link> */}
                 <Link
                     href={`/${lang !== 'vi' ? lang : ''}`}
                     className='relative w-[3.52vw] brightness-0 invert mr-auto h-[4.5vw] block max-md:w-[8.267vw] max-md:h-[11.467vw] max-lg:w-[6vw] max-lg:h-[8vw]'
                 >
                     <Image
-                        className='object-cover max-lg:object-contain'
+                        className='object-cover max-lg:object-contain select-none'
                         src='/images/logo-no-bg.svg'
                         alt='logo'
                         sizes='3.52vw'
@@ -63,7 +46,7 @@ export default function NavBar({ isHome, lang, t }) {
                         className='relative w-[3.5vw] h-[4.75vw] block'
                     >
                         <Image
-                            className='object-contain'
+                            className='object-contain select-none'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
                             priority

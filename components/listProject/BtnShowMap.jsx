@@ -65,7 +65,7 @@ export default function BtnShowMap() {
                 id='box-list-project'
                 className={`${
                     isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
-                } fixed bottom-0 left-0 z-40 w-full h-[72vh] transition-all duration-500 max-md:w-full bg-white rounded-lg p-[2vw]`}
+                } fixed bottom-0 left-0 z-40 w-full h-[72vh] transition-all duration-500 max-md:w-full bg-white rounded-[3.5vw] p-[2vw]`}
             >
                 <MapV4 />
             </div>

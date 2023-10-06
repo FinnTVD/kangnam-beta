@@ -608,7 +608,17 @@
     }
 
     #box-list-project #map{
-        border-radius: 2.13vw !important;
+        border-radius: 3.13vw !important;
+    }
+
+    #contentProject p{
+            font-size: 4.267vw;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+    #contentProject p+p{
+        margin-top: 1vw;
     }
 
 }

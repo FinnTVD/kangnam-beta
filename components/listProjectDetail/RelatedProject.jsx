@@ -8,10 +8,10 @@ export default function RelatedProject({ lang, detail, data }) {
                 <div className='flex items-start justify-between mb-[1.87vw] max-md:mb-[6.4vw]'>
                     <div className='px-mb10 max-md:w-full'>
                         <span className='text-logo sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>
-                            Danh sách dự án
+                            Danh sách bất động sản
                         </span>
                         <h2 className='text-den title56 mt-[0.62vw] max-md:mt-[1.07vw] max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                            Dự án Liên quan
+                            Bất động sản Liên quan
                         </h2>
                     </div>
                     <Button
