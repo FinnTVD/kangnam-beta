@@ -8,7 +8,7 @@ import { apiKey, findIdByAlias, slugProject } from '@/utils'
 
 const handleRenderPopup = (itemProject, lang, acc) => {
     return `<div>
-            <div class='${acc ? '' : 'hidden'} w-full border border-t border-[#656263] opacity-30 mt-[0.88vw]'></div>
+            <div class='${acc ? '' : 'hidden'} w-full border border-t border-[#656263] opacity-30 mt-[0.88vw] max-md:mt-[2.46vw]'></div>
             <div
                             key=${itemProject?.id}
                             class="flex gap-x-[0.88vw] mt-[0.88vw] max-md:mt-[2.46vw] max-md:gap-x-[2.46vw]"

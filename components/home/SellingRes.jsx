@@ -29,7 +29,7 @@ export default function SellingRes({ lang }) {
     const pathName = usePathname()
     const boxSellRef = useRef(null)
 
-    const [isShow, setIsShow] = useState(true)
+    const [isShow, setIsShow] = useState(false)
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
