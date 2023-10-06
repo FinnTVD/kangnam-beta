@@ -8,7 +8,7 @@ import useStore from '@/app/[lang]/(store)/store'
 import IconSocial from '../icons/IconSocial'
 import IconChangeCurrency from '../icons/IconChangeCurrency'
 import IconCall from '../icons/IconCall'
-export default function FeatureHome({ dataInfo }) {
+export default function FeatureHome({ dataInfo, isOther = false }) {
     const isFeatureHome = useStore((state) => state.isFeatureHome)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
 
@@ -57,7 +57,7 @@ export default function FeatureHome({ dataInfo }) {
 
             <li
                 className={`${
-                    isFeatureHome?.isContain ? 'active1' : ''
+                    isFeatureHome?.isContain && !isOther ? 'active1' : ''
                 } item-social transition-all duration-200 ease-linear group relative w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full before:content-normal before:w-[10.64vw] before:h-[25vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[58%]`}
             >
                 <IconSocial className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
@@ -65,7 +65,7 @@ export default function FeatureHome({ dataInfo }) {
             </li>
             <li
                 className={`${
-                    isFeatureHome?.isContain ? 'active2' : ''
+                    isFeatureHome?.isContain && !isOther ? 'active2' : ''
                 } item-social transition-all duration-200 ease-linear relative w-[4.5vw] h-[4.5vw] shadow-feature bg-white rounded-full group`}
                 ref={sideRef}
             >
@@ -79,7 +79,7 @@ export default function FeatureHome({ dataInfo }) {
             </li>
             <li
                 className={`${
-                    isFeatureHome?.isContain ? 'active3' : ''
+                    isFeatureHome?.isContain && !isOther ? 'active3' : ''
                 } item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
             >
                 <IconCall className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
