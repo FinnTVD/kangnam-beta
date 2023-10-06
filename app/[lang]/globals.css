@@ -749,6 +749,16 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     line-height: 1.375;
     margin-top: 1.5vw;
 }
+#mapKN #map .popupMarkerKNList{
+    width: fit-content;
+    height: 20.625vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#mapKN #map .popupMarkerKN{
+    width: fit-content;
+    height: fit-content;
+}
 
 @media (min-aspect-ratio:16/9){
     #videoBanner {
@@ -785,15 +795,25 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         width: 67.25vw !important;
     }
     .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button{
-    padding: 1.5vw;
-    font-size: 6.5vw;
-    color: black;
-}
+        padding: 1.5vw;
+        font-size: 6.5vw;
+        color: black;
+    }
 
-.mapboxgl-popup-content, .vietmapgl-popup-content{
-    padding: 1.54vw 0 4vw 3.47vw !important;
+    .mapboxgl-popup-content, .vietmapgl-popup-content{
+        padding: 1.54vw 0 4vw 3.47vw !important;
 
-}
+    }
+    #mapKN #map .popupMarkerKNList{
+        width: fit-content;
+        height: 70.625vw;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    #mapKN #map .popupMarkerKN{
+        width: fit-content;
+        height: fit-content;
+    }
 
 }
 
