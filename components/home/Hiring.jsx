@@ -56,7 +56,7 @@ export default function Hiring({ lang }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
+        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
             propertyAreaTypeParams ? propertyAreaTypeParams : ''
         }${propertyTypeParams ? propertyTypeParams : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -69,7 +69,7 @@ export default function Hiring({ lang }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=DESC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=10&propertyCategoryIds=${categoryHireId}${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
             }${propertyTypeParams ? propertyTypeParams : ''}`,
         )
