@@ -32,6 +32,15 @@ const useStore = create((set, get) => ({
     levelZoom: 9,
     isClose: true,
     isRedirect: false,
+    defaultMap: null,
+    setDefaultMap: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                defaultMap: data,
+            }
+        })
+    },
     setIsRedirect: (data) => {
         set((state) => {
             return {

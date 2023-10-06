@@ -7,6 +7,7 @@ import useDebounce from '@/hooks/useDebounce'
 import { findIdByAlias } from '@/utils'
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
 const handleRenderPopup = (itemProject, lang, acc) => {
     return `<div>
@@ -139,14 +140,13 @@ let propertyCategoryTypeParams = ''
 let listMarkerOut = []
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const MapV4 = ({ lang, dataSlug = '' }) => {
-    console.log('🚀 ~ file: MapV4.jsx:142 ~ MapV4 ~ dataSlug:', dataSlug)
     const router = useRouter()
     const mapRef = useRef(null) //lưu lại dom map
     const isRedirect = useStore((state) => state.isRedirect)
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
-    console.log('🚀 ~ file: MapV4.jsx:146 ~ MapV4 ~ districtId:', districtId)
     const wardId = useStore((state) => state.wardId)
+    const defaultMap = useStore((state) => state.defaultMap)
     const setCityId = useStore((state) => state.setCityId)
     const setDistrictId = useStore((state) => state.setDistrictId)
     const setWardId = useStore((state) => state.setWardId)
@@ -155,7 +155,6 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
-    console.log('🚀 ~ file: MapV4.jsx:157 ~ MapV4 ~ levelZoom:', levelZoom)
     const isFly = useStore((state) => state.isFly)
     const setIsFly = useStore((state) => state.setIsFly)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
@@ -242,8 +241,8 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             mapRef.current = new window.vietmapgl.Map({
                 container: 'map',
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-                center: [105.85379875200005, 21.028354507000074], //ha noi center
-                zoom: 9,
+                center: [defaultMap?.center[0] ||105.85379875200005, defaultMap?.center[1] || 21.028354507000074], //ha noi center
+                zoom: defaultMap?.zoom || 9,
                 pitch: 0, // góc nhìn từ trên cao nhìn xuống,
                 // bearing: 90,
             })
@@ -269,13 +268,26 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         loadMap() //add map
         setMapRef(mapRef.current)
         // addTileMap()
-        // return () => {
-        //     setCityId(11)
-        //     setDistrictId(null)
-        //     setWardId(null)
-        //     setMapRef(null)
-        //     setLevelZoom(9)
-        // }
+        return () => {
+            if (!dataSlug || !Array.isArray(dataSlug)) return
+            if (isRedirect) return
+            if (
+                pathName?.includes(
+                    dataSlug?.find((e) =>
+                        e?.translation?.find((i) =>
+                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
+                        ),
+                    )?.alias,
+                ) ||
+                slugProject?.find((e) => e === pathName)
+            ) {
+                setCityId(11)
+                setDistrictId(null)
+                setWardId(null)
+                setMapRef(null)
+                setLevelZoom(9)
+            }
+        }
     }, [])
 
     useEffect(() => {
@@ -591,7 +603,6 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
 
     const addMarkerV2 = (data, levelZoom) => {
         if (!data || !levelZoom) return
-        console.log('add')
         const listMarker = []
         listMarkerOut?.forEach((e) => e?.remove())
         listMarkerOut = new Array()

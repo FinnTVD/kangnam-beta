@@ -5,10 +5,11 @@ import useSWR from 'swr'
 import useStore from '@/app/[lang]/(store)/store'
 import { handleCheckLangCode, notifyError } from '@/utils'
 import useClickOutSide from '@/hooks/useClickOutSide'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
 
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
+const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
@@ -40,11 +41,11 @@ const SearchGlobal = ({
 }) => {
     const router = useRouter()
     const pathName = usePathname()
-    console.log('🚀 ~ file: SearchGlobal.jsx:43 ~ pathName:', pathName)
+    const searchParams = useSearchParams()
+
     const [dataProject, setDataProject] = useState([])
     const valueSearch = useStore((state) => state.valueSearch)
     const [dataSearch, setDataSearch] = useState([])
-    console.log('🚀 ~ file: SearchGlobal.jsx:47 ~ dataSearch:', dataSearch)
     const [dataProjectCode, setDataProjectCode] = useState([])
     const debounceValue = useDebounce(valueSearch, 500)
 
@@ -60,6 +61,7 @@ const SearchGlobal = ({
     const setDistrictId = useStore((state) => state.setDistrictId)
     const setIsFly = useStore((state) => state.setIsFly)
     const setWardId = useStore((state) => state.setWardId)
+    const setDefaultMap = useStore((state) => state.setDefaultMap)
     const setSelectSearch = useStore((state) => state.setSelectSearch)
     const dataDistrict = useStore((state) => state.dataDistrict)
     const dataProvinces = useStore((state) => state.dataProvinces)
@@ -72,30 +74,11 @@ const SearchGlobal = ({
 
     const [sideRef, isOutSide] = useClickOutSide()
 
-    // const {
-    //     data: dataSearch,
-    //     isLoading: isLoadingSearch,
-    //     error: errorSearch,
-    // } = useSWR(
-    //     `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${debounceValue ? '&text=' + debounceValue : ''}`,
-    //     fetcher,
-    // )
-
-    // const {
-    //     data: dataProjectCode,
-    //     isLoading: isLoadingProjectCode,
-    //     error: errorProjectCode,
-    // } = useSWR(
-    //     `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
-    //         listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
-    //     }`,
-    //     (url) => fetcherLang(url, handleCheckLangCode(lang)),
-    //     {
-    //         revalidateIfStale: false,
-    //         revalidateOnFocus: false,
-    //         revalidateOnReconnect: false,
-    //     },
-    // )
+    const { data, isLoading, error } = useSWR(process.env.NEXT_PUBLIC_API + '/property-category', fetcher, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
 
     useEffect(() => {
         const callDataSearch = async () => {
@@ -196,19 +179,40 @@ const SearchGlobal = ({
         }
         //delete marker before fly to city other
         setIsFly(true)
+        if (
+            !pathName?.includes(
+                data?.data?.find((e) =>
+                    e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang)),
+                )?.alias,
+            ) &&
+            !slugProject?.find((e) => e === pathName)
+        ) {
+            setIsRedirect(true)
+            setDefaultMap({
+                center: [Number(itemWard?.ward_lng), Number(itemWard?.ward_lat)],
+                zoom: 13.5,
+            })
+        }
         mapRef?.flyTo({
             center: [Number(itemWard?.ward_lng), Number(itemWard?.ward_lat)],
             zoom: 13.5,
             curve: 1,
         })
-        levelZoom !== 13.5 && setLevelZoom(13.5)
+        setLevelZoom(13.5)
     }
 
     const handleSubmit = (e) => {
         e?.preventDefault()
-        if (pathName === '/') {
-            setIsRedirect(true)
-        }
+        // if (
+        //     !pathName?.includes(
+        //         data?.data?.find((e) =>
+        //             e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang)),
+        //         )?.alias,
+        //     ) &&
+        //     !slugProject?.find((e) => e === pathName)
+        // ) {
+        //     setIsRedirect(true)
+        // }
         if (!valueSearch) {
             router.push(
                 '/' +
@@ -238,7 +242,6 @@ const SearchGlobal = ({
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
-        console.log('🚀 ~ file: SearchGlobal.jsx:293 ~ handleSelectValueSearch ~ e:', e)
 
         setValueSearch(e?.address)
         if (e?.ref_id?.includes('CITY')) {
@@ -256,7 +259,22 @@ const SearchGlobal = ({
                 return notifyError('No data project in address city search!')
             }
             setIsFly(true)
-
+            if (
+                !pathName?.includes(
+                    data?.data?.find((e) =>
+                        e?.translation?.find((i) =>
+                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
+                        ),
+                    )?.alias,
+                ) &&
+                !slugProject?.find((e) => e === pathName)
+            ) {
+                setIsRedirect(true)
+                setDefaultMap({
+                    center: [Number(itemCity?.city_lng), Number(itemCity?.city_lat)],
+                    zoom: 9,
+                })
+            }
             mapRef?.flyTo({
                 center: [Number(itemCity?.city_lng), Number(itemCity?.city_lat)],
                 zoom: 9,
@@ -276,6 +294,22 @@ const SearchGlobal = ({
                 return notifyError('No data project in address district search!')
             }
             setIsFly(true)
+            if (
+                !pathName?.includes(
+                    data?.data?.find((e) =>
+                        e?.translation?.find((i) =>
+                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
+                        ),
+                    )?.alias,
+                ) &&
+                !slugProject?.find((e) => e === pathName)
+            ) {
+                setIsRedirect(true)
+                setDefaultMap({
+                    center: [Number(itemDistrict?.district_lng), Number(itemDistrict?.district_lat)],
+                    zoom: 11.5,
+                })
+            }
             mapRef?.flyTo({
                 center: [Number(itemDistrict?.district_lng), Number(itemDistrict?.district_lat)],
                 zoom: 11.5,
@@ -299,6 +333,20 @@ const SearchGlobal = ({
     }
 
     const handleSelectValueProject = (e) => {
+        if (
+            !pathName?.includes(
+                data?.data?.find((e) =>
+                    e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang)),
+                )?.alias,
+            ) &&
+            !slugProject?.find((e) => e === pathName)
+        ) {
+            setIsRedirect(true)
+            setDefaultMap({
+                center: [Number(e?.address?.lng), Number(e?.address?.lat)],
+                zoom: 17,
+            })
+        }
         setValueSearch(e?.address?.display)
         setIsFly(true)
         mapRef?.flyTo({
@@ -379,6 +427,18 @@ const SearchGlobal = ({
                         placeholder='Thành phố Hà Nội'
                         value={valueSearch}
                         onFocus={() => {
+                            if (
+                                pathName?.includes(
+                                    data?.data?.find((e) =>
+                                        e?.translation?.find((i) =>
+                                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
+                                        ),
+                                    )?.alias,
+                                ) ||
+                                slugProject?.find((e) => e === pathName)
+                            ) {
+                                setIsRedirect(false)
+                            }
                             setIsClose(false)
                         }}
                         onChange={(e) => {
@@ -410,9 +470,7 @@ const SearchGlobal = ({
                                                                 ?.includes(lang === 'ch' ? 'cn' : lang),
                                                         )?.alias,
                                                 )
-
                                             handleSelectValueSearch(e)
-
                                             setIsClose(true)
                                             setSelectSearch('area')
                                         }}
@@ -428,7 +486,11 @@ const SearchGlobal = ({
                                 dataProjectCode?.data?.map((e, index) => (
                                     <li
                                         className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
-                                        title={e?.translation?.name}
+                                        title={
+                                            e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name || e?.translations[0]?.name
+                                        }
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
@@ -446,7 +508,9 @@ const SearchGlobal = ({
                                         }}
                                         key={index}
                                     >
-                                        {e?.translation?.name}
+                                        {e?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name || e?.translations[0]?.name}
                                     </li>
                                 ))}
                             {Array.isArray(dataProjectCode?.data) && (
@@ -457,7 +521,11 @@ const SearchGlobal = ({
                                 dataProject?.data?.map((e, index) => (
                                     <li
                                         className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
-                                        title={e?.translation?.name}
+                                        title={
+                                            e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.name || e?.translations[0]?.name
+                                        }
                                         onClick={() => {
                                             handleCheckPage(pathName, listData) &&
                                                 router.push(
@@ -470,11 +538,19 @@ const SearchGlobal = ({
                                                 )
                                             setIsClose(true)
                                             handleSelectValueProject(e)
-                                            setSelectSearch(e?.translation?.name)
+                                            setSelectSearch(
+                                                e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.name || e?.translations[0]?.name,
+                                            )
                                         }}
                                         key={index}
                                     >
-                                        {e?.translation?.name}
+                                        {e?.translations?.find((e) =>
+                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        )?.name || e?.translations[0]?.name}
                                     </li>
                                 ))}
                         </ul>

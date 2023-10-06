@@ -51,7 +51,6 @@ export default function SearchHome({ data, lang, t }) {
             <SearchGlobal
                 isIcon={true}
                 lang={lang}
-                // t={t}
             />
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw]'>
                 <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
