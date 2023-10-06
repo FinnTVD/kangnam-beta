@@ -53,6 +53,7 @@ export default function IndexHome({ lang, t }) {
             <MyProjectV2
                 lang={lang}
                 t={t}
+                isHome={true}
             />
             {isTablet && (
                 <SellingRes

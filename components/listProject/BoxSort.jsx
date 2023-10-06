@@ -17,9 +17,9 @@ const arrFilter = [
 ]
 
 const handleCheckStatusPrice = (price = '') => {
-    if (!price) return arrFilter[0].title
+    if (!price) return arrFilter[0]?.title
     const a = arrFilter?.filter((e) => e?.value === price)
-    return a[0].title
+    return a[0]?.title
 }
 
 export default function BoxSort({ price, createQueryString, pathName, router }) {

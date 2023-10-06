@@ -1,4 +1,5 @@
 import { getDictionary } from '@/app/[lang]/dictionaries'
+import NotFound from '@/app/[lang]/not-found'
 import IndexProjectDetail from '@/components/listProjectDetail'
 import getData from '@/utils/getData'
 export async function generateMetadata({ params: { lang, detail } }) {

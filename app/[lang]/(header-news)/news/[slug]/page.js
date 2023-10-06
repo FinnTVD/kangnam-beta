@@ -1,4 +1,5 @@
 import { getDictionary } from '@/app/[lang]/dictionaries'
+import NotFound from '@/app/[lang]/not-found'
 import HeaderV2 from '@/components/general/HeaderV2'
 import IndexNewsDetail from '@/components/newsDetail'
 import { handleCheckLangCode } from '@/utils'
@@ -57,10 +58,11 @@ export async function generateMetadataNews({ params: { lang, slug } }) {
 export default async function NewsDetail({ params: { lang, slug } }) {
     const t = await getDictionary(lang)
     const post = await getData(`/post/post-by-slug/${slug}`)
+    if (!post || post?.statusCode === 404) return <NotFound />
     const categories = await getData('/post-type')
     const langCode = handleCheckLangCode(lang)
     const newsDetail = post?.translations?.find((item) => item?.languageCode === langCode)
-    const category = categories?.data?.find((item) => item.id===post.postType.id)
+    const category = categories?.data?.find((item) => item.id === post.postType.id)
 
     return (
         <>
@@ -70,7 +72,7 @@ export default async function NewsDetail({ params: { lang, slug } }) {
                 post={post}
                 newsDetail={newsDetail}
             />
-            {(post && category && newsDetail) &&
+            {post && category && newsDetail && (
                 <IndexNewsDetail
                     t={t}
                     slug={slug}
@@ -79,7 +81,7 @@ export default async function NewsDetail({ params: { lang, slug } }) {
                     newsDetail={newsDetail}
                     category={category}
                 />
-            }
+            )}
         </>
     )
 }
