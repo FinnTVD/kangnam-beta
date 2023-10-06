@@ -39,12 +39,14 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                 <h2 class='line-clamp-1 text-[0.75vw] font-avertaStdCY font-bold leading-[1.3] max-md:line-clamp-2 max-md:text-[3.2vw] max-md:leading-[1.3] max-md:mb-[1.5vw] mb-[0.37vw] text-den-2'>${
                                     itemProject?.translations?.find((e) =>
                                         e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                    )?.name || itemProject?.translations[0]?.name
+                                    )?.name ||
+                                    itemProject?.translations[0]?.name ||
+                                    'Chưa có thông tin!'
                                 }
                                 </h2>
                                 </a>
                                 <div
-                                            title=${itemProject?.address?.display}
+                                            title=${itemProject?.address?.display || 'Chưa có thông tin!'}
                                             class='flex items-center gap-x-[0.5vw] max-md:gap-x-[1.41vw]'
                                         >
                                         <div class='w-fit'>
@@ -96,7 +98,11 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 </defs>
                                             </svg>
                                             <span class=' text-den font-avertaStdCY text-[0.75vw] font-normal leading-normal line-clamp-1 max-md:text-[2.67vw]'>
-                                                ${itemProject?.translation?.size + ' m²'}
+                                                ${
+                                                    itemProject?.translation?.size
+                                                        ? itemProject?.translation?.size + ' m²'
+                                                        : 'Chưa có thông tin!'
+                                                }
                                             </span>
                                         </div>
                                         <div class='flex items-center gap-x-[0.5vw] max-md:gap-x-[1.41vw]'>
@@ -113,7 +119,7 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 />
                                             </svg>
                                             <span class='capitalize text-den font-avertaStdCY text-[0.75vw] font-normal leading-normal line-clamp-1 max-md:text-[2.67vw] max-md:leading-normal'>
-                                                ${itemProject?.translation?.priceDisplay}
+                                                ${itemProject?.translation?.priceDisplay || 'Chưa có thông tin!'}
                                             </span>
                                         </div>
                             </div>
@@ -153,7 +159,6 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
     const levelZoom = useStore((state) => state.levelZoom)
-    console.log('🚀 ~ file: MapV4.jsx:156 ~ MapV4 ~ levelZoom:', levelZoom)
     const isFly = useStore((state) => state.isFly)
     const setIsFly = useStore((state) => state.setIsFly)
     const setLevelZoom = useStore((state) => state.setLevelZoom)
@@ -255,8 +260,11 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             )
 
             //add event zoom
-            mapRef.current?.on('zoomstart', function () {
-                setLevelZoom(mapRef?.current?.getZoom())
+            // mapRef.current?.on('zoomstart', function () {
+            //     console.log('zoom start', mapRef?.current?.getZoom())
+            // })
+            mapRef.current?.on('zoomend', function () {
+                setLevelZoom(mapRef.current?.getZoom())
             })
             //add event drag
             mapRef.current?.on('dragstart', () => {
@@ -490,11 +498,11 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
 
     const callDataPopup = async (listMarker) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?cityId=${cityId}${districtId ? '&districtId=' + districtId : ''}${
-                wardId ? '&wardId=' + wardId : ''
-            }${findIdByAlias(pathName, dataSlug)}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}`,
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&take=50&cityId=${cityId}${
+                districtId ? '&districtId=' + districtId : ''
+            }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
+                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
         const data = await res.json()
 

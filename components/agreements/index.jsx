@@ -24,7 +24,6 @@ export default function IndexAgreements({ lang }) {
                     agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug, description: itm?.description })
             })
         })
-        console.log(agreementDataTranslation)
     }
     // const router = useRouter()
     // useEffect(() => {

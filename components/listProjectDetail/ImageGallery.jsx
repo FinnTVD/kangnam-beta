@@ -13,7 +13,6 @@ export default function ImageGallery({ data }) {
     const images = data?.images || []
     const listImage = [data?.firstImage, ...images]?.filter((e) => e)
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
-    console.log('🚀 ~ file: ImageGallery.jsx:16 ~ ImageGallery ~ thumbsSwiper:', thumbsSwiper)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
     const [zoomSize, setZoomSize] = useState(0)
