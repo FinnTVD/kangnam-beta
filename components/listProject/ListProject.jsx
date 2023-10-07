@@ -249,6 +249,11 @@ export default function ListProject({ lang, t, dataSlug }) {
                             </div>
                         </article>
                     </div>
+                    {Array.isArray(data?.data) && data?.data?.length === 0 && (
+                        <div className='text-black text-[1.5vw] font-normal leading-normal text-center'>
+                            Không tìm thấy bất sản nào!
+                        </div>
+                    )}
                     <div
                         className={`grid ${
                             show ? 'grid-cols-3 grid-rows-[8]' : 'grid-cols-4 grid-rows-6'
