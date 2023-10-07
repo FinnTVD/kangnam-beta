@@ -242,6 +242,7 @@ const SearchGlobal = ({
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
+        console.log('🚀 ~ file: SearchGlobal.jsx:245 ~ handleSelectValueSearch ~ e:', e)
 
         setValueSearch(e?.address)
         if (e?.ref_id?.includes('CITY')) {
