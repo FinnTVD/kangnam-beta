@@ -8,6 +8,7 @@ import useStore from '@/app/[lang]/(store)/store'
 import IconSocial from '../icons/IconSocial'
 import IconChangeCurrency from '../icons/IconChangeCurrency'
 import IconCall from '../icons/IconCall'
+import Link from 'next/link'
 export default function FeatureHome({ dataInfo, isOther = false }) {
     const isFeatureHome = useStore((state) => state.isFeatureHome)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
@@ -82,7 +83,12 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                     isFeatureHome?.isContain && !isOther ? 'active3' : ''
                 } item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
             >
-                <IconCall className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                <Link
+                    className=''
+                    href={`tel:${dataInfo?.phone?.split('|')[0]}`}
+                >
+                    <IconCall className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                </Link>
             </li>
         </ul>
     )

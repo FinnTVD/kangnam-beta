@@ -147,6 +147,7 @@ export default function ListProject({ lang, t, dataSlug }) {
             revalidateOnReconnect: false,
         },
     )
+    console.log('🚀 ~ file: ListProject.jsx:135 ~ ListProject ~ data:', data)
 
     useLayoutEffect(() => {
         if (typeof window === 'undefined') return
@@ -229,7 +230,14 @@ export default function ListProject({ lang, t, dataSlug }) {
                                         Hiển thị
                                     </span>
                                     <span className='inline-block text-den title16-600-150 max-md:title-mb16-600-150 max-lg:title-tl16'>
-                                        24 trong số 50 <span className='max-md:hidden'>nhà đất xác thực</span>
+                                        {data?.meta?.take > data?.meta?.itemCount
+                                            ? data?.meta?.itemCount
+                                            : data?.meta?.take}{' '}
+                                        trong số hơn{' '}
+                                        {data?.meta?.itemCount > data?.meta?.take
+                                            ? data?.meta?.take
+                                            : data?.meta?.itemCount}{' '}
+                                        <span className='max-md:hidden'>nhà đất xác thực</span>
                                     </span>
                                 </div>
                                 <BoxSort
@@ -276,9 +284,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                                 <Link
                                     href={
                                         (lang === 'vi' ? '' : lang + '/') +
-                                        e?.propertyCategory?.translations?.find((e) =>
+                                        (e?.propertyCategory?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.alias +
+                                        )?.alias || 'du-an') +
                                         '/' +
                                         (e?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),

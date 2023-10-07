@@ -52,6 +52,23 @@ const handleRenderCode = (codeFrom, codeTo, status) => {
         }
     }
 }
+const handleFormat = (value) => {
+    if (!value) return
+    let a = value?.toString()?.split('.')
+    let b = a[0].split('').reverse()
+    const str = []
+    for (let i = 0; i < b.length; i++) {
+        if (i % 3 === 2 && b.length - 1 > i) {
+            str.push(b[i])
+            str.push(',')
+        } else {
+            str.push(b[i])
+        }
+    }
+    let c = str.reverse()
+    let d = a?.length === 1 ? '' : '.' + a[1]
+    return c.join('') + d
+}
 
 const handleCurrency = (codeFrom, codeTo, input, value) => {
     if (!input) return ''
@@ -97,24 +114,6 @@ export default function BoxCurrency({ className = '' }) {
         const hour = date.getHours().toString().padStart(2, '0')
         const minus = date.getMinutes().toString().padStart(2, '0')
         return hour + ':' + minus
-    }
-
-    const handleFormat = (value) => {
-        if (!value) return
-        let a = value?.toString()?.split('.')
-        let b = a[0].split('').reverse()
-        const str = []
-        for (let i = 0; i < b.length; i++) {
-            if (i % 3 === 2 && b.length - 1 > i) {
-                str.push(b[i])
-                str.push(',')
-            } else {
-                str.push(b[i])
-            }
-        }
-        let c = str.reverse()
-        let d = a?.length === 1 ? '' : '.' + a[1]
-        return c.join('') + d
     }
 
     const handleSrcIcon = (code) => {

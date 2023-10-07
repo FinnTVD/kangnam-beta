@@ -29,7 +29,7 @@ export default function InputCheckBox({ e, lang, lh }) {
                     viewBox='0 0 24 24'
                     strokeWidth='4'
                     stroke='white'
-                    className={`${isToggle ? '' : 'hidden'} w-[1.25vw] h-[1.5vw]`}
+                    className={`${isToggle ? '' : 'hidden'} w-[1.25vw] h-[1.5vw] max-md:w-[6.25vw] max-md:h-[5.5vw]`}
                 >
                     <path
                         strokeLinecap='round'
