@@ -458,7 +458,7 @@ const SearchGlobal = ({
                             {Array.isArray(dataSearch) &&
                                 dataSearch?.slice(0, 3)?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-2 max-md:py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         onClick={() => {
                                             // Redirects page
                                             handleCheckPage(pathName, listData) &&
@@ -485,7 +485,7 @@ const SearchGlobal = ({
                             {Array.isArray(dataProjectCode?.data) &&
                                 dataProjectCode?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         title={
                                             e?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
@@ -520,7 +520,7 @@ const SearchGlobal = ({
                                 dataSearch?.length > 0 &&
                                 dataProject?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw]'
+                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         title={
                                             e?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),

@@ -69,26 +69,28 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 indexFilter === index ? 'bg-logo' : 'bg-white'
             } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
         >
-            <span
-                className={`${
-                    indexFilter === index ? 'text-white' : 'text-den'
-                } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
-                onClick={() => {
-                    if (index === indexFilter) {
-                        return setIndexFilter(-1)
-                    }
-                    setIndexFilter(index)
-                }}
-            >
-                {item?.title}
-            </span>
-            <span
-                className={`${
-                    lh?.length && lh[0] ? '' : 'hidden'
-                } bg-logo w-[1.5vw] h-[1.5vw] flex justify-center items-center rounded-full title14-400-150 text-white absolute top-0 right-0 -translate-y-1/2 border border-solid border-white`}
-            >
-                {lh?.length && lh[0] ? lh?.length : ''}
-            </span>
+            <div className='relative'>
+                <span
+                    className={`${
+                        indexFilter === index ? 'text-white' : 'text-den'
+                    } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
+                    onClick={() => {
+                        if (index === indexFilter) {
+                            return setIndexFilter(-1)
+                        }
+                        setIndexFilter(index)
+                    }}
+                >
+                    {item?.title}
+                </span>
+                <span
+                    className={`${
+                        lh?.length && lh[0] ? '' : 'hidden'
+                    } bg-logo w-[1.5vw] h-[1.5vw] flex justify-center items-center rounded-full title14-400-150 text-white absolute top-0 right-0 -translate-y-1/2 border border-solid border-white max-md:w-[4.5vw] max-md:h-[4.5vw] title-mb12-400-150`}
+                >
+                    {lh?.length && lh[0] ? lh?.length : ''}
+                </span>
+            </div>
             <form
                 onSubmit={handleCheckValueInput}
                 autoComplete='false'

@@ -217,9 +217,9 @@ export default function MyProjectV2({ lang, t }) {
                                 <Link
                                     href={
                                         (lang === 'vi' ? '' : lang + '/') +
-                                        e?.propertyCategory?.translations?.find((e) =>
+                                        (e?.propertyCategory?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.alias +
+                                        )?.alias || 'du-an') +
                                         '/' +
                                         (e?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),

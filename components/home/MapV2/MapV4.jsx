@@ -18,7 +18,9 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                             <a class="outline-none" href="/${
                                 itemProject?.propertyCategory?.translations?.find((e) =>
                                     e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                )?.alias || itemProject?.propertyCategory?.translations[0]?.alias
+                                )?.alias ||
+                                itemProject?.propertyCategory?.translations[0]?.alias ||
+                                'du-an'
                             }/${
         itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
             ?.slug || itemProject?.translations[0]?.slug
@@ -33,7 +35,9 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                             <a href="/${
                                 itemProject?.propertyCategory?.translations?.find((e) =>
                                     e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                )?.alias || itemProject?.propertyCategory?.translations[0]?.alias
+                                )?.alias ||
+                                itemProject?.propertyCategory?.translations[0]?.alias ||
+                                'du-an'
                             }/${
         itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
             ?.slug || itemProject?.translations[0]?.slug
