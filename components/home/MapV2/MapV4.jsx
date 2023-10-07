@@ -524,7 +524,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                         .setPopup(
                             new vietmapgl.Popup().setHTML(`
                         <div class="${
-                            ata?.data?.filter((item) => item?.address?.wardId?.includes(e?.id))?.length > 3
+                            data?.data?.filter((item) => item?.address?.wardId?.includes(e?.id))?.length > 3
                                 ? 'popupMarkerKNList'
                                 : 'popupMarkerKN'
                         }">
