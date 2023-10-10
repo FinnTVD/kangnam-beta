@@ -17,8 +17,20 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
     const [sideRef, isOutSide] = useClickOutSide()
 
     useEffect(() => {
+        if (typeof window === 'undefined') return
+        document.addEventListener('scroll', handleScroll)
+        return () => {
+            document.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    useEffect(() => {
         isOutSide && setIsShow(false)
     }, [isOutSide])
+
+    const handleScroll = () => {
+        setIsShow(false)
+    }
 
     const handleCurrently = () => {
         setIsShow(!isShow)

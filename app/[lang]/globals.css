@@ -588,6 +588,19 @@
     height: calc(100vh - 6vw) !important;
     border-radius: 0.5vw !important;
 }
+
+#contentProject .ql-align-center {
+    display: flex;
+    justify-content: center;
+}
+#contentProject .ql-align-start {
+    display: flex;
+    justify-content: start;
+}
+#contentProject .ql-align-end {
+    display: flex;
+    justify-content: end;
+}
 @media screen and (max-width: 767.9px) {
     #list-project #map,
     #list-project #map .vietmapgl-canvas-container,
