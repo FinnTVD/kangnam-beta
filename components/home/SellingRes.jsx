@@ -23,7 +23,7 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
 gsap.registerPlugin(ScrollTrigger)
-export default function SellingRes({ lang, isTablet }) {
+export default function SellingRes({ lang, isTablet, t }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -134,11 +134,11 @@ export default function SellingRes({ lang, isTablet }) {
             {isShow && <BtnShowMap />}
             <div className='px-mb10 max-lg:pl-[3.2vw]'>
                 <h2 className='text-den font-bold max-lg:title-tl25 max-md:title-mb25-700-130 -tracking-[1.25px]'>
-                    Đang được rao bán
+                    {t?.homepage?.section3Mobile?.buy?.title}
                 </h2>
                 <span className='max-lg:title-tl14 max-md:title-mb14-400-150 text-den opacity-[0.65] block mb-[3.2vw]'>
-                    Hơn <span className='title-mb14-700-150 max-lg:font-bold'>{dataNew?.length || '500'}</span> dự án
-                    đang được phân phối
+                    {t?.homepage?.section3Mobile?.buy?.subtitle?.over} <span className='title-mb14-700-150 max-lg:font-bold'>{dataNew?.length || '500'}</span> {t?.homepage?.section3Mobile?.buy?.subtitle?.projectDistribution}
+                
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
@@ -265,7 +265,7 @@ export default function SellingRes({ lang, isTablet }) {
                                                 />
                                             </svg>
                                             <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 whitespace-nowrap max-lg:title-tl14 font-bold'>
-                                                Địa chỉ:
+                                                {t?.selling?.address}:
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                                 {e?.address?.ward +
@@ -301,7 +301,7 @@ export default function SellingRes({ lang, isTablet }) {
                                                 </defs>
                                             </svg>
                                             <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
-                                                Diện tích:
+                                                {t?.selling?.area}
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.size + ' m²'}
@@ -322,7 +322,7 @@ export default function SellingRes({ lang, isTablet }) {
                                                 />
                                             </svg>
                                             <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
-                                                Mức giá:
+                                                {t?.selling?.price}:
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.priceDisplay}
@@ -342,7 +342,7 @@ export default function SellingRes({ lang, isTablet }) {
                     span='text-white '
                     stroke='white'
                 >
-                    Tất cả dự án
+                    {t?.selling?.button}
                 </Button>
             </div>
         </section>

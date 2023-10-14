@@ -135,6 +135,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb })
                     newsDetail={newsDetail}
                     lang={lang}
                     breadcrumb={breadcrumb}
+                    t={t}
                 />
                 {isHome ? (
                     <></>

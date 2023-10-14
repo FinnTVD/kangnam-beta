@@ -14,18 +14,18 @@ export default function Teams({ t }) {
                     <span
                         className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'
                     >
-                        {t.aboutUsTeams.subtitle}
+                        {t?.aboutUs?.section3?.subtitle}
                     </span>
                     <h2
                         className='title56 text-den mt-[0.125vw] max-md:mt-[1.1vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-lg:title-tl38'
                     >
-                        {t.aboutUsTeams.title}
+                        {t?.aboutUs?.section3?.title}
                     </h2>
                 </div>
                 <span
                     className='mt-[1vw] text-den title16-400-150 inline-block max-md:title-mb14-400-150 max-md:mt-[2.6vw] max-lg:title-tl16'
                 >
-                    {description}
+                    {t?.aboutUs?.section3?.description}
                 </span>
             </div>
             <Image

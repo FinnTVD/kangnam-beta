@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import InputCustom from './InputCustom'
 import useStore from '@/app/[lang]/(store)/store'
 
-export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
+export default function Form2({ handlePrevSlide, handleNextSlide, isMobile, t }) {
     const setDataSubmitForm = useStore((state) => state.setDataSubmitForm)
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
     const triggerSubmit = useStore((state) => state.triggerSubmit)
@@ -125,7 +125,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                     onClick={handlePrevSlide}
                     className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
-                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>Trở lại</span>
+                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>{t?.deposit?.form?.form2?.back}</span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='11'
@@ -144,7 +144,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                 </div>
                 <div className='relative flex-1 max-lg:mt-[2vw] max-md:mt-0'>
                     <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                        Thông tin liên hệ
+                        {t?.deposit?.form?.form2?.title}
                     </h3>
                     <form
                         autoComplete='false'
@@ -163,7 +163,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 htmlFor='ourHouse'
                                 className={`${classes['label-ourHouse']} select-none text-[#9E9E9E] cursor-pointer title16-400-150 max-md:title-mb14-400-150 focus:text-den max-lg:title-tl14`}
                             >
-                                Tôi là chủ nhà
+                                {t?.deposit?.form?.form2?.owner}
                             </label>
                         </div>
                         <div className='flex gap-x-[1vw] mt-[2vw] max-md:mt-0 max-md:flex-col max-md:gap-y-[4.27vw]'>
@@ -173,7 +173,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                                 }
                                 labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Họ và tên'}
+                                labelContent={t?.deposit?.form?.form2?.input?.input1}
                                 register={'fullName'}
                                 value={valueFullName?.value}
                                 validate={valueFullName?.validate}
@@ -186,7 +186,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 }
                                 register={'numberPhone'}
                                 labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Số điện thoại'}
+                                labelContent={t?.deposit?.form?.form2?.input?.input2}
                                 value={valuePhoneNumber?.value}
                                 validate={valuePhoneNumber?.validate}
                                 type='tel'
@@ -199,7 +199,7 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                 'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
                             }
                             labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                            labelContent={'Email'}
+                            labelContent={t?.deposit?.form?.form2?.input?.input3}
                             register={'email'}
                             value={valueEmail?.value}
                             validate={valueEmail?.validate}
@@ -225,12 +225,12 @@ export default function Form2({ handlePrevSlide, handleNextSlide, isMobile }) {
                                     valueNote ? 'top-0 -translate-y-1/2' : 'top-[1vw]'
                                 } absolute text-[#646464] left-[1vw] max-md:left-[3vw] max-md:px-[1.27vw] px-[0.5vw] bg-white cursor-pointer title16-400-150 max-md:title-mb12-400-150 transition-all duration-300 max-lg:title-tl12`}
                             >
-                                Lời nhắn
+                                {t?.deposit?.form?.form2?.input?.input4}
                             </label>
                         </div>
                         <div className='flex justify-center'>
                             <button className='flex gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center py-[0.56vw] px-[1.09vw] mt-[2.44vw] w-fit h-fit border border-solid border-nu rounded-[10vw] max-md:mt-[4.27vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'>
-                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>Bước 3</span>
+                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>{t?.deposit?.form?.form2?.step}</span>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     width='11'

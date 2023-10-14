@@ -35,7 +35,7 @@ export default function IndexAboutUs({ t, lang, dataInfo }) {
         <>
             <Story t={t}></Story>
             <Teams t={t}></Teams>
-            <Mission></Mission>
+            <Mission t={t}></Mission>
             <Contact
                 t={t}
                 lang={lang}

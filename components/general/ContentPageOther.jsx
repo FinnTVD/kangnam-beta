@@ -2,38 +2,68 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-const dataHeader = [
-    {
-        id: 1,
-        title: 'Thông tin nhanh chóng theo nhịp thị trường',
-        des: 'Không thể bỏ lỡ những thông tin quan trọng của thị trường theo dòng sự kiện',
-        end: 'Tin tức',
-        slug: 'news',
-    },
-    {
-        id: 2,
-        title: 'Chúng tôi luôn hỗ trợ khách hàng một cách nhanh chóng',
-        des: 'Quý khách hàng vui lòng điền đầy đủ thông tin để được đội ngũ chúng tôi tư vấn miễn phí',
-        end: 'Liên hệ',
-        slug: 'contact',
-    },
-    {
-        id: 3,
-        title: 'Chúng tôi theo đuổi sự hoàn hảo trên từng dự án',
-        des: 'Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp giàu kinh nghiệm',
-        end: 'Giới thiệu',
-        slug: 'about-us',
-    },
-    {
-        id: 4,
-        title: 'Thỏa thuận & pháp lý',
-        des: 'Quý khách hàng vui lòng điền đầy đủ thông tin để được đội nguc chúng tôi tư vấn miễn phí',
-        end: 'Pháp lý',
-        slug: 'agreement',
-    },
-]
+// const dataHeader = [
+//     {
+//         id: 1,
+//         title: 'Thông tin nhanh chóng theo nhịp thị trường',
+//         des: 'Không thể bỏ lỡ những thông tin quan trọng của thị trường theo dòng sự kiện',
+//         end: 'Tin tức',
+//         slug: 'news',
+//     },
+//     {
+//         id: 2,
+//         title: 'Chúng tôi luôn hỗ trợ khách hàng một cách nhanh chóng',
+//         des: 'Quý khách hàng vui lòng điền đầy đủ thông tin để được đội ngũ chúng tôi tư vấn miễn phí',
+//         end: 'Liên hệ',
+//         slug: 'contact',
+//     },
+//     {
+//         id: 3,
+//         title: 'Chúng tôi theo đuổi sự hoàn hảo trên từng dự án',
+//         des: 'Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp giàu kinh nghiệm',
+//         end: 'Giới thiệu',
+//         slug: 'about-us',
+//     },
+//     {
+//         id: 4,
+//         title: 'Thỏa thuận & pháp lý',
+//         des: 'Quý khách hàng vui lòng điền đầy đủ thông tin để được đội nguc chúng tôi tư vấn miễn phí',
+//         end: 'Pháp lý',
+//         slug: 'agreement',
+//     },
+// ]
 
-export default function ContentPageOther({ post, lang, newsDetail, breadcrumb }) {
+export default function ContentPageOther({ post, lang, newsDetail, breadcrumb, t }) {
+    const dataHeader = [
+        {
+            id: 1,
+            title: t?.otherPageBanner[0]?.title,
+            des: t?.otherPageBanner[0]?.des,
+            end: t?.otherPageBanner[0]?.end,
+            slug: t?.otherPageBanner[0]?.slug,
+        },
+        {
+            id: 2,
+            title: t?.otherPageBanner[1]?.title,
+            des: t?.otherPageBanner[1]?.des,
+            end: t?.otherPageBanner[1]?.end,
+            slug: t?.otherPageBanner[1]?.slug,
+        },
+        {
+            id: 3,
+            title: t?.otherPageBanner[2]?.title,
+            des: t?.otherPageBanner[2]?.des,
+            end: t?.otherPageBanner[2]?.end,
+            slug: t?.otherPageBanner[2]?.slug,
+        },
+        {
+            id: 4,
+            title: t?.otherPageBanner[3]?.title,
+            des: t?.otherPageBanner[3]?.des,
+            end: t?.otherPageBanner[3]?.end,
+            slug: t?.otherPageBanner[3]?.slug,
+        },
+    ]
     const pathName = usePathname()
     const [data, setData] = useState(null)
 

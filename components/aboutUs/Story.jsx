@@ -13,18 +13,18 @@ export default function Story({ t }) {
                     <span
                         className='sub-title max-md:title-mb12-700-150 max-lg:title-tl12'
                     >
-                        {t.aboutUsStory.subtitle}
+                        {t?.aboutUs?.section2?.subtitle}
                     </span>
                     <h2
                         className='title56 text-den mt-[0.125vw] max-md:title-mb25-700-130 max-md:mt-[1.1vw] max-lg:title-tl38'
                     >
-                        {t.aboutUsStory.title}
+                        {t?.aboutUs?.section2?.title}
                     </h2>
                 </div>
                 <span
                     className='mt-[1vw] text-den title16-400-150 inline-block max-md:title-mb14-400-150 max-md:mt-[2.6vw] max-lg:title-tl16'
                 >
-                    {description}
+                    {t?.aboutUs?.section2?.description}
                 </span>
             </div>
             <div

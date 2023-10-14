@@ -139,11 +139,11 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
     const handleDemand = (title) => {
         switch (title) {
             case 'sell':
-                return 'Bán'
+                return t?.deposit?.form?.form1?.select?.select1
             case 'hire':
-                return 'Cho thuê'
+                return t?.deposit?.form?.form1?.select?.select2
             case 'sellandhire':
-                return 'Bán và cho thuê'
+                return t?.deposit?.form?.form1?.select?.select3
             default:
                 break
         }
@@ -151,15 +151,15 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
 
     const handlePriceWhenSubmitForm = () => {
         if (selectedOption === 'sell') {
-            return `${inputValue ? `Giá bán: ${inputValue} (${validatePrice?.title})` : ''}`
+            return `${inputValue ? `${t?.deposit?.form?.form1?.priceSubmit?.sell}: ${inputValue} (${validatePrice?.title})` : ''}`
         }
         if (selectedOption === 'hire') {
-            return `${inputValueHire ? `Cho thuê: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
+            return `${inputValueHire ? `${t?.deposit?.form?.form1?.priceSubmit?.rent}: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
         }
         if (selectedOption === 'sellandhire') {
-            return `${inputValue ? `Giá bán: ${inputValue} (${validatePrice?.title})` : ''}${
+            return `${inputValue ? `${t?.deposit?.form?.form1?.priceSubmit?.sell}: ${inputValue} (${validatePrice?.title})` : ''}${
                 inputValue && inputValueHire ? ' -- ' : ''
-            }${inputValueHire ? `Cho thuê: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
+            }${inputValueHire ? `${t?.deposit?.form?.form1?.priceSubmit?.rent}: ${inputValueHire} (${validatePriceHire?.title})` : ''}`
         }
     }
 
@@ -195,10 +195,10 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
             <article className='flex shadow-input rounded-[0.5vw] max-md:rounded-[2.13vw] max-md:pt-[8.53vw] max-md:px-[2.67vw] w-full h-fit pt-[2.5vw]  pr-[7.5vw] pb-[2.19vw] px-[1.5vw] max-md:pb-[9.6vw]'>
                 <div className='flex-1'>
                     <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                        Thông tin cơ bản
+                        {t?.deposit?.form?.form1?.title}
                     </h3>
                     <span className='text-black mt-[1.5vw] mb-[1vw] max-md:mt-[5.33vw] max-md:mb-[4.27vw] title16-400-150 max-md:title-mb14-400-150 block max-lg:title-tl16'>
-                        Nhu cầu của bạn là gì?
+                        {t?.deposit?.form?.form1?.demand}
                     </span>
                     <form
                         autoComplete='false'
@@ -219,7 +219,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                     htmlFor='sell'
                                     className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
-                                    Bán
+                                    {t?.deposit?.form?.form1?.select?.select1}
                                 </label>
                             </div>
 
@@ -237,7 +237,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                     htmlFor='hire'
                                     className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
-                                    Cho thuê
+                                    {t?.deposit?.form?.form1?.select?.select2}
                                 </label>
                             </div>
                             <div className='flex gap-x-[0.69vw] items-center max-md:gap-x-[2.93vw]'>
@@ -254,7 +254,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                                     htmlFor='sellandhire'
                                     className='text-black cursor-pointer title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'
                                 >
-                                    Bán và cho thuê
+                                    {t?.deposit?.form?.form1?.select?.select3}
                                 </label>
                             </div>
                         </div>
@@ -265,7 +265,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                         >
                             <InputCustom
                                 boxClass={'w-[17.1875vw] max-md:w-full flex justify-between items-center '}
-                                labelContent={'Căn hộ'}
+                                labelContent={t?.deposit?.form?.form1?.input?.input1}
                                 labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 inputClass={
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den title16-400-150 focus:border-logo bg-white max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
@@ -277,7 +277,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                             />
                             <InputCustom
                                 boxClass={'flex-1'}
-                                labelContent={t?.Form1?.sell}
+                                labelContent={t?.deposit?.form?.form1?.input?.input2}
                                 labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                 status={validatePrice?.status}
                                 title={validatePrice?.title}
@@ -292,7 +292,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                             {selectedOption === 'sellandhire' && (
                                 <InputCustom
                                     boxClass={'flex-1'}
-                                    labelContent={t?.Form1?.hire}
+                                    labelContent={t?.deposit?.form?.form1?.input?.input3}
                                     labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                                     status={validatePriceHire?.status}
                                     title={validatePriceHire?.title}
@@ -308,7 +308,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                         </div>
                         <InputCustom
                             boxClass={'w-full h-fit mt-[1.5vw] max-md:mt-[4.27vw] '}
-                            labelContent={'Địa chỉ'}
+                            labelContent={t?.deposit?.form?.form1?.input?.input4}
                             labelClass={'title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'}
                             inputClass={
                                 'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid text-den focus:border-logo title16-400-150 max-md:title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw] max-lg:title-tl12'
@@ -330,7 +330,7 @@ export default function Form1({ t, handleNextSlide, isMobile }) {
                         )}
                         <div className='flex justify-center'>
                             <button className='flex gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center py-[0.56vw] px-[1.09vw] mt-[2.44vw] max-md:mt-[5.33vw] max-md:py-[1.56vw] max-md:px-[3.09vw] w-fit h-fit border border-solid border-nu rounded-[10vw]'>
-                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>Bước 2</span>
+                                <span className='text-nu title14-400-150 max-md:title-mb16-600-150 max-lg:title-tl16'>{t?.deposit?.form?.form1?.step}</span>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
                                     width='11'

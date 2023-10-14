@@ -35,7 +35,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                 title: e?.translations?.find((e) =>
                     e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                 )?.name,
-                href: e?.translations?.find((e) =>
+                href: '/' + e?.translations?.find((e) =>
                     e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                 )?.alias,
             })

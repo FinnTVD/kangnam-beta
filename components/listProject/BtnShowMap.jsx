@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import MapV4 from '../home/MapV2/MapV4'
 
-export default function BtnShowMap() {
+export default function BtnShowMap({t}) {
     const [isOpen, setIsOpen] = useState(false)
     return (
         <>
@@ -14,7 +14,7 @@ export default function BtnShowMap() {
                 } fixed bottom-[10vw] left-1/2 -translate-x-1/2 w-fit flex items-center z-50 bg-logo rounded-[10vw]`}
             >
                 <span className='text-white max-md:title-mb14-400-150 -tracking-[0.28px] max-lg:title-tl14 whitespace-nowrap'>
-                    {isOpen ? 'Danh sách' : 'Bản đồ'}
+                    {isOpen ? t.projects.showMap.list : t.projects.showMap.map}
                 </span>
                 <svg
                     xmlns='http://www.w3.org/2000/svg'

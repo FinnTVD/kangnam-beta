@@ -66,6 +66,7 @@ export default function SlideForm({ t }) {
                         handleNextSlide={handleNextSlide}
                         handlePrevSlide={handlePrevSlide}
                         isMobile={isMobile}
+                        t={t}
                     />
                 </SwiperSlide>
                 <SwiperSlide className='!h-full overflow-y-scroll !pb-[10vw] max-md:!h-fit'>
@@ -73,6 +74,7 @@ export default function SlideForm({ t }) {
                         handleNextSlide={handleNextSlide}
                         handlePrevSlide={handlePrevSlide}
                         isMobile={isMobile}
+                        t={t}
                     />
                 </SwiperSlide>
             </Swiper>
@@ -86,7 +88,7 @@ export default function SlideForm({ t }) {
                             } absolute left-0 h-[0.375vw] -translate-y-1/2 opacity-100 bg-logo top-1/2 transition-all duration-[0.8s] ease-linear rounded-t-full`}
                         ></div>
                         <span className='text-nu title16-400-150 block absolute -top-[0.69vw] right-0 -translate-y-full'>
-                            Hoàn thành {indexSlider + 1}/3
+                            {t?.deposit?.form?.complete?.title} {indexSlider + 1}/3
                         </span>
                     </div>
                 </div>

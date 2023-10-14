@@ -14,7 +14,7 @@ const handleCheckStatus = (alias) => {
     return ''
 }
 
-export default function ContentDetail({ data, detail, lang }) {
+export default function ContentDetail({ data, detail, lang, t }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -135,6 +135,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         data={data}
                         lang={lang}
                         dataDetail={dataDetail}
+                        t={t}
                     />
                     <div className='mt-[2.56vw] max-md:mt-[6.4vw] relative'>
                         <h2 className='title32-800-130 max-md:title-mb20-700-130 max-md:-tracking-[0.6px] text-den -tracking-[0.96px] mb-[1vw] max-md:mb-[4vw] max-lg:title-tl20'>
@@ -161,7 +162,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         <div className='flex mb-[0.75vw] gap-x-[1vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
                                 <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
-                                    Địa chỉ:
+                                    {t?.projectDetail?.map?.address}:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.address}
@@ -169,7 +170,7 @@ export default function ContentDetail({ data, detail, lang }) {
                             </div>
                             <div className='flex-1'>
                                 <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
-                                    Phường/Xã:
+                                    {t?.projectDetail?.map?.ward}:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.ward}
@@ -179,7 +180,7 @@ export default function ContentDetail({ data, detail, lang }) {
                         <div className='flex max-md:gap-y-[4.27vw] max-md:flex-col'>
                             <div className='flex-1'>
                                 <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
-                                    Quận/Huyện:
+                                    {t?.projectDetail?.map?.district}:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.district}
@@ -187,7 +188,7 @@ export default function ContentDetail({ data, detail, lang }) {
                             </div>
                             <div className='flex-1'>
                                 <span className='inline-block mr-[3.25vw] max-md:mr-[4.2vw] max-md:min-w-[36vw] title18-600-130 max-md:title-mb16-600-130 text-den max-lg:title-tl16'>
-                                    Thành phố/Tỉnh:
+                                    {t?.projectDetail?.map?.city}:
                                 </span>
                                 <span className='title16-400-130 max-md:title-mb16-400-130 text-den max-lg:title-tl16'>
                                     {data?.address?.city}
@@ -204,6 +205,7 @@ export default function ContentDetail({ data, detail, lang }) {
                     data={data}
                     lang={lang}
                     dataDetail={dataDetail}
+                    t={t}
                 />
             </div>
             <ToastContainer style={{ zIndex: '999999999999999' }} />

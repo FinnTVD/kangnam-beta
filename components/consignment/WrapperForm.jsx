@@ -19,10 +19,10 @@ export default function WrapperForm({ t }) {
                 <div className='absolute left-0 z-10 w-full -translate-y-1/2 top-1/2'>
                     <div className='px-[4.75vw] relative z-10 max-md:px-[2.67vw]'>
                         <h1 className='title32-700-125 -tracking-[1.6px] text-white text-center mb-[2.5vw] max-md:title-mb20-700-111 max-md:-tracking-[1px] max-md:px-[3.86vw] max-md:mb-[7.64vw] max-lg:title-tl20'>
-                            Bán và cho thuê nhà đất nhanh chóng, dễ dàng cùng Kangnam
+                            {t?.deposit?.wrapper?.title}
                         </h1>
                         <span className='text-white title16-600-150 -tracking-[0.8px] max-md:title-mb12-600-150 max-md:-tracking-[0.6px] max-lg:title-tl12'>
-                            Cam kết với khách hàng
+                            {t?.deposit?.wrapper?.commitment?.title}
                         </span>
                         <ul className='flex flex-col gap-y-[0.75vw] max-md:gap-y-[1.78vw] mt-[1vw] max-md:mt-[2.38vw]'>
                             <li className='flex gap-x-[0.75vw] items-center max-md:gap-x-[1.78vw]'>
@@ -50,7 +50,7 @@ export default function WrapperForm({ t }) {
                                     />
                                 </svg>
                                 <span className='text-white title16-400-125 -tracking-[0.8px] w-[24.5vw] max-lg:w-[78.4vw] max-md:title-mb12-400-150 max-md:-tracking-[0.6px] max-lg:title-tl12'>
-                                    Đặt khách hàng làm trọng tâm trong mọi quyết định
+                                    {t?.deposit?.wrapper?.commitment?.detail?.title1}
                                 </span>
                             </li>
                             <li className='flex gap-x-[0.75vw] items-center max-md:gap-x-[1.78vw]'>
@@ -78,7 +78,7 @@ export default function WrapperForm({ t }) {
                                     />
                                 </svg>
                                 <span className='text-white title16-400-125 -tracking-[0.8px] w-[24.5vw] max-lg:w-[78.4vw] max-md:title-mb12-400-150 max-md:-tracking-[0.6px] max-lg:title-tl12'>
-                                    Những điều đã nói là những điều được làm
+                                    {t?.deposit?.wrapper?.commitment?.detail?.title2}
                                 </span>
                             </li>
                             <li className='flex gap-x-[0.75vw] items-center max-md:gap-x-[1.78vw]'>
@@ -106,14 +106,14 @@ export default function WrapperForm({ t }) {
                                     />
                                 </svg>
                                 <span className='text-white title16-400-125 -tracking-[0.8px] w-[24.5vw] max-lg:w-[78.4vw] max-md:title-mb12-400-150 max-md:-tracking-[0.6px] max-lg:title-tl12'>
-                                    Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không bán được nhà)
+                                    {t?.deposit?.wrapper?.commitment?.detail?.title3}
                                 </span>
                             </li>
                         </ul>
                     </div>
                     <div className='pl-[4.5vw] pr-[2.31vw] relative z-10 mt-[2.19vw] max-md:mt-[4.46vw] max-md:px-[2.6vw]'>
                         <span className='text-white title16-600-150 max-md:title-mb12-600-150 max-lg:title-tl12'>
-                            Miễn phí các dịch vụ bổ sung
+                            {t?.deposit?.wrapper?.additionalService?.title}
                         </span>
                         <div className='mt-[1vw] max-md:mt-[1.87vw] flex justify-between'>
                             <div className='flex gap-x-[0.75vw] max-md:gap-x-[2.21vw] w-full'>
@@ -157,11 +157,11 @@ export default function WrapperForm({ t }) {
                                 <div className='w-full'>
                                     <div className='flex justify-between w-full'>
                                         <span className='text-white title16-400-125 -tracking-[0.8px] max-md:title-mb12-600-150 max-md:-tracking-[0.6px] max-lg:title-tl12'>
-                                            Dịch vụ chụp ảnh chuyên nghiệp
+                                            {t?.deposit?.wrapper?.additionalService?.detail?.title1}
                                         </span>
                                         <div className='flex gap-x-[1.69vw] items-center max-md:gap-x-[4vw]'>
                                             <span className='text-white title16-600-125 max-md:title-mb12-600-150 max-lg:title-tl12'>
-                                                Tìm hiểu thêm
+                                                {t?.deposit?.wrapper?.button}
                                             </span>
                                             <svg
                                                 xmlns='http://www.w3.org/2000/svg'
@@ -200,10 +200,10 @@ export default function WrapperForm({ t }) {
                                     </div>
                                     <div className='w-full'>
                                         <p className='mt-[0.25vw] text-white opacity-75 title16-400-125 max-md:title-mb12-400-150 max-md:-tracking-[0.6px] -tracking-[0.8px] max-lg:title-tl12'>
-                                            Hình ảnh chất lượng cao, chuyên nghiệp
+                                            {t?.deposit?.wrapper?.additionalService?.detail?.subtitle1}
                                         </p>
                                         <p className='mt-[0.25vw] text-white opacity-75 title16-400-125 max-md:title-mb12-400-150 max-md:-tracking-[0.6px] -tracking-[0.8px] max-lg:title-tl12'>
-                                            Tiết kiệm đến 1.000.000 đồng so với thị trường
+                                            {t?.deposit?.wrapper?.additionalService?.detail?.subtitle2}
                                         </p>
                                     </div>
                                 </div>
@@ -216,11 +216,10 @@ export default function WrapperForm({ t }) {
             <div className='fixed z-50 md:top-[5.8vw] md:left-[42.0625vw] w-[calc(100vw-42.0625vw)] h-fit overflow-hidden pr-[7.5vw] pl-[1.5vw] pt-[3.75vw] max-md:pt-[16.05vw] flex flex-col justify-between bg-white max-lg:relative max-md:w-full max-md:px-[2.67vw] max-lg:!left-0 max-lg:w-full max-lg:px-[3.2vw]'>
                 <div>
                     <h2 className='title32-800-130 text-den -tracking-[1.6px] max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                        Ký gửi nhà đất với Kangnam
+                        {t?.deposit?.form?.title}
                     </h2>
                     <p className='text-den title16-400-150 mb-[3.4vw] mt-[0.5vw] max-md:hidden max-lg:title-tl16'>
-                        Do hạn chế về khu vực hoạt động của các sàn giao dịch, KangNam xin phép chỉ tiếp nhận nhà đất ký
-                        gửi từ khu vực A và B.
+                        {t?.deposit?.form?.subtitle}
                     </p>
                 </div>
             </div>

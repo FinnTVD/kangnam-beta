@@ -26,12 +26,14 @@ export default async function IndexProjectDetail({ lang, detail, t }) {
                         data={data}
                         detail={detail}
                         lang={lang}
+                        t={t}
                     />
                     <CommentFB data={data} />
                     <RelatedProject
                         lang={lang}
                         detail={detail}
                         data={data}
+                        t={t}
                     />
                 </main>
             )}

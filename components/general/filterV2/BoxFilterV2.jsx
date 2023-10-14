@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ItemFilterV2 from './ItemFilterV2'
 import { useMediaQuery } from 'react-responsive'
 
-export default function BoxFilterV2({ arrFilter, lang }) {
+export default function BoxFilterV2({ arrFilter, lang, t }) {
     const [indexFilter, setIndexFilter] = useState(null)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
 
@@ -20,6 +20,7 @@ export default function BoxFilterV2({ arrFilter, lang }) {
                         indexFilter={indexFilter}
                         lang={lang}
                         isMobile={isMobile}
+                        t={t}
                     />
                 ))}
         </ul>

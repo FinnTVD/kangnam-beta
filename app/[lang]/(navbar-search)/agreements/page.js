@@ -2,6 +2,13 @@ import IndexAgreements from '@/components/agreements'
 import NavBarV2 from '@/components/general/NavBarV2'
 import { getDictionary } from '../../dictionaries'
 
+export async function generateMetadata({ params: {lang}}){
+    const t = await getDictionary(lang)
+    return{
+        title: t?.metaData?.agreement?.title,
+        description: t?.metaData?.agreement?.description
+    }
+}
 export default async function Agreements({ params }) {
     const t = await getDictionary(params.lang)
 

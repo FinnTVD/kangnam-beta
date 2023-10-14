@@ -128,19 +128,19 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
                 <div className='border border-t border-white01'></div>
             </div>
             <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 max-lg:title-tl12 max-lg:px-[3.2vw]'>
-                Email:
+                {t?.menuRes?.email}
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb13-400-184 opacity-95 max-md:-mt-[1.6vw] max-lg:title-tl13 max-lg:px-[3.2vw] max-lg:mt-0'>
                 {data?.email}
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>
-                Địa chỉ:
+                {t?.menuRes?.address}
             </span>
             <address className='block text-white max-md:px-mb10 max-md:title-mb13-400-130 opacity-95 not-italic max-lg:title-tl13 max-lg:px-[3.2vw]'>
                 {data?.address}
             </address>
             <span className='block text-white max-md:px-mb10 max-md:title-mb12-400-200 opacity-50 mt-[2.13vw] max-lg:title-tl12 max-lg:px-[3.2vw]'>
-                Hotline:
+                {t?.menuRes?.hotline}
             </span>
             <span className='block text-white max-md:px-mb10 max-md:title-mb13-600-150 max-lg:title-tl13 max-lg:px-[3.2vw]'>
                 {data?.phone}

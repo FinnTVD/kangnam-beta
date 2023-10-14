@@ -100,10 +100,10 @@ export default function ListNews({ t, lang }) {
             <div className='flex items-center justify-between max-lg:flex-col max-lg:items-start max-lg:justify-normal'>
                 <div>
                     <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'>
-                        {t.newsList.subtitle} {category?.title}
+                        {t?.listNews?.section2?.subtitle} {category?.title}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25px] max-md:normal-case max-md:mt-[1.1vw] max-lg:title-tl38'>
-                        {t.newsList.title} {category?.title}
+                        {t?.listNews?.section2?.title} {category?.title}
                     </h2>
                 </div>
                 <div

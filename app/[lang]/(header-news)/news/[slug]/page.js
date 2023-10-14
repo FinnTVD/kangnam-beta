@@ -5,7 +5,7 @@ import IndexNewsDetail from '@/components/newsDetail'
 import { handleCheckLangCode } from '@/utils'
 import getData from '@/utils/getData'
 
-export async function generateMetadataNews({ params: { lang, slug } }) {
+export async function generateMetadata({ params: { lang, slug } }) {
     const data = await getData(`/post/post-by-slug/${slug}`)
     if (!data) return
     const dataDetail = data?.translations?.find((e) => e?.slug === slug)

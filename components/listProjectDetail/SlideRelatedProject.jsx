@@ -10,7 +10,7 @@ import { handleCheckLangCode } from '@/utils'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const arrProject = new Array(4).fill(0)
-export default function SlideRelatedProject({ lang, detail, dataDetail }) {
+export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
     const { data, error, isLoading } = useSWR(
         `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
@@ -120,6 +120,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
                                             height='14'
                                             viewBox='0 0 14 14'
                                             fill='none'
+                                            className='flex-shrink-0'
                                         >
                                             <g clipPath='url(#clip0_546_2319)'>
                                                 <path
@@ -138,7 +139,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
                                             </defs>
                                         </svg>
                                         <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 whitespace-nowrap max-lg:title-tl14'>
-                                            Địa chỉ:
+                                            {t?.relatedProjects?.item?.title1}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
@@ -158,7 +159,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
                                             />
                                         </svg>
                                         <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 max-lg:title-tl14'>
-                                            Diện tích:
+                                            {t?.relatedProjects?.item?.title2}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.translation?.size + ' m²'}
@@ -179,7 +180,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail }) {
                                             />
                                         </svg>
                                         <span className='ml-[0.5vw] mr-[0.25vw] max-md:ml-[2.13vw] max-md:title-mb14-700-150 max-md:mr-[0.75vw] text-nau-nhat title14-700-150 max-lg:title-tl14'>
-                                            Mức giá:
+                                            {t?.relatedProjects?.item?.title3}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.translation?.price}

@@ -43,10 +43,10 @@ export default function SearchHome({ data, lang, t }) {
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160 font-semibold uppercase'>
-                An tâm với 100% bất động sản được xác thực tại KANGNAM
+                {t?.homepage?.section1?.subtitle}
             </p>
             <h1 className='mt-[0.5vw] max-md:mt-[1.07vw] mb-[1.87vw] max-md:mb-[4.27vw] text-white capitalize title60 title-mb22-800-130 max-md:-tracking-[0.66px] title-tl42'>
-                Lựa chọn căn nhà ưng ý
+                {t?.homepage?.section1?.title}
             </h1>
             <SearchGlobal
                 isIcon={true}
@@ -54,7 +54,7 @@ export default function SearchHome({ data, lang, t }) {
             />
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw]'>
                 <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
-                    Gợi ý:
+                    {t?.homepage?.section1?.suggest}:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
                     {data?.suggest?.slice(0, 6)?.map((e, index) => (
