@@ -181,7 +181,6 @@ export default function ListProject({ lang, t, dataSlug }) {
             revalidateOnReconnect: false,
         },
     )
-    console.log('🚀 ~ file: ListProject.jsx:135 ~ ListProject ~ data:', data)
 
     useLayoutEffect(() => {
         if (typeof window === 'undefined') return
