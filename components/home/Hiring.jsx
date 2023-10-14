@@ -17,7 +17,7 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
-export default function Hiring({ lang }) {
+export default function Hiring({ lang, t }) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -79,11 +79,11 @@ export default function Hiring({ lang }) {
         <section className='w-full lg:hidden'>
             <div className='px-mb10 max-lg:px-[3.2vw]'>
                 <h2 className='text-den max-md:title-mb25-700-130 -tracking-[1.25px] max-lg:title-tl25 font-bold'>
-                    Dự án cho thuê
+                    {t?.homepage?.section3Mobile?.rent?.title}
                 </h2>
                 <span className='max-lg:title-tl14 max-md:title-mb14-400-150 text-den opacity-[0.65] block mb-[3.2vw]'>
-                    Hơn <span className='title-mb14-700-150 max-lg:font-bold'>{data?.meta?.itemCount || '500'}</span> dự
-                    án đang được phân phối
+                    {t?.homepage?.section3Mobile?.rent?.subtitle?.over} <span className='title-mb14-700-150 max-lg:font-bold'>{data?.meta?.itemCount || '500'}</span> {t?.homepage?.section3Mobile?.rent?.subtitle?.projectDistribution}
+                    
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
@@ -177,7 +177,7 @@ export default function Hiring({ lang }) {
                                             />
                                         </svg>
                                         <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 whitespace-nowrap max-lg:title-tl14 font-bold'>
-                                            Địa chỉ:
+                                            {t?.hiring?.address} :
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
@@ -209,7 +209,7 @@ export default function Hiring({ lang }) {
                                             </defs>
                                         </svg>
                                         <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
-                                            Diện tích:
+                                            {t?.hiring?.area} :
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                             {e?.translation?.size + ' m²'}
@@ -230,7 +230,7 @@ export default function Hiring({ lang }) {
                                             />
                                         </svg>
                                         <span className='ml-[2.13vw] mr-[0.7vw] text-nau-nhat max-md:title-mb14-700-150 max-lg:title-tl14 font-bold'>
-                                            Mức giá:
+                                            {t?.hiring?.price}
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                             {e?.translation?.priceDisplay}
@@ -250,7 +250,7 @@ export default function Hiring({ lang }) {
                     span='text-white '
                     stroke='white'
                 >
-                    Tất cả dự án
+                    {t?.hiring?.button}
                 </Button>
             </div>
         </section>

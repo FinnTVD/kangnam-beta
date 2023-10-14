@@ -3,9 +3,12 @@ import { getDictionary } from '../dictionaries'
 import BoxHeader from '@/components/home/BoxHeader'
 import getData from '@/utils/getData'
 
-export const metadata = {
-    title: 'Home | KANGNAM',
-    description: 'KangNam by OkHub',
+export async function generateMetadata({params: {lang}}){
+    const t = await getDictionary(lang)
+    return{
+        title: t?.metaData?.homepage?.title,
+        description: t?.metaData?.homepage?.description
+    }
 }
 
 export default async function RootLayout({ children, params }) {

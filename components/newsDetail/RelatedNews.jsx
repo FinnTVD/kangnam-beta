@@ -50,7 +50,7 @@ export default function RelatedNews({ t, lang, post }) {
                     {listNews?.map((item, index) => (
                         <div
                             key={index}
-                            className='bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb max-lg:w-[77.8vw] max-lg:flex-shrink-0'
+                            className='w-[27.3vw] bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb max-lg:w-[77.8vw] max-lg:flex-shrink-0'
                         >
                             <div className='w-full h-[16.1875vw] rounded-lg max-md:h-[56vw] max-lg:h-[40vw]'>
                                 <Skeleton

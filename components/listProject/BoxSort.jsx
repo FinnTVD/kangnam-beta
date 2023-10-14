@@ -1,28 +1,47 @@
 'use client'
 
 import { useState } from 'react'
-const arrFilter = [
-    {
-        title: 'Mới nhất',
-        value: 'new',
-    },
-    {
-        title: 'Giá tăng dần',
-        value: 'ASC',
-    },
-    {
-        title: 'Giá giảm dần',
-        value: 'DESC',
-    },
-]
+// const arrFilter = [
+//     {
+//         title: 'Mới nhất',
+//         value: 'new',
+//     },
+//     {
+//         title: 'Giá tăng dần',
+//         value: 'ASC',
+//     },
+//     {
+//         title: 'Giá giảm dần',
+//         value: 'DESC',
+//     },
+// ]
 
-const handleCheckStatusPrice = (price = '') => {
-    if (!price) return arrFilter[0]?.title
-    const a = arrFilter?.filter((e) => e?.value === price)
-    return a[0]?.title
-}
+// const handleCheckStatusPrice = (price = '') => {
+//     if (!price) return arrFilter[0]?.title
+//     const a = arrFilter?.filter((e) => e?.value === price)
+//     return a[0]?.title
+// }
 
-export default function BoxSort({ price, createQueryString, pathName, router }) {
+export default function BoxSort({ price, createQueryString, pathName, router, t }) {
+    const arrFilter = [
+        {
+            title: t?.projects?.filter2?.title1,
+            value: 'new',
+        },
+        {
+            title: t?.projects?.filter2?.title2,
+            value: 'ASC',
+        },
+        {
+            title: t?.projects?.filter2?.title3,
+            value: 'DESC',
+        },
+    ]
+    const handleCheckStatusPrice = (price = '') => {
+        if (!price) return arrFilter[0]?.title
+        const a = arrFilter?.filter((e) => e?.value === price)
+        return a[0]?.title
+    }
     const [isShow, setIsShow] = useState(false)
     return (
         <div className='relative w-fit z-10 select-none'>

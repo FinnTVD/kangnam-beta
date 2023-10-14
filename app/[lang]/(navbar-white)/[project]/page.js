@@ -8,6 +8,13 @@ import IndexAgreement from '@/components/agreement'
 import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
 
+export async function generateMetadata( { params: {lang}}){
+    const t = await getDictionary(lang)
+    return{
+        title: t?.metaData?.project?.title,
+        description: t?.metaData?.project?.description
+    }
+}
 export default async function Page({ params: { lang, project } }) {
     const t = await getDictionary(lang)
     const data = await getData('/property-category')

@@ -7,7 +7,7 @@ import InputCheckBox from './InputCheckBox'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
-const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile }) => {
+const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -100,7 +100,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
             >
                 <div className='px-[1.5vw] pt-[1.5vw] max-md:pt-[6.4vw] max-md:px-[5.87vw]'>
                     <p className='text-den title16-600-150 whitespace-nowrap mb-[1.5vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                        Chọn loại hình bất động sản
+                        {t?.projects?.filter1?.title}
                     </p>
                     <div
                         className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
@@ -127,17 +127,17 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                         }}
                         className='cursor-pointer title14-400-150 text-den max-md:title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw] max-lg:title-tl14'
                     >
-                        Đặt lại
+                        {t?.projects?.filter1?.reset}
                     </span>
                     <div className='flex gap-x-[0.63vw] max-md:gap-x-[2.67vw]'>
                         <div
                             onClick={() => setIndexFilter(-1)}
                             className='py-[0.28vw] px-[1vw] rounded-[10vw] border border-solid border-logo text-den title14-400-150 max-md:title-mb14-400-150 max-md:py-[1.2vw] max-md:px-[4.27vw] flex items-center justify-center cursor-pointer max-lg:title-tl14'
                         >
-                            Hủy
+                            {t?.projects?.filter1?.cancel}
                         </div>
                         <button className='py-[0.28vw] px-[1vw] rounded-[10vw] border border-solid border-logo text-logo title14-400-150 max-md:title-mb14-400-150 max-md:py-[1.2vw] max-md:px-[4.27vw] max-lg:title-tl14'>
-                            Áp dụng
+                            {t?.projects?.filter1?.apply}
                         </button>
                     </div>
                 </div>

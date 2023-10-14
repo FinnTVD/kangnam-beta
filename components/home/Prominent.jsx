@@ -21,7 +21,7 @@ const arrProminent = [
     { id: 3, src: '/images/bg-prominent3.jpeg', alt: 'bg-prominent3' },
     { id: 4, src: '/images/bg-prominent4.jpeg', alt: 'bg-prominent4' },
 ]
-export default function Prominent() {
+export default function Prominent({t}) {
     const [indexSlider, setIndexSlider] = useState(0)
     const swiperRef = useRef()
     const isMobile = useMediaQuery({
@@ -102,17 +102,17 @@ export default function Prominent() {
                         data-aos-duration='1000'
                         className='capitalize title60 title-tl42 title-mb30-800-130 max-md:-tracking-[0.9px] text-white'
                     >
-                        Nổi bật theo khu vực
+                        {t?.homepage?.section6?.title}
                     </h2>
                     <span className='mt-[0.75vw] max-md:mt-[2.13vw] mb-[1.5vw] max-lg:mt-[1.75vw] max-lg:max-lg:mb-[2.5vw] max-md:mb-[6.4vw] w-[21.5vw] max-md:w-full max-lg:w-[34.5vw] text-24pc max-lg:text-20tl font-normal leading-[1.3] block text-center max-md:text-20mb'>
-                        Căn hộ Vinhomes Grand Park hướng Bắc
+                        {t?.homepage?.section6?.description}
                     </span>
                     <Button
                         href='/'
                         className='text-white border-white'
                         stroke='white'
                     >
-                        Chi tiết dự án
+                        {t?.homepage?.section6?.button}
                     </Button>
                 </div>
                 {!isMobile && (

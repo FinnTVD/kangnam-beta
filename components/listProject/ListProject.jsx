@@ -22,40 +22,40 @@ import IconCurrency from '../icons/IconCurrency'
 import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
 const MapV4 = dynamic(() => import('../home/MapV2/MapV4'))
-const arrFilter = [
-    {
-        id: 1,
-        title: 'Loại hình',
-        slug: 'propertyTypeIds',
-        api: '/property-type',
-    },
-    {
-        id: 2,
-        title: 'Địa điểm',
-        slug: 'propertyAreaTypeIds',
-        api: '/property-area-type',
-    },
-]
-const arrFilter1 = [
-    {
-        id: 1,
-        title: 'Loại hình',
-        slug: 'propertyTypeIds',
-        api: '/property-type',
-    },
-    {
-        id: 2,
-        title: 'Địa điểm',
-        slug: 'propertyAreaTypeIds',
-        api: '/property-area-type',
-    },
-    {
-        id: 3,
-        title: 'Hình thức',
-        slug: 'propertyCategoryIds',
-        api: '/property-category',
-    },
-]
+// const arrFilter = [
+//     {
+//         id: 1,
+//         title: 'Loại hình',
+//         slug: 'propertyTypeIds',
+//         api: '/property-type',
+//     },
+//     {
+//         id: 2,
+//         title: 'Địa điểm',
+//         slug: 'propertyAreaTypeIds',
+//         api: '/property-area-type',
+//     },
+// ]
+// const arrFilter1 = [
+//     {
+//         id: 1,
+//         title: 'Loại hình',
+//         slug: 'propertyTypeIds',
+//         api: '/property-type',
+//     },
+//     {
+//         id: 2,
+//         title: 'Địa điểm',
+//         slug: 'propertyAreaTypeIds',
+//         api: '/property-area-type',
+//     },
+//     {
+//         id: 3,
+//         title: 'Hình thức',
+//         slug: 'propertyCategoryIds',
+//         api: '/property-category',
+//     },
+// ]
 
 const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
@@ -67,6 +67,40 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 gsap.registerPlugin(ScrollTrigger)
 export default function ListProject({ lang, t, dataSlug }) {
+    const arrFilter = [
+        {
+            id: 1,
+            title: t?.projects?.category,
+            slug: 'propertyTypeIds',
+            api: '/property-type',
+        },
+        {
+            id: 2,
+            title: t?.projects?.address,
+            slug: 'propertyAreaTypeIds',
+            api: '/property-area-type',
+        },
+    ]
+    const arrFilter1 = [
+        {
+            id: 1,
+            title: t?.projects?.category,
+            slug: 'propertyTypeIds',
+            api: '/property-type',
+        },
+        {
+            id: 2,
+            title: t?.projects?.address,
+            slug: 'propertyAreaTypeIds',
+            api: '/property-area-type',
+        },
+        {
+            id: 3,
+            title: 'Hình thức',
+            slug: 'propertyCategoryIds',
+            api: '/property-category',
+        },
+    ]
     const parentRef = useRef(null)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
@@ -202,10 +236,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                         <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
                                 <span className='opacity-50 text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
-                                    100% xác thực
+                                    {t?.projects?.subtitle}
                                 </span>
                                 <h3 className='text-den title32-800-130 max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl32'>
-                                    Mua bán nhà đất căn hộ
+                                    {t?.projects?.title}
                                 </h3>
                             </div>
                         </div>
@@ -217,9 +251,10 @@ export default function ListProject({ lang, t, dataSlug }) {
                         >
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
+                                t={t}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
-                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>Bản đồ</span>
+                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>{t?.projects?.map}</span>
                                 <div>{Element}</div>
                             </div>
                         </div>
@@ -227,17 +262,17 @@ export default function ListProject({ lang, t, dataSlug }) {
                             <div className='flex justify-between mt-[1.5vw] mb-[1vw]'>
                                 <div className='flex gap-x-[0.31vw] max-md:gap-x-[1.33vw]'>
                                     <span className='inline-block opacity-50 text-den title16-400-150 max-md:title-mb16-400-150 max-lg:title-tl16'>
-                                        Hiển thị
+                                        {t?.projects?.show}
                                     </span>
                                     <span className='inline-block text-den title16-600-150 max-md:title-mb16-600-150 max-lg:title-tl16'>
                                         {data?.meta?.take > data?.meta?.itemCount
                                             ? data?.meta?.itemCount
                                             : data?.meta?.take}{' '}
-                                        trong số hơn{' '}
+                                        {t?.projects?.over}{' '}
                                         {data?.meta?.itemCount > data?.meta?.take
                                             ? data?.meta?.take
                                             : data?.meta?.itemCount}{' '}
-                                        <span className='max-md:hidden'>nhà đất xác thực</span>
+                                        <span className='max-md:hidden'>{t?.projects?.validateProject}</span>
                                     </span>
                                 </div>
                                 <BoxSort
@@ -245,6 +280,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                     createQueryString={createQueryString}
                                     pathName={pathName}
                                     router={router}
+                                    t={t}
                                 />
                             </div>
                         </article>
@@ -288,7 +324,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                             data?.data?.map((e, index) => (
                                 <Link
                                     href={
-                                        (lang === 'vi' ? '' : lang + '/') +
+                                        (lang === 'vi' ? '' : `/${lang}` + '/') +
                                         (e?.propertyCategory?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.alias || 'du-an') +
@@ -350,7 +386,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 whitespace-nowrap max-lg:title-tl14'>
-                                                Địa chỉ:
+                                                {t?.projects?.item?.address}:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 line-clamp-1 max-lg:title-tl14'>
                                                 {e?.address?.ward +
@@ -367,7 +403,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14'>
-                                                Diện tích:
+                                                {t?.projects?.item?.area}:
                                             </span>
                                             <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translations?.find((e) =>
@@ -392,7 +428,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14'>
-                                                Mức giá:
+                                                {t?.projects?.item?.price}:
                                             </span>
                                             <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translations?.find((e) =>
@@ -443,7 +479,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                     <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
                 </div>
             </div>
-            {isTablet && <BtnShowMap />}
+            {isTablet && <BtnShowMap t={t}/>}
         </section>
     )
 }

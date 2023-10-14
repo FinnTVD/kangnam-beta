@@ -76,10 +76,10 @@ export default function Partner({ t }) {
                     className='max-md:flex max-md:flex-col max-md:items-center max-md:w-full'
                 >
                     <span className='sub-title max-md:title-mb12-600-160 max-md:tracking-[0.6px] max-lg:title-tl12'>
-                        {t.homepagePartners.subtitle}
+                        {t?.homepage?.section7?.subtitle}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-0 max-md:normal-case max-lg:title-tl38'>
-                        {t.homepagePartners.title}
+                        {t?.homepage?.section7?.title}
                     </h2>
                 </div>
                 {!isTablet && (
@@ -88,7 +88,7 @@ export default function Partner({ t }) {
                         href={'/'}
                         className='text-white border-none bg-logo max-lg:title-tl16'
                     >
-                        {t.homepagePartners.button}
+                        {t?.homepage?.section7?.button}
                     </Button>
                 )}
             </div>
@@ -299,7 +299,7 @@ export default function Partner({ t }) {
                     icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]'
                     className='bg-[#D6A279] w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw]'
                 >
-                    {t.homepagePartners.button}
+                    {t?.homepage?.section7?.button}
                 </Button>
             )}
         </section>

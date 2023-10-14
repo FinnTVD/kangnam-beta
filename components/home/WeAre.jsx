@@ -25,15 +25,13 @@ export default function WeAre({ lang, t }) {
                             className='w-[40.2vw] h-fit max-lg:w-full'
                         >
                             <span className='sub-title max-lg:tracking-[0.5px] max-lg:uppercase title-mb10-700-150 title-tl12-700-150'>
-                                Câu chuyện thương hiệu
+                                {t?.homepage?.section2?.subtitle}
                             </span>
                             <h2 className='text-vang-nhe mt-[0.12vw] mb-[1vw] max-lg:mt-[1.07vw] max-lg:mb-[2.27vw] max-md:mb-[4.27vw] -tracking-[1.12px] title56 title-tl38 title-mb25-700-130 max-lg:-tracking-[1.25px]'>
-                                Chúng tôi là ai
+                                {t?.homepage?.section2?.title}
                             </h2>
                             <p className='text-vang-nhe title16-400-150 title-tl16-400-150 title-mb14-400-150 w-[38vw] max-lg:w-full'>
-                                Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp,
-                                chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung
-                                với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản
+                                {t?.homepage?.section2?.description}
                             </p>
                             <ul className='flex my-[2.5vw] max-md:mt-[6.4vw] max-md:mb-[8.8vw] max-lg:mt-[3.4vw] max-lg:mb-[4.8vw] max-md:justify-between'>
                                 <li className='flex flex-col items-center gap-y-[1vw] max-lg:gap-y-[2.93vw] max-lg:text-center max-md:w-[18.67vw] max-lg:w-fit'>
@@ -45,7 +43,7 @@ export default function WeAre({ lang, t }) {
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
-                                        Cam kết xác thực
+                                        {t?.homepage?.section2?.detail?.title1}
                                     </span>
                                 </li>
                                 <li className='flex flex-col items-center gap-y-[1vw] max-lg:gap-y-[2.93vw] max-lg:text-center ml-[3.75vw] mr-[3.12vw] max-md:w-[25.067vw] max-lg:w-fit'>
@@ -57,7 +55,7 @@ export default function WeAre({ lang, t }) {
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
-                                        Trọn hỗ trợ, chi phí thấp
+                                        {t?.homepage?.section2?.detail?.title2}
                                     </span>
                                 </li>
                                 <li className='flex flex-col items-center gap-y-[1vw] max-lg:gap-y-[2.93vw] max-lg:text-center max-md:w-[20vw] max-lg:w-fit'>
@@ -69,16 +67,16 @@ export default function WeAre({ lang, t }) {
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
                                     <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
-                                        Thủ tục nhanh chóng
+                                        {t?.homepage?.section2?.detail?.title3}
                                     </span>
                                 </li>
                             </ul>
                             <div className='flex gap-x-[1.5vw] max-lg:gap-x-[2.67vw] relative z-[99999]'>
                                 <Link
-                                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
+                                    href={'/' + lang + t?.Navbar?.listNav[0]?.href || '/' + lang + '/du-an'}
                                     className='group flex justify-center items-center gap-x-[0.5vw] max-lg:gap-x-[1vw] max-md:gap-x-[2.13vw] rounded-[10vw] py-[1vw] px-[2.06vw] max-md:py-[4vw] max-lg:py-[2vw] max-lg:px-[4.41vw] title-tl14-400-150 bg-transparent text-logo border border-solid border-logo title16-400-150 max-md:px-[8.41vw] max-md:box-content title-mb14-400-150 h-fit'
                                 >
-                                    Xem dự án
+                                    {t?.homepage?.section2?.button?.secondary}
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='8'
@@ -99,7 +97,7 @@ export default function WeAre({ lang, t }) {
                                     href={'/' + lang + '/about-us'}
                                     className='flex justify-center gap-x-[0.5vw] max-lg:gap-x-[1vw] items-center group relative rounded-[10vw] text-white py-[1vw] px-[2.06vw] bg-logo title16-400-150 overflow-hidden title-mb14-400-150 max-lg:py-[2vw] max-lg:px-[4.67vw] title-tl14-400-150 max-md:py-[4vw] max-md:px-[6.67vw] max-md:box-content max-md:gap-x-[3.2vw] h-fit'
                                 >
-                                    Về chúng tôi
+                                    {t?.homepage?.section2?.button?.primary}
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='8'

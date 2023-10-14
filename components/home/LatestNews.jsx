@@ -29,10 +29,10 @@ export default function LatestNews({ t, lang }) {
                     data-aos-duration='1000'
                 >
                     <span className='sub-title max-md:title-mb12-600-160 max-md:leading-[1.5] max-md:tracking-[0.6px] max-lg:title-tl12'>
-                        {t.homepageNews.subtitle}
+                        {t?.homepage?.section8?.subtitle}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-0.75px] max-md:mt-[2.1vw] max-md:normal-case max-lg:title-tl38'>
-                        {t.homepageNews.title}
+                        {t?.homepage?.section8?.title}
                     </h2>
                 </div>
                 {!isTablet && (
@@ -41,7 +41,7 @@ export default function LatestNews({ t, lang }) {
                         className='bg-logo text-white border-none'
                         href={'/news'}
                     >
-                        {t.homepageNews.button}
+                        {t?.homepage?.section8?.button}
                     </Button>
                 )}
             </div>
@@ -134,7 +134,7 @@ export default function LatestNews({ t, lang }) {
                     icon='w-auto max-md:h-[4.5vw] max-lg:h-[2vw]'
                     className='bg-logo w-full mt-[8.26vw] justify-center text-white border-none max-md:gap-x-[3.2vw] max-md:py-[4.26vw]'
                 >
-                    {t.homepageNews.button}
+                    {t?.homepage?.section8?.button}
                 </Button>
             )}
         </section>

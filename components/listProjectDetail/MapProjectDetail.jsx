@@ -40,23 +40,23 @@ export default function MapProjectDetail({ dataDetail, data }) {
                     <div style="width:fit-content;height:fit-content">
                         <div
                             key=${data?.id}
-                            class="flex gap-x-[0.88vw]"
+                            class="flex gap-x-[0.88vw] max-md:flex-col max-md:items-center"
                         >
                             <img
-                                class="w-[5.4375vw] h-[4.75vw] block object-cover"
+                                class="w-[5.4375vw] h-[4.75vw] block object-cover max-md:w-[40%] max-md:h-[15vw]"
                                 src=${data?.firstImage || '/images/itemproject.jpg'}
                                 alt=${dataDetail?.name || 'marker'}
                             />
-                            <div class="w-[12.0625vw]">
+                            <div class="w-[12.0625vw] max-md:w-full">
                                 <h2 class='line-clamp-1 text-den'>${dataDetail.name ?? ''}</h2>
                                 <div
                                             title=${data?.address?.display}
                                             class='flex items-center'
                                         >
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap'>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap max-md:text-[2.8vw]'>
                                                 Địa chỉ:
                                             </span>
-                                            <span class='capitalize text-black title14-400-150 line-clamp-1'>
+                                            <span class='capitalize text-black title14-400-150 line-clamp-1 max-md:text-[2.8vw]'>
                                                 ${
                                                     data?.address?.name +
                                                     ', ' +
@@ -67,19 +67,19 @@ export default function MapProjectDetail({ dataDetail, data }) {
                                             </span>
                                         </div>
                                         <div class='flex items-center my-[0.5vw]'>
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 max-md:text-[2.8vw]'>
                                                 Diện tích:
                                             </span>
-                                            <span class=' text-black title14-400-150'>
+                                            <span class=' text-black title14-400-150 max-md:text-[2.8vw]'>
                                                 ${dataDetail.size + ' m²'}
                                             </span>
                                         </div>
                                         <div class='flex items-center'>
                                             
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150'>
+                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 max-md:text-[2.8vw]'>
                                                 Mức giá:
                                             </span>
-                                            <span class='capitalize text-black title14-400-150'>
+                                            <span class='capitalize text-black title14-400-150 max-md:text-[2.8vw]'>
                                                 ${dataDetail.priceDisplay}
                                             </span>
                                         </div>

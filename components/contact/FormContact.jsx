@@ -48,26 +48,45 @@ const listSocial = [
     },
 ]
 
-const schema = yup
+// const schema = yup
+//     .object({
+//         name: yup.string().required('Vui lòng điền họ tên!'),
+//         phone: yup
+//             .string()
+//             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
+//                 if (value && isNaN(value)) {
+//                     return false
+//                 }
+//                 return true
+//             })
+//             .required('Vui lòng điền số điện thoại!'),
+//         email: yup
+//             .string()
+//             .required('Vui lòng điền email!')
+//             .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
+//     })
+//     .required()
+
+export default function FormContact({dataInfo, t}) {
+    const schema = yup
     .object({
-        name: yup.string().required('Vui lòng điền họ tên!'),
+        name: yup.string().required(t?.contact?.notification?.name?.required),
         phone: yup
             .string()
-            .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
+            .test('is-number', t?.contact?.notification?.phone?.invalid, (value) => {
                 if (value && isNaN(value)) {
                     return false
                 }
                 return true
             })
-            .required('Vui lòng điền số điện thoại!'),
+            .required(t?.contact?.notification?.phone?.required),
         email: yup
             .string()
-            .required('Vui lòng điền email!')
-            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
+            .required(t?.contact?.notification?.email?.required)
+            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, t?.contact?.notification?.email?.invalid),
     })
     .required()
 
-export default function FormContact({dataInfo}) {
     const [valueCategory, setValueCategory] = useState('')
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
 
@@ -118,7 +137,7 @@ export default function FormContact({dataInfo}) {
                     />
                     <div className='relative z-10 px-[1.75vw] pt-[1.5vw] pb-[2.31vw] rounded-[1vw] border border-solid border-white09 backdrop-blur-[11.1199px] bg-white07 w-full h-fit max-md:px-[3.2vw] max-md:pt-[5.6vw] max-md:pb-[4.53vw] max-md:rounded-[2.1vw]'>
                         <span className='sub-title text-[#926B4F] block mb-[1.25vw] max-md:mb-[4.27vw] max-md:title-mb14-700-130 max-lg:title-tl14'>
-                            Thông tin liên hệ
+                            {t?.contact?.section2?.infoTitle}
                         </span>
                         <ul className='flex flex-col gap-y-[1vw] max-md:gap-y-[3.2vw]'>
                             <li className='flex gap-x-[0.5vw] max-md:gap-x-[1.07vw] items-center max-md:items-start'>
@@ -163,9 +182,9 @@ export default function FormContact({dataInfo}) {
                     </div>
                 </div>
                 <div className='flex-1'>
-                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>Kết nối với chúng tôi</span>
+                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>{t?.contact?.section2?.subtitle}</span>
                     <h2 className='text-den title56 max-md:mt-[1.07vw] max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                        Điền thông tin
+                        {t?.contact?.section2?.title}
                     </h2>
                     <form
                         className='flex flex-col gap-y-[2vw] mt-[1.25vw] max-md:mt-[4.27vw] max-md:gap-y-[5.33vw]'
@@ -241,13 +260,13 @@ export default function FormContact({dataInfo}) {
                             full={true}
                             type='submit'
                         >
-                            Gửi thông tin
+                            {t?.contact?.section2?.button}
                         </Button>
                     </form>
                     <hr className='bg-[#D9D9D9] mt-[2.13vw] mb-[1.5vw] max-md:mb-[6.4vw] max-md:mt-[4.27vw] max-lg:mt-[4vw] max-lg:mb-[3vw]' />
                     <div className='flex items-start justify-between max-md:flex-col'>
                         <span className='w-fit text-20pc leading-[1.4] font-extrabold text-den max-md:text-20mb max-lg:title-tl20'>
-                            Liên hệ ngay:
+                            {t?.contact?.section2?.contactAction}
                         </span>
                         <ul className='flex gap-x-[1vw] max-md:gap-x-[4.27vw] max-md:mt-[2.67vw]'>
                             {listSocial &&

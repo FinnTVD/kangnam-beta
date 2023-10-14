@@ -13,13 +13,13 @@ export default function ProjectProminent({ children, lang, t }) {
                     data-aos-duration='1000'
                     className='px-mb10'
                 >
-                    <span className='sub-title max-md:hidden title-tl12-700-150'>Tổng hợp các bất động sản</span>
+                    <span className='sub-title max-md:hidden title-tl12-700-150'>{t?.homepage?.section5?.subtitle}</span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:mb-0 mb-[3vw] title-mb25-700-130 max-md:-tracking-[0.75px] title-tl38'>
-                        Bất động sản nổi bật
+                        {t?.homepage?.section5?.title}
                     </h2>
                     <span className='title-mb14-400-150 text-den opacity-[0.65] block mb-[4.27vw] md:hidden'>
-                        Hơn <span className='title-mb14-700-150'>{dataHomePage?.properties?.length || '0'}</span> dự án
-                        đang được phân phối
+                        {t?.homepage?.section5?.over} <span className='title-mb14-700-150'>{dataHomePage?.properties?.length || '0'}</span> {t?.homepage?.section5?.projectDistribution}
+                        
                     </span>
                 </div>
                 <Button
@@ -28,7 +28,7 @@ export default function ProjectProminent({ children, lang, t }) {
                     span='text-white'
                     stroke='white'
                 >
-                    Xem tất cả
+                    {t?.homepage?.section5?.button}
                 </Button>
             </div>
             <SlideProjectProminent
@@ -37,13 +37,13 @@ export default function ProjectProminent({ children, lang, t }) {
             />
             <div className='px-mb10 md:hidden'>
                 <Button
-                    href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
+                    href={'/' + lang + t?.Navbar?.listNav[0]?.href || '/' + lang + '/du-an'}
                     className='border-none bg-logo max-md:mt-[6.19vw] md:hidden'
                     span='text-white'
                     stroke='white'
                     full={true}
                 >
-                    Tất cả dự án
+                    {t?.homepage?.section5?.button}
                 </Button>
             </div>
             {children}

@@ -18,10 +18,10 @@ export default function Contact({ t, lang, dataInfo }) {
             <div className='flex justify-between items-end'>
                 <div>
                     <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6] max-lg:title-tl12'>
-                        {t?.aboutUsContact?.subtitle}
+                        {t?.aboutUs?.section5?.subtitle}
                     </span>
                     <h2 className='title56 text-den mt-[0.62vw] max-md:title-mb25-700-130 max-md:tracking-[-1.25] max-md:mt-[1.1vw] max-lg:title-tl38'>
-                        {t?.aboutUsContact?.title}
+                        {t?.aboutUs?.section5?.title}
                     </h2>
                 </div>
                 {!isTablet && (
@@ -32,7 +32,7 @@ export default function Contact({ t, lang, dataInfo }) {
                         span='max-lg:title-tl16'
                     >
                         {' '}
-                        {t.aboutUsContact.button}{' '}
+                        {t?.aboutUs?.section5?.button}{' '}
                     </Button>
                 )}
             </div>
@@ -40,7 +40,7 @@ export default function Contact({ t, lang, dataInfo }) {
                 <div className='max-md:absolute max-md:top-[50%] max-md:left-[50%] max-md:z-[2] max-md:w-full max-md:translate-x-[-50%] max-md:translate-y-[-50%]'>
                     <div className='max-md:relative max-md:py-[8vw] max-md:px-[4.2vw]'>
                         <h3 className='title32-600-127 text-den relative max-md:z-[3] max-md:text-white max-md:text-20mb max-md:font-bold max-md:leading-[1.27] max-md:tracking-[-1px] max-lg:title-tl24'>
-                            {title}
+                            {t?.aboutUs?.section5?.headquarter}
                         </h3>
                         <div className='mt-[1.1875vw] relative max-md:z-[3] max-md:mt-[4.2vw]'>
                             <div className='flex items-center'>

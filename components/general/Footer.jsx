@@ -14,7 +14,7 @@ export default function Footer({ lang, t, dataInfo }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const addr = 'Villa e11, The Manor, KĐT mới Mỹ Đình - Mễ Trì, Nam từ Liêm, Hà Nội'
     // const phoneArr = ['0637 858 974', '0337 858 892', '0837 858 357']
-    const menuArr = t.footerNav
+    const menuArr = t?.footerNav
     const serviceArr = ['Dự án mới', 'Thiết kế nhà đẹp', 'Ký gửi bất động sản']
     const copyright = '© 2023 Copyright. Powered by OKHUB Viet Nam'
     const languageCode = handleCheckLangCode(lang)
@@ -252,7 +252,7 @@ export default function Footer({ lang, t, dataInfo }) {
                     <div className='max-w-[19.6875vw] max-md:max-w-full max-md:py-[6.4vw] max-lg:max-w-[50%]'>
                         <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130 max-lg:title-tl18'>
                             {' '}
-                            {t.footer.title1}{' '}
+                            {t?.footer?.contact?.title}{' '}
                         </h2>
                         <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
                             <div className='flex items-center'>
@@ -294,10 +294,10 @@ export default function Footer({ lang, t, dataInfo }) {
                     <div className='max-md:max-w-full max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw] max-lg:max-w-[50%]'>
                         <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130 max-lg:title-tl18'>
                             {' '}
-                            {t.footer.title2}{' '}
+                            {t?.footer?.navigation?.title}{' '}
                         </h2>
                         <div className='mt-[1.25vw] flex flex-col items-baseline gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
-                            {menuArr.map((menu, index) => (
+                            {t?.footer?.navigation?.list?.map((menu, index) => (
                                 <Link
                                     href={lang === 'vi' ? menu?.href : `/${lang + menu?.href}`}
                                     key={index}
@@ -320,15 +320,15 @@ export default function Footer({ lang, t, dataInfo }) {
                     <div className='max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw]'>
                         <h2 className='uppercase text-nau-nhat title18-700-130 max-md:title-mb18-700-130 max-lg:title-tl18'>
                             {' '}
-                            {t.footer.title3}{' '}
+                            {t?.footer?.service?.title}{' '}
                         </h2>
                         <div className='mt-[1.25vw] flex flex-col gap-[0.75vw] max-md:mt-[4.2vw] max-md:gap-[2.6vw]'>
-                            {serviceArr.map((service, index) => (
+                            {t?.footer?.service?.list?.map((service, index) => (
                                 <span
                                     key={index}
                                     className='text-den-2 title16-400-130 max-md:title-mb16-400-130 max-lg:title-tl16'
                                 >
-                                    {service}
+                                    {service.title}
                                 </span>
                             ))}
                         </div>

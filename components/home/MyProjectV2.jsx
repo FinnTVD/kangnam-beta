@@ -168,15 +168,16 @@ export default function MyProjectV2({ lang, t }) {
                 data-aos-duration='1000'
                 className='pr-[7.5vw] title56'
             >
-                Dự án của chúng tôi
+                {t?.homepage?.section3?.title}
             </h2>
             <div className='flex justify-between items-center pr-[7.5vw] mb-[2vw] mt-[1.5vw]'>
                 <BoxFilterV2
                     arrFilter={arrFilter}
                     lang={lang}
+                    t={t}
                 />
                 <div className='flex gap-x-[1.5vw] items-center'>
-                    <span className='text-black title16-400-150 h-fit'>Hiển thị bản đồ</span>
+                    <span className='text-black title16-400-150 h-fit'>{t?.homepage?.section3?.showMap}</span>
                     <div>{Element}</div>
                 </div>
             </div>
@@ -279,7 +280,7 @@ export default function MyProjectV2({ lang, t }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150 whitespace-nowrap'>
-                                                Địa chỉ:
+                                                {t?.projects?.item?.address}
                                             </span>
                                             <span className='capitalize text-den title14-400-150 line-clamp-1'>
                                                 {e?.address?.ward +
@@ -296,7 +297,7 @@ export default function MyProjectV2({ lang, t }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
-                                                Diện tích:
+                                                {t?.projects?.item?.area}
                                             </span>
                                             <span className=' text-den title14-400-150'>
                                                 {e?.translations?.find((e) =>
@@ -321,7 +322,7 @@ export default function MyProjectV2({ lang, t }) {
                                                 }
                                             />
                                             <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
-                                                Mức giá:
+                                                {t?.projects?.item?.price}
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
                                                 {e?.translations?.find((e) =>
@@ -359,12 +360,12 @@ export default function MyProjectV2({ lang, t }) {
                             <div></div>
                         )}
                         <Button
-                            href={'/' + lang + t.Navbar.listNav[0].href || '/' + lang + '/du-an'}
+                            href={'/' + lang + t?.Navbar?.listNav[0]?.href || '/' + lang + '/du-an'}
                             className='border-none bg-logo mt-[2.5vw]'
                             stroke='white'
                             span='text-white font-semibold -tracking-[0.32px]'
                         >
-                            Xem tất cả
+                            {t?.homepage?.section3?.button}
                         </Button>
                     </div>
                 </div>

@@ -4,6 +4,13 @@ import NavBarV2 from '@/components/general/NavBarV2'
 import getData from '@/utils/getData'
 import FeatureHome from '@/components/home/FeatureHome'
 
+export async function generateMetadata( {params: {lang}} ){
+    const t = await getDictionary(lang)
+    return{
+        title: t?.metaData?.deposit?.title,
+        description: t?.metaData?.deposit?.description
+    }
+}
 export default async function DepositPage({ params: { lang } }) {
     const t = await getDictionary(lang)
     const data = await getData('/site-infor')

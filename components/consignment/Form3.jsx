@@ -10,7 +10,7 @@ import postData from '@/utils/postData'
 import { notifyError, notifySuccess } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function Form3({ handlePrevSlide, isMobile }) {
+export default function Form3({ handlePrevSlide, isMobile, t }) {
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
     const setTriggerSubmit = useStore((state) => state.setTriggerSubmit)
     const triggerSubmit = useStore((state) => state.triggerSubmit)
@@ -19,7 +19,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
     const [files, setFiles] = useState([])
     const [isOpen, setIsOpen] = useState(false)
     const [valueType, setValueType] = useState({
-        title:"Loại hình",
+        title: t?.deposit?.form?.form3?.detailInput?.input1,
         id:null
     })
     const [valueArea, setValueArea] = useState('')
@@ -35,7 +35,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
     })
     const [validateFiles, setValidateFiles] = useState({
         status: false,
-        title: 'Cần ít nhất 3 ảnh để xuất bản!',
+        title: t?.deposit?.form?.form3?.validateFiles,
     })
     const fileRef = useRef()
 
@@ -55,7 +55,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
         setSelectedImage([])
         setFiles([])
         setValueType({
-            title:"Loại hình",
+            title: t?.deposit?.form?.form3?.detailInput?.input1,
             id:null
         })
         setValueArea('')
@@ -214,7 +214,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                     onClick={handlePrevSlide}
                     className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
-                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>Trở lại</span>
+                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>{t?.deposit?.form?.form3?.back}</span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='11'
@@ -238,7 +238,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                 >
                     <div className='relative'>
                         <h3 className='title24-800-150 -tracking-[1.2px] text-den max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
-                            Thông tin bất động sản
+                            {t?.deposit?.form?.form3?.title}
                         </h3>
                         <div className='relative w-full mt-[1.25vw] max-md:mt-[4.27vw]'>
                             <textarea
@@ -262,11 +262,11 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     valueDescription?.validate ? 'text-red-400 ' : 'text-[#646464]'
                                 } absolute left-[1vw] px-[0.5vw] max-md:px-[1.27vw] max-md:left-[3vw] bg-white cursor-pointer title16-400-150 max-md:title-mb12-400-150 transition-all duration-300 max-lg:title-tl12`}
                             >
-                                Mô tả nhà đất <span className='text-red-400'> *</span>
+                                {t?.deposit?.form?.form3?.descriptionInput} <span className='text-red-400'> *</span>
                             </label>
                         </div>
                         <span className='block mt-[1.5vw] max-md:mt-[4.27vw] mb-[1vw] max-md:mb-[2.67vw] text-black title16-600-150 max-md:title-mb14-600-150 max-lg:title-tl14'>
-                            Thông tin chi tiết
+                            {t?.deposit?.form?.form3?.detailInput?.title}
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
                             <div className='relative flex flex-1'>
@@ -321,7 +321,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Diện tích'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input2}
                                 onChange={handleChangeArea}
                                 value={valueArea}
                                 register={'area'}
@@ -337,7 +337,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Số tầng'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input3}
                                 onChange={handleChangeNumberFloors}
                                 value={valueNumberFloors}
                                 register={'numberFloors'}
@@ -351,7 +351,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Hướng nhà'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input4}
                                 onChange={handleChangeHomeOrientation}
                                 value={valueHomeOrientation}
                                 register={'homeOrientation'}
@@ -366,7 +366,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Loại công trình'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input5}
                                 onChange={handleChangeBuildingType}
                                 value={valueBuildingType}
                                 register={'buildingType'}
@@ -379,7 +379,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Hướng ban công'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input6}
                                 onChange={handleChangeBalconyOrientation}
                                 value={valueBalconyOrientation}
                                 register={'balconyOrientation'}
@@ -394,7 +394,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 max-md:title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw] max-lg:title-tl12'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Nội thất'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input7}
                                 value={valueInterior}
                                 onChange={handleChangeInterior}
                                 register={'interior'}
@@ -407,7 +407,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     'w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] text-den title16-400-150 title-mb12-400-150 max-md:py-[2.93vw] max-md:px-[6.4vw]'
                                 }
                                 labelClass={'title16-400-500 max-md:title-mb12-400-150 max-lg:title-tl12'}
-                                labelContent={'Pháp lý'}
+                                labelContent={t?.deposit?.form?.form3?.detailInput?.input8}
                                 onChange={handleChangeLegal}
                                 value={valueLegal}
                                 register={'legal'}
@@ -424,14 +424,14 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                     validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#646464]'
                                 } cursor-pointer max-md:title-mb14-400-150 title16-400-150 max-lg:title-tl14`}
                             >
-                                Hình ảnh *
+                                {t?.deposit?.form?.form3?.pictureInput?.title} *
                             </label>
                             <div className='flex gap-x-[0.5vw] items-center title16-400-150'>
                                 <span className='border border-solid text-12pc text-black border-black rounded-full w-[1vw] h-[1vw] max-md:w-[3vw] max-md:h-[3vw] flex justify-center items-center max-md:text-10mb max-md:font-normal max-md:leading-normal max-lg:title-tl10 max-lg:w-[2vw] max-lg:h-[2vw]'>
                                     !
                                 </span>
                                 <span className='text-[#313131] underline title16-600-150 max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                    Tiêu chuẩn hình ảnh
+                                    {t?.deposit?.form?.form3?.pictureInput?.standard}
                                 </span>
                             </div>
                         </div>
@@ -482,14 +482,14 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#454545]'
                                     } mt-[0.5vw] max-md:mt-[2.13vw] max-md:mb-[1.07vw] mb-[0.25vw] title14-700-150 select-none max-md:title-mb12-700-150 max-md:text-center max-lg:title-tl12`}
                                 >
-                                    Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên
+                                    {t?.deposit?.form?.form3?.pictureInput?.drop}
                                 </p>
                                 <p
                                     className={`${
                                         validateFiles.status && validateFiles.title ? 'text-red-400' : 'text-[#C7C7C7]'
                                     } title12-400-150 select-none max-md:title-mb10-400-150 max-md:text-center max-md:px-[6.67vw] max-lg:title-tl10`}
                                 >
-                                    Đề xuất tỉ lệ hình ảnh tốt nhất là 1600 x 900 (16:9). Giới hạn 2MB/ ảnh
+                                    {t?.deposit?.form?.form3?.pictureInput?.recommend}
                                 </p>
                             </div>
                             <div className='absolute bottom-[1vw] left-0'>
@@ -546,7 +546,7 @@ export default function Form3({ handlePrevSlide, isMobile }) {
                                 span='text-white font-semibold -tracking-[0.32px] title-mb14-600-150 max-md:-tracking-[0.28px]'
                                 icon='w-[1vw] h-[1vw]'
                             >
-                                Gửi thông tin
+                                {t?.deposit?.form?.form3?.pictureInput?.button}
                             </Button>
                         </div>
                     </div>

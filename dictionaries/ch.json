@@ -4,7 +4,7 @@
             {
                 "id": 4,
                 "title": "Dự án",
-                "href": "/项目"
+                "href": "/du-an"
             },
             {
                 "id": 5,
@@ -24,89 +24,457 @@
                         "id": 2,
                         "title": "Liên hệ",
                         "href": "/contact"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Thỏa thuận & pháp lý",
+                        "href": "/agreements"
                     }
                 ]
             }
         ],
-        "button": "Land deposit",
-        "title": "Select Language"
+        "button": "Kí gửi nhà đất",
+        "title": "Chọn ngôn ngữ"
     },
     "Form1": {
-        "sell": "所需销售价格",
-        "hire": "所需租金"
+        "sell": "Giá bán mong muốn",
+        "hire": "Giá thuê mong muốn"
     },
-
-    "homepageNews": {
-        "subtitle": "新闻综合",
-        "title": "最新消息",
-        "button": "查看全部"
-    },
-    "homepagePartners": {
-        "subtitle": "合作伙伴综合",
-        "title": "我们的伙伴",
-        "button": "成为合伙人"
-    },
-    "footer": {
-        "title1": "接触",
-        "title2": "导航",
-        "title3": "服务"
-    },
-
     "aboutUsStory": {
-        "subtitle": "品牌故事",
-        "title": "介绍"
+        "subtitle": "Câu chuyện thương hiệu",
+        "title": "Giới thiệu",
+        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
     },
     "aboutUsTeams": {
-        "subtitle": "江南专家",
-        "title": "江南专家"
+        "subtitle": "Đội ngũ",
+        "title": "Chuyên viên Kangnam",
+        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
     },
     "aboutUsContact": {
-        "subtitle": "接触",
-        "title": "文字信息",
-        "button": "文字信息"
+        "subtitle": "Liên hệ",
+        "title": "Thông tin văn phòng",
+        "button": "Liên hệ ngay"
     },
-
     "newsList": {
-        "subtitle": "新闻关于",
-        "title": "消息"
+        "subtitle": "Tin tức về",
+        "title": "Tin tức"
     },
     "newsDetailDes": {
-        "byAuthor": "撰写者",
-        "share": "分享吧"
+        "byAuthor": "Viết bởi",
+        "share": "Chia sẻ lên"
     },
     "newsDetailRelated": {
-        "subtitle": "新闻聚合器",
-        "title": "相关新闻",
-        "button": "查看全部"
+        "subtitle": "Tổng hợp tin tức",
+        "title": "Tin tức liên quan",
+        "button": "Xem tất cả"
     },
     "newsLatestButton": {
-        "title": "细节"
+        "title": "Chi tiết"
     },
-    "footerNav": [
-        {
-            "id": 1,
-            "title": "Trang chủ",
-            "href": "/"
+    "menuNav": {
+        "nav1": [
+            {
+                "id": 1,
+                "title": "Trang chủ",
+                "href": "/"
+            },
+            {
+                "id": 2,
+                "title": "Dự án",
+                "href": "/projects"
+            },
+            {
+                "id": 3,
+                "title": "Bán lại",
+                "href": "/resale"
+            },
+            {
+                "id": 4,
+                "title": "Thỏa thuận & pháp lý",
+                "href": "/agreements"
+            }
+        ],
+        "nav2": [
+            {
+                "id": 1,
+                "title": "Về Kangnam",
+                "href": "/about-us"
+            },
+            {
+                "id": 2,
+                "title": "Tin tức",
+                "href": "/news"
+            },
+            {
+                "id": 3,
+                "title": "Liên hệ",
+                "href": "/contact"
+            }
+        ]
+    },
+    "footer": {
+        "contact": {
+            "title": "Liên hệ"
         },
-        {
-            "id": 2,
-            "title": "Về Kangnam",
-            "href": "/about-us"
+        "navigation": {
+            "title": "Điều hướng chung",
+            "list": [
+                {
+                    "id": 1,
+                    "title": "Trang chủ",
+                    "href": "/"
+                },
+                {
+                    "id": 2,
+                    "title": "Về Kangnam",
+                    "href": "/about-us"
+                },
+                {
+                    "id": 3,
+                    "title": "Dự án",
+                    "href": "/du-an"
+                },
+                {
+                    "id": 4,
+                    "title": "Ký gửi nhà đất",
+                    "href": "/deposit"
+                },
+                {
+                    "id": 5,
+                    "title": "Tin tức",
+                    "href": "/news"
+                }
+            ]
         },
-        {
-            "id": 3,
-            "title": "Dự án",
-            "href": "/项目"
-        },
-        {
-            "id": 4,
-            "title": "Ký gửi nhà đất",
-            "href": "/deposit"
-        },
-        {
-            "id": 5,
-            "title": "Tin tức",
-            "href": "/news"
+        "service": {
+            "title": "Dịch vụ",
+            "list": [
+                {
+                    "id": "1",
+                    "title": "Dự án mới"
+                },
+                {
+                    "id": "2",
+                    "title": "Thiết kế nhà đẹp"
+                },
+                {
+                    "id": "3",
+                    "title": "Ký gửi bất động sản"
+                }
+            ]
         }
-    ]
+    },
+    "scroll": {
+        "title": "Cuộn xuống"
+    },
+    "homepage": {
+        "section1" : {
+            "subtitle": "An tâm với 100% bất động sản được xác thực tại KANGNAM",
+            "title": "Lựa Chọn Căn Nhà Ưng Ý",
+            "suggest": "Gợi ý"
+        },
+        "section2" : {
+            "subtitle": "Câu chuyện thương hiệu",
+            "title": "Chúng tôi là ai",
+            "description": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp, chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản",
+            "detail": {
+                "title1": "Cam kết xác thực",
+                "title2": "Trọn hỗ trợ, chi phí thấp",
+                "title3": "Thủ tục nhanh chóng"
+            },
+            "button": {
+                "primary": "Về chúng tôi",
+                "secondary": "Xem dự án"
+            }
+        },
+        "section3": {
+            "title": "Dự án của chúng tôi",
+            "showMap": "Hiển thị bản đồ",
+            "button": "Xem tất cả"
+        },
+        "section3Mobile": {
+            "buy": {
+                "title": "Đang được rao bán",
+                "subtitle": {
+                    "over": "Hơn",
+                    "projectDistribution": "dự án đang được phân phối"
+                },
+                "button": "Tất cả dự án"
+            },
+            "rent": {
+                "title": "Dự án cho thuê",
+                "subtitle": {
+                    "over": "Hơn",
+                    "projectDistribution": "dự án đang được phân phối"
+                },
+                "button": "Tất cả dự án"
+            }
+        },
+        "section4": {
+            "title": "Ký gửi nhà đất",
+            "description": "Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý khách.",
+            "detail": {
+                "title1": "Đặt khách hàng làm trọng tâm",
+                "title2": "Dịch vụ nhanh chóng",
+                "title3": "Đảm bảo thực thi"
+            },
+            "button": "Đăng ký ngay"
+        },
+        "section5": {
+            "subtitle": "TỔNG HỢP CÁC BẤT ĐỘNG SẢN",
+            "title": "Bất Động Sản Nổi Bật",
+            "button": "Xem tất cả",
+            "over": "Hơn",
+            "projectDistribution": "dự án đang được phân phối"
+        },
+        "section6": {
+            "title": "Nổi bật theo khu vực",
+            "button": "Chi tiết dự án"
+        },
+        "section7": {
+            "subtitle": "Tổng hợp các đối tác",
+            "title": "Đối tác của chúng tôi",
+            "button": "Trở thành đối tác"
+        },
+        "section8": {
+            "subtitle": "Tổng hợp tin tức",
+            "title": "Tin tức mới nhất",
+            "button": "Xem tất cả"
+        }
+    },
+    "projects": {
+        "subtitle": "100% xác thực",
+        "title": "Mua bán nhà đất căn hộ",
+        "map": "Bản đồ",
+        "category": "Loại hình",
+        "address": "Địa điểm",
+        "show": "Hiển thị",
+        "over": "trong số hơn",
+        "validateProject": "nhà đất xác thực",
+        "item": {
+            "address": "Địa chỉ",
+            "price": "Mức giá",
+            "area": "Diện tích"
+        },
+        "filter1": {
+            "title": "Chọn loại hình bất động sản",
+            "reset": "Đặt lại",
+            "cancel": "Hủy",
+            "apply": "Áp dụng"
+        },
+        "filter2": {
+            "title1": "Mới nhất",
+            "title2": "Giá tăng dần",
+            "title3": "Giá giảm dần"
+        },
+        "showMap": {
+            "list": "Danh sách",
+            "map": "Bản đồ"
+        }
+    },
+    "listNews": {
+        "section2": {
+            "subtitle": "Tin tức về",
+            "title": "Tin tức"
+        }
+    },
+    "projectDetail": {
+        "title": "Thông tin chi tiết",
+        "info": {
+            "type": "Loại hình",
+            "area": "Diện tích",
+            "floors": "Số tầng",
+            "orientHouse": "Hướng nhà",
+            "year": "Năm xây dựng",
+            "orientBalcony": "Hướng ban công",
+            "interior": "Nội thất",
+            "juridical": "Pháp lý"
+        },
+        "map": {
+            "address": "Địa chỉ",
+            "ward": "Phường/Xã",
+            "district": "Quận",
+            "city": "Thành phố/Tỉnh"
+        }
+    },
+    "aboutUs": {
+        "section2": {
+            "subtitle": "Câu chuyện thương hiệu",
+            "title": "Giới thiệu",
+            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        },
+        "section3": {
+            "subtitle": "ĐỘI NGŨ",
+            "title": "Chuyên Viên Kangnam",
+            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        },
+        "section4": {
+            "description": "<p><strong>SỨ MỆNH</strong> của chúng tôi là <strong>THIẾT LẬP</strong> và <strong>THỰC THI</strong> những tiêu chuẩn cao nhất nhằm phục vụ lợi ích lớn nhất của Khách hàng cho mọi nhu cầu về <strong>BẤT ĐỘNG SẢN</strong></p>"
+        },
+        "section5": {
+            "subtitle": "Liên hệ",
+            "title": "Thông tin văn phòng",
+            "button": "Liên hệ ngay",
+            "headquarter": "Trụ sở chính (Hà Nội)"
+        }
+    },
+    "contact": {
+        "section2": {
+            "subtitle": "Kết nối với chúng tôi",
+            "title": "Điền thông tin",
+            "infoTitle": "Thông tin liên hệ",
+            "button": "Gửi thông tin",
+            "contactAction": "Liên hệ ngay"
+        },
+        "notification": {
+            "name": {
+                "required": "Vui lòng điền họ tên"
+            },
+            "phone":{
+                "invalid" : "Số điện thoại không hợp lệ",
+                "required": "Vui lòng điền số điện thoại"
+            },
+            "email":{
+                "invalid": "Email không hợp lệ",
+                "required": "Vui lòng điền email"
+            }
+        }
+    },
+    "deposit": {
+        "wrapper": {
+            "title": "Bán và cho thuê nhà đất nhanh chóng, dễ dàng cùng Kangnam",
+            "commitment": {
+                "title": "Cam kết với khách hàng",
+                "detail": {
+                    "title1": "Đặt khách hàng làm trọng tâm cho mọi quyết định",
+                    "title2": "Những điều đã nói là những điều được làm",
+                    "title3": "Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không bán được nhà)"
+                }
+            },
+            "additionalService": {
+                "detail": {
+                    "title1": "Dịch vụ chụp ảnh chuyên nghiệp",
+                    "subtitle1": "Hình ảnh chất lượng cao, chuyên nghiệp",
+                    "subtitle2": "Tiết kiệm đến 1.000.000 đồng so với thị trường"
+                }
+            },
+            "button": "Tìm hiểu thêm"
+        },
+        "form": {
+            "title": "Ký gửi nhà đất với Kangnam",
+            "subtitle": "Do hạn chế về khu vực hoạt động của các sàn giao dịch, KangNam xin phép chỉ tiếp nhận nhà đất ký gửi từ khu vực A và B.",
+            "form1": {
+                "title": "Thông tin cơ bản",
+                "demand": "Nhu cầu của bạn là gì",
+                "select": {
+                    "select1": "Bán",
+                    "select2": "Cho thuê",
+                    "select3": "Bán và cho thuê"
+                },
+                "input": {
+                    "input1": "Căn hộ",
+                    "input2": "Giá bán mong muốn",
+                    "input3": "Giá thuê mong muốn",
+                    "input4": "Địa chỉ"
+                },
+                "priceSubmit": {
+                    "sell": "Giá bán",
+                    "rent": "Giá thuê"
+                },
+                "step": "Bước 2"
+            },
+            "form2": {
+                "back": "Trở lại",
+                "title": "Thông tin liên hệ",
+                "owner": "Tôi là chủ nhà",
+                "input": {
+                    "input1": "Họ và tên",
+                    "input2": "Số điện thoại",
+                    "input3": "Email",
+                    "input4": "Lời nhắn"
+                },
+                "step": "Bước 3"
+            },
+            "form3": {
+                "back": "Trở lại",
+                "title": "Thông tin bất động sản",
+                "descriptionInput": "Mô tả nhà đất",
+                "detailInput": {
+                    "title": "Thông tin chi tiết",
+                    "input1": "Loại hình",
+                    "input2": "Diện tích",
+                    "input3": "Số tầng",
+                    "input4": "Hướng nhà",
+                    "input5": "Loại công trình",
+                    "input6": "Hướng ban công",
+                    "input7": "Nội thất",
+                    "input8": "Pháp lý"
+                },
+                "pictureInput": {
+                    "title": "Hình ảnh",
+                    "standard": "Tiêu chuẩn hình ảnh",
+                    "drop": "Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên",
+                    "recommend": "Đề xuất tỉ lệ hình ảnh tốt nhất là 1600x900 (16:9). Giới hạn 2MB/ảnh",
+                    "button": "Gửi thông tin"
+                },
+                "validateFiles" : "Cần ít nhất 3 ảnh để xuất bản!"
+            },
+            "complete": {
+                "title": "Hoàn thành"
+            }
+        }
+    },
+    "otherPageBanner": [
+        {
+            "title": "Thông tin nhanh chóng theo nhịp thị trường",
+            "des": "Không thể bỏ lỡ những thông tin quan trọng của thị trường theo dòng sự kiện",
+            "end": "Tin tức",
+            "slug": "news"
+        },
+        {
+            "title": "Chúng tôi luôn hỗ trợ khách hàng một cách nhanh chóng",
+            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội ngũ chúng tôi tư vấn miễn phí",
+            "end": "Liên hệ",
+            "slug": "contact"
+        },
+        {
+            "title": "Chúng tôi theo đuổi sự hoàn hảo trên từng dự án",
+            "des": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp giàu kinh nghiệm",
+            "end": "Giới thiệu",
+            "slug": "about-us"
+        },
+        {
+            "title": "Thỏa thuận & pháp lý",
+            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội nguc chúng tôi tư vấn miễn phí",
+            "end": "Pháp lý",
+            "slug": "agreements"
+        }
+    ],
+    "menuRes": {
+        "email": "Email",
+        "hotline": "Hotline",
+        "address": "Địa chỉ"
+    },
+    "hiring": {
+        "button": "Xem tất cả",
+        "area": "Diện tích",
+        "address": "Địa chỉ",
+        "price": "Mức giá"
+    },
+    "selling": {
+        "button": "Xem tất cả",
+        "area": "Diện tích",
+        "address": "Địa chỉ",
+        "price": "Mức giá"
+    },
+    "relatedProjects": {
+        "subtitle": "Danh sách bất động sản",
+        "title": "Bất động sản liên quan",
+        "item": {
+            "title1": "Địa chỉ",
+            "title2": "Diện tích",
+            "title3": "Mức giá"
+        },
+        "button": "Xem tất cả"
+    }
 }
