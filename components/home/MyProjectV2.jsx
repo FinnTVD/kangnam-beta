@@ -290,13 +290,13 @@ export default function MyProjectV2({ lang, t }) {
                                                     e?.address?.city}
                                             </span>
                                         </div>
-                                        <div className='flex items-center my-[0.5vw]'>
+                                        <div title={t?.projects?.item?.area} className='flex items-center my-[0.5vw]'>
                                             <IconArea
                                                 className={
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
                                                 }
                                             />
-                                            <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
+                                            <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150 line-clamp-1'>
                                                 {t?.projects?.item?.area}
                                             </span>
                                             <span className=' text-den title14-400-150'>
@@ -315,7 +315,7 @@ export default function MyProjectV2({ lang, t }) {
                                                     : 'Chưa có thông tin!'}
                                             </span>
                                         </div>
-                                        <div className='flex items-center'>
+                                        <div title={t?.projects?.item?.price} className='flex items-center'>
                                             <IconCurrency
                                                 className={
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
