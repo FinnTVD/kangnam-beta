@@ -296,10 +296,10 @@ export default function MyProjectV2({ lang, t }) {
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
                                                 }
                                             />
-                                            <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150 line-clamp-1'>
+                                            <span className='ml-[0.5vw] mr-[0.25vw] text-nau-nhat title14-700-150'>
                                                 {t?.projects?.item?.area}
                                             </span>
-                                            <span className=' text-den title14-400-150'>
+                                            <span className=' text-den title14-400-150 line-clamp-1'>
                                                 {e?.translations?.find((e) =>
                                                     e?.languageCode
                                                         ?.toLowerCase()
