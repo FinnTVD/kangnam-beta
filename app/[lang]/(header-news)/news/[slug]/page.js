@@ -24,7 +24,7 @@ export async function generateMetadata({ params: { lang, slug } }) {
                     alt: dataDetail?.title || dataDetail?.titleSeo,
                 },
             ],
-            locale: lang,
+            locale: handleCheckLangCode(lang),
             type: 'website',
         },
         twitter: {
@@ -38,19 +38,8 @@ export async function generateMetadata({ params: { lang, slug } }) {
                     alt: dataDetail?.name || dataDetail?.titleSeo,
                 },
             ],
-        },
-        robots: {
-            index: false,
-            follow: true,
-            nocache: true,
-            googleBot: {
-                index: true,
-                follow: false,
-                noimageindex: true,
-                'max-video-preview': -1,
-                'max-image-preview': 'large',
-                'max-snippet': -1,
-            },
+            locale: handleCheckLangCode(lang),
+            type: 'website',
         },
     }
 }
