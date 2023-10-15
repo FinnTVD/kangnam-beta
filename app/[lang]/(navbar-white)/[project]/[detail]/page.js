@@ -1,6 +1,6 @@
 import { getDictionary } from '@/app/[lang]/dictionaries'
-import NotFound from '@/app/[lang]/not-found'
 import IndexProjectDetail from '@/components/listProjectDetail'
+import { handleCheckLangCode } from '@/utils'
 import getData from '@/utils/getData'
 export async function generateMetadata({ params: { lang, detail } }) {
     const data = await getData(`/property/property-by-slug/${detail}`)
@@ -21,7 +21,7 @@ export async function generateMetadata({ params: { lang, detail } }) {
                     alt: dataDetail?.name || dataDetail?.titleSeo,
                 },
             ],
-            locale: lang,
+            locale: handleCheckLangCode(lang),
             type: 'website',
         },
         twitter: {
@@ -35,19 +35,8 @@ export async function generateMetadata({ params: { lang, detail } }) {
                     alt: dataDetail?.name || dataDetail?.titleSeo,
                 },
             ],
-        },
-        robots: {
-            index: false,
-            follow: true,
-            nocache: true,
-            googleBot: {
-                index: true,
-                follow: false,
-                noimageindex: true,
-                'max-video-preview': -1,
-                'max-image-preview': 'large',
-                'max-snippet': -1,
-            },
+            locale: handleCheckLangCode(lang),
+            type: 'website',
         },
     }
 }
