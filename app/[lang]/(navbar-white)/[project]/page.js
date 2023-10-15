@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 
 import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
+import { handleCheckLangCode } from '@/utils'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
