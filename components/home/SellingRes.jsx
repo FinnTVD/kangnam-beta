@@ -304,7 +304,7 @@ export default function SellingRes({ lang, isTablet, t }) {
                                                 {t?.selling?.area}
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.size + ' m²'}
+                                                {e?.translation?.size?e?.translation?.size + ' m²':'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -325,7 +325,7 @@ export default function SellingRes({ lang, isTablet, t }) {
                                                 {t?.selling?.price}:
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.priceDisplay}
+                                                {e?.translation?.priceDisplay ||'Chưa có thông tin!'}
                                             </span>
                                         </div>
                                     </div>

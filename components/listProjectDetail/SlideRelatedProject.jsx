@@ -162,7 +162,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title2}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.translation?.size + ' m²'}
+                                            {e?.translation?.size?e?.translation?.size + ' m²':'Chưa có thông tin!'}
                                         </span>
                                     </div>
 
@@ -183,7 +183,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title3}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.translation?.price}
+                                            {e?.translation?.price || 'Chưa có thông tin!'}
                                         </span>
                                     </div>
                                 </div>
