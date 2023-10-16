@@ -131,7 +131,7 @@ export default function SellingRes({ lang, isTablet, t }) {
             id='selling'
             className='w-full pt-[11.11vw] h-fit relative lg:hidden'
         >
-            {isShow && <BtnShowMap />}
+            {isShow && <BtnShowMap t={t} />}
             <div className='px-mb10 max-lg:pl-[3.2vw]'>
                 <h2 className='text-den font-bold max-lg:title-tl25 max-md:title-mb25-700-130 -tracking-[1.25px]'>
                     {t?.homepage?.section3Mobile?.buy?.title}

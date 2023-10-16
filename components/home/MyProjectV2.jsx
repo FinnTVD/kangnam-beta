@@ -290,7 +290,19 @@ export default function MyProjectV2({ lang, t }) {
                                                     e?.address?.city}
                                             </span>
                                         </div>
-                                        <div title={t?.projects?.item?.area} className='flex items-center my-[0.5vw]'>
+                                        <div title={e?.translations?.find((e) =>
+                                                    e?.languageCode
+                                                        ?.toLowerCase()
+                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                )?.size
+                                                    ? e?.translations?.find((e) =>
+                                                          e?.languageCode
+                                                              ?.toLowerCase()
+                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                      )?.size + ' m²'
+                                                    : e?.translations[0]?.size
+                                                    ? e?.translations[0]?.size + ' m²'
+                                                    : 'Chưa có thông tin!'} className='flex items-center my-[0.5vw]'>
                                             <IconArea
                                                 className={
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
