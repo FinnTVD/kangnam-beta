@@ -41,7 +41,7 @@ export default function ContentDetail({ data, detail, lang, t }) {
                     {data?.address?.display}
                 </address>
             </div>
-            <div className='flex gap-x-[4.87vw]'>
+            <div className='flex gap-x-[2vw]'>
                 <div className='flex-1'>
                     <div className='flex items-center justify-between max-lg:flex-col max-md:justify-start'>
                         <h1 className='w-[28.8125vw] title32-800-130 text-den -tracking-[1.6px] capitalize max-md:title-mb20-700-130 max-md:-tracking-[1px] max-lg:w-full line-clamp-3 max-lg:title-tl20'>

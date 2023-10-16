@@ -601,6 +601,27 @@
     display: flex;
     justify-content: end;
 }
+
+#contentProject p+p{
+    margin-top: 1vw;
+}
+
+#contentProject img+img{
+    margin-top: 1vw;
+}
+
+@media (min-width:768px) and (max-width:1023.9px){
+    #contentProject p+p{
+    margin-top: 1.3vw;
+}
+
+#contentProject img+img{
+    margin-top: 1.3vw;
+}
+    #contentProject p{
+            font-size: 2vw;
+        }
+}
 @media screen and (max-width: 767.9px) {
     #list-project #map,
     #list-project #map .vietmapgl-canvas-container,
@@ -658,6 +679,7 @@ canvas.vietmapgl-canvas.mapboxgl-canvas {
     width: 22.25vw !important;
 }
 
+
 .mapboxgl-popup-content, .vietmapgl-popup-content{
     padding: 0.67vw 0 1.5vw 1vw !important;
 
@@ -666,6 +688,15 @@ canvas.vietmapgl-canvas.mapboxgl-canvas {
     padding: 0.5vw;
     font-size: 1.5vw;
     color: black;
+}
+
+@media (min-width:768px) and (max-width:1023.9px){
+    .vietmapgl-popup-content.mapboxgl-popup-content {
+        width: 48.25vw !important;
+    }
+    .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button{
+        font-size: 3.5vw;
+    }
 }
 
 /* My Project */

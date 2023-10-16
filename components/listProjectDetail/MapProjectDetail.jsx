@@ -1,7 +1,6 @@
 'use client'
 import { apiKey } from '@/utils'
 import { useEffect, useRef, useState } from 'react'
-// const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 
 export default function MapProjectDetail({ dataDetail, data }) {
     const mapRef = useRef(null)
@@ -25,6 +24,7 @@ export default function MapProjectDetail({ dataDetail, data }) {
     useEffect(() => {
         const addMarkerItem = (dataDetail, data) => {
             if (!dataDetail || !data) return
+            console.log("🚀 ~ file: MapProjectDetail.jsx:27 ~ addMarkerItem ~ data:", data)
             const divElement = document.createElement('div')
             divElement.textContent = 1
             divElement.setAttribute('data-marker', data?.id)
@@ -43,43 +43,39 @@ export default function MapProjectDetail({ dataDetail, data }) {
                             class="flex gap-x-[0.88vw] max-md:flex-col max-md:items-center"
                         >
                             <img
-                                class="w-[5.4375vw] h-[4.75vw] block object-cover max-md:w-[40%] max-md:h-[15vw]"
+                                class="w-[5.4375vw] max-lg:w-[10.4375vw] h-auto block object-cover max-md:w-[40%] max-md:h-[15vw]"
                                 src=${data?.firstImage || '/images/itemproject.jpg'}
                                 alt=${dataDetail?.name || 'marker'}
                             />
-                            <div class="w-[12.0625vw] max-md:w-full">
-                                <h2 class='line-clamp-1 text-den'>${dataDetail.name ?? ''}</h2>
+                            <div class="w-[12.0625vw] max-lg:w-full">
+                                <h2 class='line-clamp-1 text-den mb-[0.5vw] max-lg:text-16tl max-lg:font-bold'>${dataDetail.name ?? ''}</h2>
                                 <div
-                                            title=${data?.address?.display}
+                                            title="${data?.address?.display}"
                                             class='flex items-center'
                                         >
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 whitespace-nowrap max-md:text-[2.8vw]'>
+                                            <span class='mr-[0.25vw] text-black title14-700-150 title-tl14-700-150 whitespace-nowrap max-md:text-[2.8vw]'>
                                                 Địa chỉ:
                                             </span>
-                                            <span class='capitalize text-black title14-400-150 line-clamp-1 max-md:text-[2.8vw]'>
+                                            <span class='capitalize text-black title14-400-150 title-tl14-400-150 line-clamp-1 max-md:text-[2.8vw]'>
                                                 ${
-                                                    data?.address?.name +
-                                                    ', ' +
-                                                    data?.address?.ward +
-                                                    ', ' +
-                                                    data?.address?.district
+                                                    data?.address?.name +', ' +data?.address?.ward +', ' +data?.address?.district
                                                 }
                                             </span>
                                         </div>
                                         <div class='flex items-center my-[0.5vw]'>
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 max-md:text-[2.8vw]'>
+                                            <span class='mr-[0.25vw] text-black title14-700-150 title-tl14-700-150 max-md:text-[2.8vw]'>
                                                 Diện tích:
                                             </span>
-                                            <span class=' text-black title14-400-150 max-md:text-[2.8vw]'>
+                                            <span class=' text-black title14-400-150 title-tl14-400-150 max-md:text-[2.8vw]'>
                                                 ${dataDetail.size + ' m²'}
                                             </span>
                                         </div>
                                         <div class='flex items-center'>
                                             
-                                            <span class='ml-[0.5vw] mr-[0.25vw] text-black title14-700-150 max-md:text-[2.8vw]'>
+                                            <span class='mr-[0.25vw] text-black title14-700-150 title-tl14-700-150 max-md:text-[2.8vw]'>
                                                 Mức giá:
                                             </span>
-                                            <span class='capitalize text-black title14-400-150 max-md:text-[2.8vw]'>
+                                            <span class='capitalize text-black title14-400-150 title-tl14-400-150 max-md:text-[2.8vw]'>
                                                 ${dataDetail.priceDisplay}
                                             </span>
                                         </div>
@@ -102,7 +98,7 @@ export default function MapProjectDetail({ dataDetail, data }) {
                 position: 'relative',
             }}
             id='mapProjectDetail'
-            className='w-[56.1875vw] h-[25.3125vw] rounded-[1vw] mt-[1vw] max-md:mt-[4.27vw] max-md:h-[66.93vw] max-md:w-full max-md:rounded-[3.73vw]'
+            className='w-[56.1875vw] h-[25.3125vw] rounded-[1vw] mt-[1vw] max-md:mt-[4.27vw] max-lg:h-[43vw] max-md:h-[66.93vw] max-lg:w-full max-md:rounded-[3.73vw]'
         ></div>
     )
 }
