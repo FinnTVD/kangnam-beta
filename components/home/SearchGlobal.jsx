@@ -55,8 +55,11 @@ const SearchGlobal = ({
     const setValueSearchPrev = useStore((state) => state.setValueSearchPrev)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
     const cityId = useStore((state) => state.cityId)
+    console.log("🚀 ~ file: SearchGlobal.jsx:58 ~ cityId:", cityId)
     const districtId = useStore((state) => state.districtId)
+    console.log("🚀 ~ file: SearchGlobal.jsx:59 ~ districtId:", districtId)
     const wardId = useStore((state) => state.wardId)
+    console.log("🚀 ~ file: SearchGlobal.jsx:62 ~ wardId:", wardId)
     const setCityId = useStore((state) => state.setCityId)
     const setDistrictId = useStore((state) => state.setDistrictId)
     const setIsFly = useStore((state) => state.setIsFly)
@@ -156,6 +159,33 @@ const SearchGlobal = ({
         isOutSide && setIsClose(true)
     }, [isOutSide])
 
+    
+    const callPlace = async (refId) => {
+        const res = await fetch(`https://maps.vietmap.vn/api/place/v3?apikey=${apiKey}&refid=${refId}`)
+        const data = await res.json()
+        console.log("🚀 ~ file: SearchGlobal.jsx:246 ~ callPlace ~ data:", data)
+        if (refId?.includes('DIST')) {
+            mapRef?.flyTo({
+                center: [Number(data?.lng), Number(data?.lat)],
+                zoom: 11.5,
+                curve: 1,
+            })
+            setLevelZoom(11.5)
+            !wardId && setWardId(null)
+            setIsSubmit(!isSubmit)
+            return notifyError('No data project in address district search!')
+        }
+        if (!e?.ref_id?.includes('CITY') && !e?.ref_id?.includes('DIST')) {
+            setIsFly(true)
+            mapRef?.flyTo({
+                center: [Number(data?.lng), Number(data?.lat)],
+                zoom: 13.5,
+                curve: 1,
+            })
+            setLevelZoom(13.5)
+        }
+    }
+
     const callDataProject = async ({ cityIdSearch, districtIdSearch, wardIdSearch }) => {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API}/property?page=1&take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
@@ -168,13 +198,15 @@ const SearchGlobal = ({
         setDataProject(data)
     }
 
-    const callDataWard = async (cityIdWard, districtIdWard, wardIdWard) => {
+    const callDataWard = async (cityIdWard, districtIdWard, wardIdWard,refId) => {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityIdWard}&districtId=${districtIdWard}`,
         )
         const data = await res.json()
         const itemWard = data?.find((i) => i?.ward_id == wardIdWard)
+        console.log("🚀 ~ file: SearchGlobal.jsx:198 ~ callDataWard ~ itemWard:", itemWard)
         if (!itemWard) {
+            callPlace(refId)
             return notifyError('No data project in address ward search!')
         }
         //delete marker before fly to city other
@@ -240,9 +272,10 @@ const SearchGlobal = ({
         setIsClose(true)
     }
 
+
     const handleSelectValueSearch = (e) => {
         if (!e) return
-        console.log('🚀 ~ file: SearchGlobal.jsx:245 ~ handleSelectValueSearch ~ e:', e)
+        console.log("🚀 ~ file: SearchGlobal.jsx:245 ~ handleSelectValueSearch ~ e:", e)
 
         setValueSearch(e?.address)
         if (e?.ref_id?.includes('CITY')) {
@@ -257,6 +290,7 @@ const SearchGlobal = ({
             // if (e?.boundaries[0]?.id === cityId && !districtId) return notifyError('Now, in current city!')
             const itemCity = dataProvinces?.find((i) => i?.city_id == e?.boundaries[0]?.id)
             if (!itemCity) {
+                // callPlace(e?.ref_id)
                 return notifyError('No data project in address city search!')
             }
             setIsFly(true)
@@ -292,7 +326,7 @@ const SearchGlobal = ({
             // if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
             const itemDistrict = dataDistrict?.find((i) => i?.district_id == e?.boundaries[0]?.id)
             if (typeof itemDistrict !== 'object') {
-                return notifyError('No data project in address district search!')
+                callPlace(e?.ref_id)
             }
             setIsFly(true)
             if (
@@ -320,7 +354,7 @@ const SearchGlobal = ({
             !wardId && setWardId(null)
             setIsSubmit(!isSubmit)
         }
-        if (e?.ref_id?.includes('WARD')) {
+        if (!e?.ref_id?.includes('CITY') && !e?.ref_id?.includes('DIST')) {
             if (e?.boundaries[2]?.id !== cityId) {
                 setCityId(e?.boundaries[2]?.id)
             }
@@ -328,7 +362,7 @@ const SearchGlobal = ({
                 setDistrictId(e?.boundaries[1]?.id)
             }
             setWardId(e?.boundaries[0]?.id)
-            callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id)
+            callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id,e?.ref_id)
             setIsSubmit(!isSubmit)
         }
     }

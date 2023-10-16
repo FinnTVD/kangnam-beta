@@ -605,9 +605,23 @@
 #contentProject p+p{
     margin-top: 1vw;
 }
+#contentProject h5+p{
+    margin-top: 1vw;
+}
 
 #contentProject img+img{
     margin-top: 1vw;
+}
+
+#contentProject p{
+    overflow: hidden;
+    display: flex;
+    column-gap: 1vw;
+    
+}
+
+#contentProject p img+img{
+    margin-top: 0;
 }
 
 @media (min-width:768px) and (max-width:1023.9px){
@@ -621,6 +635,9 @@
     #contentProject p{
             font-size: 2vw;
         }
+        #contentProject h5+p{
+    margin-top: 1.3vw;
+}
 }
 @media screen and (max-width: 767.9px) {
     #list-project #map,
@@ -651,11 +668,15 @@
             line-height: 1.5;
         }
 
-        #contentProject img+img{
-    margin-top: 2.13vw;
-}
+    #contentProject img+img{
+        margin-top: 2.13vw;
+    }
 
     #contentProject p+p{
+        margin-top: 2.13vw;
+    }
+
+    #contentProject h5+p{
         margin-top: 2.13vw;
     }
 

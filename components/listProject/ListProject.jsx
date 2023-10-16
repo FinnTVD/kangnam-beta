@@ -223,7 +223,7 @@ export default function ListProject({ lang, t, dataSlug }) {
         <section
             id='list-project'
             ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw]'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw] lg:min-h-screen'
         >
             <div className='flex justify-between w-full'>
                 <div
@@ -398,13 +398,13 @@ export default function ListProject({ lang, t, dataSlug }) {
                                         <div className='flex items-center my-[0.5vw] max-md:my-[2.69vw]'>
                                             <IconArea
                                                 className={
-                                                    'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
+                                                    'w-[0.875vw] h-[0.875vw] min-w-[0.875vw] max-md:min-w-[5vw] max-lg:min-w-[2vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
                                                 }
                                             />
-                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14'>
+                                            <span className='ml-[0.5vw] max-md:ml-[2.69vw] mr-[0.25vw] max-md:mr-[1vw] text-nau-nhat title14-700-150 max-md:title-mb16-700-150 max-lg:title-tl14 whitespace-nowrap'>
                                                 {t?.projects?.item?.area}:
                                             </span>
-                                            <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
+                                            <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14 line-clamp-1'>
                                                 {e?.translations?.find((e) =>
                                                     e?.languageCode
                                                         ?.toLowerCase()
