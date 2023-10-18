@@ -45,10 +45,18 @@ const avertaStdCY = localFont({
     display: 'swap',
 })
 
+export const metadata = {
+    viewport: 'width=device-width, initial-scale=1, maximum-scale=1', // <-- now here
+}
+
 export default async function RootLayout({ children, params }) {
     return (
         <html lang={params.lang}>
             <head>
+                <meta
+                    name='google-site-verification'
+                    content='mLV7YCxrelL4Fm6eT69OV9RzCJxKi5Jfm-hsA6hrTXE'
+                />
                 <script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
                 <link
                     href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
