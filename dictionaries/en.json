@@ -3,12 +3,12 @@
         "listNav": [
             {
                 "id": 4,
-                "title": "Dự án",
-                "href": "/du-an"
+                "title": "Project",
+                "href": "/projects"
             },
             {
                 "id": 5,
-                "title": "Tin tức",
+                "title": "News",
                 "href": "/news"
             },
             {
