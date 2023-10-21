@@ -165,6 +165,11 @@ const categoryHireId = '05d52397-71a8-4ecf-9a86-ee37965332ef'
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
+const cityIdDefault = 11 //ha noi
+const levelZoomDefault = 8 //zoom mac dinh
+const levelZoomDistrictDefault = 11 //zoom mac dinh
+const levelZoomWardDefault = 13 //zoom mac dinh
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -183,4 +188,8 @@ export {
     categoryHireId,
     apiKey,
     slugProject,
+    cityIdDefault,
+    levelZoomDefault,
+    levelZoomDistrictDefault,
+    levelZoomWardDefault,
 }

@@ -4,8 +4,10 @@ import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
-import { apiKey, findIdByAlias, slugProject } from '@/utils'
+import { apiKey, cityIdDefault, findIdByAlias, levelZoomDefault, levelZoomDistrictDefault, levelZoomWardDefault, slugProject } from '@/utils'
 
+
+//draw content popup marker
 const handleRenderPopup = (itemProject, lang, acc) => {
     return `<div>
             <div class='${
@@ -133,51 +135,64 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                         </div>`
 }
 
+const removeZeroSubArrays=(arr)=> {
+    return arr.filter(subarr => {
+        return !subarr.some(element => isNaN(element) || element === 0);
+    });
+}
+
+//xử lý chuỗi geoWKT trả về từ api border
 const handleGeoWKT = (str) => {
-    return str
+    const a = str
         ?.slice(16, str?.length - 3)
         ?.split(', ')
         ?.map((capSo) => {
             let [so1, so2] = capSo?.split(' ')?.map(parseFloat)
             return [so1, so2]
         })
+    const b = removeZeroSubArrays(a)
+    return b
+    // return removeZeroSubArrays(str)
 }
 
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
-let listMarkerOut = []
+
+let listMarkerOut = []//lưu lại các marker
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV4 = ({ lang, dataSlug = '' }) => {
+const MapV5 = ({ lang, dataSlug = '' }) => {
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const pathName = usePathname()
     const mapRef = useRef(null) //lưu lại dom map
+
+    const cityId = Number(searchParams.get('cityId'))
+    const districtId = Number(searchParams.get('districtId'))
+    const wardId = Number(searchParams.get('wardId'))
+    const levelZoom = Number(searchParams.get('levelZoom'))
+    const lng = Number(searchParams.get('lng'))
+    const lat = Number(searchParams.get('lat'))
+    const isFly = Boolean(searchParams.get('isFly'))
+
+    const propertyType = searchParams.getAll('propertyTypeIds')
+    const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
+    const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+
     const isRedirect = useStore((state) => state.isRedirect)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
-    const cityId = useStore((state) => state.cityId)
-    const districtId = useStore((state) => state.districtId)
-    const wardId = useStore((state) => state.wardId)
-    const defaultMap = useStore((state) => state.defaultMap)
-    const setCityId = useStore((state) => state.setCityId)
-    const setDistrictId = useStore((state) => state.setDistrictId)
-    const setWardId = useStore((state) => state.setWardId)
+
     const setDataDistrict = useStore((state) => state.setDataDistrict)
     const setDataProvinces = useStore((state) => state.setDataProvinces)
     const setDataWard = useStore((state) => state.setDataWard)
     const setMapRef = useStore((state) => state.setMapRef)
-    const levelZoom = useStore((state) => state.levelZoom)
-    console.log("🚀 ~ file: MapV4.jsx:168 ~ MapV4 ~ levelZoom:", levelZoom)
-    const isFly = useStore((state) => state.isFly)
-    const setIsFly = useStore((state) => state.setIsFly)
-    const setLevelZoom = useStore((state) => state.setLevelZoom)
+    // const isFly = useStore((state) => state.isFly)
+    // const setIsFly = useStore((state) => state.setIsFly)
     const [isDrag, setIsDrag] = useState(false) // trigger sự kiện drag
     const isDragDebounce = useDebounce(isDrag, 500) // trigger sự kiện drag
     const [isFirst, setIsFirst] = useState(true)
     const [dataMap, setDataMap] = useState(null)
-    const searchParams = useSearchParams()
-    const pathName = usePathname()
-    const propertyType = searchParams.getAll('propertyTypeIds')
-    const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
-    const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+
 
     const createQueryString = useCallback(
         (name, value) => {
@@ -188,6 +203,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         },
         [searchParams],
     )
+
     if (propertyType?.length > 0 && propertyType[0]) {
         propertyTypeParams = propertyType[0]
             .split('--')
@@ -233,7 +249,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         data: dataDistrict,
         error: errorDistrict,
         isLoading: isLoadingDistrict,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || 11}`, fetcher)
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}`, fetcher)
 
     // get list ward count
     const {
@@ -252,13 +268,16 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             mapRef.current = new window.vietmapgl.Map({
                 container: 'map',
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
-                center: [defaultMap?.center[0] || 105.85379875200005, defaultMap?.center[1] || 21.028354507000074], //ha noi center
-                zoom: defaultMap?.zoom || 9,
+                center: [Number(lng) || 105.85379875200005, Number(lat) || 21.028354507000074], //ha noi center
+                zoom: levelZoom || levelZoomDefault,
                 pitch: 0, // góc nhìn từ trên cao nhìn xuống,
                 // bearing: 90,
             })
-            mapRef.current?.scrollZoom.disable()
-            mapRef.current?.addControl(
+
+            mapRef.current?.scrollZoom.disable() // disable scrollZoom
+
+            // init add controls
+            mapRef.current?.addControl( 
                 new window.vietmapgl.NavigationControl({
                     visualizePitch: true,
                     showZoom: true,
@@ -267,12 +286,14 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             )
 
             //add event zoom
-            // mapRef.current?.on('zoomstart', function () {
-            //     console.log('zoom start', mapRef?.current?.getZoom())
-            // })
             mapRef.current?.on('zoomend', function () {
-                setLevelZoom(mapRef.current?.getZoom())
+                // const paramNew = new URLSearchParams(searchParams)
+                // paramNew.set('levelZoom',Math.round(Number(mapRef.current?.getZoom())))
+                router.push(pathName + '?' + createQueryString('levelZoom',Math.round(Number(mapRef.current?.getZoom()))), {
+                    scroll: false,
+                })
             })
+
             //add event drag
             mapRef.current?.on('dragstart', () => {
                 setIsDrag((prev) => !prev)
@@ -287,8 +308,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 setIsRedirect(false)
             })
         return () => {
-            if (!dataSlug || !Array.isArray(dataSlug)) return
-            if (isRedirect) return
+            if (!dataSlug || !Array.isArray(dataSlug) || isRedirect) return
             if (
                 pathName?.includes(
                     dataSlug?.find((e) =>
@@ -299,19 +319,27 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 ) ||
                 slugProject?.find((e) => e === pathName)
             ) {
-                setCityId(11)
-                setDistrictId(null)
-                setWardId(null)
                 setMapRef(null)
-                setLevelZoom(9)
             }
         }
     }, [])
 
     useEffect(() => {
+        if (!mapRef.current) return
+        if (isFly && lng && lat) {
+            mapRef.current?.flyTo({
+            center: [Number(lng), Number(lat)],
+            zoom: levelZoom || levelZoomDefault,
+            curve: 1,
+            })
+        }
+       
+    },[isFly,lng,lat])
+
+    useEffect(() => {
         const callApiBorder = async () => {
             const res = await fetch(
-                `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId}?apikey=${apiKey}`,
+                `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId || cityIdDefault}?apikey=${apiKey}`,
             )
             const data = await res.json()
             if (data && isFirst) {
@@ -333,12 +361,12 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 }
             }
         }
-        callApiBorder()
+        callApiBorder() // draw border
         setIsFirst(false)
 
         const callApi = async () => {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}${
+                `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || cityIdDefault}${
                     districtId ? '&districtId=' + districtId : ''
                 }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                     propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
@@ -346,15 +374,15 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                     propertyTypeParams ? propertyTypeParams : ''
                 }`,
             )
-            const data = await res.json()
+            const data = await res.json() //data marker
             if (data) {
                 setIsFirst(false)
                 setDataMap(data)
-                addMarkerV2(data, mapRef.current?.getZoom() || 9)
+                addMarkerV2(data, mapRef.current?.getZoom() || levelZoomDefault)
             }
         }
         callApi()
-    }, [cityId, districtId, wardId, searchParams])
+    }, [cityId,wardId,districtId])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -374,25 +402,40 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             )
             // get data follow center viewport
             const data = await res.json()
+            if(!data) return
+            const paramNew = new URLSearchParams(searchParams)
             const one = dataMap?.find(
                 (e) => Number(e?.district_id) === data[0]?.boundaries[1]?.id, // boundaries[1]<=> district
             )
             if (Number(one?.count) <= 1) return
-            if (levelZoom >= 11.5) {
-                setDistrictId(data[0]?.boundaries[1]?.id)
+            if (levelZoom >= levelZoomDistrictDefault) {
+                paramNew.set('districtId', data[0]?.boundaries[1]?.id)
+                paramNew.set('lng', ct?.lng)
+                paramNew.set('lat', ct?.lat)
             }
-            if (levelZoom >= 13.5) {
-                setWardId(data[0]?.boundaries[0]?.id) // boundaries[1]<=> ward
+            if (levelZoom >= levelZoomWardDefault) {
+                // setWardId(data[0]?.boundaries[0]?.id) // boundaries[1]<=> ward
+                paramNew.set('wardId', data[0]?.boundaries[0]?.id)
+                paramNew.set('lng', ct?.lng)
+                paramNew.set('lat', ct?.lat)
             }
+            if (levelZoom >= levelZoomDistrictDefault && levelZoom < levelZoomWardDefault) {
+                // setWardId(null)
+                paramNew.set('wardId', '')
+            }
+            if (districtId && levelZoom < levelZoomDistrictDefault) {
+                paramNew.set('districtId', '')
+                wardId && paramNew.set('wardId', '')
+            }
+            if (!districtId && levelZoom < levelZoomDistrictDefault) {
+                data[0]?.boundaries[2]?.id && paramNew.set('cityId', data[0]?.boundaries[2]?.id)
+            }
+            router.push(pathName + '?' + paramNew.toString(), {
+                        scroll: false,
+                })
         }
         getLocationCurrent()
-        if (levelZoom >= 11.5 && levelZoom < 13.5) {
-            setWardId(null)
-        }
-        if (districtId && levelZoom < 11.5) {
-            setDistrictId(null)
-            wardId && setWardId(null)
-        }
+        
     }, [levelZoom, isDragDebounce])
 
     if (propertyType?.length > 0 && propertyType[0]) {
@@ -450,16 +493,13 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         })
     }
 
-    // style="width:fit-content;${
-    //     data?.length > 3
-    //         ? 'height:20.625vw;overflow-x:hidden;overflow-y:scroll'
-    //         : 'height:fit-content;'
-    // }"
+
     //call data + add marker detail project
     const callDataAddressDetail = async (e) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property/property-by-refid/${e?.id}`)
         const data = await res.json()
-        console.log("🚀 ~ file: MapV4.jsx:462 ~ callDataAddressDetail ~ data:", data)
+        if(!data) return
+        console.log("🚀 ~ file: MapV5.jsx:502 ~ callDataAddressDetail ~ data:", data)
         if (Array.isArray(data) && data?.length) {
             let childNode = data?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang), '')
             const marker = new vietmapgl.Marker()
@@ -507,20 +547,22 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
 
     const callDataPopup = async (listMarker) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&take=50&cityId=${cityId}${
+            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&take=50&cityId=${cityId || cityIdDefault}${
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
             }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
-        const data = await res.json()
-
+        const data = await res.json() // data popup
+        if(!data) return 
+        
+        // handle create popup follow levelZoom
         listMarker?.forEach((e) => {
             if (data) {
-                if (levelZoom >= 13.5) {
+                if (levelZoom >= levelZoomWardDefault) {
                     callDataAddressDetail(e)
                 }
-                if (levelZoom >= 11.5 && levelZoom < 13.5) {
+                if (levelZoom >= levelZoomDistrictDefault && levelZoom < levelZoomWardDefault) {
                     let childNode = data?.data
                         ?.filter((item) => item?.address?.wardId?.includes(e?.id))
                         ?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang), '')
@@ -568,7 +610,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                     marker.getElement().appendChild(textElm)
                     listMarkerOut?.push(marker)
                 }
-                if (levelZoom < 11.5) {
+                if (levelZoom < levelZoomDistrictDefault) {
                     let childNode = data?.data
                         ?.filter((item) => item?.address?.districtId?.includes(e?.id))
                         ?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang, acc), '')
@@ -619,13 +661,22 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
                 }
             }
         })
+        setTimeout(() => {
+            if(isFly){
+                const paramNew = new URLSearchParams(searchParams)
+            paramNew.set('isFly','')
+            router.push(pathName + '?' + paramNew.toString(), {
+                scroll: false,
+            })
+            }
+        }, 2000);
     }
 
     const addMarkerV2 = (data, levelZoom) => {
         if (!data || !levelZoom) return
         const listMarker = []
         listMarkerOut?.forEach((e) => e?.remove())
-        listMarkerOut = new Array()
+        listMarkerOut = []
         data?.forEach((e) => {
             if (e?.ref_id) {
                 listMarker?.push({
@@ -650,7 +701,7 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
             }
         })
         callDataPopup(listMarker)
-        setIsFly(false)
+        
     }
 
     return (
@@ -666,4 +717,4 @@ const MapV4 = ({ lang, dataSlug = '' }) => {
         </div>
     )
 }
-export default memo(MapV4)
+export default memo(MapV5)
