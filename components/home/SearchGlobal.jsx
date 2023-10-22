@@ -51,7 +51,6 @@ const SearchGlobal = ({
     const [dataProjectCode, setDataProjectCode] = useState([])
     const debounceValue = useDebounce(valueSearch, 500)
 
-    // const setIsFly = useStore((state) => state.setIsFly)
     const isClose = useStore((state) => state.isClose)
     const setIsClose = useStore((state) => state.setIsClose)
     const setValueSearch = useStore((state) => state.setValueSearch)
@@ -208,12 +207,9 @@ const SearchGlobal = ({
         
         if (dataSearch?.length >= 0) {
             handleSelectValueSearch(dataSearch[0])
-            console.log('1');
         } else if (dataProjectCode?.data?.length >= 0) {
             handleSelectValueProject(dataProjectCode?.data[0])
-            console.log('2');
         } else if (dataProject?.data?.length >= 0) {
-            console.log('3');
             handleSelectValueProject(dataProject?.data[0])
         }
         setIsClose(true)

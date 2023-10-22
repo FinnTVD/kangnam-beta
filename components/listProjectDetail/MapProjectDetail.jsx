@@ -24,7 +24,6 @@ export default function MapProjectDetail({ dataDetail, data }) {
     useEffect(() => {
         const addMarkerItem = (dataDetail, data) => {
             if (!dataDetail || !data) return
-            console.log("🚀 ~ file: MapProjectDetail.jsx:27 ~ addMarkerItem ~ data:", data)
             const divElement = document.createElement('div')
             divElement.textContent = 1
             divElement.setAttribute('data-marker', data?.id)

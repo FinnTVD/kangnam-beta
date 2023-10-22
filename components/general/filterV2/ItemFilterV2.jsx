@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { memo, useCallback, useEffect, useState } from 'react'
 import useSWR from 'swr'
 import InputCheckBox from './InputCheckBox'
+import { cityIdDefault, latDefault, levelZoomDefault, lngDefault } from '@/utils'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
@@ -50,10 +51,31 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
         })
 
         let search = b.join('--')
-
-        router.push(pathName + '?' + createQueryString(item?.slug, search), {
-            scroll: false,
-        })
+        if (index === 1) {
+            const paramNew = new URLSearchParams(searchParams)
+            paramNew.set(item?.slug, search)
+            paramNew.set('districtId', '')
+            paramNew.set('wardId', '')
+            paramNew.set('isFly', 1)
+            paramNew.set('levelZoom', levelZoomDefault)
+            const dataArea = JSON.parse(window.localStorage.getItem('dataArea'))
+            if (dataArea) {
+                paramNew.set('cityId', dataArea?.cityId)
+                paramNew.set('lng', dataArea?.lng)
+                paramNew.set('lat', dataArea?.lat)
+            } else {
+                paramNew.set('cityId', cityIdDefault)
+                paramNew.set('lng', lngDefault)
+                paramNew.set('lat', latDefault)
+            }
+            router.push(pathName + '?' + paramNew.toString(), {
+                    scroll: false,
+                })
+        } else {
+            router.push(pathName + '?' + createQueryString(item?.slug, search), {
+                scroll: false,
+            })
+        }
         setIndexFilter(-1)
     }
 
@@ -61,6 +83,29 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
         dataNew = data?.data?.filter((e) => e?.id !== '05d52397-71a8-4ecf-9a86-ee37965332ef')
     } else {
         dataNew = data?.data
+    }
+
+    const handleReset = () => {
+        if (index === 1) {
+            const paramNew = new URLSearchParams(searchParams)
+            paramNew.set(item?.slug, '')
+            paramNew.set('districtId', '')
+            paramNew.set('wardId', '')
+            paramNew.set('cityId', '')
+            paramNew.set('isFly', 1)
+            paramNew.set('levelZoom', levelZoomDefault)
+            paramNew.set('lng', lngDefault)
+            paramNew.set('lat', latDefault)
+            router.push(pathName + '?' + paramNew.toString(), {
+                    scroll: false,
+                })
+        } else {
+            router.push(pathName + '?' + createQueryString(item?.slug, ''), {
+            scroll: false,
+        })
+        }
+        setIndexFilter(-1)
+        window.localStorage.removeItem('dataArea')
     }
     return (
         <li
@@ -106,12 +151,13 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                         className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
                     >
                         {Array.isArray(dataNew) &&
-                            dataNew?.map((e, index) => (
+                            dataNew?.map((e, idx) => (
                                 <InputCheckBox
-                                    key={index}
+                                    key={idx}
                                     e={e}
                                     lang={lang}
                                     lh={lh}
+                                    index={index}
                                     searchParams={searchParams}
                                 />
                             ))}
@@ -119,12 +165,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 </div>
                 <div className='border-t border-solid border-black01 flex justify-between items-center py-[1vw] px-[1.5vw] max-md:py-[5.6vw] max-md:px-[6.4vw]'>
                     <span
-                        onClick={() => {
-                            router.push(pathName + '?' + createQueryString(item?.slug, ''), {
-                                scroll: false,
-                            })
-                            setIndexFilter(-1)
-                        }}
+                        onClick={handleReset}
                         className='cursor-pointer title14-400-150 text-den max-md:title-mb14-400-150 py-[0.28vw] pr-[1vw] max-md:py-[1.2vw] max-md:pr-[4.27vw] max-lg:title-tl14'
                     >
                         {t?.projects?.filter1?.reset}

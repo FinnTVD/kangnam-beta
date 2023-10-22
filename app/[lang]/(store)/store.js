@@ -9,9 +9,6 @@ const useStore = create((set, get) => ({
     slugDetailNews: null,
     dataSubmitForm: null,
     triggerSubmit: false,
-    cityId: 11,
-    districtId: null,
-    wardId: null,
     dataHomePage: null,
     valueSearch: '',
     valueSearchPrev: '',
@@ -21,15 +18,12 @@ const useStore = create((set, get) => ({
     dataProvinces: null,
     dataDistrict: null,
     dataWard: null,
-    isFly: false,
     listData: '',
     isFeatureHome: {
         isContain: false,
         isStandMap: false,
     },
     categoryNav: [],
-    mapRef: null,
-    levelZoom: 9,
     isClose: true,
     isRedirect: false,
     defaultMap: null,
@@ -49,14 +43,6 @@ const useStore = create((set, get) => ({
             }
         })
     },
-    setIsFly: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                isFly: data,
-            }
-        })
-    },
     setIsClose: (data) => {
         set((state) => {
             return {
@@ -70,14 +56,6 @@ const useStore = create((set, get) => ({
             return {
                 ...state,
                 levelZoom: data,
-            }
-        })
-    },
-    setMapRef: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                mapRef: data,
             }
         })
     },
@@ -174,30 +152,6 @@ const useStore = create((set, get) => ({
             return {
                 ...state,
                 dataHomePage: data,
-            }
-        })
-    },
-    setCityId: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                cityId: data,
-            }
-        })
-    },
-    setDistrictId: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                districtId: data,
-            }
-        })
-    },
-    setWardId: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                wardId: data,
             }
         })
     },

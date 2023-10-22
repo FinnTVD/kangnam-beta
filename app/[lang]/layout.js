@@ -57,8 +57,12 @@ export default async function RootLayout({ children, params }) {
                     name='google-site-verification'
                     content='mLV7YCxrelL4Fm6eT69OV9RzCJxKi5Jfm-hsA6hrTXE'
                 />
-                <script src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'></script>
+                <script
+                    async
+                    src='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.js'
+                ></script>
                 <link
+                    async
                     href='https://maps.vietmap.vn/sdk/vietmap-gl/1.15.3/vietmap-gl.css'
                     rel='stylesheet'
                 />

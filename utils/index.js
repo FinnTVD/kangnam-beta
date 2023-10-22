@@ -170,6 +170,9 @@ const levelZoomDefault = 8 //zoom mac dinh
 const levelZoomDistrictDefault = 11 //zoom mac dinh
 const levelZoomWardDefault = 13 //zoom mac dinh
 
+const lngDefault = 105.85379875200005
+const latDefault = 21.028354507000074
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -192,4 +195,6 @@ export {
     levelZoomDefault,
     levelZoomDistrictDefault,
     levelZoomWardDefault,
+    latDefault,
+    lngDefault,
 }
