@@ -254,7 +254,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                     </div>
                     {Array.isArray(data?.data) && data?.data?.length === 0 && (
                         <div className='text-black text-[1.5vw] font-normal leading-normal text-center'>
-                            Không tìm thấy bất sản nào!
+                            Không tìm thấy bất động sản nào!
                         </div>
                     )}
                     <div

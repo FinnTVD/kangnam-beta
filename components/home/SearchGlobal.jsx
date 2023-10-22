@@ -124,6 +124,8 @@ const SearchGlobal = ({
             paramNew.set('lng', data?.lng)
             paramNew.set('lat', data?.lat)
             paramNew.set('levelZoom', levelZoom)
+            wardId && paramNew.set('wardId', '')
+            paramNew.set('isFly', 1)
             if(isCheck){
                 router.push(
                 '/' +
@@ -525,6 +527,7 @@ const SearchGlobal = ({
                                         {e?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.name || e?.translations[0]?.name}
+                                        
                                     </li>
                                 ))}
                         </ul>

@@ -249,7 +249,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         data: dataDistrict,
         error: errorDistrict,
         isLoading: isLoadingDistrict,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}`, fetcher)
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || cityIdDefault}`, fetcher)
 
     // get list ward count
     const {
