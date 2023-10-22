@@ -19,7 +19,7 @@ import dynamic from 'next/dynamic'
 import IconAddress from '../icons/IconAddress'
 import IconArea from '../icons/IconArea'
 import IconCurrency from '../icons/IconCurrency'
-const MapV4 = dynamic(() => import('./MapV2/MapV4'))
+const MapV5 = dynamic(() => import('./MapV2/MapV5'))
 
 const arrItem = new Array(8).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -386,7 +386,7 @@ export default function MyProjectV2({ lang, t }) {
                         isToggle ? 'w-full' : '!w-[35.5625vw]'
                     } !h-[46.9375vw] rounded-bl-[0.5vw] overflow-hidden relative `}
                 >
-                    <MapV4 lang={lang} />
+                    <MapV5 lang={lang} />
                     <div
                         onClick={() =>
                             setIsFeatureHome({
