@@ -4,9 +4,18 @@ import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
-import { apiKey, cityIdDefault, findIdByAlias, latDefault, levelZoomDefault, levelZoomDistrictDefault, levelZoomWardDefault, lngDefault, slugProject } from '@/utils'
-import * as vietmapgl from "/public/js/vietmap-gl.js"
-
+import {
+    apiKey,
+    cityIdDefault,
+    findIdByAlias,
+    latDefault,
+    levelZoomDefault,
+    levelZoomDistrictDefault,
+    levelZoomWardDefault,
+    lngDefault,
+    slugProject,
+} from '@/utils'
+import * as vietmapgl from '/public/js/vietmap-gl.js'
 
 //draw content popup marker
 const handleRenderPopup = (itemProject, lang, acc) => {
@@ -136,10 +145,10 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                         </div>`
 }
 
-const removeZeroSubArrays=(arr)=> {
-    return arr.filter(subarr => {
-        return !subarr.some(element => isNaN(element) || element === 0);
-    });
+const removeZeroSubArrays = (arr) => {
+    return arr.filter((subarr) => {
+        return !subarr.some((element) => isNaN(element) || element === 0)
+    })
 }
 
 //xử lý chuỗi geoWKT trả về từ api border
@@ -160,7 +169,7 @@ let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
-let listMarkerOut = []//lưu lại các marker
+let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -193,7 +202,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     const isDragDebounce = useDebounce(isDrag, 500) // trigger sự kiện drag
     const [isFirst, setIsFirst] = useState(true)
     const [dataMap, setDataMap] = useState(null)
-
 
     const createQueryString = useCallback(
         (name, value) => {
@@ -277,7 +285,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             mapRef?.scrollZoom.disable() // disable scrollZoom
 
             // init add controls
-            mapRef?.addControl( 
+            mapRef?.addControl(
                 new vietmapgl.NavigationControl({
                     visualizePitch: true,
                     showZoom: true,
@@ -287,9 +295,12 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
             //add event zoom
             mapRef?.on('zoomend', function () {
-                if(isFly) return
+                if (isFly) return
                 const paramNew = new URLSearchParams(searchParams)
-                paramNew.set('levelZoom',Math.round(Number(mapRef?.getZoom())))
+                paramNew.set('levelZoom', Math.round(Number(mapRef?.getZoom())))
+                router.push(pathName + '?' + paramNew.toString(), {
+                    scroll: false,
+                })
             })
 
             //add event drag
@@ -323,17 +334,19 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         if (!mapRef) return
         if (isFly && lng && lat && typeof mapRef?.flyTo === 'function') {
             mapRef?.flyTo({
-            center: [Number(lng), Number(lat)],
-            zoom: levelZoom || levelZoomDefault,
-            curve: 1,
+                center: [Number(lng), Number(lat)],
+                zoom: levelZoom || levelZoomDefault,
+                curve: 1,
             })
         }
-    },[isFly,lng,lat,mapRef])
+    }, [isFly, lng, lat, mapRef])
 
     useEffect(() => {
         const callApiBorder = async () => {
             const res = await fetch(
-                `https://maps.vietmap.vn/api/boundaries/v3/info/${wardId || districtId || cityId || cityIdDefault}?apikey=${apiKey}`,
+                `https://maps.vietmap.vn/api/boundaries/v3/info/${
+                    wardId || districtId || cityId || cityIdDefault
+                }?apikey=${apiKey}`,
             )
             const data = await res.json()
             if (data && isFirst) {
@@ -369,14 +382,14 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                 }`,
             )
             const data = await res.json() //data marker
-            if (data && typeof mapRef?.getZoom ==='function') {
+            if (data && typeof mapRef?.getZoom === 'function') {
                 setIsFirst(false)
                 setDataMap(data)
                 addMarkerV2(data, mapRef?.getZoom() || levelZoomDefault)
             }
         }
         callApi()
-    }, [cityId,wardId,districtId,mapRef])
+    }, [cityId, wardId, districtId, mapRef])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -386,7 +399,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
     // xử lý các marker theo sự kiên zoom và drag
     useEffect(() => {
-        if (isFly || isRedirect || typeof mapRef?.getCenter !=='function') return
+        if (isFly || isRedirect || typeof mapRef?.getCenter !== 'function') return
         // kiểm tra xem điểm giữa của khung hình đang là quân/huyện nào hay là phường/xã nào
         const getLocationCurrent = async () => {
             const ct = await mapRef?.getCenter()
@@ -396,7 +409,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             )
             // get data follow center viewport
             const data = await res.json()
-            if(!data) return
+            if (!data) return
             const paramNew = new URLSearchParams(searchParams)
             const one = dataMap?.find(
                 (e) => Number(e?.district_id) === data[0]?.boundaries[1]?.id, // boundaries[1]<=> district
@@ -422,15 +435,14 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                 wardId && paramNew.set('wardId', '')
             }
             if (!districtId && levelZoom < levelZoomDistrictDefault) {
-               searchParams?.size && data[0]?.boundaries[2]?.id && paramNew.set('cityId', data[0]?.boundaries[2]?.id)
+                searchParams?.size && data[0]?.boundaries[2]?.id && paramNew.set('cityId', data[0]?.boundaries[2]?.id)
             }
             router.push(pathName + '?' + paramNew.toString(), {
-                        scroll: false,
-                })
+                scroll: false,
+            })
         }
         getLocationCurrent()
-        
-    }, [levelZoom, isDragDebounce,mapRef])
+    }, [levelZoom, isDragDebounce, mapRef])
 
     if (propertyType?.length > 0 && propertyType[0]) {
         propertyTypeParams = propertyType[0]
@@ -487,12 +499,11 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         })
     }
 
-
     //call data + add marker detail project
     const callDataAddressDetail = async (e) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property/property-by-refid/${e?.id}`)
         const data = await res.json()
-        if(!data) return
+        if (!data) return
         if (Array.isArray(data) && data?.length) {
             let childNode = data?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang), '')
             const marker = new vietmapgl.Marker()
@@ -547,8 +558,8 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
         )
         const data = await res.json() // data popup
-        if(!data) return 
-        
+        if (!data) return
+
         // handle create popup follow levelZoom
         listMarker?.forEach((e) => {
             if (data) {
@@ -655,14 +666,14 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             }
         })
         setTimeout(() => {
-            if(isFly){
+            if (isFly) {
                 const paramNew = new URLSearchParams(searchParams)
-            paramNew.set('isFly','')
-            router.push(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
+                paramNew.set('isFly', '')
+                router.push(pathName + '?' + paramNew.toString(), {
+                    scroll: false,
+                })
             }
-        }, 2000);
+        }, 2000)
     }
 
     const addMarkerV2 = (data, levelZoom) => {
@@ -694,7 +705,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             }
         })
         callDataPopup(listMarker)
-        
     }
 
     return (
