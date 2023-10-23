@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import MapV5 from '../home/MapV2/MapV5'
 
-export default function BtnShowMap({t}) {
+export default function BtnShowMap({ t, isShow }) {
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <>
+        <div className={`${isShow ? '' : 'hidden'}`}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`${
@@ -75,6 +75,6 @@ export default function BtnShowMap({t}) {
                     isOpen ? 'block opacity-100' : 'hidden opacity-0'
                 } fixed top-0 left-0 z-30 w-full h-screen transition-all duration-500 max-md:w-full bg-black/20 rounded-lg p-[0.5vw]`}
             ></div>
-        </>
+        </div>
     )
 }

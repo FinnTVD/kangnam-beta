@@ -6,21 +6,15 @@ import Prominent from './Prominent'
 import Partner from './Partner'
 import LatestNews from './LatestNews'
 import WeAre from './WeAre'
-import SellingRes from './SellingRes'
-import Hiring from './Hiring'
+
 import MyProjectV2 from './MyProjectV2'
 import { ToastContainer } from 'react-toastify'
 
 import Aos from 'aos'
-// import 'aos/dist/aos.css'
 import { useEffect } from 'react'
-import { useMediaQuery } from 'react-responsive'
+import SellingBox from './SellingBox'
 
 export default function IndexHome({ lang, t }) {
-    const isTablet = useMediaQuery({
-        query: '(max-width: 1023px)',
-    })
-
     useEffect(() => {
         Aos.init({
             disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -54,17 +48,13 @@ export default function IndexHome({ lang, t }) {
                 lang={lang}
                 t={t}
             />
-            <SellingRes
-                lang={lang}
-                t={t}
-                isTablet={isTablet}
-            />
-            {isTablet && (
-                <Hiring
-                    lang={lang}
+
+            <div className='lg:hidden'>
+                <SellingBox
                     t={t}
+                    lang={lang}
                 />
-            )}
+            </div>
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
                 <Deposit
                     lang={lang}

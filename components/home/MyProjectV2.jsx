@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import Button from '../general/Button'
-import { arrFilter, handleCheckLangCode } from '@/utils'
+import { arrFilter, handleCheckLangCode, renderAddress, renderTitle, renderHref } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
@@ -30,9 +30,6 @@ let propertyCategoryTypeParams = ''
 gsap.registerPlugin(ScrollTrigger)
 export default function MyProjectV2({ lang, t }) {
     const setBoxMap = useStore((state) => state.setBoxMap)
-    // const valueSearch = useStore((state) => state.valueSearch)
-    // const selectSearch = useStore((state) => state.selectSearch)
-    // const valueSearchPrev = useStore((state) => state.valueSearchPrev)
     const cityId = useStore((state) => state.cityId)
     const districtId = useStore((state) => state.districtId)
     const wardId = useStore((state) => state.wardId)
@@ -96,12 +93,14 @@ export default function MyProjectV2({ lang, t }) {
 
     const [show, Element] = useToggleShowMap()
     const [isToggle, setIsToggle] = useState(false)
-    const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
-            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-            cityId ? '&cityId=' + cityId : ''
-        }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+    const { data, error, isLoading, mutate } = useSWR(
+        !isTablet
+            ? `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+                  propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+              }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                  cityId ? '&cityId=' + cityId : ''
+              }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`
+            : undefined,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -111,13 +110,14 @@ export default function MyProjectV2({ lang, t }) {
     )
 
     useEffect(() => {
-        mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
-                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-                cityId ? '&cityId=' + cityId : ''
-            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
-        )
+        // mutate(
+        //     `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+        //         propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+        //     }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+        //         cityId ? '&cityId=' + cityId : ''
+        //     }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+        // )
+        mutate()
     }, [lang, isSubmit])
 
     useEffect(() => {
@@ -155,7 +155,7 @@ export default function MyProjectV2({ lang, t }) {
         }
     }, [])
 
-    if (isTablet) return
+    if (isTablet) return null
 
     return (
         <section
@@ -216,23 +216,12 @@ export default function MyProjectV2({ lang, t }) {
                         {data &&
                             data?.data?.map((e, index) => (
                                 <Link
-                                    href={
-                                        (lang === 'vi' ? '' : lang + '/') +
-                                        (e?.propertyCategory?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.alias || 'du-an') +
-                                        '/' +
-                                        (e?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.slug || e?.translations[0]?.slug)
-                                    }
+                                    href={renderHref(e, lang)}
                                     className='w-full'
                                     key={index}
                                 >
                                     <div className='relative w-full h-[13.75vw] rounded-[0.5vw] overflow-hidden'>
                                         <Image
-                                            // data-aos='zoom-out'
-                                            // data-aos-delay={`${(index % 3) * 300}`}
                                             className='z-0 object-cover'
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={
@@ -255,20 +244,10 @@ export default function MyProjectV2({ lang, t }) {
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
-                                            title={
-                                                e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
-                                                )?.name || e?.translations[0]?.name
-                                            }
+                                            title={renderTitle(e, lang)}
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {e?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                            )?.name ||
-                                                e?.translations[0]?.name ||
-                                                'Chưa có thông tin!'}
+                                            {renderTitle(e, lang)}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -283,14 +262,12 @@ export default function MyProjectV2({ lang, t }) {
                                                 {t?.projects?.item?.address}
                                             </span>
                                             <span className='capitalize text-den title14-400-150 line-clamp-1'>
-                                                {e?.address?.ward +
-                                                    ', ' +
-                                                    e?.address?.district +
-                                                    ', ' +
-                                                    e?.address?.city}
+                                                {renderAddress(e?.address)}
                                             </span>
                                         </div>
-                                        <div title={e?.translations?.find((e) =>
+                                        <div
+                                            title={
+                                                e?.translations?.find((e) =>
                                                     e?.languageCode
                                                         ?.toLowerCase()
                                                         ?.includes(lang === 'ch' ? 'cn' : lang),
@@ -302,7 +279,10 @@ export default function MyProjectV2({ lang, t }) {
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'} className='flex items-center my-[0.5vw]'>
+                                                    : 'Chưa có thông tin!'
+                                            }
+                                            className='flex items-center my-[0.5vw]'
+                                        >
                                             <IconArea
                                                 className={
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'
@@ -327,7 +307,10 @@ export default function MyProjectV2({ lang, t }) {
                                                     : 'Chưa có thông tin!'}
                                             </span>
                                         </div>
-                                        <div title={t?.projects?.item?.price} className='flex items-center'>
+                                        <div
+                                            title={t?.projects?.item?.price}
+                                            className='flex items-center'
+                                        >
                                             <IconCurrency
                                                 className={
                                                     'w-[0.875vw] h-[0.875vw] max-md:w-[5vw] max-md:h-[5vw] max-lg:w-[2vw] max-lg:h-[2vw]'

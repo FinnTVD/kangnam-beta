@@ -173,6 +173,47 @@ const levelZoomWardDefault = 13 //zoom mac dinh
 const lngDefault = 105.85379875200005
 const latDefault = 21.028354507000074
 
+const renderTitle = (e, lang, message) => {
+    return (
+        e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+            ?.name ||
+        e?.translations[0]?.name ||
+        message ||
+        'Chưa có thông tin!'
+    )
+}
+
+const renderAddress = (e) => {
+    return `${e?.ward}, ${e?.district}, ${e?.city}`
+}
+const renderHref = (e, lang) => {
+    return (
+        (lang === 'vi' ? '' : lang + '/') +
+        (e?.propertyCategory?.translations?.find((e) =>
+            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+        )?.alias || 'du-an') +
+        '/' +
+        (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))?.slug ||
+            e?.translations[0]?.slug)
+    )
+}
+
+const preventRefreshSwr = {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+}
+
+// const preventRefreshSwr = {
+//     revalidateOnFocus: false,
+//     revalidateOnMount: false,
+//     revalidateOnReconnect: false,
+//     refreshWhenOffline: false,
+//     refreshWhenHidden: false,
+//     refreshInterval: 0,
+//     revalidateIfStale: false,
+// }
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -197,4 +238,8 @@ export {
     levelZoomWardDefault,
     latDefault,
     lngDefault,
+    renderTitle,
+    renderAddress,
+    renderHref,
+    preventRefreshSwr,
 }

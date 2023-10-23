@@ -2,13 +2,20 @@
 import { memo, useEffect, useState } from 'react'
 import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-// 
+//
 import SelectSearch from '../general/SelectSearch'
 import useStore from '@/app/[lang]/(store)/store'
-import { apiKey, cityIdDefault, levelZoomDefault, levelZoomDistrictDefault, levelZoomWardDefault, notifyError, slugProject } from '@/utils'
+import {
+    apiKey,
+    cityIdDefault,
+    levelZoomDefault,
+    levelZoomDistrictDefault,
+    levelZoomWardDefault,
+    notifyError,
+    slugProject,
+} from '@/utils'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import useDebounce from '@/hooks/useDebounce'
-
 
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
@@ -44,7 +51,7 @@ const SearchGlobal = ({
     const cityId = Number(searchParams.get('cityId'))
     const districtId = Number(searchParams.get('districtId'))
     const wardId = Number(searchParams.get('wardId'))
-    
+
     const [dataProject, setDataProject] = useState([])
     const valueSearch = useStore((state) => state.valueSearch)
     const [dataSearch, setDataSearch] = useState([])
@@ -62,7 +69,7 @@ const SearchGlobal = ({
     const listData = useStore((state) => state.listData)
 
     const [sideRef, isOutSide] = useClickOutSide()
- 
+
     const { data, isLoading, error } = useSWR(process.env.NEXT_PUBLIC_API + '/property-category', fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
@@ -72,7 +79,8 @@ const SearchGlobal = ({
     useEffect(() => {
         const callDataSearch = async () => {
             const res = await fetch(
-                `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${debounceValue ? '&text=' + debounceValue : ''
+                `https://maps.vietmap.vn/api/search/v3?apikey=${apiKey}${
+                    debounceValue ? '&text=' + debounceValue : ''
                 }`,
             )
             const data = await res.json()
@@ -103,7 +111,8 @@ const SearchGlobal = ({
         }
         const callDataProjectCode = async () => {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
+                `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
+                    listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
                 }`,
             )
             const data = await res.json()
@@ -117,7 +126,7 @@ const SearchGlobal = ({
         isOutSide && setIsClose(true)
     }, [isOutSide])
 
-    const callApiGetLngLat = async(refId,levelZoom,isCheck,paramNew)=>{
+    const callApiGetLngLat = async (refId, levelZoom, isCheck, paramNew) => {
         const res = await fetch(`https://maps.vietmap.vn/api/place/v3?apikey=${apiKey}&refid=${refId}`)
         const data = await res.json()
         if (data) {
@@ -126,14 +135,18 @@ const SearchGlobal = ({
             paramNew.set('levelZoom', levelZoom)
             wardId && paramNew.set('wardId', '')
             paramNew.set('isFly', 1)
-            if(isCheck){
+            if (isCheck) {
                 router.push(
-                '/' +
-                listData[0]?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.alias + '?' + paramNew.toString(), {
-                scroll: false,
-            })
+                    '/' +
+                        listData[0]?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                        )?.alias +
+                        '?' +
+                        paramNew.toString(),
+                    {
+                        scroll: false,
+                    },
+                )
             } else {
                 router.push(pathName + '?' + paramNew.toString(), {
                     scroll: false,
@@ -141,20 +154,24 @@ const SearchGlobal = ({
             }
         }
     }
-    
+
     const callDataProject = async ({ cityIdSearch, districtIdSearch, wardIdSearch }) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?page=1&take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${districtIdSearch ? '&districtId=' + districtIdSearch : ''
-            }${wardIdSearch ? '&wardId=' + wardIdSearch : ''}${listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
+            `${process.env.NEXT_PUBLIC_API}/property?page=1&take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
+                districtIdSearch ? '&districtId=' + districtIdSearch : ''
+            }${wardIdSearch ? '&wardId=' + wardIdSearch : ''}${
+                listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
             }`,
         )
         const data = await res.json()
         setDataProject(data)
     }
 
-    const callDataWard = async (cityIdWard, districtIdWard, wardIdWard, refId,isCheck) => {
+    const callDataWard = async (cityIdWard, districtIdWard, wardIdWard, refId, isCheck) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityIdWard || cityIdDefault}&districtId=${districtIdWard}`,
+            `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${
+                cityIdWard || cityIdDefault
+            }&districtId=${districtIdWard}`,
         )
         const data = await res.json()
         const itemWard = data?.find((i) => i?.ward_id == wardIdWard)
@@ -167,7 +184,7 @@ const SearchGlobal = ({
         }
         paramNew.set('wardId', wardIdWard)
         if (!itemWard) {
-            callApiGetLngLat(refId,levelZoomWardDefault,isCheck,paramNew)
+            callApiGetLngLat(refId, levelZoomWardDefault, isCheck, paramNew)
             return notifyError('No data project in address ward search!')
         }
         //delete marker before fly to city other
@@ -183,19 +200,23 @@ const SearchGlobal = ({
             paramNew.set('lng', itemWard?.ward_lng)
             paramNew.set('lat', itemWard?.ward_lat)
             paramNew.set('levelZoom', levelZoomWardDefault)
-            isCheck && router.push(
-                '/' +
-                listData[0]?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.alias+ '?' + paramNew.toString(), {
-                    scroll: false,
-                }
-            )
+            isCheck &&
+                router.push(
+                    '/' +
+                        listData[0]?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                        )?.alias +
+                        '?' +
+                        paramNew.toString(),
+                    {
+                        scroll: false,
+                    },
+                )
         } else {
             paramNew.set('lng', itemWard?.ward_lng)
             paramNew.set('lat', itemWard?.ward_lat)
             paramNew.set('levelZoom', levelZoomWardDefault)
-            paramNew.set('isFly',1)
+            paramNew.set('isFly', 1)
             router.push(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
@@ -204,9 +225,9 @@ const SearchGlobal = ({
 
     const handleSubmit = (e) => {
         e?.preventDefault()
-        
+
         if (!valueSearch) return // khong search thi khong redirect
-        
+
         if (dataSearch?.length >= 0) {
             handleSelectValueSearch(dataSearch[0])
         } else if (dataProjectCode?.data?.length >= 0) {
@@ -216,7 +237,6 @@ const SearchGlobal = ({
         }
         setIsClose(true)
     }
-
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
@@ -228,16 +248,17 @@ const SearchGlobal = ({
             cityId !== Number(e?.boundaries[0]?.id) && paramNew.set('cityId', e?.boundaries[0]?.id)
             paramNew.set('districtId', '')
             paramNew.set('wardId', '')
-            if (!dataProvinces || !e?.boundaries[0]?.id) return router.push(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
+            if (!dataProvinces || !e?.boundaries[0]?.id)
+                return router.push(pathName + '?' + paramNew.toString(), {
+                    scroll: false,
+                })
             //nếu đang ở tỉnh đó và ở level zoom city thì không fly
             if (e?.boundaries[0]?.id === cityId && !cityId && !wardId) return notifyError('Now, in current city!')
             if (e?.boundaries[0]?.id === cityId && !districtId) return notifyError('Now, in current city!')
 
             const itemCity = dataProvinces?.find((i) => i?.city_id == e?.boundaries[0]?.id)
             if (!itemCity) {
-                callApiGetLngLat(e?.ref_id,levelZoomDefault,isCheck,paramNew)
+                callApiGetLngLat(e?.ref_id, levelZoomDefault, isCheck, paramNew)
                 return notifyError('No data project in address city search!')
             }
             if (
@@ -247,25 +268,30 @@ const SearchGlobal = ({
                             i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
                         ),
                     )?.alias,
-                ) && !slugProject?.find((e) => e === pathName)
+                ) &&
+                !slugProject?.find((e) => e === pathName)
             ) {
                 setIsRedirect(true)
                 paramNew.set('lng', itemCity?.city_lng)
                 paramNew.set('lat', itemCity?.city_lat)
                 paramNew.set('levelZoom', levelZoomDefault)
-                isCheck && router.push(
-                    '/' +
-                    listData[0]?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                    )?.alias + '?' + paramNew.toString(), {
-                    scroll: false,
-                }
-                )
+                isCheck &&
+                    router.push(
+                        '/' +
+                            listData[0]?.translations?.find((e) =>
+                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                            )?.alias +
+                            '?' +
+                            paramNew.toString(),
+                        {
+                            scroll: false,
+                        },
+                    )
             } else {
                 paramNew.set('lng', itemCity?.city_lng)
                 paramNew.set('lat', itemCity?.city_lat)
                 paramNew.set('levelZoom', levelZoomDefault)
-                paramNew.set('isFly',1)
+                paramNew.set('isFly', 1)
                 router.push(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
@@ -275,14 +301,15 @@ const SearchGlobal = ({
             const paramNew = new URLSearchParams(searchParams)
             paramNew.set('districtId', e?.boundaries[0]?.id)
             e?.boundaries[1]?.id !== cityId && paramNew.set('cityId', e?.boundaries[1]?.id)
-            if (!dataDistrict || !e?.boundaries[0]?.id) return router.push(pathName + '?' + paramNew.toString(), {
+            if (!dataDistrict || !e?.boundaries[0]?.id)
+                return router.push(pathName + '?' + paramNew.toString(), {
                     scroll: false,
-            })
+                })
             // nếu đang là districtid đó và đang ở cấp quận thì return
             if (e?.boundaries[0]?.id === districtId && !wardId) return notifyError('Now, in current district!')
             const itemDistrict = dataDistrict?.find((i) => i?.district_id == e?.boundaries[0]?.id)
             if (typeof itemDistrict !== 'object') {
-                callApiGetLngLat(e?.ref_id,levelZoomDistrictDefault,isCheck,paramNew)
+                callApiGetLngLat(e?.ref_id, levelZoomDistrictDefault, isCheck, paramNew)
                 return notifyError('No data project in address district search!')
             }
             if (
@@ -292,35 +319,41 @@ const SearchGlobal = ({
                             i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
                         ),
                     )?.alias,
-                ) && !slugProject?.find((e) => e === pathName)
+                ) &&
+                !slugProject?.find((e) => e === pathName)
             ) {
                 setIsRedirect(true)
                 paramNew.set('lng', itemDistrict?.district_lng)
                 paramNew.set('lat', itemDistrict?.district_lat)
                 paramNew.set('levelZoom', levelZoomDistrictDefault)
                 wardId && paramNew.set('wardId', '')
-                isCheck && router.push('/' + listData[0]?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                    )?.alias+ '?' + paramNew.toString(), {
-                        scroll: false,
-                    }
-                )
-            }else{
+                isCheck &&
+                    router.push(
+                        '/' +
+                            listData[0]?.translations?.find((e) =>
+                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                            )?.alias +
+                            '?' +
+                            paramNew.toString(),
+                        {
+                            scroll: false,
+                        },
+                    )
+            } else {
                 paramNew.set('lng', itemDistrict?.district_lng)
                 paramNew.set('lat', itemDistrict?.district_lat)
                 paramNew.set('levelZoom', levelZoomDistrictDefault)
-                paramNew.set('isFly',1)
+                paramNew.set('isFly', 1)
                 wardId && paramNew.set('wardId', '')
                 router.push(pathName + '?' + paramNew.toString(), {
-                            scroll: false,
-                    })
+                    scroll: false,
+                })
             }
         }
         if (!e?.ref_id?.includes('CITY') && !e?.ref_id?.includes('DIST')) {
-            callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id, e?.ref_id,isCheck)
+            callDataWard(e?.boundaries[2]?.id, e?.boundaries[1]?.id, e?.boundaries[0]?.id, e?.ref_id, isCheck)
         }
     }
-
 
     const handleSelectValueProject = (e) => {
         const paramNew = new URLSearchParams(searchParams)
@@ -335,53 +368,57 @@ const SearchGlobal = ({
             setIsRedirect(true)
             setValueSearch(e?.address?.display)
             if (Number(e?.address?.cityId) !== cityId) {
-                paramNew.set('cityId',e?.address?.cityId)
+                paramNew.set('cityId', e?.address?.cityId)
             }
             if (Number(e?.address?.districtId) !== districtId) {
-                paramNew.set('districtId',e?.address?.districtId)
+                paramNew.set('districtId', e?.address?.districtId)
             }
             if (Number(e?.address?.wardId) !== wardId) {
-                paramNew.set('wardId',e?.address?.wardId)
+                paramNew.set('wardId', e?.address?.wardId)
             }
             paramNew.set('lng', e?.address?.lng)
             paramNew.set('lat', e?.address?.lat)
             paramNew.set('levelZoom', 15)
-            handleCheckPage(pathName, listData) && router.push(
-                        '/' +
+            handleCheckPage(pathName, listData) &&
+                router.push(
+                    '/' +
                         listData[0]?.translations?.find((e) =>
                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                        )?.alias+ '?' + paramNew.toString(), {
-                            scroll: false,
-                        }
-                    )
-        }else{
+                        )?.alias +
+                        '?' +
+                        paramNew.toString(),
+                    {
+                        scroll: false,
+                    },
+                )
+        } else {
             setValueSearch(e?.address?.display)
             if (Number(e?.address?.cityId) !== cityId) {
-                paramNew.set('cityId',e?.address?.cityId)
+                paramNew.set('cityId', e?.address?.cityId)
             }
             if (Number(e?.address?.districtId) !== districtId) {
-                paramNew.set('districtId',e?.address?.districtId)
+                paramNew.set('districtId', e?.address?.districtId)
             }
             if (Number(e?.address?.wardId) !== wardId) {
-                paramNew.set('wardId',e?.address?.wardId)
+                paramNew.set('wardId', e?.address?.wardId)
             }
             paramNew.set('lng', e?.address?.lng)
             paramNew.set('lat', e?.address?.lat)
             paramNew.set('levelZoom', 15)
-            paramNew.set('isFly',1)
-            
+            paramNew.set('isFly', 1)
+
             router.push(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
-        
     }
 
     return (
         <div
-            className={`${classContainer ||
+            className={`${
+                classContainer ||
                 'w-[54vw] max-md:w-full py-[0.62vw] max-md:py-[4.27vw] max-md:px-[6.4vw] pl-[2.5vw] pr-[1.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'
-                }`}
+            }`}
         >
             <div className='flex items-center w-full'>
                 <SelectSearch
@@ -389,15 +426,17 @@ const SearchGlobal = ({
                     lang={lang}
                 />
                 <div
-                    className={`${classLine ||
+                    className={`${
+                        classLine ||
                         'border-l border-solid border-[#57534E] max-md:border-den02 opacity-30 h-[1.6875vw] max-md:h-[4.53vw] mx-[1vw] max-md:mx-[4.27vw]'
-                        }`}
+                    }`}
                 ></div>
                 <form
                     ref={sideRef}
                     onSubmit={handleSubmit}
-                    className={`${classForm || 'flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw] relative'
-                        }`}
+                    className={`${
+                        classForm || 'flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw] relative'
+                    }`}
                 >
                     <label htmlFor='search'>
                         {iconSmall && (
@@ -425,12 +464,14 @@ const SearchGlobal = ({
                         )}
                     </label>
                     <input
-                        className={`${classInput || 'w-full outline-none text-den title18-400-150 title-mb14-400-130 pr-[2vw]'
-                            }`}
+                        className={`${
+                            classInput || 'w-full outline-none text-den title18-400-150 title-mb14-400-130 pr-[2vw]'
+                        }`}
                         type='text'
                         name='search'
                         id='search'
                         placeholder='Thành phố Hà Nội'
+                        spellCheck={false}
                         value={valueSearch}
                         onFocus={() => {
                             if (
@@ -455,9 +496,10 @@ const SearchGlobal = ({
                     />
                     {dataSearch && valueSearch && (
                         <ul
-                            className={`${isClose ? 'hidden' : ''} ${classList ||
+                            className={`${isClose ? 'hidden' : ''} ${
+                                classList ||
                                 'absolute bottom-0 left-[-1.5vw] translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150'
-                                }`}
+                            }`}
                         >
                             {dataSearch && <li className='font-bold text-black max-md:my-[1vw]'>Khu vực</li>}
                             {Array.isArray(dataSearch) &&
@@ -527,7 +569,6 @@ const SearchGlobal = ({
                                         {e?.translations?.find((e) =>
                                             e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                         )?.name || e?.translations[0]?.name}
-                                        
                                     </li>
                                 ))}
                         </ul>
@@ -568,8 +609,9 @@ const SearchGlobal = ({
                                 height='11'
                                 viewBox='0 0 11 11'
                                 fill='none'
-                                className={`${valueSearch ? 'hidden' : ''
-                                    } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw]`}
+                                className={`${
+                                    valueSearch ? 'hidden' : ''
+                                } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw]`}
                             >
                                 <g clipPath='url(#clip0_2399_2436)'>
                                     <path
