@@ -280,7 +280,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                 center: [Number(lng) || lngDefault, Number(lat) || latDefault], //ha noi center
                 zoom: levelZoom || levelZoomDefault,
                 pitch: 0, // góc nhìn từ trên cao nhìn xuống,
-                // bearing: 90,
+                bearing: 0,
             })
             mapRef?.scrollZoom.disable() // disable scrollZoom
 

@@ -1,3 +1,4 @@
+import '/public/css/vietmap-gl.css'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -5,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'aos/dist/aos.css'
 
 import './globals.css'
-import "/public/css/vietmap-gl.css"
 
 import localFont from 'next/font/local'
 import Script from 'next/script'
