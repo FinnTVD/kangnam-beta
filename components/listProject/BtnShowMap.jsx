@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import MapV4 from '../home/MapV2/MapV4'
+import MapV5 from '../home/MapV2/MapV5'
 
 export default function BtnShowMap({t}) {
     const [isOpen, setIsOpen] = useState(false)
@@ -67,7 +67,7 @@ export default function BtnShowMap({t}) {
                     isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[110%] opacity-0'
                 } fixed bottom-0 left-0 z-40 w-full h-[72vh] transition-all duration-500 max-md:w-full bg-white rounded-[3.5vw] p-[2vw]`}
             >
-                <MapV4 />
+                <MapV5 />
             </div>
             <div
                 onClick={() => setIsOpen(false)}

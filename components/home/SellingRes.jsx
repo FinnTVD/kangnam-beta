@@ -124,6 +124,7 @@ export default function SellingRes({ lang, isTablet, t }) {
     }, [lang])
 
     if (!data || !isTablet) return
+    console.log("🚀 ~ file: SellingRes.jsx:127 ~ SellingRes ~ data:", data?.data)
     const dataNew = data?.data?.filter((item) => item?.propertyCategory?.id !== categoryHireId)
     return (
         <section
