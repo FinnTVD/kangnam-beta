@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import useDebounce from '@/hooks/useDebounce'
 import { apiKey, cityIdDefault, findIdByAlias, latDefault, levelZoomDefault, levelZoomDistrictDefault, levelZoomWardDefault, lngDefault, slugProject } from '@/utils'
+import * as vietmapgl from "/public/js/vietmap-gl.js"
 
 
 //draw content popup marker
@@ -264,8 +265,8 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     useEffect(() => {
         if (typeof window === 'undefined') return
         const loadMap = () => {
-            if (!window.vietmapgl || typeof window === 'undefined') return
-            mapRef = new window.vietmapgl.Map({
+            if (!vietmapgl || typeof window === 'undefined') return
+            mapRef = new vietmapgl.Map({
                 container: 'map',
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
                 center: [Number(lng) || lngDefault, Number(lat) || latDefault], //ha noi center
@@ -277,7 +278,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
             // init add controls
             mapRef?.addControl( 
-                new window.vietmapgl.NavigationControl({
+                new vietmapgl.NavigationControl({
                     visualizePitch: true,
                     showZoom: true,
                     showCompass: true,
