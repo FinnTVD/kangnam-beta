@@ -1,12 +1,12 @@
 'use client'
-import { useState } from 'react'
-import Button from '../general/Button'
-import 'swiper/css/effect-fade'
+import { useState, useRef } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
 import Image from 'next/image'
-import { useRef } from 'react'
-import { useMediaQuery } from 'react-responsive'
+//
+import Button from '../general/Button'
+import 'swiper/css/effect-fade'
 
 const arrArea = [
     '01. Khu vực Bắc Từ Liêm, Hà Nội',
@@ -21,7 +21,7 @@ const arrProminent = [
     { id: 3, src: '/images/bg-prominent3.jpeg', alt: 'bg-prominent3' },
     { id: 4, src: '/images/bg-prominent4.jpeg', alt: 'bg-prominent4' },
 ]
-export default function Prominent({t}) {
+export default function Prominent({ t }) {
     const [indexSlider, setIndexSlider] = useState(0)
     const swiperRef = useRef()
     const isMobile = useMediaQuery({
@@ -71,7 +71,6 @@ export default function Prominent({t}) {
                                     alt={e.alt}
                                     sizes='100vw'
                                     fill
-                                    quality={100}
                                 />
                             </div>
                         </SwiperSlide>

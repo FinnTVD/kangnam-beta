@@ -7,6 +7,7 @@ import house from '../../public/images/house.png'
 import check from '../../public/images/check.svg'
 import pig from '../../public/images/pig.svg'
 import watch from '../../public/images/watch.svg'
+import bgWe from '../../public/images/bg-we.png'
 
 export default function WeAre({ lang, t }) {
     return (
@@ -14,13 +15,13 @@ export default function WeAre({ lang, t }) {
             <section
                 id='weAre'
                 className='relative w-full h-screen overflow-hidden bg-den-2'
-                // data-aos='fade-up'
             >
                 <Image
                     className='z-0 object-cover'
-                    src='/images/bg-we.png'
-                    alt='bg-we'
+                    src={bgWe}
+                    alt='background we'
                     sizes='100vw'
+                    placeholder='blur'
                     fill
                 />
                 <div className='relative z-10 flex justify-between h-full max-lg:flex-col'>
@@ -123,6 +124,7 @@ export default function WeAre({ lang, t }) {
                                 data-aos='fade-up'
                                 data-aos-delay='600'
                                 src={house}
+                                placeholder='blur'
                                 alt='house'
                                 className='object-fill z-[2]'
                                 sizes='48.1875vw'
@@ -132,12 +134,14 @@ export default function WeAre({ lang, t }) {
                                 data-aos='fade-up'
                                 data-aos-delay='600'
                                 src={circleHouse}
+                                placeholder='blur'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-lg:w-[44.6vw] max-md:w-[63.6vw] max-lg:h-[44.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-lg:top-[4.49vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-lg:left-[38.46vw] max-md:left-[23.46vw]'
                             />
                             <Image
                                 data-aos='fade'
                                 data-aos-duration='500'
+                                placeholder='blur'
                                 data-aos-delay='1000'
                                 src={people}
                                 alt='people'
@@ -150,7 +154,7 @@ export default function WeAre({ lang, t }) {
                     className='absolute top-0 left-0 object-cover z-[3] !h-[200vh] w-screen max-lg:!h-[164vh]'
                     src={src}
                     alt='linear'
-                    priority
+                    placeholder='blur'
                 />
             </section>
         </>

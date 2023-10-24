@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useSWR, { mutate } from 'swr'
 import dynamic from 'next/dynamic'
-// 
+//
 import useToggleShowMap from '@/hooks/useToggleShowMap'
 import BoxSort from './BoxSort'
 import BtnShowMap from './BtnShowMap'
@@ -21,7 +21,6 @@ import IconCurrency from '../icons/IconCurrency'
 import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
 const MapV5 = dynamic(() => import('../home/MapV2/MapV5'))
-
 
 const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
 
@@ -133,14 +132,13 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=24${findIdByAlias(
-            pathName,
-            dataSlug,
-        )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-            propertyAreaTypeParams ? propertyAreaTypeParams : ''
-        }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
-            cityId ? '&cityId=' + cityId : ''
-        }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+        `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
+            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+            price ? '&price=' + price : ''
+        }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
+            wardId ? '&wardId=' + wardId : ''
+        }`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -175,7 +173,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=24${findIdByAlias(
+            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(
                 pathName,
                 dataSlug,
             )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
@@ -220,7 +218,9 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                 t={t}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
-                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>{t?.projects?.map}</span>
+                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
+                                    {t?.projects?.map}
+                                </span>
                                 <div>{Element}</div>
                             </div>
                         </div>
@@ -445,7 +445,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                     <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
                 </div>
             </div>
-            {isTablet && <BtnShowMap t={t}/>}
+            {isTablet && <BtnShowMap t={t} />}
         </section>
     )
 }

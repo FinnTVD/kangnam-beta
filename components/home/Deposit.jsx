@@ -3,30 +3,30 @@ import Button from '../general/Button'
 import IconDeposit1 from '../icons/IconDeposit1'
 import IconDeposit2 from '../icons/IconDeposit2'
 import IconDeposit3 from '../icons/IconDeposit3'
+import bgDeposit from '../../public/images/bg-deposit.jpg'
+import bgDepositMb from '../../public/images/bg-deposit-res.jpg'
 
 export default function Deposit({ lang, t }) {
     return (
         <section
-            // data-aos='fade-up'
-            // data-aos-duration='1000'
             id='deposit'
             className='relative h-fit pt-[8.44vw] pb-[7vw] max-md:pt-[13.33vw] max-lg:h-[55vh] max-md:h-screen'
         >
             <Image
                 className='z-0 object-cover max-md:hidden'
-                src='/images/bg-deposit.jpg'
-                alt='bg-deposit'
+                src={bgDeposit}
+                alt='background deposit'
                 sizes='100vw'
+                placeholder='blur'
                 fill
-                quality={100}
             />
             <Image
                 className='z-0 object-cover md:hidden'
-                src='/images/bg-deposit-res.jpg'
-                alt='bg-deposit'
+                src={bgDepositMb}
+                alt='background deposit mobile'
                 sizes='100vw'
+                placeholder='blur'
                 fill
-                quality={100}
             />
             <div
                 data-aos='fade-right'

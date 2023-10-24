@@ -551,7 +551,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
     const callDataPopup = async (listMarker) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&take=50&cityId=${cityId || cityIdDefault}${
+            `${process.env.NEXT_PUBLIC_API}/property?take=50&cityId=${cityId || cityIdDefault}${
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''

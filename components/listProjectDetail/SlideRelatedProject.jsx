@@ -12,7 +12,7 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 const arrProject = new Array(4).fill(0)
 export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+        `${process.env.NEXT_PUBLIC_API}/property?take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -23,7 +23,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=1&take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+            `${process.env.NEXT_PUBLIC_API}/property?take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         )
     }, [lang])
 
@@ -162,7 +162,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title2}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.translation?.size?e?.translation?.size + ' m²':'Chưa có thông tin!'}
+                                            {e?.translation?.size ? e?.translation?.size + ' m²' : 'Chưa có thông tin!'}
                                         </span>
                                     </div>
 

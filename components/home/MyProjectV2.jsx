@@ -95,7 +95,7 @@ export default function MyProjectV2({ lang, t }) {
     const [isToggle, setIsToggle] = useState(false)
     const { data, error, isLoading, mutate } = useSWR(
         !isTablet
-            ? `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+            ? `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=${show ? 6 : 8}${
                   propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
               }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
                   cityId ? '&cityId=' + cityId : ''
@@ -111,7 +111,7 @@ export default function MyProjectV2({ lang, t }) {
 
     useEffect(() => {
         // mutate(
-        //     `${process.env.NEXT_PUBLIC_API}/property?order=ASC&page=${page ? page : 1}&take=${show ? 6 : 8}${
+        //     `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=${show ? 6 : 8}${
         //         propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
         //     }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
         //         cityId ? '&cityId=' + cityId : ''

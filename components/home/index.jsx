@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify'
 import Aos from 'aos'
 import { useEffect } from 'react'
 import SellingBox from './SellingBox'
+import bgSky from '../../public/images/bg-sky.png'
 
 export default function IndexHome({ lang, t }) {
     useEffect(() => {
@@ -65,10 +66,9 @@ export default function IndexHome({ lang, t }) {
                     t={t}
                 >
                     <Image
-                        src='/images/bg-sky.png'
-                        alt='sky'
-                        height={800}
-                        width={1600}
+                        src={bgSky}
+                        alt='background sky kangnam'
+                        placeholder='blur'
                         className='absolute bottom-0 left-0 object-cover w-full h-[48.625vw] z-0 max-md:hidden'
                     />
                 </ProjectProminent>
