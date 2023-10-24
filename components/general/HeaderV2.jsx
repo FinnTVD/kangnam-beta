@@ -10,7 +10,6 @@ import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
 import Aos from 'aos'
-// import 'aos/dist/aos.css';
 
 const isCheckPathName = (pathName) => {
     switch (pathName) {
@@ -30,9 +29,6 @@ const isCheckPathName = (pathName) => {
 export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb }) {
     const [isHome, setIsHome] = useState(true) // neu la home page isHome = true
     const pathName = usePathname()
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767.9px)',
-    })
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
@@ -90,20 +86,8 @@ export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb })
                     fill
                     priority
                 />
-                {/* <SlideBanner /> */}
-                {/* {isHome && (
-                    <Image
-                        className='object-contain z-20 w-[23.4375vw] h-[59.8vh] absolute right-[7.56vw] top-[18vh] mix-blend-color-dodge max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]'
-                        src='/images/big-logo.png'
-                        alt='big-logo'
-                        width={350}
-                        height={550}
-                        priority
-                    />
-                )} */}
                 <div className={`bg-gradient-header-other absolute z-[2] top-0 left-0 w-full h-full`}></div>
                 {/* linear-white */}
-                {/* {isHome && <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div>} */}
                 {isTablet ? (
                     <NavBarRes
                         isHome={isHome}
@@ -168,10 +152,6 @@ export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb })
                         </span>
                     </div>
                 )}
-                {/* {isHome && (
-                    <div className='absolute z-[4] bottom-0 left-1/2 opacity-20 -translate-x-1/2 w-[72.625vw] h-[2px] bg-gradient-line-header'></div>
-                )}
-                {isHome && !isMobile && <FeatureHome />} */}
             </div>
         </header>
     )
