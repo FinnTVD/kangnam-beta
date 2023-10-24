@@ -1,6 +1,6 @@
 'use client'
 import useStore from '@/app/[lang]/(store)/store'
-import { listIdNav, postTypeIdAgreement } from '@/utils'
+import { listIdNav } from '@/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
@@ -10,15 +10,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
     const [listNav, setListNav] = useState([])
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-    const {
-        data: agreementData,
-        error: agreementError,
-        isLoading: agreementIsLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12&postTypeIds=${postTypeIdAgreement}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -43,16 +34,6 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
         })
         setListNav([...b, ...t?.Navbar?.listNav])
     }, [lang, data])
-
-    let agreementDataTranslation = []
-    if (agreementData) {
-        agreementData?.data?.forEach((item) => {
-            item?.translations?.forEach((itm) => {
-                if (itm?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-                    agreementDataTranslation?.push({ title: itm?.title, slug: itm?.slug })
-            })
-        })
-    }
 
     if (!listNav?.length) return
     if (fixed)

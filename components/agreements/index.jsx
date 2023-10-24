@@ -34,7 +34,7 @@ export default function IndexAgreements({ lang }) {
     return (
         <div className='py-[5.5vw] flex max-lg:py-[8.5vw] max-lg:flex-col max-md:py-[18.5vw]'>
             <div className='w-[30%] max-lg:w-full'>
-                <ul className='flex flex-col bg-[#F4F4F4] sticky top-[5.5vw] left-0 flex flex-col gap-[1vw] px-[3.75vw] py-[3vw] max-lg:py-[7.5vw] max-lg:flex-row max-lg:bg-transparent max-lg:justify-end max-lg:flex-nowrap max-lg:px-[8.25vw] max-lg:pt-[4.5vw] max-lg:pb-[0] max-lg:static max-lg:gap-[2vw] max-md:pt-[6vw]'>
+                <ul className='flex flex-col bg-[#F4F4F4] sticky top-[5.5vw] left-0 gap-[1vw] px-[3.75vw] py-[3vw] max-lg:py-[7.5vw] max-lg:flex-row max-lg:bg-transparent max-lg:justify-end max-lg:flex-nowrap max-lg:px-[8.25vw] max-lg:pt-[4.5vw] max-lg:pb-[0] max-lg:static max-lg:gap-[2vw] max-md:pt-[6vw]'>
                     {agreementDataTranslation?.map((e, indx) => (
                         <li
                             className={`${

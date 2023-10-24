@@ -1,10 +1,8 @@
 'use client'
 
 import useClickOutSide from '@/hooks/useClickOutSide'
-import { useCallback, useEffect, useState } from 'react'
-// import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { memo, useEffect, useState } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
-import useSWR from 'swr'
 import { usePathname } from 'next/navigation'
 
 const objProject = {
@@ -37,44 +35,18 @@ const objProject = {
     ],
 }
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
-
-export default function SelectSearch({ type = 'dark', menu = false, lang, dark }) {
-    // const router = useRouter()
+const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
     const pathName = usePathname()
-    // const searchParams = useSearchParams()
     const setListData = useStore((state) => state.setListData)
     const listData = useStore((state) => state.listData)
     const [isOpen, setIsOpen] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
+
     useEffect(() => {
         isOutSide && setIsOpen(false)
     }, [isOutSide])
 
-    // const createQueryString = useCallback(
-    //     (name, value) => {
-    //         const params = new URLSearchParams(searchParams)
-    //         params.set(name, value)
-
-    //         return params.toString()
-    //     },
-    //     [searchParams],
-    // )
-
-    // const handleCheckValueInput = (e) => {
-    //     router.push(pathName + '?' + createQueryString('propertyCategoryIds', e?.id), {
-    //         scroll: false,
-    //     })
-    // }
-
-    const { data, isLoading, error } = useSWR('https://cms-kangnam.okhub.tech/api/v1/property-category', fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-
     useEffect(() => {
-        // data && setListData([objProject, ...data?.data])
         if (data) {
             const dataNew = data?.data?.filter((e) =>
                 e?.translations?.find((i) => i?.alias?.includes(pathName?.slice(1))),
@@ -140,3 +112,4 @@ export default function SelectSearch({ type = 'dark', menu = false, lang, dark }
         </div>
     )
 }
+export default memo(SelectSearch)

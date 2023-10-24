@@ -424,6 +424,7 @@ const SearchGlobal = ({
                 <SelectSearch
                     type={dark}
                     lang={lang}
+                    data={data}
                 />
                 <div
                     className={`${
