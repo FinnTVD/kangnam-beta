@@ -1,6 +1,7 @@
 'use client'
 import { apiKey } from '@/utils'
 import { useEffect, useRef, useState } from 'react'
+import * as vietmapgl from '../../public/js/vietmap-gl'
 
 export default function MapProjectDetail({ dataDetail, data }) {
     const mapRef = useRef(null)
@@ -9,8 +10,8 @@ export default function MapProjectDetail({ dataDetail, data }) {
     useEffect(() => {
         if (typeof window === 'undefined' || !mapRef.current) return
         const loadMap = () => {
-            if (!window.vietmapgl || typeof window === 'undefined') return
-            mapRef.current = new window.vietmapgl.Map({
+            if (!vietmapgl || typeof window === 'undefined') return
+            mapRef.current = new vietmapgl.Map({
                 container: 'mapProjectDetail',
                 style: `https://maps.vietmap.vn/mt/tm/style.json?apikey=${apiKey}`,
                 center: [data?.address?.lng, data?.address?.lat], //ha noi center
@@ -28,14 +29,14 @@ export default function MapProjectDetail({ dataDetail, data }) {
             divElement.textContent = 1
             divElement.setAttribute('data-marker', data?.id)
             // Set options
-            // if (!window.vietmapgl || typeof window === 'undefined') return
-            const marker = new window.vietmapgl.Marker({
+            // if (!vietmapgl || typeof window === 'undefined') return
+            const marker = new vietmapgl.Marker({
                 // scale: [0.5], //size of marker
                 element: divElement,
             })
                 .setLngLat([data?.address?.lng || 0, data?.address?.lat || 0])
                 .setPopup(
-                    new window.vietmapgl.Popup().setHTML(`
+                    new vietmapgl.Popup().setHTML(`
                     <div style="width:fit-content;height:fit-content">
                         <div
                             key=${data?.id}
@@ -47,7 +48,9 @@ export default function MapProjectDetail({ dataDetail, data }) {
                                 alt=${dataDetail?.name || 'marker'}
                             />
                             <div class="w-[12.0625vw] max-lg:w-full max-md:mt-[2.13vw]">
-                                <h2 class='line-clamp-1 text-den mb-[0.5vw] max-md:mb-[1.5rem] max-lg:text-16tl max-md:text-14mb max-lg:font-bold'>${dataDetail.name ?? ''}</h2>
+                                <h2 class='line-clamp-1 text-den mb-[0.5vw] max-md:mb-[1.5rem] max-lg:text-16tl max-md:text-14mb max-lg:font-bold'>${
+                                    dataDetail.name ?? ''
+                                }</h2>
                                 <div
                                             title="${data?.address?.display}"
                                             class='flex items-center'
@@ -57,7 +60,11 @@ export default function MapProjectDetail({ dataDetail, data }) {
                                             </span>
                                             <span class='capitalize text-black title14-400-150 title-tl14-400-150 title-mb12-700-150 line-clamp-1 max-md:text-[2.8vw]'>
                                                 ${
-                                                    data?.address?.name +', ' +data?.address?.ward +', ' +data?.address?.district
+                                                    data?.address?.name +
+                                                    ', ' +
+                                                    data?.address?.ward +
+                                                    ', ' +
+                                                    data?.address?.district
                                                 }
                                             </span>
                                         </div>

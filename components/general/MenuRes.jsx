@@ -26,7 +26,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
         data: agreementData,
         error: errorNews,
         isLoading: isLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

@@ -90,9 +90,9 @@ export default function SellingBox({ lang, t }) {
         error: errorHiring,
         isLoading: isLoadingHiring,
     } = useSWR(
-        `/property?take=10&propertyCategoryIds=${categoryHireId}${
-            propertyAreaTypeParams ? propertyAreaTypeParams : ''
-        }${propertyTypeParams ? propertyTypeParams : ''}`,
+        `/property?propertyCategoryIds=${categoryHireId}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+            propertyTypeParams ? propertyTypeParams : ''
+        }`,
         (url) => (isTablet ? fetcher(url, handleCheckLangCode(lang)) : undefined),
         preventRefreshSwr,
     )

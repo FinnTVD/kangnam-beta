@@ -15,7 +15,7 @@ export default function RelatedNews({ t, lang, post }) {
         data: newsArr,
         error: errornewsArr,
         isLoading: isLoadingNewsArr,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=7&postTypeIds[]=${post?.postType?.id}`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=7&postTypeIds[]=${post?.postType?.id}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -26,7 +26,7 @@ export default function RelatedNews({ t, lang, post }) {
 
     return (
         <section className='px-120 mt-[3.75vw] max-md:mt-[13.3vw] max-lg:px-0 max-md:mb-[16vw] max-lg:mb-[8vw]'>
-            <div className='flex justify-between items-end px-mb10 max-lg:px-120'>
+            <div className='flex items-end justify-between px-mb10 max-lg:px-120'>
                 <div>
                     <span className='sub-title max-md:title-mb10-700-150 max-md:tracking-[0.5px] max-lg:title-tl12'>
                         {t.newsDetailRelated.subtitle}
@@ -62,8 +62,7 @@ export default function RelatedNews({ t, lang, post }) {
                                 <Skeleton
                                     width={'100%'}
                                     height={'100%'}
-                                >
-                                </Skeleton>
+                                ></Skeleton>
                             </div>
                             <div className='w-full mt-[0.2625vw] flex flex-col max-md:mt-[0.8vw]'>
                                 <Skeleton

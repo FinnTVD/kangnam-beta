@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from 'react'
 
-export default function InputCheckBox({ e, lang, lh,index }) {
+export default function InputCheckBox({ e, lang, lh, index }) {
     const [isToggle, setIsToggle] = useState(lh?.find((item) => e?.id === item) ? true : false)
     const [data, setData] = useState(null)
     useEffect(() => {
         if (index !== 1) return
         const callApi = async (id) => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?page=1&take=1&propertyAreaTypeIds=${id}`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?take=1&propertyAreaTypeIds=${id}`)
             const data = await res.json()
             data && setData(data?.data[0]?.address)
         }
         callApi(e?.id)
-    },[])
+    }, [])
 
     useEffect(() => {
         setIsToggle(lh?.find((item) => e?.id === item) ? true : false)
@@ -26,10 +26,10 @@ export default function InputCheckBox({ e, lang, lh,index }) {
             const a = {
                 cityId: data?.cityId,
                 lng: data?.cityLng,
-                lat:data?.cityLat
+                lat: data?.cityLat,
             }
             if (data?.cityId && data?.cityLng && data?.cityLat) {
-                window.localStorage.setItem('dataArea',JSON.stringify(a))
+                window.localStorage.setItem('dataArea', JSON.stringify(a))
             }
         }
     }

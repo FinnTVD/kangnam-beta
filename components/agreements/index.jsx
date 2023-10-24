@@ -11,7 +11,7 @@ export default function IndexAgreements({ lang }) {
         data: agreementData,
         error: errorAgreement,
         isLoading: isLoadingAgreement,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

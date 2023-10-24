@@ -11,7 +11,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const arrItem = new Array(5).fill(0)
 export default function LatestNews({ t, lang }) {
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12`, fetcher, {
+    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -23,7 +23,7 @@ export default function LatestNews({ t, lang }) {
 
     return (
         <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative max-md:mt-[3.7vw] px-mb10 max-md:pb-[20.8vw]'>
-            <div className='flex justify-between items-end'>
+            <div className='flex items-end justify-between'>
                 <div
                     data-aos='fade-right'
                     data-aos-duration='1000'
@@ -38,7 +38,7 @@ export default function LatestNews({ t, lang }) {
                 {!isTablet && (
                     <Button
                         stroke='white'
-                        className='bg-logo text-white border-none'
+                        className='text-white border-none bg-logo'
                         href={'/news'}
                     >
                         {t?.homepage?.section8?.button}
@@ -56,7 +56,7 @@ export default function LatestNews({ t, lang }) {
                     )}
                     {isLoading && (
                         <div className='group w-full h-full rounded-2xl flex overflow-hidden max-md:rounded-[10px] relative'>
-                            <div className='w-full h-full absolute top-0 left-0'>
+                            <div className='absolute top-0 left-0 w-full h-full'>
                                 <Skeleton
                                     width={'100%'}
                                     height={'100%'}

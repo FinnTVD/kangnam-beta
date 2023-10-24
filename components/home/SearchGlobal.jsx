@@ -111,7 +111,7 @@ const SearchGlobal = ({
         }
         const callDataProjectCode = async () => {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/property?page=1&take=10${debounceValue ? '&q=' + debounceValue : ''}${
+                `${process.env.NEXT_PUBLIC_API}/property?${debounceValue ? 'q=' + debounceValue : ''}${
                     listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
                 }`,
             )
@@ -157,7 +157,7 @@ const SearchGlobal = ({
 
     const callDataProject = async ({ cityIdSearch, districtIdSearch, wardIdSearch }) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?page=1&take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
+            `${process.env.NEXT_PUBLIC_API}/property?take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
                 districtIdSearch ? '&districtId=' + districtIdSearch : ''
             }${wardIdSearch ? '&wardId=' + wardIdSearch : ''}${
                 listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''

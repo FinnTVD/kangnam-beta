@@ -43,7 +43,7 @@ export default function ListNews({ t, lang }) {
         data: allDataNews,
         error: errorAllNews,
         isLoading: isLoadingAllNews,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=50`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=50`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

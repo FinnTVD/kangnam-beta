@@ -1,18 +1,17 @@
 'use client'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, FreeMode } from 'swiper/modules'
 import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
-import { useEffect } from 'react'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, renderAddress, renderTitle } from '@/utils'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const arrProject = new Array(4).fill(0)
 export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+        `${process.env.NEXT_PUBLIC_API}/property?propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -21,11 +20,11 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
         },
     )
 
-    useEffect(() => {
-        mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
-        )
-    }, [lang])
+    // useEffect(() => {
+    //     mutate(
+    //         `${process.env.NEXT_PUBLIC_API}/property?take=11&propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+    //     )
+    // }, [lang])
 
     const dataRelated = data?.data?.filter((e) => e?.translation?.slug !== detail)
 
@@ -91,8 +90,18 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                             className='w-full !h-fit max-md:!w-[77.6vw] overflow-hidden rounded-[0.5vw] max-md:rounded-[2.13vw]'
                         >
                             <Link
-                                href={e?.translation?.slug || '/'}
-                                className='block w-full'
+                                href={
+                                    '/' +
+                                    (lang === 'vi' ? '' : lang + '/') +
+                                    (dataDetail?.propertyCategory?.translations?.find((item) =>
+                                        item?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    )?.alias || 'du-an') +
+                                    '/' +
+                                    (e?.translations?.find((e) =>
+                                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    )?.slug || e?.translations[0]?.slug)
+                                }
+                                className='block w-full select-none'
                                 key={index}
                             >
                                 <div className='relative w-full h-[13.75vw] max-md:h-[50.94vw] rounded-[0.5vw] overflow-hidden max-md:rounded-[2.13vw] max-lg:h-[25vw]'>
@@ -110,8 +119,11 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                     </div>
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
-                                    <h6 className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1 max-lg:title-tl18'>
-                                        {e?.translation?.name}
+                                    <h6
+                                        title={renderTitle(e, lang)}
+                                        className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1 max-lg:title-tl18'
+                                    >
+                                        {renderTitle(e, lang)}
                                     </h6>
                                     <div className='flex items-center'>
                                         <svg
@@ -142,7 +154,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title1}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.address?.ward + ', ' + e?.address?.district + ', ' + e?.address?.city}
+                                            {renderAddress(e?.address)}
                                         </span>
                                     </div>
                                     <div className='flex items-center my-[0.5vw] max-md:my-[2.13vw]'>
@@ -162,7 +174,17 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title2}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.translation?.size ? e?.translation?.size + ' m²' : 'Chưa có thông tin!'}
+                                            {e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            )?.size
+                                                ? e?.translations?.find((e) =>
+                                                      e?.languageCode
+                                                          ?.toLowerCase()
+                                                          ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                  )?.size + ' m²'
+                                                : e?.translations[0]?.size
+                                                ? e?.translations[0]?.size + ' m²'
+                                                : 'Chưa có thông tin!'}
                                         </span>
                                     </div>
 

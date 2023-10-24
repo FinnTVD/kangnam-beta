@@ -43,7 +43,7 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
         data: dataType,
         isLoading: isLoadingType,
         error: errorType,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-type?page=1&take=50`, fetcher, {
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-type?take=20`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

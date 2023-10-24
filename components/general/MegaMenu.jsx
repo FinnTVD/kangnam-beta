@@ -18,7 +18,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
         data: agreementData,
         error: agreementError,
         isLoading: agreementIsLoading,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?page=1&take=12&postTypeIds=${postTypeIdAgreement}`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12&postTypeIds=${postTypeIdAgreement}`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -35,9 +35,10 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                 title: e?.translations?.find((e) =>
                     e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                 )?.name,
-                href: '/' + e?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.alias,
+                href:
+                    '/' +
+                    e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+                        ?.alias,
             })
         })
         setListNav([...b, ...t?.Navbar?.listNav])
@@ -114,7 +115,9 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                                     href={`${
                                         lang !== 'vi'
                                             ? '/' + lang + (e?.href?.startsWith('/') ? e?.href : '/' + e?.href)
-                                            : (e?.href.includes('/') ? e?.href : `/${e?.href}`)
+                                            : e?.href.includes('/')
+                                            ? e?.href
+                                            : `/${e?.href}`
                                     }`}
                                 >
                                     {e.title}
