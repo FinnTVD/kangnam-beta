@@ -42,7 +42,7 @@ export default function SellingRes({ lang, data, t }) {
                         },
                     },
                 })
-            }, 5000)
+            }, 500)
         }, boxSellRef)
         return () => {
             ctx.revert()

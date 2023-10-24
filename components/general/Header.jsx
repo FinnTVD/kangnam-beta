@@ -39,7 +39,7 @@ export default function Header({ lang, t, data, isHome, dataInfo, children }) {
     return (
         <header
             id='header'
-            className='relative w-screen h-fit bg-gradient-line-header'
+            className='relative w-screen h-fit bg-gradient-header1'
         >
             <div className={`h-screen max-md:h-[82vh] relative w-full`}>
                 <video
