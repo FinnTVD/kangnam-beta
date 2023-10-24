@@ -9,6 +9,7 @@ import './globals.css'
 
 import localFont from 'next/font/local'
 import Script from 'next/script'
+import AosInit from '@/components/general/AosInit'
 
 const avertaStdCY = localFont({
     src: [
@@ -63,6 +64,7 @@ export default async function RootLayout({ children, params }) {
                 suppressHydrationWarning={true}
                 className={avertaStdCY.className}
             >
+                <AosInit />
                 {children}
                 <Script
                     async
