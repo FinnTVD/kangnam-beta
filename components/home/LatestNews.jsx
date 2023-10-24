@@ -3,23 +3,11 @@ import Button from '../general/Button'
 import LatestNewsItem from '../general/LatestNewsItem'
 import OtherNewsItem from '../general/OtherNewsItem'
 import { useMediaQuery } from 'react-responsive'
-import useSWR from 'swr'
 import Skeleton from 'react-loading-skeleton'
-import { postTypeIdAgreement } from '@/utils'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const arrItem = new Array(5).fill(0)
-export default function LatestNews({ t, lang }) {
+export default function LatestNews({ t, lang, dataPostNews }) {
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
-    const { data, error, isLoading } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-    let dataCategorized
-    if (data) {
-        dataCategorized = data?.data?.filter((item) => item?.postType?.id !== postTypeIdAgreement).slice(0, 6)
-    }
 
     return (
         <section className='w-full px-120 pb-[8.125vw] mt-[-6.25vw] relative max-md:mt-[3.7vw] px-mb10 max-md:pb-[20.8vw]'>
@@ -47,14 +35,14 @@ export default function LatestNews({ t, lang }) {
             </div>
             <div className='mt-[3.5vw] grid grid-cols-3 grid-rows-[16.875vw_16.875vw_16.875vw] gap-[1.5vw] max-md:grid-cols-1 max-md:grid-rows-[68.5vw_44.2vw_44.2vw] max-md:gap-[4.2vw] max-md:mt-[4.2vw] max-lg:grid-cols-1 max-lg:grid-rows-[66.6vw_28.2vw_28.2vw]'>
                 <div className='col-span-2 row-span-2 max-lg:col-span-1 max-lg:row-span-1'>
-                    {dataCategorized && dataCategorized.length > 0 && (
+                    {dataPostNews && dataPostNews?.length > 0 && (
                         <LatestNewsItem
-                            newsItem={dataCategorized[0]}
+                            newsItem={dataPostNews[0]}
                             t={t}
                             lang={lang}
                         />
                     )}
-                    {isLoading && (
+                    {!dataPostNews && (
                         <div className='group w-full h-full rounded-2xl flex overflow-hidden max-md:rounded-[10px] relative'>
                             <div className='absolute top-0 left-0 w-full h-full'>
                                 <Skeleton
@@ -65,7 +53,7 @@ export default function LatestNews({ t, lang }) {
                         </div>
                     )}
                 </div>
-                {isLoading &&
+                {!dataPostNews &&
                     (isTablet ? arrItem?.slice(1, 3) : arrItem)?.map((e, index) => (
                         <div
                             key={index}
@@ -108,7 +96,7 @@ export default function LatestNews({ t, lang }) {
                         </div>
                     ))}
                 {!isTablet
-                    ? dataCategorized?.slice(1, 6)?.map((news, index) => (
+                    ? dataPostNews?.slice(1, 6)?.map((news, index) => (
                           <div key={news?.id}>
                               <OtherNewsItem
                                   newsOtherItem={news}
@@ -117,7 +105,7 @@ export default function LatestNews({ t, lang }) {
                               />
                           </div>
                       ))
-                    : dataCategorized?.slice(1, 3)?.map((news, index) => (
+                    : dataPostNews?.slice(1, 3)?.map((news, index) => (
                           <div key={news?.id}>
                               <OtherNewsItem
                                   newsOtherItem={news}

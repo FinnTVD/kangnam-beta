@@ -6,14 +6,12 @@ import NavBarFixed from './NavBarFixed'
 import { useMediaQuery } from 'react-responsive'
 import NavBarRes from './NavBarRes'
 import NavBarFixedRes from './NavBarFixedRes'
-import { useEffect, useRef } from 'react'
-import useStore from '@/app/[lang]/(store)/store'
+import { useRef } from 'react'
 import IconBigLogo from '../icons/IconBigLogo'
 import FeatureHome from '../home/FeatureHome'
 
 export default function Header({ lang, t, data, isHome, dataInfo, children }) {
     const videoRef = useRef(null)
-    const setDataHomePage = useStore((state) => state.setDataHomePage)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
@@ -21,13 +19,12 @@ export default function Header({ lang, t, data, isHome, dataInfo, children }) {
         query: '(max-width: 1023px)',
     })
 
-    useEffect(() => {
-        data && setDataHomePage(data)
-        // window.scrollTo({
-        //     top: 0,
-        //     behavior: 'smooth',
-        // })
-    }, [])
+    // useEffect(() => {
+    //     // window.scrollTo({
+    //     //     top: 0,
+    //     //     behavior: 'smooth',
+    //     // })
+    // }, [])
 
     const handleScrollDown = () => {
         if (typeof window !== 'undefined') {

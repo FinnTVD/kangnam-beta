@@ -4,11 +4,9 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import { useMediaQuery } from 'react-responsive'
-import useStore from '@/app/[lang]/(store)/store'
 import bgPartner from '../../public/images/partner-bg.jpg'
 
-export default function Partner({ t }) {
-    const dataHomePage = useStore((state) => state.dataHomePage)
+export default function Partner({ t, dataHomePage }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const isTablet = useMediaQuery({ query: '(max-width: 1023px)' })
 

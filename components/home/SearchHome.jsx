@@ -7,7 +7,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export default function SearchHome({ data, lang, t }) {
     const setValueSearch = useStore((state) => state.setValueSearch)
-    const dataHomePage = useStore((state) => state.dataHomePage)
     const setIsClose = useStore((state) => state.setIsClose)
     const router = useRouter()
     const pathName = usePathname()
@@ -74,8 +73,8 @@ export default function SearchHome({ data, lang, t }) {
                 </ul>
             </div>
             <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-md:flex-wrap'>
-                {dataHomePage?.propertyTypes?.length > 0 &&
-                    dataHomePage?.propertyTypes?.map((e, index) => (
+                {data?.propertyTypes?.length > 0 &&
+                    data?.propertyTypes?.map((e, index) => (
                         <div
                             key={index}
                             onClick={() => handleFilter(e)}

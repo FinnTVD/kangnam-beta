@@ -1,7 +1,7 @@
 import IndexHome from '@/components/home'
 import { getDictionary } from '../dictionaries'
 import getData from '@/utils/getData'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
@@ -52,11 +52,15 @@ export async function generateMetadata({ params: { lang } }) {
 }
 export default async function Home({ params: { lang } }) {
     const t = await getDictionary(lang)
-
+    const dataHomePage = await getData('/home-page')
+    const dataPosts = await getData('/post')
+    const dataPostNews = dataPosts?.data?.filter((item) => item?.postType?.id !== postTypeIdAgreement).slice(0, 6)
     return (
         <IndexHome
             lang={lang}
             t={t}
+            dataPostNews={dataPostNews}
+            dataHomePage={dataHomePage}
         />
     )
 }

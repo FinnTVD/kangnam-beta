@@ -9,7 +9,6 @@ const useStore = create((set, get) => ({
     slugDetailNews: null,
     dataSubmitForm: null,
     triggerSubmit: false,
-    dataHomePage: null,
     valueSearch: '',
     valueSearchPrev: '',
     boxMap: null,
@@ -144,14 +143,6 @@ const useStore = create((set, get) => ({
             return {
                 ...state,
                 valueSearch: data,
-            }
-        })
-    },
-    setDataHomePage: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                dataHomePage: data,
             }
         })
     },

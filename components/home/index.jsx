@@ -15,7 +15,7 @@ import { useEffect } from 'react'
 import SellingBox from './SellingBox'
 import bgSky from '../../public/images/bg-sky.png'
 
-export default function IndexHome({ lang, t }) {
+export default function IndexHome({ lang, t, dataPostNews, dataHomePage }) {
     useEffect(() => {
         Aos.init({
             disable: 'mobile', // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -64,6 +64,7 @@ export default function IndexHome({ lang, t }) {
                 <ProjectProminent
                     lang={lang}
                     t={t}
+                    dataHomePage={dataHomePage}
                 >
                     <Image
                         src={bgSky}
@@ -80,10 +81,12 @@ export default function IndexHome({ lang, t }) {
             <Partner
                 t={t}
                 lang={lang}
+                dataHomePage={dataHomePage}
             />
             <LatestNews
                 t={t}
                 lang={lang}
+                dataPostNews={dataPostNews}
             />
             <ToastContainer style={{ zIndex: '999999999999999' }} />
         </main>
