@@ -5,12 +5,14 @@ let locales = ['en', 'kr', 'ch']
 
 export function middleware(request) {
     // Check if there is any supported locale in the pathname
-    const pathname = request.nextUrl.pathname
+    const nextUrl = request.nextUrl
+    const pathname = nextUrl.pathname
 
     // Check if the default locale is in the pathname
     if (pathname.startsWith(`/${defaultLocale}/`) || pathname === `/${defaultLocale}`) {
         // e.g. incoming request is /en/products
         // The new URL is now /products
+        // nextUrl.pathname =
         return NextResponse.redirect(
             new URL(pathname.replace(`/${defaultLocale}`, pathname === `/${defaultLocale}` ? '/' : ''), request.url),
         )
@@ -26,7 +28,14 @@ export function middleware(request) {
 
         // e.g. incoming request is /products
         // Tell Next.js it should pretend it's /en/products
-        return NextResponse.rewrite(new URL(`/${defaultLocale}${pathname}`, request.url))
+
+        if (nextUrl.searchParams) {
+            const newUrl = new URL(`/${defaultLocale}`, request.url)
+            newUrl.search = nextUrl.searchParams.toString()
+            return NextResponse.rewrite(newUrl)
+        }
+
+        return NextResponse.rewrite(new URL(`/${defaultLocale}`, request.url))
     }
 }
 

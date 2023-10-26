@@ -72,7 +72,7 @@ export default function SearchHome({ data, lang, t }) {
                     ))}
                 </ul>
             </div>
-            <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-md:flex-wrap'>
+            <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-lg:gap-y-[2vw] max-lg:flex-wrap'>
                 {data?.propertyTypes?.length > 0 &&
                     data?.propertyTypes?.map((e, index) => (
                         <div
@@ -92,7 +92,7 @@ export default function SearchHome({ data, lang, t }) {
                                 priority
                                 className='object-cover transition-all duration-150 group-hover:scale-125 w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                             />
-                            <span className='text-white title14-400-150 title-mb12-400-150 inline-flex relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left'>
+                            <span className='text-white title14-400-150 title-mb12-400-150 inline-flex relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left max-lg:whitespace-nowrap'>
                                 {e?.translations?.find((i) =>
                                     i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
                                 )?.name || e?.title}

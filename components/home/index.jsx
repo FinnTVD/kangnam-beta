@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify'
 import SellingBox from './SellingBox'
 import bgSky from '../../public/images/bg-sky.png'
 
-export default function IndexHome({ lang, t, dataPostNews, dataHomePage }) {
+export default function IndexHome({ lang, t, dataPostNews, dataHomePage, dataSelling, dataHiring }) {
     return (
         <main>
             <WeAre
@@ -28,6 +28,8 @@ export default function IndexHome({ lang, t, dataPostNews, dataHomePage }) {
                 <SellingBox
                     t={t}
                     lang={lang}
+                    dataSellingN={dataSelling}
+                    dataHiringN={dataHiring}
                 />
             </div>
             <div className='w-full max-md:flex max-md:flex-col-reverse'>

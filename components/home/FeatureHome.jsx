@@ -9,6 +9,7 @@ import IconSocial from '../icons/IconSocial'
 import IconChangeCurrency from '../icons/IconChangeCurrency'
 import IconCall from '../icons/IconCall'
 import Link from 'next/link'
+import IconYoutube from '../icons/IconYoutube'
 export default function FeatureHome({ dataInfo, isOther = false }) {
     const isFeatureHome = useStore((state) => state.isFeatureHome)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
@@ -39,7 +40,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
     return (
         <ul
             id='listFeature'
-            className='fixed right-[3.94vw] bottom-[5.86vw] z-[9999] gap-y-[1.88vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
+            className='fixed right-[1.94vw] bottom-[1.86vw] z-[9999] gap-y-[1vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
         >
             <div
                 onClick={() =>
@@ -71,35 +72,61 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
             <li
                 className={`${
                     isFeatureHome?.isContain && !isOther ? 'active1' : ''
-                } item-social transition-all duration-200 ease-linear group relative w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full before:content-normal before:w-[10.64vw] before:h-[25vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[58%]`}
+                } item-social transition-all duration-200 ease-linear group relative w-[3vw] h-[3vw] cursor-pointer shadow-feature flex justify-center items-center bg-logo rounded-full `}
             >
-                <IconSocial className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                <Link
+                    href={'https://blog.naver.com/hanoi-kn'}
+                    target='_blank'
+                    className='uppercase text-[0.6vw] font-bold text-white w-full h-full flex justify-center items-center rounded-full'
+                >
+                    NAVER
+                </Link>
+            </li>
+            <li
+                className={`${
+                    isFeatureHome?.isContain && !isOther ? 'active1' : ''
+                } item-social transition-all duration-200 ease-linear group relative w-[3vw] h-[3vw] cursor-pointer shadow-feature flex justify-center items-center bg-logo rounded-full`}
+            >
+                <Link
+                    href={'https://www.youtube.com/@kangnamland/featured'}
+                    target='_blank'
+                    className='w-full h-full flex justify-center items-center'
+                >
+                    <IconYoutube className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                </Link>
+            </li>
+            <li
+                className={`${
+                    isFeatureHome?.isContain && !isOther ? 'active1' : ''
+                } item-social transition-all duration-200 ease-linear group relative w-[3vw] h-[3vw] cursor-pointer shadow-feature flex justify-center items-center bg-logo rounded-full before:content-normal before:w-[10.64vw] before:h-[25vw] before:bg-transparent hover:before:block before:hidden before:absolute before:top-1/2 before:-translate-y-1/2 before:left-0 before:-translate-x-[58%]`}
+            >
+                <IconSocial className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 <SocialMedia dataInfo={dataInfo} />
             </li>
             <li
                 className={`${
                     isFeatureHome?.isContain && !isOther ? 'active2' : ''
-                } item-social transition-all duration-200 ease-linear relative w-[4.5vw] h-[4.5vw] shadow-feature bg-white rounded-full group`}
+                } item-social transition-all duration-200 ease-linear relative w-[3vw] h-[3vw] shadow-feature bg-logo rounded-full group`}
                 ref={sideRef}
             >
                 <div
                     onClick={handleCurrently}
                     className='relative flex items-center justify-center w-full h-full rounded-full cursor-pointer '
                 >
-                    <IconChangeCurrency className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                    <IconChangeCurrency className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 </div>
                 <BoxCurrency className={!isShow || isOutSide ? 'hidden' : ''} />
             </li>
             <li
                 className={`${
                     isFeatureHome?.isContain && !isOther ? 'active3' : ''
-                } item-social transition-all duration-200 ease-linear w-[4.5vw] h-[4.5vw] cursor-pointer shadow-feature flex justify-center items-center bg-white rounded-full group`}
+                } item-social transition-all duration-200 ease-linear w-[3vw] h-[3vw] cursor-pointer shadow-feature flex justify-center items-center bg-logo rounded-full group`}
             >
                 <Link
                     className=''
                     href={`tel:${dataInfo?.phone?.split('|')[0]}`}
                 >
-                    <IconCall className='object-contain w-[2.8vw] h-[2.8vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
+                    <IconCall className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 </Link>
             </li>
         </ul>

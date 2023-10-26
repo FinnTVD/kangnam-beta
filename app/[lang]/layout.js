@@ -72,7 +72,7 @@ export default async function RootLayout({ children, params }) {
                     crossOrigin='anonymous'
                     src='https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=969348797395616&autoLogAppEvents=1'
                     nonce='OlcKjsAi'
-                    strategy='afterInteractive'
+                    strategy='lazyOnload'
                 ></Script>
             </body>
         </html>

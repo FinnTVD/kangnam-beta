@@ -417,7 +417,7 @@ const SearchGlobal = ({
         <div
             className={`${
                 classContainer ||
-                'w-[54vw] max-md:w-full py-[0.62vw] max-md:py-[4.27vw] max-md:px-[6.4vw] pl-[2.5vw] pr-[1.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'
+                'w-[54vw] max-lg:w-[72vw] max-md:w-full py-[0.62vw] max-lg:py-[1.62vw] max-lg:pl-[3.5vw] max-lg:pr-[2.5vw] max-md:py-[4.27vw] max-md:px-[6.4vw] pl-[2.5vw] pr-[1.5vw] bg-white rounded-[6.25vw] backdrop-blur-[7.5px] flex justify-between items-center relative z-40'
             }`}
         >
             <div className='flex items-center w-full'>
@@ -466,7 +466,7 @@ const SearchGlobal = ({
                     </label>
                     <input
                         className={`${
-                            classInput || 'w-full outline-none text-den title18-400-150 title-mb14-400-130 pr-[2vw]'
+                            classInput || 'w-full outline-none text-den lg:title18-400-150 max-lg:text-[2.5vw] max-md:title-mb14-400-130 pr-[2vw]'
                         }`}
                         type='text'
                         name='search'
@@ -578,7 +578,7 @@ const SearchGlobal = ({
                 {isIcon && (
                     <div
                         onClick={() => handleSubmit()}
-                        className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] rounded-full bg-logo flex justify-center items-center'
+                        className='w-[3.125vw] max-md:hidden cursor-pointer h-[3.125vw] max-lg:w-[5.125vw] max-lg:h-[5.125vw] rounded-full bg-logo flex justify-center items-center'
                     >
                         <div className='relative w-fit h-fit'>
                             <svg
@@ -587,7 +587,7 @@ const SearchGlobal = ({
                                 height='26'
                                 viewBox='0 0 26 26'
                                 fill='none'
-                                className='object-cover h-[1.625vw] w-[1.625vw]'
+                                className='object-cover h-[1.625vw] w-[1.625vw] max-lg:h-[3.125vw] max-lg:w-[3.125vw]'
                             >
                                 <path
                                     d='M13.5417 22.75C7.85773 22.75 3.25 18.1423 3.25 12.4583C3.25 6.77439 7.85773 2.16666 13.5417 2.16666C19.2256 2.16666 23.8333 6.77439 23.8333 12.4583C23.8333 18.1423 19.2256 22.75 13.5417 22.75Z'
@@ -612,7 +612,7 @@ const SearchGlobal = ({
                                 fill='none'
                                 className={`${
                                     valueSearch ? 'hidden' : ''
-                                } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw]`}
+                                } absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[0.66475vw] h-[0.66475vw] max-lg:w-[1.66vw] max-lg:h-[1.66vw]`}
                             >
                                 <g clipPath='url(#clip0_2399_2436)'>
                                     <path
