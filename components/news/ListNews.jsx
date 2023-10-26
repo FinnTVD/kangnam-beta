@@ -5,7 +5,6 @@ import ReactPaginate from 'react-paginate'
 import classes from './ListNewsStyles.module.css'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
-import { useTurboFrame } from 'turbo'
 import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
