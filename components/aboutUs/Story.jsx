@@ -4,32 +4,25 @@ import { useMediaQuery } from 'react-responsive'
 
 export default function Story({ t }) {
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
-    const description =
-        'Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở.'
     return (
         <section className='relative flex justify-between items-center px-120 pt-[1.25vw] pb-[6.125vw] px-mb10 max-lg:flex-col max-md:items-start max-md:pt-[10.6vw] max-md:pb-[15.2vw] max-lg:pt-[5vw]'>
-            <div className='flex-col w-[41.625vw] max-lg:w-full' data-aos='fade-up'>
+            <div
+                className='flex-col w-[41.625vw] max-lg:w-full'
+                data-aos='fade-up'
+            >
                 <div>
-                    <span
-                        className='sub-title max-md:title-mb12-700-150 max-lg:title-tl12'
-                    >
+                    <span className='sub-title max-md:title-mb12-700-150 max-lg:title-tl12'>
                         {t?.aboutUs?.section2?.subtitle}
                     </span>
-                    <h2
-                        className='title56 text-den mt-[0.125vw] max-md:title-mb25-700-130 max-md:mt-[1.1vw] max-lg:title-tl38'
-                    >
+                    <h2 className='title56 text-den mt-[0.125vw] max-md:title-mb25-700-130 max-md:mt-[1.1vw] max-lg:title-tl38'>
                         {t?.aboutUs?.section2?.title}
                     </h2>
                 </div>
-                <span
-                    className='mt-[1vw] text-den title16-400-150 inline-block max-md:title-mb14-400-150 max-md:mt-[2.6vw] max-lg:title-tl16'
-                >
+                <span className='mt-[1vw] text-den title16-400-150 inline-block max-md:title-mb14-400-150 max-md:mt-[2.6vw] max-lg:title-tl16'>
                     {t?.aboutUs?.section2?.description}
                 </span>
             </div>
-            <div
-                className='relative w-[32.125vw] h-[30.6875vw] max-md:w-full max-md:h-[86.9vw] max-md:mt-[9.3vw] max-lg:w-[55vw] max-lg:h-[50vw]'
-            >
+            <div className='relative w-[32.125vw] h-[30.6875vw] max-md:w-full max-md:h-[86.9vw] max-md:mt-[9.3vw] max-lg:w-[55vw] max-lg:h-[50vw]'>
                 <Image
                     fill
                     src='/images/about-us-logo.svg'

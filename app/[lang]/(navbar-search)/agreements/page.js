@@ -1,7 +1,7 @@
 import IndexAgreements from '@/components/agreements'
 import NavBarV2 from '@/components/general/NavBarV2'
 import { getDictionary } from '../../dictionaries'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
 import getData from '@/utils/getData'
 
 export async function generateMetadata({ params: { lang } }) {
@@ -50,7 +50,16 @@ export async function generateMetadata({ params: { lang } }) {
 }
 export default async function Agreements({ params }) {
     const t = await getDictionary(params.lang)
-
+    const agreementData = await getData(`/post?take=12&postTypeIds[]=${postTypeIdAgreement}`)
+    let agreementDataTranslation = []
+    if (agreementData) {
+        agreementData?.data?.forEach((item) => {
+            item?.translations?.forEach((itm) => {
+                if (itm?.languageCode?.toLowerCase()?.includes(params.lang === 'ch' ? 'cn' : params.lang))
+                    agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug, description: itm?.description })
+            })
+        })
+    }
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
@@ -59,7 +68,10 @@ export default async function Agreements({ params }) {
                     t={t}
                 />
             </header>
-            <IndexAgreements lang={params.lang} />
+            <IndexAgreements
+                lang={params.lang}
+                agreementDataTranslation={agreementDataTranslation}
+            />
         </>
     )
 }

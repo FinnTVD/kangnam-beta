@@ -1,35 +1,9 @@
 'use client'
-import { postTypeIdAgreement } from '@/utils'
-import useSWR from 'swr'
 import { useState } from 'react'
 import AgreementItem from './AgreementItem'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function IndexAgreements({ lang }) {
+export default function IndexAgreements({ lang, agreementDataTranslation }) {
     const [index, setIndex] = useState(0)
-    const {
-        data: agreementData,
-        error: errorAgreement,
-        isLoading: isLoadingAgreement,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=12&postTypeIds[]=${postTypeIdAgreement}`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
-    let agreementDataTranslation = []
-    if (agreementData) {
-        agreementData?.data?.forEach((item) => {
-            item?.translations?.forEach((itm) => {
-                if (itm?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-                    agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug, description: itm?.description })
-            })
-        })
-    }
-    // const router = useRouter()
-    // useEffect(() => {
-    //     if(data)
-    //         router.replace(`/${lang}/${data.slug}`, undefined, {shallow: true})
-    // }, [lang])
 
     return (
         <div className='py-[5.5vw] flex max-lg:py-[8.5vw] max-lg:flex-col max-md:py-[18.5vw]'>

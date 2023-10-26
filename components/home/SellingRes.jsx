@@ -72,7 +72,10 @@ export default function SellingRes({ lang, data, t }) {
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
-                <BoxFilterV2 arrFilter={arrFilter} />
+                <BoxFilterV2
+                    arrFilter={arrFilter}
+                    t={t}
+                />
             </div>
 
             {dataNew && (

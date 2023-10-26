@@ -49,10 +49,10 @@ export default function SocialMedia({ dataInfo }) {
                         <Link
                             href={dataInfo[e?.title] || '/'}
                             target='_blank'
-                            className='flex group justify-center items-center w-[3.5vw] h-[3.5vw] bg-white rounded-full relative'
+                            className='flex group justify-center items-center w-[2.5vw] h-[2.5vw] bg-white rounded-full relative'
                         >
                             <Image
-                                className='relative z-20 object-contain w-[2vw] h-[2vw] group-hover/item:brightness-0 group-hover/item:invert'
+                                className='relative z-20 object-contain w-[1.6vw] h-[1.6vw] group-hover/item:brightness-0 group-hover/item:invert'
                                 src={e.src}
                                 alt={e.title}
                                 width={56}

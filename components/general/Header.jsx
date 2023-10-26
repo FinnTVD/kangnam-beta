@@ -56,7 +56,7 @@ export default function Header({ lang, t, data, isHome, dataInfo, children }) {
                     <source src='/images/videotest22.mp4'></source>
                 </video>
 
-                <IconBigLogo className='z-20 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]' />
+                <IconBigLogo className='z-10 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]' />
                 <div className={`bg-gradient-header1 absolute z-[2] top-0 left-0 w-full h-full`}></div>
                 {/* linear-white */}
                 {/* <div className='absolute z-[1] bg-gradient-header2 top-0 left-0 w-full h-full'></div> */}

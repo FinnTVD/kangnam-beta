@@ -67,7 +67,7 @@ const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
             onClick={() => setIsOpen(!isOpen)}
             className={`${type === 'white' ? 'text-white' : 'text-den'} ${
                 menu ? 'max-md:title-mb12-400-130' : 'max-md:title-mb14-400-130'
-            } gap-x-[0.13vw] select-none cursor-pointer flex items-center max-lg:title-tl12-400-130 title14-400-130 whitespace-nowrap relative`}
+            } gap-x-[0.13vw] select-none cursor-pointer flex items-center max-lg:text-[2.56vw] title14-400-130 whitespace-nowrap relative`}
         >
             {listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name}
             {listData?.length > 1 && (
