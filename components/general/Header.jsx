@@ -45,7 +45,8 @@ export default function Header({ lang, t, data, isHome, dataInfo, children }) {
                 <video
                     ref={videoRef}
                     autoPlay
-                    poster='/images/thumnail.jpg'
+                    // poster='/images/thumnail.jpg'
+                    poster={process.env.NEXT_PUBLIC_CDN_URL+'/images/public/thumnail.jpg'}
                     loop
                     className='absolute top-0 left-0 object-cover min-w-full min-h-full'
                     id='videoBanner'
@@ -53,7 +54,8 @@ export default function Header({ lang, t, data, isHome, dataInfo, children }) {
                     playsInline
                     muted
                 >
-                    <source src='/images/videotest22.mp4'></source>
+                    {/* <source src='/images/videotest22.mp4'></source> */}
+                    <source src={process.env.NEXT_PUBLIC_CDN_URL+'/images/public/videotest22.mp4'}></source>
                 </video>
 
                 <IconBigLogo className='z-10 w-[23.4375vw] max-lg:w-[45.4vw] h-[59.8vh] max-lg:top-[13vw] max-lg:right-[6.56vw] absolute right-[7.56vw] top-[18vh] max-md:w-[45.6vw] max-md:h-[64.26vw] max-md:top-[16.8vw] max-md:right-[4.8vw]' />
