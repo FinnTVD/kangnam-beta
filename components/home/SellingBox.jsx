@@ -17,8 +17,6 @@ let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
 
 export default function SellingBox({ lang, t, dataSellingN, dataHiringN }) {
-    console.log('🚀 ~ file: SellingBox.jsx:20 ~ SellingBox ~ dataHiring:', dataHiringN)
-    console.log('🚀 ~ file: SellingBox.jsx:20 ~ SellingBox ~ dataSelling:', dataSellingN)
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()

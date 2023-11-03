@@ -1,12 +1,10 @@
+'use client'
 import Image from 'next/image'
 import Button from './Button'
 import Link from 'next/link'
 import { formatDateTime, handleCheckLangCode } from '@/utils'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import useSWR from 'swr'
-// href={e?.propertyCategory?.alias + '/' + e?.translation?.slug}
-// lang==='vn' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function LatestNewsItem({ newsItem, t, lang }) {
     const languageCode = handleCheckLangCode(lang)
@@ -34,12 +32,9 @@ export default function LatestNewsItem({ newsItem, t, lang }) {
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div
-                data-aos='fade'
-                className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'
-            >
+            <div className='group cursor-pointer w-full h-full bg-center bg-no-repeat bg-cover rounded-2xl shadow backdrop-blur-[39.77px] flex overflow-hidden max-md:rounded-[10px] relative'>
                 <Image
-                    className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover'
+                    className='absolute top-0 left-0 object-cover w-full h-full transition duration-300 group-hover:scale-110'
                     src={newsItem?.image ? newsItem?.image : '/images/featuredImg.jpg'}
                     alt={translation?.title || 'thumbnail news'}
                     sizes='60vw'
@@ -144,7 +139,7 @@ export default function LatestNewsItem({ newsItem, t, lang }) {
                         </div>
                     </div>
                     <div className='mt-[0.625vw] max-md:mt-[0.5vw]'>
-                        <div className='w-full flex flex-col'>
+                        <div className='flex flex-col w-full'>
                             <h2 className='text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 line-clamp-2 max-md:title-mb14-700-150 max-lg:title-tl20'>
                                 {translation?.title}
                             </h2>

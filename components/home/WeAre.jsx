@@ -121,8 +121,6 @@ export default function WeAre({ lang, t }) {
                     <div className='flex items-end'>
                         <div className='h-[77.5vh] max-lg:h-[59.8vh] max-md:h-[38.8vh] w-[48.1875vw] max-lg:w-full relative z-10'>
                             <Image
-                                data-aos='fade-up'
-                                data-aos-delay='600'
                                 src={house}
                                 placeholder='blur'
                                 alt='house'
@@ -131,16 +129,12 @@ export default function WeAre({ lang, t }) {
                                 fill
                             />
                             <Image
-                                data-aos='fade-up'
-                                data-aos-delay='600'
                                 src={circleHouse}
                                 placeholder='blur'
                                 alt='circle'
                                 className='object-cover w-[35.5vw] h-[35.5vw] max-lg:w-[44.6vw] max-md:w-[63.6vw] max-lg:h-[44.6vw] max-md:h-[63.6vw] absolute -top-[3.81vw] max-lg:top-[4.49vw] max-md:-top-[13.51vw] left-[2.69vw] z-[1] max-lg:left-[38.46vw] max-md:left-[23.46vw]'
                             />
                             <Image
-                                data-aos='fade'
-                                data-aos-duration='500'
                                 placeholder='blur'
                                 data-aos-delay='1000'
                                 src={people}
