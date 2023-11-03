@@ -31,11 +31,7 @@ export default function OtherNewsItem({ newsOtherItem, lang, index }) {
 
     return (
         <Link href={lang === 'vi' ? `/news/${translation?.slug}` : `/${lang}/news/${translation?.slug}`}>
-            <div
-                data-aos='fade'
-                data-aos-delay={index <= 1 ? `${(index + 1) * 300}` : `${((index + 1) % 3) * 300}`}
-                className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'
-            >
+            <div className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[2.6vw] shadow-input max-md:shadow-newsDetailMb'>
                 <div className='flex h-[11vw] items-center max-md:h-[30.1vw] max-lg:h-[20vw]'>
                     <div className='w-[45%] h-full relative rounded-lg overflow-hidden max-md:rounded-[6.5px]'>
                         <Image
@@ -43,7 +39,7 @@ export default function OtherNewsItem({ newsOtherItem, lang, index }) {
                             fill
                             sizes='30vw'
                             alt={translation?.title || 'thumbnail news'}
-                            className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden'
+                            className='absolute top-0 left-0 object-cover w-full h-full overflow-hidden transition duration-300 group-hover:scale-110'
                         />
                     </div>
                     <div className='w-[50%] ml-[5%] flex flex-col'>
