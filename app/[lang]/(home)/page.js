@@ -98,22 +98,13 @@ export default async function Home({ params, searchParams }) {
     const dataPostNews = dataPosts?.data?.filter((item) => item?.postType?.id !== postTypeIdAgreement).slice(0, 6)
 
     return (
-        <>
-            {/* <div className='text-black text-[50px] h-[100vh] mt-[10vw]'>
-                <div>{JSON.stringify(searchParams)}</div>
-
-                {`/property?take=20${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-                    propertyAreaTypeParams ? propertyAreaTypeParams : ''
-                }${propertyTypeParams ? propertyTypeParams : ''}`}
-            </div> */}
-            <IndexHome
-                lang={params?.lang}
-                t={t}
-                dataPostNews={dataPostNews}
-                dataHomePage={dataHomePage}
-                // dataHiring={[]}
-                // dataSelling={[]}
-            />
-        </>
+        <IndexHome
+            lang={params?.lang}
+            t={t}
+            dataPostNews={dataPostNews}
+            dataHomePage={dataHomePage}
+            // dataHiring={[]}
+            // dataSelling={[]}
+        />
     )
 }
