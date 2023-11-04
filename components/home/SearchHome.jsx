@@ -6,7 +6,6 @@ import { useCallback } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 export default function SearchHome({ data, lang, t, homePagePropertyType }) {
-    console.log('🚀 ~ file: SearchHome.jsx:9 ~ SearchHome ~ homePagePropertyType:', homePagePropertyType)
     const setValueSearch = useStore((state) => state.setValueSearch)
     const setIsClose = useStore((state) => state.setIsClose)
     const router = useRouter()

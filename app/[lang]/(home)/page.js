@@ -51,23 +51,16 @@ export async function generateMetadata({ params: { lang } }) {
         // manifest: `${DOMAIN}/site.webmanifest`,
     }
 }
-export const dynamic = 'force-dynamic'
 export default async function Home({ params, searchParams }) {
     const [t, dataHomePage] = await Promise.all([getDictionary(params?.lang), getData('/home-page')])
 
     return (
-        <>
-            {/* <div className='text-black text-[50px] h-[100vh] mt-[10vw]'>
-                <div>{JSON.stringify(searchParams)}</div>
-
-            </div> */}
-            <IndexHome
-                lang={params?.lang}
-                t={t}
-                dataHomePage={dataHomePage}
-                params={params}
-                searchParams={searchParams}
-            />
-        </>
+        <IndexHome
+            lang={params?.lang}
+            t={t}
+            dataHomePage={dataHomePage}
+            params={params}
+            searchParams={searchParams}
+        />
     )
 }
