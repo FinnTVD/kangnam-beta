@@ -5,7 +5,8 @@ import SearchGlobal from './SearchGlobal'
 import { useCallback } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-export default function SearchHome({ data, lang, t }) {
+export default function SearchHome({ data, lang, t, homePagePropertyType }) {
+    console.log('🚀 ~ file: SearchHome.jsx:9 ~ SearchHome ~ homePagePropertyType:', homePagePropertyType)
     const setValueSearch = useStore((state) => state.setValueSearch)
     const setIsClose = useStore((state) => state.setIsClose)
     const router = useRouter()
@@ -73,8 +74,8 @@ export default function SearchHome({ data, lang, t }) {
                 </ul>
             </div>
             <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-lg:gap-y-[2vw] max-lg:flex-wrap'>
-                {data?.propertyTypes?.length > 0 &&
-                    data?.propertyTypes?.map((e, index) => (
+                {homePagePropertyType?.length > 0 &&
+                    homePagePropertyType?.map((e, index) => (
                         <div
                             key={index}
                             onClick={() => handleFilter(e)}
