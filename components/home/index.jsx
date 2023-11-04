@@ -28,8 +28,8 @@ export default function IndexHome({ lang, t, dataPostNews, dataHomePage, dataSel
                 <SellingBox
                     t={t}
                     lang={lang}
-                    dataSellingN={dataSelling}
-                    dataHiringN={dataHiring}
+                    dataSelling={dataSelling}
+                    dataHiring={dataHiring}
                 />
             </div>
             <div className='w-full max-md:flex max-md:flex-col-reverse'>

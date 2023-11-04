@@ -170,7 +170,7 @@ export default function SellingRes({ lang, data, t }) {
 
 SellingRes.Skeleton = function () {
     return (
-        <div className='flex flex-col overflow-hidden'>
+        <div className='flex flex-col overflow-hidden mt-[11.16rem]'>
             <div className='flex gap-x-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
                 {arrSelling?.map((e, index) => (
                     <div
