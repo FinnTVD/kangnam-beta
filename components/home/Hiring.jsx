@@ -25,36 +25,11 @@ export default function Hiring({ lang, t, data }) {
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
-                <BoxFilterV2 arrFilter={arrFilterV2} />
+                <BoxFilterV2
+                    arrFilter={arrFilterV2}
+                    t={t}
+                />
             </div>
-            {/* {isLoading && (
-                <div className='flex gap-x-[4.27vw] mt-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
-                    {arrHiring?.map((e, index) => (
-                        <div
-                            className='h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]'
-                            key={index}
-                        >
-                            <div className='relative w-full h-[50.93vw] rounded-[0.5vw] overflow-hidden'>
-                                <Skeleton height={'50.93vw'} />
-                            </div>
-                            <div className='my-[2.67vw]'>
-                                <Skeleton height={'6.13vw'} />
-                            </div>
-                            <div className='flex flex-col gap-y-[2.13vw]'>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )} */}
             {data && (
                 <Swiper
                     slidesPerView={'auto'}
