@@ -47,7 +47,7 @@ const slugProject = [
     },
     {
         code: 'kr',
-        href: '/项目',
+        href: '/분양',
     },
     {
         code: 'ch',

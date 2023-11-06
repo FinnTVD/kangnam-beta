@@ -81,11 +81,11 @@
             {
                 "id": 2,
                 "title": "Dự án",
-                "href": "/projects"
+                "href": "/du-an"
             },
             {
                 "id": 3,
-                "title": "Bán lại",
+                "title": "Mua bán lại",
                 "href": "/resale"
             },
             {

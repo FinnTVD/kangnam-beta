@@ -22,7 +22,7 @@ import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
 const MapV5 = dynamic(() => import('../home/MapV2/MapV5'))
 
-const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+const slugProject = ['/du-an', '/projects', '/분양', '/프로젝트']
 
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
