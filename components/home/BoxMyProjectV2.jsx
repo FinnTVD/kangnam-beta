@@ -38,7 +38,7 @@ export default async function BoxMyProjectV2({ searchParams, t, lang }) {
         propertyCategoryTypeParams = ''
     }
 
-    const query = `/property/for-web?page=${page ? page : 1}&take=8${
+    const query = `/property/for-web?page=${Number(page) ? Number(page) : 1}&take=8${
         propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
     }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
         cityId ? '&cityId=' + cityId : ''
