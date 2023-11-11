@@ -70,7 +70,7 @@ const SearchGlobal = ({
 
     const [sideRef, isOutSide] = useClickOutSide()
 
-    const { data, isLoading, error } = useSWR(process.env.NEXT_PUBLIC_API + '/property-category', fetcher, {
+    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
@@ -466,7 +466,8 @@ const SearchGlobal = ({
                     </label>
                     <input
                         className={`${
-                            classInput || 'w-full outline-none text-den lg:title18-400-150 max-lg:text-[2.5vw] max-md:title-mb14-400-130 pr-[2vw]'
+                            classInput ||
+                            'w-full outline-none text-den lg:title18-400-150 max-lg:text-[2.5vw] max-md:title-mb14-400-130 pr-[2vw]'
                         }`}
                         type='text'
                         name='search'

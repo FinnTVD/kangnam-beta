@@ -35,6 +35,7 @@ const listSocial = [
 ]
 
 export default function SocialMedia({ dataInfo }) {
+    console.log('🚀 ~ file: SocialMedia.jsx:38 ~ SocialMedia ~ dataInfo:', dataInfo)
     return (
         <ul
             id='list-social'

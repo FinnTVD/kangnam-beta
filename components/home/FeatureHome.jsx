@@ -59,7 +59,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                     viewBox='0 0 24 24'
                     strokeWidth='1.5'
                     stroke='black'
-                    class='w-[2.5vw] h-[2.5vw] p-[0.5vw]'
+                    className='w-[2.5vw] h-[2.5vw] p-[0.5vw]'
                 >
                     <path
                         strokeLinecap='round'
@@ -90,7 +90,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                 <Link
                     href={'https://www.youtube.com/@kangnamland/featured'}
                     target='_blank'
-                    className='w-full h-full flex justify-center items-center'
+                    className='flex items-center justify-center w-full h-full'
                 >
                     <IconYoutube className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 </Link>

@@ -2,7 +2,6 @@
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import classes from './NewsDetailStyle.module.css'
 import { useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
 export default function PostDetail({ t, post, newsDetail, lang, category }) {
     const langCode = handleCheckLangCode(lang)
@@ -13,35 +12,32 @@ export default function PostDetail({ t, post, newsDetail, lang, category }) {
                 ? category?.translations?.find((item) => item?.langCode === langCode)?.name
                 : category?.title
     }
-    const router = useRouter()
     const urlRef = useRef('')
     const setSlugDetailNews = useStore((state) => state.setSlugDetailNews)
 
     const fbShareHandler = () => {
+        if (typeof window === undefined) return
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${urlRef.current}`)
     }
     const twitterShareHandler = () => {
+        if (typeof window === undefined) return
         window.open(`https://twitter.com/intent/tweet?url=${urlRef.current}`)
     }
     const linkedinShareHandler = () => {
+        if (typeof window === undefined) return
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${urlRef.current}`)
     }
     useEffect(() => {
-        urlRef.current = window.location.href
-        if (window.FB) {
-            window.FB.XFBML.parse()
+        if (typeof window === undefined && !window?.location) return
+        urlRef.current = window?.location?.href
+        if (window?.FB) {
+            window?.FB?.XFBML?.parse()
         }
         setSlugDetailNews(post)
         return () => {
             setSlugDetailNews(null)
         }
     }, [])
-
-    // useEffect(() => {
-    //     if (newsDetail) {
-    //         router.replace(`/${lang}/news/${newsDetail?.slug}`, undefined, { shallow: true })
-    //     }
-    // }, [newsDetail])
 
     return (
         <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw] max-lg:px-[10vw]'>
