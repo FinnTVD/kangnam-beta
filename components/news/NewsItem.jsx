@@ -1,7 +1,6 @@
 import { formatDateTime, handleCheckLangCode } from '@/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMediaQuery } from 'react-responsive'
 import useSWR from 'swr'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -42,7 +41,7 @@ export default function NewsItem({ newsOtherItem, lang, index }) {
                         src={newsOtherItem?.image ? newsOtherItem?.image : '/images/featuredImg.jpg'}
                         fill
                         alt={translation?.title || 'thumbnail news'}
-                        className='group-hover:scale-110 transition duration-300 absolute top-0 left-0 w-full h-full object-cover overflow-hidden'
+                        className='absolute top-0 left-0 object-cover w-full h-full overflow-hidden transition duration-300 group-hover:scale-110'
                     />
                 </div>
                 <span className='bg-nau-nhat inline-block title12-400-150 mt-[1vw] py-[0.3125vw] px-[1.125vw] bg-opacity-20 rounded-[100px] text-nau-nhat max-md:pr-[2.6vw] max-md:title-mb10-400-150 max-md:mt-[3.4vw] max-md:py-[1.1vw] max-md:px-[3.7vw] max-md:rounded-[3.3px] max-lg:title-tl12'>
