@@ -84,30 +84,31 @@ const SearchGlobal = ({
                 }`,
             )
             const data = await res.json()
-            if (data?.length && debounceValue) {
-                if (data[0]?.boundaries?.length === 1) {
+            const dataNews = [...data?.reverse()]
+            if (dataNews?.length && debounceValue) {
+                if (dataNews[0]?.boundaries?.length === 1) {
                     const obj1 = {
-                        cityIdSearch: data[0]?.boundaries[0]?.id,
+                        cityIdSearch: dataNews[0]?.boundaries[0]?.id,
                     }
                     callDataProject(obj1)
                 }
-                if (data[0]?.boundaries?.length === 2) {
+                if (dataNews[0]?.boundaries?.length === 2) {
                     const obj2 = {
-                        districtIdSearch: data[0]?.boundaries[0]?.id,
-                        cityIdSearch: data[0]?.boundaries[1]?.id,
+                        districtIdSearch: dataNews[0]?.boundaries[0]?.id,
+                        cityIdSearch: dataNews[0]?.boundaries[1]?.id,
                     }
                     callDataProject(obj2)
                 }
-                if (data[0]?.boundaries?.length === 3) {
+                if (dataNews[0]?.boundaries?.length === 3) {
                     const obj3 = {
-                        wardIdSearch: data[0]?.boundaries[0]?.id,
-                        districtIdSearch: data[0]?.boundaries[1]?.id,
-                        cityIdSearch: data[0]?.boundaries[2]?.id,
+                        wardIdSearch: dataNews[0]?.boundaries[0]?.id,
+                        districtIdSearch: dataNews[0]?.boundaries[1]?.id,
+                        cityIdSearch: dataNews[0]?.boundaries[2]?.id,
                     }
                     callDataProject(obj3)
                 }
             }
-            setDataSearch(data)
+            setDataSearch(dataNews)
         }
         const callDataProjectCode = async () => {
             const res = await fetch(
