@@ -59,6 +59,26 @@ export default async function RootLayout({ children, params }) {
                     name='google-site-verification'
                     content='mLV7YCxrelL4Fm6eT69OV9RzCJxKi5Jfm-hsA6hrTXE'
                 />
+                <meta
+                    name='DC.title'
+                    content='Công Ty Tư Vấn Đầu Tư BDS Kang Nam (하노이강남부동산)'
+                />
+                <meta
+                    name='geo.region'
+                    content='VN-HN'
+                />
+                <meta
+                    name='geo.placename'
+                    content='Ha Noi'
+                />
+                <meta
+                    name='geo.position'
+                    content='21.015453152589238;105.77731782503285'
+                />
+                <meta
+                    name='ICBM'
+                    content='21.015453152589238, 105.77731782503285'
+                />
             </head>
             <body
                 suppressHydrationWarning={true}
@@ -66,6 +86,17 @@ export default async function RootLayout({ children, params }) {
             >
                 <AosInit />
                 {children}
+                <Script
+                    strategy='lazyOnload'
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-YQHLC4FNTP`}
+                ></Script>
+                <Script strategy='lazyOnload'>
+                    {`window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+
+							gtag('config', 'G-YQHLC4FNTP');`}
+                </Script>
                 <Script
                     async
                     defer
