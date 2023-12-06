@@ -13,8 +13,6 @@ import postData from '@/utils/postData'
 import { handleListPhone, notifyError, notifySuccess } from '@/utils'
 import { ToastContainer } from 'react-toastify'
 
-
-
 const listSocial = [
     {
         id: 1,
@@ -67,25 +65,25 @@ const listSocial = [
 //     })
 //     .required()
 
-export default function FormContact({dataInfo, t}) {
+export default function FormContact({ dataInfo, t }) {
     const schema = yup
-    .object({
-        name: yup.string().required(t?.contact?.notification?.name?.required),
-        phone: yup
-            .string()
-            .test('is-number', t?.contact?.notification?.phone?.invalid, (value) => {
-                if (value && isNaN(value)) {
-                    return false
-                }
-                return true
-            })
-            .required(t?.contact?.notification?.phone?.required),
-        email: yup
-            .string()
-            .required(t?.contact?.notification?.email?.required)
-            .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, t?.contact?.notification?.email?.invalid),
-    })
-    .required()
+        .object({
+            name: yup.string().required(t?.contact?.notification?.name?.required),
+            phone: yup
+                .string()
+                .test('is-number', t?.contact?.notification?.phone?.invalid, (value) => {
+                    if (value && isNaN(value)) {
+                        return false
+                    }
+                    return true
+                })
+                .required(t?.contact?.notification?.phone?.required),
+            email: yup
+                .string()
+                .required(t?.contact?.notification?.email?.required)
+                .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, t?.contact?.notification?.email?.invalid),
+        })
+        .required()
 
     const [valueCategory, setValueCategory] = useState('')
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
@@ -119,8 +117,15 @@ export default function FormContact({dataInfo, t}) {
         window.open(url)
     }
     let social
-    if(dataInfo){
-        social = [dataInfo.kakaotalk, dataInfo.wechat, dataInfo.zalo, dataInfo.telegram, dataInfo.skype, dataInfo.linkedIn]
+    if (dataInfo) {
+        social = [
+            dataInfo.kakaotalk,
+            dataInfo.wechat,
+            dataInfo.zalo,
+            dataInfo.telegram,
+            dataInfo.skype,
+            dataInfo.linkedIn,
+        ]
     }
 
     return (
@@ -158,8 +163,11 @@ export default function FormContact({dataInfo, t}) {
                                     {dataInfo?.address}
                                 </span>
                             </li>
-                            {handleListPhone(dataInfo?.phone).map((item, index) => 
-                                <li className='flex gap-x-[0.5vw] max-md:gap-x-[1.07vw] items-center'>
+                            {handleListPhone(dataInfo?.phone)?.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className='flex gap-x-[0.5vw] max-md:gap-x-[1.07vw] items-center'
+                                >
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'
                                         width='20'
@@ -173,16 +181,43 @@ export default function FormContact({dataInfo, t}) {
                                             fill='#57534E'
                                         />
                                     </svg>
-                                    <span className='text-den-2 title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'>
+                                    <Link
+                                        href={`tel:${item}`}
+                                        className='text-den-2 title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'
+                                    >
                                         {item}
-                                    </span>
+                                    </Link>
                                 </li>
-                            )}
+                            ))}
+                            <li className='flex gap-x-[0.5vw] max-md:gap-x-[1.07vw] items-center'>
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    stroke-width='1.5'
+                                    stroke='#57534E'
+                                    className='max-md:w-[5vw] max-md:h-[5vw] w-[1rem] h-[1rem] max-lg:w-[2.5rem] max-lg:h-[2.5rem]'
+                                >
+                                    <path
+                                        stroke-linecap='round'
+                                        stroke-linejoin='round'
+                                        d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
+                                    />
+                                </svg>
+                                <Link
+                                    href={`mailto: kangnam.fist@gmail.com`}
+                                    className='text-den-2 title16-400-130 max-md:title-mb14-400-130 max-lg:title-tl14'
+                                >
+                                    kangnam.fist@gmail.com
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div className='flex-1'>
-                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>{t?.contact?.section2?.subtitle}</span>
+                    <span className='sub-title max-md:title-mb12-700-150 max-md:tracking-[0.6px] max-lg:title-tl12'>
+                        {t?.contact?.section2?.subtitle}
+                    </span>
                     <h2 className='text-den title56 max-md:mt-[1.07vw] max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl25'>
                         {t?.contact?.section2?.title}
                     </h2>
@@ -277,9 +312,9 @@ export default function FormContact({dataInfo, t}) {
                                         title={e.title}
                                     >
                                         <Link
-                                            href={social? social[index] : '/'}
+                                            href={social ? social[index] : '/'}
                                             target='_blank'
-                                            className='flex items-center justify-center w-full h-full '                                    
+                                            className='flex items-center justify-center w-full h-full '
                                         >
                                             <Image
                                                 className='w-[1.5vw] h-[1.5vw] max-md:w-[5vw] max-md:h-[5vw] object-contain brightness-0 invert max-lg:w-[3vw] max-lg:h-[3vw]'

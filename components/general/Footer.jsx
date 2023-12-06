@@ -289,6 +289,28 @@ export default function Footer({ lang, t, dataInfo }) {
                                     </span>
                                 </Link>
                             ))}
+                            <Link
+                                className='flex items-center'
+                                href={`mailto: kangnam.fist@gmail.com`}
+                            >
+                                <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth='1.5'
+                                    stroke='#57534E'
+                                    className='relative w-[1.25vw] h-[1.25vw] flex max-md:w-[5.3vw] max-md:h-[5.3vw] max-lg:w-[4.25vw] max-lg:h-[4.25vw]'
+                                >
+                                    <path
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                        d='M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
+                                    />
+                                </svg>
+                                <span className='ml-[0.5vw] text-den-2 title16-400-130 max-md:title-mb16-400-130 max-md:ml-[2.1vw] max-lg:title-tl16'>
+                                    kangnam.fist@gmail.com
+                                </span>
+                            </Link>
                         </div>
                     </div>
                     <div className='max-md:max-w-full max-md:border-t max-md:border-[#57534E] max-md:border-opacity-10 max-md:py-[6.4vw] max-lg:max-w-[50%]'>
