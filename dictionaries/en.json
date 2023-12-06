@@ -13,468 +13,468 @@
             },
             {
                 "id": 6,
-                "title": "Về KangNam",
+                "title": "About KangNam",
                 "branch": [
                     {
                         "id": 1,
-                        "title": "Giới thiệu",
+                        "title": "About us",
                         "href": "/about-us"
                     },
                     {
                         "id": 2,
-                        "title": "Liên hệ",
+                        "title": "Contact",
                         "href": "/contact"
                     },
                     {
                         "id": 3,
-                        "title": "Thỏa thuận & pháp lý",
+                        "title": "Agreement & Legal",
                         "href": "/agreements"
                     }
                 ]
             }
         ],
-        "button": "Kí gửi nhà đất",
-        "title": "Chọn ngôn ngữ"
+        "button": "Land deposit",
+        "title": "Select language"
     },
     "Form1": {
-        "sell": "Giá bán mong muốn",
-        "hire": "Giá thuê mong muốn"
+        "sell": "Desired selling price",
+        "hire": "Desired rent"
     },
     "aboutUsStory": {
-        "subtitle": "Câu chuyện thương hiệu",
-        "title": "Giới thiệu",
-        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        "subtitle": "Brand story",
+        "title": "Introduce",
+        "description": "Officially established in 2018, Kangnam is the first technology company in Southeast Asia in the field of real estate brokerage. At Kangnam, we use technology to make the buying and selling process easier and build trust for our customers by providing price comparison tools using market data analysis systems, tracking listing properties, etc  combined with interactive communication technology, online transaction management to bring the best value to home buyers and sellers. At the same time, Kangnam also equips brokers with a customer management system (Smart CRM) and database, aiming to become a destination for all accommodation-related needs."
     },
     "aboutUsTeams": {
-        "subtitle": "Đội ngũ",
-        "title": "Chuyên viên Kangnam",
-        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        "subtitle": "Team",
+        "title": "Kangnam Specialist",
+        "description": "Officially established in 2018, Kangnam is the first technology company in Southeast Asia in the field of real estate brokerage. At Kangnam, we use technology to make the buying and selling process easier and build trust for our customers by providing price comparison tools using market data analysis systems, tracking listing properties, etc  combined with interactive communication technology, online transaction management to bring the best value to home buyers and sellers. At the same time, Kangnam also equips brokers with a customer management system (Smart CRM) and database, aiming to become a destination for all accommodation-related needs."
     },
     "aboutUsContact": {
-        "subtitle": "Liên hệ",
-        "title": "Thông tin văn phòng",
-        "button": "Liên hệ ngay"
+        "subtitle": "Contact",
+        "title": "Office Information",
+        "button": "Contact Now"
     },
     "newsList": {
-        "subtitle": "Tin tức về",
-        "title": "Tin tức"
+        "subtitle": "News about",
+        "title": "News"
     },
     "newsDetailDes": {
-        "byAuthor": "Viết bởi",
-        "share": "Chia sẻ lên"
+        "byAuthor": "Written by",
+        "share": "Share to"
     },
     "newsDetailRelated": {
-        "subtitle": "Tổng hợp tin tức",
-        "title": "Tin tức liên quan",
-        "button": "Xem tất cả"
+        "subtitle": "News aggregator",
+        "title": "Related News",
+        "button": "See all"
     },
     "newsLatestButton": {
-        "title": "Chi tiết"
+        "title": "Detail"
     },
     "menuNav": {
         "nav1": [
             {
                 "id": 1,
-                "title": "Trang chủ",
+                "title": "Home",
                 "href": "/"
             },
             {
                 "id": 2,
-                "title": "Dự án",
+                "title": "Project",
                 "href": "/projects"
             },
             {
                 "id": 3,
-                "title": "Bán lại",
+                "title": "Resale",
                 "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Thỏa thuận & pháp lý",
+                "title": "Agreement & Legal",
                 "href": "/agreements"
             }
         ],
         "nav2": [
             {
                 "id": 1,
-                "title": "Về Kangnam",
+                "title": "About Kangnam",
                 "href": "/about-us"
             },
             {
                 "id": 2,
-                "title": "Tin tức",
+                "title": "News",
                 "href": "/news"
             },
             {
                 "id": 3,
-                "title": "Liên hệ",
+                "title": "Contact",
                 "href": "/contact"
             }
         ]
     },
     "footer": {
         "contact": {
-            "title": "Liên hệ"
+            "title": "Contact"
         },
         "navigation": {
-            "title": "Điều hướng chung",
+            "title": "General navigation",
             "list": [
                 {
                     "id": 1,
-                    "title": "Trang chủ",
+                    "title": "Home",
                     "href": "/"
                 },
                 {
                     "id": 2,
-                    "title": "Về Kangnam",
+                    "title": "About Kangnam",
                     "href": "/about-us"
                 },
                 {
                     "id": 3,
-                    "title": "Dự án",
+                    "title": "Project",
                     "href": "/du-an"
                 },
                 {
                     "id": 4,
-                    "title": "Ký gửi nhà đất",
+                    "title": "Land deposit",
                     "href": "/deposit"
                 },
                 {
                     "id": 5,
-                    "title": "Tin tức",
+                    "title": "News",
                     "href": "/news"
                 }
             ]
         },
         "service": {
-            "title": "Dịch vụ",
+            "title": "Service",
             "list": [
                 {
                     "id": "1",
-                    "title": "Dự án mới"
+                    "title": "New projects"
                 },
                 {
                     "id": "2",
-                    "title": "Thiết kế nhà đẹp"
+                    "title": "Beautiful home design"
                 },
                 {
                     "id": "3",
-                    "title": "Ký gửi bất động sản"
+                    "title": "Real estate deposit"
                 }
             ]
         }
     },
     "scroll": {
-        "title": "Cuộn xuống"
+        "title": "Scroll down"
     },
     "homepage": {
         "section1" : {
-            "subtitle": "An tâm với 100% bất động sản được xác thực tại KANGNAM",
-            "title": "Lựa Chọn Căn Nhà Ưng Ý",
-            "suggest": "Gợi ý"
+            "subtitle": "Peace of mind with 100% authenticated real estate in KANGNAM",
+            "title": "Choosing the right house",
+            "suggest": "Suggest"
         },
         "section2" : {
-            "subtitle": "Câu chuyện thương hiệu",
-            "title": "Chúng tôi là ai",
-            "description": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp, chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản",
+            "subtitle": "Brand story",
+            "title": "Who we are",
+            "description": "Kangnam Real Estate Joint Stock Company is a professional real estate broker, specializing in distributing a variety of real estate segments spread throughout the North and Central with a team of experienced and well-trained shoe brokers",
             "detail": {
-                "title1": "Cam kết xác thực",
-                "title2": "Trọn hỗ trợ, chi phí thấp",
-                "title3": "Thủ tục nhanh chóng"
+                "title1": "Commitment to authentication",
+                "title2": "Full support, low cost",
+                "title3": "Quick procedure"
             },
             "button": {
-                "primary": "Về chúng tôi",
-                "secondary": "Xem dự án"
+                "primary": "About Us",
+                "secondary": "View project"
             }
         },
         "section3": {
-            "title": "Dự án của chúng tôi",
-            "showMap": "Hiển thị bản đồ",
-            "button": "Xem tất cả"
+            "title": "Our Projects",
+            "showMap": "Show map",
+            "button": "See all"
         },
         "section3Mobile": {
             "buy": {
-                "title": "Đang được rao bán",
+                "title": "For sale",
                 "subtitle": {
-                    "over": "Hơn",
-                    "projectDistribution": "dự án đang được phân phối"
+                    "over": "More",
+                    "projectDistribution": "The project is being distributed"
                 },
-                "button": "Tất cả dự án"
+                "button": "All project"
             },
             "rent": {
-                "title": "Dự án cho thuê",
+                "title": "Projects for lease",
                 "subtitle": {
-                    "over": "Hơn",
-                    "projectDistribution": "dự án đang được phân phối"
+                    "over": "More",
+                    "projectDistribution": "The project is being distributed"
                 },
-                "button": "Tất cả dự án"
+                "button": "All project"
             }
         },
         "section4": {
-            "title": "Ký gửi nhà đất",
-            "description": "Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý khách.",
+            "title": "Land deposit",
+            "description": "We provide real estate deposit services, to meet your needs to sell or lease your property.",
             "detail": {
-                "title1": "Đặt khách hàng làm trọng tâm",
-                "title2": "Dịch vụ nhanh chóng",
-                "title3": "Đảm bảo thực thi"
+                "title1": "Customer-centric",
+                "title2": "Prompt service",
+                "title3": "Ensure execution"
             },
-            "button": "Đăng ký ngay"
+            "button": "Sign up now"
         },
         "section5": {
-            "subtitle": "TỔNG HỢP CÁC BẤT ĐỘNG SẢN",
-            "title": "Bất Động Sản Nổi Bật",
-            "button": "Xem tất cả",
-            "over": "Hơn",
-            "projectDistribution": "dự án đang được phân phối"
+            "subtitle": "SUMMARY OF PROPERTIES",
+            "title": "Featured Real Estate",
+            "button": "View all",
+            "over": "More",
+            "projectDistribution": "The project is being distributed"
         },
         "section6": {
-            "title": "Nổi bật theo khu vực",
-            "button": "Chi tiết dự án"
+            "title": "Featured by region",
+            "button": "Project details"
         },
         "section7": {
-            "subtitle": "Tổng hợp các đối tác",
-            "title": "Đối tác của chúng tôi",
-            "button": "Trở thành đối tác"
+            "subtitle": "Summary of partners",
+            "title": "Our Partners",
+            "button": "Become a partner"
         },
         "section8": {
-            "subtitle": "Tổng hợp tin tức",
-            "title": "Tin tức mới nhất",
-            "button": "Xem tất cả"
+            "subtitle": "News aggregator",
+            "title": "Latest News",
+            "button": "See all"
         }
     },
     "projects": {
-        "subtitle": "100% xác thực",
-        "title": "Mua bán nhà đất căn hộ",
-        "map": "Bản đồ",
-        "category": "Loại hình",
-        "address": "Địa điểm",
-        "show": "Hiển thị",
-        "over": "trong số hơn",
-        "validateProject": "nhà đất xác thực",
+        "subtitle": "100% authentic",
+        "title": "Buying and selling houses and apartments",
+        "map": "Map",
+        "category": "Type",
+        "address": "Location",
+        "show": "Display",
+        "over": "among more",
+        "validateProject": "Authentic housing",
         "item": {
-            "address": "Địa chỉ",
-            "price": "Mức giá",
-            "area": "Diện tích"
+            "address": "Address",
+            "price": "Pricing",
+            "area": "Area"
         },
         "filter1": {
-            "title": "Chọn loại hình bất động sản",
-            "reset": "Đặt lại",
-            "cancel": "Hủy",
-            "apply": "Áp dụng"
+            "title": "Select property type",
+            "reset": "Reset",
+            "cancel": "Cancel",
+            "apply": "Apply"
         },
         "filter2": {
-            "title1": "Mới nhất",
-            "title2": "Giá tăng dần",
-            "title3": "Giá giảm dần"
+            "title1": "Latest",
+            "title2": "Incremental price",
+            "title3": "Descending price"
         },
         "showMap": {
-            "list": "Danh sách",
-            "map": "Bản đồ"
+            "list": "List",
+            "map": "Map"
         }
     },
     "listNews": {
         "section2": {
-            "subtitle": "Tin tức về",
-            "title": "Tin tức"
+            "subtitle": "News about",
+            "title": "News"
         }
     },
     "projectDetail": {
-        "title": "Thông tin chi tiết",
+        "title": "Details",
         "info": {
-            "type": "Loại hình",
-            "area": "Diện tích",
-            "floors": "Số tầng",
-            "orientHouse": "Hướng nhà",
-            "year": "Năm xây dựng",
-            "orientBalcony": "Hướng ban công",
-            "interior": "Nội thất",
-            "juridical": "Pháp lý"
+            "type": "Type",
+            "area": "Area",
+            "floors": "Number of floors",
+            "orientHouse": "Home orientation",
+            "year": "Year of construction",
+            "orientBalcony": "Balcony orientation",
+            "interior": "Interior",
+            "juridical": "Legal"
         },
         "map": {
-            "address": "Địa chỉ",
-            "ward": "Phường/Xã",
-            "district": "Quận",
-            "city": "Thành phố/Tỉnh"
+            "address": "Address",
+            "ward": "Wards/Communes",
+            "district": "County",
+            "city": "City/Province"
         }
     },
     "aboutUs": {
         "section2": {
-            "subtitle": "Câu chuyện thương hiệu",
-            "title": "Giới thiệu",
-            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+            "subtitle": "Brand story",
+            "title": "Introduce",
+            "description": "Officially established in 2018, Kangnam is the first technology company in Southeast Asia in the field of real estate brokerage. At Kangnam, we use technology to make the buying and selling process easier and build trust for our customers by providing price comparison tools using market data analysis systems, tracking listing properties, etc  combined with interactive communication technology, online transaction management to bring the best value to home buyers and sellers. At the same time, Kangnam also equips brokers with a customer management system (Smart CRM) and database, aiming to become a destination for all accommodation-related needs."
         },
         "section3": {
-            "subtitle": "ĐỘI NGŨ",
-            "title": "Chuyên Viên Kangnam",
-            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+            "subtitle": "TEAM",
+            "title": "Kangnam Expert",
+            "description": "Officially established in 2018, Kangnam is the first technology company in Southeast Asia in the field of real estate brokerage. At Kangnam, we use technology to make the buying and selling process easier and build trust for our customers by providing price comparison tools using market data analysis systems, tracking listing properties, etc  combined with interactive communication technology, online transaction management to bring the best value to home buyers and sellers. At the same time, Kangnam also equips brokers with a customer management system (Smart CRM) and database, aiming to become a destination for all accommodation-related needs."
         },
         "section4": {
-            "description": "<p><strong>SỨ MỆNH</strong> của chúng tôi là <strong>THIẾT LẬP</strong> và <strong>THỰC THI</strong> những tiêu chuẩn cao nhất nhằm phục vụ lợi ích lớn nhất của Khách hàng cho mọi nhu cầu về <strong>BẤT ĐỘNG SẢN</strong></p>"
+            "description": "<p>Our <strong>MISSION</strong> is to <strong>ESTABLISH</strong> and <strong>ENFORCE</strong> the highest standards to serve the best interests of our Clients for all <strong>REAL ESTATE</strong> needs</p>"
         },
         "section5": {
-            "subtitle": "Liên hệ",
-            "title": "Thông tin văn phòng",
-            "button": "Liên hệ ngay",
-            "headquarter": "Trụ sở chính (Hà Nội)"
+            "subtitle": "Contact",
+            "title": "Office Information",
+            "button": "Contact Now",
+            "headquarter": "Head Office (Hanoi)"
         }
     },
     "contact": {
         "section2": {
-            "subtitle": "Kết nối với chúng tôi",
-            "title": "Điền thông tin",
-            "infoTitle": "Thông tin liên hệ",
-            "button": "Gửi thông tin",
-            "contactAction": "Liên hệ ngay"
+            "subtitle": "Connect with us",
+            "title": "Fill in the information",
+            "infoTitle": "Contact Info",
+            "button": "Submit information",
+            "contactAction": "Contact Now"
         },
         "notification": {
             "name": {
-                "required": "Vui lòng điền họ tên"
+                "required": "Please enter your full name"
             },
             "phone":{
-                "invalid" : "Số điện thoại không hợp lệ",
-                "required": "Vui lòng điền số điện thoại"
+                "invalid" : "Invalid phone number",
+                "required": "Please enter your phone number"
             },
             "email":{
-                "invalid": "Email không hợp lệ",
-                "required": "Vui lòng điền email"
+                "invalid": "Invalid email",
+                "required": "Please enter your email"
             }
         }
     },
     "deposit": {
         "wrapper": {
-            "title": "Bán và cho thuê nhà đất nhanh chóng, dễ dàng cùng Kangnam",
+            "title": "Sell and rent real estate quickly and easily with Kangnam",
             "commitment": {
-                "title": "Cam kết với khách hàng",
+                "title": "Commitment to customers",
                 "detail": {
-                    "title1": "Đặt khách hàng làm trọng tâm cho mọi quyết định",
-                    "title2": "Những điều đã nói là những điều được làm",
-                    "title3": "Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không bán được nhà)"
+                    "title1": "Put the customer at the center of every decision",
+                    "title2": "Things said are things done",
+                    "title3": "Enforceable guarantee (Free premium services if home cannot be sold)"
                 }
             },
             "additionalService": {
                 "detail": {
-                    "title1": "Dịch vụ chụp ảnh chuyên nghiệp",
-                    "subtitle1": "Hình ảnh chất lượng cao, chuyên nghiệp",
-                    "subtitle2": "Tiết kiệm đến 1.000.000 đồng so với thị trường"
+                    "title1": "Professional photography services",
+                    "subtitle1": "High-quality, professional images",
+                    "subtitle2": "Save up to VND 1,000,000 compared to the market"
                 }
             },
-            "button": "Tìm hiểu thêm"
+            "button": "Learn more"
         },
         "form": {
-            "title": "Ký gửi nhà đất với Kangnam",
-            "subtitle": "Do hạn chế về khu vực hoạt động của các sàn giao dịch, KangNam xin phép chỉ tiếp nhận nhà đất ký gửi từ khu vực A và B.",
+            "title": "Land deposit with Kangnam",
+            "subtitle": "Due to restrictions on the area of operation of the exchanges, KangNam applied for permission to only accept consignment properties from areas A and B.",
             "form1": {
-                "title": "Thông tin cơ bản",
-                "demand": "Nhu cầu của bạn là gì",
+                "title": "Basic information",
+                "demand": "What are your needs",
                 "select": {
-                    "select1": "Bán",
-                    "select2": "Cho thuê",
-                    "select3": "Bán và cho thuê"
+                    "select1": "Sell",
+                    "select2": "Hire",
+                    "select3": "Sale and rental"
                 },
                 "input": {
-                    "input1": "Căn hộ",
-                    "input2": "Giá bán mong muốn",
-                    "input3": "Giá thuê mong muốn",
-                    "input4": "Địa chỉ"
+                    "input1": "Apartment",
+                    "input2": "Desired selling price",
+                    "input3": "Desired rent",
+                    "input4": "Address"
                 },
                 "priceSubmit": {
-                    "sell": "Giá bán",
-                    "rent": "Giá thuê"
+                    "sell": "Price",
+                    "rent": "Rent"
                 },
-                "step": "Bước 2"
+                "step": "Step 2"
             },
             "form2": {
-                "back": "Trở lại",
-                "title": "Thông tin liên hệ",
-                "owner": "Tôi là chủ nhà",
+                "back": "Return",
+                "title": "Contact Info",
+                "owner": "I'm a landlord",
                 "input": {
-                    "input1": "Họ và tên",
-                    "input2": "Số điện thoại",
+                    "input1": "Full name",
+                    "input2": "Phone number",
                     "input3": "Email",
-                    "input4": "Lời nhắn"
+                    "input4": "Message"
                 },
-                "step": "Bước 3"
+                "step": "Step 3"
             },
             "form3": {
-                "back": "Trở lại",
-                "title": "Thông tin bất động sản",
-                "descriptionInput": "Mô tả nhà đất",
+                "back": "Return",
+                "title": "Property Information",
+                "descriptionInput": "Description of real estate",
                 "detailInput": {
-                    "title": "Thông tin chi tiết",
-                    "input1": "Loại hình",
-                    "input2": "Diện tích",
-                    "input3": "Số tầng",
-                    "input4": "Hướng nhà",
-                    "input5": "Loại công trình",
-                    "input6": "Hướng ban công",
-                    "input7": "Nội thất",
-                    "input8": "Pháp lý"
+                    "title": "Details",
+                    "input1": "Type",
+                    "input2": "Area",
+                    "input3": "Number of floors",
+                    "input4": "Home orientation",
+                    "input5": "Building type",
+                    "input6": "Balcony orientation",
+                    "input7": "Interior",
+                    "input8": "Legal"
                 },
                 "pictureInput": {
-                    "title": "Hình ảnh",
-                    "standard": "Tiêu chuẩn hình ảnh",
-                    "drop": "Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên",
-                    "recommend": "Đề xuất tỉ lệ hình ảnh tốt nhất là 1600x900 (16:9). Giới hạn 2MB/ảnh",
-                    "button": "Gửi thông tin"
+                    "title": "Image",
+                    "standard": "Image standards",
+                    "drop": "Drag and drop real estate images or click here to upload",
+                    "recommend": "The best aspect ratio recommendation is 1600x900 (16:9). Limited to 2MB/image",
+                    "button": "Submit information"
                 },
-                "validateFiles" : "Cần ít nhất 3 ảnh để xuất bản!"
+                "validateFiles" : "At least 3 photos are required to publish!"
             },
             "complete": {
-                "title": "Hoàn thành"
+                "title": "Complete"
             }
         }
     },
     "otherPageBanner": [
         {
-            "title": "Thông tin nhanh chóng theo nhịp thị trường",
-            "des": "Không thể bỏ lỡ những thông tin quan trọng của thị trường theo dòng sự kiện",
-            "end": "Tin tức",
+            "title": "Information quickly follows the market rhythm",
+            "des": "Can't miss important market news along the course of events",
+            "end": "News",
             "slug": "news"
         },
         {
-            "title": "Chúng tôi luôn hỗ trợ khách hàng một cách nhanh chóng",
-            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội ngũ chúng tôi tư vấn miễn phí",
-            "end": "Liên hệ",
+            "title": "We always support customers quickly",
+            "des": "Please fill in the information to be consulted by our team for free",
+            "end": "Contact",
             "slug": "contact"
         },
         {
-            "title": "Chúng tôi theo đuổi sự hoàn hảo trên từng dự án",
-            "des": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp giàu kinh nghiệm",
-            "end": "Giới thiệu",
+            "title": "We pursue perfection on every project",
+            "des": "Kangnam Real Estate Joint Stock Company is an experienced professional real estate broker",
+            "end": "Introduce",
             "slug": "about-us"
         },
         {
-            "title": "Thỏa thuận & pháp lý",
-            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội nguc chúng tôi tư vấn miễn phí",
-            "end": "Pháp lý",
+            "title": "Agreement & Legal",
+            "des": "Please fill in the information to receive a free consultation from our team",
+            "end": "Legal",
             "slug": "agreements"
         }
     ],
     "menuRes": {
         "email": "Email",
         "hotline": "Hotline",
-        "address": "Địa chỉ"
+        "address": "Address"
     },
     "hiring": {
-        "button": "Xem tất cả",
-        "area": "Diện tích",
-        "address": "Địa chỉ",
-        "price": "Mức giá"
+        "button": "View all",
+        "area": "Area",
+        "address": "Address",
+        "price": "Pricing"
     },
     "selling": {
-        "button": "Xem tất cả",
-        "area": "Diện tích",
-        "address": "Địa chỉ",
-        "price": "Mức giá"
+        "button": "View all",
+        "area": "Area",
+        "address": "Address",
+        "price": "Pricing"
     },
     "relatedProjects": {
-        "subtitle": "Danh sách bất động sản",
-        "title": "Bất động sản liên quan",
+        "subtitle": "Real Estate Listings",
+        "title": "Related properties",
         "item": {
-            "title1": "Địa chỉ",
-            "title2": "Diện tích",
-            "title3": "Mức giá"
+            "title1": "Address",
+            "title2": "Area",
+            "title3": "Pricing"
         },
-        "button": "Xem tất cả"
+        "button": "View all"
     }
 }

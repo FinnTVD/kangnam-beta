@@ -47,7 +47,7 @@ export default function WeAre({ lang, t }) {
                                         alt='check'
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
+                                    <span className='text-center text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
                                         {t?.homepage?.section2?.detail?.title1}
                                     </span>
                                 </li>
@@ -57,7 +57,7 @@ export default function WeAre({ lang, t }) {
                                         alt='pig'
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
+                                    <span className='text-center text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
                                         {t?.homepage?.section2?.detail?.title2}
                                     </span>
                                 </li>
@@ -67,7 +67,7 @@ export default function WeAre({ lang, t }) {
                                         alt='watch'
                                         className='w-[4.375vw] h-[4.375vw] max-lg:w-[7vw] max-lg:h-[7vw] max-md:w-[10.67vw] max-md:h-[10.67vw] object-cover'
                                     />
-                                    <span className='text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
+                                    <span className='text-center text-vang-nhe title18-600-130 title-tl14-600-130 title-mb12-600-130'>
                                         {t?.homepage?.section2?.detail?.title3}
                                     </span>
                                 </li>
