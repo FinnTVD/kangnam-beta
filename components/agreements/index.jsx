@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
 import AgreementItem from './AgreementItem'
+import FormAgreement from '../agreement/FormAgreement'
 
-export default function IndexAgreements({ lang, agreementDataTranslation }) {
+export default function IndexAgreements({ t, agreementDataTranslation }) {
     const [index, setIndex] = useState(0)
 
     return (
@@ -27,6 +28,7 @@ export default function IndexAgreements({ lang, agreementDataTranslation }) {
                     {agreementDataTranslation && agreementDataTranslation[index]?.title}
                 </h1>
                 <AgreementItem data={agreementDataTranslation && agreementDataTranslation[index]}></AgreementItem>
+                <FormAgreement t={t} />
             </div>
         </div>
     )

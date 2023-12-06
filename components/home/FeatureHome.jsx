@@ -40,7 +40,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
     return (
         <ul
             id='listFeature'
-            className='fixed right-[1.94vw] bottom-[1.86vw] z-[9999] gap-y-[1vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
+            className='fixed right-[1.94vw] bottom-[1.86vw] z-[99999] gap-y-[1vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
         >
             <div
                 onClick={() =>

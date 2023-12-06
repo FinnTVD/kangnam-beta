@@ -69,7 +69,7 @@ export default async function Agreements({ params }) {
                 />
             </header>
             <IndexAgreements
-                lang={params.lang}
+                t={t}
                 agreementDataTranslation={agreementDataTranslation}
             />
         </>

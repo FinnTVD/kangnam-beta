@@ -1,31 +1,31 @@
 'use client'
 
 import useClickOutSide from '@/hooks/useClickOutSide'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const selectCategory = [
     {
         id: 1,
-        title: 'Mua Nhà',
+        title: 'Mua Bán',
     },
     {
         id: 2,
-        title: 'Bán Nhà',
-    },
-    {
-        id: 3,
         title: 'Thuê Nhà',
     },
     {
-        id: 4,
+        id: 3,
         title: 'Cho Thuê',
     },
     {
-        id: 5,
+        id: 4,
         title: 'Trở thành đối tác',
     },
+    {
+        id: 5,
+        title: 'Khác',
+    },
 ]
-export default function SelectCategory({ setValueCategory, valueCategory }) {
+export default function SelectCategory({ setValueCategory, valueCategory, setIsSubmit, isSubmit }) {
     const [isOpen, setIsOpen] = useState(false)
     const [sideRef, isOutSide] = useClickOutSide()
 
@@ -35,6 +35,7 @@ export default function SelectCategory({ setValueCategory, valueCategory }) {
 
     const handleChangeCategory = (e) => {
         setValueCategory(e?.title)
+        setIsSubmit(false)
     }
 
     return (
@@ -46,7 +47,9 @@ export default function SelectCategory({ setValueCategory, valueCategory }) {
             <div
                 ref={sideRef}
                 onClick={() => setIsOpen(!isOpen)}
-                className='w-full text-den07 title16-600-150 py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input font-normal border border-solid border-den03 focus:border-[#d6a279] flex justify-between items-center cursor-pointer relative max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14'
+                className={`${
+                    isSubmit ? 'border-red-400 text-red-400' : 'text-den07 border-den03'
+                } w-full title16-600-150 py-[1vw] px-[2vw] flex-1 rounded-[10vw] outline-none shadow-input font-normal border border-solid focus:border-[#d6a279] flex justify-between items-center cursor-pointer relative max-md:py-[4.27vw] max-md:px-[6.4vw] max-md:title-mb14-400-150 max-lg:title-tl14`}
             >
                 {valueCategory ? valueCategory : 'Hạng mục *'}
                 <svg

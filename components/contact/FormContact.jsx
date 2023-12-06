@@ -46,25 +46,6 @@ const listSocial = [
     },
 ]
 
-// const schema = yup
-//     .object({
-//         name: yup.string().required('Vui lòng điền họ tên!'),
-//         phone: yup
-//             .string()
-//             .test('is-number', 'Số điện thoại không hợp lệ!', (value) => {
-//                 if (value && isNaN(value)) {
-//                     return false
-//                 }
-//                 return true
-//             })
-//             .required('Vui lòng điền số điện thoại!'),
-//         email: yup
-//             .string()
-//             .required('Vui lòng điền email!')
-//             .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Email không hợp lệ!'),
-//     })
-//     .required()
-
 export default function FormContact({ dataInfo, t }) {
     const schema = yup
         .object({
@@ -86,6 +67,7 @@ export default function FormContact({ dataInfo, t }) {
         .required()
 
     const [valueCategory, setValueCategory] = useState('')
+    const [isSubmit, setIsSubmit] = useState(false)
     const [areaRef, heightArea, handleResizeHeight] = useResizeArea()
 
     const {
@@ -103,9 +85,14 @@ export default function FormContact({ dataInfo, t }) {
             return notifyError(res?.error)
         }
         notifySuccess()
+        reset()
+        setValueCategory('')
     }
 
     const onSubmit = (e) => {
+        if (!valueCategory) {
+            return setIsSubmit(true)
+        }
         const dataForm = {
             ...e,
             category: valueCategory,
@@ -113,9 +100,6 @@ export default function FormContact({ dataInfo, t }) {
         handlePostDataForm('/contact', dataForm)
     }
 
-    const linkHandler = (url) => {
-        window.open(url)
-    }
     let social
     if (dataInfo) {
         social = [
@@ -196,7 +180,7 @@ export default function FormContact({ dataInfo, t }) {
                                     viewBox='0 0 24 24'
                                     stroke-width='1.5'
                                     stroke='#57534E'
-                                    className='max-md:w-[5vw] max-md:h-[5vw] w-[1rem] h-[1rem] max-lg:w-[2.5rem] max-lg:h-[2.5rem]'
+                                    className='max-md:w-[5vw] max-md:h-[5vw] w-[1vw] h-[1vw] max-lg:w-[2.5vw] max-lg:h-[2.5vw]'
                                 >
                                     <path
                                         stroke-linecap='round'
@@ -268,6 +252,8 @@ export default function FormContact({ dataInfo, t }) {
                             <SelectCategory
                                 setValueCategory={setValueCategory}
                                 valueCategory={valueCategory}
+                                setIsSubmit={setIsSubmit}
+                                isSubmit={isSubmit}
                             />
                         </div>
                         <input
