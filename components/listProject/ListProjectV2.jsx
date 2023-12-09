@@ -173,27 +173,14 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             })
 
             mm.add('(min-width: 1024px)', () => {
-                // ScrollTrigger.create({
-                //     trigger: '#container_boxMap',
-                //     start: 'top top',
-                //     endTrigger: '#boxPagination',
-                //     end: 'top bottom',
-                //     pin: true,
-                //     onToggle: () => {
-                //         document.getElementById('boxMap').classList.toggle('active')
-                //     },
-                // })
-                const tl = gsap.timeline({
-                    paused: true,
-                    scrollTrigger: {
-                        trigger: '#container_boxMap',
-                        start: 'top top',
-                        endTrigger: '#boxPagination',
-                        end: 'top bottom',
-                        pin: true,
-                        onToggle: () => {
-                            document.getElementById('boxMap').classList.toggle('active')
-                        },
+                ScrollTrigger.create({
+                    trigger: '#container_boxMap',
+                    start: 'top top',
+                    endTrigger: '#boxPagination',
+                    end: 'top bottom',
+                    pin: true,
+                    onToggle: () => {
+                        document.getElementById('boxMap').classList.toggle('active')
                     },
                 })
             })
@@ -201,7 +188,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         return () => {
             ctx.revert()
         }
-    }, [])
+    }, [data])
 
     useEffect(() => {
         mutate(
