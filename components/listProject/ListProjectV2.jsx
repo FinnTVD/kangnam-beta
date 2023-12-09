@@ -191,7 +191,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                         endTrigger: '#boxPagination',
                         end: 'top bottom',
                         pin: true,
-                        markers: true,
                         onToggle: () => {
                             document.getElementById('boxMap').classList.toggle('active')
                         },
