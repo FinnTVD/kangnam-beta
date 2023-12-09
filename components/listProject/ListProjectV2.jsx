@@ -160,8 +160,8 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     )
 
     useEffect(() => {
+        let mm = gsap.matchMedia()
         let ctx = gsap.context(() => {
-            let mm = gsap.matchMedia()
             ScrollTrigger.create({
                 trigger: '#container_filter',
                 start: 'top top',
