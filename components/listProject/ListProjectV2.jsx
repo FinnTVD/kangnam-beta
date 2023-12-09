@@ -173,41 +173,31 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             })
 
             mm.add('(min-width: 1024px)', () => {
-                ScrollTrigger.create({
-                    trigger: '#container_boxMap',
-                    start: 'top top',
-                    endTrigger: '#boxPagination',
-                    end: 'bottom bottom',
-                    pin: true,
-                    onToggle: () => {
-                        document.getElementById('boxMap').classList.toggle('active')
+                // ScrollTrigger.create({
+                //     trigger: '#container_boxMap',
+                //     start: 'top top',
+                //     endTrigger: '#boxPagination',
+                //     end: 'top bottom',
+                //     pin: true,
+                //     onToggle: () => {
+                //         document.getElementById('boxMap').classList.toggle('active')
+                //     },
+                // })
+                const tl = gsap.timeline({
+                    paused: true,
+                    scrollTrigger: {
+                        trigger: '#container_boxMap',
+                        start: 'top top',
+                        endTrigger: '#boxPagination',
+                        end: 'top bottom',
+                        pin: true,
+                        markers: true,
+                        onToggle: () => {
+                            document.getElementById('boxMap').classList.toggle('active')
+                        },
                     },
                 })
             })
-
-            // if (window.innerWidth >= 1024) {
-
-            //     // const tl = gsap.timeline({
-            //     //     paused: true,
-            //     //     scrollTrigger: {
-            //     //         trigger: '#container_boxMap',
-            //     //         start: 'top top',
-            //     //         endTrigger: '#boxPagination',
-            //     //         end: 'bottom bottom',
-            //     //         pin: true,
-            //     //         markers: true,
-            //     //         // onEnter: () => {
-            //     //         //     const nav = document.querySelector('nav')
-            //     //         //     const boxMap = document.getElementById('boxMap')
-            //     //         //     boxMap.style.marginTop = nav.offsetHeight + 'px'
-            //     //         // },
-            //     //         // onLeave: () => {
-            //     //         //     const boxMap = document.getElementById('boxMap')
-            //     //         //     boxMap.style.marginTop = '0'
-            //     //         // },
-            //     //     },
-            //     // })
-            // }
         }, parentRef)
         return () => {
             ctx.revert()
