@@ -257,7 +257,11 @@
             "area": "Diện tích"
         },
         "filter1": {
-            "title": "Chọn loại hình bất động sản",
+            "propertyTypeIds": "Chọn loại hình bất động sản",
+            "propertyAreaTypeIds": "Chọn địa điểm bất động sản",
+            "propertyCategoryIds": "Chọn hình thức bất động sản",
+            "price": "Chọn nhanh khoảng giá",
+            "area": "Chọn nhanh diện tích",
             "reset": "Đặt lại",
             "cancel": "Hủy",
             "apply": "Áp dụng"

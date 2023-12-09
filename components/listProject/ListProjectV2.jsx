@@ -46,6 +46,18 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             slug: 'propertyAreaTypeIds',
             api: '/property-area-type',
         },
+        {
+            id: 4,
+            title: 'Khoảng giá',
+            slug: 'price',
+            api: '/price',
+        },
+        {
+            id: 5,
+            title: 'Diện tích',
+            slug: 'area',
+            api: '/area',
+        },
     ]
     const arrFilter1 = [
         {
@@ -147,24 +159,55 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         },
     )
 
-    useLayoutEffect(() => {
-        if (typeof window === 'undefined') return
+    useEffect(() => {
         let ctx = gsap.context(() => {
-            setTimeout(() => {
-                gsap.to('#boxRef-filter', {
-                    position: 'fixed',
-                    left: !isTablet ? '7.5vw' : isMobile ? '0' : '3.2vw',
-                    top: !isTablet ? '5.75vw' : isMobile ? '18.25vw' : '9.3vw',
-                    zIndex: '999999',
-                    background: 'white',
-                    scrollTrigger: {
-                        trigger: '#boxRef-filter',
-                        start: 'top top',
-                        end: 'bottom top',
-                        scrub: true,
+            let mm = gsap.matchMedia()
+            ScrollTrigger.create({
+                trigger: '#container_filter',
+                start: 'top top',
+                endTrigger: 'footer',
+                end: 'bottom top',
+                onToggle: () => {
+                    document.getElementById('boxRef-filter').classList.toggle('active')
+                },
+            })
+
+            mm.add('(min-width: 1024px)', () => {
+                ScrollTrigger.create({
+                    trigger: '#container_boxMap',
+                    start: 'top top',
+                    endTrigger: '#boxPagination',
+                    end: 'bottom bottom',
+                    pin: true,
+                    onToggle: () => {
+                        document.getElementById('boxMap').classList.toggle('active')
                     },
                 })
-            }, 500)
+            })
+
+            // if (window.innerWidth >= 1024) {
+
+            //     // const tl = gsap.timeline({
+            //     //     paused: true,
+            //     //     scrollTrigger: {
+            //     //         trigger: '#container_boxMap',
+            //     //         start: 'top top',
+            //     //         endTrigger: '#boxPagination',
+            //     //         end: 'bottom bottom',
+            //     //         pin: true,
+            //     //         markers: true,
+            //     //         // onEnter: () => {
+            //     //         //     const nav = document.querySelector('nav')
+            //     //         //     const boxMap = document.getElementById('boxMap')
+            //     //         //     boxMap.style.marginTop = nav.offsetHeight + 'px'
+            //     //         // },
+            //     //         // onLeave: () => {
+            //     //         //     const boxMap = document.getElementById('boxMap')
+            //     //         //     boxMap.style.marginTop = '0'
+            //     //         // },
+            //     //     },
+            //     // })
+            // }
         }, parentRef)
         return () => {
             ctx.revert()
@@ -188,15 +231,18 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         <section
             id='list-project'
             ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw] lg:min-h-screen'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw] lg:min-h-screen overflow-hidden'
         >
-            <div className='flex justify-between w-full'>
+            <div className='flex justify-between w-full h-fit'>
                 <div
                     className={`${
                         show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'
-                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw]`}
+                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw] h-fit`}
                 >
-                    <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
+                    <div
+                        id='container_filter'
+                        className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}
+                    >
                         <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
                                 <span className='opacity-50 text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
@@ -211,7 +257,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                             id='boxRef-filter'
                             className={`${
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
-                            } max-md:pl-0 max-md:ml-[2.67vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
+                            } max-md:pl-0 max-md:ml-[2.67vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
@@ -430,19 +476,21 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                         />
                     </div>
                 </div>
-                <div className='max-lg:hidden'>
+                <div
+                    id='container_boxMap'
+                    className='max-lg:hidden'
+                >
                     <div
                         id='boxMap'
                         className={`${
                             !show ? 'hidden' : ''
-                        } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
+                        } w-[35.3125vw] z-[99999] relative h-screen rounded-tl-[0.5vw] overflow-hidden transition-all duration-200`}
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                             {/* <MapV3 /> */}
                             <MapV5 dataSlug={dataSlug} />
                         </div>
                     </div>
-                    <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
                 </div>
             </div>
             {isTablet && <BtnShowMap t={t} />}

@@ -87,6 +87,18 @@ const arrFilter = [
         slug: 'propertyCategoryIds',
         api: '/property-category',
     },
+    {
+        id: 4,
+        title: 'Khoảng giá',
+        slug: 'price',
+        api: '/price',
+    },
+    {
+        id: 5,
+        title: 'Diện tích',
+        slug: 'area',
+        api: '/area',
+    },
 ]
 const arrFilterV2 = [
     {
@@ -100,6 +112,18 @@ const arrFilterV2 = [
         title: 'Địa điểm',
         slug: 'propertyAreaTypeIds',
         api: '/property-area-type',
+    },
+    {
+        id: 4,
+        title: 'Khoảng giá',
+        slug: 'price',
+        api: '/price',
+    },
+    {
+        id: 5,
+        title: 'Diện tích',
+        slug: 'area',
+        api: '/area',
     },
 ]
 const handleCheckIsHome = (pathName) => {
@@ -214,6 +238,115 @@ const preventRefreshSwr = {
 //     revalidateIfStale: false,
 // }
 
+const listPriceHire = [
+    {
+        title: '< 10',
+        min: 0,
+        max: 10,
+    },
+    {
+        title: '10 - 20',
+        min: 10,
+        max: 20,
+    },
+    {
+        title: '20 - 30',
+        min: 20,
+        max: 30,
+    },
+    {
+        title: '30 - 40',
+        min: 30,
+        max: 40,
+    },
+    {
+        title: '40 - 50',
+        min: 40,
+        max: 50,
+    },
+    {
+        title: '100+',
+        min: 100,
+        max: 100,
+    },
+]
+const listPriceResale = [
+    {
+        title: '< 2',
+        min: 0,
+        max: 2,
+    },
+    {
+        title: '2 - 5',
+        min: 2,
+        max: 5,
+    },
+    {
+        title: '5 - 10',
+        min: 5,
+        max: 10,
+    },
+    {
+        title: '10 - 15',
+        min: 10,
+        max: 15,
+    },
+    {
+        title: '15 - 20',
+        min: 15,
+        max: 20,
+    },
+    {
+        title: '20+',
+        min: 20,
+        max: 20,
+    },
+]
+
+const listAreaProject = [
+    {
+        title: '< 30',
+        min: 0,
+        max: 30,
+    },
+    {
+        title: '30 - 50',
+        min: 30,
+        max: 50,
+    },
+    {
+        title: '50 - 70',
+        min: 50,
+        max: 70,
+    },
+    {
+        title: '70 - 100',
+        min: 70,
+        max: 100,
+    },
+    {
+        title: '100 - 150',
+        min: 100,
+        max: 150,
+    },
+    {
+        title: '150 - 200',
+        min: 150,
+        max: 200,
+    },
+    {
+        title: '200 - 250',
+        min: 200,
+        max: 250,
+    },
+    {
+        title: '250+',
+        min: 250,
+        max: 250,
+    },
+]
+const listSlugNavHire = ['thue', '임대아파트', 'hire', '赁赁']
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -242,4 +375,8 @@ export {
     renderAddress,
     renderHref,
     preventRefreshSwr,
+    listPriceHire,
+    listSlugNavHire,
+    listPriceResale,
+    listAreaProject,
 }
