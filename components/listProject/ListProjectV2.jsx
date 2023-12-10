@@ -78,6 +78,18 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             slug: 'propertyCategoryIds',
             api: '/property-category',
         },
+        {
+            id: 4,
+            title: 'Khoảng giá',
+            slug: 'price',
+            api: '/price',
+        },
+        {
+            id: 5,
+            title: 'Diện tích',
+            slug: 'area',
+            api: '/area',
+        },
     ]
     const parentRef = useRef(null)
     const isTablet = useMediaQuery({
@@ -167,8 +179,11 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                 start: 'top top',
                 endTrigger: 'footer',
                 end: 'bottom top',
-                onToggle: () => {
-                    document.getElementById('boxRef-filter').classList.toggle('active')
+                onEnter: () => {
+                    document.getElementById('boxRef-filter').classList.add('active')
+                },
+                onLeave: () => {
+                    document.getElementById('boxRef-filter').classList.remove('active')
                 },
             })
 
@@ -179,8 +194,11 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                     endTrigger: '#boxPagination',
                     end: 'top bottom',
                     pin: true,
-                    onToggle: () => {
-                        document.getElementById('boxMap').classList.toggle('active')
+                    onEnter: () => {
+                        document.getElementById('boxMap').classList.add('active')
+                    },
+                    onLeave: () => {
+                        document.getElementById('boxMap').classList.remove('active')
                     },
                 })
             })
