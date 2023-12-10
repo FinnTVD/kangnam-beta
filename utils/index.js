@@ -8,8 +8,8 @@ const handleCheckParamsLanguage = (lang, href) => {
             return '/en' + href
         case 'kr':
             return '/kr' + href
-        case 'ch':
-            return '/ch' + href
+        case 'cn':
+            return '/cn' + href
         default:
             return '/'
     }
@@ -33,7 +33,7 @@ const handleCheckLangCode = (lang) => {
             return 'en_US'
         case 'kr':
             return 'ko_KR'
-        case 'ch':
+        case 'cn':
             return 'zh_CN'
         default:
             return 'vi_VN'
@@ -134,7 +134,7 @@ const handleCheckIsHome = (pathName) => {
             return true
         case '/kr':
             return true
-        case '/ch':
+        case '/cn':
             return true
         default:
             return false
@@ -199,8 +199,7 @@ const latDefault = 21.028354507000074
 
 const renderTitle = (e, lang, message) => {
     return (
-        e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-            ?.name ||
+        e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang))?.name ||
         e?.translations[0]?.name ||
         message ||
         'Chưa có thông tin!'
@@ -213,12 +212,10 @@ const renderAddress = (e) => {
 const renderHref = (e, lang) => {
     return (
         (lang === 'vi' ? '' : lang + '/') +
-        (e?.propertyCategory?.translations?.find((e) =>
-            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-        )?.alias || 'du-an') +
+        (e?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias ||
+            'du-an') +
         '/' +
-        (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))?.slug ||
-            e?.translations[0]?.slug)
+        (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug || e?.translations[0]?.slug)
     )
 }
 

@@ -16,19 +16,19 @@ const objProject = {
         },
         {
             languageCode: 'en_US',
-            alias: 'du-an',
+            alias: 'projects',
             name: 'Project',
             propertyCategoryId: '',
         },
         {
             languageCode: 'zh_CN',
-            alias: 'du-an',
+            alias: '프로젝트',
             name: 'Project',
             propertyCategoryId: '',
         },
         {
             languageCode: 'ko_KR',
-            alias: 'du-an',
+            alias: '분양',
             name: 'Project',
             propertyCategoryId: '',
         },
@@ -101,11 +101,7 @@ const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
                                 menu ? 'title-mb12-400-130' : 'title-mb14-400-130'
                             } py-[0.5vw] max-md:py-[1.5vw] max-md:px-[3vw] px-[1vw] hover:bg-[#f3f4f7] title-tl12-400-130`}
                         >
-                            {
-                                e?.translations?.find((i) =>
-                                    i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                )?.name
-                            }
+                            {e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name}
                         </li>
                     ))}
             </ul>

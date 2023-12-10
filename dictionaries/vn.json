@@ -188,7 +188,7 @@
             }
         },
         "section3": {
-            "title": "Dự án của chúng tôi",
+            "title": "Bất động sản của chúng tôi",
             "showMap": "Hiển thị bản đồ",
             "button": "Xem tất cả"
         },
@@ -245,12 +245,15 @@
     "projects": {
         "subtitle": "100% xác thực",
         "title": "Mua bán nhà đất căn hộ",
+        "titleH": "Thuê nhà đất căn hộ",
+        "titleP": "Tất cả các dự án",
         "map": "Bản đồ",
         "category": "Loại hình",
         "address": "Địa điểm",
         "show": "Hiển thị",
         "over": "trong số hơn",
         "validateProject": "nhà đất xác thực",
+        "validateIsProject": "dự án xác thực",
         "item": {
             "address": "Địa chỉ",
             "price": "Mức giá",
@@ -473,7 +476,9 @@
     },
     "relatedProjects": {
         "subtitle": "Danh sách bất động sản",
+        "subtitleP": "Danh sách dự án",
         "title": "Bất động sản liên quan",
+        "titleP": "Dự án cùng khu vực",
         "item": {
             "title1": "Địa chỉ",
             "title2": "Diện tích",

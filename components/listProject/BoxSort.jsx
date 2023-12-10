@@ -1,26 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-// const arrFilter = [
-//     {
-//         title: 'Mới nhất',
-//         value: 'new',
-//     },
-//     {
-//         title: 'Giá tăng dần',
-//         value: 'ASC',
-//     },
-//     {
-//         title: 'Giá giảm dần',
-//         value: 'DESC',
-//     },
-// ]
-
-// const handleCheckStatusPrice = (price = '') => {
-//     if (!price) return arrFilter[0]?.title
-//     const a = arrFilter?.filter((e) => e?.value === price)
-//     return a[0]?.title
-// }
 
 export default function BoxSort({ price, createQueryString, pathName, router, t }) {
     const arrFilter = [

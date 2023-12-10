@@ -12,7 +12,7 @@ const handleCheckCountry = (locale) => {
             return 'English'
         case 'kr':
             return 'Korea'
-        case 'ch':
+        case 'cn':
             return 'China'
         default:
             break
@@ -27,7 +27,7 @@ const handleCheckIcon = (locale) => {
             return '/images/english.svg'
         case 'kr':
             return '/images/korea.svg'
-        case 'ch':
+        case 'cn':
             return '/images/china.svg'
         default:
             break

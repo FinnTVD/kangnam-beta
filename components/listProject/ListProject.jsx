@@ -20,19 +20,19 @@ import { findIdByAlias, handleCheckLangCode } from '@/utils'
 import IconCurrency from '../icons/IconCurrency'
 import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
-const MapV5 = dynamic(() => import('../home/MapV2/MapV5'))
+const MapV6 = dynamic(() => import('../home/MapV2/MapV6'))
 
-const slugProject = ['/du-an', '/projects', '/분양', '/프로젝트']
+// const slugProject = ['/du-an', '/projects', '/분양', '/프로젝트']
 
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
-let propertyCategoryTypeParams = ''
+
 gsap.registerPlugin(ScrollTrigger)
 
-export default function ListProjectV2({ lang, t, dataSlug }) {
+export default function ListProject({ lang, t, dataSlug }) {
     const arrFilter = [
         {
             id: 1,
@@ -59,38 +59,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             api: '/area',
         },
     ]
-    const arrFilter1 = [
-        {
-            id: 1,
-            title: t?.projects?.category,
-            slug: 'propertyTypeIds',
-            api: '/property-type',
-        },
-        {
-            id: 2,
-            title: t?.projects?.address,
-            slug: 'propertyAreaTypeIds',
-            api: '/property-area-type',
-        },
-        {
-            id: 3,
-            title: 'Hình thức',
-            slug: 'propertyCategoryIds',
-            api: '/property-category',
-        },
-        {
-            id: 4,
-            title: 'Khoảng giá',
-            slug: 'price',
-            api: '/price',
-        },
-        {
-            id: 5,
-            title: 'Diện tích',
-            slug: 'area',
-            api: '/area',
-        },
-    ]
+
     const parentRef = useRef(null)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
@@ -110,7 +79,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
-    const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
 
     const createQueryString = useCallback(
         (name, value) => {
@@ -144,25 +112,12 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         propertyAreaTypeParams = ''
     }
 
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
-            scroll: false,
-        })
-    } else {
-        propertyCategoryTypeParams = ''
-    }
-
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
-            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-            price ? '&price=' + price : ''
-        }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
-            wardId ? '&wardId=' + wardId : ''
-        }`,
+        `${process.env.NEXT_PUBLIC_API}/project?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
+            propertyAreaTypeParams ? propertyAreaTypeParams : ''
+        }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
+            cityId ? '&cityId=' + cityId : ''
+        }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -215,16 +170,26 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(
+            `${process.env.NEXT_PUBLIC_API}/project?page=${page ? page : 1}&take=24${findIdByAlias(
                 pathName,
                 dataSlug,
-            )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
-                cityId ? '&cityId=' + cityId : ''
-            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+            )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                price ? '&price=' + price : ''
+            }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
+                wardId ? '&wardId=' + wardId : ''
+            }`,
         )
     }, [lang, searchParams])
+
+    const handleOpenDate = (date) => {
+        const dateNew = new Date(date)
+        const dateNow = new Date()
+        if (dateNow >= dateNew) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     return (
         <section
@@ -248,7 +213,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                     {t?.projects?.subtitle}
                                 </span>
                                 <h3 className='text-den title32-800-130 max-md:title-mb25-700-130 max-md:-tracking-[1.25px] max-lg:title-tl32'>
-                                    {t?.projects?.title}
+                                    {t?.projects?.titleP}
                                 </h3>
                             </div>
                         </div>
@@ -259,7 +224,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                             } max-md:pl-0 max-md:ml-[2.67vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
                             <BoxFilterV2
-                                arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
+                                arrFilter={arrFilter}
                                 t={t}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
@@ -283,7 +248,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                         {data?.meta?.itemCount > data?.meta?.take
                                             ? data?.meta?.take
                                             : data?.meta?.itemCount}{' '}
-                                        <span className='max-md:hidden'>{t?.projects?.validateProject}</span>
+                                        <span className='max-md:hidden'>{t?.projects?.validateIsProject}</span>
                                     </span>
                                 </div>
                                 <BoxSort
@@ -367,7 +332,16 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                             )?.name || 'Dự án'}
                                         </div>
                                     </div>
-                                    <div className='pt-[1.13vw] max-md:pt-[6.4vw]'>
+                                    <div className='pt-[0.5vw] max-md:pt-[6.4vw]'>
+                                        <div
+                                            className={`${
+                                                handleOpenDate(e?.openDate)
+                                                    ? 'bg-[#E7FFF4] text-[#07A35D]'
+                                                    : 'bg-gray-300 text-gray-800'
+                                            } rounded-md p-[0.5vw] w-fit mb-[0.613vw]`}
+                                        >
+                                            {handleOpenDate(e?.openDate) ? 'Đang mở bán' : 'Sắp mở bán'}
+                                        </div>
                                         <h6
                                             title={
                                                 e?.translations?.find((e) =>
@@ -476,7 +450,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                             {/* <MapV3 /> */}
-                            <MapV5 dataSlug={dataSlug} />
+                            <MapV6 dataSlug={dataSlug} />
                         </div>
                     </div>
                 </div>

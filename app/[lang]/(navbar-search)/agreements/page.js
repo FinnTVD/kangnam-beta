@@ -56,7 +56,7 @@ export default async function Agreements({ params }) {
     if (agreementData) {
         agreementData?.data?.forEach((item) => {
             item?.translations?.forEach((itm) => {
-                if (itm?.languageCode?.toLowerCase()?.includes(params.lang === 'ch' ? 'cn' : params.lang))
+                if (itm?.languageCode?.toLowerCase()?.includes(params.lang))
                     agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug, description: itm?.description })
             })
         })

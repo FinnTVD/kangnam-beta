@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useRef, memo, useCallback } from 'react'
+import { useEffect, useState, memo, useCallback } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
 import useSWR from 'swr'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -13,7 +13,6 @@ import {
     levelZoomDistrictDefault,
     levelZoomWardDefault,
     lngDefault,
-    slugProject,
 } from '@/utils'
 import * as vietmapgl from '/public/js/vietmap-gl.js'
 
@@ -167,13 +166,12 @@ const handleGeoWKT = (str) => {
 
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
-let propertyCategoryTypeParams = ''
 
 let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV5 = ({ lang, dataSlug = '' }) => {
+const MapV6 = ({ lang, dataSlug = '' }) => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -235,30 +233,19 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         propertyAreaTypeParams = ''
     }
 
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
-            scroll: false,
-        })
-    } else {
-        propertyCategoryTypeParams = ''
-    }
-
     // get list provinces count
     const {
         data: dataProvinces,
         error: errorProvinces,
         isLoading: isLoadingProvinces,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address`, fetcher)
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/project/project-by-address`, fetcher)
 
     // get list district count
     const {
         data: dataDistrict,
         error: errorDistrict,
         isLoading: isLoadingDistrict,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || cityIdDefault}`, fetcher)
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/project/project-by-address?cityId=${cityId || cityIdDefault}`, fetcher)
 
     // get list ward count
     const {
@@ -266,7 +253,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         error: errorWard,
         isLoading: isLoadingWard,
     } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId}&districtId=${districtId}`,
+        `${process.env.NEXT_PUBLIC_API}/project/project-by-address?cityId=${cityId}&districtId=${districtId}`,
         fetcher,
     )
 
@@ -373,13 +360,11 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
         const callApi = async () => {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${cityId || cityIdDefault}${
+                `${process.env.NEXT_PUBLIC_API}/project/project-by-address?cityId=${cityId || cityIdDefault}${
                     districtId ? '&districtId=' + districtId : ''
                 }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
-                    propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-                }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
-                    propertyTypeParams ? propertyTypeParams : ''
-                }`,
+                    propertyAreaTypeParams ? propertyAreaTypeParams : ''
+                }${propertyTypeParams ? propertyTypeParams : ''}`,
             )
             const data = await res.json() //data marker
             if (data && typeof mapRef?.getZoom === 'function') {
@@ -460,14 +445,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         propertyAreaTypeParams = ''
     }
 
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-    } else {
-        propertyCategoryTypeParams = ''
-    }
-
     //function add border
     const addGeojsonLine = (dataPolygon) => {
         if (!dataPolygon || !mapRef) return
@@ -501,7 +478,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
     //call data + add marker detail project
     const callDataAddressDetail = async (e) => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property/property-by-refid/${e?.id}`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/projcet/projcet-by-refid/${e?.id}`)
         const data = await res.json()
         if (!data) return
         if (Array.isArray(data) && data?.length) {
@@ -551,11 +528,11 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
 
     const callDataPopup = async (listMarker) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?take=50&cityId=${cityId || cityIdDefault}${
+            `${process.env.NEXT_PUBLIC_API}/project?take=50&cityId=${cityId || cityIdDefault}${
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
-                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+                propertyAreaTypeParams ? propertyAreaTypeParams : ''
+            }${propertyTypeParams ? propertyTypeParams : ''}`,
         )
         const data = await res.json() // data popup
         if (!data) return
@@ -720,4 +697,4 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         </div>
     )
 }
-export default memo(MapV5)
+export default memo(MapV6)

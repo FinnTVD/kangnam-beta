@@ -68,8 +68,7 @@ export default function InputCheckBox({ e, lang, lh, index }) {
                 htmlFor={e?.id}
                 onClick={handleToggle}
             >
-                {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-                    ?.name || e?.title}
+                {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name || e?.title}
             </span>
         </div>
     )

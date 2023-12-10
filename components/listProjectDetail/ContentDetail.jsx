@@ -14,7 +14,26 @@ const handleCheckStatus = (alias) => {
     return ''
 }
 
-export default function ContentDetail({ data, detail, lang, t }) {
+const slugProjectLang = [
+    {
+        code: 'vi',
+        title: 'Dự án',
+    },
+    {
+        code: 'en',
+        title: 'Project',
+    },
+    {
+        code: 'kr',
+        title: '분양',
+    },
+    {
+        code: 'cn',
+        title: '프로젝트',
+    },
+]
+
+export default function ContentDetail({ data, detail, lang, t, isProject }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -30,11 +49,11 @@ export default function ContentDetail({ data, detail, lang, t }) {
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
                 <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
                     Trang chủ /{' '}
-                    {
-                        data?.propertyCategory?.translations?.find((e) =>
-                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                        )?.name
-                    }
+                    {isProject
+                        ? slugProjectLang?.find((e) => e?.code === lang)?.title
+                        : data?.propertyCategory?.translations?.find((e) =>
+                              e?.languageCode?.toLowerCase()?.includes(lang),
+                          )?.name}
                 </span>
                 <span className='title16-600-150 text-den max-md:hidden max-lg:title-tl14'> / {dataDetail?.name}</span>
                 <address className='not-italic title16-600-150 title-tl14 title-mb14-400-150 text-den lg:mb-[1vw] md:hidden max-md:opacity-50'>

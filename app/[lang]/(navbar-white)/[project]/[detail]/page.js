@@ -1,6 +1,6 @@
 import { getDictionary } from '@/app/[lang]/dictionaries'
 import IndexProjectDetail from '@/components/listProjectDetail'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, slugProject } from '@/utils'
 import getData from '@/utils/getData'
 export async function generateMetadata({ params: { lang, detail } }) {
     const data = await getData(`/property/property-by-slug/${detail}`)
@@ -41,14 +41,15 @@ export async function generateMetadata({ params: { lang, detail } }) {
         },
     }
 }
-export default async function DetailPage({ params: { lang, detail } }) {
+export default async function DetailPage({ params: { lang, detail, project } }) {
     const t = await getDictionary(lang)
-
+    const isProject = slugProject?.join('')?.includes(project)
     return (
         <IndexProjectDetail
             lang={lang}
             detail={detail}
             t={t}
+            isProject={isProject}
         />
     )
 }
