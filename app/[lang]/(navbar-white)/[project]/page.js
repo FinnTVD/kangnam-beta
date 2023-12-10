@@ -11,6 +11,7 @@ export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.project?.title,
         description: t?.metaData?.project?.description,
         keywords: ['KANGNAM', 'kangnam', 'Bất động sản', 'Mua nhà'],

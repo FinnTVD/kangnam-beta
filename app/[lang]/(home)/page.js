@@ -9,6 +9,7 @@ export async function generateMetadata({ params: { lang } }) {
 
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.homepage?.title,
         description: t?.metaData?.homepage?.description,
         applicationName: process.env.SITE_NAME,

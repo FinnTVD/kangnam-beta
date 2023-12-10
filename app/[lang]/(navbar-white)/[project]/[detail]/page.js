@@ -7,6 +7,7 @@ export async function generateMetadata({ params: { lang, detail } }) {
     if (!data) return
     const dataDetail = data?.translations?.find((e) => e?.slug === detail)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: dataDetail?.titleSeo || 'Detail Project',
         description: dataDetail?.descSeo,
         applicationName: process.env.SITE_NAME,

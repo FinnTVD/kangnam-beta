@@ -47,8 +47,16 @@ const avertaStdCY = localFont({
     display: 'swap',
 })
 
-export const metadata = {
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=1', // <-- now here
+// export const metadata = {
+//     viewport: 'width=device-width, initial-scale=1, maximum-scale=1', // <-- now here
+// }
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    // Also supported by less commonly used
+    // interactiveWidget: 'resizes-visual',
 }
 
 export default async function RootLayout({ children, params }) {

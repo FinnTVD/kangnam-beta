@@ -9,6 +9,7 @@ export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.news?.title,
         description: t?.metaData?.news?.description,
         keywords: ['KANGNAM', 'kangnam', 'Bất động sản', 'Mua nhà'],
@@ -62,7 +63,7 @@ export default async function News({ params: { lang } }) {
             <IndexNews
                 t={t}
                 lang={lang}
-            ></IndexNews>
+            />
         </>
     )
 }
