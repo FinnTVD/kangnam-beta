@@ -78,6 +78,18 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             slug: 'propertyCategoryIds',
             api: '/property-category',
         },
+        {
+            id: 4,
+            title: 'Khoảng giá',
+            slug: 'price',
+            api: '/price',
+        },
+        {
+            id: 5,
+            title: 'Diện tích',
+            slug: 'area',
+            api: '/area',
+        },
     ]
     const parentRef = useRef(null)
     const isTablet = useMediaQuery({
