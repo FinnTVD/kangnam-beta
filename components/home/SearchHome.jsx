@@ -83,9 +83,8 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                             <Image
                                 src={e?.icon || '/images/px.png'}
                                 alt={
-                                    e?.translations?.find((i) =>
-                                        i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                    )?.name || e?.title
+                                    e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))
+                                        ?.name || e?.title
                                 }
                                 width={40}
                                 height={40}
@@ -93,9 +92,8 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                                 className='object-cover transition-all duration-150 group-hover:scale-125 w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                             />
                             <span className='text-white title14-400-150 title-mb12-400-150 inline-flex relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left max-lg:whitespace-nowrap'>
-                                {e?.translations?.find((i) =>
-                                    i?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                )?.name || e?.title}
+                                {e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name ||
+                                    e?.title}
                             </span>
                         </div>
                     ))}

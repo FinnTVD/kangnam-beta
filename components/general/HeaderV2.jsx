@@ -18,7 +18,7 @@ const isCheckPathName = (pathName) => {
             return true
         case '/kr':
             return true
-        case '/ch':
+        case '/cn':
             return true
         default:
             return false

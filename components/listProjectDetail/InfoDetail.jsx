@@ -26,7 +26,7 @@ export default function InfoDetail({ data, lang, dataDetail, t }) {
                         <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
                             {
                                 data?.propertyType?.translations?.find((e) =>
-                                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                 )?.name
                             }
                         </span>

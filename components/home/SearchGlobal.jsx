@@ -139,9 +139,7 @@ const SearchGlobal = ({
             if (isCheck) {
                 router.push(
                     '/' +
-                        listData[0]?.translations?.find((e) =>
-                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                        )?.alias +
+                        listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
                         paramNew.toString(),
                     {
@@ -191,9 +189,8 @@ const SearchGlobal = ({
         //delete marker before fly to city other
         if (
             !pathName?.includes(
-                data?.data?.find((e) =>
-                    e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang)),
-                )?.alias,
+                data?.data?.find((e) => e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang)))
+                    ?.alias,
             ) &&
             !slugProject?.find((e) => e === pathName)
         ) {
@@ -204,9 +201,7 @@ const SearchGlobal = ({
             isCheck &&
                 router.push(
                     '/' +
-                        listData[0]?.translations?.find((e) =>
-                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                        )?.alias +
+                        listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
                         paramNew.toString(),
                     {
@@ -264,11 +259,8 @@ const SearchGlobal = ({
             }
             if (
                 !pathName?.includes(
-                    data?.data?.find((e) =>
-                        e?.translation?.find((i) =>
-                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
-                        ),
-                    )?.alias,
+                    data?.data?.find((e) => e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang)))
+                        ?.alias,
                 ) &&
                 !slugProject?.find((e) => e === pathName)
             ) {
@@ -279,9 +271,8 @@ const SearchGlobal = ({
                 isCheck &&
                     router.push(
                         '/' +
-                            listData[0]?.translations?.find((e) =>
-                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                            )?.alias +
+                            listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                ?.alias +
                             '?' +
                             paramNew.toString(),
                         {
@@ -315,11 +306,8 @@ const SearchGlobal = ({
             }
             if (
                 !pathName?.includes(
-                    data?.data?.find((e) =>
-                        e?.translation?.find((i) =>
-                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
-                        ),
-                    )?.alias,
+                    data?.data?.find((e) => e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang)))
+                        ?.alias,
                 ) &&
                 !slugProject?.find((e) => e === pathName)
             ) {
@@ -331,9 +319,8 @@ const SearchGlobal = ({
                 isCheck &&
                     router.push(
                         '/' +
-                            listData[0]?.translations?.find((e) =>
-                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                            )?.alias +
+                            listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                ?.alias +
                             '?' +
                             paramNew.toString(),
                         {
@@ -360,9 +347,8 @@ const SearchGlobal = ({
         const paramNew = new URLSearchParams(searchParams)
         if (
             !pathName?.includes(
-                data?.data?.find((e) =>
-                    e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang)),
-                )?.alias,
+                data?.data?.find((e) => e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang)))
+                    ?.alias,
             ) &&
             !slugProject?.find((e) => e === pathName)
         ) {
@@ -383,9 +369,7 @@ const SearchGlobal = ({
             handleCheckPage(pathName, listData) &&
                 router.push(
                     '/' +
-                        listData[0]?.translations?.find((e) =>
-                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                        )?.alias +
+                        listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
                         paramNew.toString(),
                     {
@@ -480,9 +464,7 @@ const SearchGlobal = ({
                             if (
                                 pathName?.includes(
                                     data?.data?.find((e) =>
-                                        e?.translation?.find((i) =>
-                                            i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
-                                        ),
+                                        e?.translation?.find((i) => i?.languageCode?.toLowerCase?.includes(lang)),
                                     )?.alias,
                                 ) ||
                                 slugProject?.find((e) => e === pathName)
@@ -527,9 +509,8 @@ const SearchGlobal = ({
                                     <li
                                         className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         title={
-                                            e?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                            )?.name || e?.translations[0]?.name
+                                            e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                                ?.name || e?.translations[0]?.name
                                         }
                                         onClick={() => {
                                             handleSelectValueProject(e)
@@ -538,9 +519,8 @@ const SearchGlobal = ({
                                         }}
                                         key={index}
                                     >
-                                        {e?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.name || e?.translations[0]?.name}
+                                        {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                            ?.name || e?.translations[0]?.name}
                                     </li>
                                 ))}
                             {Array.isArray(dataProjectCode?.data) && (
@@ -552,26 +532,22 @@ const SearchGlobal = ({
                                     <li
                                         className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         title={
-                                            e?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                            )?.name || e?.translations[0]?.name
+                                            e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                                ?.name || e?.translations[0]?.name
                                         }
                                         onClick={() => {
                                             setIsClose(true)
                                             handleSelectValueProject(e)
                                             setSelectSearch(
                                                 e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name || e?.translations[0]?.name,
                                             )
                                         }}
                                         key={index}
                                     >
-                                        {e?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.name || e?.translations[0]?.name}
+                                        {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                            ?.name || e?.translations[0]?.name}
                                     </li>
                                 ))}
                         </ul>

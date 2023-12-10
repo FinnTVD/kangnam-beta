@@ -57,7 +57,7 @@ export default function Hiring({ lang, t, data }) {
                                     />
                                     <div className='block absolute rounded-[1vw] bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit max-md:title-mb10-600-150'>
                                         {e?.propertyCategory?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            e?.languageCode?.toLowerCase()?.includes(lang),
                                         )?.name || 'Dự án'}
                                     </div>
                                 </div>

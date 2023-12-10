@@ -7,21 +7,15 @@ import Link from 'next/link'
 
 const handleRenderItem = (data, lang) => {
     if (!data) return
-    let alias = data?.propertyCategory?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.alias
-    let slug = data?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.slug
+    let alias = data?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias
+    let slug = data?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug
     // return `/${alias || '/projects'}/${slug || data?.translations[0]?.slug}`
     return `/${alias || '/projects'}`
 }
 
 const handleTitle = (data, lang) => {
     if (!data) return
-    let title = data?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.name
+    let title = data?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name
     return title || data?.translations[0]?.name
 }
 export default function SlideProjectProminent({ lang, dataHomePage }) {
@@ -90,9 +84,7 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                                         <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>
                                             {
                                                 e?.translations?.find((i) =>
-                                                    i?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    i?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.priceDisplay
                                             }
                                         </span>

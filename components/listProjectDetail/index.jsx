@@ -6,8 +6,8 @@ import RelatedProject from './RelatedProject'
 import NavBarV2 from '../general/NavBarV2'
 import NotFound from '@/app/[lang]/not-found'
 
-export default async function IndexProjectDetail({ lang, detail, t }) {
-    const data = await getData(`/property/property-by-slug/${detail}`)
+export default async function IndexProjectDetail({ lang, detail, t, isProject }) {
+    const data = await getData(`${isProject ? '/project/project-by-slug/' : '/property/property-by-slug/'}${detail}`)
 
     return (
         <>
@@ -27,13 +27,14 @@ export default async function IndexProjectDetail({ lang, detail, t }) {
                         detail={detail}
                         lang={lang}
                         t={t}
+                        isProject={isProject}
                     />
                     <CommentFB data={data} />
                     <RelatedProject
                         lang={lang}
-                        detail={detail}
                         data={data}
                         t={t}
+                        isProject={isProject}
                     />
                 </main>
             )}

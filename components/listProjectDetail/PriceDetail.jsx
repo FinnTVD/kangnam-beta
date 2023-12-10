@@ -8,7 +8,7 @@ const handleCheckCode = (lang) => {
             return 'USD'
         case 'kr':
             return 'KRW'
-        case 'ch':
+        case 'cn':
             return 'CNY'
         default:
             return 'VND'

@@ -226,9 +226,7 @@ export default function MyProjectV2({ lang, t }) {
                                             src={e?.firstImage || '/images/itemproject.jpg'}
                                             alt={
                                                 e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name ||
                                                 e?.translations[0]?.name ||
                                                 'thumbnail project'
@@ -238,7 +236,7 @@ export default function MyProjectV2({ lang, t }) {
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
                                             {e?.propertyCategory?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name || 'Dự án'}
                                         </div>
                                     </div>
@@ -268,14 +266,10 @@ export default function MyProjectV2({ lang, t }) {
                                         <div
                                             title={
                                                 e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.size
                                                     ? e?.translations?.find((e) =>
-                                                          e?.languageCode
-                                                              ?.toLowerCase()
-                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                          e?.languageCode?.toLowerCase()?.includes(lang),
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
@@ -293,14 +287,10 @@ export default function MyProjectV2({ lang, t }) {
                                             </span>
                                             <span className=' text-den title14-400-150 line-clamp-1'>
                                                 {e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.size
                                                     ? e?.translations?.find((e) =>
-                                                          e?.languageCode
-                                                              ?.toLowerCase()
-                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                          e?.languageCode?.toLowerCase()?.includes(lang),
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
@@ -321,9 +311,7 @@ export default function MyProjectV2({ lang, t }) {
                                             </span>
                                             <span className='capitalize text-den title14-400-150'>
                                                 {e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.priceDisplay || 'Chưa có thông tin!'}
                                             </span>
                                         </div>
