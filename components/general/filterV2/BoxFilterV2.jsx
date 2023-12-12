@@ -4,18 +4,25 @@ import { useState } from 'react'
 import ItemFilterV2 from './ItemFilterV2'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname } from 'next/navigation'
-import { listSlugNavHire } from '@/utils'
+import { listSlugNavHire, slugProject } from '@/utils'
 import ItemRangeV2 from './ItemRangeV2'
+import ItemFilterStatus from './ItemFilterStatus'
+import ItemFilterOther from './ItemFilterOther'
 
-export default function BoxFilterV2({ arrFilter, lang, t }) {
+export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = false }) {
     const [indexFilter, setIndexFilter] = useState(null)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const pathName = usePathname()
-    let isHire
+    let isHire = false
+    let isProject = false
     listSlugNavHire.forEach((e) => {
         if (pathName.includes(e)) {
-            isHire = true
-            return
+            return (isHire = true)
+        }
+    })
+    slugProject.forEach((e) => {
+        if (pathName?.includes(e)) {
+            return (isProject = true)
         }
     })
     const handleCheckPriceAndArea = (slug) => {
@@ -40,6 +47,19 @@ export default function BoxFilterV2({ arrFilter, lang, t }) {
                             t={t}
                             isHire={isHire}
                             isPrice={e?.slug?.includes('price')}
+                            isProject={isProject}
+                            isHome={isHome}
+                        />
+                    ) : e?.slug?.includes('status') ? (
+                        <ItemFilterStatus
+                            key={index}
+                            index={index}
+                            item={e}
+                            setIndexFilter={setIndexFilter}
+                            indexFilter={indexFilter}
+                            lang={lang}
+                            isMobile={isMobile}
+                            t={t}
                         />
                     ) : (
                         <ItemFilterV2
@@ -54,6 +74,23 @@ export default function BoxFilterV2({ arrFilter, lang, t }) {
                         />
                     ),
                 )}
+
+            {isOther && (
+                <ItemFilterOther
+                    setIndexFilter={setIndexFilter}
+                    indexFilter={indexFilter}
+                    lang={lang}
+                    item={{
+                        id: 6,
+                        title: 'Thêm',
+                        slug: 'add',
+                        titleLang: 'add',
+                        api: '/add',
+                    }}
+                    isMobile={isMobile}
+                    t={t}
+                />
+            )}
         </ul>
     )
 }

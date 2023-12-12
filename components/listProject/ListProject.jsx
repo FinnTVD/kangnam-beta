@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
@@ -22,8 +22,6 @@ import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
 const MapV6 = dynamic(() => import('../home/MapV2/MapV6'))
 
-// const slugProject = ['/du-an', '/projects', '/분양', '/프로젝트']
-
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 
@@ -38,25 +36,36 @@ export default function ListProject({ lang, t, dataSlug }) {
             id: 1,
             title: t?.projects?.category,
             slug: 'propertyTypeIds',
+            titleLang: 'propertyTypeIdsP',
             api: '/property-type',
         },
         {
             id: 2,
             title: t?.projects?.address,
             slug: 'propertyAreaTypeIds',
+            titleLang: 'propertyAreaTypeIdsP',
             api: '/property-area-type',
         },
         {
             id: 4,
             title: 'Khoảng giá',
             slug: 'price',
+            titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
             title: 'Diện tích',
             slug: 'area',
+            titleLang: 'area',
             api: '/area',
+        },
+        {
+            id: 6,
+            title: 'Trạng thái',
+            slug: 'status',
+            titleLang: 'status',
+            api: '/status',
         },
     ]
 
@@ -64,15 +73,19 @@ export default function ListProject({ lang, t, dataSlug }) {
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767px)',
-    })
+
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const cityId = searchParams.get('cityId')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+    const status = searchParams.get('status')
+
     const districtId = searchParams.get('districtId')
     const wardId = searchParams.get('wardId')
     const [show, Element] = useToggleShowMap()
@@ -113,11 +126,17 @@ export default function ListProject({ lang, t, dataSlug }) {
     }
 
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/project?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
-            propertyAreaTypeParams ? propertyAreaTypeParams : ''
-        }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
-            cityId ? '&cityId=' + cityId : ''
-        }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+        `${process.env.NEXT_PUBLIC_API}/project?order=${price ? price : 'DESC'}${price ? '&orderBy=price' : ''}&page=${
+            page ? page : 1
+        }&take=24${findIdByAlias(pathName, dataSlug)}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+            propertyTypeParams ? propertyTypeParams : ''
+        }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
+            wardId ? '&wardId=' + wardId : ''
+        }${minPrice ? '&minPrice=' + minPrice + '000000000' : ''}${
+            maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''
+        }${minArea ? '&minArea=' + minArea : ''}${maxArea ? '&maxArea=' + maxArea : ''}${
+            status ? '&status=' + status : ''
+        }`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -170,14 +189,17 @@ export default function ListProject({ lang, t, dataSlug }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/project?page=${page ? page : 1}&take=24${findIdByAlias(
-                pathName,
-                dataSlug,
-            )}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-                price ? '&price=' + price : ''
-            }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
-                wardId ? '&wardId=' + wardId : ''
-            }`,
+            `${process.env.NEXT_PUBLIC_API}/project?order=${price ? price : 'DESC'}${
+                price ? '&orderBy=price' : ''
+            }&page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
+                propertyAreaTypeParams ? propertyAreaTypeParams : ''
+            }${propertyTypeParams ? propertyTypeParams : ''}${
+                cityId ? '&cityId=' + cityId : ''
+            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}${
+                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                maxArea ? '&maxArea=' + maxArea : ''
+            }${status ? '&status=' + status : ''}`,
         )
     }, [lang, searchParams])
 
@@ -348,7 +370,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                     e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name || e?.translations[0]?.name
                                             }
-                                            className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
+                                            className='text-den title18-700-150 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
                                         >
                                             {e?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang),

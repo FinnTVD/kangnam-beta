@@ -16,15 +16,15 @@ export function SlidersCustom({
             {isShowValue && (
                 <div
                     className={cn(
-                        'flex justify-between px-[2px] py-1 text-white text-[11px] font-bold',
+                        'flex justify-between px-[2px] py-1 max-lg:pb-[1.25rem] text-white font-bold',
                         props.isDark && 'text-muted-foreground',
                     )}
                 >
-                    <div className='text-den text-[1vw] leading-normal font-normal'>
+                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal'>
                         {value[0]}
                         {prefixValue}
                     </div>
-                    <div className='text-den text-[1vw] leading-normal font-normal'>
+                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal'>
                         {value[1]}
                         {prefixValue}
                     </div>

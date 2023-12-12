@@ -1,7 +1,7 @@
 import ListProject from './ListProject'
 import ListProjectV2 from './ListProjectV2'
 
-export default function IndexListProject({ lang, t, dataSlug, isProject }) {
+export default function IndexListProject({ lang, t, dataSlug, isProject, isHire }) {
     return (
         <main>
             {isProject ? (
@@ -15,6 +15,7 @@ export default function IndexListProject({ lang, t, dataSlug, isProject }) {
                     lang={lang}
                     t={t}
                     dataSlug={dataSlug}
+                    isHire={isHire}
                 />
             )}
         </main>

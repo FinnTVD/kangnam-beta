@@ -2,13 +2,20 @@
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { memo, useEffect, useState } from 'react'
-import useSWR from 'swr'
 import InputCheckBox from './InputCheckBox'
 import { cityIdDefault, latDefault, levelZoomDefault, lngDefault } from '@/utils'
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-let dataNew = []
-const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
+let dataNew = [
+    {
+        id: 'selling',
+        title: 'Đã mở bán',
+    },
+    {
+        id: 'open',
+        title: 'Chưa mở bán',
+    },
+]
+const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -16,11 +23,6 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
     const [sideRef, isOutSide] = useClickOutSide()
     // const lh = searchParams.get(item?.slug)?.split('--')
     const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
-    const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}${item?.api}`, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-    })
 
     useEffect(() => {
         setLh(searchParams.get(item?.slug)?.split('--'))
@@ -32,6 +34,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
 
     const handleCheckValueInput = (e) => {
         e.preventDefault()
+
         const b = []
 
         Array.from(e?.target)?.map((i) => {
@@ -39,67 +42,28 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 b.push(i?.id)
             }
         })
-
-        let search = b.join('--')
-        if (index === 1) {
-            const paramNew = new URLSearchParams(searchParams)
-            paramNew.set(item?.slug, search)
-            paramNew.set('districtId', '')
-            paramNew.set('wardId', '')
-            paramNew.set('isFly', 1)
-            paramNew.set('levelZoom', levelZoomDefault)
-            const dataArea = JSON.parse(window.localStorage.getItem('dataArea'))
-            if (dataArea) {
-                paramNew.set('cityId', dataArea?.cityId)
-                paramNew.set('lng', dataArea?.lng)
-                paramNew.set('lat', dataArea?.lat)
-            } else {
-                paramNew.set('cityId', cityIdDefault)
-                paramNew.set('lng', lngDefault)
-                paramNew.set('lat', latDefault)
-            }
+        const paramNew = new URLSearchParams(searchParams)
+        if (b?.length === dataNew?.length || b?.length === 0) {
+            paramNew.set('status', '')
             router.push(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         } else {
-            const paramNew = new URLSearchParams(searchParams)
-            paramNew.set(item?.slug, search)
+            paramNew.set('status', b[0])
             router.push(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
         setIndexFilter(-1)
-    }
-
-    if (item?.api === '/property-category' && isMobile) {
-        dataNew = data?.data?.filter((e) => e?.id !== '05d52397-71a8-4ecf-9a86-ee37965332ef')
-    } else {
-        dataNew = data?.data
     }
 
     const handleReset = () => {
-        if (index === 1) {
-            const paramNew = new URLSearchParams(searchParams)
-            paramNew.set(item?.slug, '')
-            paramNew.set('districtId', '')
-            paramNew.set('wardId', '')
-            paramNew.set('cityId', '')
-            paramNew.set('isFly', 1)
-            paramNew.set('levelZoom', levelZoomDefault)
-            paramNew.set('lng', lngDefault)
-            paramNew.set('lat', latDefault)
-            router.push(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
-        } else {
-            const paramNew = new URLSearchParams(searchParams)
-            paramNew.set(item?.slug, '')
-            router.push(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
-        }
+        const paramNew = new URLSearchParams(searchParams)
+        paramNew.set('status', '')
+        router.push(pathName + '?' + paramNew.toString(), {
+            scroll: false,
+        })
         setIndexFilter(-1)
-        window.localStorage.removeItem('dataArea')
     }
 
     return (
@@ -139,7 +103,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 } absolute z-50 left-0 -bottom-[1.5vw] translate-y-full flex flex-col shadow-boxFilter rounded-[0.75vw] bg-white w-[20.875vw] gap-y-[2.3vw] max-md:gap-y-[6.4vw] transition-all duration-[2s] ease-linear max-md:w-[94vw] max-md:rounded-xl max-lg:w-[50vw]`}
             >
                 <div className='px-[1.5vw] pt-[1.5vw] max-md:pt-[6.4vw] max-md:px-[5.87vw]'>
-                    <p className='text-den title16-600-150 whitespace-nowrap mb-[1.5vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
+                    <p className='text-den title16-600-150 whitespace-nowrap mb-[1vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
                         {t?.projects?.filter1?.[item?.titleLang]}
                     </p>
                     <div
@@ -181,4 +145,4 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
         </li>
     )
 }
-export default memo(ItemFilterV2)
+export default memo(ItemFilterStatus)

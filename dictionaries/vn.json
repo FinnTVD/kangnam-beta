@@ -262,7 +262,10 @@
         "filter1": {
             "propertyTypeIds": "Chọn loại hình bất động sản",
             "propertyAreaTypeIds": "Chọn địa điểm bất động sản",
+            "propertyTypeIdsP": "Chọn loại hình dự án",
+            "propertyAreaTypeIdsP": "Chọn địa điểm dự án",
             "propertyCategoryIds": "Chọn hình thức bất động sản",
+            "status": "Chọn trạng thái dự án",
             "price": "Chọn nhanh khoảng giá",
             "area": "Chọn nhanh diện tích",
             "reset": "Đặt lại",

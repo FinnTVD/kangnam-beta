@@ -105,6 +105,8 @@ export default function MyProject({ lang, t, data }) {
                     arrFilter={arrFilter}
                     lang={lang}
                     t={t}
+                    isOther={true}
+                    isHome={true}
                 />
                 <div className='flex gap-x-[1.5vw] items-center'>
                     <span className='text-black title16-400-150 h-fit'>{t?.homepage?.section3?.showMap}</span>

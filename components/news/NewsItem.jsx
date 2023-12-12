@@ -139,7 +139,7 @@ export default function NewsItem({ newsOtherItem, lang, index }) {
                         </g>
                     </svg>
                     <span className='text-[#656263] title14-400-150 ml-[0.375vw] opacity-70 max-md:title-mb12-400-150 max-md:ml-[1.3vw] max-lg:title-tl14'>
-                        {formatDateTime(newsOtherItem?.createdAt)}
+                        {formatDateTime(newsOtherItem?.updatedAt)}
                     </span>
                 </div>
             </div>

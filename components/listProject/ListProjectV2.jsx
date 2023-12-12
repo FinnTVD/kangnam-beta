@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
@@ -30,32 +30,39 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
+let propertyBedsParams = ''
+let propertyBathsParams = ''
+let propertyOrientsParams = ''
 gsap.registerPlugin(ScrollTrigger)
 
-export default function ListProjectV2({ lang, t, dataSlug }) {
+export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
     const arrFilter = [
         {
             id: 1,
             title: t?.projects?.category,
             slug: 'propertyTypeIds',
+            titleLang: 'propertyTypeIds',
             api: '/property-type',
         },
         {
             id: 2,
             title: t?.projects?.address,
             slug: 'propertyAreaTypeIds',
+            titleLang: 'propertyAreaTypeIds',
             api: '/property-area-type',
         },
         {
             id: 4,
             title: 'Khoảng giá',
             slug: 'price',
+            titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
             title: 'Diện tích',
             slug: 'area',
+            titleLang: 'area',
             api: '/area',
         },
     ]
@@ -64,30 +71,35 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             id: 1,
             title: t?.projects?.category,
             slug: 'propertyTypeIds',
+            titleLang: 'propertyTypeIds',
             api: '/property-type',
         },
         {
             id: 2,
             title: t?.projects?.address,
             slug: 'propertyAreaTypeIds',
+            titleLang: 'propertyAreaTypeIds',
             api: '/property-area-type',
         },
         {
             id: 3,
             title: 'Hình thức',
             slug: 'propertyCategoryIds',
+            titleLang: 'propertyCategoryIds',
             api: '/property-category',
         },
         {
             id: 4,
             title: 'Khoảng giá',
             slug: 'price',
+            titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
             title: 'Diện tích',
             slug: 'area',
+            titleLang: 'area',
             api: '/area',
         },
     ]
@@ -95,15 +107,18 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767px)',
-    })
+
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const cityId = searchParams.get('cityId')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+
     const districtId = searchParams.get('districtId')
     const wardId = searchParams.get('wardId')
     const [show, Element] = useToggleShowMap()
@@ -111,6 +126,9 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const propertyBeds = searchParams.get('beds')
+    const propertyBaths = searchParams.get('baths')
+    const propertyOrients = searchParams.get('orients')
 
     const createQueryString = useCallback(
         (name, value) => {
@@ -132,7 +150,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     } else {
         propertyTypeParams = ''
     }
-
     if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
@@ -143,7 +160,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     } else {
         propertyAreaTypeParams = ''
     }
-
     if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
@@ -155,14 +171,51 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         propertyCategoryTypeParams = ''
     }
 
+    if (propertyBeds) {
+        propertyBedsParams = propertyBeds
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBedsParams = ''
+    }
+    if (propertyBaths) {
+        propertyBathsParams = propertyBaths
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBathsParams = ''
+    }
+    if (propertyOrients) {
+        propertyOrientsParams = propertyOrients
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyOrientsParams = ''
+    }
+
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
-            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-            price ? '&price=' + price : ''
-        }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
-            wardId ? '&wardId=' + wardId : ''
-        }`,
+        `${process.env.NEXT_PUBLIC_API}/property?order=${price ? price : 'DESC'}${price ? '&orderBy=price' : ''}&page=${
+            page ? page : 1
+        }&take=24${findIdByAlias(pathName, dataSlug)}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
+            propertyAreaTypeParams ? propertyAreaTypeParams : ''
+        }${propertyTypeParams ? propertyTypeParams : ''}${propertyBedsParams ? propertyBedsParams : ''}${
+            propertyBathsParams ? propertyBathsParams : ''
+        }${propertyOrientsParams ? propertyOrientsParams : ''}${cityId ? '&cityId=' + cityId : ''}${
+            districtId ? '&districtId=' + districtId : ''
+        }${wardId ? '&wardId=' + wardId : ''}${
+            minPrice ? '&minPrice=' + minPrice + (isHire ? '000000' : '000000000') : ''
+        }${maxPrice ? '&maxPrice=' + maxPrice + (isHire ? '000000' : '000000000') : ''}${
+            minArea ? '&minArea=' + minArea : ''
+        }${maxArea ? '&maxArea=' + maxArea : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -215,14 +268,19 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(
-                pathName,
-                dataSlug,
-            )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
+            `${process.env.NEXT_PUBLIC_API}/property?order=${price ? price : 'DESC'}${
+                price ? '&orderBy=price' : ''
+            }&page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
+                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                propertyBedsParams ? propertyBedsParams : ''
+            }${propertyBathsParams ? propertyBathsParams : ''}${propertyOrientsParams ? propertyOrientsParams : ''}${
                 cityId ? '&cityId=' + cityId : ''
-            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}${
+                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                maxArea ? '&maxArea=' + maxArea : ''
+            }`,
         )
     }, [lang, searchParams])
 
@@ -261,6 +319,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
                                 t={t}
+                                isOther={true}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
                                 <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
@@ -374,7 +433,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                                     e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name || e?.translations[0]?.name
                                             }
-                                            className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
+                                            className='text-den title18-700-150 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
                                         >
                                             {e?.translations?.find((e) =>
                                                 e?.languageCode?.toLowerCase()?.includes(lang),

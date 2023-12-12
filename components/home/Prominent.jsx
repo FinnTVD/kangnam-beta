@@ -7,12 +7,41 @@ import Image from 'next/image'
 //
 import Button from '../general/Button'
 import 'swiper/css/effect-fade'
-
+import { slugProjectLangCode } from '@/utils'
+// districtId=3083&levelZoom=12&lng=105.76722048500005&lat=21.039611664000063&cityId=11
 const arrArea = [
-    '01. Khu vực Bắc Từ Liêm, Hà Nội',
-    '02. Khu vực Thanh Xuân, Hà Nội',
-    '03. Khu vực Hà Đông, Hà Nội',
-    '04. Khu vực Đống Đa, Hà Nội',
+    {
+        id: 1,
+        title: '01. Khu vực Nam Từ Liêm, Hà Nội',
+        cityId: 11,
+        districtId: 3083,
+        lng: 105.76722048500005,
+        lat: 21.039611664000063,
+    },
+    {
+        id: 2,
+        title: '02. Khu vực Hà Đông, Hà Nội',
+        cityId: 11,
+        districtId: 1035,
+        lng: 105.77091365500007,
+        lat: 20.96472601000005,
+    },
+    {
+        id: 3,
+        title: '03. Khu vực Cầu Giấy, Hà Nội',
+        cityId: 11,
+        districtId: 523,
+        lng: 105.79180610344349,
+        lat: 21.030707398300226,
+    },
+    {
+        id: 4,
+        title: '04. Khu vực Ba Vì, Hà Nội',
+        cityId: 11,
+        districtId: 3595,
+        lng: 105.42338142200003,
+        lat: 21.19812091500006,
+    },
 ]
 
 const arrProminent = [
@@ -21,21 +50,28 @@ const arrProminent = [
     { id: 3, src: '/images/bg-prominent3.jpeg', alt: 'bg-prominent3' },
     { id: 4, src: '/images/bg-prominent4.jpeg', alt: 'bg-prominent4' },
 ]
-export default function Prominent({ t }) {
-    const [indexSlider, setIndexSlider] = useState(0)
+export default function Prominent({ t, lang }) {
     const swiperRef = useRef()
+    const [indexSlider, setIndexSlider] = useState(0)
     const isMobile = useMediaQuery({
         query: '(max-width: 767.9px)',
     })
 
     const handleSlideChange = (swiper) => {
-        setIndexSlider(swiper.realIndex)
+        setIndexSlider(Number(swiper.realIndex))
     }
 
     const handleSlideClick = (index) => {
         if (swiperRef.current) {
             swiperRef.current.slideTo(index)
         }
+    }
+    const handleGenderHref = () => {
+        const data = { ...arrArea[indexSlider] }
+        return (
+            slugProjectLangCode?.find((e) => e?.langCode == lang)?.slug +
+            `/districtId=${data?.districtId}&levelZoom=12&lng=${data?.lng}&lat=${data?.lat}&cityId=${data?.cityId}`
+        )
     }
 
     return (
@@ -59,39 +95,37 @@ export default function Prominent({ t }) {
                 modules={[EffectFade, Autoplay]}
                 className='!absolute top-0 left-0 z-0 w-full h-full mySwiper'
             >
-                {arrProminent &&
-                    arrProminent?.map((e, index) => (
-                        <SwiperSlide key={index}>
-                            <div className='relative w-full h-full overflow-hidden box-img-slide'>
-                                <Image
-                                    className={`${
-                                        indexSlider === index ? 'active' : ''
-                                    } object-cover w-[110vw] h-[110vh] scale-110`}
-                                    src={e.src}
-                                    alt={e.alt}
-                                    sizes='100vw'
-                                    fill
-                                />
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                {arrProminent?.map((e, index) => (
+                    <SwiperSlide key={index}>
+                        <div className='relative w-full h-full overflow-hidden box-img-slide'>
+                            <Image
+                                className={`${
+                                    indexSlider === index ? 'active' : ''
+                                } object-cover w-[110vw] h-[110vh] scale-110`}
+                                src={e.src}
+                                alt={e.alt}
+                                sizes='100vw'
+                                fill
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
             <div className='absolute bottom-0 left-0 w-full h-[76vh] max-md:h-full bg-gradient-slide z-[1]'></div>
             <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] max-md:gap-y-[30.4vw] items-center w-full mb-[3.19vw] max-md:mt-[10.4vw] px-mb10 max-lg:mb-[4.29vw]'>
                 {isMobile && (
                     <div className='w-full md:hidden'>
-                        <span className='text-white title-mb14-600-160'>{arrArea[indexSlider]}</span>
+                        <span className='text-white title-mb14-600-160'>{arrArea[indexSlider]?.title}</span>
                         <ul className='flex gap-x-[2.4vw] w-full mt-[2.67vw]'>
-                            {arrArea &&
-                                arrArea?.map((e, index) => (
-                                    <li
-                                        onClick={() => handleSlideClick(index)}
-                                        key={index}
-                                        className={`${
-                                            indexSlider === index ? 'active' : ''
-                                        } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
-                                    ></li>
-                                ))}
+                            {arrArea?.map((e, index) => (
+                                <li
+                                    onClick={() => handleSlideClick(index)}
+                                    key={index}
+                                    className={`${
+                                        indexSlider === index ? 'active' : ''
+                                    } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] cursor-pointer`}
+                                ></li>
+                            ))}
                         </ul>
                     </div>
                 )}
@@ -107,7 +141,7 @@ export default function Prominent({ t }) {
                         {t?.homepage?.section6?.description}
                     </span>
                     <Button
-                        href='/'
+                        href={handleGenderHref()}
                         className='text-white border-white'
                         stroke='white'
                     >
@@ -116,18 +150,17 @@ export default function Prominent({ t }) {
                 </div>
                 {!isMobile && (
                     <ul className='flex gap-x-[1.5vw] w-full max-md:hidden'>
-                        {arrArea &&
-                            arrArea?.map((e, index) => (
-                                <li
-                                    onClick={() => handleSlideClick(index)}
-                                    key={index}
-                                    className={`${
-                                        indexSlider === index ? 'active' : ''
-                                    } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] max-lg:text-center cursor-pointer title16-600-160 title-tl16-600-160 max-lg:pt-[1.5vw]`}
-                                >
-                                    {e}
-                                </li>
-                            ))}
+                        {arrArea?.map((e, index) => (
+                            <li
+                                onClick={() => handleSlideClick(index)}
+                                key={index}
+                                className={`${
+                                    indexSlider === index ? 'active' : ''
+                                } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] max-lg:text-center cursor-pointer title16-600-160 title-tl16-600-160 max-lg:pt-[1.5vw]`}
+                            >
+                                {e?.title}
+                            </li>
+                        ))}
                     </ul>
                 )}
             </div>

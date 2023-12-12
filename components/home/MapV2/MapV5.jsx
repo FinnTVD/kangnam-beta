@@ -168,7 +168,9 @@ const handleGeoWKT = (str) => {
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
-
+let propertyBedsParams = ''
+let propertyBathsParams = ''
+let propertyOrientsParams = ''
 let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
@@ -190,6 +192,13 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+    const propertyBeds = searchParams.get('beds')
+    const propertyBaths = searchParams.get('baths')
+    const propertyOrients = searchParams.get('orients')
 
     const isRedirect = useStore((state) => state.isRedirect)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
@@ -223,7 +232,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     } else {
         propertyTypeParams = ''
     }
-
     if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
@@ -234,7 +242,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     } else {
         propertyAreaTypeParams = ''
     }
-
     if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
@@ -244,6 +251,37 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         })
     } else {
         propertyCategoryTypeParams = ''
+    }
+
+    if (propertyBeds) {
+        propertyBedsParams = propertyBeds
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBedsParams = ''
+    }
+    if (propertyBaths) {
+        propertyBathsParams = propertyBaths
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBathsParams = ''
+    }
+    if (propertyOrients) {
+        propertyOrientsParams = propertyOrients
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyOrientsParams = ''
     }
 
     // get list provinces count
@@ -270,6 +308,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         fetcher,
     )
 
+    // init add map
     useEffect(() => {
         if (typeof window === 'undefined') return
         const loadMap = () => {
@@ -379,7 +418,11 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                     propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
                 }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
                     propertyTypeParams ? propertyTypeParams : ''
-                }`,
+                }${propertyBedsParams ? propertyBedsParams : ''}${propertyBathsParams ? propertyBathsParams : ''}${
+                    propertyOrientsParams ? propertyOrientsParams : ''
+                }${minPrice ? '&minPrice=' + minPrice + '000000000' : ''}${
+                    maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''
+                }${minArea ? '&minArea=' + minArea : ''}${maxArea ? '&maxArea=' + maxArea : ''}`,
             )
             const data = await res.json() //data marker
             if (data && typeof mapRef?.getZoom === 'function') {
@@ -389,7 +432,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             }
         }
         callApi()
-    }, [cityId, wardId, districtId, mapRef])
+    }, [cityId, wardId, districtId, mapRef,searchParams])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -444,29 +487,29 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         getLocationCurrent()
     }, [levelZoom, isDragDebounce, mapRef])
 
-    if (propertyType?.length > 0 && propertyType[0]) {
-        propertyTypeParams = propertyType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-    } else {
-        propertyTypeParams = ''
-    }
+    // if (propertyType?.length > 0 && propertyType[0]) {
+    //     propertyTypeParams = propertyType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+    // } else {
+    //     propertyTypeParams = ''
+    // }
 
-    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
-        propertyAreaTypeParams = propertyAreaType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-    } else {
-        propertyAreaTypeParams = ''
-    }
+    // if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+    //     propertyAreaTypeParams = propertyAreaType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+    // } else {
+    //     propertyAreaTypeParams = ''
+    // }
 
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-    } else {
-        propertyCategoryTypeParams = ''
-    }
+    // if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
+    //     propertyCategoryTypeParams = propertyCategoryType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
+    // } else {
+    //     propertyCategoryTypeParams = ''
+    // }
 
     //function add border
     const addGeojsonLine = (dataPolygon) => {
@@ -555,7 +598,13 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                propertyBedsParams ? propertyBedsParams : ''
+            }${propertyBathsParams ? propertyBathsParams : ''}${propertyOrientsParams ? propertyOrientsParams : ''}${
+                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                maxArea ? '&maxArea=' + maxArea : ''
+            }`,
         )
         const data = await res.json() // data popup
         if (!data) return
