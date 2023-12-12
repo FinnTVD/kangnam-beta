@@ -17,6 +17,7 @@ import {
 import useClickOutSide from '@/hooks/useClickOutSide'
 import useDebounce from '@/hooks/useDebounce'
 
+
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
     //nếu ko đứng ỏ các page nằm ở listPage thì sẽ chuyển sang page có maphandleCheckPage
@@ -62,8 +63,10 @@ const SearchGlobal = ({
     const setIsClose = useStore((state) => state.setIsClose)
     const setValueSearch = useStore((state) => state.setValueSearch)
     const setValueSearchPrev = useStore((state) => state.setValueSearchPrev)
+    const selectTypeSearch = useStore((state) => state.selectTypeSearch)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
     const setSelectSearch = useStore((state) => state.setSelectSearch)
+
     const dataDistrict = useStore((state) => state.dataDistrict)
     const dataProvinces = useStore((state) => state.dataProvinces)
     const listData = useStore((state) => state.listData)
@@ -112,9 +115,9 @@ const SearchGlobal = ({
         }
         const callDataProjectCode = async () => {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_API}/property?${debounceValue ? 'q=' + debounceValue : ''}${
-                    listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
-                }`,
+                `${process.env.NEXT_PUBLIC_API}${selectTypeSearch ? '/project?' : '/property?'}${
+                    debounceValue ? 'q=' + debounceValue : ''
+                }${selectTypeSearch ? '' : listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''}`,
             )
             const data = await res.json()
             setDataProjectCode(data)
@@ -156,11 +159,11 @@ const SearchGlobal = ({
 
     const callDataProject = async ({ cityIdSearch, districtIdSearch, wardIdSearch }) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property?take=15${cityIdSearch ? '&cityId=' + cityIdSearch : ''}${
-                districtIdSearch ? '&districtId=' + districtIdSearch : ''
-            }${wardIdSearch ? '&wardId=' + wardIdSearch : ''}${
-                listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''
-            }`,
+            `${process.env.NEXT_PUBLIC_API}${selectTypeSearch ? '/project' : '/property'}?take=15${
+                cityIdSearch ? '&cityId=' + cityIdSearch : ''
+            }${districtIdSearch ? '&districtId=' + districtIdSearch : ''}${
+                wardIdSearch ? '&wardId=' + wardIdSearch : ''
+            }${selectTypeSearch ? '' : listData[0]?.id ? '&propertyCategoryIds=' + listData[0]?.id : ''}`,
         )
         const data = await res.json()
         setDataProject(data)
@@ -168,9 +171,9 @@ const SearchGlobal = ({
 
     const callDataWard = async (cityIdWard, districtIdWard, wardIdWard, refId, isCheck) => {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API}/property/property-by-address?cityId=${
-                cityIdWard || cityIdDefault
-            }&districtId=${districtIdWard}`,
+            `${process.env.NEXT_PUBLIC_API}${
+                selectTypeSearch ? '/project/project-by-address' : '/property/property-by-address'
+            }?cityId=${cityIdWard || cityIdDefault}&districtId=${districtIdWard}`,
         )
         const data = await res.json()
         const itemWard = data?.find((i) => i?.ward_id == wardIdWard)
@@ -397,6 +400,8 @@ const SearchGlobal = ({
             })
         }
     }
+
+
 
     return (
         <div

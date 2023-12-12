@@ -187,7 +187,11 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
 
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
-    const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+    const status = searchParams.get('status')
 
     const isRedirect = useStore((state) => state.isRedirect)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
@@ -364,7 +368,11 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
                     districtId ? '&districtId=' + districtId : ''
                 }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                     propertyAreaTypeParams ? propertyAreaTypeParams : ''
-                }${propertyTypeParams ? propertyTypeParams : ''}`,
+                }${propertyTypeParams ? propertyTypeParams : ''}${
+                    minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+                }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                    maxArea ? '&maxArea=' + maxArea : ''
+                }${status ? '&status=' + status : ''}`,
             )
             const data = await res.json() //data marker
             if (data && typeof mapRef?.getZoom === 'function') {
@@ -374,7 +382,7 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
             }
         }
         callApi()
-    }, [cityId, wardId, districtId, mapRef])
+    }, [cityId, wardId, districtId, mapRef, searchParams])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -532,7 +540,11 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}`,
+            }${propertyTypeParams ? propertyTypeParams : ''}${minPrice ? '&minPrice=' + minPrice + '000000000' : ''}${
+                maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''
+            }${minArea ? '&minArea=' + minArea : ''}${maxArea ? '&maxArea=' + maxArea : ''}${
+                status ? '&status=' + status : ''
+            }`,
         )
         const data = await res.json() // data popup
         if (!data) return

@@ -73,30 +73,35 @@ const arrFilter = [
         id: 1,
         title: 'Loại hình',
         slug: 'propertyTypeIds',
+        titleLang: 'propertyTypeIds',
         api: '/property-type',
     },
     {
         id: 2,
         title: 'Địa điểm',
         slug: 'propertyAreaTypeIds',
+        titleLang: 'propertyAreaTypeIds',
         api: '/property-area-type',
     },
     {
         id: 3,
         title: 'Hình thức',
         slug: 'propertyCategoryIds',
+        titleLang: 'propertyCategoryIds',
         api: '/property-category',
     },
     {
         id: 4,
         title: 'Khoảng giá',
         slug: 'price',
+        titleLang: 'price',
         api: '/price',
     },
     {
         id: 5,
         title: 'Diện tích',
         slug: 'area',
+        titleLang: 'area',
         api: '/area',
     },
 ]
@@ -105,24 +110,28 @@ const arrFilterV2 = [
         id: 1,
         title: 'Loại hình',
         slug: 'propertyTypeIds',
+        titleLang: 'propertyTypeIds',
         api: '/property-type',
     },
     {
         id: 2,
         title: 'Địa điểm',
         slug: 'propertyAreaTypeIds',
+        titleLang: 'propertyAreaTypeIds',
         api: '/property-area-type',
     },
     {
         id: 4,
         title: 'Khoảng giá',
         slug: 'price',
+        titleLang: 'price',
         api: '/price',
     },
     {
         id: 5,
         title: 'Diện tích',
         slug: 'area',
+        titleLang: 'area',
         api: '/area',
     },
 ]
@@ -188,6 +197,24 @@ const postTypeIdAgreement = '645dc0f1-091a-4ead-87f2-fce21d843c72'
 const categoryHireId = '05d52397-71a8-4ecf-9a86-ee37965332ef'
 const apiKey = 'c6a8fb5d25f0f32c87d1469f6847388c445850643364b94e'
 const slugProject = ['/du-an', '/projects', '/분양', '/프로젝트']
+const slugProjectLangCode = [
+    {
+        slug: '/du-an',
+        langCode: 'vi',
+    },
+    {
+        slug: '/projects',
+        langCode: 'en',
+    },
+    {
+        slug: '/분양',
+        langCode: 'kr',
+    },
+    {
+        slug: '/프로젝트',
+        langCode: 'cn',
+    },
+]
 
 const cityIdDefault = 11 //ha noi
 const levelZoomDefault = 8 //zoom mac dinh
@@ -238,7 +265,7 @@ const preventRefreshSwr = {
 const listPriceHire = [
     {
         title: '< 10',
-        min: 0,
+        min: '',
         max: 10,
     },
     {
@@ -262,15 +289,25 @@ const listPriceHire = [
         max: 50,
     },
     {
+        title: '50 - 70',
+        min: 50,
+        max: 70,
+    },
+    {
+        title: '70 - 100',
+        min: 70,
+        max: 100,
+    },
+    {
         title: '100+',
         min: 100,
-        max: 100,
+        max: '',
     },
 ]
 const listPriceResale = [
     {
         title: '< 2',
-        min: 0,
+        min: '',
         max: 2,
     },
     {
@@ -296,14 +333,14 @@ const listPriceResale = [
     {
         title: '20+',
         min: 20,
-        max: 20,
+        max: '',
     },
 ]
 
 const listAreaProject = [
     {
         title: '< 30',
-        min: 0,
+        min: '',
         max: 30,
     },
     {
@@ -339,7 +376,49 @@ const listAreaProject = [
     {
         title: '250+',
         min: 250,
-        max: 250,
+        max: '',
+    },
+]
+const listAreaProjectP = [
+    {
+        title: '< 150',
+        min: '',
+        max: 150,
+    },
+    {
+        title: '150 - 300',
+        min: 150,
+        max: 300,
+    },
+    {
+        title: '300 - 500',
+        min: 300,
+        max: 500,
+    },
+    {
+        title: '500 - 750',
+        min: 500,
+        max: 750,
+    },
+    {
+        title: '750 - 1000',
+        min: 750,
+        max: 1000,
+    },
+    {
+        title: '1000 - 1500',
+        min: 1000,
+        max: 1500,
+    },
+    {
+        title: '1500 - 2000',
+        min: 1500,
+        max: 2000,
+    },
+    {
+        title: '2000+',
+        min: 2000,
+        max: '',
     },
 ]
 const listSlugNavHire = ['thue', '임대아파트', 'hire', '赁赁']
@@ -376,4 +455,6 @@ export {
     listSlugNavHire,
     listPriceResale,
     listAreaProject,
+    listAreaProjectP,
+    slugProjectLangCode,
 }

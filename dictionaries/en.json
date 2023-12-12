@@ -245,19 +245,29 @@
     "projects": {
         "subtitle": "100% authentic",
         "title": "Buying and selling houses and apartments",
+        "titleH": "Renting an apartment land",
+        "titleP": "All Projects",
         "map": "Map",
         "category": "Type",
         "address": "Location",
         "show": "Display",
         "over": "among more",
         "validateProject": "Authentic housing",
+        "validateIsProject": "Project authentication",
         "item": {
             "address": "Address",
             "price": "Pricing",
             "area": "Area"
         },
         "filter1": {
-            "title": "Select property type",
+            "propertyTypeIds": "Select property type",
+            "propertyAreaTypeIds": "Choosing a real estate location",
+            "propertyTypeIdsP": "Select a project type",
+            "propertyAreaTypeIdsP": "Select project site",
+            "propertyCategoryIds": "Choose the form of real estate",
+            "status": "Select project status",
+            "price": "Quickly select a price range",
+            "area": "Quick selection of area",
             "reset": "Reset",
             "cancel": "Cancel",
             "apply": "Apply"

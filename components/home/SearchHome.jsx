@@ -39,6 +39,21 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
             }
         }
     }
+
+    const handleChangeSuggestLang = (init) => {
+        switch (lang) {
+            case 'vi':
+                return data?.suggest?.slice(0, init)
+            case 'en':
+                return data?.suggestEn?.slice(0, init)
+            case 'kr':
+                return data?.suggestKo?.slice(0, init)
+            case 'cn':
+                return data?.suggestCn?.slice(0, init)
+            default:
+                return data?.suggest?.slice(0, init)
+        }
+    }
     return (
         <div className='absolute top-[45%] -translate-y-1/2 left-[7.5vw] w-[calc(100vw-15vw)] max-md:w-[calc(100vw-5.34vw)] z-10 max-md:z-40 max-md:left-[2.67vw] max-md:top-[37.87vw] max-md:translate-y-0'>
             <p className='title18-400-160 title-mb12-400-160 text-white max-md:-tracking-[0.6px] title-tl14-400-160 font-semibold uppercase'>
@@ -56,7 +71,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                     {t?.homepage?.section1?.suggest}:
                 </span>
                 <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
-                    {data?.suggest?.slice(0, 6)?.map((e, index) => (
+                    {handleChangeSuggestLang(6)?.map((e, index) => (
                         <li
                             key={index}
                             className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150'
@@ -67,7 +82,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                                 }, 500)
                             }}
                         >
-                            {e || arrSuggest[index]?.title}
+                            {e}
                         </li>
                     ))}
                 </ul>

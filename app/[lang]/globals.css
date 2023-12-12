@@ -75,6 +75,10 @@
         @apply text-20pc font-normal leading-[1.3];
     }
 
+    .title18-700-150 {
+        @apply font-bold leading-normal text-18pc;
+    }
+
     .title18-700-130 {
         @apply text-18pc font-bold leading-[1.3];
     }

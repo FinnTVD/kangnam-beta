@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify'
 
 import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
-import { handleCheckLangCode, slugProject } from '@/utils'
+import { handleCheckLangCode, listSlugNavHire, slugProject } from '@/utils'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
@@ -56,6 +56,7 @@ export default async function Page({ params: { lang, project } }) {
     const t = await getDictionary(lang)
     const data = await getData('/property-category')
     const isProject = slugProject?.join('')?.includes(project)
+    const isHire = listSlugNavHire?.join('')?.includes(project)
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
@@ -72,6 +73,7 @@ export default async function Page({ params: { lang, project } }) {
                     t={t}
                     dataSlug={data?.data}
                     isProject={isProject}
+                    isHire={isHire}
                 />
             )}
             <ToastContainer style={{ zIndex: '999999999999999' }} />

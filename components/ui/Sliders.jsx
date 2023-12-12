@@ -12,7 +12,7 @@ const Sliders = React.forwardRef(({ className, ...props }, ref) => (
     >
         <SliderPrimitive.Track
             className={cn(
-                'relative h-[4px] w-full grow overflow-hidden rounded-full bg-gray-200/50',
+                'relative h-[4px] w-full grow overflow-hidden rounded-full bg-gray-200/50 cursor-pointer',
                 props.isDark && 'bg-[#00000014]',
             )}
         >
@@ -20,13 +20,13 @@ const Sliders = React.forwardRef(({ className, ...props }, ref) => (
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
             className={cn(
-                'block h-[0.75vw] w-[0.75vw] rounded-full border-2 border-secondary bg-[#d6a279] ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing',
+                'block h-[0.75vw] w-[0.75vw] max-lg:h-[1.75vw] max-lg:w-[1.75vw] rounded-full border-2 border-secondary bg-[#d6a279] ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing',
                 props.isDark && 'bg-white border-primary',
             )}
         />
         <SliderPrimitive.Thumb
             className={cn(
-                'block h-[0.75vw] w-[0.75vw] rounded-full border-2 border-secondary bg-[#d6a279] ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing',
+                'block h-[0.75vw] w-[0.75vw] max-lg:h-[1.75vw] max-lg:w-[1.75vw] rounded-full border-2 border-secondary bg-[#d6a279] ring-offset-background transition-colors disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing',
                 props.isDark && 'bg-white border-primary',
             )}
         />
