@@ -43,7 +43,7 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
     return (
         <ul
             className={`${
-                isMobile ? (isScrollX ? 'max-md:overflow-x-auto' : '') : ''
+                isScrollX || count == 0 ? 'max-md:overflow-x-scroll' : ''
             } flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative`}
         >
             {arrFilter &&
