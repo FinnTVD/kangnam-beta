@@ -27,15 +27,7 @@ const useStore = create((set, get) => ({
     isClose: true,
     isRedirect: false,
     defaultMap: null,
-    isScrollX: true,
-    setIsScrollX: (data) => {
-        set((state) => {
-            return {
-                ...state,
-                isScrollX: data,
-            }
-        })
-    },
+    
     setSelectTypeSearch: (data) => {
         set((state) => {
             return {

@@ -5,7 +5,7 @@ import { memo, useEffect, useState } from 'react'
 import { listAreaProject, listAreaProjectP, listPriceHire, listPriceResale } from '@/utils'
 import { SlidersCustom } from '@/components/ui/SlidersCustom'
 
-const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, isHome, click }) => {
+const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, isHome }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -185,7 +185,6 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                         indexFilter === index ? 'text-white' : 'text-den'
                     } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
                     onClick={() => {
-                        click();
                         if (index === indexFilter) {
                             return setIndexFilter(-1)
                         }
