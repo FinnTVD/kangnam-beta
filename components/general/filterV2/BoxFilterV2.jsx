@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ItemFilterV2 from './ItemFilterV2'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname } from 'next/navigation'
@@ -8,11 +8,21 @@ import { listSlugNavHire, slugProject } from '@/utils'
 import ItemRangeV2 from './ItemRangeV2'
 import ItemFilterStatus from './ItemFilterStatus'
 import ItemFilterOther from './ItemFilterOther'
+import useStore from '@/app/[lang]/(store)/store'
 
 export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = false }) {
     const [indexFilter, setIndexFilter] = useState(null)
+    const isScrollX = useStore((state) => state.isScrollX)
+    const setIsScrollX = useStore((state) => state.setIsScrollX)
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const pathName = usePathname()
+    useEffect(() => {
+        if (indexFilter >= 0) {
+            setIsScrollX(false)
+        } else {
+            setIsScrollX(true)
+        }
+    }, [indexFilter])
     let isHire = false
     let isProject = false
     listSlugNavHire.forEach((e) => {
@@ -32,7 +42,11 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
     }
 
     return (
-        <ul className='flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative'>
+        <ul
+            className={`${
+                isMobile ? (isScrollX ? 'max-md:overflow-x-auto' : '') : ''
+            } flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative`}
+        >
             {arrFilter &&
                 arrFilter.map((e, index) =>
                     handleCheckPriceAndArea(e?.slug) ? (
