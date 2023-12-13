@@ -15,12 +15,13 @@ let dataNew = [
         title: 'Chưa mở bán',
     },
 ]
-const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
+const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t, click }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
 
     const [sideRef, isOutSide] = useClickOutSide()
+    console.log(isOutSide);
     // const lh = searchParams.get(item?.slug)?.split('--')
     const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
 
@@ -29,7 +30,14 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
     }, [searchParams])
 
     useEffect(() => {
-        isOutSide && setIndexFilter(-1)
+        
+        console.log('isOutSide', isOutSide, setIndexFilter(-1));
+        isOutSide && setIndexFilter(-1);
+        if(!isOutSide) {
+          click()
+        } else {
+            click('hidden')
+        }
     }, [isOutSide])
 
     const handleCheckValueInput = (e) => {
@@ -79,6 +87,7 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
                         indexFilter === index ? 'text-white' : 'text-den'
                     } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
                     onClick={() => {
+                        click();
                         if (index === indexFilter) {
                             return setIndexFilter(-1)
                         }

@@ -31,66 +31,80 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
         return false
     }
 
-    return (
-        <ul className='flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative'>
-            {arrFilter &&
-                arrFilter.map((e, index) =>
-                    handleCheckPriceAndArea(e?.slug) ? (
-                        <ItemRangeV2
-                            key={index}
-                            index={index}
-                            item={e}
-                            setIndexFilter={setIndexFilter}
-                            indexFilter={indexFilter}
-                            lang={lang}
-                            isMobile={isMobile}
-                            t={t}
-                            isHire={isHire}
-                            isPrice={e?.slug?.includes('price')}
-                            isProject={isProject}
-                            isHome={isHome}
-                        />
-                    ) : e?.slug?.includes('status') ? (
-                        <ItemFilterStatus
-                            key={index}
-                            index={index}
-                            item={e}
-                            setIndexFilter={setIndexFilter}
-                            indexFilter={indexFilter}
-                            lang={lang}
-                            isMobile={isMobile}
-                            t={t}
-                        />
-                    ) : (
-                        <ItemFilterV2
-                            key={index}
-                            index={index}
-                            item={e}
-                            setIndexFilter={setIndexFilter}
-                            indexFilter={indexFilter}
-                            lang={lang}
-                            isMobile={isMobile}
-                            t={t}
-                        />
-                    ),
-                )}
+    const handleGetElementParent = (a) => {
+        const getParentElemnt = document.querySelector('.show-scroll');
+        if(a == 'hidden') {
+            console.log('hidden');
+            getParentElemnt.classList.remove('scrollbar-hidden')
+        } else {
+            getParentElemnt.classList.add('scrollbar-hidden')
+        }
+        
+    }
 
-            {isOther && (
-                <ItemFilterOther
-                    setIndexFilter={setIndexFilter}
-                    indexFilter={indexFilter}
-                    lang={lang}
-                    item={{
-                        id: 6,
-                        title: 'Thêm',
-                        slug: 'add',
-                        titleLang: 'add',
-                        api: '/add',
-                    }}
-                    isMobile={isMobile}
-                    t={t}
-                />
-            )}
-        </ul>
+    return (
+            <ul className='flex  scrollbar show-scroll max-sm:overflow-x-scroll click-show  gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative'>
+                {arrFilter &&
+                    arrFilter.map((e, index) =>
+                        handleCheckPriceAndArea(e?.slug) ? (
+                            <ItemRangeV2
+                                key={index}
+                                index={index}
+                                item={e}
+                                setIndexFilter={setIndexFilter}
+                                indexFilter={indexFilter}
+                                lang={lang}
+                                isMobile={isMobile}
+                                t={t}
+                                isHire={isHire}
+                                isPrice={e?.slug?.includes('price')}
+                                isProject={isProject}
+                                isHome={isHome}
+                                click={(a) => handleGetElementParent(a)}
+                            />
+                        ) : e?.slug?.includes('status') ? (
+                            <ItemFilterStatus
+                                key={index}
+                                index={index}
+                                item={e}
+                                setIndexFilter={setIndexFilter}
+                                indexFilter={indexFilter}
+                                lang={lang}
+                                isMobile={isMobile}
+                                t={t}
+                                click={(a) => handleGetElementParent(a)}
+                            />
+                        ) : (
+                            <ItemFilterV2
+                                key={index}
+                                index={index}
+                                item={e}
+                                setIndexFilter={setIndexFilter}
+                                indexFilter={indexFilter}
+                                lang={lang}
+                                isMobile={isMobile}
+                                t={t}
+                                click={(a) => handleGetElementParent(a)}
+                            />
+                        ),
+                    )}
+
+                {isOther && (
+                    <ItemFilterOther
+                        setIndexFilter={setIndexFilter}
+                        indexFilter={indexFilter}
+                        lang={lang}
+                        item={{
+                            id: 6,
+                            title: 'Thêm',
+                            slug: 'add',
+                            titleLang: 'add',
+                            api: '/add',
+                        }}
+                        isMobile={isMobile}
+                        t={t}
+                    />
+                )}
+            </ul>
     )
 }

@@ -5,7 +5,7 @@ import { memo, useEffect, useState } from 'react'
 import { listAreaProject, listAreaProjectP, listPriceHire, listPriceResale } from '@/utils'
 import { SlidersCustom } from '@/components/ui/SlidersCustom'
 
-const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, isHome }) => {
+const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, isHome, click }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -167,13 +167,16 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
         } else {
             return 10
         }
-    }
+    };
+
+   
     return (
         <li
             ref={sideRef}
             className={`${
                 indexFilter === index ? 'bg-logo' : 'bg-white'
-            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
+            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative` }
+            
         >
             <div className='relative'>
                 <span
@@ -181,6 +184,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                         indexFilter === index ? 'text-white' : 'text-den'
                     } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
                     onClick={() => {
+                        click();
                         if (index === indexFilter) {
                             return setIndexFilter(-1)
                         }
@@ -214,7 +218,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                                     searchMin == e?.min && searchMax == e?.max && isChangeRange
                                         ? 'bg-[#d6a279] text-white'
                                         : 'bg-gray-400/20 text-den'
-                                } cursor-pointer text-[0.75vw] max-lg:text-[1.75vw] py-[0.5vw] max-lg:py-[1vw] px-[1vw] font-bold rounded-md hover:bg-[#d6a279] hover:text-white`}
+                                } cursor-pointer text-[0.75vw] max-lg:text-[1.75vw] py-[0.5vw] max-lg:py-[1vw] px-[1vw] font-bold rounded-md hover:bg-[#d6a279] hover:text-white max-sm:text-[3.45vw]`}
                                 key={index}
                                 onClick={() => {
                                     setPriceRange([e?.min, e?.max])
