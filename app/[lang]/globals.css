@@ -640,6 +640,14 @@
     #contentProject h5 + p {
         margin-top: 1.3vw;
     }
+
+    #contentProject h3  {
+        font-size: 2.1vw;
+    }
+
+    #contentProject ul > li  {
+        font-size: 2vw;
+    }
 }
 @media screen and (max-width: 767.9px) {
     #list-project #map,
@@ -680,6 +688,14 @@
 
     #contentProject h5 + p {
         margin-top: 2.13vw;
+    }
+
+    #contentProject h3  {
+        font-size: 4vw;
+    }
+
+    #contentProject ul > li  {
+        font-size: 4.2vw;
     }
 }
 .vietmapgl-marker.mapboxgl-marker:not([aria-label='Map marker']) {

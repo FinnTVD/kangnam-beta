@@ -20,11 +20,11 @@ export function SlidersCustom({
                         props.isDark && 'text-muted-foreground',
                     )}
                 >
-                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal'>
+                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal max-sm:text-[4rem]'>
                         {value[0]}
                         {prefixValue}
                     </div>
-                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal'>
+                    <div className='text-den text-[1vw] max-lg:text-[2vw] leading-normal font-normal max-sm:text-[4rem]'>
                         {value[1]}
                         {prefixValue}
                     </div>

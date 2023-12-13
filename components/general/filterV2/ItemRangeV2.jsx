@@ -11,6 +11,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
     const searchParams = useSearchParams()
     const searchMin = searchParams.get(isPrice ? 'minPrice' : 'minArea')
     const searchMax = searchParams.get(isPrice ? 'maxPrice' : 'maxArea')
+
     const handleRenderMax = () => {
         if (isHire) {
             if (isPrice) {
@@ -184,7 +185,6 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                         indexFilter === index ? 'text-white' : 'text-den'
                     } rounded-[10vw] title14-400-150 block py-[0.59vw] px-[1.5vw] max-md:py-[1.73vw] max-md:px-[4.43vw] cursor-pointer max-md:title-mb12-400-150 max-md:whitespace-nowrap max-md:box-content max-lg:title-tl12`}
                     onClick={() => {
-                        click();
                         if (index === indexFilter) {
                             return setIndexFilter(-1)
                         }

@@ -27,6 +27,7 @@ const useStore = create((set, get) => ({
     isClose: true,
     isRedirect: false,
     defaultMap: null,
+    
     setSelectTypeSearch: (data) => {
         set((state) => {
             return {

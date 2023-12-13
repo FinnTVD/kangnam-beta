@@ -168,7 +168,7 @@ export default function ContentDetailProject({ data, detail, lang, t, isProject 
                     </div>
 
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>
-                        <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px] max-lg:title-tl20'>
+                        <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px] max-lg:title-tl20 md:text-[2.1vw]'>
                             Vị trí
                         </h2>
                         <div className='flex mb-[0.75vw] gap-x-[1vw] max-md:gap-y-[4.27vw] max-md:mb-[4.27vw] max-md:flex-col'>
