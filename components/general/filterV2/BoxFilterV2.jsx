@@ -89,22 +89,6 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
                     ),
                 )}
 
-            {isOther && (
-                <ItemFilterOther
-                    setIndexFilter={setIndexFilter}
-                    indexFilter={indexFilter}
-                    lang={lang}
-                    item={{
-                        id: 6,
-                        title: 'Thêm',
-                        slug: 'add',
-                        titleLang: 'add',
-                        api: '/add',
-                    }}
-                    isMobile={isMobile}
-                    t={t}
-                />
-            )}
-        </ul>
+    </ul>
     )
 }

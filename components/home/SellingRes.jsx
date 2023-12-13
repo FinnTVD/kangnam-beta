@@ -71,12 +71,14 @@ export default function SellingRes({ lang, data, t }) {
                     {t?.homepage?.section3Mobile?.buy?.subtitle?.projectDistribution}
                 </span>
             </div>
-            <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
-                <BoxFilterV2
-                    arrFilter={arrFilter}
-                    t={t}
-                />
-            </div>
+            {/* <div className='scrollbar overflow-x-scroll'> */}
+                <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
+                    <BoxFilterV2
+                        arrFilter={arrFilter}
+                        t={t}
+                    />
+                </div>
+            {/* </div> */}
 
             {dataNew && (
                 <Swiper

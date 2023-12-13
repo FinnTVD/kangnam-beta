@@ -70,7 +70,7 @@ const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
     const [sideRef, isOutSide] = useClickOutSide()
 
     useEffect(() => {
-        isOutSide && setIsOpen(false)
+        isOutSide && setIsOpen(false);
     }, [isOutSide])
 
     useEffect(() => {

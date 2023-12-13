@@ -969,4 +969,13 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         left: 0;
         top: 18.25vw;
     }
+
+    /* hidden scrollbar */
+
+    .scrollbar-hidden {
+        overflow-x: visible;
+    }
+    .scrollbar::-webkit-scrollbar {
+        display: none;
+    }
 }
