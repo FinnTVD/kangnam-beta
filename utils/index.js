@@ -423,6 +423,153 @@ const listAreaProjectP = [
 ]
 const listSlugNavHire = ['thue', '임대아파트', 'hire', '赁赁']
 
+const originHouseInit = {
+    north: [
+        {
+            title: 'Bắc',
+            langCode: 'vi',
+        },
+        {
+            title: 'North',
+            langCode: 'en',
+        },
+        {
+            title: 'North',
+            langCode: 'kr',
+        },
+        {
+            title: 'North',
+            langCode: 'cn',
+        },
+    ],
+    west: [
+        {
+            title: 'Tây',
+            langCode: 'vi',
+        },
+        {
+            title: 'West',
+            langCode: 'en',
+        },
+        {
+            title: 'West',
+            langCode: 'kr',
+        },
+        {
+            title: 'West',
+            langCode: 'cn',
+        },
+    ],
+    east: [
+        {
+            title: 'Đông',
+            langCode: 'vi',
+        },
+        {
+            title: 'East',
+            langCode: 'en',
+        },
+        {
+            title: 'East',
+            langCode: 'kr',
+        },
+        {
+            title: 'East',
+            langCode: 'cn',
+        },
+    ],
+    south: [
+        {
+            title: 'Nam',
+            langCode: 'vi',
+        },
+        {
+            title: 'South',
+            langCode: 'en',
+        },
+        {
+            title: 'South',
+            langCode: 'kr',
+        },
+        {
+            title: 'South',
+            langCode: 'cn',
+        },
+    ],
+    southeast: [
+        {
+            title: 'Đông Nam',
+            langCode: 'vi',
+        },
+        {
+            title: 'Southeast',
+            langCode: 'en',
+        },
+        {
+            title: 'Southeast',
+            langCode: 'kr',
+        },
+        {
+            title: 'Southeast',
+            langCode: 'cn',
+        },
+    ],
+    northeast: [
+        {
+            title: 'Đông Bắc',
+            langCode: 'vi',
+        },
+        {
+            title: 'Northeast',
+            langCode: 'en',
+        },
+        {
+            title: 'Northeast',
+            langCode: 'kr',
+        },
+        {
+            title: 'Northeast',
+            langCode: 'cn',
+        },
+    ],
+    southwest: [
+        {
+            title: 'Tây Nam',
+            langCode: 'vi',
+        },
+        {
+            title: 'Southwest',
+            langCode: 'en',
+        },
+        {
+            title: 'Southwest',
+            langCode: 'kr',
+        },
+        {
+            title: 'Southwest',
+            langCode: 'cn',
+        },
+    ],
+    northwest: [
+        {
+            title: 'Tây Bắc',
+            langCode: 'vi',
+        },
+        {
+            title: 'Northwest',
+            langCode: 'en',
+        },
+        {
+            title: 'Northwest',
+            langCode: 'kr',
+        },
+        {
+            title: 'Northwest',
+            langCode: 'cn',
+        },
+    ],
+}
+
 export {
     handleCheckParamsLanguage,
     formatDateTime,
@@ -457,4 +604,5 @@ export {
     listAreaProject,
     listAreaProjectP,
     slugProjectLangCode,
+    originHouseInit,
 }

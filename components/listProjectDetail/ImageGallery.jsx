@@ -330,7 +330,7 @@ export default function ImageGallery({ data }) {
                 </Swiper>
                 <div
                     onClick={handleScrollDownMap}
-                    className='flex flex-col items-center justify-center bg-logo rounded-[10px] gap-[0.375vw] w-[5vw] h-[5vw] max-md:hidden cursor-pointer group transition-all duration-500 max-lg:w-[8vw] max-lg:h-[8vw]'
+                    className='flex flex-col items-center justify-center bg-logo rounded-[10px] gap-[0.375vw] w-[5vw] h-[5vw] max-md:hidden cursor-pointer group transition-all duration-500 max-lg:w-[8vw] max-lg:h-[8vw] flex-shrink-0 my-auto'
                 >
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -338,7 +338,7 @@ export default function ImageGallery({ data }) {
                         height='30'
                         viewBox='0 0 31 30'
                         fill='none'
-                        className='w-[1.875vw] group-hover:translate-y-[0.5vw] transition-all duration-300'
+                        className='w-[1.875vw] max-lg:w-[2.875vw] group-hover:translate-y-[0.5vw] transition-all duration-300'
                     >
                         <path
                             d='M15.1375 14.6875C15.7399 14.6875 16.2546 14.473 16.6816 14.0441C17.1087 13.6152 17.3223 13.0996 17.3223 12.4972C17.3223 11.8949 17.1078 11.3802 16.6789 10.9531C16.2499 10.526 15.7343 10.3125 15.132 10.3125C14.5297 10.3125 14.015 10.527 13.5879 10.9559C13.1608 11.3848 12.9473 11.9004 12.9473 12.5028C12.9473 13.1051 13.1617 13.6198 13.5907 14.0469C14.0196 14.474 14.5352 14.6875 15.1375 14.6875ZM15.1348 27.5C11.7806 24.6458 9.27539 21.9948 7.61914 19.5469C5.96289 17.099 5.13477 14.8333 5.13477 12.75C5.13477 9.625 6.13997 7.13542 8.15039 5.28125C10.1608 3.42708 12.4889 2.5 15.1348 2.5C17.7806 2.5 20.1087 3.42708 22.1191 5.28125C24.1296 7.13542 25.1348 9.625 25.1348 12.75C25.1348 14.8333 24.3066 17.099 22.6504 19.5469C20.9941 21.9948 18.4889 24.6458 15.1348 27.5Z'

@@ -5,6 +5,7 @@ import ImageGallery from './ImageGallery'
 import RelatedProject from './RelatedProject'
 import NavBarV2 from '../general/NavBarV2'
 import NotFound from '@/app/[lang]/not-found'
+import ContentDetailProject from './ContentDetailProject'
 
 export default async function IndexProjectDetail({ lang, detail, t, isProject }) {
     const data = await getData(`${isProject ? '/project/project-by-slug/' : '/property/property-by-slug/'}${detail}`)
@@ -22,13 +23,23 @@ export default async function IndexProjectDetail({ lang, detail, t, isProject })
             ) : (
                 <main>
                     <ImageGallery data={data} />
-                    <ContentDetail
-                        data={data}
-                        detail={detail}
-                        lang={lang}
-                        t={t}
-                        isProject={isProject}
-                    />
+                    {isProject ? (
+                        <ContentDetailProject
+                            data={data}
+                            detail={detail}
+                            lang={lang}
+                            t={t}
+                            isProject={isProject}
+                        />
+                    ) : (
+                        <ContentDetail
+                            data={data}
+                            detail={detail}
+                            lang={lang}
+                            t={t}
+                            isProject={isProject}
+                        />
+                    )}
                     <CommentFB data={data} />
                     <RelatedProject
                         lang={lang}

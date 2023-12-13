@@ -166,11 +166,6 @@ export default function MyProject({ lang, t, data }) {
                                             sizes='100vw'
                                             fill
                                         />
-                                        <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150'>
-                                            {e?.propertyCategory?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang),
-                                            )?.name || 'Dự án'}
-                                        </div>
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
@@ -300,7 +295,7 @@ export default function MyProject({ lang, t, data }) {
                         id='showFeature'
                         className={`${
                             isFeatureHome?.isContain ? 'active' : ''
-                        } fixed top-1/2 right-0 -translate-y-1/2 w-[3vw] h-[6vw] bg-white z-50  rounded-tl-full rounded-bl-full flex justify-center items-center`}
+                        } fixed top-1/2 right-0 -translate-y-1/2 w-[2.5vw] h-[4vw] bg-white z-50  rounded-tl-full rounded-bl-full flex justify-center items-center cursor-pointer`}
                     >
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -308,7 +303,7 @@ export default function MyProject({ lang, t, data }) {
                             height='25'
                             viewBox='0 0 24 25'
                             fill='none'
-                            className={`w-[1.375vw] h-[1.375vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:w-[4.27vw] max-md:h-[4.27vw] rotate-90`}
+                            className={`w-[1.25vw] h-[1.25vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:w-[4.27vw] max-md:h-[4.27vw] rotate-90`}
                         >
                             <path
                                 d='M1 1L12 12L23 1'
