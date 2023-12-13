@@ -5,9 +5,10 @@ import { useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import MapProjectDetail from './MapProjectDetail'
 import PriceDetail from './PriceDetail'
-import { categoryHireId, originHouseInit } from '@/utils'
-import InfoDetail from './InfoDetail'
-import InfoDetailRes from './InfoDetailRes'
+import { categoryHireId } from '@/utils'
+
+import InfoDetailProject from './InfoDetailProject'
+import InfoDetailResProject from './InfoDetailResProject'
 
 const handleCheckStatus = (alias) => {
     if (alias === 'hire') return '/tháng'
@@ -33,7 +34,7 @@ const slugProjectLang = [
     },
 ]
 
-export default function ContentDetail({ data, detail, lang, t, isProject }) {
+export default function ContentDetailProject({ data, detail, lang, t, isProject }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
     if (!data) return
     useEffect(() => {
@@ -90,39 +91,7 @@ export default function ContentDetail({ data, detail, lang, t, isProject }) {
                         <ul className='flex gap-x-[2.5vw] max-md:flex-wrap max-md:gap-x-[10.61vw] max-md:gap-y-[4.27vw]'>
                             <li
                                 className={`${
-                                    data?.bed ? '' : 'hidden'
-                                } flex gap-x-[0.63vw] max-md:gap-x-[2.67vw] items-center`}
-                            >
-                                <Image
-                                    className='object-cover w-[1.25vw] h-[1.25vw] max-md:w-[5.33vw] max-md:h-[5.33vw]'
-                                    src='/images/bed.svg'
-                                    alt='bed'
-                                    width={24}
-                                    height={24}
-                                />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
-                                    {data?.bed} ngủ
-                                </span>
-                            </li>
-                            <li
-                                className={`${
-                                    data?.bath ? '' : 'hidden'
-                                } flex gap-x-[0.63vw] max-md:gap-x-[2.67vw] items-center`}
-                            >
-                                <Image
-                                    className='object-cover w-[1.25vw] h-[1.25vw] max-md:w-[5.33vw] max-md:h-[5.33vw]'
-                                    src='/images/wc.svg'
-                                    alt='bed'
-                                    width={24}
-                                    height={24}
-                                />
-                                <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
-                                    {data?.bath} tắm
-                                </span>
-                            </li>
-                            <li
-                                className={`${
-                                    dataDetail?.size ? '' : 'hidden'
+                                    dataDetail?.areaDisplay ? '' : 'hidden'
                                 } flex gap-x-[0.63vw] max-md:gap-x-[2.67vw] items-center`}
                             >
                                 <Image
@@ -133,28 +102,28 @@ export default function ContentDetail({ data, detail, lang, t, isProject }) {
                                     height={24}
                                 />
                                 <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
-                                    {dataDetail?.size}
+                                    {dataDetail?.areaDisplay}
                                 </span>
                             </li>
                             <li
                                 className={`${
-                                    data?.orient ? '' : 'hidden'
+                                    data?.buildingNumber ? '' : 'hidden'
                                 } flex gap-x-[0.63vw] max-md:gap-x-[2.67vw] items-center`}
                             >
                                 <Image
-                                    className='object-cover w-[1.25vw] h-[1.25vw] max-md:w-[5.33vw] max-md:h-[5.33vw]'
-                                    src='/images/direction.svg'
+                                    className='object-cover w-[1.5vw] h-[1.5vw] max-md:w-[5.33vw] max-md:h-[5.33vw]'
+                                    src='/images/bt.svg'
                                     alt='bed'
                                     width={24}
                                     height={24}
                                 />
                                 <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
-                                    {originHouseInit[data?.orient]?.find((e) => e?.langCode === lang)?.title}
+                                    Số toà nhà: {data?.buildingNumber}
                                 </span>
                             </li>
                             <li
                                 className={`${
-                                    dataDetail?.bedRoom ? '' : 'hidden'
+                                    data?.constructionYear ? '' : 'hidden'
                                 } flex gap-x-[0.63vw] max-md:gap-x-[2.67vw] items-center`}
                             >
                                 <Image
@@ -165,12 +134,12 @@ export default function ContentDetail({ data, detail, lang, t, isProject }) {
                                     height={24}
                                 />
                                 <span className='text-14pc leading-[1.14] font-normal opacity-70 text-den max-md:text-14mb max-md:leading-[1.14] max-lg:title-tl14'>
-                                    Năm xây dựng: {dataDetail?.constructionYear}
+                                    Năm xây dựng: {data?.constructionYear}
                                 </span>
                             </li>
                         </ul>
                     </div>
-                    <InfoDetailRes
+                    <InfoDetailResProject
                         data={data}
                         lang={lang}
                         dataDetail={dataDetail}
@@ -190,7 +159,11 @@ export default function ContentDetail({ data, detail, lang, t, isProject }) {
                             className='absolute bottom-[calc(5.75vw-2.19vw)] left-0 max-md:bottom-0 text-den/20'
                         ></div>
                     </div>
-                    <div className='text-den mt-[1.5vw] text-[1vw] font-semibold leading-normal max-md:text-14mb max-lg:text-14tl'>
+                    <div
+                        className={`${
+                            data?.propertyCode ? '' : 'hidden'
+                        } text-den mt-[1.5vw] text-[1vw] font-semibold leading-normal max-md:text-14mb max-lg:text-14tl`}
+                    >
                         Mã dự án: <span className=' text-nau-nhat tracking-[0.5px]'>{data?.propertyCode}</span>
                     </div>
 
@@ -240,7 +213,7 @@ export default function ContentDetail({ data, detail, lang, t, isProject }) {
                         />
                     </div>
                 </div>
-                <InfoDetail
+                <InfoDetailProject
                     data={data}
                     lang={lang}
                     dataDetail={dataDetail}
