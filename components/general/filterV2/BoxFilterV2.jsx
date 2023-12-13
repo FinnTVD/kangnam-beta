@@ -11,6 +11,7 @@ import ItemFilterOther from './ItemFilterOther'
 
 export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = false }) {
     const [indexFilter, setIndexFilter] = useState(null)
+
     const [isScrollX, setIsScrollX] = useState(true);
     const [count, setCount] = useState(0);
     
@@ -92,7 +93,6 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
                             />
                         ),
                     )}
-
                 {isOther && (
                     <ItemFilterOther
                         setIndexFilter={setIndexFilter}

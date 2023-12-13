@@ -8,7 +8,7 @@ import { cityIdDefault, latDefault, levelZoomDefault, lngDefault } from '@/utils
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
-const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
+const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t, click }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
