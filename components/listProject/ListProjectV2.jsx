@@ -314,7 +314,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                             id='boxRef-filter'
                             className={`${
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
-                            } max-md:pl-0 max-md:ml-[0.1vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
+                            } max-md:pl-0 max-md:ml-[0.1vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.57vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
