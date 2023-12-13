@@ -24,12 +24,13 @@ export default function Hiring({ lang, t, data }) {
                     {t?.homepage?.section3Mobile?.rent?.subtitle?.projectDistribution}
                 </span>
             </div>
-            <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
-                <BoxFilterV2
-                    arrFilter={arrFilterV2}
-                    t={t}
-                />
-            </div>
+                <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
+                    <BoxFilterV2
+                        arrFilter={arrFilterV2}
+                        t={t}
+                        />
+                </div>
+      
             {data && (
                 <Swiper
                     slidesPerView={'auto'}
