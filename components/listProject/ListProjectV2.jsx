@@ -300,7 +300,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                         id='container_filter'
                         className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}
                     >
-                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
+                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[0.2vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
                                 <span className='opacity-50 text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                     {t?.projects?.subtitle}
@@ -314,7 +314,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                             id='boxRef-filter'
                             className={`${
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
-                            } max-md:pl-0 max-md:ml-[2.67vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
+                            } max-md:pl-0 max-md:ml-[0.1vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
