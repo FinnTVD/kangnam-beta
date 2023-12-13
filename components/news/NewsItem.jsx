@@ -36,7 +36,7 @@ export default function NewsItem({ newsOtherItem, lang, index }) {
                 className='group cursor-pointer w-full h-full bg-white rounded-2xl backdrop-blur-2xl p-[1.5vw] max-md:rounded-[13px] max-md:p-[5.3vw] max-md:py-mb10 shadow-input max-md:shadow-newsDetailMb'
             >
                 {/* <div className="flex h-[11vw] items-center"> */}
-                <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw] max-lg:h-[40vw]'>
+                <div className='w-full h-[16.1875vw] relative rounded-lg overflow-hidden max-md:h-[56vw] max-lg:h-[40vw] max-md:rounded-[8px]'>
                     <Image
                         src={newsOtherItem?.image ? newsOtherItem?.image : '/images/featuredImg.jpg'}
                         fill
@@ -48,7 +48,7 @@ export default function NewsItem({ newsOtherItem, lang, index }) {
                     {categoryTranslation}
                 </span>
                 <div className='w-full mt-[0.2625vw]] flex flex-col max-md:mt-[0.8vw]'>
-                    <h2 className='mt-[0.25vw] text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 max-md:title-mb16-700-135 max-lg:title-tl20'>
+                    <h2 className='mt-[0.25vw] text-den-2 title20-700-150 group-hover:text-[#D6A279] transition duration-300 max-md:title-mb16-700-135 max-lg:title-tl20 line-clamp-5 max-md:line-clamp-3'>
                         {translation?.title}
                     </h2>
                     <span className='text-den-2 title14-400-160 mt-[0.5vw] line-clamp-2 max-md:mt-[0.8vw] max-md:title-mb12-400-150 max-lg:title-tl14'>
