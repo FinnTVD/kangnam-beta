@@ -90,6 +90,11 @@
             },
             {
                 "id": 4,
+                "title": "Hire",
+                "href": "/hire"
+            },
+            {
+                "id": 5,
                 "title": "Agreement & Legal",
                 "href": "/agreements"
             }

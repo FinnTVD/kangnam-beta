@@ -21,7 +21,6 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
     const searchParams = useSearchParams()
 
     const [sideRef, isOutSide] = useClickOutSide()
-    console.log(isOutSide);
     // const lh = searchParams.get(item?.slug)?.split('--')
     const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
 
@@ -30,10 +29,7 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
     }, [searchParams])
 
     useEffect(() => {
-        
-        console.log('isOutSide', isOutSide, setIndexFilter(-1));
-        isOutSide && setIndexFilter(-1);
-       
+        isOutSide && setIndexFilter(-1)
     }, [isOutSide])
 
     const handleCheckValueInput = (e) => {

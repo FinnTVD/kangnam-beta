@@ -86,10 +86,15 @@
             {
                 "id": 3,
                 "title": "Mua bán lại",
-                "href": "/resale"
+                "href": "/mua-ban"
             },
             {
                 "id": 4,
+                "title": "Cho Thuê",
+                "href": "/thue"
+            },
+            {
+                "id": 5,
                 "title": "Thỏa thuận & pháp lý",
                 "href": "/agreements"
             }
