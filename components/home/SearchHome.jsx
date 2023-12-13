@@ -67,14 +67,14 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                 lang={lang}
             />
             <div className='flex items-center my-[1.88vw] max-md:mt-[4.27vw] max-md:mb-[2.67vw]'>
-                <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160'>
+                <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160 whitespace-nowrap'>
                     {t?.homepage?.section1?.suggest}:
                 </span>
-                <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw]'>
+                <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw] flex-wrap max-md:gap-y-[1.5vw]'>
                     {handleChangeSuggestLang(6)?.map((e, index) => (
                         <li
                             key={index}
-                            className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150'
+                            className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150 whitespace-nowrap'
                             onClick={() => {
                                 setValueSearch(e)
                                 setTimeout(() => {

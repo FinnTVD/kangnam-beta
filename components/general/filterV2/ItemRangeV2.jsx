@@ -11,6 +11,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
     const searchParams = useSearchParams()
     const searchMin = searchParams.get(isPrice ? 'minPrice' : 'minArea')
     const searchMax = searchParams.get(isPrice ? 'maxPrice' : 'maxArea')
+
     const handleRenderMax = () => {
         if (isHire) {
             if (isPrice) {
