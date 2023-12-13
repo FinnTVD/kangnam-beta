@@ -457,7 +457,7 @@ const SearchGlobal = ({
                     <input
                         className={`${
                             classInput ||
-                            'w-full outline-none text-den lg:title18-400-150 max-lg:text-[2.5vw] max-md:title-mb14-400-130 pr-[2vw]'
+                            'w-full outline-none text-den lg:title18-400-150 max-lg:text-[2.5vw] max-md:title-mb14-400-130 max-md:text-[3.73vw] pr-[2vw]'
                         }`}
                         type='text'
                         name='search'

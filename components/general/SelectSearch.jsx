@@ -70,7 +70,7 @@ const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
     const [sideRef, isOutSide] = useClickOutSide()
 
     useEffect(() => {
-        isOutSide && setIsOpen(false);
+        isOutSide && setIsOpen(false)
     }, [isOutSide])
 
     useEffect(() => {
@@ -99,7 +99,9 @@ const SelectSearch = ({ type = 'dark', menu = false, lang, data }) => {
             ref={sideRef}
             onClick={() => setIsOpen(!isOpen)}
             className={`${type === 'white' ? 'text-white' : 'text-den'} ${
-                menu ? 'max-md:title-mb12-400-130' : 'max-md:title-mb14-400-130'
+                menu
+                    ? 'max-md:title-mb12-400-130 max-md:text-[3.2vw]'
+                    : 'max-md:title-mb14-400-130 max-md:text-[3.73vw]'
             } gap-x-[0.13vw] select-none cursor-pointer flex items-center max-lg:text-[2.56vw] title14-400-130 whitespace-nowrap relative`}
         >
             {listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name}
