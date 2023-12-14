@@ -70,8 +70,8 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                 <span className='mr-[0.81vw] max-md:mr-[4.27vw] text-white title16-600-160 max-lg:title-tl14-600-160 max-md:title-mb12-600-160 whitespace-nowrap'>
                     {t?.homepage?.section1?.suggest}:
                 </span>
-                <ul className='flex gap-x-[0.5vw] max-md:gap-x-[1.33vw] flex-wrap max-md:gap-y-[1.5vw]'>
-                    {handleChangeSuggestLang(6)?.map((e, index) => (
+                <ul className='flex gap-[0.5vw] max-md:gap-x-[1.33vw] flex-wrap max-md:gap-y-[1.5vw]'>
+                    {handleChangeSuggestLang(20)?.map((e, index) => (
                         <li
                             key={index}
                             className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150 whitespace-nowrap'
@@ -87,7 +87,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                     ))}
                 </ul>
             </div>
-            <div className='flex gap-x-[1.06vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-lg:gap-y-[2vw] max-lg:flex-wrap'>
+            <div className='flex gap-x-[1.06vw] gap-y-[1vw] max-lg:gap-x-[3vw] max-md:gap-x-[2vw] max-md:gap-y-[2.67vw] max-lg:gap-y-[2vw] flex-wrap'>
                 {homePagePropertyType?.length > 0 &&
                     homePagePropertyType?.map((e, index) => (
                         <div
@@ -106,7 +106,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                                 priority
                                 className='object-cover transition-all duration-150 group-hover:scale-125 w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                             />
-                            <span className='text-white title14-400-150 title-mb12-400-150 inline-flex relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left max-lg:whitespace-nowrap'>
+                            <span className='text-white title14-400-150 title-mb12-400-150 relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left whitespace-nowrap inline-block'>
                                 {e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name ||
                                     e?.title}
                             </span>
