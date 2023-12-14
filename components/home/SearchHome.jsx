@@ -93,7 +93,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                         <div
                             key={index}
                             onClick={() => handleFilter(e)}
-                            className='py-[0.97vw] group h-fit w-fit cursor-pointer px-[1.5vw] border border-solid border-logo flex gap-x-[1vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'
+                            className='py-[0.85vw] group h-fit w-fit cursor-pointer px-[1.25vw] border border-solid border-logo flex gap-x-[0.5vw] max-md:gap-x-[2.13vw] max-md:py-[2.67vw] max-md:px-[4vw] rounded-[6.25vw] items-center bg-category backdrop-blur-[7.5px]'
                         >
                             <Image
                                 src={e?.icon || '/images/px.png'}
@@ -104,7 +104,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                                 width={40}
                                 height={40}
                                 priority
-                                className='object-cover transition-all duration-150 group-hover:scale-125 w-[2vw] h-[2vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
+                                className='object-cover transition-all duration-150 group-hover:scale-125 w-[1.5vw] h-[1.5vw] max-md:w-[4.8vw] max-lg:w-[3vw] max-lg:h-[3vw] max-md:h-[4.8vw]'
                             />
                             <span className='text-white title14-400-150 title-mb12-400-150 relative title-tl12-400-150 before:absolute before:content-[""] before:top-0 before:left-0 before:w-full before:h-full before:border-b before:border-white before:scale-x-0 before:origin-right before:transition-transform before:duration-300 group-hover:before:scale-x-100 group-hover:before:origin-left whitespace-nowrap inline-block'>
                                 {e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name ||
