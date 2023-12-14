@@ -38,14 +38,14 @@ export default async function SellingBox({ lang, t, searchParams }) {
 
     const [dataSelling, dataHiring] = await Promise.all([
         getData(
-            `/property/for-web?take=20${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
+            `/property?take=20${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
             }${propertyTypeParams ? propertyTypeParams : ''}`,
         ),
         getData(
-            `/property/for-web?propertyCategoryIds=${categoryHireId}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}`,
+            `/property?propertyCategoryIds=${categoryHireId}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
+                propertyTypeParams ? propertyTypeParams : ''
+            }`,
         ),
     ])
     if (dataHiring === undefined || dataSelling === undefined) return <SellingRes.Skeleton />
