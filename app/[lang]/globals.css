@@ -886,6 +886,9 @@ article#list-img-preview::-webkit-scrollbar-thumb {
 }
 
 @media only screen and (max-width: 767px) {
+    html {
+        overflow: scroll !important;
+    }
     #map .text-cluster {
         position: absolute;
         z-index: 9999999;

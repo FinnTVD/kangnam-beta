@@ -11,15 +11,23 @@ import ItemFilterOther from './ItemFilterOther'
 
 export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = false }) {
     const [indexFilter, setIndexFilter] = useState(null)
-    const [isScrollX, setIsScrollX] = useState(null)
+    const [isScrollX, setIsScrollX] = useState(false)
+    const [count, setCount] = useState(0)
     
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
     const pathName = usePathname()
     useEffect(() => {
-        if (indexFilter >= 0) {
-            setIsScrollX(false)
-        } else {
-            setIsScrollX(true)
+        console.log('isMobile', isMobile);
+        if(count >  0) {
+            if (indexFilter >= 0) {
+                setIsScrollX(false)
+            } else {
+                setIsScrollX(true)
+                setCount(2)
+            }
+        }
+        if(isMobile) {
+            setCount(1)
         }
     }, [indexFilter])
     let isHire = false
@@ -42,11 +50,11 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
 
     return (
         <ul
-            className={`${
-                isScrollX || count == 0 ? 'max-md:overflow-x-scroll' : ''
-            } flex gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none relative`}
-        >
-            {arrFilter &&
+        className={`${
+            isScrollX || count == 0 ? 'max-md:overflow-x-scroll ' : ''
+        } flex max-md:pt-[2vw] max-sm:h-[10vw] gap-x-[1.5vw] max-md:gap-x-[2.5vw] select-none  max-md:overflow-x-scroll max-md:pb-[9.2vw]`}
+    >
+        {arrFilter &&
                     arrFilter.map((e, index) =>
                         handleCheckPriceAndArea(e?.slug) ? (
                             <ItemRangeV2
