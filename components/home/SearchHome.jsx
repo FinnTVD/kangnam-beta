@@ -71,7 +71,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
                     {t?.homepage?.section1?.suggest}:
                 </span>
                 <ul className='flex gap-[0.5vw] max-md:gap-x-[1.33vw] flex-wrap max-md:gap-y-[1.5vw]'>
-                    {handleChangeSuggestLang(20)?.map((e, index) => (
+                    {handleChangeSuggestLang(10)?.map((e, index) => (
                         <li
                             key={index}
                             className='text-white px-[1.12vw] h-fit w-fit backdrop-blur-[3px] bg-suggest rounded-[6.25vw] py-[0.5vw] max-md:py-[1.33vw] max-md:px-[2.13vw] cursor-pointer title14-400-150 title-mb10-400-150 title-tl12-400-150 whitespace-nowrap'
