@@ -3,16 +3,49 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { memo, useEffect, useState } from 'react'
 import InputCheckBox from './InputCheckBox'
-import { cityIdDefault, latDefault, levelZoomDefault, lngDefault } from '@/utils'
 
 let dataNew = [
     {
         id: 'selling',
-        title: 'Đã mở bán',
+        translations: [
+            {
+                languageCode: 'vi',
+                name: 'Đã mở bán',
+            },
+            {
+                languageCode: 'en',
+                name: 'Opened for sale',
+            },
+            {
+                languageCode: 'kr',
+                name: '판매 개시',
+            },
+            {
+                languageCode: 'cn',
+                name: '已开业出售',
+            },
+        ],
     },
     {
         id: 'open',
-        title: 'Chưa mở bán',
+        translations: [
+            {
+                languageCode: 'vi',
+                name: 'Chưa mở bán',
+            },
+            {
+                languageCode: 'en',
+                name: 'Not yet open for sale',
+            },
+            {
+                languageCode: 'kr',
+                name: '아직 판매되지 않음',
+            },
+            {
+                languageCode: 'cn',
+                name: '尚未开放出售',
+            },
+        ],
     },
 ]
 const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
@@ -85,7 +118,7 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
                         setIndexFilter(index)
                     }}
                 >
-                    {item?.title}
+                    {item?.translations?.find((e) => e?.langCode === lang)?.title || item?.title}
                 </span>
                 <span
                     className={`${

@@ -129,7 +129,10 @@ export default function InfoDetail({ data, lang, dataDetail, t }) {
                     </li>
                 </ul>
             </div>
-            <FormNamePhone id={data?.id} />
+            <FormNamePhone
+                id={data?.id}
+                t={t}
+            />
         </div>
     )
 }

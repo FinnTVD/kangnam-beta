@@ -53,14 +53,14 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         },
         {
             id: 4,
-            title: 'Khoảng giá',
+            title: t?.projects?.filterSecond?.priceRange,
             slug: 'price',
             titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
-            title: 'Diện tích',
+            title: t?.projects?.filterSecond?.acreage,
             slug: 'area',
             titleLang: 'area',
             api: '/area',
@@ -83,21 +83,21 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         },
         {
             id: 3,
-            title: 'Hình thức',
+            title: t?.projects?.filterSecond?.form,
             slug: 'propertyCategoryIds',
             titleLang: 'propertyCategoryIds',
             api: '/property-category',
         },
         {
             id: 4,
-            title: 'Khoảng giá',
+            title: t?.projects?.filterSecond?.priceRange,
             slug: 'price',
             titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
-            title: 'Diện tích',
+            title: t?.projects?.filterSecond?.acreage,
             slug: 'area',
             titleLang: 'area',
             api: '/area',
@@ -320,6 +320,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
                                 t={t}
                                 isOther={true}
+                                lang={lang}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
                                 <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
@@ -357,7 +358,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                     </div>
                     {Array.isArray(data?.data) && data?.data?.length === 0 && (
                         <div className='text-black text-[1.5vw] font-normal leading-normal text-center'>
-                            Không tìm thấy bất động sản nào!
+                            {t?.projects?.filterSecond?.nofind}
                         </div>
                     )}
                     <div
@@ -439,7 +440,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                                                 e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name ||
                                                 e?.translations[0]?.name ||
-                                                'Chưa có thông tin!'}
+                                                t?.projects?.filterSecond?.noinfo}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -479,7 +480,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -494,7 +495,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                                             <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translations?.find((e) =>
                                                     e?.languageCode?.toLowerCase()?.includes(lang),
-                                                )?.priceDisplay || 'Chưa có thông tin!'}
+                                                )?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>
@@ -535,7 +536,10 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                             {/* <MapV3 /> */}
-                            <MapV5 dataSlug={dataSlug} />
+                            <MapV5
+                                dataSlug={dataSlug}
+                                t={t}
+                            />
                         </div>
                     </div>
                 </div>

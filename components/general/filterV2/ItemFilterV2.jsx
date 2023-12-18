@@ -121,7 +121,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                         setIndexFilter(index)
                     }}
                 >
-                    {item?.title}
+                    {item?.translations?.find((e) => e?.langCode === lang)?.title || item?.title}
                 </span>
                 <span
                     className={`${

@@ -10,7 +10,7 @@ export default function InputCheckBoxAdd({ e, lang, lh, index }) {
         const callApi = async (id) => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?take=1&propertyAreaTypeIds=${id}`)
             const data = await res.json()
-            data && setData(data?.data[0]?.address)
+            data && setData(data?.data?.[0]?.address)
         }
         callApi(e?.id)
     }, [])

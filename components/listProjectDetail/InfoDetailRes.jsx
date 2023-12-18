@@ -37,7 +37,7 @@ export default function InfoDetailRes({ data, lang, dataDetail, t }) {
                         </span>
                     </div>
                     <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
-                        {dataDetail?.size} m²
+                        {dataDetail?.size}
                     </span>
                 </li>
                 <li className='flex items-center justify-between'>
@@ -59,7 +59,7 @@ export default function InfoDetailRes({ data, lang, dataDetail, t }) {
                         </span>
                     </div>
                     <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
-                        {dataDetail?.orientHouse}
+                        {data?.orient}
                     </span>
                 </li>
                 <li className='flex items-center justify-between'>
@@ -70,7 +70,7 @@ export default function InfoDetailRes({ data, lang, dataDetail, t }) {
                         </span>
                     </div>
                     <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
-                        {dataDetail?.constructionYear}
+                        {data?.constructionYear}
                     </span>
                 </li>
                 <li className='flex items-center justify-between'>
@@ -81,7 +81,7 @@ export default function InfoDetailRes({ data, lang, dataDetail, t }) {
                         </span>
                     </div>
                     <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2] max-lg:title-tl14'>
-                        {dataDetail?.orientBalcony}
+                        {data?.orientBalcony}
                     </span>
                 </li>
                 <li className='flex items-center justify-between'>

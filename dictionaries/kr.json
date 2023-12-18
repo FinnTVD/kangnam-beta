@@ -229,20 +229,20 @@
             "subtitle": "프로젝트 ",
             "title": "핫한 프로젝트",
             "button": "전체 매물 보기",
-            "over": "Hơn",
-            "projectDistribution": "dự án đang được phân phối"
+            "over": "보다",
+            "projectDistribution": "프로젝트가 배포되고 있습니다"
         },
         "section6": {
             "title": "지역별 핫 매물 소개",
             "button": "프로젝트 세부"
         },
         "section7": {
-            "subtitle": "Tổng hợp các đối tác",
+            "subtitle": "파트너의 요약",
             "title": "강남부동산의 파트너",
             "button": "하노이강남부동산 파트너 요청"
         },
         "section8": {
-            "subtitle": "Tổng hợp tin tức",
+            "subtitle": "뉴스 요약",
             "title": "핫 이슈",
             "button": "전체 매물 보기"
         }
@@ -250,40 +250,65 @@
     "projects": {
         "subtitle": "사실상 확인",
         "title": "주택 매매",
-        "titleH": "Renting an apartment land",
-        "titleP": "All Projects",
+        "titleH": "아파트 랜드 임대",
+        "titleP": "모든 프로젝트",
         "map": "지도",
         "category": "부동산 유형",
-        "address": "Địa điểm",
-        "show": "Hiển thị",
-        "over": "trong số hơn",
-        "validateProject": "nhà đất xác thực",
-        "validateIsProject": "Project authentication",
+        "address": "위치",
+        "show": "표시하다",
+        "over": "더",
+        "validateProject": "부동산",
+        "validateIsProject": "프로젝트 인증",
         "item": {
             "address": "주소",
-            "price": "Mức giá",
+            "price": "가격",
             "area": "면적"
         },
         "filter1": {
-            "propertyTypeIds": "Select property type",
-            "propertyAreaTypeIds": "Choosing a real estate location",
-            "propertyTypeIdsP": "Select a project type",
-            "propertyAreaTypeIdsP": "Select project site",
-            "propertyCategoryIds": "Choose the form of real estate",
-            "status": "Select project status",
-            "price": "Quickly select a price range",
-            "area": "Quick selection of area",
-            "reset": "Đặt lại",
-            "cancel": "Hủy",
-            "apply": "Áp dụng"
+            "propertyTypeIds": "속성 유형을 선택하십시오",
+            "propertyAreaTypeIds": "부동산 위치 선택",
+            "propertyTypeIdsP": "프로젝트 유형을 선택하십시오",
+            "propertyAreaTypeIdsP": "프로젝트 사이트를 선택하십시오",
+            "propertyCategoryIds": "부동산의 형태를 선택하십시오",
+            "status": "프로젝트 상태를 선택하십시오",
+            "price": "가격대를 빠르게 선택하십시오",
+            "area": "영역의 빠른 선택",
+            "reset": "초기화",
+            "cancel": "취소",
+            "apply": "적용하다"
         },
         "filter2": {
             "title1": "가장 핫한 매물",
-            "title2": "Giá tăng dần",
-            "title3": "Giá giảm dần"
+            "title2": "가격은 점차 상승합니다",
+            "title3": "가격이 하락합니다"
+        },
+        "filterSecond":{
+            "orSelect":"아니면 선택하세요",
+            "price":"가격",
+            "priceRange":"가격 범위",
+             "acreage":"토지",
+            "status":"상태",
+            "form":"형태",
+            "million":"백만",
+            "billion":"10억",
+            "selectBed":"침실 수를 선택하세요",
+            "selectBath":"욕실 수를 선택하세요",
+            "selectOriginHouse":"집 방향 선택",
+            "bedRoom":"침실",
+            "bathRoom":"화장실",
+            "north":"북쪽",
+            "west":"서쪽",
+            "east":"동쪽",
+            "south":"남쪽",
+            "southeast":"남동쪽",
+            "northeast":"북동",
+            "southwest":"남서",
+            "northwest":"북서",
+            "nofind":"속성을 찾을 수 없습니다!",
+            "noinfo":"정보 없음!"
         },
         "showMap": {
-            "list": "Danh sách",
+            "list": "목록",
             "map": "지도"
         }
     },
@@ -294,16 +319,27 @@
         }
     },
     "projectDetail": {
-        "title": "Thông tin chi tiết",
+        "title": "세부",
         "info": {
             "type": "부동산 유형",
             "area": "면적",
-            "floors": "Số tầng",
-            "orientHouse": "Hướng nhà",
+            "floors": "바닥의 ​​수",
+            "orientHouse": "집의 방향",
             "year": "시공 년도",
             "orientBalcony": "반코니 향",
             "interior": "인테리어, 옵션",
-            "juridical": "소유증빙"
+            "juridical": "소유증빙",
+            "location":"위치",
+            "numberHouse":"건물의 수",
+            "scale":"규모",
+            "investor":"투자자",
+            "yearBuilding":"세트",
+            "title":"프로젝트 내용",
+            "codeProject":"프로젝트 코드",
+            "contact":"연락처 정보",
+            "fullName":"이름과 성",
+            "phone":"전화 번호",
+            "sendInfo":"정보를 보냅니다"
         },
         "map": {
             "address": "주소",

@@ -22,7 +22,11 @@ export default async function IndexProjectDetail({ lang, detail, t, isProject })
                 <NotFound />
             ) : (
                 <main>
-                    <ImageGallery data={data} />
+                    <ImageGallery
+                        data={data}
+                        t={t}
+                        lang={lang}
+                    />
                     {isProject ? (
                         <ContentDetailProject
                             data={data}

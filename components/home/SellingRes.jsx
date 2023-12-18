@@ -71,13 +71,14 @@ export default function SellingRes({ lang, data, t }) {
                     {t?.homepage?.section3Mobile?.buy?.subtitle?.projectDistribution}
                 </span>
             </div>
-            {/* <div className='scrollbar overflow-x-scroll'> */}
-                <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
-                    <BoxFilterV2
-                        arrFilter={arrFilter}
-                        t={t}
-                    />
-                </div>
+            {/* <div className='overflow-x-scroll scrollbar'> */}
+            <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
+                <BoxFilterV2
+                    arrFilter={arrFilter}
+                    t={t}
+                    lang={lang}
+                />
+            </div>
             {/* </div> */}
 
             {dataNew && (
@@ -137,7 +138,7 @@ export default function SellingRes({ lang, data, t }) {
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.size
                                                     ? e?.translation?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -146,7 +147,7 @@ export default function SellingRes({ lang, data, t }) {
                                                 {t?.selling?.price}:
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                                {e?.translation?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>

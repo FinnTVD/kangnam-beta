@@ -282,6 +282,31 @@
             "title2": "Giá tăng dần",
             "title3": "Giá giảm dần"
         },
+        "filterSecond":{
+            "orSelect":"Hoặc chọn",
+            "price":"giá",
+            "priceRange":"Khoảng giá",
+            "acreage":"Diện tích",
+            "status":"Trạng thái",
+            "form":"Hình thức",
+            "million":"triệu",
+            "billion":"tỷ",
+            "selectBed":"Chọn số phòng ngủ",
+            "selectBath":"Chọn số phòng tắm",
+            "selectOriginHouse":"Chọn hướng nhà",
+            "bedRoom":"phòng ngủ",
+            "bathRoom":"phòng tắm",
+            "north":"Bắc",
+            "west":"Tây",
+            "east":"Đông",
+            "south":"Nam",
+            "southeast":"Đông Nam",
+            "northeast":"Đông Bắc",
+            "southwest":"Tây Nam",
+            "northwest":"Tây Bắc",
+            "nofind":"Không tìm thấy bất động sản nào!",
+            "noinfo":"Chưa có thông tin!"
+        },
         "showMap": {
             "list": "Danh sách",
             "map": "Bản đồ"
@@ -303,7 +328,18 @@
             "year": "Năm xây dựng",
             "orientBalcony": "Hướng ban công",
             "interior": "Nội thất",
-            "juridical": "Pháp lý"
+            "juridical": "Pháp lý",
+            "location":"Vị trí",
+            "numberHouse":"Số toà nhà",
+            "yearBuilding":"Năm xây dựng",
+            "scale":"Quy mô",
+            "investor":"Chủ đầu tư",
+            "title":"Nội dung dự án",
+            "codeProject":"Mã dự án",
+            "contact":"Thông tin Liên hệ",
+            "fullName":"Họ và tên",
+            "phone":"Số điện thoại",
+            "sendInfo":"Gửi thông tin"
         },
         "map": {
             "address": "Địa chỉ",

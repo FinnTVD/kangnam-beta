@@ -282,6 +282,31 @@
             "title2": "Incremental price",
             "title3": "Descending price"
         },
+        "filterSecond":{
+            "orSelect":"Or choose",
+            "price":"price",
+            "priceRange":"Price range",
+            "acreage":"Acreage",
+            "status":"Status",
+            "form":"Form",
+            "million":"million",
+            "billion":"billion",
+            "selectBed":"Choose the number of bedrooms",
+            "selectBath":"Choose the number of bathrooms",
+            "selectOriginHouse":"Choose house direction",
+            "bedRoom":"bedroom",
+            "bathRoom":"bathroom",
+            "north":"North",
+            "west":"West",
+            "east":"East",
+            "south":"South",
+            "southeast":"South East",
+            "northeast":"Northeast",
+            "southwest":"Southwest",
+            "northwest":"Northwest",
+            "nofind":"No properties found!",
+            "noinfo":"No information!"
+        },
         "showMap": {
             "list": "List",
             "map": "Map"
@@ -303,7 +328,18 @@
             "year": "Year of construction",
             "orientBalcony": "Balcony orientation",
             "interior": "Interior",
-            "juridical": "Legal"
+            "juridical": "Legal",
+            "location":"Location",
+            "numberHouse":"Building number",
+            "yearBuilding":"Year Built",
+            "scale":"Scale",
+            "investor":"Investor",
+            "title":"Project content",
+            "codeProject":"Project code",
+            "contact":"Contact Info",
+            "fullName":"Full name",
+            "phone":"Phone",
+            "sendInfo":"Send"
         },
         "map": {
             "address": "Address",

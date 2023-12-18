@@ -71,35 +71,120 @@ const findIdByAlias = (pathName, dataSlug) => {
 const arrFilter = [
     {
         id: 1,
-        title: 'Loại hình',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Loại hình',
+            },
+            {
+                langCode: 'en',
+                title: 'Type',
+            },
+            {
+                langCode: 'kr',
+                title: '부동산 유형',
+            },
+            {
+                langCode: 'cn',
+                title: '类也',
+            },
+        ],
         slug: 'propertyTypeIds',
         titleLang: 'propertyTypeIds',
         api: '/property-type',
     },
     {
         id: 2,
-        title: 'Địa điểm',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Địa điểm',
+            },
+            {
+                langCode: 'en',
+                title: 'Location',
+            },
+            {
+                langCode: 'kr',
+                title: '위치',
+            },
+            {
+                langCode: 'cn',
+                title: '位',
+            },
+        ],
         slug: 'propertyAreaTypeIds',
         titleLang: 'propertyAreaTypeIds',
         api: '/property-area-type',
     },
     {
         id: 3,
-        title: 'Hình thức',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Hình thức',
+            },
+            {
+                langCode: 'en',
+                title: 'Form',
+            },
+            {
+                langCode: 'kr',
+                title: '형태',
+            },
+            {
+                langCode: 'cn',
+                title: '形式',
+            },
+        ],
         slug: 'propertyCategoryIds',
         titleLang: 'propertyCategoryIds',
         api: '/property-category',
     },
     {
         id: 4,
-        title: 'Khoảng giá',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Khoảng giá',
+            },
+            {
+                langCode: 'en',
+                title: 'Price range',
+            },
+            {
+                langCode: 'kr',
+                title: '가격 범위',
+            },
+            {
+                langCode: 'cn',
+                title: '价格范围',
+            },
+        ],
         slug: 'price',
         titleLang: 'price',
         api: '/price',
     },
     {
         id: 5,
-        title: 'Diện tích',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Diện tích',
+            },
+            {
+                langCode: 'en',
+                title: 'Acreage',
+            },
+            {
+                langCode: 'kr',
+                title: '면적',
+            },
+            {
+                langCode: 'cn',
+                title: '面积',
+            },
+        ],
         slug: 'area',
         titleLang: 'area',
         api: '/area',
@@ -108,28 +193,96 @@ const arrFilter = [
 const arrFilterV2 = [
     {
         id: 1,
-        title: 'Loại hình',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Loại hình',
+            },
+            {
+                langCode: 'en',
+                title: 'Type',
+            },
+            {
+                langCode: 'kr',
+                title: '부동산 유형',
+            },
+            {
+                langCode: 'cn',
+                title: '类也',
+            },
+        ],
         slug: 'propertyTypeIds',
         titleLang: 'propertyTypeIds',
         api: '/property-type',
     },
     {
         id: 2,
-        title: 'Địa điểm',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Địa điểm',
+            },
+            {
+                langCode: 'en',
+                title: 'Location',
+            },
+            {
+                langCode: 'kr',
+                title: '위치',
+            },
+            {
+                langCode: 'cn',
+                title: '位',
+            },
+        ],
         slug: 'propertyAreaTypeIds',
         titleLang: 'propertyAreaTypeIds',
         api: '/property-area-type',
     },
     {
         id: 4,
-        title: 'Khoảng giá',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Khoảng giá',
+            },
+            {
+                langCode: 'en',
+                title: 'Price range',
+            },
+            {
+                langCode: 'kr',
+                title: '가격 범위',
+            },
+            {
+                langCode: 'cn',
+                title: '价格范围',
+            },
+        ],
         slug: 'price',
         titleLang: 'price',
         api: '/price',
     },
     {
         id: 5,
-        title: 'Diện tích',
+        translations: [
+            {
+                langCode: 'vi',
+                title: 'Diện tích',
+            },
+            {
+                langCode: 'en',
+                title: 'Acreage',
+            },
+            {
+                langCode: 'kr',
+                title: '면적',
+            },
+            {
+                langCode: 'cn',
+                title: '面积',
+            },
+        ],
         slug: 'area',
         titleLang: 'area',
         api: '/area',
@@ -229,7 +382,7 @@ const renderTitle = (e, lang, message) => {
         e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang))?.name ||
         e?.translations[0]?.name ||
         message ||
-        'Chưa có thông tin!'
+        t?.projects?.filterSecond?.noinfo
     )
 }
 

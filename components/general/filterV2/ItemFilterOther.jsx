@@ -4,76 +4,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { memo, useEffect, useState } from 'react'
 import InputCheckBoxAdd from './InputCheckBoxAdd'
 
-let dataBedRoom = [
-    {
-        id: 'beds-1',
-        title: '1 phòng ngủ',
-    },
-    {
-        id: 'beds-2',
-        title: '2 phòng ngủ',
-    },
-    {
-        id: 'beds-3',
-        title: '3 phòng ngủ',
-    },
-    {
-        id: 'beds-4plus',
-        title: '4+ phòng ngủ',
-    },
-]
-let dataBathRoom = [
-    {
-        id: 'baths-1',
-        title: '1 phòng tắm',
-    },
-    {
-        id: 'baths-2',
-        title: '2 phòng tắm',
-    },
-    {
-        id: 'baths-3',
-        title: '3 phòng tắm',
-    },
-    {
-        id: 'baths-4plus',
-        title: '4+ phòng tắm',
-    },
-]
-let originHouse = [
-    {
-        id: 'orients-north',
-        title: 'Bắc',
-    },
-    {
-        id: 'orients-west',
-        title: 'Tây',
-    },
-    {
-        id: 'orients-east',
-        title: 'Đông',
-    },
-    {
-        id: 'orients-south',
-        title: 'Nam',
-    },
-    {
-        id: 'orients-southeast',
-        title: 'Đông Nam',
-    },
-    {
-        id: 'orients-northeast',
-        title: 'Đông Bắc',
-    },
-    {
-        id: 'orients-southwest',
-        title: 'Tây Nam',
-    },
-    {
-        id: 'orients-northwest',
-        title: 'Tây Bắc',
-    },
-]
 const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
     const router = useRouter()
     const pathName = usePathname()
@@ -145,6 +75,76 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
         })
         setIndexFilter(-1)
     }
+    let dataBedRoom = [
+        {
+            id: 'beds-1',
+            title: `1 ${t?.projects?.filterSecond?.bedRoom}`,
+        },
+        {
+            id: 'beds-2',
+            title: `2 ${t?.projects?.filterSecond?.bedRoom}`,
+        },
+        {
+            id: 'beds-3',
+            title: `3 ${t?.projects?.filterSecond?.bedRoom}`,
+        },
+        {
+            id: 'beds-4plus',
+            title: `4+ ${t?.projects?.filterSecond?.bedRoom}`,
+        },
+    ]
+    let dataBathRoom = [
+        {
+            id: 'baths-1',
+            title: `1 ${t?.projects?.filterSecond?.bathRoom}`,
+        },
+        {
+            id: 'baths-2',
+            title: `2 ${t?.projects?.filterSecond?.bathRoom}`,
+        },
+        {
+            id: 'baths-3',
+            title: `3 ${t?.projects?.filterSecond?.bathRoom}`,
+        },
+        {
+            id: 'baths-4plus',
+            title: `4+ ${t?.projects?.filterSecond?.bathRoom}`,
+        },
+    ]
+    let originHouse = [
+        {
+            id: 'orients-north',
+            title: t?.projects?.filterSecond?.north,
+        },
+        {
+            id: 'orients-west',
+            title: t?.projects?.filterSecond?.west,
+        },
+        {
+            id: 'orients-east',
+            title: t?.projects?.filterSecond?.east,
+        },
+        {
+            id: 'orients-south',
+            title: t?.projects?.filterSecond?.south,
+        },
+        {
+            id: 'orients-southeast',
+            title: t?.projects?.filterSecond?.southeast,
+        },
+        {
+            id: 'orients-northeast',
+            title: t?.projects?.filterSecond?.northeast,
+        },
+        {
+            id: 'orients-southwest',
+            title: t?.projects?.filterSecond?.southwest,
+        },
+        {
+            id: 'orients-northwest',
+            title: t?.projects?.filterSecond?.northwest,
+        },
+    ]
 
     return (
         <li
@@ -165,7 +165,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
                         setIndexFilter(index)
                     }}
                 >
-                    {item?.title}
+                    {item?.translations?.find((e) => e?.langCode === lang)?.title}
                 </span>
                 <span
                     className={`${
@@ -186,7 +186,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
                     <div className='flex '>
                         <div className='flex-1'>
                             <p className='text-den title16-600-150 whitespace-nowrap mb-[1vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                                Chọn số phòng ngủ
+                                {t?.projects?.filterSecond?.selectBed}
                             </p>
                             <div
                                 className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
@@ -205,7 +205,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
                         </div>
                         <div className='flex-1'>
                             <p className='text-den title16-600-150 whitespace-nowrap mb-[1vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                                Chọn số phòng tắm
+                                {t?.projects?.filterSecond?.selectBath}
                             </p>
                             <div
                                 className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
@@ -225,7 +225,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
                     </div>
                     <div className='mt-[1.5vw]'>
                         <p className='text-den title16-600-150 whitespace-nowrap mb-[1vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                            Chọn hướng nhà
+                            {t?.projects?.filterSecond?.selectOriginHouse}
                         </p>
                         <div
                             className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw] w-1/2`}

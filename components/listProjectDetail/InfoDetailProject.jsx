@@ -52,7 +52,7 @@ export default function InfoDetailProject({ data, lang, dataDetail, t }) {
                         <div className='flex items-center gap-x-[0.56vw] max-md:gap-x-[3.73vw]'>
                             <IconST />
                             <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
-                                Quy mô:
+                                {t?.projectDetail?.info?.scale}:
                             </span>
                         </div>
                         <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
@@ -63,7 +63,7 @@ export default function InfoDetailProject({ data, lang, dataDetail, t }) {
                         <div className='flex items-center gap-x-[0.56vw] max-md:gap-x-[3.73vw]'>
                             <IconHN />
                             <span className='title-16-400-150 text-[#333] max-md:text-14mb max-md:font-normal max-md:leading-[1.71]'>
-                                Chủ đầu tư:
+                                {t?.projectDetail?.info?.investor}:
                             </span>
                         </div>
                         <span className='text-14pc font-normal leading-[1.71] text-[#888] max-md:text-12mb max-md:leading-[2]'>
@@ -95,7 +95,10 @@ export default function InfoDetailProject({ data, lang, dataDetail, t }) {
                     </li>
                 </ul>
             </div>
-            <FormNamePhone id={data?.id} />
+            <FormNamePhone
+                id={data?.id}
+                t={t}
+            />
         </div>
     )
 }

@@ -58,12 +58,12 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                         e?.languageCode?.toLowerCase()?.includes(lang),
                                     )?.name ||
                                     itemProject?.translations[0]?.name ||
-                                    'Chưa có thông tin!'
+                                    t?.projects?.filterSecond?.noinfo
                                 }
                                 </h2>
                                 </a>
                                 <div
-                                            title=${itemProject?.address?.display || 'Chưa có thông tin!'}
+                                            title=${itemProject?.address?.display || t?.projects?.filterSecond?.noinfo}
                                             class='flex items-center gap-x-[0.5vw] max-md:gap-x-[1.41vw]'
                                         >
                                         <div class='w-fit'>
@@ -118,7 +118,7 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 ${
                                                     itemProject?.translation?.size
                                                         ? itemProject?.translation?.size + ' m²'
-                                                        : 'Chưa có thông tin!'
+                                                        : t?.projects?.filterSecond?.noinfo
                                                 }
                                             </span>
                                         </div>
@@ -136,7 +136,10 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 />
                                             </svg>
                                             <span class='capitalize text-den font-avertaStdCY text-[0.75vw] font-normal leading-normal line-clamp-1 max-md:text-[2.67vw] max-md:leading-normal'>
-                                                ${itemProject?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                                ${
+                                                    itemProject?.translation?.priceDisplay ||
+                                                    t?.projects?.filterSecond?.noinfo
+                                                }
                                             </span>
                                         </div>
                             </div>

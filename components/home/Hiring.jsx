@@ -24,13 +24,14 @@ export default function Hiring({ lang, t, data }) {
                     {t?.homepage?.section3Mobile?.rent?.subtitle?.projectDistribution}
                 </span>
             </div>
-                <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
-                    <BoxFilterV2
-                        arrFilter={arrFilterV2}
-                        t={t}
-                        />
-                </div>
-      
+            <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
+                <BoxFilterV2
+                    arrFilter={arrFilterV2}
+                    t={t}
+                    lang={lang}
+                />
+            </div>
+
             {data && (
                 <Swiper
                     slidesPerView={'auto'}
@@ -81,7 +82,9 @@ export default function Hiring({ lang, t, data }) {
                                             {t?.hiring?.area} :
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                            {e?.translation?.size ? e?.translation?.size + ' m²' : 'Chưa có thông tin!'}
+                                            {e?.translation?.size
+                                                ? e?.translation?.size + ' m²'
+                                                : t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
                                     <div className='flex items-center'>
@@ -90,7 +93,7 @@ export default function Hiring({ lang, t, data }) {
                                             {t?.hiring?.price}
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                            {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                            {e?.translation?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
                                 </div>

@@ -48,21 +48,21 @@ export default function ListProject({ lang, t, dataSlug }) {
         },
         {
             id: 4,
-            title: 'Khoảng giá',
+            title: t?.projects?.filterSecond?.priceRange,
             slug: 'price',
             titleLang: 'price',
             api: '/price',
         },
         {
             id: 5,
-            title: 'Diện tích',
+            title: t?.projects?.filterSecond?.acreage,
             slug: 'area',
             titleLang: 'area',
             api: '/area',
         },
         {
             id: 6,
-            title: 'Trạng thái',
+            title: t?.projects?.filterSecond?.status,
             slug: 'status',
             titleLang: 'status',
             api: '/status',
@@ -193,13 +193,13 @@ export default function ListProject({ lang, t, dataSlug }) {
                 price ? '&orderBy=price' : ''
             }&page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
                 propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}${
-                cityId ? '&cityId=' + cityId : ''
-            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}${
-                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
-            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
-                maxArea ? '&maxArea=' + maxArea : ''
-            }${status ? '&status=' + status : ''}`,
+            }${propertyTypeParams ? propertyTypeParams : ''}${cityId ? '&cityId=' + cityId : ''}${
+                districtId ? '&districtId=' + districtId : ''
+            }${wardId ? '&wardId=' + wardId : ''}${minPrice ? '&minPrice=' + minPrice + '000000000' : ''}${
+                maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''
+            }${minArea ? '&minArea=' + minArea : ''}${maxArea ? '&maxArea=' + maxArea : ''}${
+                status ? '&status=' + status : ''
+            }`,
         )
     }, [lang, searchParams])
 
@@ -248,6 +248,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                             <BoxFilterV2
                                 arrFilter={arrFilter}
                                 t={t}
+                                lang={lang}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
                                 <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
@@ -376,7 +377,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                 e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name ||
                                                 e?.translations[0]?.name ||
-                                                'Chưa có thông tin!'}
+                                                t?.projects?.filterSecond?.noinfo}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -416,7 +417,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -431,7 +432,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                                             <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translations?.find((e) =>
                                                     e?.languageCode?.toLowerCase()?.includes(lang),
-                                                )?.priceDisplay || 'Chưa có thông tin!'}
+                                                )?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>

@@ -9,7 +9,7 @@ const initial = {
     validate: false,
 }
 
-export default function FormNamePhone({ id }) {
+export default function FormNamePhone({ id, t }) {
     const [valueName, setValueName] = useState(initial)
     const [valuePhone, setValuePhone] = useState(initial)
     const handleChangeName = (e) => {
@@ -60,14 +60,16 @@ export default function FormNamePhone({ id }) {
     }
     return (
         <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw]'>
-            <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw]'>Thông tin Liên hệ</h3>
+            <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw]'>
+                {t?.projectDetail?.info?.contact}
+            </h3>
             <form
                 className='w-full'
                 autoComplete='false'
                 onSubmit={handleSubmit}
             >
                 <InputCustom
-                    labelContent={'Họ và tên'}
+                    labelContent={t?.projectDetail?.info?.fullName}
                     labelClass={'title14-400-150 title-mb12-400-150 text-den left-[0.5vw]'}
                     inputClass={
                         'w-full py-[0.78vw] px-[1vw] rounded-[10vw] outline-none border border-solid border-den03 text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
@@ -79,7 +81,7 @@ export default function FormNamePhone({ id }) {
                 />
                 <InputCustom
                     boxClass={'mt-[1vw] mb-[1.5vw]'}
-                    labelContent={'Số điện thoại'}
+                    labelContent={t?.projectDetail?.info?.phone}
                     labelClass={'title14-400-150 title-mb12-400-150 text-den left-[0.5vw]'}
                     inputClass={
                         'w-full py-[0.78vw] px-[1vw] rounded-[10vw] outline-none border border-solid border-den03 text-den title16-400-150 focus:border-logo bg-white title-mb12-400-150 max-md:px-[4.27vw] max-md:py-[2.93vw]'
@@ -98,7 +100,7 @@ export default function FormNamePhone({ id }) {
                         stroke='white'
                         type='submit'
                     >
-                        Gửi thông tin
+                        {t?.projectDetail?.info?.sendInfo}
                     </Button>
                 </div>
             </form>

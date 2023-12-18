@@ -9,7 +9,26 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useMediaQuery } from 'react-responsive'
 
-export default function ImageGallery({ data }) {
+const seeLocation = [
+    {
+        title: 'Xem vị trí',
+        code: 'vi',
+    },
+    {
+        title: 'See location',
+        code: 'en',
+    },
+    {
+        title: '위치를 참조하십시오',
+        code: 'kr',
+    },
+    {
+        title: '请参阅位置',
+        code: 'cn',
+    },
+]
+
+export default function ImageGallery({ data, t, lang }) {
     const images = data?.images || []
     const listImage = [data?.firstImage, ...images]?.filter((e) => e)
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -237,7 +256,7 @@ export default function ImageGallery({ data }) {
                         className='absolute bottom-[5.3vw] right-[2.6vw] border border-white rounded-[10vw] gap-[1vw] z-[5] px-[3.4vw] py-[1.6vw] flex items-center cursor-pointer'
                         onClick={handleScrollDownMap}
                     >
-                        <span className='title-mb13-400-130'> Xem vị trí </span>
+                        <span className='title-mb13-400-130'>{seeLocation?.find((i) => i?.code === lang)?.title}</span>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='14'
@@ -352,7 +371,7 @@ export default function ImageGallery({ data }) {
                         />
                     </svg>
                     <span className='text-white text-14pc font-semibold leading-[1.14286] max-lg:title-tl14'>
-                        Vị trí
+                        {t?.projectDetail?.info?.location}
                     </span>
                 </div>
             </div>

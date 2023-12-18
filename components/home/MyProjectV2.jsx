@@ -273,7 +273,7 @@ export default function MyProjectV2({ lang, t }) {
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'
+                                                    : t?.projects?.filterSecond?.noinfo
                                             }
                                             className='flex items-center my-[0.5vw]'
                                         >
@@ -294,7 +294,7 @@ export default function MyProjectV2({ lang, t }) {
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div
@@ -312,7 +312,7 @@ export default function MyProjectV2({ lang, t }) {
                                             <span className='capitalize text-den title14-400-150'>
                                                 {e?.translations?.find((e) =>
                                                     e?.languageCode?.toLowerCase()?.includes(lang),
-                                                )?.priceDisplay || 'Chưa có thông tin!'}
+                                                )?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>

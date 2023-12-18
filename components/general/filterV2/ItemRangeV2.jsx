@@ -5,7 +5,7 @@ import { memo, useEffect, useState } from 'react'
 import { listAreaProject, listAreaProjectP, listPriceHire, listPriceResale } from '@/utils'
 import { SlidersCustom } from '@/components/ui/SlidersCustom'
 
-const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, isHome, click }) => {
+const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPrice, isProject, lang }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
@@ -94,13 +94,13 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
     const handleTitleFilter = (placeholder = '') => {
         if (isHire) {
             if (isPrice) {
-                return ` ${placeholder ? placeholder + ' ' : ''}(triệu - VND)`
+                return ` ${placeholder ? placeholder + ' ' : ''}(${t?.projects?.filterSecond?.million} - VND)`
             } else {
                 return ' (m²)'
             }
         } else {
             if (isPrice) {
-                return ` ${placeholder ? placeholder + ' ' : ''}(tỷ - VND)`
+                return ` ${placeholder ? placeholder + ' ' : ''}(${t?.projects?.filterSecond?.billion} - VND)`
             } else {
                 return ' (m²)'
             }
@@ -168,16 +168,14 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
         } else {
             return 10
         }
-    };
+    }
 
-   
     return (
         <li
             ref={sideRef}
             className={`${
                 indexFilter === index ? 'bg-logo' : 'bg-white'
-            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative` }
-            
+            } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
         >
             <div className='relative'>
                 <span
@@ -191,7 +189,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                         setIndexFilter(index)
                     }}
                 >
-                    {item?.title}
+                    {item?.translations?.find((e) => e?.langCode === lang)?.title || item?.title}
                 </span>
                 <span
                     className={`${
@@ -204,7 +202,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
             <div
                 className={`${
                     indexFilter === index ? '' : 'hidden'
-                } absolute z-50 left-0 -bottom-[1.5vw] translate-y-full flex flex-col shadow-boxFilter rounded-[0.75vw] bg-white w-[20.875vw] gap-y-[2.3vw] max-md:gap-y-[6.4vw] transition-all duration-[2s] ease-linear max-md:w-[95vw] max-md:rounded-xl max-lg:w-[50vw]`}
+                } absolute z-50 left-0 -bottom-[1.5vw] translate-y-full flex flex-col shadow-boxFilter rounded-[0.75vw] bg-white w-[22.875vw] gap-y-[2.3vw] max-md:gap-y-[6.4vw] transition-all duration-[2s] ease-linear max-md:w-[95vw] max-md:rounded-xl max-lg:w-[50vw]`}
             >
                 <div className='px-[1.5vw] pt-[1.5vw] max-md:pt-[6.4vw] max-md:px-[5.87vw]'>
                     <p className='text-den title16-600-150 whitespace-nowrap mb-[0.5vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
@@ -230,7 +228,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
                         ))}
                     </ul>
                     <p className='text-den title16-600-150 whitespace-nowrap mt-[0.5vw] mb-[0.25vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                        {'Hoặc chọn' + handleTitleFilter('giá')}
+                        {t?.projects?.filterSecond?.orSelect + handleTitleFilter(t?.projects?.filterSecond?.price)}
                     </p>
                     <SlidersCustom
                         isShowValue

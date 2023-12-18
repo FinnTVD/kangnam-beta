@@ -52,7 +52,7 @@ export async function generateMetadata({ params: { lang } }) {
         },
     }
 }
-export default async function Page({ params: { lang, project } }) {
+export default async function page({ params: { lang, project } }) {
     const t = await getDictionary(lang)
     const data = await getData('/property-category')
     const isProject = slugProject?.join('')?.includes(project)

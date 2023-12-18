@@ -75,7 +75,7 @@
         "nav1": [
             {
                 "id": 1,
-                "title": "Trang chủ",
+                "title": "홈 페이지",
                 "href": "/"
             },
             {
@@ -282,6 +282,31 @@
             "title2": "Giá tăng dần",
             "title3": "Giá giảm dần"
         },
+        "filterSecond":{
+            "orSelect":"或者选择",
+            "price":"价格",
+            "priceRange":"价格范围",
+            "acreage":"面积",
+            "status":"地位",
+            "form":"形式",
+            "million":"百万",
+            "billion":"十亿",
+            "selectBed":"选择卧室数量",
+            "selectBath":"选择浴室数量",
+            "selectOriginHouse":"选择房屋方向",
+            "bedRoom":"卧室",
+            "bathRoom":"浴室",
+            "north":"北",
+            "west":"西方",
+            "east":"东方",
+            "south":"南",
+            "southeast":"东南",
+            "northeast":"东北",
+            "southwest":"西南",
+            "northwest":"西北",
+            "nofind":"没有找到属性",
+            "noinfo":"无信息"
+        },
         "showMap": {
             "list": "Danh sách",
             "map": "Bản đồ"
@@ -303,7 +328,18 @@
             "year": "Năm xây dựng",
             "orientBalcony": "Hướng ban công",
             "interior": "Nội thất",
-            "juridical": "Pháp lý"
+            "juridical": "Pháp lý",
+            "location":"Vị trí",
+            "numberHouse":"Số toà nhà",
+            "yearBuilding":"Năm xây dựng",
+            "scale":"规模",
+            "investor":"投资者",
+            "title":"Nội dung dự án",
+            "codeProject":"Mã dự án",
+            "contact":"Thông tin Liên hệ",
+            "fullName":"Họ và tên",
+            "phone":"Số điện thoại",
+            "sendInfo":"Gửi thông tin"
         },
         "map": {
             "address": "Địa chỉ",

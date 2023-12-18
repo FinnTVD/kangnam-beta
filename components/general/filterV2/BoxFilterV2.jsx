@@ -9,7 +9,7 @@ import ItemRangeV2 from './ItemRangeV2'
 import ItemFilterStatus from './ItemFilterStatus'
 import ItemFilterOther from './ItemFilterOther'
 
-export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = false }) {
+export default function BoxFilterV2({ arrFilter, lang, t, isOther }) {
     const [indexFilter, setIndexFilter] = useState(null)
 
     const isMobile = useMediaQuery({ query: '(max-width: 767.9px)' })
@@ -35,8 +35,8 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
 
     return (
         <ul className={`flex gap-x-[1.5vw] max-md:gap-[2.5vw] select-none relative max-md:flex-wrap`}>
-            {arrFilter &&
-                arrFilter.map((e, index) =>
+            {Array.isArray(arrFilter) &&
+                arrFilter?.map((e, index) =>
                     handleCheckPriceAndArea(e?.slug) ? (
                         <ItemRangeV2
                             key={index}
@@ -50,7 +50,6 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
                             isHire={isHire}
                             isPrice={e?.slug?.includes('price')}
                             isProject={isProject}
-                            isHome={isHome}
                         />
                     ) : e?.slug?.includes('status') ? (
                         <ItemFilterStatus
@@ -83,7 +82,24 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther, isHome = fals
                     lang={lang}
                     item={{
                         id: 6,
-                        title: 'Thêm',
+                        translations: [
+                            {
+                                langCode: 'vi',
+                                title: 'Thêm',
+                            },
+                            {
+                                langCode: 'en',
+                                title: 'Other',
+                            },
+                            {
+                                langCode: 'kr',
+                                title: '다른',
+                            },
+                            {
+                                langCode: 'cn',
+                                title: '其他',
+                            },
+                        ],
                         slug: 'add',
                         titleLang: 'add',
                         api: '/add',
