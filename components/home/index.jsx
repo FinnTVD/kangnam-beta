@@ -3,23 +3,25 @@ import Deposit from './Deposit'
 import ProjectProminent from './ProjectProminent'
 import Prominent from './Prominent'
 import Partner from './Partner'
-import LatestNews from './LatestNews'
 import WeAre from './WeAre'
 
-import MyProjectV2 from './MyProjectV2'
 import { ToastContainer } from 'react-toastify'
 
 import SellingBox from './SellingBox'
 import bgSky from '../../public/images/bg-sky.png'
+import BoxMyProjectV2 from './BoxMyProjectV2'
+import BoxLatestNews from './BoxLatestNews'
 
-export default function IndexHome({ lang, t, dataPostNews, dataHomePage, dataSelling, dataHiring }) {
+export default function IndexHome({ lang, t, dataHomePage, params, searchParams }) {
     return (
         <main>
             <WeAre
                 lang={lang}
                 t={t}
             />
-            <MyProjectV2
+            <BoxMyProjectV2
+                params={params}
+                searchParams={searchParams}
                 lang={lang}
                 t={t}
             />
@@ -28,8 +30,7 @@ export default function IndexHome({ lang, t, dataPostNews, dataHomePage, dataSel
                 <SellingBox
                     t={t}
                     lang={lang}
-                    dataSellingN={dataSelling}
-                    dataHiringN={dataHiring}
+                    searchParams={searchParams}
                 />
             </div>
             <div className='w-full max-md:flex max-md:flex-col-reverse'>
@@ -59,10 +60,9 @@ export default function IndexHome({ lang, t, dataPostNews, dataHomePage, dataSel
                 lang={lang}
                 dataHomePage={dataHomePage}
             />
-            <LatestNews
+            <BoxLatestNews
                 t={t}
                 lang={lang}
-                dataPostNews={dataPostNews}
             />
             <ToastContainer style={{ zIndex: '999999999999999' }} />
         </main>

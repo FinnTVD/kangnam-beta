@@ -14,6 +14,7 @@ const useStore = create((set, get) => ({
     boxMap: null,
     isSubmit: false,
     selectSearch: '',
+    selectTypeSearch: true,
     dataProvinces: null,
     dataDistrict: null,
     dataWard: null,
@@ -26,6 +27,15 @@ const useStore = create((set, get) => ({
     isClose: true,
     isRedirect: false,
     defaultMap: null,
+    
+    setSelectTypeSearch: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                selectTypeSearch: data,
+            }
+        })
+    },
     setDefaultMap: (data) => {
         set((state) => {
             return {

@@ -81,15 +81,20 @@
             {
                 "id": 2,
                 "title": "Dự án",
-                "href": "/projects"
+                "href": "/du-an"
             },
             {
                 "id": 3,
-                "title": "Bán lại",
-                "href": "/resale"
+                "title": "Mua bán lại",
+                "href": "/mua-ban"
             },
             {
                 "id": 4,
+                "title": "Cho Thuê",
+                "href": "/thue"
+            },
+            {
+                "id": 5,
                 "title": "Thỏa thuận & pháp lý",
                 "href": "/agreements"
             }
@@ -188,7 +193,7 @@
             }
         },
         "section3": {
-            "title": "Dự án của chúng tôi",
+            "title": "Bất động sản của chúng tôi",
             "showMap": "Hiển thị bản đồ",
             "button": "Xem tất cả"
         },
@@ -245,19 +250,29 @@
     "projects": {
         "subtitle": "100% xác thực",
         "title": "Mua bán nhà đất căn hộ",
+        "titleH": "Thuê nhà đất căn hộ",
+        "titleP": "Tất cả các dự án",
         "map": "Bản đồ",
         "category": "Loại hình",
         "address": "Địa điểm",
         "show": "Hiển thị",
         "over": "trong số hơn",
         "validateProject": "nhà đất xác thực",
+        "validateIsProject": "dự án xác thực",
         "item": {
             "address": "Địa chỉ",
             "price": "Mức giá",
             "area": "Diện tích"
         },
         "filter1": {
-            "title": "Chọn loại hình bất động sản",
+            "propertyTypeIds": "Chọn loại hình bất động sản",
+            "propertyAreaTypeIds": "Chọn địa điểm bất động sản",
+            "propertyTypeIdsP": "Chọn loại hình dự án",
+            "propertyAreaTypeIdsP": "Chọn địa điểm dự án",
+            "propertyCategoryIds": "Chọn hình thức bất động sản",
+            "status": "Chọn trạng thái dự án",
+            "price": "Chọn nhanh khoảng giá",
+            "area": "Chọn nhanh diện tích",
             "reset": "Đặt lại",
             "cancel": "Hủy",
             "apply": "Áp dụng"
@@ -266,6 +281,31 @@
             "title1": "Mới nhất",
             "title2": "Giá tăng dần",
             "title3": "Giá giảm dần"
+        },
+        "filterSecond":{
+            "orSelect":"Hoặc chọn",
+            "price":"giá",
+            "priceRange":"Khoảng giá",
+            "acreage":"Diện tích",
+            "status":"Trạng thái",
+            "form":"Hình thức",
+            "million":"triệu",
+            "billion":"tỷ",
+            "selectBed":"Chọn số phòng ngủ",
+            "selectBath":"Chọn số phòng tắm",
+            "selectOriginHouse":"Chọn hướng nhà",
+            "bedRoom":"phòng ngủ",
+            "bathRoom":"phòng tắm",
+            "north":"Bắc",
+            "west":"Tây",
+            "east":"Đông",
+            "south":"Nam",
+            "southeast":"Đông Nam",
+            "northeast":"Đông Bắc",
+            "southwest":"Tây Nam",
+            "northwest":"Tây Bắc",
+            "nofind":"Không tìm thấy bất động sản nào!",
+            "noinfo":"Chưa có thông tin!"
         },
         "showMap": {
             "list": "Danh sách",
@@ -288,7 +328,18 @@
             "year": "Năm xây dựng",
             "orientBalcony": "Hướng ban công",
             "interior": "Nội thất",
-            "juridical": "Pháp lý"
+            "juridical": "Pháp lý",
+            "location":"Vị trí",
+            "numberHouse":"Số toà nhà",
+            "yearBuilding":"Năm xây dựng",
+            "scale":"Quy mô",
+            "investor":"Chủ đầu tư",
+            "title":"Nội dung dự án",
+            "codeProject":"Mã dự án",
+            "contact":"Thông tin Liên hệ",
+            "fullName":"Họ và tên",
+            "phone":"Số điện thoại",
+            "sendInfo":"Gửi thông tin"
         },
         "map": {
             "address": "Địa chỉ",
@@ -469,7 +520,9 @@
     },
     "relatedProjects": {
         "subtitle": "Danh sách bất động sản",
+        "subtitleP": "Danh sách dự án",
         "title": "Bất động sản liên quan",
+        "titleP": "Dự án cùng khu vực",
         "item": {
             "title1": "Địa chỉ",
             "title2": "Diện tích",

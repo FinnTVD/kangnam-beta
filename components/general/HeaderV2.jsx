@@ -18,7 +18,7 @@ const isCheckPathName = (pathName) => {
             return true
         case '/kr':
             return true
-        case '/ch':
+        case '/cn':
             return true
         default:
             return false
@@ -124,7 +124,7 @@ export default function HeaderV2({ lang, t, post, newsDetail, src, breadcrumb })
                             />
                         </svg>
                         <span className='uppercase text-14pc font-semibold leading-[1.28] tracking-[0.7px] max-md:text-10mb max-md:font-semibold max-md:leading-[1.8] max-md:tracking-[0.5px] max-md:uppercase text-white max-lg:title-tl14'>
-                            Cuộn xuống
+                            {t?.scroll?.title}
                         </span>
                     </div>
                 )}

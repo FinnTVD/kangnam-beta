@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
@@ -22,7 +22,7 @@ import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
 const MapV5 = dynamic(() => import('../home/MapV2/MapV5'))
 
-const slugProject = ['/du-an', '/projects', '/项目', '/프로젝트']
+const slugProject = ['/du-an', '/projects', '/분양', '/项目']
 
 const listProject = new Array(24).fill(0)
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
@@ -30,21 +30,40 @@ const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': la
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
+let propertyBedsParams = ''
+let propertyBathsParams = ''
+let propertyOrientsParams = ''
 gsap.registerPlugin(ScrollTrigger)
 
-export default function ListProjectV2({ lang, t, dataSlug }) {
+export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
     const arrFilter = [
         {
             id: 1,
             title: t?.projects?.category,
             slug: 'propertyTypeIds',
+            titleLang: 'propertyTypeIds',
             api: '/property-type',
         },
         {
             id: 2,
             title: t?.projects?.address,
             slug: 'propertyAreaTypeIds',
+            titleLang: 'propertyAreaTypeIds',
             api: '/property-area-type',
+        },
+        {
+            id: 4,
+            title: t?.projects?.filterSecond?.priceRange,
+            slug: 'price',
+            titleLang: 'price',
+            api: '/price',
+        },
+        {
+            id: 5,
+            title: t?.projects?.filterSecond?.acreage,
+            slug: 'area',
+            titleLang: 'area',
+            api: '/area',
         },
     ]
     const arrFilter1 = [
@@ -52,34 +71,54 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
             id: 1,
             title: t?.projects?.category,
             slug: 'propertyTypeIds',
+            titleLang: 'propertyTypeIds',
             api: '/property-type',
         },
         {
             id: 2,
             title: t?.projects?.address,
             slug: 'propertyAreaTypeIds',
+            titleLang: 'propertyAreaTypeIds',
             api: '/property-area-type',
         },
         {
             id: 3,
-            title: 'Hình thức',
+            title: t?.projects?.filterSecond?.form,
             slug: 'propertyCategoryIds',
+            titleLang: 'propertyCategoryIds',
             api: '/property-category',
+        },
+        {
+            id: 4,
+            title: t?.projects?.filterSecond?.priceRange,
+            slug: 'price',
+            titleLang: 'price',
+            api: '/price',
+        },
+        {
+            id: 5,
+            title: t?.projects?.filterSecond?.acreage,
+            slug: 'area',
+            titleLang: 'area',
+            api: '/area',
         },
     ]
     const parentRef = useRef(null)
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
-    const isMobile = useMediaQuery({
-        query: '(max-width: 767px)',
-    })
+
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const cityId = searchParams.get('cityId')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+
     const districtId = searchParams.get('districtId')
     const wardId = searchParams.get('wardId')
     const [show, Element] = useToggleShowMap()
@@ -87,6 +126,9 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const propertyBeds = searchParams.get('beds')
+    const propertyBaths = searchParams.get('baths')
+    const propertyOrients = searchParams.get('orients')
 
     const createQueryString = useCallback(
         (name, value) => {
@@ -108,7 +150,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     } else {
         propertyTypeParams = ''
     }
-
     if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
@@ -119,7 +160,6 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
     } else {
         propertyAreaTypeParams = ''
     }
-
     if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
@@ -131,14 +171,51 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         propertyCategoryTypeParams = ''
     }
 
+    if (propertyBeds) {
+        propertyBedsParams = propertyBeds
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBedsParams = ''
+    }
+    if (propertyBaths) {
+        propertyBathsParams = propertyBaths
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBathsParams = ''
+    }
+    if (propertyOrients) {
+        propertyOrientsParams = propertyOrients
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyOrientsParams = ''
+    }
+
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
-            propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-        }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
-            price ? '&price=' + price : ''
-        }${cityId ? '&cityId=' + cityId : ''}${districtId ? '&districtId=' + districtId : ''}${
-            wardId ? '&wardId=' + wardId : ''
-        }`,
+        `${process.env.NEXT_PUBLIC_API}/property?order=${price ? price : 'DESC'}${price ? '&orderBy=price' : ''}&page=${
+            page ? page : 1
+        }&take=24${findIdByAlias(pathName, dataSlug)}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
+            propertyAreaTypeParams ? propertyAreaTypeParams : ''
+        }${propertyTypeParams ? propertyTypeParams : ''}${propertyBedsParams ? propertyBedsParams : ''}${
+            propertyBathsParams ? propertyBathsParams : ''
+        }${propertyOrientsParams ? propertyOrientsParams : ''}${cityId ? '&cityId=' + cityId : ''}${
+            districtId ? '&districtId=' + districtId : ''
+        }${wardId ? '&wardId=' + wardId : ''}${
+            minPrice ? '&minPrice=' + minPrice + (isHire ? '000000' : '000000000') : ''
+        }${maxPrice ? '&maxPrice=' + maxPrice + (isHire ? '000000' : '000000000') : ''}${
+            minArea ? '&minArea=' + minArea : ''
+        }${maxArea ? '&maxArea=' + maxArea : ''}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -147,40 +224,63 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         },
     )
 
-    useLayoutEffect(() => {
-        if (typeof window === 'undefined') return
+    useEffect(() => {
+        let mm = gsap.matchMedia()
         let ctx = gsap.context(() => {
-            setTimeout(() => {
-                gsap.to('#boxRef-filter', {
-                    position: 'fixed',
-                    left: !isTablet ? '7.5vw' : isMobile ? '0' : '3.2vw',
-                    top: !isTablet ? '5.75vw' : isMobile ? '18.25vw' : '9.3vw',
-                    zIndex: '999999',
-                    background: 'white',
-                    scrollTrigger: {
-                        trigger: '#boxRef-filter',
-                        start: 'top top',
-                        end: 'bottom top',
-                        scrub: true,
+            ScrollTrigger.create({
+                trigger: '#container_filter',
+                start: 'top top',
+                endTrigger: 'footer',
+                end: 'bottom top',
+                onEnter: () => {
+                    if (data?.data?.length > 3) {
+                        document.getElementById('boxRef-filter').classList.add('active')
+                    }
+                },
+                onLeave: () => {
+                    document.getElementById('boxRef-filter').classList.remove('active')
+                },
+                onLeaveBack: () => {
+                    document.getElementById('boxRef-filter').classList.remove('active')
+                },
+            })
+
+            mm.add('(min-width: 1024px)', () => {
+                ScrollTrigger.create({
+                    trigger: '#container_boxMap',
+                    start: 'top top',
+                    endTrigger: '#boxPagination',
+                    end: 'top bottom',
+                    pin: true,
+                    onEnter: () => {
+                        document.getElementById('boxMap').classList.add('active')
+                    },
+                    onLeave: () => {
+                        document.getElementById('boxMap').classList.remove('active')
                     },
                 })
-            }, 500)
+            })
         }, parentRef)
         return () => {
             ctx.revert()
         }
-    }, [])
+    }, [data])
 
     useEffect(() => {
         mutate(
-            `${process.env.NEXT_PUBLIC_API}/property?page=${page ? page : 1}&take=24${findIdByAlias(
-                pathName,
-                dataSlug,
-            )}${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-                propertyAreaTypeParams ? propertyAreaTypeParams : ''
-            }${propertyTypeParams ? propertyTypeParams : ''}${price ? '&price=' + price : ''}${
+            `${process.env.NEXT_PUBLIC_API}/property?order=${price ? price : 'DESC'}${
+                price ? '&orderBy=price' : ''
+            }&page=${page ? page : 1}&take=24${findIdByAlias(pathName, dataSlug)}${
+                propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                propertyBedsParams ? propertyBedsParams : ''
+            }${propertyBathsParams ? propertyBathsParams : ''}${propertyOrientsParams ? propertyOrientsParams : ''}${
                 cityId ? '&cityId=' + cityId : ''
-            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}`,
+            }${districtId ? '&districtId=' + districtId : ''}${wardId ? '&wardId=' + wardId : ''}${
+                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                maxArea ? '&maxArea=' + maxArea : ''
+            }`,
         )
     }, [lang, searchParams])
 
@@ -188,16 +288,19 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
         <section
             id='list-project'
             ref={parentRef}
-            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw] lg:min-h-screen'
+            className='mt-[5.75vw] relative z-10 max-md:mt-[17vw] max-lg:mt-[10vw] lg:min-h-screen overflow-hidden'
         >
-            <div className='flex justify-between w-full'>
+            <div className='flex justify-between w-full h-fit'>
                 <div
                     className={`${
                         show ? 'w-[calc(100vw-35.3125vw-2vw)]' : 'w-full pr-[7.5vw]'
-                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw]`}
+                    } pl-[7.5vw] px-mb10 max-lg:w-full max-lg:px-[3.2vw] h-fit`}
                 >
-                    <div className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}>
-                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[2.67vw] max-md:px-0'>
+                    <div
+                        id='container_filter'
+                        className={`w-full bg-white max-md:top-[18.3vw] max-md:pr-[2.67vw] max-md:w-full`}
+                    >
+                        <div className='mt-[2vw] max-md:mt-[6.4vw] flex items-center border-b border-solid border-line max-md:ml-[0.2vw] max-md:px-0'>
                             <div className='flex flex-col gap-y-[0.31vw] max-md:gap-y-[1.33vw] mb-[1vw] max-md:mb-[2.13vw]'>
                                 <span className='opacity-50 text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                     {t?.projects?.subtitle}
@@ -211,11 +314,13 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                             id='boxRef-filter'
                             className={`${
                                 show ? 'w-[55.25vw]' : 'w-[84vw]'
-                            } max-md:pl-0 max-md:ml-[2.67vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 max-md:pt-[2.67vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
+                            } max-md:pl-0 max-md:ml-[0.1vw] max-lg:w-full max-md:left-0 max-lg:left-[3.2vw] border-b border-solid border-line py-[1vw] max-md:pr-0 transition-all duration-200 max-md:pt-[2.57vw] max-md:pb-[4.27vw] max-md:border-none flex justify-between left-[7.5vw] bg-white`}
                         >
                             <BoxFilterV2
                                 arrFilter={slugProject?.find((e) => e?.includes(pathName)) ? arrFilter1 : arrFilter}
                                 t={t}
+                                isOther={true}
+                                lang={lang}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
                                 <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
@@ -253,7 +358,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                     </div>
                     {Array.isArray(data?.data) && data?.data?.length === 0 && (
                         <div className='text-black text-[1.5vw] font-normal leading-normal text-center'>
-                            Không tìm thấy bất động sản nào!
+                            {t?.projects?.filterSecond?.nofind}
                         </div>
                     )}
                     <div
@@ -292,12 +397,11 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                     href={
                                         (lang === 'vi' ? '' : `/${lang}` + '/') +
                                         (e?.propertyCategory?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            e?.languageCode?.toLowerCase()?.includes(lang),
                                         )?.alias || 'du-an') +
                                         '/' +
-                                        (e?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                        )?.slug || e?.translations[0]?.slug)
+                                        (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                            ?.slug || e?.translations[0]?.slug)
                                     }
                                     className='w-full'
                                     key={index}
@@ -308,9 +412,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                             src={`${e?.firstImage ? e?.firstImage : '/images/itemproject.jpg'}`}
                                             alt={
                                                 e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name ||
                                                 e?.translations[0]?.name ||
                                                 'thumbnail project'
@@ -321,7 +423,7 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                         />
                                         <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-md:top-[5.37vw] max-md:left-[5.37vw] max-md:py-[1.16vw] max-md:px-[5.04vw] max-md:title-mb12-600-150 max-lg:title-tl10 max-md:rounded-[1.33vw]'>
                                             {e?.propertyCategory?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name || 'Dự án'}
                                         </div>
                                     </div>
@@ -329,18 +431,16 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                         <h6
                                             title={
                                                 e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.name || e?.translations[0]?.name
                                             }
-                                            className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
+                                            className='text-den title18-700-150 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[3.36vw] max-md:-tracking-[1.259px] line-clamp-1 max-lg:title-tl18'
                                         >
                                             {e?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name ||
                                                 e?.translations[0]?.name ||
-                                                'Chưa có thông tin!'}
+                                                t?.projects?.filterSecond?.noinfo}
                                         </h6>
                                         <div
                                             title={e?.address?.display}
@@ -373,18 +473,14 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                             </span>
                                             <span className='capitalize text-den title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14 line-clamp-1'>
                                                 {e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.size
                                                     ? e?.translations?.find((e) =>
-                                                          e?.languageCode
-                                                              ?.toLowerCase()
-                                                              ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                          e?.languageCode?.toLowerCase()?.includes(lang),
                                                       )?.size + ' m²'
                                                     : e?.translations[0]?.size
                                                     ? e?.translations[0]?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -398,10 +494,8 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                                             </span>
                                             <span className='capitalize text-den max-md:title14-400-150 max-md:title-mb16-400-150 max-lg:title-tl14'>
                                                 {e?.translations?.find((e) =>
-                                                    e?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
-                                                )?.priceDisplay || 'Chưa có thông tin!'}
+                                                    e?.languageCode?.toLowerCase()?.includes(lang),
+                                                )?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>
@@ -430,19 +524,24 @@ export default function ListProjectV2({ lang, t, dataSlug }) {
                         />
                     </div>
                 </div>
-                <div className='max-lg:hidden'>
+                <div
+                    id='container_boxMap'
+                    className='max-lg:hidden'
+                >
                     <div
                         id='boxMap'
                         className={`${
                             !show ? 'hidden' : ''
-                        } w-[35.3125vw] z-[99999] fixed top-[5.75vw] right-0 rounded-tl-[0.5vw] overflow-hidden`}
+                        } w-[35.3125vw] z-[99999] relative h-screen rounded-tl-[0.5vw] overflow-hidden transition-all duration-200`}
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
                             {/* <MapV3 /> */}
-                            <MapV5 dataSlug={dataSlug} />
+                            <MapV5
+                                dataSlug={dataSlug}
+                                t={t}
+                            />
                         </div>
                     </div>
-                    <div className={`${!show ? 'hidden' : ''} !w-[35.3125vw]`}></div>
                 </div>
             </div>
             {isTablet && <BtnShowMap t={t} />}

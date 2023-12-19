@@ -30,7 +30,7 @@ export default function ListNews({ t, lang }) {
         error: errorNewsCategorized,
         isLoading: isLoadingNewsCategorized,
     } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&postTypeIds[]=${category?.id}`,
+        process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&order=DESC&postTypeIds[]=${category?.id}`,
         fetcher,
         {
             revalidateIfStale: false,
@@ -43,7 +43,7 @@ export default function ListNews({ t, lang }) {
         data: allDataNews,
         error: errorAllNews,
         isLoading: isLoadingAllNews,
-    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=50`, fetcher, {
+    } = useSWR(process.env.NEXT_PUBLIC_API + `/post?take=50&order=DESC`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,

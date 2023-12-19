@@ -8,6 +8,7 @@ export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.agreement?.title,
         description: t?.metaData?.agreement?.description,
         keywords: ['KANGNAM', 'kangnam', 'Bất động sản', 'Mua nhà'],
@@ -55,7 +56,7 @@ export default async function Agreements({ params }) {
     if (agreementData) {
         agreementData?.data?.forEach((item) => {
             item?.translations?.forEach((itm) => {
-                if (itm?.languageCode?.toLowerCase()?.includes(params.lang === 'ch' ? 'cn' : params.lang))
+                if (itm?.languageCode?.toLowerCase()?.includes(params.lang))
                     agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug, description: itm?.description })
             })
         })
@@ -69,7 +70,7 @@ export default async function Agreements({ params }) {
                 />
             </header>
             <IndexAgreements
-                lang={params.lang}
+                t={t}
                 agreementDataTranslation={agreementDataTranslation}
             />
         </>

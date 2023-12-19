@@ -3,21 +3,21 @@
         "listNav": [
             {
                 "id": 4,
-                "title": "프로젝트",
-                "href": "/프로젝트"
+                "title": "분양",
+                "href": "/분양"
             },
             {
                 "id": 5,
-                "title": "헛뉴스",
+                "title": "뉴스",
                 "href": "/news"
             },
             {
                 "id": 6,
-                "title": "강남소개",
+                "title": "하노이 강남부동산 소개",
                 "branch": [
                     {
                         "id": 1,
-                        "title": "소개",
+                        "title": "강남부돋산 소개",
                         "href": "/about-us"
                     },
                     {
@@ -27,13 +27,13 @@
                     },
                     {
                         "id": 3,
-                        "title": "Thỏa thuận & pháp lý",
+                        "title": "법률∙정책진행∙절차",
                         "href": "/agreements"
                     }
                 ]
             }
         ],
-        "button": "매물위탁",
+        "button": "임대∙매매 위탁",
         "title": "언어선택"
     },
     "Form1": {
@@ -41,8 +41,8 @@
         "hire": "Giá thuê mong muốn"
     },
     "aboutUsStory": {
-        "subtitle": "Câu chuyện thương hiệu",
-        "title": "Giới thiệu",
+        "subtitle": "신뢰로 우똑하게 써있는 기업",
+        "title": "강남부돋산 소개",
         "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
     },
     "aboutUsTeams": {
@@ -51,7 +51,7 @@
         "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
     },
     "aboutUsContact": {
-        "subtitle": "Liên hệ",
+        "subtitle": "연락처",
         "title": "Thông tin văn phòng",
         "button": "Liên hệ ngay"
     },
@@ -80,29 +80,34 @@
             },
             {
                 "id": 2,
-                "title": "프로젝트",
-                "href": "/projects"
+                "title": "분양",
+                "href": "/분양"
             },
             {
                 "id": 3,
-                "title": "Bán lại",
-                "href": "/resale"
+                "title": "전매",
+                "href": "/전매"
             },
             {
                 "id": 4,
-                "title": "Thỏa thuận & pháp lý",
+                "title": "임대 아파트",
+                "href": "/임대아파트"
+            },
+            {
+                "id": 5,
+                "title": "법률∙정책진행∙절차",
                 "href": "/agreements"
             }
         ],
         "nav2": [
             {
                 "id": 1,
-                "title": "강남소개",
+                "title": "하노이 강남부동산 소개",
                 "href": "/about-us"
             },
             {
                 "id": 2,
-                "title": "헛뉴스",
+                "title": "뉴스",
                 "href": "/news"
             },
             {
@@ -117,7 +122,7 @@
             "title": "연락처"
         },
         "navigation": {
-            "title": "Điều hướng chung",
+            "title": "바로가기",
             "list": [
                 {
                     "id": 1,
@@ -126,32 +131,32 @@
                 },
                 {
                     "id": 2,
-                    "title": "강남소개",
+                    "title": "하노이 강남부동산 소개",
                     "href": "/about-us"
                 },
                 {
                     "id": 3,
-                    "title": "프로젝트",
-                    "href": "/projects"
+                    "title": "분양",
+                    "href": "/분양"
                 },
                 {
                     "id": 4,
-                    "title": "매물위탁",
+                    "title": "임대∙매매 위탁",
                     "href": "/deposit"
                 },
                 {
                     "id": 5,
-                    "title": "헛뉴스",
+                    "title": "뉴스",
                     "href": "/news"
                 }
             ]
         },
         "service": {
-            "title": "서비스",
+            "title": "제공 서비스",
             "list": [
                 {
                     "id": "1",
-                    "title": "신규 프로젝트"
+                    "title": "분양 프로제트"
                 },
                 {
                     "id": "2",
@@ -159,7 +164,7 @@
                 },
                 {
                     "id": "3",
-                    "title": "부동산 위탁"
+                    "title": "매물위탁"
                 }
             ]
         }
@@ -169,28 +174,28 @@
     },
     "homepage": {
         "section1" : {
-            "subtitle": "저희 강남부동산은 100% 실 매물만 취급합니다.",
-            "title": "고객님은 만족하실 때까지 최선을 다 하겠습니다. 하노이 지역의 고객 맞춤형 부동산을 찾아드립니다.",
-            "suggest": "검색 키워드 예시. 지역별, 아파트별, 유형별"
+            "subtitle": "저희 하노이 강남부동산은 100% 실 매물만 취급합니다.",
+            "title": "맞춤형 부동산을 찾아드립니다.",
+            "suggest": "추천 검색어"
         },
         "section2" : {
-            "subtitle": "Câu chuyện thương hiệu",
-            "title": "강남소개",
-            "description": "안녕하세요. 하노이강남부도산입니다. 저희 강남부동산은  하노이 미딩 중심에 한 자리  잡고, 대표가 베트남인이고 한국귀화자이자 원어민 수준 정도로 편하게 소통할 수 있는 사람입니다.  저희 부동산은  전문성이 있는 10명  넘게 구성원과 함께 운영하고 있습니다.  하노이 비롯해서 호치민, 베트남 각 성시의 부동산 제품을 분양 전문 부동산입니다. 궁금하시거나 어려운 점이 있으시면 언제든지 편하게 연락헤주시기 바랍니다.  감사합니다.",
+            "subtitle": "신뢰로 우똑하게 써있는 기업",
+            "title": "하노이 강남부동산에 대한",
+            "description": "하노이 강남부동산은 하노이 미딩 중심 한인촌에 자리하고며, 한국손님을 주 고객으로 운영하고 있는 하노이지역 부동산전문 중개업소입니다. 베트남인 대표가 운녕하고 있으며, 한국 국적의 귀화자이기 때문에 한국어 원어민 수준으로 편하게 소통할 수 있고, 베트남 현지 부동산 거래 시스템을 잘 알고 있기 때문에 정부 정책, 베트남 부동산법 등에 대하여 명확한 지식을 바탕으로 수준 높은 계약체결과 상담을 약속드립니다. 하노이 아파트와 빌라, 토지, 건설등의 투자 상담도 안전하게 투자할 수 있도록 유익한 정보를 제공 드립니다. 부동산에 관련하여 궁금하신 점 있으시면 언제든지 편하게 연락해주세요.",
             "detail": {
-                "title1": "약속",
-                "title2": "Trọn hỗ trợ, chi phí thấp",
-                "title3": "빠른 진행"
+                "title1": "100% 사실물",
+                "title2": "질 높은 서비서",
+                "title3": "신속과 안전"
             },
             "button": {
-                "primary": "강남소개",
-                "secondary": "프로젝트"
+                "primary": "하노이 강남부동산에 대한",
+                "secondary": "项目 별 보기"
             }
         },
         "section3": {
             "title": "분양 프로제트",
-            "showMap": "지도에서 매물 확인",
-            "button": "무도 보기"
+            "showMap": "지도에서 보기",
+            "button": "전체 매물 보기"
         },
         "section3Mobile": {
             "buy": {
@@ -211,84 +216,130 @@
             }
         },
         "section4": {
-            "title": "매물위탁",
-            "description": "강남부동산은 부동산 전매.임대 위탁을 받는 업체입니다.",
+            "title": "임대∙매매 위탁",
+            "description": "최적 운영 시스템으로 분양을 손쉽게 받고, 전매.임대 매물을 신속하게 소화해드리는 강남부동산입니다.",
             "detail": {
-                "title1": "손님의 중심으로 운영하는 강남부도산입니다.",
-                "title2": "빠른 진행",
-                "title3": "잘 소화시켜주는 강남부동산"
+                "title1": "고객님이 만족할 때까지 최선으로 다하는 하노이강남부동산입니다.",
+                "title2": "신속 진행",
+                "title3": "법적 안전"
             },
-            "button": "바로 가기"
+            "button": "바로가기"
         },
         "section5": {
-            "subtitle": "프로젝트 ",
-            "title": "핫한 프로젝트",
-            "button": "무도 보기",
-            "over": "Hơn",
-            "projectDistribution": "dự án đang được phân phối"
+            "subtitle": "项目 ",
+            "title": "핫한 项目",
+            "button": "전체 매물 보기",
+            "over": "보다",
+            "projectDistribution": "项目가 배포되고 있습니다"
         },
         "section6": {
-            "title": "지역변 핫한 프로젝트",
-            "button": "프로젝트 세부"
+            "title": "지역별 핫 매물 소개",
+            "button": "项目 세부"
         },
         "section7": {
-            "subtitle": "Tổng hợp các đối tác",
+            "subtitle": "파트너의 요약",
             "title": "강남부동산의 파트너",
-            "button": "강남부동산의 파트너 되기  요청"
+            "button": "하노이강남부동산 파트너 요청"
         },
         "section8": {
-            "subtitle": "Tổng hợp tin tức",
-            "title": "핫이슈",
-            "button": "무도 보기"
+            "subtitle": "뉴스 요약",
+            "title": "핫 이슈",
+            "button": "전체 매물 보기"
         }
     },
     "projects": {
         "subtitle": "사실상 확인",
         "title": "주택 매매",
+        "titleH": "아파트 랜드 임대",
+        "titleP": "모든 项目",
         "map": "지도",
         "category": "부동산 유형",
-        "address": "Địa điểm",
-        "show": "Hiển thị",
-        "over": "trong số hơn",
-        "validateProject": "nhà đất xác thực",
+        "address": "위치",
+        "show": "표시하다",
+        "over": "더",
+        "validateProject": "부동산",
+        "validateIsProject": "项目 인증",
         "item": {
             "address": "주소",
-            "price": "Mức giá",
+            "price": "가격",
             "area": "면적"
         },
         "filter1": {
-            "title": "Chọn loại hình bất động sản",
-            "reset": "Đặt lại",
-            "cancel": "Hủy",
-            "apply": "Áp dụng"
+            "propertyTypeIds": "속성 유형을 선택하십시오",
+            "propertyAreaTypeIds": "부동산 위치 선택",
+            "propertyTypeIdsP": "项目 유형을 선택하십시오",
+            "propertyAreaTypeIdsP": "项目 사이트를 선택하십시오",
+            "propertyCategoryIds": "부동산의 형태를 선택하십시오",
+            "status": "项目 상태를 선택하십시오",
+            "price": "가격대를 빠르게 선택하십시오",
+            "area": "영역의 빠른 선택",
+            "reset": "초기화",
+            "cancel": "취소",
+            "apply": "적용하다"
         },
         "filter2": {
             "title1": "가장 핫한 매물",
-            "title2": "Giá tăng dần",
-            "title3": "Giá giảm dần"
+            "title2": "가격은 점차 상승합니다",
+            "title3": "가격이 하락합니다"
+        },
+        "filterSecond":{
+            "orSelect":"아니면 선택하세요",
+            "price":"가격",
+            "priceRange":"가격 범위",
+             "acreage":"토지",
+            "status":"상태",
+            "form":"형태",
+            "million":"백만",
+            "billion":"10억",
+            "selectBed":"침실 수를 선택하세요",
+            "selectBath":"욕실 수를 선택하세요",
+            "selectOriginHouse":"집 방향 선택",
+            "bedRoom":"침실",
+            "bathRoom":"화장실",
+            "north":"북쪽",
+            "west":"서쪽",
+            "east":"동쪽",
+            "south":"남쪽",
+            "southeast":"남동쪽",
+            "northeast":"북동",
+            "southwest":"남서",
+            "northwest":"북서",
+            "nofind":"속성을 찾을 수 없습니다!",
+            "noinfo":"정보 없음!"
         },
         "showMap": {
-            "list": "Danh sách",
+            "list": "목록",
             "map": "지도"
         }
     },
     "listNews": {
         "section2": {
-            "subtitle": "헛뉴스",
-            "title": "헛뉴스"
+            "subtitle": "뉴스",
+            "title": "뉴스"
         }
     },
     "projectDetail": {
-        "title": "Thông tin chi tiết",
+        "title": "세부",
         "info": {
             "type": "부동산 유형",
             "area": "면적",
-            "floors": "Số tầng",
-            "orientHouse": "Hướng nhà",
+            "floors": "바닥의 ​​수",
+            "orientHouse": "집의 방향",
             "year": "시공 년도",
             "orientBalcony": "반코니 향",
             "interior": "인테리어, 옵션",
-            "juridical": "소유증빙"
+            "juridical": "소유증빙",
+            "location":"위치",
+            "numberHouse":"건물의 수",
+            "scale":"규모",
+            "investor":"투자자",
+            "yearBuilding":"세트",
+            "title":"项目 내용",
+            "codeProject":"项目 코드",
+            "contact":"연락처 정보",
+            "fullName":"이름과 성",
+            "phone":"전화 번호",
+            "sendInfo":"정보를 보냅니다"
         },
         "map": {
             "address": "주소",
@@ -405,7 +456,7 @@
                     "input2": "면적:",
                     "input3": "면적",
                     "input4": "Hướng nhà",
-                    "input5": "프로젝트",
+                    "input5": "项目",
                     "input6": "반코니 향",
                     "input7": "인테리어, 옵션",
                     "input8": "소유증빙"

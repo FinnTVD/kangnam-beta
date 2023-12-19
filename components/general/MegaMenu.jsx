@@ -23,13 +23,8 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
         a.forEach((e, index) => {
             b.push({
                 id: index + 1,
-                title: e?.translations?.find((e) =>
-                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                )?.name,
-                href:
-                    '/' +
-                    e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-                        ?.alias,
+                title: e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name,
+                href: '/' + e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias,
             })
         })
         setListNav([...b, ...t?.Navbar?.listNav])

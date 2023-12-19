@@ -5,12 +5,20 @@ import { ToastContainer } from 'react-toastify'
 
 import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
-import { handleCheckLangCode } from '@/utils'
+import { handleCheckLangCode, listSlugNavHire, slugProject } from '@/utils'
+import { projects } from '@/utils/sitemapinit'
+
+export async function generateStaticParams({ params: { lang } }) {
+    return projects.map((project) => {
+        if (lang === project.code) return { project: project.title }
+    })
+}
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.project?.title,
         description: t?.metaData?.project?.description,
         keywords: ['KANGNAM', 'kangnam', 'Bất động sản', 'Mua nhà'],
@@ -51,9 +59,11 @@ export async function generateMetadata({ params: { lang } }) {
         },
     }
 }
-export default async function Page({ params: { lang, project } }) {
+export default async function page({ params: { lang, project } }) {
     const t = await getDictionary(lang)
     const data = await getData('/property-category')
+    const isProject = slugProject?.join('')?.includes(project)
+    const isHire = listSlugNavHire?.join('')?.includes(project)
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
@@ -69,6 +79,8 @@ export default async function Page({ params: { lang, project } }) {
                     lang={lang}
                     t={t}
                     dataSlug={data?.data}
+                    isProject={isProject}
+                    isHire={isHire}
                 />
             )}
             <ToastContainer style={{ zIndex: '999999999999999' }} />

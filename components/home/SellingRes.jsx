@@ -71,12 +71,15 @@ export default function SellingRes({ lang, data, t }) {
                     {t?.homepage?.section3Mobile?.buy?.subtitle?.projectDistribution}
                 </span>
             </div>
+            {/* <div className='overflow-x-scroll scrollbar'> */}
             <div className='px-mb10 mb-[3.2vw] max-lg:pl-[3.2vw]'>
                 <BoxFilterV2
                     arrFilter={arrFilter}
                     t={t}
+                    lang={lang}
                 />
             </div>
+            {/* </div> */}
 
             {dataNew && (
                 <Swiper
@@ -110,7 +113,7 @@ export default function SellingRes({ lang, data, t }) {
                                         />
                                         <div className='block absolute rounded-[1vw] bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit max-md:title-mb10-600-150 max-lg:title-tl10'>
                                             {e?.propertyCategory?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.name || 'Dự án'}
                                         </div>
                                     </div>
@@ -135,7 +138,7 @@ export default function SellingRes({ lang, data, t }) {
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
                                                 {e?.translation?.size
                                                     ? e?.translation?.size + ' m²'
-                                                    : 'Chưa có thông tin!'}
+                                                    : t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                         <div className='flex items-center'>
@@ -144,7 +147,7 @@ export default function SellingRes({ lang, data, t }) {
                                                 {t?.selling?.price}:
                                             </span>
                                             <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                                {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                                {e?.translation?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                             </span>
                                         </div>
                                     </div>
@@ -170,7 +173,7 @@ export default function SellingRes({ lang, data, t }) {
 
 SellingRes.Skeleton = function () {
     return (
-        <div className='flex flex-col overflow-hidden'>
+        <div className='flex flex-col overflow-hidden mt-[11.16rem]'>
             <div className='flex gap-x-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
                 {arrSelling?.map((e, index) => (
                     <div

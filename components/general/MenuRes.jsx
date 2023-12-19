@@ -35,7 +35,7 @@ export default function MenuRes({ lang, t, setIsOpen, isOpen, data }) {
     if (agreementData) {
         agreementData?.data?.forEach((item) => {
             item?.translations?.forEach((itm) => {
-                if (itm?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
+                if (itm?.languageCode?.toLowerCase()?.includes(lang))
                     agreementDataTranslation.push({ title: itm?.title, slug: itm?.slug })
             })
         })

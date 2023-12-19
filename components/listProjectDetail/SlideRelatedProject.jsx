@@ -9,9 +9,11 @@ import { handleCheckLangCode, renderAddress, renderTitle } from '@/utils'
 
 const fetcher = (url, langCode) => fetch(url, { headers: { 'x-language-code': langCode } }).then((res) => res.json())
 const arrProject = new Array(4).fill(0)
-export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
+export default function SlideRelatedProject({ lang, dataDetail, t, isProject }) {
     const { data, error, isLoading } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/property?propertyCategoryIds=${dataDetail?.propertyCategory?.id}`,
+        `${process.env.NEXT_PUBLIC_API}${
+            isProject ? '/project?propertyAreaTypeIds=' : '/property?propertyCategoryIds='
+        }${isProject ? dataDetail?.propertyAreaType?.id : dataDetail?.propertyCategory?.id}`,
         (url) => fetcher(url, handleCheckLangCode(lang)),
         {
             revalidateIfStale: false,
@@ -26,7 +28,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
     //     )
     // }, [lang])
 
-    const dataRelated = data?.data?.filter((e) => e?.translation?.slug !== detail)
+    const dataRelated = data?.data?.filter((e) => e?.id !== dataDetail?.id)
 
     return (
         <>
@@ -94,12 +96,11 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                     '/' +
                                     (lang === 'vi' ? '' : lang + '/') +
                                     (dataDetail?.propertyCategory?.translations?.find((item) =>
-                                        item?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        item?.languageCode?.toLowerCase()?.includes(lang),
                                     )?.alias || 'du-an') +
                                     '/' +
-                                    (e?.translations?.find((e) =>
-                                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-                                    )?.slug || e?.translations[0]?.slug)
+                                    (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
+                                        ?.slug || e?.translations[0]?.slug)
                                 }
                                 className='block w-full select-none'
                                 key={index}
@@ -114,7 +115,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                     />
                                     <div className='block absolute rounded-[0.25vw] bg-logo top-[1vw] left-[1vw] text-white py-[0.38vw] px-[0.94vw] h-fit w-fit title10-600-150 max-lg:title-tl10 max-md:text-10mb max-md:top-[2.67vw] max-md:left-[2.92vw] max-md:py-[1.6vw] max-md:px-[4vw] max-md:rounded-[1.067vw]'>
                                         {e?.propertyCategory?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            e?.languageCode?.toLowerCase()?.includes(lang),
                                         )?.name || 'Dự án'}
                                     </div>
                                 </div>
@@ -175,16 +176,14 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
                                             {e?.translations?.find((e) =>
-                                                e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
                                             )?.size
                                                 ? e?.translations?.find((e) =>
-                                                      e?.languageCode
-                                                          ?.toLowerCase()
-                                                          ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                      e?.languageCode?.toLowerCase()?.includes(lang),
                                                   )?.size + ' m²'
                                                 : e?.translations[0]?.size
                                                 ? e?.translations[0]?.size + ' m²'
-                                                : 'Chưa có thông tin!'}
+                                                : t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
 
@@ -205,7 +204,7 @@ export default function SlideRelatedProject({ lang, detail, dataDetail, t }) {
                                             {t?.relatedProjects?.item?.title3}
                                         </span>
                                         <span className='capitalize text-den title14-400-150 max-md:title-mb14-400-150 line-clamp-1 max-lg:title-tl14'>
-                                            {e?.translation?.price || 'Chưa có thông tin!'}
+                                            {e?.translation?.price || t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
                                 </div>

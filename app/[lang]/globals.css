@@ -75,6 +75,10 @@
         @apply text-20pc font-normal leading-[1.3];
     }
 
+    .title18-700-150 {
+        @apply font-bold leading-normal text-18pc;
+    }
+
     .title18-700-130 {
         @apply text-18pc font-bold leading-[1.3];
     }
@@ -538,7 +542,6 @@
             @apply !px-[2.67vw];
         }
     }
-
 }
 
 /* ------------HomePage----------------- */
@@ -602,42 +605,62 @@
     justify-content: end;
 }
 
-#contentProject p+p{
+#contentProject p + p {
     margin-top: 1vw;
 }
-#contentProject h5+p{
-    margin-top: 1vw;
-}
-
-#contentProject img+img{
+#contentProject h5 + p {
     margin-top: 1vw;
 }
 
-#contentProject p{
+#contentProject img + img {
+    margin-top: 1vw;
+}
+
+#contentProject p {
     overflow: hidden;
     display: flex;
     column-gap: 1vw;
-    
 }
 
-#contentProject p img+img{
+#contentProject p img + img {
     margin-top: 0;
 }
 
-@media (min-width:768px) and (max-width:1023.9px){
-    #contentProject p+p{
-    margin-top: 1.3vw;
+#contentProject ul > li  {
+    margin-left: 1vw;
 }
 
-#contentProject img+img{
-    margin-top: 1.3vw;
+#contentProject ul > li  {
+    list-style: disc !important;
 }
-    #contentProject p{
-            font-size: 2vw;
-        }
-        #contentProject h5+p{
-    margin-top: 1.3vw;
-}
+
+@media (min-width: 768px) and (max-width: 1023.9px) {
+    #contentProject p + p {
+        margin-top: 1.3vw;
+    }
+
+    #contentProject img + img {
+        margin-top: 1.3vw;
+    }
+    #contentProject p {
+        font-size: 2vw;
+    }
+    #contentProject h5 + p {
+        margin-top: 1.3vw;
+    }
+
+    #contentProject h3  {
+        font-size: 2.1vw;
+    }
+
+    #contentProject ul   {
+        margin-left: 2.5vw;
+    }
+
+    #contentProject ul > li  {
+        font-size: 2vw;
+        list-style: disc !important;
+    }
 }
 @media screen and (max-width: 767.9px) {
     #list-project #map,
@@ -647,39 +670,50 @@
         height: calc(70vh) !important;
         border-radius: 0 !important;
     }
-    #list-project #map{
+    #list-project #map {
         border-top-left-radius: 2.13vw !important;
         border-top-right-radius: 2.13vw !important;
     }
     #box-list-project #map,
     #box-list-project #map .vietmapgl-canvas-container,
     #box-list-project #map .vietmapgl-canvas-container canvas {
-            width: 96vw !important;
-            height: 70vh !important;
+        width: 96vw !important;
+        height: 70vh !important;
     }
 
-    #box-list-project #map{
+    #box-list-project #map {
         border-radius: 3.13vw !important;
     }
 
-    #contentProject p{
-            font-size: 4.267vw;
-            font-weight: 400;
-            line-height: 1.5;
-        }
+    #contentProject p {
+        font-size: 4.267vw;
+        font-weight: 400;
+        line-height: 1.5;
+    }
 
-    #contentProject img+img{
+    #contentProject img + img {
         margin-top: 2.13vw;
     }
 
-    #contentProject p+p{
+    #contentProject p + p {
         margin-top: 2.13vw;
     }
 
-    #contentProject h5+p{
+    #contentProject h5 + p {
         margin-top: 2.13vw;
     }
 
+    #contentProject h3  {
+        font-size: 4vw;
+    }
+
+    #contentProject ul   {
+        margin-left: 5vw;
+    }
+    #contentProject ul > li  {
+        font-size: 4.2vw;
+        list-style: disc !important;
+    }
 }
 .vietmapgl-marker.mapboxgl-marker:not([aria-label='Map marker']) {
     width: 30px;
@@ -704,22 +738,21 @@ canvas.vietmapgl-canvas.mapboxgl-canvas {
     width: 22.25vw !important;
 }
 
-
-.mapboxgl-popup-content, .vietmapgl-popup-content{
+.mapboxgl-popup-content,
+.vietmapgl-popup-content {
     padding: 0.67vw 0 1.5vw 1vw !important;
-
 }
-.vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button{
+.vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button {
     padding: 0.5vw;
     font-size: 1.5vw;
     color: black;
 }
 
-@media (min-width:768px) and (max-width:1023.9px){
+@media (min-width: 768px) and (max-width: 1023.9px) {
     .vietmapgl-popup-content.mapboxgl-popup-content {
         width: 48.25vw !important;
     }
-    .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button{
+    .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button {
         font-size: 3.5vw;
     }
 }
@@ -793,15 +826,15 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     @apply bg-logo rounded-full !h-[32px];
 } */
 
-#listFeature .active1{
+#listFeature .active1 {
     transition: all 1s;
     transform: translateX(9vw) translateY(6vw);
 }
-#listFeature .active2{
+#listFeature .active2 {
     transition: all 1s;
     transform: translateX(9vw);
 }
-#listFeature .active3{
+#listFeature .active3 {
     transition: all 1s;
     transform: translateX(9vw) translateY(-6vw);
 }
@@ -811,88 +844,86 @@ article#list-img-preview::-webkit-scrollbar-thumb {
 #contentNewsDetail h3,
 #contentNewsDetail h4,
 #contentNewsDetail h5,
-#contentNewsDetail h6{
+#contentNewsDetail h6 {
     color: #444;
     font-size: 1.5vw;
     font-weight: 700;
     line-height: 1.375;
     margin-top: 1.5vw;
 }
-#mapKN #map .popupMarkerKNList{
+#mapKN #map .popupMarkerKNList {
     width: fit-content;
     height: 20.625vw;
     overflow-x: hidden;
     overflow-y: scroll;
 }
-#mapKN #map .popupMarkerKN{
+#mapKN #map .popupMarkerKN {
     width: fit-content;
     height: fit-content;
 }
 
-@media (min-aspect-ratio:16/9){
+@media (min-aspect-ratio: 16/9) {
     #videoBanner {
         width: 100%;
         height: auto;
     }
 }
 
-@media (max-aspect-ratio:16/9){
+@media (max-aspect-ratio: 16/9) {
     #videoBanner {
         width: 100%;
         height: auto;
     }
 }
 
-#showFeature{
+#showFeature {
     transition: all 1s;
     transform: translateX(110%);
 }
 
-#showFeature.active{
+#showFeature.active {
     transform: translateX(0);
 }
 
 @media only screen and (max-width: 767px) {
     #map .text-cluster {
-            position: absolute;
-            z-index: 9999999;
-            top: 2.8vw;
-            left: 4.3vw;
-            color: black;
+        position: absolute;
+        z-index: 9999999;
+        top: 2.8vw;
+        left: 4.3vw;
+        color: black;
     }
     .vietmapgl-popup-content.mapboxgl-popup-content {
         width: 67.25vw !important;
     }
-    .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button{
+    .vietmapgl-popup-content .vietmapgl-popup-close-button.mapboxgl-popup-close-button {
         padding: 1.5vw;
         font-size: 6.5vw;
         color: black;
     }
 
-    .mapboxgl-popup-content, .vietmapgl-popup-content{
+    .mapboxgl-popup-content,
+    .vietmapgl-popup-content {
         padding: 1.54vw 0 4vw 3.47vw !important;
-
     }
-    #mapKN #map .popupMarkerKNList{
+    #mapKN #map .popupMarkerKNList {
         width: fit-content;
         height: 70.625vw;
         overflow-x: hidden;
         overflow-y: scroll;
     }
-    #mapKN #map .popupMarkerKN{
+    #mapKN #map .popupMarkerKN {
         width: fit-content;
         height: fit-content;
     }
-
 }
-
 
 @media only screen and (min-width: 1024px) {
     #map .text-cluster {
         position: absolute;
         z-index: 9999999;
         top: 1.1vw;
-        left:1.6vw;
+        left: 1.6vw;
         color: black;
     }
 }
@@ -901,7 +932,7 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         position: absolute;
         z-index: 9999999;
         top: 0.8vw;
-        left:1.2vw;
+        left: 1.2vw;
         color: black;
     }
 }
@@ -910,7 +941,7 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         position: absolute;
         z-index: 9999999;
         top: 0.6vw;
-        left:0.9vw;
+        left: 0.9vw;
         color: black;
     }
 }
@@ -919,7 +950,7 @@ article#list-img-preview::-webkit-scrollbar-thumb {
         position: absolute;
         z-index: 9999999;
         top: 0.4vw;
-        left:0.65vw;
+        left: 0.65vw;
         color: black;
     }
 }
@@ -930,7 +961,7 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     #contentNewsDetail h3,
     #contentNewsDetail h4,
     #contentNewsDetail h5,
-    #contentNewsDetail h6{
+    #contentNewsDetail h6 {
         font-size: 3.125vw;
     }
 }
@@ -940,7 +971,44 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     #contentNewsDetail h3,
     #contentNewsDetail h4,
     #contentNewsDetail h5,
-    #contentNewsDetail h6{
+    #contentNewsDetail h6 {
         font-size: 4.8vw;
+    }
+}
+
+#boxRef-filter.active {
+    position: fixed;
+    left: 7.5vw;
+    top: 5.75vw;
+    z-index: 999999;
+    background: white;
+}
+
+#boxMap.active {
+    display: flex;
+    align-items: flex-end;
+}
+@media screen and (max-width: 1023.9px) {
+    #boxRef-filter.active {
+        position: fixed;
+        left: 3.2vw;
+        top: 9.3vw;
+    }
+}
+
+@media screen and (max-width: 767.9px) {
+    #boxRef-filter.active {
+        position: fixed;
+        left: 0;
+        top: 18.25vw;
+    }
+
+    /* hidden scrollbar */
+
+    .scrollbar-hidden {
+        overflow-x: visible;
+    }
+    .scrollbar::-webkit-scrollbar {
+        display: none;
     }
 }

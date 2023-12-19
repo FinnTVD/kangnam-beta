@@ -1,7 +1,9 @@
 import SlideProjectProminent from './SlideProjectProminent'
 import Button from '../general/Button'
+import getData from '@/utils/getData'
 
-export default function ProjectProminent({ children, lang, t, dataHomePage }) {
+export default async function ProjectProminent({ children, lang, t }) {
+    const data = await getData('/home-page/property')
     return (
         <section className='w-screen px-120 py-[8.125vw] relative max-md:px-0 max-md:pb-[18.4vw]'>
             <div className='relative z-10 flex items-center justify-between'>
@@ -17,8 +19,7 @@ export default function ProjectProminent({ children, lang, t, dataHomePage }) {
                         {t?.homepage?.section5?.title}
                     </h2>
                     <span className='title-mb14-400-150 text-den opacity-[0.65] block mb-[4.27vw] md:hidden'>
-                        {t?.homepage?.section5?.over}{' '}
-                        <span className='title-mb14-700-150'>{dataHomePage?.properties?.length || '0'}</span>{' '}
+                        {t?.homepage?.section5?.over} <span className='title-mb14-700-150'>{data?.length || '0'}</span>{' '}
                         {t?.homepage?.section5?.projectDistribution}
                     </span>
                 </div>
@@ -33,7 +34,7 @@ export default function ProjectProminent({ children, lang, t, dataHomePage }) {
             </div>
             <SlideProjectProminent
                 lang={lang}
-                dataHomePage={dataHomePage}
+                dataHomePage={data}
             />
             <div className='px-mb10 md:hidden'>
                 <Button

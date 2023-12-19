@@ -40,7 +40,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
     return (
         <ul
             id='listFeature'
-            className='fixed right-[1.94vw] bottom-[1.86vw] z-[9999] gap-y-[1vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
+            className='fixed right-[1.94vw] bottom-[1.86vw] z-[99999] gap-y-[1vw] flex flex-col transition-all duration-500 ease-linear select-none max-md:hidden'
         >
             <div
                 onClick={() =>
@@ -59,7 +59,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                     viewBox='0 0 24 24'
                     strokeWidth='1.5'
                     stroke='black'
-                    class='w-[2.5vw] h-[2.5vw] p-[0.5vw]'
+                    className='w-[2.5vw] h-[2.5vw] p-[0.5vw]'
                 >
                     <path
                         strokeLinecap='round'
@@ -90,7 +90,7 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                 <Link
                     href={'https://www.youtube.com/@kangnamland/featured'}
                     target='_blank'
-                    className='w-full h-full flex justify-center items-center'
+                    className='flex items-center justify-center w-full h-full'
                 >
                     <IconYoutube className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 </Link>

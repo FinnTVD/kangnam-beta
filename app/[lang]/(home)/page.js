@@ -2,16 +2,14 @@ import IndexHome from '@/components/home'
 
 import { getDictionary } from '../dictionaries'
 import getData from '@/utils/getData'
-import { categoryHireId, handleCheckLangCode, postTypeIdAgreement } from '@/utils'
-// let propertyTypeParams = ''
-// let propertyAreaTypeParams = ''
-// let propertyCategoryTypeParams = ''
+import { handleCheckLangCode } from '@/utils'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
 
     const t = await getDictionary(lang)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: t?.metaData?.homepage?.title,
         description: t?.metaData?.homepage?.description,
         applicationName: process.env.SITE_NAME,
@@ -54,57 +52,16 @@ export async function generateMetadata({ params: { lang } }) {
         // manifest: `${DOMAIN}/site.webmanifest`,
     }
 }
-export const dynamic = 'force-dynamic'
 export default async function Home({ params, searchParams }) {
-    const t = await getDictionary(params?.lang)
-    const dataHomePage = await getData('/home-page')
-    const dataPosts = await getData('/post')
-    // const propertyType = searchParams?.propertyTypeIds
-    // const propertyAreaType = searchParams?.propertyAreaTypeIds
-    // const propertyCategoryType = searchParams?.propertyCategoryIds
-    // if (propertyType) {
-    //     propertyTypeParams = propertyType
-    //         .split('--')
-    //         .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-    // } else {
-    //     propertyTypeParams = ''
-    // }
-
-    // if (propertyAreaType) {
-    //     propertyAreaTypeParams = propertyAreaType
-    //         .split('--')
-    //         .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-    // } else {
-    //     propertyAreaTypeParams = ''
-    // }
-
-    // if (propertyCategoryType) {
-    //     propertyCategoryTypeParams = propertyCategoryType
-    //         .split('--')
-    //         .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-    // } else {
-    //     propertyCategoryTypeParams = ''
-    // }
-    // const dataSelling = await getData(
-    //     `/property?take=20${propertyCategoryTypeParams ? propertyCategoryTypeParams : ''}${
-    //         propertyAreaTypeParams ? propertyAreaTypeParams : ''
-    //     }${propertyTypeParams ? propertyTypeParams : ''}`,
-    // )
-    // const dataHiring = await getData(
-    //     `/property?propertyCategoryIds=${categoryHireId}${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
-    //         propertyTypeParams ? propertyTypeParams : ''
-    //     }`,
-    // )
-    const dataPostNews = dataPosts?.data?.filter((item) => item?.postType?.id !== postTypeIdAgreement).slice(0, 6)
+    const [t, dataHomePage] = await Promise.all([getDictionary(params?.lang), getData('/home-page')])
 
     return (
         <IndexHome
             lang={params?.lang}
             t={t}
-            dataPostNews={dataPostNews}
             dataHomePage={dataHomePage}
-            // dataHiring={[]}
-            // dataSelling={[]}
+            params={params}
+            searchParams={searchParams}
         />
     )
 }

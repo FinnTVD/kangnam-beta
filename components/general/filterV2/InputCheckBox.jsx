@@ -10,7 +10,7 @@ export default function InputCheckBox({ e, lang, lh, index }) {
         const callApi = async (id) => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API}/property?take=1&propertyAreaTypeIds=${id}`)
             const data = await res.json()
-            data && setData(data?.data[0]?.address)
+            data && setData(data?.data?.[0]?.address)
         }
         callApi(e?.id)
     }, [])
@@ -68,8 +68,7 @@ export default function InputCheckBox({ e, lang, lh, index }) {
                 htmlFor={e?.id}
                 onClick={handleToggle}
             >
-                {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-                    ?.name || e?.title}
+                {e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name || e?.title}
             </span>
         </div>
     )

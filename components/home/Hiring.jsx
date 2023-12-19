@@ -25,36 +25,13 @@ export default function Hiring({ lang, t, data }) {
                 </span>
             </div>
             <div className='px-mb10 mb-[3.2vw] max-lg:px-[3.2vw]'>
-                <BoxFilterV2 arrFilter={arrFilterV2} />
+                <BoxFilterV2
+                    arrFilter={arrFilterV2}
+                    t={t}
+                    lang={lang}
+                />
             </div>
-            {/* {isLoading && (
-                <div className='flex gap-x-[4.27vw] mt-[4.27vw] px-mb10 flex-nowrap overflow-hidden w-fit'>
-                    {arrHiring?.map((e, index) => (
-                        <div
-                            className='h-[calc(180vw/2-16px)] !w-[77.6vw] overflow-hidden rounded-[2.13vw]'
-                            key={index}
-                        >
-                            <div className='relative w-full h-[50.93vw] rounded-[0.5vw] overflow-hidden'>
-                                <Skeleton height={'50.93vw'} />
-                            </div>
-                            <div className='my-[2.67vw]'>
-                                <Skeleton height={'6.13vw'} />
-                            </div>
-                            <div className='flex flex-col gap-y-[2.13vw]'>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                                <div>
-                                    <Skeleton height={'4.53vw'} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )} */}
+
             {data && (
                 <Swiper
                     slidesPerView={'auto'}
@@ -82,7 +59,7 @@ export default function Hiring({ lang, t, data }) {
                                     />
                                     <div className='block absolute rounded-[1vw] bg-logo top-[2.67vw] left-[2.92vw] text-white py-[0.93vw] px-[4vw] h-fit w-fit max-md:title-mb10-600-150'>
                                         {e?.propertyCategory?.translations?.find((e) =>
-                                            e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                            e?.languageCode?.toLowerCase()?.includes(lang),
                                         )?.name || 'Dự án'}
                                     </div>
                                 </div>
@@ -105,7 +82,9 @@ export default function Hiring({ lang, t, data }) {
                                             {t?.hiring?.area} :
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                            {e?.translation?.size ? e?.translation?.size + ' m²' : 'Chưa có thông tin!'}
+                                            {e?.translation?.size
+                                                ? e?.translation?.size + ' m²'
+                                                : t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
                                     <div className='flex items-center'>
@@ -114,7 +93,7 @@ export default function Hiring({ lang, t, data }) {
                                             {t?.hiring?.price}
                                         </span>
                                         <span className='capitalize text-den max-md:title-mb14-400-150 max-lg:title-tl14'>
-                                            {e?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                            {e?.translation?.priceDisplay || t?.projects?.filterSecond?.noinfo}
                                         </span>
                                     </div>
                                 </div>

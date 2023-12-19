@@ -1,17 +1,18 @@
 'use client'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import useSWR from 'swr'
 import InputCheckBox from './InputCheckBox'
 import { cityIdDefault, latDefault, levelZoomDefault, lngDefault } from '@/utils'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 let dataNew = []
-const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
+const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t, click }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
+
     const [sideRef, isOutSide] = useClickOutSide()
     // const lh = searchParams.get(item?.slug)?.split('--')
     const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
@@ -28,17 +29,6 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
     useEffect(() => {
         isOutSide && setIndexFilter(-1)
     }, [isOutSide])
-
-    const createQueryString = useCallback(
-        (name, value) => {
-            const params = new URLSearchParams(searchParams)
-            params.set(name, value)
-
-            if (!value) return params.toString().replace(name + '=', '')
-            return params.toString()
-        },
-        [searchParams],
-    )
 
     const handleCheckValueInput = (e) => {
         e.preventDefault()
@@ -69,10 +59,12 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 paramNew.set('lat', latDefault)
             }
             router.push(pathName + '?' + paramNew.toString(), {
-                    scroll: false,
-                })
+                scroll: false,
+            })
         } else {
-            router.push(pathName + '?' + createQueryString(item?.slug, search), {
+            const paramNew = new URLSearchParams(searchParams)
+            paramNew.set(item?.slug, search)
+            router.push(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -97,16 +89,19 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
             paramNew.set('lng', lngDefault)
             paramNew.set('lat', latDefault)
             router.push(pathName + '?' + paramNew.toString(), {
-                    scroll: false,
-                })
+                scroll: false,
+            })
         } else {
-            router.push(pathName + '?' + createQueryString(item?.slug, ''), {
-            scroll: false,
-        })
+            const paramNew = new URLSearchParams(searchParams)
+            paramNew.set(item?.slug, '')
+            router.push(pathName + '?' + paramNew.toString(), {
+                scroll: false,
+            })
         }
         setIndexFilter(-1)
         window.localStorage.removeItem('dataArea')
     }
+
     return (
         <li
             ref={sideRef}
@@ -126,7 +121,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                         setIndexFilter(index)
                     }}
                 >
-                    {item?.title}
+                    {item?.translations?.find((e) => e?.langCode === lang)?.title || item?.title}
                 </span>
                 <span
                     className={`${
@@ -145,7 +140,7 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
             >
                 <div className='px-[1.5vw] pt-[1.5vw] max-md:pt-[6.4vw] max-md:px-[5.87vw]'>
                     <p className='text-den title16-600-150 whitespace-nowrap mb-[1.5vw] max-md:mb-[6.4vw] max-md:title-mb16-600-150 max-lg:title-tl16'>
-                        {t?.projects?.filter1?.title}
+                        {t?.projects?.filter1?.[item?.titleLang]}
                     </p>
                     <div
                         className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}

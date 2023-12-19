@@ -4,12 +4,28 @@ import HeaderV2 from '@/components/general/HeaderV2'
 import IndexNewsDetail from '@/components/newsDetail'
 import { handleCheckLangCode } from '@/utils'
 import getData from '@/utils/getData'
+import { mgId, ttId, tvId } from '@/utils/sitemapinit'
+
+export async function generateStaticParams({ params: { lang } }) {
+    const posts = await getData(
+        `/post?order=DESC&page=1&take=50&postTypeIds=${ttId}&postTypeIds=${tvId}&postTypeIds=${mgId}`,
+    )
+
+    return posts?.data?.map((item) => {
+        if (item?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug) {
+            return {
+                slug: item?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug,
+            }
+        }
+    })
+}
 
 export async function generateMetadata({ params: { lang, slug } }) {
     const data = await getData(`/post/post-by-slug/${slug}`)
     if (!data) return
     const dataDetail = data?.translations?.find((e) => e?.slug === slug)
     return {
+        metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
         title: dataDetail?.titleSeo,
         description: dataDetail?.descSeo,
         applicationName: process.env.SITE_NAME,

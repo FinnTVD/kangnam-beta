@@ -18,7 +18,7 @@ import {
 import * as vietmapgl from '/public/js/vietmap-gl.js'
 
 //draw content popup marker
-const handleRenderPopup = (itemProject, lang, acc) => {
+const handleRenderPopup = (itemProject, lang, acc,t) => {
     return `<div>
             <div class='${
                 acc ? '' : 'hidden'
@@ -29,13 +29,13 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                         >
                             <a class="outline-none" href="/${
                                 itemProject?.propertyCategory?.translations?.find((e) =>
-                                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                 )?.alias ||
                                 itemProject?.propertyCategory?.translations[0]?.alias ||
                                 'du-an'
                             }/${
-        itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-            ?.slug || itemProject?.translations[0]?.slug
+        itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug ||
+        itemProject?.translations[0]?.slug
     }">
                                 <img
                                     class="w-[5.4375vw] h-full block object-cover rounded-[0.25vw] max-md:w-[20.8vw] max-md:rounded-[0.7vw]"
@@ -46,25 +46,25 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                             <div class="w-[12.0625vw] max-md:w-[36vw]">
                             <a href="/${
                                 itemProject?.propertyCategory?.translations?.find((e) =>
-                                    e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                    e?.languageCode?.toLowerCase()?.includes(lang),
                                 )?.alias ||
                                 itemProject?.propertyCategory?.translations[0]?.alias ||
                                 'du-an'
                             }/${
-        itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang))
-            ?.slug || itemProject?.translations[0]?.slug
+        itemProject?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug ||
+        itemProject?.translations[0]?.slug
     }">
                                 <h2 class='line-clamp-1 text-[0.75vw] font-avertaStdCY font-bold leading-[1.3] max-md:line-clamp-2 max-md:text-[3.2vw] max-md:leading-[1.3] max-md:mb-[1.5vw] mb-[0.37vw] text-den-2'>${
                                     itemProject?.translations?.find((e) =>
-                                        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
+                                        e?.languageCode?.toLowerCase()?.includes(lang),
                                     )?.name ||
                                     itemProject?.translations[0]?.name ||
-                                    'Chưa có thông tin!'
+                                    t?.projects?.filterSecond?.noinfo
                                 }
                                 </h2>
                                 </a>
                                 <div
-                                            title=${itemProject?.address?.display || 'Chưa có thông tin!'}
+                                            title=${itemProject?.address?.display || t?.projects?.filterSecond?.noinfo}
                                             class='flex items-center gap-x-[0.5vw] max-md:gap-x-[1.41vw]'
                                         >
                                         <div class='w-fit'>
@@ -119,7 +119,7 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 ${
                                                     itemProject?.translation?.size
                                                         ? itemProject?.translation?.size + ' m²'
-                                                        : 'Chưa có thông tin!'
+                                                        : t?.projects?.filterSecond?.noinfo
                                                 }
                                             </span>
                                         </div>
@@ -137,7 +137,10 @@ const handleRenderPopup = (itemProject, lang, acc) => {
                                                 />
                                             </svg>
                                             <span class='capitalize text-den font-avertaStdCY text-[0.75vw] font-normal leading-normal line-clamp-1 max-md:text-[2.67vw] max-md:leading-normal'>
-                                                ${itemProject?.translation?.priceDisplay || 'Chưa có thông tin!'}
+                                                ${
+                                                    itemProject?.translation?.priceDisplay ||
+                                                    t?.projects?.filterSecond?.noinfo
+                                                }
                                             </span>
                                         </div>
                             </div>
@@ -168,12 +171,14 @@ const handleGeoWKT = (str) => {
 let propertyTypeParams = ''
 let propertyAreaTypeParams = ''
 let propertyCategoryTypeParams = ''
-
+let propertyBedsParams = ''
+let propertyBathsParams = ''
+let propertyOrientsParams = ''
 let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV5 = ({ lang, dataSlug = '' }) => {
+const MapV5 = ({ lang, dataSlug = '',t }) => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -190,6 +195,13 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     const propertyType = searchParams.getAll('propertyTypeIds')
     const propertyAreaType = searchParams.getAll('propertyAreaTypeIds')
     const propertyCategoryType = searchParams.getAll('propertyCategoryIds')
+    const minPrice = searchParams.get('minPrice')
+    const maxPrice = searchParams.get('maxPrice')
+    const minArea = searchParams.get('minArea')
+    const maxArea = searchParams.get('maxArea')
+    const propertyBeds = searchParams.get('beds')
+    const propertyBaths = searchParams.get('baths')
+    const propertyOrients = searchParams.get('orients')
 
     const isRedirect = useStore((state) => state.isRedirect)
     const setIsRedirect = useStore((state) => state.setIsRedirect)
@@ -223,7 +235,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     } else {
         propertyTypeParams = ''
     }
-
     if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
@@ -234,7 +245,6 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
     } else {
         propertyAreaTypeParams = ''
     }
-
     if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
@@ -244,6 +254,37 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         })
     } else {
         propertyCategoryTypeParams = ''
+    }
+
+    if (propertyBeds) {
+        propertyBedsParams = propertyBeds
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBedsParams = ''
+    }
+    if (propertyBaths) {
+        propertyBathsParams = propertyBaths
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyBathsParams = ''
+    }
+    if (propertyOrients) {
+        propertyOrientsParams = propertyOrients
+            ?.split('--')
+            ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
+        router.push(pathName + '?' + createQueryString('page', 1), {
+            scroll: false,
+        })
+    } else {
+        propertyOrientsParams = ''
     }
 
     // get list provinces count
@@ -270,6 +311,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         fetcher,
     )
 
+    // init add map
     useEffect(() => {
         if (typeof window === 'undefined') return
         const loadMap = () => {
@@ -320,7 +362,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         //         pathName?.includes(
         //             dataSlug?.find((e) =>
         //                 e?.translation?.find((i) =>
-        //                     i?.languageCode?.toLowerCase?.includes(lang === 'ch' ? 'cn' : lang),
+        //                     i?.languageCode?.toLowerCase?.includes( lang),
         //                 ),
         //             )?.alias,
         //         ) ||
@@ -379,7 +421,11 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                     propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
                 }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${
                     propertyTypeParams ? propertyTypeParams : ''
-                }`,
+                }${propertyBedsParams ? propertyBedsParams : ''}${propertyBathsParams ? propertyBathsParams : ''}${
+                    propertyOrientsParams ? propertyOrientsParams : ''
+                }${minPrice ? '&minPrice=' + minPrice + '000000000' : ''}${
+                    maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''
+                }${minArea ? '&minArea=' + minArea : ''}${maxArea ? '&maxArea=' + maxArea : ''}`,
             )
             const data = await res.json() //data marker
             if (data && typeof mapRef?.getZoom === 'function') {
@@ -389,7 +435,7 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
             }
         }
         callApi()
-    }, [cityId, wardId, districtId, mapRef])
+    }, [cityId, wardId, districtId, mapRef, searchParams])
 
     useEffect(() => {
         dataProvinces && setDataProvinces(dataProvinces)
@@ -444,29 +490,29 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
         getLocationCurrent()
     }, [levelZoom, isDragDebounce, mapRef])
 
-    if (propertyType?.length > 0 && propertyType[0]) {
-        propertyTypeParams = propertyType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-    } else {
-        propertyTypeParams = ''
-    }
+    // if (propertyType?.length > 0 && propertyType[0]) {
+    //     propertyTypeParams = propertyType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
+    // } else {
+    //     propertyTypeParams = ''
+    // }
 
-    if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
-        propertyAreaTypeParams = propertyAreaType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-    } else {
-        propertyAreaTypeParams = ''
-    }
+    // if (propertyAreaType?.length > 0 && propertyAreaType[0]) {
+    //     propertyAreaTypeParams = propertyAreaType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
+    // } else {
+    //     propertyAreaTypeParams = ''
+    // }
 
-    if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
-        propertyCategoryTypeParams = propertyCategoryType[0]
-            .split('--')
-            .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-    } else {
-        propertyCategoryTypeParams = ''
-    }
+    // if (propertyCategoryType?.length > 0 && propertyCategoryType[0]) {
+    //     propertyCategoryTypeParams = propertyCategoryType[0]
+    //         .split('--')
+    //         .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
+    // } else {
+    //     propertyCategoryTypeParams = ''
+    // }
 
     //function add border
     const addGeojsonLine = (dataPolygon) => {
@@ -555,7 +601,13 @@ const MapV5 = ({ lang, dataSlug = '' }) => {
                 districtId ? '&districtId=' + districtId : ''
             }${wardId ? '&wardId=' + wardId : ''}${findIdByAlias(pathName, dataSlug)}${
                 propertyCategoryTypeParams ? propertyCategoryTypeParams : ''
-            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}`,
+            }${propertyAreaTypeParams ? propertyAreaTypeParams : ''}${propertyTypeParams ? propertyTypeParams : ''}${
+                propertyBedsParams ? propertyBedsParams : ''
+            }${propertyBathsParams ? propertyBathsParams : ''}${propertyOrientsParams ? propertyOrientsParams : ''}${
+                minPrice ? '&minPrice=' + minPrice + '000000000' : ''
+            }${maxPrice ? '&maxPrice=' + maxPrice + '000000000' : ''}${minArea ? '&minArea=' + minArea : ''}${
+                maxArea ? '&maxArea=' + maxArea : ''
+            }`,
         )
         const data = await res.json() // data popup
         if (!data) return

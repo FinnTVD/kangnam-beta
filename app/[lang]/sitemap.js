@@ -1,153 +1,134 @@
+import { categoryHireId, categoryResaleId } from '@/utils'
+import getData from '@/utils/getData'
+import { hireSM, langSM, mgId, projectSM, resaleSM, ttId, tvId } from '@/utils/sitemapinit'
+
 export default async function sitemap() {
-    // const posts = await getData(GET_POSTS)
-    // const arrPosts = posts?.data?.posts?.nodes?.map((e) => {
-    //   return {
-    //     url: `${process.env.DOMAIN}/${e?.slug}`,
-    //     lastModified: e?.date,
-    //     priority: 0.8,
-    //   }
-    // })
+    const [hire, resale, posts, project] = await Promise.all([
+        getData(`/property/for-web?take=50&propertyCategoryIds=${categoryHireId}`),
+        getData(`/property/for-web?take=50&propertyCategoryIds=${categoryResaleId}`),
+        getData(`/post?order=DESC&page=1&take=50&postTypeIds=${ttId}&postTypeIds=${tvId}&postTypeIds=${mgId}`),
+        getData(`/project?page=1&take=50`),
+    ])
+
+    const listHire = []
+    hire?.data?.forEach((e) => {
+        const b = []
+        e?.translations?.forEach((i) => {
+            b.push({
+                url: hireSM?.find((h) => i?.languageCode?.toLowerCase()?.includes(h?.code))?.link + i?.slug,
+                lastModified: new Date(),
+                priority: 0.9,
+            })
+        })
+        return listHire?.push(...b)
+    })
+
+    const listResale = []
+    resale?.data?.forEach((e) => {
+        const b = []
+        e?.translations?.forEach((i) => {
+            b.push({
+                url: resaleSM?.find((h) => i?.languageCode?.toLowerCase()?.includes(h?.code))?.link + i?.slug,
+                lastModified: new Date(),
+                priority: 0.9,
+            })
+        })
+        return listResale?.push(...b)
+    })
+
+    const listPosts = []
+    posts?.data?.forEach((e) => {
+        const b = []
+        e?.translations?.forEach((i) => {
+            b.push({
+                url: langSM?.find((h) => i?.languageCode?.toLowerCase()?.includes(h?.code))?.link + 'news/' + i?.slug,
+                lastModified: new Date(),
+                priority: 0.9,
+            })
+        })
+        return listPosts?.push(...b)
+    })
+
+    const listProjects = []
+    project?.data?.forEach((e) => {
+        const b = []
+        e?.translations?.forEach((i) => {
+            b.push({
+                url: projectSM?.find((h) => i?.languageCode?.toLowerCase()?.includes(h?.code))?.link + i?.slug,
+                lastModified: new Date(),
+                priority: 0.9,
+            })
+        })
+        return listProjects?.push(...b)
+    })
 
     return [
-        {
-            url: process.env.DOMAIN,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}en`,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}kr`,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}ch`,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}du-an`,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/프로젝트`,
-            lastModified: new Date(),
-            priority: 1,
-        },
-        {
-            url: `${process.env.DOMAIN}ban-lai`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/재판매`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}mua-lai`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/획득`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}thue`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/임대`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}about-us`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}en/about-us`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/about-us`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}ch/about-us`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}news`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}en/news`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/news`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}ch/news`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}contact`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}en/contact`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/contact`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}ch/contact`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}deposit`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}en/deposit`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}kr/deposit`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
-        {
-            url: `${process.env.DOMAIN}ch/deposit`,
-            lastModified: new Date(),
-            priority: 0.9,
-        },
+        ...langSM.map((e) => {
+            return {
+                url: e?.link,
+                lastModified: new Date(),
+                priority: 1,
+            }
+        }),
+        ...hireSM.map((e) => {
+            return {
+                url: e?.link,
+                lastModified: new Date(),
+                priority: 1,
+            }
+        }),
+        ...listHire,
+        ...listResale,
+        ...listProjects,
+        ...resaleSM.map((e) => {
+            return {
+                url: e?.link,
+                lastModified: new Date(),
+                priority: 1,
+            }
+        }),
+        ...projectSM.map((e) => {
+            return {
+                url: e?.link,
+                lastModified: new Date(),
+                priority: 1,
+            }
+        }),
+        ...langSM.map((e) => {
+            return {
+                url: e?.link + 'news',
+                lastModified: new Date(),
+                priority: 0.8,
+            }
+        }),
+        ...listPosts,
+        ...langSM.map((e) => {
+            return {
+                url: e?.link + 'about-us',
+                lastModified: new Date(),
+                priority: 0.5,
+            }
+        }),
+        ...langSM.map((e) => {
+            return {
+                url: e?.link + 'contact',
+                lastModified: new Date(),
+                priority: 0.5,
+            }
+        }),
+        ...langSM.map((e) => {
+            return {
+                url: e?.link + 'agreements',
+                lastModified: new Date(),
+                priority: 0.5,
+            }
+        }),
+        ...langSM.map((e) => {
+            return {
+                url: e?.link + 'deposit',
+                lastModified: new Date(),
+                priority: 0.5,
+            }
+        }),
     ]
 }

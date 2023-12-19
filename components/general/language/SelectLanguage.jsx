@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import useStore from '@/app/[lang]/(store)/store'
 import { memo } from 'react'
 
-const arrHref = ['/en', '/kr', '/ch']
+const arrHref = ['/en', '/kr', '/cn']
 const arrLanguage = [
     {
         id: 1,
@@ -32,11 +32,11 @@ const arrLanguage = [
         id: 4,
         title: 'China',
         src: '/images/china.svg',
-        code: 'ch',
+        code: 'cn',
         languageCode: 'zh_CN',
     },
 ]
-const slugProject = [
+export const slugProjectHref = [
     {
         code: 'vi',
         href: '/du-an',
@@ -47,11 +47,11 @@ const slugProject = [
     },
     {
         code: 'kr',
-        href: '/项目',
+        href: '/분양',
     },
     {
-        code: 'ch',
-        href: '/프로젝트',
+        code: 'cn',
+        href: '/项目',
     },
 ]
 
@@ -71,7 +71,7 @@ const SelectLanguage = ({ className, lang, t }) => {
                     '/' +
                     lgNew +
                     slugDetailProject?.propertyCategory?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                        e?.languageCode?.toLowerCase()?.includes(lg),
                     )?.alias +
                     '/' +
                     item?.slug
@@ -82,7 +82,7 @@ const SelectLanguage = ({ className, lang, t }) => {
                     '/' +
                     lgNew +
                     slugDetailProject?.propertyCategory?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
+                        e?.languageCode?.toLowerCase()?.includes(lg),
                     )?.alias +
                     '/' +
                     itemVN?.slug
@@ -100,12 +100,11 @@ const SelectLanguage = ({ className, lang, t }) => {
             }
         }
         if (lg === 'vi') {
-            if (pathName === t?.Navbar?.listNav[0]?.href) return slugProject?.find((e) => e?.code === lg)?.href
+            if (pathName === t?.Navbar?.listNav[0]?.href) return slugProjectHref?.find((e) => e?.code === lg)?.href
             if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
                 return categoryNav
                     ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
-                    ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg))
-                    ?.alias
+                    ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg))?.alias
             }
 
             if (lang === 'vi') {
@@ -118,7 +117,7 @@ const SelectLanguage = ({ className, lang, t }) => {
         } else {
             // check projects
             if (pathName === t?.Navbar?.listNav[0]?.href)
-                return '/' + lg + slugProject?.find((e) => e?.code === lg)?.href
+                return '/' + lg + slugProjectHref?.find((e) => e?.code === lg)?.href
             // check category
             if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
                 return (
@@ -127,9 +126,7 @@ const SelectLanguage = ({ className, lang, t }) => {
                     '/' +
                     categoryNav
                         ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
-                        ?.translations?.find((item) =>
-                            item?.languageCode?.toLowerCase()?.includes(lg === 'ch' ? 'cn' : lg),
-                        )?.alias
+                        ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg))?.alias
                 )
             }
             if (lg === lang) {

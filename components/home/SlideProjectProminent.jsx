@@ -7,21 +7,15 @@ import Link from 'next/link'
 
 const handleRenderItem = (data, lang) => {
     if (!data) return
-    let alias = data?.propertyCategory?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.alias
-    let slug = data?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.slug
+    let alias = data?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias
+    let slug = data?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug
     // return `/${alias || '/projects'}/${slug || data?.translations[0]?.slug}`
     return `/${alias || '/projects'}`
 }
 
 const handleTitle = (data, lang) => {
     if (!data) return
-    let title = data?.translations?.find((e) =>
-        e?.languageCode?.toLowerCase()?.includes(lang === 'ch' ? 'cn' : lang),
-    )?.name
+    let title = data?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.name
     return title || data?.translations[0]?.name
 }
 export default function SlideProjectProminent({ lang, dataHomePage }) {
@@ -58,8 +52,8 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                 modules={[FreeMode]}
                 className='max-md:px-[2.67vw]'
             >
-                {Array.isArray(dataHomePage?.properties) &&
-                    dataHomePage?.properties?.map((e, index) => (
+                {Array.isArray(dataHomePage) &&
+                    dataHomePage?.map((e, index) => (
                         <SwiperSlide
                             className='!h-[26.1825vw] max-lg:!h-[32.1825vw] gr max-md:!w-[77.6vw] max-md:!h-[88vw] overflow-hidden rounded-[1vw] max-md:rounded-[3.2vw]'
                             key={index}
@@ -67,8 +61,6 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                             <Link href={handleRenderItem(e, lang) || '/'}>
                                 <div className='h-full max-md:w-full relative select-none px-[1.5vw] py-[1.5vw] flex items-end max-md:px-[4.51vw] max-md:py-[6.47vw]'>
                                     <Image
-                                        // data-aos='zoom-out'
-                                        // data-aos-delay={`${index * 300}`}
                                         className='object-cover rounded-[1vw]'
                                         src={e?.firstImage || '/images/slideitem.jpg'}
                                         alt={`slide-${index}`}
@@ -92,9 +84,7 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
                                         <span className='text-white max-md:title-mb12-400-150 max-lg:title-tl12'>
                                             {
                                                 e?.translations?.find((i) =>
-                                                    i?.languageCode
-                                                        ?.toLowerCase()
-                                                        ?.includes(lang === 'ch' ? 'cn' : lang),
+                                                    i?.languageCode?.toLowerCase()?.includes(lang),
                                                 )?.priceDisplay
                                             }
                                         </span>
@@ -107,7 +97,7 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
             <button
                 onClick={handlePrevSlide}
                 className={`${
-                    dataHomePage?.properties?.length <= 4 ? 'hidden' : ''
+                    dataHomePage?.length <= 4 ? 'hidden' : ''
                 } absolute top-1/2 max-md:hidden left-0 -translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] max-lg:w-[6vw] max-lg:h-[6vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20`}
             >
                 <svg
@@ -128,7 +118,7 @@ export default function SlideProjectProminent({ lang, dataHomePage }) {
             <button
                 onClick={handleNextSlide}
                 className={`${
-                    dataHomePage?.properties?.length <= 4 ? 'hidden' : ''
+                    dataHomePage?.length <= 4 ? 'hidden' : ''
                 } absolute top-1/2 max-md:hidden right-0 translate-x-1/2 -translate-y-1/2 w-[4vw] h-[4vw] max-lg:w-[6vw] max-lg:h-[6vw] rounded-full border border-solid border-[#D6A279] flex justify-center items-center bg-white z-20`}
             >
                 <svg

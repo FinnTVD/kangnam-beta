@@ -10,7 +10,12 @@ import './globals.css'
 import localFont from 'next/font/local'
 import Script from 'next/script'
 import AosInit from '@/components/general/AosInit'
-
+import { Gowun_Batang } from 'next/font/google'
+const gowun_Batang = Gowun_Batang({
+    weight: ['400', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+})
 const avertaStdCY = localFont({
     src: [
         {
@@ -47,8 +52,17 @@ const avertaStdCY = localFont({
     display: 'swap',
 })
 
-export const metadata = {
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=1', // <-- now here
+export async function generateStaticParams() {
+    const listLang = ['vi', 'en', 'kr', 'cn']
+    return listLang.map((locale) => ({ lang: locale }))
+}
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    // Also supported by less commonly used
+    // interactiveWidget: 'resizes-visual',
 }
 
 export default async function RootLayout({ children, params }) {
@@ -59,13 +73,44 @@ export default async function RootLayout({ children, params }) {
                     name='google-site-verification'
                     content='mLV7YCxrelL4Fm6eT69OV9RzCJxKi5Jfm-hsA6hrTXE'
                 />
+                <meta
+                    name='DC.title'
+                    content='Công Ty Tư Vấn Đầu Tư BDS Kang Nam (하노이강남부동산)'
+                />
+                <meta
+                    name='geo.region'
+                    content='VN-HN'
+                />
+                <meta
+                    name='geo.placename'
+                    content='Ha Noi'
+                />
+                <meta
+                    name='geo.position'
+                    content='21.015453152589238;105.77731782503285'
+                />
+                <meta
+                    name='ICBM'
+                    content='21.015453152589238, 105.77731782503285'
+                />
             </head>
             <body
                 suppressHydrationWarning={true}
-                className={avertaStdCY.className}
+                className={params.lang === 'kr' ? gowun_Batang.className : avertaStdCY.className}
             >
                 <AosInit />
                 {children}
+                <Script
+                    strategy='lazyOnload'
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-YQHLC4FNTP`}
+                ></Script>
+                <Script strategy='lazyOnload'>
+                    {`window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+
+							gtag('config', 'G-YQHLC4FNTP');`}
+                </Script>
                 <Script
                     async
                     defer
