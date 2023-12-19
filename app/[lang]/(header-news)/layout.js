@@ -13,6 +13,7 @@ export default async function RootLayout({ children, params }) {
             <FeatureHome
                 dataInfo={data}
                 isOther={true}
+                t={t}
             />
             <Footer
                 lang={params.lang}

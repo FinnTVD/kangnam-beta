@@ -85,7 +85,7 @@ const handleCurrency = (codeFrom, codeTo, input, value) => {
     }
 }
 
-export default function BoxCurrency({ className = '' }) {
+export default function BoxCurrency({ className = '', t }) {
     const [codeFrom, setCodeFrom] = useState('VND')
     const [codeTo, setCodeTo] = useState('USD')
     const [value, setValue] = useState('')
@@ -122,21 +122,21 @@ export default function BoxCurrency({ className = '' }) {
     }
     return (
         <div
-            className={`${className} absolute -left-[1.88vw] top-1/2 -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
+            className={`${className} absolute -left-[1.88vw] top-[-65%] -translate-y-1/2 -translate-x-full py-[1.69vw] px-[1.5vw] rounded-[0.75vw] bg-white`}
         >
-            <span className='block mx-auto text-den title20-700-130'>Chuyển đổi tiền tệ</span>
+            <span className='block mx-auto text-den title20-700-130'>{t?.homepage?.currency?.conversion}</span>
             <label
                 htmlFor='currency-default'
                 className='text-den title10-400-150 opacity-50 mb-[0.31vw] cursor-pointer block'
             >
-                Số tiền
+                {t?.homepage?.currency?.amountOfMoney}
             </label>
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
                     type='number'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5]'
                     id='currency-default'
-                    placeholder='Nhập số tiền'
+                    placeholder={t?.homepage?.currency?.enterTheAmount}
                     value={value}
                     onChange={(e) => {
                         setValue(e?.target?.value)
@@ -193,13 +193,13 @@ export default function BoxCurrency({ className = '' }) {
                 htmlFor='currency-new'
                 className='text-den title10-400-150 opacity-50 mb-[0.31vw] block cursor-pointer'
             >
-                Chuyển đổi thành
+                {t?.homepage?.currency?.convert}
             </label>
 
             <div className='w-[15.8125vw] rounded-[6.25vw] px-[1vw] py-[0.6vw] flex shadow-currency'>
                 <input
                     type='text'
-                    placeholder='Thành tiền'
+                    placeholder={t?.homepage?.currency?.intoMoney}
                     id='currency-new'
                     className='outline-none w-[80%] text-den title14-400-150 placeholder:opacity-50 placeholder:font-normal placeholder:leading-[1.5] pointer-events-none'
                     value={handleCurrency(codeFrom, codeTo, debounceValue, data?.value)}
@@ -241,7 +241,7 @@ export default function BoxCurrency({ className = '' }) {
                 <span className='ml-[2px] text-nau-nhat'>{data?.codeTo}</span>
             </div>
             <p className='text-center text-den opacity-70 title10-400-150'>
-                Tỷ giá chuyển đổi thực vào lúc {handleRenderTime(data?.updatedAt)} UTC
+                {t?.homepage?.currency?.realConversion} {handleRenderTime(data?.updatedAt)} UTC
             </p>
         </div>
     )

@@ -121,7 +121,12 @@ export default function Header({ lang, t, data, isHome, dataInfo, children, home
                     </span>
                 </div>
                 {children}
-                {!isMobile && <FeatureHome dataInfo={dataInfo} />}
+                {!isMobile && (
+                    <FeatureHome
+                        dataInfo={dataInfo}
+                        t={t}
+                    />
+                )}
             </div>
         </header>
     )

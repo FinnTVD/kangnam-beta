@@ -173,6 +173,14 @@
         "title": "Scroll down"
     },
     "homepage": {
+        "currency":{
+            "conversion":"Currency conversion",
+            "amountOfMoney":"Amount of money",
+            "enterTheAmount":"Enter the amount",
+            "convert":"Convert",
+            "realConversion":"Real conversion exchange rate at the time",
+            "intoMoney":"Into money"
+        },
         "section1" : {
             "subtitle": "Peace of mind with 100% authenticated real estate in KANGNAM",
             "title": "Choosing the right house",

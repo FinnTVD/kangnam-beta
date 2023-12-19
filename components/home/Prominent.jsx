@@ -12,7 +12,24 @@ import { slugProjectLangCode } from '@/utils'
 const arrArea = [
     {
         id: 1,
-        title: '01. Khu vực Nam Từ Liêm, Hà Nội',
+        translations: [
+            {
+                title: '01. Khu vực Nam Từ Liêm, Hà Nội',
+                code: 'vi',
+            },
+            {
+                title: '01. Area Nam Tu Liem, Ha Noi',
+                code: 'en',
+            },
+            {
+                title: '01. 영역 Nam Tu Liem, Ha Noi',
+                code: 'kr',
+            },
+            {
+                title: '01. 区域 Nam Tu Liem, Ha Noi',
+                code: 'cn',
+            },
+        ],
         cityId: 11,
         districtId: 3083,
         lng: 105.76722048500005,
@@ -20,7 +37,24 @@ const arrArea = [
     },
     {
         id: 2,
-        title: '02. Khu vực Hà Đông, Hà Nội',
+        translations: [
+            {
+                title: '02. Khu vực Hà Đông, Hà Nội',
+                code: 'vi',
+            },
+            {
+                title: '02. Area Ha Dong, Ha Noi',
+                code: 'en',
+            },
+            {
+                title: '02. 영역 Ha Dong, Ha Noi',
+                code: 'kr',
+            },
+            {
+                title: '02. 区域 Ha Dong, Ha Noi',
+                code: 'cn',
+            },
+        ],
         cityId: 11,
         districtId: 1035,
         lng: 105.77091365500007,
@@ -28,7 +62,24 @@ const arrArea = [
     },
     {
         id: 3,
-        title: '03. Khu vực Cầu Giấy, Hà Nội',
+        translations: [
+            {
+                title: '03. Khu vực Cầu Giấy, Hà Nội',
+                code: 'vi',
+            },
+            {
+                title: '03. Area Cau Giay, Ha Noi',
+                code: 'en',
+            },
+            {
+                title: '03. 영역 Cau Giay, Ha Noi',
+                code: 'kr',
+            },
+            {
+                title: '03. 区域 Cau Giay, Ha Noi',
+                code: 'cn',
+            },
+        ],
         cityId: 11,
         districtId: 523,
         lng: 105.79180610344349,
@@ -36,7 +87,24 @@ const arrArea = [
     },
     {
         id: 4,
-        title: '04. Khu vực Ba Vì, Hà Nội',
+        translations: [
+            {
+                title: '04. Khu vực Ba Vì, Hà Nội',
+                code: 'vi',
+            },
+            {
+                title: '04. Area Ba Vi, Ha Noi',
+                code: 'en',
+            },
+            {
+                title: '04. 영역 Ba Vi, Ha Noi',
+                code: 'kr',
+            },
+            {
+                title: '04. 区域 Ba Vi, Ha Noi',
+                code: 'cn',
+            },
+        ],
         cityId: 11,
         districtId: 3595,
         lng: 105.42338142200003,
@@ -115,7 +183,9 @@ export default function Prominent({ t, lang }) {
             <div className='relative z-10 px-120 flex flex-col gap-y-[4.25vw] max-md:gap-y-[30.4vw] items-center w-full mb-[3.19vw] max-md:mt-[10.4vw] px-mb10 max-lg:mb-[4.29vw]'>
                 {isMobile && (
                     <div className='w-full md:hidden'>
-                        <span className='text-white title-mb14-600-160'>{arrArea[indexSlider]?.title}</span>
+                        <span className='text-white title-mb14-600-160'>
+                            {arrArea[indexSlider]?.translations?.find((e) => e?.code === lang)?.title}
+                        </span>
                         <ul className='flex gap-x-[2.4vw] w-full mt-[2.67vw]'>
                             {arrArea?.map((e, index) => (
                                 <li
@@ -158,7 +228,7 @@ export default function Prominent({ t, lang }) {
                                     indexSlider === index ? 'active' : ''
                                 } flex-1 border-t-[2px] border-solid border-white02 pt-[0.5vw] relative before:h-[2px] before:w-0 before:bg-white before:absolute before:-top-[2px] before:left-0 transition-all duration-[5s] max-lg:text-center cursor-pointer title16-600-160 title-tl16-600-160 max-lg:pt-[1.5vw]`}
                             >
-                                {e?.title}
+                                {e?.translations?.find((i) => i?.code === lang)?.title}
                             </li>
                         ))}
                     </ul>

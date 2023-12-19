@@ -10,7 +10,7 @@ import IconChangeCurrency from '../icons/IconChangeCurrency'
 import IconCall from '../icons/IconCall'
 import Link from 'next/link'
 import IconYoutube from '../icons/IconYoutube'
-export default function FeatureHome({ dataInfo, isOther = false }) {
+export default function FeatureHome({ dataInfo, isOther = false, t }) {
     const isFeatureHome = useStore((state) => state.isFeatureHome)
     const setIsFeatureHome = useStore((state) => state.setIsFeatureHome)
 
@@ -115,7 +115,10 @@ export default function FeatureHome({ dataInfo, isOther = false }) {
                 >
                     <IconChangeCurrency className='object-contain w-[2vw] h-[2vw] group-hover:scale-125 transition-all duration-200 ease-linear' />
                 </div>
-                <BoxCurrency className={!isShow || isOutSide ? 'hidden' : ''} />
+                <BoxCurrency
+                    t={t}
+                    className={!isShow || isOutSide ? 'hidden' : ''}
+                />
             </li>
             <li
                 className={`${

@@ -173,6 +173,14 @@
         "title": "아래로"
     },
     "homepage": {
+        "currency":{
+            "conversion":"통화 변환",
+            "amountOfMoney":"금액",
+            "enterTheAmount":"금액을 입력하십시오",
+            "convert":"전환하다",
+            "realConversion":"당시 실제 전환 환율",
+            "intoMoney":"돈으로"
+        },
         "section1" : {
             "subtitle": "저희 하노이 강남부동산은 100% 실 매물만 취급합니다.",
             "title": "맞춤형 부동산을 찾아드립니다.",

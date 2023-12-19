@@ -173,6 +173,14 @@
         "title": "Cuộn xuống"
     },
     "homepage": {
+        "currency":{
+            "conversion":"货币转换",
+            "amountOfMoney":"金钱数额",
+            "enterTheAmount":"输入金额",
+            "convert":"转变",
+            "realConversion":"当时的实际转换率",
+            "intoMoney":"变成金钱"
+        },
         "section1" : {
             "subtitle": "An tâm với 100% bất động sản được xác thực tại KANGNAM",
             "title": "Lựa Chọn Căn Nhà Ưng Ý",

@@ -61,7 +61,10 @@ export default async function DepositPage({ params: { lang } }) {
                     lang={lang}
                     t={t}
                 />
-                <FeatureHome dataInfo={data} />
+                <FeatureHome
+                    dataInfo={data}
+                    t={t}
+                />
             </header>
             <ConsignmentIndex
                 t={t}
