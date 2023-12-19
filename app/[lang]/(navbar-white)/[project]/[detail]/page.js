@@ -1,7 +1,27 @@
 import { getDictionary } from '@/app/[lang]/dictionaries'
 import IndexProjectDetail from '@/components/listProjectDetail'
-import { handleCheckLangCode, slugProject } from '@/utils'
+import { categoryHireId, categoryResaleId, handleCheckLangCode, slugProject } from '@/utils'
 import getData from '@/utils/getData'
+
+export async function generateStaticParams({ params: { lang, project } }) {
+    const [hire, resale, projects] = await Promise.all([
+        getData(`/property/for-web?take=50&propertyCategoryIds=${categoryHireId}`),
+        getData(`/property/for-web?take=50&propertyCategoryIds=${categoryResaleId}`),
+        getData(`/project?page=1&take=50`),
+    ])
+
+    const allList = [...hire?.data, ...resale?.data, ...projects?.data]
+    return allList?.map((item) => {
+        if (
+            item?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug &&
+            item?.propertyCategory?.translations?.find((e) => e?.alias === project)?.alias
+        ) {
+            return {
+                detail: item?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug,
+            }
+        }
+    })
+}
 export async function generateMetadata({ params: { lang, detail } }) {
     const data = await getData(`/property/property-by-slug/${detail}`)
     if (!data) return

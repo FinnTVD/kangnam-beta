@@ -6,6 +6,13 @@ import { ToastContainer } from 'react-toastify'
 import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
 import { handleCheckLangCode, listSlugNavHire, slugProject } from '@/utils'
+import { projects } from '@/utils/sitemapinit'
+
+export async function generateStaticParams({ params: { lang } }) {
+    return projects.map((project) => {
+        if (lang === project.code) return { project: project.title }
+    })
+}
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')

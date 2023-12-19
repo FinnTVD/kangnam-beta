@@ -10,7 +10,12 @@ import './globals.css'
 import localFont from 'next/font/local'
 import Script from 'next/script'
 import AosInit from '@/components/general/AosInit'
-
+import { Gowun_Batang } from 'next/font/google'
+const gowun_Batang = Gowun_Batang({
+    weight: ['400', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+})
 const avertaStdCY = localFont({
     src: [
         {
@@ -47,9 +52,10 @@ const avertaStdCY = localFont({
     display: 'swap',
 })
 
-// export const metadata = {
-//     viewport: 'width=device-width, initial-scale=1, maximum-scale=1', // <-- now here
-// }
+export async function generateStaticParams() {
+    const listLang = ['vi', 'en', 'kr', 'cn']
+    return listLang.map((locale) => ({ lang: locale }))
+}
 
 export const viewport = {
     width: 'device-width',
@@ -90,7 +96,7 @@ export default async function RootLayout({ children, params }) {
             </head>
             <body
                 suppressHydrationWarning={true}
-                className={avertaStdCY.className}
+                className={params.lang === 'kr' ? gowun_Batang.className : avertaStdCY.className}
             >
                 <AosInit />
                 {children}

@@ -17,7 +17,7 @@ import {
 import * as vietmapgl from '/public/js/vietmap-gl.js'
 
 //draw content popup marker
-const handleRenderPopup = (itemProject, lang, acc) => {
+const handleRenderPopup = (t, itemProject, lang, acc) => {
     return `<div>
             <div class='${
                 acc ? '' : 'hidden'
@@ -174,7 +174,7 @@ let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV6 = ({ lang, dataSlug = '' }) => {
+const MapV6 = ({ lang, dataSlug = '', t }) => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -259,10 +259,7 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
         data: dataWard,
         error: errorWard,
         isLoading: isLoadingWard,
-    } = useSWR(
-        `${process.env.NEXT_PUBLIC_API}/project/project-by-address?cityId=${cityId}&districtId=${districtId}`,
-        fetcher,
-    )
+    } = useSWR(`${process.env.NEXT_PUBLIC_API}/project/project-by-address?districtId=${districtId}`, fetcher)
 
     useEffect(() => {
         if (typeof window === 'undefined') return
@@ -493,7 +490,7 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
         const data = await res.json()
         if (!data) return
         if (Array.isArray(data) && data?.length) {
-            let childNode = data?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang), '')
+            let childNode = data?.reduce((acc, itemProject) => acc + handleRenderPopup(t, itemProject, lang), '')
             const marker = new vietmapgl.Marker()
                 .setLngLat(e.coor)
                 .addTo(mapRef)
@@ -561,7 +558,7 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
                 if (levelZoom >= levelZoomDistrictDefault && levelZoom < levelZoomWardDefault) {
                     let childNode = data?.data
                         ?.filter((item) => item?.address?.wardId?.includes(e?.id))
-                        ?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang), '')
+                        ?.reduce((acc, itemProject) => acc + handleRenderPopup(t, itemProject, lang), '')
                     const marker = new vietmapgl.Marker()
                         .setLngLat(e.coor)
                         .addTo(mapRef)
@@ -609,7 +606,7 @@ const MapV6 = ({ lang, dataSlug = '' }) => {
                 if (levelZoom < levelZoomDistrictDefault) {
                     let childNode = data?.data
                         ?.filter((item) => item?.address?.districtId?.includes(e?.id))
-                        ?.reduce((acc, itemProject) => acc + handleRenderPopup(itemProject, lang, acc), '')
+                        ?.reduce((acc, itemProject) => acc + handleRenderPopup(t, itemProject, lang, acc), '')
                     const marker = new vietmapgl.Marker()
                         .setLngLat(e.coor)
                         .addTo(mapRef)

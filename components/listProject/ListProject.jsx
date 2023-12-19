@@ -472,8 +472,11 @@ export default function ListProject({ lang, t, dataSlug }) {
                         } w-[35.3125vw] z-[99999] relative h-screen rounded-tl-[0.5vw] overflow-hidden transition-all duration-200`}
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>
-                            {/* <MapV3 /> */}
-                            <MapV6 dataSlug={dataSlug} />
+                            <MapV6
+                                dataSlug={dataSlug}
+                                t={t}
+                                lang={lang}
+                            />
                         </div>
                     </div>
                 </div>

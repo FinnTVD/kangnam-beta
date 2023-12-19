@@ -134,7 +134,7 @@ export default function LatestNewsItem({ newsItem, t, lang }) {
                                 </g>
                             </svg>
                             <span className='text-[#656263] title14-400-150 ml-[0.375vw] opacity-70 max-md:title-mb10-400-150 max-md:ml-[0.8vw] max-lg:title-tl14'>
-                                {formatDateTime(newsItem?.updatedAt)}
+                                {formatDateTime(translation?.updatedAt)}
                             </span>
                         </div>
                     </div>
