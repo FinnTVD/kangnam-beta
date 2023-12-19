@@ -22,8 +22,8 @@ const objProject = {
         },
         {
             languageCode: 'zh_CN',
-            alias: '프로젝트',
-            name: '프로젝트',
+            alias: '项目',
+            name: '项目',
             propertyCategoryId: '',
         },
         {
@@ -53,8 +53,8 @@ const dataProjectInit = {
             languageCode: 'kr',
         },
         {
-            alias: '/프로젝트',
-            name: '프로젝트',
+            alias: '/项目',
+            name: '项目',
             languageCode: 'cn',
         },
     ],

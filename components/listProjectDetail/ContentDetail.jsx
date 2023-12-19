@@ -53,7 +53,7 @@ const slugProjectLang = [
     },
     {
         code: 'cn',
-        title: '프로젝트',
+        title: '项目',
     },
 ]
 const bed = [

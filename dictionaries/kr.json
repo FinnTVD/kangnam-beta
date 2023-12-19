@@ -189,7 +189,7 @@
             },
             "button": {
                 "primary": "하노이 강남부동산에 대한",
-                "secondary": "프로젝트 별 보기"
+                "secondary": "项目 별 보기"
             }
         },
         "section3": {
@@ -226,15 +226,15 @@
             "button": "바로가기"
         },
         "section5": {
-            "subtitle": "프로젝트 ",
-            "title": "핫한 프로젝트",
+            "subtitle": "项目 ",
+            "title": "핫한 项目",
             "button": "전체 매물 보기",
             "over": "보다",
-            "projectDistribution": "프로젝트가 배포되고 있습니다"
+            "projectDistribution": "项目가 배포되고 있습니다"
         },
         "section6": {
             "title": "지역별 핫 매물 소개",
-            "button": "프로젝트 세부"
+            "button": "项目 세부"
         },
         "section7": {
             "subtitle": "파트너의 요약",
@@ -251,14 +251,14 @@
         "subtitle": "사실상 확인",
         "title": "주택 매매",
         "titleH": "아파트 랜드 임대",
-        "titleP": "모든 프로젝트",
+        "titleP": "모든 项目",
         "map": "지도",
         "category": "부동산 유형",
         "address": "위치",
         "show": "표시하다",
         "over": "더",
         "validateProject": "부동산",
-        "validateIsProject": "프로젝트 인증",
+        "validateIsProject": "项目 인증",
         "item": {
             "address": "주소",
             "price": "가격",
@@ -267,10 +267,10 @@
         "filter1": {
             "propertyTypeIds": "속성 유형을 선택하십시오",
             "propertyAreaTypeIds": "부동산 위치 선택",
-            "propertyTypeIdsP": "프로젝트 유형을 선택하십시오",
-            "propertyAreaTypeIdsP": "프로젝트 사이트를 선택하십시오",
+            "propertyTypeIdsP": "项目 유형을 선택하십시오",
+            "propertyAreaTypeIdsP": "项目 사이트를 선택하십시오",
             "propertyCategoryIds": "부동산의 형태를 선택하십시오",
-            "status": "프로젝트 상태를 선택하십시오",
+            "status": "项目 상태를 선택하십시오",
             "price": "가격대를 빠르게 선택하십시오",
             "area": "영역의 빠른 선택",
             "reset": "초기화",
@@ -334,8 +334,8 @@
             "scale":"규모",
             "investor":"투자자",
             "yearBuilding":"세트",
-            "title":"프로젝트 내용",
-            "codeProject":"프로젝트 코드",
+            "title":"项目 내용",
+            "codeProject":"项目 코드",
             "contact":"연락처 정보",
             "fullName":"이름과 성",
             "phone":"전화 번호",
@@ -456,7 +456,7 @@
                     "input2": "면적:",
                     "input3": "면적",
                     "input4": "Hướng nhà",
-                    "input5": "프로젝트",
+                    "input5": "项目",
                     "input6": "반코니 향",
                     "input7": "인테리어, 옵션",
                     "input8": "소유증빙"

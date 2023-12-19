@@ -51,7 +51,7 @@ export const slugProjectHref = [
     },
     {
         code: 'cn',
-        href: '/프로젝트',
+        href: '/项目',
     },
 ]
 
