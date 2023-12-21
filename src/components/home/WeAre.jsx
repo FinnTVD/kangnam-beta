@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import src from '../../public/images/linear.png'
-import people from '../../public/images/people.png'
-import circleHouse from '../../public/images/circle-house.png'
-import house from '../../public/images/house.png'
-import check from '../../public/images/check.svg'
-import pig from '../../public/images/pig.svg'
-import watch from '../../public/images/watch.svg'
-import bgWe from '../../public/images/bg-we.png'
+import src from '../../../public/images/linear.png'
+import people from '../../../public/images/people.png'
+import circleHouse from '../../../public/images/circle-house.png'
+import house from '../../../public/images/house.png'
+import check from '../../../public/images/check.svg'
+import pig from '../../../public/images/pig.svg'
+import watch from '../../../public/images/watch.svg'
+import bgWe from '../../../public/images/bg-we.png'
 
 export default function WeAre({ lang, t }) {
     return (

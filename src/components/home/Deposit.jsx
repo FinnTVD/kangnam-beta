@@ -3,8 +3,8 @@ import Button from '../general/Button'
 import IconDeposit1 from '../icons/IconDeposit1'
 import IconDeposit2 from '../icons/IconDeposit2'
 import IconDeposit3 from '../icons/IconDeposit3'
-import bgDeposit from '../../public/images/bg-deposit.jpg'
-import bgDepositMb from '../../public/images/bg-deposit-res.jpg'
+import bgDeposit from '../../../public/images/bg-deposit.jpg'
+import bgDepositMb from '../../../public/images/bg-deposit-res.jpg'
 
 export default function Deposit({ lang, t }) {
     return (

@@ -8,7 +8,7 @@ import WeAre from './WeAre'
 import { ToastContainer } from 'react-toastify'
 
 import SellingBox from './SellingBox'
-import bgSky from '../../public/images/bg-sky.png'
+import bgSky from '../../../public/images/bg-sky.png'
 import BoxMyProjectV2 from './BoxMyProjectV2'
 import BoxLatestNews from './BoxLatestNews'
 

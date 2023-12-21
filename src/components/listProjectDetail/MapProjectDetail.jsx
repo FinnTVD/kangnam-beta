@@ -1,7 +1,7 @@
 'use client'
 import { apiKey } from '@/utils'
 import { useEffect, useRef, useState } from 'react'
-import * as vietmapgl from '../../public/js/vietmap-gl'
+import * as vietmapgl from '../../../public/js/vietmap-gl'
 
 export default function MapProjectDetail({ dataDetail, data }) {
     const mapRef = useRef(null)

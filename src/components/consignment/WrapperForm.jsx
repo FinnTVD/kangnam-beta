@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import SlideForm from './SlideForm'
-import src from '../../public/images/bg-dang-tin.jpg'
+import src from '../../../public/images/bg-dang-tin.jpg'
 
 export default function WrapperForm({ t }) {
     return (
