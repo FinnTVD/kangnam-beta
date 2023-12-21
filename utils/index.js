@@ -382,8 +382,8 @@ const renderTitle = (e, lang, message) => {
     return (
         e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang))?.name ||
         e?.translations[0]?.name ||
-        message ||
-        t?.projects?.filterSecond?.noinfo
+        message 
+        // || t?.projects?.filterSecond?.noinfo
     )
 }
 
