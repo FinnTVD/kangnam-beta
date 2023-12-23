@@ -378,12 +378,12 @@ const levelZoomWardDefault = 13 //zoom mac dinh
 const lngDefault = 105.85379875200005
 const latDefault = 21.028354507000074
 
-const renderTitle = (e, lang, message) => {
+const renderTitle = (t, e, lang, message) => {
     return (
         e?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lang))?.name ||
         e?.translations[0]?.name ||
-        message 
-        // || t?.projects?.filterSecond?.noinfo
+        message ||
+        t?.projects?.filterSecond?.noinfo
     )
 }
 

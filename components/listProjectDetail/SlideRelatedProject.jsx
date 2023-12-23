@@ -121,10 +121,10 @@ export default function SlideRelatedProject({ lang, dataDetail, t, isProject }) 
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
                                     <h6
-                                        title={renderTitle(e, lang)}
+                                        title={renderTitle(t, e, lang)}
                                         className='text-den title18-700-130 max-md:title-mb18-700-130 -tracking-[1px] mb-[0.63vw] max-md:mb-[2.67vw] line-clamp-1 max-lg:title-tl18'
                                     >
-                                        {renderTitle(e, lang)}
+                                        {renderTitle(t, e, lang)}
                                     </h6>
                                     <div className='flex items-center'>
                                         <svg

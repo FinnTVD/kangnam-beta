@@ -242,10 +242,10 @@ export default function MyProjectV2({ lang, t }) {
                                     </div>
                                     <div className='pt-[1.13vw]'>
                                         <h6
-                                            title={renderTitle(e, lang)}
+                                            title={renderTitle(t, e, lang)}
                                             className='text-den title18-700-130 -tracking-[1px] mb-[0.63vw] line-clamp-1'
                                         >
-                                            {renderTitle(e, lang)}
+                                            {renderTitle(t, e, lang)}
                                         </h6>
                                         <div
                                             title={e?.address?.display}

@@ -65,7 +65,7 @@ export default function Hiring({ lang, t, data }) {
                                 </div>
                                 <div className='pt-[1.13vw] max-md:pt-[2.67vw]'>
                                     <h6 className='text-den max-md:title-mb18-700-130 mb-[2.67vw] line-clamp-1 max-lg:title-tl18 font-bold'>
-                                        {renderTitle(e, lang)}
+                                        {renderTitle(t, e, lang)}
                                     </h6>
                                     <div className='flex items-center '>
                                         <IconAddress className={'flex-shrink-0'} />
