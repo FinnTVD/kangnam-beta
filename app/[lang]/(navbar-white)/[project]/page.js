@@ -7,6 +7,7 @@ import NavBarV2 from '@/components/general/NavBarV2'
 import NotFound from '../../not-found'
 import { handleCheckLangCode, listSlugNavHire, slugProject } from '@/utils'
 import { projects } from '@/utils/sitemapinit'
+import { Suspense } from 'react'
 
 export async function generateStaticParams({ params: { lang } }) {
     return projects.map((project) => {
@@ -67,21 +68,25 @@ export default async function page({ params: { lang, project } }) {
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
-                <NavBarV2
-                    lang={lang}
-                    t={t}
-                />
+                <Suspense fallback={<div>Loading ...</div>}>
+                    <NavBarV2
+                        lang={lang}
+                        t={t}
+                    />
+                </Suspense>
             </header>
             {!data || data?.statusCode === 404 ? (
                 <NotFound />
             ) : (
-                <IndexListProject
-                    lang={lang}
-                    t={t}
-                    dataSlug={data?.data}
-                    isProject={isProject}
-                    isHire={isHire}
-                />
+                <Suspense fallback={<div>Loading ...</div>}>
+                    <IndexListProject
+                        lang={lang}
+                        t={t}
+                        dataSlug={data?.data}
+                        isProject={isProject}
+                        isHire={isHire}
+                    />
+                </Suspense>
             )}
             <ToastContainer style={{ zIndex: '999999999999999' }} />
         </>

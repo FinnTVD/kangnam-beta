@@ -5,6 +5,6 @@ export default function AgreementItem({ data }) {
         <div
             className={classes.description}
             dangerouslySetInnerHTML={{ __html: data?.description }}
-        ></div>
+        />
     )
 }

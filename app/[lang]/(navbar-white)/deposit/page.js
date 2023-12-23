@@ -4,6 +4,7 @@ import NavBarV2 from '@/components/general/NavBarV2'
 import getData from '@/utils/getData'
 import FeatureHome from '@/components/home/FeatureHome'
 import { handleCheckLangCode } from '@/utils'
+import { Suspense } from 'react'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
@@ -57,10 +58,12 @@ export default async function DepositPage({ params: { lang } }) {
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
-                <NavBarV2
-                    lang={lang}
-                    t={t}
-                />
+                <Suspense fallback={<div>Loading ...</div>}>
+                    <NavBarV2
+                        lang={lang}
+                        t={t}
+                    />
+                </Suspense>
                 <FeatureHome
                     dataInfo={data}
                     t={t}

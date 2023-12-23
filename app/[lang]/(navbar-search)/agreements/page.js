@@ -3,6 +3,7 @@ import NavBarV2 from '@/components/general/NavBarV2'
 import { getDictionary } from '../../dictionaries'
 import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
 import getData from '@/utils/getData'
+import { Suspense } from 'react'
 
 export async function generateMetadata({ params: { lang } }) {
     const data = await getData('/site-infor')
@@ -64,10 +65,12 @@ export default async function Agreements({ params }) {
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
-                <NavBarV2
-                    lang={params.lang}
-                    t={t}
-                />
+                <Suspense fallback={<div>Loading ...</div>}>
+                    <NavBarV2
+                        lang={params.lang}
+                        t={t}
+                    />
+                </Suspense>
             </header>
             <IndexAgreements
                 t={t}
