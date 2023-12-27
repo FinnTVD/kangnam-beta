@@ -7,6 +7,17 @@ export function middleware(request) {
     // Check if there is any supported locale in the pathname
     const nextUrl = request.nextUrl
     const pathname = nextUrl.pathname
+    // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
+    // If you have one
+    if (
+        [
+            '/manifest.json',
+            '/favicon.ico',
+            '/robots.txt',
+            // Your other files in `public`
+        ].includes(pathname)
+    )
+        return
 
     // Check if the default locale is in the pathname
     if (pathname.startsWith(`/${defaultLocale}/`) || pathname === `/${defaultLocale}`) {
