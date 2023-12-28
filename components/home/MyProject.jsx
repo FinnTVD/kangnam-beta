@@ -252,7 +252,7 @@ export default function MyProject({ lang, t, data }) {
                                 breakLabel='...'
                                 nextLabel='Next'
                                 onPageChange={(e) => {
-                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1), {
+                                    router.replace(pathName + '?' + createQueryString('page', e?.selected + 1), {
                                         scroll: false,
                                     })
                                     projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })

@@ -26,7 +26,7 @@ export default function SearchHome({ data, lang, t, homePagePropertyType }) {
         const b = []
         b.push(e?.id)
         let search = b.join('--')
-        router.push(pathName + '?' + createQueryString('propertyTypeIds', search), {
+        router.replace(pathName + '?' + createQueryString('propertyTypeIds', search), {
             scroll: false,
         })
         if (typeof window !== 'undefined') {

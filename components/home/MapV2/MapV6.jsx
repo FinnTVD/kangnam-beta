@@ -222,7 +222,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -233,7 +233,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -289,7 +289,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
                 if (isFly) return
                 const paramNew = new URLSearchParams(searchParams)
                 paramNew.set('levelZoom', Math.round(Number(mapRef?.getZoom())))
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             })
@@ -430,7 +430,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
             if (!districtId && levelZoom < levelZoomDistrictDefault) {
                 searchParams?.size && data[0]?.boundaries[2]?.id && paramNew.set('cityId', data[0]?.boundaries[2]?.id)
             }
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -658,7 +658,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
             if (isFly) {
                 const paramNew = new URLSearchParams(searchParams)
                 paramNew.set('isFly', '')
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             }

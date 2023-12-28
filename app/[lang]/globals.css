@@ -626,11 +626,11 @@
     margin-top: 0;
 }
 
-#contentProject ul > li  {
+#contentProject ul > li {
     margin-left: 1vw;
 }
 
-#contentProject ul > li  {
+#contentProject ul > li {
     list-style: disc !important;
 }
 
@@ -649,15 +649,15 @@
         margin-top: 1.3vw;
     }
 
-    #contentProject h3  {
+    #contentProject h3 {
         font-size: 2.1vw;
     }
 
-    #contentProject ul   {
+    #contentProject ul {
         margin-left: 2.5vw;
     }
 
-    #contentProject ul > li  {
+    #contentProject ul > li {
         font-size: 2vw;
         list-style: disc !important;
     }
@@ -703,14 +703,14 @@
         margin-top: 2.13vw;
     }
 
-    #contentProject h3  {
+    #contentProject h3 {
         font-size: 4vw;
     }
 
-    #contentProject ul   {
+    #contentProject ul {
         margin-left: 5vw;
     }
-    #contentProject ul > li  {
+    #contentProject ul > li {
         font-size: 4.2vw;
         list-style: disc !important;
     }
@@ -1010,5 +1010,16 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     }
     .scrollbar::-webkit-scrollbar {
         display: none;
+    }
+}
+
+@media (max-height: 801px) and (max-width: 767.9px) {
+    header#header > div {
+        height: 90vh !important;
+    }
+}
+@media (max-height: 751px) and (max-width: 767.9px) {
+    header#header > div {
+        height: 100vh !important;
     }
 }

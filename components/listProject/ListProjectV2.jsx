@@ -144,7 +144,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -154,7 +154,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -164,7 +164,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -175,7 +175,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyBedsParams = propertyBeds
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -185,7 +185,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyBathsParams = propertyBaths
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -195,7 +195,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
         propertyOrientsParams = propertyOrients
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -510,7 +510,7 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                             breakLabel='...'
                             nextLabel='Next'
                             onPageChange={(e) => {
-                                router.push(pathName + '?' + createQueryString('page', e.selected + 1))
+                                router.replace(pathName + '?' + createQueryString('page', e.selected + 1))
                                 window?.scrollTo({ top: 0, behavior: 'smooth' })
                             }}
                             pageRangeDisplayed={5}

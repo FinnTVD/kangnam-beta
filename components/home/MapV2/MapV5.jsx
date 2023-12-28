@@ -18,7 +18,7 @@ import {
 import * as vietmapgl from '/public/js/vietmap-gl.js'
 
 //draw content popup marker
-const handleRenderPopup = (itemProject, lang, acc,t) => {
+const handleRenderPopup = (itemProject, lang, acc, t) => {
     return `<div>
             <div class='${
                 acc ? '' : 'hidden'
@@ -178,7 +178,7 @@ let listMarkerOut = [] //lưu lại các marker
 let mapRef = null
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-const MapV5 = ({ lang, dataSlug = '',t }) => {
+const MapV5 = ({ lang, dataSlug = '', t }) => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const pathName = usePathname()
@@ -229,7 +229,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -239,7 +239,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -249,7 +249,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -260,7 +260,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyBedsParams = propertyBeds
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&beds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -270,7 +270,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyBathsParams = propertyBaths
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&baths=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -280,7 +280,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
         propertyOrientsParams = propertyOrients
             ?.split('--')
             ?.reduce((accumulator, currentValue) => accumulator + '&orients=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -340,7 +340,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
                 if (isFly) return
                 const paramNew = new URLSearchParams(searchParams)
                 paramNew.set('levelZoom', Math.round(Number(mapRef?.getZoom())))
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             })
@@ -483,7 +483,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
             if (!districtId && levelZoom < levelZoomDistrictDefault) {
                 searchParams?.size && data[0]?.boundaries[2]?.id && paramNew.set('cityId', data[0]?.boundaries[2]?.id)
             }
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -721,7 +721,7 @@ const MapV5 = ({ lang, dataSlug = '',t }) => {
             if (isFly) {
                 const paramNew = new URLSearchParams(searchParams)
                 paramNew.set('isFly', '')
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             }

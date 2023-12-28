@@ -57,9 +57,9 @@ export default function BoxSort({ price, createQueryString, pathName, router, t 
                         onClick={() => {
                             setIsShow(false)
                             if (e?.value === 'new') {
-                                router.push(pathName + '?' + createQueryString('price', ''))
+                                router.replace(pathName + '?' + createQueryString('price', ''))
                             } else {
-                                router.push(pathName + '?' + createQueryString('price', e?.value))
+                                router.replace(pathName + '?' + createQueryString('price', e?.value))
                             }
                         }}
                         className='text-[#6B7280] text-14pc cursor-pointer hover:bg-[#F3F4F7] font-normal leading-[1.15] py-[0.9vw] px-[1.13vw] whitespace-nowrap flex gap-x-[0.5vw] max-md:gap-x-[1vw] items-center max-md:text-14mb max-md:px-[2.5vw] max-md:py-[1.5vw] max-lg:title-tl14'

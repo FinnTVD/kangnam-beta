@@ -64,7 +64,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
             paramNew.set('maxArea', priceRange[1] || '')
         }
 
-        router.push(pathName + '?' + paramNew.toString(), {
+        router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
         setIndexFilter(-1)
@@ -80,7 +80,7 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
             paramNew.set('maxArea', b || '')
         }
 
-        router.push(pathName + '?' + paramNew.toString(), {
+        router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
         setIsChangeRange(true)
@@ -112,13 +112,13 @@ const ItemRangeV2 = ({ item, indexFilter, setIndexFilter, index, t, isHire, isPr
         if (isPrice) {
             paramNew.set('minPrice', '')
             paramNew.set('maxPrice', '')
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         } else {
             paramNew.set('minArea', '')
             paramNew.set('maxArea', '')
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }

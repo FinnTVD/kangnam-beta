@@ -62,7 +62,7 @@ export default function MyProjectV2({ lang, t }) {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -73,7 +73,7 @@ export default function MyProjectV2({ lang, t }) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -84,7 +84,7 @@ export default function MyProjectV2({ lang, t }) {
         propertyCategoryTypeParams = propertyCategoryType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyCategoryIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -325,7 +325,7 @@ export default function MyProjectV2({ lang, t }) {
                                 breakLabel='...'
                                 nextLabel='Next'
                                 onPageChange={(e) => {
-                                    router.push(pathName + '?' + createQueryString('page', e?.selected + 1), {
+                                    router.replace(pathName + '?' + createQueryString('page', e?.selected + 1), {
                                         scroll: false,
                                     })
                                     projectsRef?.current?.scrollIntoView({ behavior: 'smooth' })

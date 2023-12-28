@@ -17,7 +17,6 @@ import {
 import useClickOutSide from '@/hooks/useClickOutSide'
 import useDebounce from '@/hooks/useDebounce'
 
-
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
     //nếu ko đứng ỏ các page nằm ở listPage thì sẽ chuyển sang page có maphandleCheckPage
@@ -140,7 +139,7 @@ const SearchGlobal = ({
             wardId && paramNew.set('wardId', '')
             paramNew.set('isFly', 1)
             if (isCheck) {
-                router.push(
+                router.replace(
                     '/' +
                         listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
@@ -150,7 +149,7 @@ const SearchGlobal = ({
                     },
                 )
             } else {
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             }
@@ -202,7 +201,7 @@ const SearchGlobal = ({
             paramNew.set('lat', itemWard?.ward_lat)
             paramNew.set('levelZoom', levelZoomWardDefault)
             isCheck &&
-                router.push(
+                router.replace(
                     '/' +
                         listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
@@ -216,7 +215,7 @@ const SearchGlobal = ({
             paramNew.set('lat', itemWard?.ward_lat)
             paramNew.set('levelZoom', levelZoomWardDefault)
             paramNew.set('isFly', 1)
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -248,7 +247,7 @@ const SearchGlobal = ({
             paramNew.set('districtId', '')
             paramNew.set('wardId', '')
             if (!dataProvinces || !e?.boundaries[0]?.id)
-                return router.push(pathName + '?' + paramNew.toString(), {
+                return router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             //nếu đang ở tỉnh đó và ở level zoom city thì không fly
@@ -272,7 +271,7 @@ const SearchGlobal = ({
                 paramNew.set('lat', itemCity?.city_lat)
                 paramNew.set('levelZoom', levelZoomDefault)
                 isCheck &&
-                    router.push(
+                    router.replace(
                         '/' +
                             listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
                                 ?.alias +
@@ -287,7 +286,7 @@ const SearchGlobal = ({
                 paramNew.set('lat', itemCity?.city_lat)
                 paramNew.set('levelZoom', levelZoomDefault)
                 paramNew.set('isFly', 1)
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             }
@@ -297,7 +296,7 @@ const SearchGlobal = ({
             paramNew.set('districtId', e?.boundaries[0]?.id)
             e?.boundaries[1]?.id !== cityId && paramNew.set('cityId', e?.boundaries[1]?.id)
             if (!dataDistrict || !e?.boundaries[0]?.id)
-                return router.push(pathName + '?' + paramNew.toString(), {
+                return router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             // nếu đang là districtid đó và đang ở cấp quận thì return
@@ -320,7 +319,7 @@ const SearchGlobal = ({
                 paramNew.set('levelZoom', levelZoomDistrictDefault)
                 wardId && paramNew.set('wardId', '')
                 isCheck &&
-                    router.push(
+                    router.replace(
                         '/' +
                             listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
                                 ?.alias +
@@ -336,7 +335,7 @@ const SearchGlobal = ({
                 paramNew.set('levelZoom', levelZoomDistrictDefault)
                 paramNew.set('isFly', 1)
                 wardId && paramNew.set('wardId', '')
-                router.push(pathName + '?' + paramNew.toString(), {
+                router.replace(pathName + '?' + paramNew.toString(), {
                     scroll: false,
                 })
             }
@@ -370,7 +369,7 @@ const SearchGlobal = ({
             paramNew.set('lat', e?.address?.lat)
             paramNew.set('levelZoom', 15)
             handleCheckPage(pathName, listData) &&
-                router.push(
+                router.replace(
                     '/' +
                         listData[0]?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias +
                         '?' +
@@ -395,13 +394,11 @@ const SearchGlobal = ({
             paramNew.set('levelZoom', 15)
             paramNew.set('isFly', 1)
 
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
     }
-
-
 
     return (
         <div

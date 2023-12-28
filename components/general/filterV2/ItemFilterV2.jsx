@@ -58,13 +58,13 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
                 paramNew.set('lng', lngDefault)
                 paramNew.set('lat', latDefault)
             }
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         } else {
             const paramNew = new URLSearchParams(searchParams)
             paramNew.set(item?.slug, search)
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -88,13 +88,13 @@ const ItemFilterV2 = ({ item, indexFilter, setIndexFilter, index, lang, isMobile
             paramNew.set('levelZoom', levelZoomDefault)
             paramNew.set('lng', lngDefault)
             paramNew.set('lat', latDefault)
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         } else {
             const paramNew = new URLSearchParams(searchParams)
             paramNew.set(item?.slug, '')
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }

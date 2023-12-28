@@ -59,7 +59,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
         paramNew.set('beds', bed?.join('--'))
         paramNew.set('baths', bath?.join('--'))
         paramNew.set('orients', origin?.join('--'))
-        router.push(pathName + '?' + paramNew.toString(), {
+        router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
         setIndexFilter(-1)
@@ -70,7 +70,7 @@ const ItemFilterOther = ({ item, indexFilter, setIndexFilter, index, lang, isMob
         paramNew.set('beds', '')
         paramNew.set('baths', '')
         paramNew.set('orients', '')
-        router.push(pathName + '?' + paramNew.toString(), {
+        router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
         setIndexFilter(-1)

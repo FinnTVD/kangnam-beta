@@ -8,6 +8,7 @@ import NotFound from '../../not-found'
 import { handleCheckLangCode, listSlugNavHire, slugProject } from '@/utils'
 import { projects } from '@/utils/sitemapinit'
 import { Suspense } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 export async function generateStaticParams({ params: { lang } }) {
     return projects.map((project) => {
@@ -78,7 +79,13 @@ export default async function page({ params: { lang, project } }) {
             {!data || data?.statusCode === 404 ? (
                 <NotFound />
             ) : (
-                <Suspense fallback={<div>Loading ...</div>}>
+                <Suspense
+                    fallback={
+                        <div className='w-full h-screen'>
+                            <Skeleton className='h-full' />
+                        </div>
+                    }
+                >
                     <IndexListProject
                         lang={lang}
                         t={t}

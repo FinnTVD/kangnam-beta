@@ -107,7 +107,7 @@ export default function ListProject({ lang, t, dataSlug }) {
         propertyTypeParams = propertyType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -118,7 +118,7 @@ export default function ListProject({ lang, t, dataSlug }) {
         propertyAreaTypeParams = propertyAreaType[0]
             .split('--')
             .reduce((accumulator, currentValue) => accumulator + '&propertyAreaTypeIds=' + currentValue, '')
-        router.push(pathName + '?' + createQueryString('page', 1), {
+        router.replace(pathName + '?' + createQueryString('page', 1), {
             scroll: false,
         })
     } else {
@@ -447,7 +447,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                             breakLabel='...'
                             nextLabel='Next'
                             onPageChange={(e) => {
-                                router.push(pathName + '?' + createQueryString('page', e.selected + 1))
+                                router.replace(pathName + '?' + createQueryString('page', e.selected + 1))
                                 window?.scrollTo({ top: 0, behavior: 'smooth' })
                             }}
                             pageRangeDisplayed={5}

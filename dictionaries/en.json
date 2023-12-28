@@ -33,7 +33,7 @@
                 ]
             }
         ],
-        "button": "Land deposit",
+        "button": "Real estate consignment",
         "title": "Select language"
     },
     "Form1": {
@@ -85,12 +85,12 @@
             },
             {
                 "id": 3,
-                "title": "Resale",
+                "title": "Buy & Sell",
                 "href": "/resale"
             },
             {
                 "id": 4,
-                "title": "Hire",
+                "title": "Rent",
                 "href": "/hire"
             },
             {
@@ -141,7 +141,7 @@
                 },
                 {
                     "id": 4,
-                    "title": "Land deposit",
+                    "title": "Real estate consignment",
                     "href": "/deposit"
                 },
                 {
@@ -164,7 +164,7 @@
                 },
                 {
                     "id": "3",
-                    "title": "Real estate deposit"
+                    "title": "Real estate consignment"
                 }
             ]
         }
@@ -183,13 +183,13 @@
         },
         "section1" : {
             "subtitle": "Peace of mind with 100% authenticated real estate in KANGNAM",
-            "title": "Choosing the right house",
+            "title": "Find your perfect home",
             "suggest": "Suggest"
         },
         "section2" : {
             "subtitle": "Brand story",
             "title": "Who we are",
-            "description": "Kangnam Real Estate Joint Stock Company is a professional real estate broker, specializing in distributing a variety of real estate segments spread throughout the North and Central with a team of experienced and well-trained shoe brokers",
+            "description": "Kangnam Real Estate Joint Stock Company is a professional real estate broker, specializing in distributing a variety of real estate segments spread throughout the North and Central Vietnam with a highly trained and well-experienced team.",
             "detail": {
                 "title1": "Commitment to authentication",
                 "title2": "Full support, low cost",
@@ -224,18 +224,18 @@
             }
         },
         "section4": {
-            "title": "Land deposit",
-            "description": "We provide real estate deposit services, to meet your needs to sell or lease your property.",
+            "title": "Real estate consignment",
+            "description": "We provide Real estate consignment services, to meet your needs to sell or lease your property.",
             "detail": {
                 "title1": "Customer-centric",
                 "title2": "Prompt service",
-                "title3": "Ensure execution"
+                "title3": "Ensure implementation"
             },
             "button": "Sign up now"
         },
         "section5": {
             "subtitle": "SUMMARY OF PROPERTIES",
-            "title": "Featured Real Estate",
+            "title": "Featured Listings",
             "button": "View all",
             "over": "More",
             "projectDistribution": "The project is being distributed"
@@ -295,7 +295,7 @@
             "price":"price",
             "priceRange":"Price range",
             "acreage":"Acreage",
-            "status":"Status",
+            "status":"State",
             "form":"Form",
             "million":"million",
             "billion":"billion",
@@ -420,15 +420,15 @@
             "button": "Learn more"
         },
         "form": {
-            "title": "Land deposit with Kangnam",
+            "title": "Real estate consignment with Kangnam",
             "subtitle": "Due to restrictions on the area of operation of the exchanges, KangNam applied for permission to only accept consignment properties from areas A and B.",
             "form1": {
                 "title": "Basic information",
                 "demand": "What are your needs",
                 "select": {
                     "select1": "Sell",
-                    "select2": "Hire",
-                    "select3": "Sale and rental"
+                    "select2": "Rent",
+                    "select3": "Sell & Rent"
                 },
                 "input": {
                     "input1": "Apartment",

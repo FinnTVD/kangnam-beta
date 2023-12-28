@@ -78,12 +78,12 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
         const paramNew = new URLSearchParams(searchParams)
         if (b?.length === dataNew?.length || b?.length === 0) {
             paramNew.set('status', '')
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         } else {
             paramNew.set('status', b[0])
-            router.push(pathName + '?' + paramNew.toString(), {
+            router.replace(pathName + '?' + paramNew.toString(), {
                 scroll: false,
             })
         }
@@ -93,7 +93,7 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
     const handleReset = () => {
         const paramNew = new URLSearchParams(searchParams)
         paramNew.set('status', '')
-        router.push(pathName + '?' + paramNew.toString(), {
+        router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
         setIndexFilter(-1)
