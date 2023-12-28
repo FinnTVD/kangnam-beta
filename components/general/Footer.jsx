@@ -72,7 +72,7 @@ export default function Footer({ lang, t, dataInfo }) {
                     <div className='relative w-[24.0625vw] h-[6.625vw] max-md:w-[87.7vw] max-md:h-[25.6vw] max-lg:w-[70vw] max-lg:h-[20vw]'>
                         <Image
                             fill
-                            src='/images/logoKangnam.svg'
+                            src='/images/logoKangnam.png'
                             alt='logo-kangnam'
                             className='top-0 left-0 object-contain'
                         ></Image>
