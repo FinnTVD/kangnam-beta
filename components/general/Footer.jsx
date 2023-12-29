@@ -75,7 +75,7 @@ export default function Footer({ lang, t, dataInfo }) {
                             src='/images/logoKangnam.png'
                             alt='logo-kangnam'
                             className='top-0 left-0 object-contain'
-                        ></Image>
+                        />
                     </div>
                     <div className='flex mt-[2.5vw] max-lg:w-full max-md:mt-[4.2vw]'>
                         <div
