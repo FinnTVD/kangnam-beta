@@ -2,13 +2,14 @@
 import useStore from '@/app/[lang]/(store)/store'
 import { listIdNav } from '@/utils'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import useSWR from 'swr'
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-export default function MegaMenu({ isHome, lang, t, fixed }) {
+const MegaMenu = ({ isHome, lang, t, fixed }) => {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
     const [listNav, setListNav] = useState([])
+
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
@@ -16,7 +17,7 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
     })
 
     useEffect(() => {
-        if (!data) return
+        if (!data || !t?.Navbar?.listNav?.length) return
         setCategoryNav(data?.data)
         let a = data?.data?.filter((e) => listIdNav?.find((i) => i === e?.id))
         let b = []
@@ -27,7 +28,8 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
                 href: '/' + e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias,
             })
         })
-        setListNav([...b, ...t?.Navbar?.listNav])
+        setListNav([t?.Navbar?.listNav[0], ...b.reverse(), t?.Navbar?.listNav[1], t?.Navbar?.listNav[2]])
+        // setListNav([...b, ...t?.Navbar?.listNav])
     }, [lang, data])
 
     if (!listNav?.length) return
@@ -177,3 +179,4 @@ export default function MegaMenu({ isHome, lang, t, fixed }) {
         </ul>
     )
 }
+export default memo(MegaMenu)

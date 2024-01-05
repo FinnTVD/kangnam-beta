@@ -101,7 +101,7 @@ export default function NavBarFixed({ isHome, lang, t, isMobile }) {
                                 href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
                                 className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
                             >
-                                Kí gửi nhà đất
+                                {t?.Navbar?.button}
                             </Link>
                             <BoxLanguage
                                 type={'ds'}

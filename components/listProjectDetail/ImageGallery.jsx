@@ -31,7 +31,6 @@ const seeLocation = [
 ]
 
 export default function ImageGallery({ data, t, lang }) {
-    console.log('🚀 ~ file: ImageGallery.jsx:32 ~ ImageGallery ~ data:', data)
     const images = data?.images || []
     const listImage = [data?.firstImage, ...images]?.filter((e) => e)
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
