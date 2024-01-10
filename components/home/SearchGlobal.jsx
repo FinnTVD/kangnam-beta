@@ -238,7 +238,7 @@ const SearchGlobal = ({
 
     const handleSelectValueSearch = (e) => {
         if (!e) return
-        setValueSearch(e?.address)
+        setValueSearch(e?.display)
         const isCheck = handleCheckPage(pathName, listData)
         if (e?.ref_id?.includes('CITY')) {
             //set lại cityid
@@ -500,7 +500,7 @@ const SearchGlobal = ({
                                         }}
                                         key={index}
                                     >
-                                        {e?.address}
+                                        {e?.display}
                                     </li>
                                 ))}
                             {Array.isArray(dataProjectCode?.data) && (
