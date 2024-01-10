@@ -86,7 +86,7 @@ const SearchGlobal = ({
                 }`,
             )
             const data = await res.json()
-            const dataNews = [...data?.reverse()]
+            const dataNews = [...data]
             if (dataNews?.length && debounceValue) {
                 if (dataNews[0]?.boundaries?.length === 1) {
                     const obj1 = {
