@@ -296,6 +296,7 @@
             "priceRange":"Price range",
             "acreage":"Acreage",
             "status":"State",
+            "investor":"Investor",
             "form":"Form",
             "million":"million",
             "billion":"billion",

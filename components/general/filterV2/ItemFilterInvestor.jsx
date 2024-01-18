@@ -3,59 +3,29 @@ import useClickOutSide from '@/hooks/useClickOutSide'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { memo, useEffect, useState } from 'react'
 import InputCheckBox from './InputCheckBox'
+import useStore from '@/app/[lang]/(store)/store'
 
-let dataNew = [
-    {
-        id: 'selling',
-        translations: [
-            {
-                languageCode: 'vi',
-                name: 'Đã mở bán',
-            },
-            {
-                languageCode: 'en',
-                name: 'Opened for sale',
-            },
-            {
-                languageCode: 'kr',
-                name: '판매 개시',
-            },
-            {
-                languageCode: 'cn',
-                name: '已开业出售',
-            },
-        ],
-    },
-    {
-        id: 'open',
-        translations: [
-            {
-                languageCode: 'vi',
-                name: 'Chưa mở bán',
-            },
-            {
-                languageCode: 'en',
-                name: 'Not yet open for sale',
-            },
-            {
-                languageCode: 'kr',
-                name: '아직 판매되지 않음',
-            },
-            {
-                languageCode: 'cn',
-                name: '尚未开放出售',
-            },
-        ],
-    },
-]
-const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
+const ItemFilterInvestor = ({ item, indexFilter, setIndexFilter, index, lang, isMobile, t }) => {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
+    const [dataNewInvestor, setDataNewInvestor] = useState([])
+    const dataInvestor = useStore((state) => state.dataInvestor)
 
     const [sideRef, isOutSide] = useClickOutSide()
     // const lh = searchParams.get(item?.slug)?.split('--')
     const [lh, setLh] = useState(searchParams.get(item?.slug)?.split('--'))
+
+    useEffect(() => {
+        if (!dataInvestor) return
+        const dataNew = []
+        dataInvestor?.forEach((item) => {
+            if (item.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.investor) {
+                dataNew.push(item.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.investor)
+            }
+        })
+        setDataNewInvestor([...new Set(dataNew)])
+    }, [dataInvestor])
 
     useEffect(() => {
         setLh(searchParams.get(item?.slug)?.split('--'))
@@ -76,23 +46,17 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
             }
         })
         const paramNew = new URLSearchParams(searchParams)
-        if (b?.length === dataNew?.length || b?.length === 0) {
-            paramNew.set('status', '')
-            router.replace(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
-        } else {
-            paramNew.set('status', b[0])
-            router.replace(pathName + '?' + paramNew.toString(), {
-                scroll: false,
-            })
-        }
+
+        paramNew.set('investor', encodeURI(b.join('--')))
+        router.replace(pathName + '?' + paramNew.toString(), {
+            scroll: false,
+        })
         setIndexFilter(-1)
     }
 
     const handleReset = () => {
         const paramNew = new URLSearchParams(searchParams)
-        paramNew.set('status', '')
+        paramNew.set('investor', '')
         router.replace(pathName + '?' + paramNew.toString(), {
             scroll: false,
         })
@@ -102,8 +66,8 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
     return (
         <li
             ref={sideRef}
-            className={`${
-                indexFilter === index ? 'bg-logo' : 'bg-white'
+            className={`${indexFilter === index ? 'bg-logo' : 'bg-white'} ${
+                dataNewInvestor?.length === 0 ? 'hidden' : ''
             } itemFilter-${index} rounded-[10vw] h-fit w-fit border border-solid border-logo md:relative`}
         >
             <div className='relative'>
@@ -142,11 +106,14 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
                     <div
                         className={`grid grid-cols-2 gap-x-[2.3vw] gap-y-[1vw] max-md:gap-x-[9.07vw] max-md:gap-y-[4.27vw]`}
                     >
-                        {Array.isArray(dataNew) &&
-                            dataNew?.map((e, idx) => (
+                        {Array.isArray(dataNewInvestor) &&
+                            dataNewInvestor?.map((e, idx) => (
                                 <InputCheckBox
                                     key={idx}
-                                    e={e}
+                                    e={{
+                                        id: e,
+                                        title: e,
+                                    }}
                                     lang={lang}
                                     lh={lh}
                                     index={index}
@@ -178,4 +145,4 @@ const ItemFilterStatus = ({ item, indexFilter, setIndexFilter, index, lang, isMo
         </li>
     )
 }
-export default memo(ItemFilterStatus)
+export default memo(ItemFilterInvestor)

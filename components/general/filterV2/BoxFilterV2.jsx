@@ -8,6 +8,7 @@ import { listSlugNavHire, slugProject } from '@/utils'
 import ItemRangeV2 from './ItemRangeV2'
 import ItemFilterStatus from './ItemFilterStatus'
 import ItemFilterOther from './ItemFilterOther'
+import ItemFilterInvestor from './ItemFilterInvestor'
 
 export default function BoxFilterV2({ arrFilter, lang, t, isOther }) {
     const [indexFilter, setIndexFilter] = useState(null)
@@ -34,7 +35,7 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther }) {
     }
 
     return (
-        <ul className={`flex gap-x-[1.5vw] max-md:gap-[2.5vw] select-none relative max-md:flex-wrap`}>
+        <ul className={`flex gap-x-[1vw] max-md:gap-[2.5vw] select-none relative max-md:flex-wrap`}>
             {Array.isArray(arrFilter) &&
                 arrFilter?.map((e, index) =>
                     handleCheckPriceAndArea(e?.slug) ? (
@@ -53,6 +54,17 @@ export default function BoxFilterV2({ arrFilter, lang, t, isOther }) {
                         />
                     ) : e?.slug?.includes('status') ? (
                         <ItemFilterStatus
+                            key={index}
+                            index={index}
+                            item={e}
+                            setIndexFilter={setIndexFilter}
+                            indexFilter={indexFilter}
+                            lang={lang}
+                            isMobile={isMobile}
+                            t={t}
+                        />
+                    ) : e?.slug?.includes('investor') ? (
+                        <ItemFilterInvestor
                             key={index}
                             index={index}
                             item={e}

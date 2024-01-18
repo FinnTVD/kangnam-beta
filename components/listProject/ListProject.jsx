@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { gsap } from 'gsap'
@@ -20,6 +20,7 @@ import { findIdByAlias, handleCheckLangCode } from '@/utils'
 import IconCurrency from '../icons/IconCurrency'
 import IconArea from '../icons/IconArea'
 import IconAddress from '../icons/IconAddress'
+import useStore from '@/app/[lang]/(store)/store'
 const MapV6 = dynamic(() => import('../home/MapV2/MapV6'))
 
 const listProject = new Array(24).fill(0)
@@ -67,6 +68,13 @@ export default function ListProject({ lang, t, dataSlug }) {
             titleLang: 'status',
             api: '/status',
         },
+        {
+            id: 7,
+            title: t?.projects?.filterSecond?.investor,
+            slug: 'investor',
+            titleLang: 'investor',
+            api: '/investor',
+        },
     ]
 
     const parentRef = useRef(null)
@@ -77,6 +85,8 @@ export default function ListProject({ lang, t, dataSlug }) {
     const router = useRouter()
     const pathName = usePathname()
     const searchParams = useSearchParams()
+    const [dataProject, setDataProject] = useState([])
+    const setDataInvestor = useStore((state) => state.setDataInvestor)
     const page = searchParams.get('page')
     const price = searchParams.get('price')
     const cityId = searchParams.get('cityId')
@@ -85,6 +95,8 @@ export default function ListProject({ lang, t, dataSlug }) {
     const minArea = searchParams.get('minArea')
     const maxArea = searchParams.get('maxArea')
     const status = searchParams.get('status')
+    const defalutinvestor = decodeURI(searchParams.get('investor') || '')
+    const investor = defalutinvestor && defalutinvestor?.split('--')
 
     const districtId = searchParams.get('districtId')
     const wardId = searchParams.get('wardId')
@@ -146,6 +158,20 @@ export default function ListProject({ lang, t, dataSlug }) {
     )
 
     useEffect(() => {
+        if (!defalutinvestor) return setDataProject(data?.data)
+        const dataNew = []
+        data?.data?.forEach((item) => {
+            if (item?.translations?.find((e) => investor?.find((a) => a === e?.investor))) {
+                dataNew.push(item)
+            }
+        })
+        setDataProject(dataNew)
+    }, [defalutinvestor])
+
+    useEffect(() => {
+        setDataInvestor(data?.data)
+
+        setDataProject(data?.data)
         let mm = gsap.matchMedia()
         let ctx = gsap.context(() => {
             ScrollTrigger.create({
@@ -166,26 +192,28 @@ export default function ListProject({ lang, t, dataSlug }) {
                 },
             })
 
-            mm.add('(min-width: 1024px)', () => {
-                ScrollTrigger.create({
-                    trigger: '#container_boxMap',
-                    start: 'top top',
-                    endTrigger: '#boxPagination',
-                    end: 'top bottom',
-                    pin: true,
-                    onEnter: () => {
-                        document.getElementById('boxMap').classList.add('active')
-                    },
-                    onLeave: () => {
-                        document.getElementById('boxMap').classList.remove('active')
-                    },
+            if (show) {
+                mm.add('(min-width: 1024px)', () => {
+                    ScrollTrigger.create({
+                        trigger: '#container_boxMap',
+                        start: 'top top',
+                        endTrigger: '#boxPagination',
+                        end: 'top bottom',
+                        pin: true,
+                        onEnter: () => {
+                            document.getElementById('boxMap').classList.add('active')
+                        },
+                        onLeave: () => {
+                            document.getElementById('boxMap').classList.remove('active')
+                        },
+                    })
                 })
-            })
+            }
         }, parentRef)
         return () => {
             ctx.revert()
         }
-    }, [data])
+    }, [data, show])
 
     useEffect(() => {
         mutate(
@@ -251,9 +279,9 @@ export default function ListProject({ lang, t, dataSlug }) {
                                 lang={lang}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
-                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
+                                {/* <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
                                     {t?.projects?.map}
-                                </span>
+                                </span> */}
                                 <div>{Element}</div>
                             </div>
                         </div>
@@ -284,7 +312,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                             </div>
                         </article>
                     </div>
-                    {Array.isArray(data?.data) && data?.data?.length === 0 && (
+                    {Array.isArray(dataProject) && dataProject?.length === 0 && (
                         <div className='text-black text-[1.5vw] font-normal leading-normal text-center'>
                             Không tìm thấy bất động sản nào!
                         </div>
@@ -319,8 +347,8 @@ export default function ListProject({ lang, t, dataSlug }) {
                                     </div>
                                 </div>
                             ))}
-                        {Array.isArray(data?.data) &&
-                            data?.data?.map((e, index) => (
+                        {Array.isArray(dataProject) &&
+                            dataProject?.map((e, index) => (
                                 <Link
                                     href={
                                         (lang === 'vi' ? '' : `/${lang}` + '/') +
@@ -468,7 +496,7 @@ export default function ListProject({ lang, t, dataSlug }) {
                     <div
                         id='boxMap'
                         className={`${
-                            !show ? 'hidden' : ''
+                            !show ? 'hidden opacity-0 pointer-events-none' : ''
                         } w-[35.3125vw] z-[99999] relative h-screen rounded-tl-[0.5vw] overflow-hidden transition-all duration-200`}
                     >
                         <div className='w-full h-[calc(100vh-6vw)] rounded-tl-[0.5vw] overflow-hidden'>

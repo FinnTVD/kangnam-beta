@@ -296,6 +296,7 @@
             "priceRange":"가격 범위",
              "acreage":"토지",
             "status":"상태",
+            "investor":"투자자",
             "form":"형태",
             "million":"백만",
             "billion":"10억",

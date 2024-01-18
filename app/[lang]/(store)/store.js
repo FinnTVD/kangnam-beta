@@ -27,7 +27,15 @@ const useStore = create((set, get) => ({
     isClose: true,
     isRedirect: false,
     defaultMap: null,
-
+    dataInvestor: [],
+    setDataInvestor: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                dataInvestor: data,
+            }
+        })
+    },
     setSelectTypeSearch: (data) => {
         set((state) => {
             return {

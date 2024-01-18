@@ -323,9 +323,9 @@ export default function ListProjectV2({ lang, t, dataSlug, isHire }) {
                                 lang={lang}
                             />
                             <div className='flex gap-x-[1.31vw] items-center max-lg:hidden'>
-                                <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
+                                {/* <span className='text-black title16-400-150 h-fit max-lg:title-tl16'>
                                     {t?.projects?.map}
-                                </span>
+                                </span> */}
                                 <div>{Element}</div>
                             </div>
                         </div>
