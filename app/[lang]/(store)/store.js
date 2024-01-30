@@ -28,6 +28,15 @@ const useStore = create((set, get) => ({
     isRedirect: false,
     defaultMap: null,
     dataInvestor: [],
+    isPopupShare: false,
+    setIsPopupShare: (data) => {
+        set((state) => {
+            return {
+                ...state,
+                isPopupShare: data,
+            }
+        })
+    },
     setDataInvestor: (data) => {
         set((state) => {
             return {

@@ -45,7 +45,7 @@ export default function NavBarV2({ lang, t }) {
                         className='relative w-[3.52vw] h-[4.5vw] block my-[0.62vw] max-md:w-[8.267vw] max-md:h-[11.467vw] max-lg:w-[6vw] max-lg:h-[8vw]'
                     >
                         <Image
-                            className='object-cover max-lg:object-contain select-none'
+                            className='object-cover select-none max-lg:object-contain'
                             src='/images/logo-no-bg.svg'
                             alt='logo'
                             sizes='3.52vw'

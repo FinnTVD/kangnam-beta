@@ -8,10 +8,14 @@ import IconNXD from '../icons/IconNXD'
 import IconPL from '../icons/IconPL'
 import IconST from '../icons/IconST'
 import FormNamePhone from './FormNamePhone'
+import ShareSocialInfo from './ShareSocialInfo'
 
 export default function InfoDetail({ data, lang, dataDetail, t }) {
     return (
-        <div className='w-[23.9375vw] max-lg:hidden'>
+        <div
+            id='info_detail_other'
+            className='w-[23.9375vw] max-lg:hidden lg:max-h-[85vh] lg:overflow-y-scroll'
+        >
             <div className='rounded-[0.625vw] border border-solid border-den01 pt-[1.88vw] pb-[3.63vw] px-[1.58vw]'>
                 <h4 className='text-den font-extrabold leading-[1.3] tracking-[-0.72px] text-[1.5vw]'>
                     {t?.projectDetail?.title}
@@ -133,6 +137,7 @@ export default function InfoDetail({ data, lang, dataDetail, t }) {
                 id={data?.id}
                 t={t}
             />
+            <ShareSocialInfo />
         </div>
     )
 }

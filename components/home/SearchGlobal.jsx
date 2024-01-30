@@ -12,10 +12,12 @@ import {
     levelZoomDistrictDefault,
     levelZoomWardDefault,
     notifyError,
+    renderHref,
     slugProject,
 } from '@/utils'
 import useClickOutSide from '@/hooks/useClickOutSide'
 import useDebounce from '@/hooks/useDebounce'
+import Link from 'next/link'
 
 const handleCheckPage = (pathName, listData) => {
     if (pathName === '/') return true
@@ -509,20 +511,23 @@ const SearchGlobal = ({
                             {Array.isArray(dataProjectCode?.data) &&
                                 dataProjectCode?.data?.map((e, index) => (
                                     <li
-                                        className='pl-[0.5vw] line-clamp-1 max-md:line-clamp-2 max-md:py-[1vw] py-[0.3vw] hover:bg-slate-200 transition-all duration-200'
                                         title={
                                             e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
                                                 ?.name || e?.translations[0]?.name
                                         }
                                         onClick={() => {
-                                            handleSelectValueProject(e)
                                             setIsClose(true)
-                                            setSelectSearch('word')
                                         }}
                                         key={index}
                                     >
-                                        {e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))
-                                            ?.name || e?.translations[0]?.name}
+                                        <Link
+                                            className='line-clamp-1 max-md:line-clamp-2 pl-[0.5vw] max-md:py-[1vw] py-[0.3vw] transition-all duration-200  hover:bg-slate-200'
+                                            href={renderHref(e, lang) || '/'}
+                                        >
+                                            {e?.translations?.find((e) =>
+                                                e?.languageCode?.toLowerCase()?.includes(lang),
+                                            )?.name || e?.translations[0]?.name}
+                                        </Link>
                                     </li>
                                 ))}
                             {Array.isArray(dataProjectCode?.data) && (

@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import useStore from '@/app/[lang]/(store)/store'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 import MapProjectDetail from './MapProjectDetail'
 import PriceDetail from './PriceDetail'
@@ -9,6 +9,11 @@ import { categoryHireId } from '@/utils'
 
 import InfoDetailProject from './InfoDetailProject'
 import InfoDetailResProject from './InfoDetailResProject'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import FormNamePhone from './FormNamePhone'
+import ShareSocialInfo from './ShareSocialInfo'
+import PopupShareSocial from './PopupShareSocial'
 
 const month = [
     {
@@ -59,17 +64,35 @@ const slugProjectLang = [
 
 export default function ContentDetailProject({ data, detail, lang, t, isProject }) {
     const setSlugDetailProject = useStore((state) => state.setSlugDetailProject)
+    const parentRef = useRef(null)
     if (!data) return
     useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger)
+        let mm = gsap.matchMedia()
+        let ctx = gsap.context(() => {
+            mm.add('(min-width: 1024px)', () => {
+                ScrollTrigger.create({
+                    trigger: parentRef.current,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    pin: '#info_detail_project',
+                    scrub: true,
+                })
+            })
+        }, parentRef)
         setSlugDetailProject(data)
         return () => {
             setSlugDetailProject(null)
+            ctx.revert()
         }
     }, [])
     const dataDetail = data?.translations?.find((e) => e?.slug === detail || e?.slug === decodeURIComponent(detail))
 
     return (
-        <section className='mt-[3.875vw] max-md:mt-[4.27vw] px-120 px-mb10'>
+        <section
+            ref={parentRef}
+            className='pt-[3.875vw] max-md:pt-[4.27vw] px-120 px-mb10'
+        >
             <div className='flex mb-[1.25vw] max-md:mb-[2.13vw]'>
                 <span className='mr-[0.25vw] inline-block title16-600-150 text-den opacity-50 max-md:hidden max-lg:title-tl14'>
                     {t?.menuNav?.nav1?.[0]?.title} /{' '}
@@ -190,6 +213,13 @@ export default function ContentDetailProject({ data, detail, lang, t, isProject 
                         {t?.projectDetail?.info?.codeProject}:{' '}
                         <span className=' text-nau-nhat tracking-[0.5px]'>{data?.propertyCode}</span>
                     </div>
+                    <div className='w-full h-fit lg:hidden'>
+                        <FormNamePhone
+                            id={data?.id}
+                            t={t}
+                        />
+                        <ShareSocialInfo />
+                    </div>
 
                     <div className='border-t md:border-b border-solid border-[#faf4ed] py-[2.5vw] max-md:pt-[4.27vw] mt-[2.19vw] max-md:mt-[7.47vw]'>
                         <h2 className='title32-800-130 text-den -tracking-[0.96px] max-md:mb-[4.27vw] mb-[1vw] max-md:title-mb20-700-130 max-md:-tracking-[0.6px] max-lg:title-tl20 md:text-[2.1vw]'>
@@ -245,6 +275,7 @@ export default function ContentDetailProject({ data, detail, lang, t, isProject 
                 />
             </div>
             <ToastContainer style={{ zIndex: '999999999999999' }} />
+            <PopupShareSocial />
         </section>
     )
 }

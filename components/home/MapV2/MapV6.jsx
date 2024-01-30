@@ -375,6 +375,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
                 }${status ? '&status=' + status : ''}`,
             )
             const data = await res.json() //data marker
+            console.log('🚀 ~ callApi ~ data:', data)
             if (data && typeof mapRef?.getZoom === 'function') {
                 setIsFirst(false)
                 setDataMap(data)
@@ -547,6 +548,7 @@ const MapV6 = ({ lang, dataSlug = '', t }) => {
             }`,
         )
         const data = await res.json() // data popup
+        console.log('🚀 ~ callDataPopup ~ data:', data)
         if (!data) return
 
         // handle create popup follow levelZoom

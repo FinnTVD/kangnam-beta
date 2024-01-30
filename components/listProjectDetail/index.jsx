@@ -6,8 +6,9 @@ import RelatedProject from './RelatedProject'
 import NavBarV2 from '../general/NavBarV2'
 import NotFound from '@/app/[lang]/not-found'
 import ContentDetailProject from './ContentDetailProject'
+import FeatureHome from '../home/FeatureHome'
 
-export default async function IndexProjectDetail({ lang, detail, t, isProject }) {
+export default async function IndexProjectDetail({ lang, detail, t, isProject, dataInfo }) {
     const data = await getData(`${isProject ? '/project/project-by-slug/' : '/property/property-by-slug/'}${detail}`)
 
     return (
@@ -15,6 +16,10 @@ export default async function IndexProjectDetail({ lang, detail, t, isProject })
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>
                 <NavBarV2
                     lang={lang}
+                    t={t}
+                />
+                <FeatureHome
+                    dataInfo={dataInfo}
                     t={t}
                 />
             </header>

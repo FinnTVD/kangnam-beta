@@ -34,11 +34,14 @@ const listSocial = [
     },
 ]
 
-export default function SocialMedia({ dataInfo }) {
+export default function SocialMedia({ dataInfo, className = '' }) {
     return (
         <ul
             id='list-social'
-            className='group-hover:flex hidden flex-col gap-y-[0.63vw] absolute top-1/2 -left-full -translate-y-1/2 -translate-x-[0.62vw] z-20'
+            className={`${
+                className ||
+                'group-hover:flex hidden flex-col gap-y-[0.63vw] absolute top-1/2 -left-full -translate-y-1/2 -translate-x-[0.62vw] z-20'
+            }`}
         >
             {listSocial &&
                 listSocial.map((e, index) => (
@@ -49,10 +52,10 @@ export default function SocialMedia({ dataInfo }) {
                         <Link
                             href={dataInfo[e?.title] || '/'}
                             target='_blank'
-                            className='flex group justify-center items-center w-[2.5vw] h-[2.5vw] bg-white rounded-full relative'
+                            className='flex group justify-center items-center w-[2.5vw] h-[2.5vw] max-md:w-[8.5vw] max-md:h-[8.5vw] bg-white rounded-full relative'
                         >
                             <Image
-                                className='relative z-20 object-contain w-[1.6vw] h-[1.6vw] group-hover/item:brightness-0 group-hover/item:invert'
+                                className='relative z-20 object-contain w-[1.6vw] h-[1.6vw] max-md:w-[5.6vw] max-md:h-[6.5vw] group-hover/item:brightness-0 group-hover/item:invert'
                                 src={e.src}
                                 alt={e.title}
                                 width={56}

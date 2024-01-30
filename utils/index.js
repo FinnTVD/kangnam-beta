@@ -313,6 +313,7 @@ const notifySuccess = (title) =>
         draggable: true,
         progress: undefined,
         theme: 'colored',
+        className: 'toastify_kn',
     })
 const notifyError = (title) =>
     toast.error(title || 'Something went wrong!', {
@@ -324,6 +325,7 @@ const notifyError = (title) =>
         draggable: true,
         progress: undefined,
         theme: 'colored',
+        className: 'toastify_kn',
     })
 
 const scrollToSection = (element) => {
@@ -392,11 +394,18 @@ const renderAddress = (e) => {
 }
 const renderHref = (e, lang) => {
     return (
-        (lang === 'vi' ? '' : lang + '/') +
+        (lang === 'vi' ? '/' : lang + '/') +
         (e?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias ||
             'du-an') +
         '/' +
         (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug || e?.translations[0]?.slug)
+    )
+}
+
+const renderHrefNews = (e, lang) => {
+    return (
+        (lang === 'vi' ? '/news/' : lang + '/news/') +
+        e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.slug
     )
 }
 
@@ -760,4 +769,5 @@ export {
     listAreaProjectP,
     slugProjectLangCode,
     originHouseInit,
+    renderHrefNews,
 }

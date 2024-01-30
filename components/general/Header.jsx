@@ -9,6 +9,7 @@ import NavBarFixedRes from './NavBarFixedRes'
 import { useRef } from 'react'
 import IconBigLogo from '../icons/IconBigLogo'
 import FeatureHome from '../home/FeatureHome'
+import MegaMenuAll from './MegaMenuAll'
 
 export default function Header({ lang, t, data, isHome, dataInfo, children, homePagePropertyType }) {
     const videoRef = useRef(null)
@@ -72,6 +73,7 @@ export default function Header({ lang, t, data, isHome, dataInfo, children, home
                     lang={lang}
                     t={t}
                 />
+
                 {!isTablet ? (
                     <NavBarFixed
                         isHome={true}

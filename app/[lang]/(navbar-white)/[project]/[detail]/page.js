@@ -64,12 +64,15 @@ export async function generateMetadata({ params: { lang, detail } }) {
 export default async function DetailPage({ params: { lang, detail, project } }) {
     const t = await getDictionary(lang)
     const isProject = slugProject?.join('')?.includes(project)
+    const dataInfo = await getData('/site-infor')
+
     return (
         <IndexProjectDetail
             lang={lang}
             detail={detail}
             t={t}
             isProject={isProject}
+            dataInfo={dataInfo}
         />
     )
 }

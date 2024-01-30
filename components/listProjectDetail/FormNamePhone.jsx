@@ -59,8 +59,8 @@ export default function FormNamePhone({ id, t }) {
         }
     }
     return (
-        <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw]'>
-            <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw]'>
+        <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw] max-md:pt-[5.19vw] max-md:pb-[5vw] max-md:px-[4vw] '>
+            <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw] max-md:!text-[5.5vw] max-md:mb-[4.5vw]'>
                 {t?.projectDetail?.info?.contact}
             </h3>
             <form
@@ -80,7 +80,7 @@ export default function FormNamePhone({ id, t }) {
                     onChange={handleChangeName}
                 />
                 <InputCustom
-                    boxClass={'mt-[1vw] mb-[1.5vw]'}
+                    boxClass={'mt-[1vw] mb-[1.5vw] max-md:mt-[4vw] max-md:mb-[4.5vw]'}
                     labelContent={t?.projectDetail?.info?.phone}
                     labelClass={'title14-400-150 title-mb12-400-150 text-den left-[0.5vw]'}
                     inputClass={
@@ -95,7 +95,7 @@ export default function FormNamePhone({ id, t }) {
 
                 <div className='flex justify-center'>
                     <Button
-                        className='border-none bg-logo shadow-submit'
+                        className='border-none bg-logo shadow-submit max-md:!py-[2.87vw] max-md:!px-[3.4vw]'
                         span='text-white'
                         stroke='white'
                         type='submit'

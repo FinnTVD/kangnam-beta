@@ -714,6 +714,9 @@
         font-size: 4.2vw;
         list-style: disc !important;
     }
+    .toastify_kn {
+        font-size: 4vw;
+    }
 }
 .vietmapgl-marker.mapboxgl-marker:not([aria-label='Map marker']) {
     width: 30px;
@@ -1022,4 +1025,29 @@ article#list-img-preview::-webkit-scrollbar-thumb {
     header#header > div {
         height: 100vh !important;
     }
+}
+
+#info_detail_other::-webkit-scrollbar,
+#info_detail_project::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+/* Track */
+#info_detail_other::-webkit-scrollbar-track,
+#info_detail_project::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 6.25vw;
+}
+
+/* Handle */
+#info_detail_other::-webkit-scrollbar-thumb,
+#info_detail_project::-webkit-scrollbar-thumb {
+    background: #d6a279;
+    border-radius: 6.25vw;
+}
+
+/* Handle on hover */
+#info_detail_other::-webkit-scrollbar-thumb:hover,
+#info_detail_project::-webkit-scrollbar-thumb:hover {
+    background: #d6a279;
 }
