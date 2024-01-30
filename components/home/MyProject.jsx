@@ -7,7 +7,7 @@ import Button from '../general/Button'
 import { arrFilter, renderAddress, renderTitle, renderHref } from '@/utils'
 import { useMediaQuery } from 'react-responsive'
 import ReactPaginate from 'react-paginate'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import classes from '../news/ListNewsStyles.module.css'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import BoxFilterV2 from '../general/filterV2/BoxFilterV2'
@@ -23,7 +23,7 @@ const MapV5 = dynamic(() => import('./MapV2/MapV5'))
 const arrItem = new Array(8).fill(0)
 
 gsap.registerPlugin(ScrollTrigger)
-export default function MyProject({ lang, t, data }) {
+const MyProject = ({ lang, t, data }) => {
     const isTablet = useMediaQuery({
         query: '(max-width: 1023px)',
     })
@@ -322,3 +322,4 @@ export default function MyProject({ lang, t, data }) {
         </section>
     )
 }
+export default memo(MyProject)

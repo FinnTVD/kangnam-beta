@@ -213,7 +213,7 @@ export default function ContentDetailProject({ data, detail, lang, t, isProject 
                         {t?.projectDetail?.info?.codeProject}:{' '}
                         <span className=' text-nau-nhat tracking-[0.5px]'>{data?.propertyCode}</span>
                     </div>
-                    <div className='w-full h-fit lg:hidden'>
+                    <div className='w-full h-fit lg:hidden md:flex md:gap-x-[3vw]'>
                         <FormNamePhone
                             id={data?.id}
                             t={t}

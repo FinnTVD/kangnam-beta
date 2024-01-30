@@ -7,10 +7,10 @@ import MegaMenu from './MegaMenu'
 
 const objClass = {
     classContainer:
-        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo',
+        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo relative',
     classLine:
         'border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]',
-    classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
+    classForm: 'flex-1 flex items-center gap-x-[0.5vw] lg:relative',
     isIcon: false,
     iconSmall: true,
     classInput:

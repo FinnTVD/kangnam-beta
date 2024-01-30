@@ -15,7 +15,10 @@ export default function ConsignmentIndex({ t, lang }) {
                 </Suspense>
             </header>
             <main className='overflow-hidden h-fit'>
-                <WrapperForm t={t} />
+                <WrapperForm
+                    t={t}
+                    lang={lang}
+                />
                 <ToastContainer style={{ zIndex: '999999999999999' }} />
             </main>
         </>

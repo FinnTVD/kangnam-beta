@@ -2,7 +2,7 @@ import Image from 'next/image'
 import SlideForm from './SlideForm'
 import src from '../../public/images/bg-dang-tin.jpg'
 
-export default function WrapperForm({ t }) {
+export default function WrapperForm({ t, lang }) {
     return (
         <section className='flex w-full h-screen md:overflow-hidden max-lg:flex-col max-lg:h-fit'>
             <aside className='h-[calc(100vh-5.8vw)] w-[42.0625vw] max-lg:w-full max-md:!h-[126.3vw] md:fixed max-lg:!relative z-50 md:top-[5.8vw] md:left-0 max-md:mt-[18vw] max-lg:h-[55.8vw]'>
@@ -225,7 +225,10 @@ export default function WrapperForm({ t }) {
             </div>
             <div className='flex-1 h-full md:overflow-hidden max-md:h-fit pl-[1.5vw] max-md:px-[2.67vw] mt-[19vw] max-md:mt-[4.27vw] flex flex-col justify-between max-lg:mt-[5vw]'>
                 <div className='w-full h-[calc(100vh-13.19vw)] max-md:!h-fit relative max-lg:h-[calc(50vh-13.19vw)]'>
-                    <SlideForm t={t} />
+                    <SlideForm
+                        t={t}
+                        lang={lang}
+                    />
                 </div>
             </div>
         </section>

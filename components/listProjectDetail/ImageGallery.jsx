@@ -192,7 +192,10 @@ export default function ImageGallery({ data, t, lang }) {
                 >
                     {!isTablet
                         ? listImage?.slice(0, 9).map((item, index) => (
-                              <SwiperSlide key={index}>
+                              <SwiperSlide
+                                  key={index}
+                                  className='lg:max-w-[calc((100%-8px)/3)] md:max-w-[calc((100%-8px)/2))]'
+                              >
                                   <Image
                                       src={item || '/images/itemproject.jpg'}
                                       alt={index}
@@ -203,7 +206,10 @@ export default function ImageGallery({ data, t, lang }) {
                               </SwiperSlide>
                           ))
                         : listImage?.map((item, index) => (
-                              <SwiperSlide key={index}>
+                              <SwiperSlide
+                                  key={index}
+                                  className='lg:max-w-[calc((100%-8px)/3)] md:max-w-[calc((100%-8px)/2))]'
+                              >
                                   <Image
                                       src={item || '/images/itemproject.jpg'}
                                       width={532}
@@ -328,7 +334,7 @@ export default function ImageGallery({ data, t, lang }) {
                         ? listImage?.slice(0, 10).map((item, index) => (
                               <SwiperSlide
                                   key={index}
-                                  className='rounded-[4px] overflow-hidden'
+                                  className='rounded-[4px] overflow-hidden lg:max-w-[calc((100%-54px)/10)]'
                               >
                                   {index !== listImage.slice(0, 10).length - 1 ? (
                                       <Image
@@ -358,7 +364,10 @@ export default function ImageGallery({ data, t, lang }) {
                               </SwiperSlide>
                           ))
                         : listImage?.map((item, index) => (
-                              <SwiperSlide key={index}>
+                              <SwiperSlide
+                                  key={index}
+                                  className='lg:max-w-[calc((100%-54px)/10)]'
+                              >
                                   <Image
                                       src={item}
                                       width={532}

@@ -10,7 +10,7 @@ import postData from '@/utils/postData'
 import { notifyError, notifySuccess } from '@/utils'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-export default function Form3({ handlePrevSlide, isMobile, t }) {
+export default function Form3({ handlePrevSlide, isMobile, t, lang }) {
     const dataSubmitForm = useStore((state) => state.dataSubmitForm)
     const setTriggerSubmit = useStore((state) => state.setTriggerSubmit)
     const triggerSubmit = useStore((state) => state.triggerSubmit)
@@ -20,7 +20,7 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
     const [isOpen, setIsOpen] = useState(false)
     const [valueType, setValueType] = useState({
         title: t?.deposit?.form?.form3?.detailInput?.input1,
-        id:null
+        id: null,
     })
     const [valueArea, setValueArea] = useState('')
     const [valueNumberFloors, setValueNumberFloors] = useState('')
@@ -48,15 +48,14 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    
 
-    useEffect(()=>{
+    useEffect(() => {
         setValueArea('')
         setSelectedImage([])
         setFiles([])
         setValueType({
             title: t?.deposit?.form?.form3?.detailInput?.input1,
-            id:null
+            id: null,
         })
         setValueArea('')
         setValueNumberFloors('')
@@ -69,7 +68,7 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
             value: '',
             validate: false,
         })
-    },[triggerSubmit])
+    }, [triggerSubmit])
 
     const handleChangeArea = (e) => {
         setValueArea(e?.target?.value)
@@ -132,7 +131,7 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
     const handleChangeDescription = (e) => {
         handleResizeHeight(e)
         setValueDescription({
-            validate:false,
+            validate: false,
             value: e?.target?.value,
         })
     }
@@ -159,23 +158,23 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
         // The return value is *not* serialized
         // You can return Date, Map, Set, etc.
         const data = await res.json()
-        if(data){
+        if (data) {
             const listLinkImg = []
-            data?.forEach(e=>listLinkImg.push(e?.url))
-            const dataForm ={
-                propertyDescription:valueDescription?.value,
-                propertyTypeId:valueType?.id,
-                size:Number(valueArea),
-                floor:Number(valueNumberFloors),
-                orientHouse:valueHomeOrientation,
-                constructionType:valueBuildingType,
-                orientBalcony:valueBalconyOrientation,
-                furniture:valueInterior,
-                policy:valueLegal,
-                images:listLinkImg,
+            data?.forEach((e) => listLinkImg.push(e?.url))
+            const dataForm = {
+                propertyDescription: valueDescription?.value,
+                propertyTypeId: valueType?.id,
+                size: Number(valueArea),
+                floor: Number(valueNumberFloors),
+                orientHouse: valueHomeOrientation,
+                constructionType: valueBuildingType,
+                orientBalcony: valueBalconyOrientation,
+                furniture: valueInterior,
+                policy: valueLegal,
+                images: listLinkImg,
             }
-            
-            const post = await postData('/deposit',{
+
+            const post = await postData('/deposit', {
                 ...dataSubmitForm,
                 ...dataForm,
             })
@@ -189,20 +188,18 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
         }
     }
 
-    
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(!valueDescription?.value){
+        if (!valueDescription?.value) {
             setValueDescription({
                 ...valueDescription,
-                validate:true,
+                validate: true,
             })
         }
-        if (files?.length < 3 || !files){
+        if (files?.length < 3 || !files) {
             setValidateFiles((prev) => ({ ...prev, status: true }))
         }
-        if(valueDescription?.value && files?.length >= 3){
+        if (valueDescription?.value && files?.length >= 3) {
             handleUpLoadImage()
         }
     }
@@ -214,7 +211,9 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
                     onClick={handlePrevSlide}
                     className='absolute left-[2.75vw] top-[2.25vw] flex py-[0.56vw] gap-x-[0.75vw] max-md:gap-x-[2.4vw] items-center cursor-pointer pr-[1vw] border border-solid border-nu rounded-[10vw] px-[1.09vw] max-md:py-[1.56vw] max-md:px-[3.09vw]'
                 >
-                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>{t?.deposit?.form?.form3?.back}</span>
+                    <span className='text-nu title14-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>
+                        {t?.deposit?.form?.form3?.back}
+                    </span>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         width='11'
@@ -270,9 +269,20 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
                         </span>
                         <div className='flex gap-x-[1.25vw] max-md:flex-col max-md:gap-y-[2.67vw]'>
                             <div className='relative flex flex-1'>
-                                <div onClick={()=>setIsOpen(!isOpen)} className='flex gap-[0.28vw] w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] max-md:py-[2.93vw] max-md:px-[4.2vw]'>
-                                    <Image src={'/images/loaihinh.svg'} width={16} height={16} className='w-[1vw] max-lg:hidden'></Image>
-                                    <span className='text-den title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'> {valueType?.title} </span>
+                                <div
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    className='flex gap-[0.28vw] w-full py-[1vw] px-[1.5vw] rounded-[10vw] outline-none border border-solid border-[#C5C5C5] max-md:py-[2.93vw] max-md:px-[4.2vw]'
+                                >
+                                    <Image
+                                        src={'/images/loaihinh.svg'}
+                                        width={16}
+                                        height={16}
+                                        className='w-[1vw] max-lg:hidden'
+                                    ></Image>
+                                    <span className='text-den title16-400-150 max-md:title-mb12-400-150 max-lg:title-tl12'>
+                                        {' '}
+                                        {valueType?.title}{' '}
+                                    </span>
                                 </div>
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -288,20 +298,35 @@ export default function Form3({ handlePrevSlide, isMobile, t }) {
                                         d='M19.5 8.25l-7.5 7.5-7.5-7.5'
                                     />
                                 </svg>
-                                <ul className={`${dataType?.data ? '' : 'hidden'} ${isOpen?'':'hidden'} z-[10] rounded-[1vw] overflow-hidden shadow-input bg-white text-den absolute bottom-[-0.5vw] translate-y-full left-0 py-[0.5vw] flex flex-col`}>
+                                <ul
+                                    className={`${dataType?.data ? '' : 'hidden'} ${
+                                        isOpen ? '' : 'hidden'
+                                    } z-[10] rounded-[1vw] overflow-hidden shadow-input bg-white text-den absolute bottom-[-0.5vw] translate-y-full left-0 py-[0.5vw] flex flex-col`}
+                                >
                                     {dataType?.data?.map((e, index) => (
-                                        <li onClick={()=>{
-                                            setValueType({
-                                            title:e?.name,
-                                            id:e?.id
-                                        })
-                                        setIsOpen(false)
-                                        }} className='text-den px-[1vw] py-[0.5vw] hover:bg-gray-200' key={index}>{e?.name}</li>
+                                        <li
+                                            onClick={() => {
+                                                setValueType({
+                                                    title: e?.translations?.find((item) =>
+                                                        item?.languageCode?.toLowerCase()?.includes(lang),
+                                                    )?.name,
+                                                    id: e?.id,
+                                                })
+                                                setIsOpen(false)
+                                            }}
+                                            className='text-den px-[1vw] py-[0.5vw] hover:bg-gray-200'
+                                            key={index}
+                                        >
+                                            {
+                                                e?.translations?.find((item) =>
+                                                    item?.languageCode?.toLowerCase()?.includes(lang),
+                                                )?.name
+                                            }
+                                        </li>
                                     ))}
-                                    
                                 </ul>
                             </div>
-                            
+
                             {/* <InputCustom
                                 boxClass={'flex-1'}
                                 inputClass={

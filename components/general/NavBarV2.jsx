@@ -11,16 +11,16 @@ import useSWR from 'swr'
 
 const objClass = {
     classContainer:
-        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo max-lg:w-fit',
+        'w-[23.125vw] py-[0.87vw] px-[1.75vw] max-md:w-[68.267vw] max-md:py-[3.06vw] max-md:px-[5.07vw] bg-white rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo max-lg:w-fit relative',
     classLine:
         'border-l border-solid border-den opacity-40 h-[1.0625vw] mx-[0.63vw] max-md:h-[2.67vw] max-md:mx-[3.2vw]',
-    classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
+    classForm: 'flex-1 flex items-center gap-x-[0.5vw] lg:relative',
     isIcon: false,
     iconSmall: true,
     classInput:
         'outline-none text-den title16-400-130 mr-[1.5vw] max-md:mr-0 max-md:title-mb12-400-130 max-md:w-[29vw] max-lg:title-tl12',
     classList:
-        'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:w-[50vw] max-md:title-mb12-400-150',
+        'w-[36vw] absolute bottom-[-0.5vw] left-0 translate-y-full z-[1000] bg-white text-black px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:w-[50vw] max-md:title-mb12-400-150 max-md:w-full max-md:rounded-[2.3vw] max-md:h-[60vh] max-md:overflow-y-auto',
 }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())

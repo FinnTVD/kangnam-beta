@@ -118,8 +118,11 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                         </svg>
                                     </Link>
                                     <div
-                                        className='z-0 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:z-[99999] group-hover:pointer-events-auto fixed w-full h-fit bg-white left-0 top-[4.9rem] rounded-[0.5vw] px-[2rem] py-[1rem]'
-                                        style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}
+                                        className='z-0 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:z-[99999] group-hover:pointer-events-auto fixed w-full h-fit bg-white left-0 top-[4.9vw] rounded-[0.5vw] px-[2vw] pt-[1vw] pb-[3vw]'
+                                        style={{
+                                            boxShadow:
+                                                'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+                                        }}
                                     >
                                         <MegaMenuAll
                                             lang={lang}
@@ -217,7 +220,13 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                         />
                                     </svg>
                                 </Link>
-                                <div className='z-0 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:z-[99999] group-hover:pointer-events-auto fixed w-full h-fit bg-white left-0 top-[5.9rem] rounded-[0.5vw] px-[2rem] py-[1rem] '>
+                                <div
+                                    className='z-0 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:z-[99999] group-hover:pointer-events-auto fixed w-full h-fit bg-white left-0 top-[5.9vw] rounded-[0.5vw] px-[2vw] pt-[1vw] pb-[3vw]'
+                                    style={{
+                                        boxShadow:
+                                            'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+                                    }}
+                                >
                                     <MegaMenuAll
                                         lang={lang}
                                         t={t}

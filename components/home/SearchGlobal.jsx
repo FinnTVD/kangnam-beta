@@ -425,7 +425,7 @@ const SearchGlobal = ({
                     ref={sideRef}
                     onSubmit={handleSubmit}
                     className={`${
-                        classForm || 'flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw] relative'
+                        classForm || 'flex-1 flex items-center gap-x-[0.62vw] max-md:gap-x-[1.07vw] lg:relative'
                     }`}
                 >
                     <label htmlFor='search'>
@@ -487,7 +487,7 @@ const SearchGlobal = ({
                         <ul
                             className={`${isClose ? 'hidden' : ''} ${
                                 classList ||
-                                'absolute bottom-0 left-[-1.5vw] translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] shadow-input max-md:title-mb12-400-150'
+                                'absolute bottom-0 left-[-1.5vw] translate-y-full z-[1000] bg-white text-black w-full px-[1.5vw] py-[1vw] rounded-[0.5vw] max-md:h-[60vh] max-md:overflow-y-auto max-md:rounded-[2.3vw] shadow-input max-md:title-mb12-400-150'
                             }`}
                         >
                             {dataSearch && <li className='font-bold text-black max-md:my-[1vw]'>Khu vực</li>}

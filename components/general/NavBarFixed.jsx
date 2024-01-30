@@ -9,7 +9,7 @@ const objClass = {
     classContainer:
         'w-[23.125vw] py-[0.87vw] px-[1.75vw] bg-white02 rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo backdrop-blur-[11px] mr-[0.5vw]',
     classLine: 'border-l border-solid border-logo opacity-40 h-[1.0625vw] mx-[0.63vw]',
-    classForm: 'flex-1 flex items-center gap-x-[0.5vw] relative',
+    classForm: 'flex-1 flex items-center gap-x-[0.5vw] lg:relative',
     isIcon: false,
     iconSmall: true,
     classInput: 'bg-transparent outline-none text-den title16-400-130',

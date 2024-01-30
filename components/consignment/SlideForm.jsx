@@ -6,7 +6,7 @@ import Form2 from './Form2'
 import Form3 from './Form3'
 import { useMediaQuery } from 'react-responsive'
 
-export default function SlideForm({ t }) {
+export default function SlideForm({ t, lang }) {
     const [indexSlider, setIndexSlider] = useState(0)
     const swiperRef = useRef()
     const isMobile = useMediaQuery({
@@ -75,6 +75,7 @@ export default function SlideForm({ t }) {
                         handlePrevSlide={handlePrevSlide}
                         isMobile={isMobile}
                         t={t}
+                        lang={lang}
                     />
                 </SwiperSlide>
             </Swiper>

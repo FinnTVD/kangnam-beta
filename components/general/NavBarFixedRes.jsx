@@ -8,7 +8,7 @@ import useSWR from 'swr'
 
 const objClass = {
     classContainer:
-        'w-[68.267vw] py-[3.06vw] px-[5.07vw] rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo',
+        'w-[68.267vw] py-[3.06vw] px-[5.07vw] rounded-[10vw] flex justify-between items-center shadow-input border border-solid border-logo relative',
     classLine: 'border-l border-solid border-logo opacity-50 h-[2.67vw] mx-[3.2vw]',
     classForm: 'flex-1 flex items-center gap-x-[0.5vw]',
     isIcon: false,

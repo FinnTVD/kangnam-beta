@@ -59,7 +59,7 @@ export default function FormNamePhone({ id, t }) {
         }
     }
     return (
-        <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw] max-md:pt-[5.19vw] max-md:pb-[5vw] max-md:px-[4vw] '>
+        <div className='rounded-[0.625vw] mt-[1.5vw] border border-solid border-den01 pt-[1.19vw] pb-[2vw] px-[1vw] max-md:pt-[5.19vw] max-md:pb-[5vw] max-md:px-[4vw] max-lg:w-[40vw] max-md:w-full'>
             <h3 className='title24-800-130 text-center text-den -tracking-[0.72px] mb-[1.5vw] max-md:!text-[5.5vw] max-md:mb-[4.5vw]'>
                 {t?.projectDetail?.info?.contact}
             </h3>
