@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 import MapProjectDetail from './MapProjectDetail'
 import PriceDetail from './PriceDetail'
-import { categoryHireId } from '@/utils'
+import { categoryHireId, formatDateTime } from '@/utils'
 
 import InfoDetailProject from './InfoDetailProject'
 import InfoDetailResProject from './InfoDetailResProject'
@@ -129,6 +129,16 @@ export default function ContentDetailProject({ data, detail, lang, t, isProject 
                                 )}
                             </div>
                         </div>
+                    </div>
+                    <div className='mt-[1vw] max-md:mt-[4vw]'>
+                        <span className='text-[#888] text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
+                            {formatDateTime(dataDetail?.updatedAt).slice(0, 10)} -
+                        </span>
+
+                        <span className='text-[#888] text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
+                            {' '}
+                            Admin KangNam
+                        </span>
                     </div>
                     <div className='mt-[1.5vw] max-md:mt-[4.27vw] border border-dashed border-logo rounded-[0.625vw] bg-[#FFFBF5] pt-[1.25vw] px-[1.69vw] max-md:py-[6.4vw] max-md:px-[4.27vw] pb-[1.81vw]'>
                         <address className='not-italic title16-600-150 text-den mb-[1vw] max-md:hidden max-lg:title-tl16'>

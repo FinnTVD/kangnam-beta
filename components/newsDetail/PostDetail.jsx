@@ -5,13 +5,13 @@ import { useEffect, useRef } from 'react'
 import useStore from '@/app/[lang]/(store)/store'
 export default function PostDetail({ t, post, newsDetail, lang, category }) {
     const langCode = handleCheckLangCode(lang)
-    let categoryTranslation
-    if (category) {
-        categoryTranslation =
-            category?.translations?.length > 0
-                ? category?.translations?.find((item) => item?.langCode === langCode)?.name
-                : category?.title
-    }
+    // let categoryTranslation
+    // if (category) {
+    //     categoryTranslation =
+    //         category?.translations?.length > 0
+    //             ? category?.translations?.find((item) => item?.langCode === langCode)?.name
+    //             : category?.title
+    // }
     const urlRef = useRef('')
     const setSlugDetailNews = useStore((state) => state.setSlugDetailNews)
 
@@ -43,15 +43,16 @@ export default function PostDetail({ t, post, newsDetail, lang, category }) {
         <section className='px-[16.25vw] pt-[6.875vw] px-mb10 max-md:pt-[13.3vw] max-lg:px-[10vw]'>
             <div className=''>
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
-                    {formatDateTime(post?.updatedAt).slice(0, 10)} /
+                    {formatDateTime(post?.updatedAt).slice(0, 10)} -
                 </span>
-                <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
+                {/* <span className='text-den-2 uppercase text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
                     {categoryTranslation} -{' '}
-                </span>
+                </span> */}
                 <span className='text-den-2 text-20pc font-normal leading-[1.7] max-md:title-mb16-400-150 max-lg:title-tl20'>
                     {' '}
-                    {t?.newsDetailDes?.byAuthor} {post?.user?.lastName + ' ' + post?.user?.firstName}
+                    {/* {t?.newsDetailDes?.byAuthor} {post?.user?.lastName + ' ' + post?.user?.firstName} */}
+                    Admin KangNam
                 </span>
             </div>
             <div
