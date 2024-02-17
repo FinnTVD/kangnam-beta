@@ -394,7 +394,7 @@ const renderAddress = (e) => {
 }
 const renderHref = (e, lang) => {
     return (
-        (lang === 'vi' ? '/' : lang + '/') +
+        (lang === 'vi' ? '/' : '/' + lang + '/') +
         (e?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias ||
             'du-an') +
         '/' +

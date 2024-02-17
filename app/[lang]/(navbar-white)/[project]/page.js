@@ -64,8 +64,8 @@ export async function generateMetadata({ params: { lang } }) {
 export default async function page({ params: { lang, project } }) {
     const t = await getDictionary(lang)
     const data = await getData('/property-category')
-    const isProject = slugProject?.join('')?.includes(project)
-    const isHire = listSlugNavHire?.join('')?.includes(project)
+    const isProject = slugProject?.join('')?.includes(decodeURI(project))
+    const isHire = listSlugNavHire?.join('')?.includes(decodeURI(project))
     return (
         <>
             <header className='fixed top-0 left-0 w-screen bg-white h-fit shadow-boxFilter z-[999999999999]'>

@@ -68,13 +68,7 @@ const SelectLanguage = ({ className, lang, t }) => {
             const lgNew = lg === 'vi' ? '' : lg + '/'
             if (item?.slug) {
                 return (
-                    '/' +
-                    lgNew +
-                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lg),
-                    )?.alias +
-                    '/' +
-                    item?.slug
+                    '/' + lgNew + slugProjectHref?.find((e) => e?.code?.includes(lg))?.href.slice(1) + '/' + item?.slug
                 )
             } else {
                 const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
@@ -100,42 +94,43 @@ const SelectLanguage = ({ className, lang, t }) => {
             }
         }
         if (lg === 'vi') {
-            if (pathName === t?.Navbar?.listNav[0]?.href) return slugProjectHref?.find((e) => e?.code === lg)?.href
-            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
+            if (decodeURI(pathName)?.includes(t?.Navbar?.listNav[0]?.href))
+                return slugProjectHref?.find((e) => e?.code === lg)?.href
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === decodeURI(pathName).slice(1)))) {
                 return categoryNav
-                    ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
+                    ?.find((e) => e?.translations?.find((i) => i?.alias === decodeURI(pathName).slice(1)))
                     ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg))?.alias
             }
 
             if (lang === 'vi') {
-                return pathName
+                return decodeURI(pathName)
             } else if (arrHref.includes(pathName)) {
                 return '/'
             } else {
-                return pathName.slice(3)
+                return decodeURI(pathName).slice(3)
             }
         } else {
             // check projects
-            if (pathName === t?.Navbar?.listNav[0]?.href)
+            if (decodeURI(pathName)?.includes(t?.Navbar?.listNav[0]?.href))
                 return '/' + lg + slugProjectHref?.find((e) => e?.code === lg)?.href
             // check category
-            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))) {
+            if (categoryNav?.find((e) => e?.translations?.find((i) => i?.alias === decodeURI(pathName).slice(1)))) {
                 return (
                     '/' +
                     lg +
                     '/' +
                     categoryNav
-                        ?.find((e) => e?.translations?.find((i) => i?.alias === pathName.slice(1)))
+                        ?.find((e) => e?.translations?.find((i) => i?.alias === decodeURI(pathName).slice(1)))
                         ?.translations?.find((item) => item?.languageCode?.toLowerCase()?.includes(lg))?.alias
                 )
             }
             if (lg === lang) {
-                return pathName
+                return decodeURI(pathName)
             }
             if (lang === 'vi') {
-                return lg + pathName
+                return lg + decodeURI(pathName)
             } else {
-                return '/' + lg + pathName.slice(3)
+                return '/' + lg + decodeURI(pathName).slice(3)
             }
         }
     }
