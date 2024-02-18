@@ -396,7 +396,7 @@ const renderHref = (e, lang) => {
     return (
         (lang === 'vi' ? '/' : '/' + lang + '/') +
         (e?.propertyCategory?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.alias ||
-            'du-an') +
+            slugProjectLangCode?.find((e) => e.langCode === lang)?.slug?.slice(1)) +
         '/' +
         (e?.translations?.find((e) => e?.languageCode?.toLowerCase()?.includes(lang))?.slug || e?.translations[0]?.slug)
     )

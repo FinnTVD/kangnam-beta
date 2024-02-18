@@ -66,21 +66,48 @@ const SelectLanguage = ({ className, lang, t }) => {
         if (slugDetailProject) {
             const item = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes(lgCode))
             const lgNew = lg === 'vi' ? '' : lg + '/'
-            if (item?.slug) {
-                return (
-                    '/' + lgNew + slugProjectHref?.find((e) => e?.code?.includes(lg))?.href.slice(1) + '/' + item?.slug
-                )
+            if (slugDetailProject.hasOwnProperty('propertyCategory')) {
+                if (item?.slug) {
+                    return (
+                        '/' +
+                        lgNew +
+                        slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lg),
+                        )?.alias +
+                        '/' +
+                        item?.slug
+                    )
+                } else {
+                    const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
+                    return (
+                        '/' +
+                        lgNew +
+                        slugDetailProject?.propertyCategory?.translations?.find((e) =>
+                            e?.languageCode?.toLowerCase()?.includes(lg),
+                        )?.alias +
+                        '/' +
+                        itemVN?.slug
+                    )
+                }
             } else {
-                const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
-                return (
-                    '/' +
-                    lgNew +
-                    slugDetailProject?.propertyCategory?.translations?.find((e) =>
-                        e?.languageCode?.toLowerCase()?.includes(lg),
-                    )?.alias +
-                    '/' +
-                    itemVN?.slug
-                )
+                if (item?.slug) {
+                    return (
+                        '/' +
+                        lgNew +
+                        slugProjectHref?.find((e) => e?.code?.includes(lg))?.href.slice(1) +
+                        '/' +
+                        item?.slug
+                    )
+                } else {
+                    const itemVN = slugDetailProject?.translations?.find((e) => e?.languageCode?.includes('vi_VN'))
+                    return (
+                        '/' +
+                        lgNew +
+                        slugProjectHref?.find((e) => e?.code?.includes(lg))?.href.slice(1) +
+                        '/' +
+                        itemVN?.slug
+                    )
+                }
             }
         }
         if (slugDetailNews) {
