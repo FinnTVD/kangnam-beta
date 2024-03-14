@@ -404,8 +404,9 @@ const renderHref = (e, lang) => {
 
 const renderHrefNews = (e, lang) => {
     return (
-        (lang === 'vi' ? '/news/' : lang + '/news/') +
-        e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.slug
+        (lang === 'vi' ? '/news/' : '/' + lang + '/news/') +
+            e?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.slug ||
+        e?.translations[0]?.slug
     )
 }
 
