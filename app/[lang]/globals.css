@@ -595,6 +595,11 @@
 #contentProject .ql-align-center {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#contentProject .ql-align-center em {
+    margin-top: 0.5rem;
 }
 #contentProject .ql-align-start {
     display: flex;
