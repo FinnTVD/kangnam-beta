@@ -22,13 +22,15 @@ export async function generateStaticParams({ params: { lang, project } }) {
         }
     })
 }
-export async function generateMetadata({ params: { lang, detail } }) {
-    const data = await getData(`/property/property-by-slug/${detail}`)
+export async function generateMetadata({ params: { lang, detail, project } }) {
+    const isProject = slugProject?.join('')?.includes(decodeURI(project))
+    const data = await getData(`${isProject ? '/project/project-by-slug/' : '/property/property-by-slug/'}${detail}`)
+
     if (!data) return
     const dataDetail = data?.translations?.find((e) => e?.slug === detail)
     return {
         metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
-        title: dataDetail?.titleSeo || 'Detail Project',
+        title: dataDetail?.titleSeo || dataDetail?.name || 'Detail Project',
         description: dataDetail?.descSeo,
         applicationName: process.env.SITE_NAME,
         openGraph: {

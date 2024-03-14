@@ -26,7 +26,7 @@ export async function generateMetadata({ params: { lang, slug } }) {
     const dataDetail = data?.translations?.find((e) => e?.slug === slug)
     return {
         metadataBase: new URL(process.env.NEXT_PUBLIC_DOMAIN),
-        title: dataDetail?.titleSeo,
+        title: dataDetail?.titleSeo || dataDetail?.title,
         description: dataDetail?.descSeo,
         applicationName: process.env.SITE_NAME,
         openGraph: {
