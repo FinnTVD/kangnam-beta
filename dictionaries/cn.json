@@ -13,69 +13,69 @@
             },
             {
                 "id": 6,
-                "title": "Về KangNam",
+                "title": "关于康南",
                 "branch": [
                     {
                         "id": 1,
-                        "title": "Giới thiệu",
-                        "href": "/about-us"
+                        "title": "简介",
+                        "href": "/简介"
                     },
                     {
                         "id": 2,
-                        "title": "Liên hệ",
-                        "href": "/contact"
+                        "title": "联系",
+                        "href": "/联系"
                     },
                     {
                         "id": 3,
-                        "title": "Thỏa thuận & pháp lý",
-                        "href": "/agreements"
+                        "title": "协议及法律文件",
+                        "href": "/协议及法律文件"
                     }
                 ]
             }
         ],
-        "button": "Kí gửi nhà đất",
-        "title": "Chọn ngôn ngữ"
+        "button": "房屋及土地寄卖",
+        "title": "选择语言"
     },
     "Form1": {
-        "sell": "Giá bán mong muốn",
-        "hire": "Giá thuê mong muốn"
+        "sell": "希望售价",
+        "hire": "希望租价"
     },
     "aboutUsStory": {
-        "subtitle": "Câu chuyện thương hiệu",
-        "title": "Giới thiệu",
-        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        "subtitle": "品牌故事",
+        "title": "简介",
+        "description": "康南房地产股份公司是一家经验丰富的专业房地产经纪单位"
     },
     "aboutUsTeams": {
-        "subtitle": "Đội ngũ",
-        "title": "Chuyên viên Kangnam",
-        "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+        "subtitle": "员工队伍",
+        "title": "康南专员",
+        "description": "康南于2018年正式成立, 是东南亚房地产经纪领域的第一家科技公司。在康南, 我们通过使用市场数据分析系统、上市中房地产清单跟踪系统, 结合交互式通信技术、在线交易管理, 且通过提供价格比较工具, 使买卖过程更轻松, 并建立客户对我们的信任度, 为房屋买房双方带来最佳价值。同时, 康南还为经纪专员配备了客户管理系统(Smart CRM)和数据库, 旨在成为满足与居住有关的所有需求的目的地。"
     },
     "aboutUsContact": {
-        "subtitle": "Liên hệ",
-        "title": "Thông tin văn phòng",
-        "button": "Liên hệ ngay"
+        "subtitle": "联系",
+        "title": "办公室信息",
+        "button": "立即联系"
     },
     "newsList": {
-        "subtitle": "Tin tức về",
-        "title": "Tin tức"
+        "subtitle": "新闻",
+        "title": "新闻"
     },
     "newsDetailDes": {
-        "byAuthor": "Viết bởi",
-        "share": "Chia sẻ lên"
+        "byAuthor": "撰写者",
+        "share": "分享一下"
     },
     "newsDetailRelated": {
-        "subtitle": "Tổng hợp tin tức",
-        "title": "Tin tức liên quan",
-        "button": "Xem tất cả"
+        "subtitle": "新闻摘要",
+        "title": "相关新闻",
+        "button": "查看全部"
     },
     "newsLatestButton": {
-        "title": "Chi tiết"
+        "title": "细节"
     },
     "menuNav": {
         "nav1": [
             {
                 "id": 1,
-                "title": "홈 페이지",
+                "title": "主页",
                 "href": "/"
             },
             {
@@ -95,82 +95,82 @@
             },
             {
                 "id": 5,
-                "title": "Thỏa thuận & pháp lý",
-                "href": "/agreements"
+                "title": "协议及法律文件",
+                "href": "/协议及法律文件"
             }
         ],
         "nav2": [
             {
                 "id": 1,
-                "title": "Về Kangnam",
-                "href": "/about-us"
+                "title": "关于康南",
+                "href": "/简介"
             },
             {
                 "id": 2,
-                "title": "Tin tức",
-                "href": "/news"
+                "title": "新闻",
+                "href": "/新闻"
             },
             {
                 "id": 3,
-                "title": "Liên hệ",
-                "href": "/contact"
+                "title": "联系",
+                "href": "/联系"
             }
         ]
     },
     "footer": {
         "contact": {
-            "title": "Liên hệ"
+            "title": "联系"
         },
         "navigation": {
-            "title": "Điều hướng chung",
+            "title": "常规导航",
             "list": [
                 {
                     "id": 1,
-                    "title": "Trang chủ",
+                    "title": "主页",
                     "href": "/"
                 },
                 {
                     "id": 2,
-                    "title": "Về Kangnam",
-                    "href": "/about-us"
+                    "title": "关于康南",
+                    "href": "/简介"
                 },
                 {
                     "id": 3,
-                    "title": "Dự án",
-                    "href": "/du-an"
+                    "title": "项目",
+                    "href": "/项目"
                 },
                 {
                     "id": 4,
-                    "title": "Ký gửi nhà đất",
-                    "href": "/deposit"
+                    "title": "房屋及土地寄卖",
+                    "href": "/房屋及土地寄卖"
                 },
                 {
                     "id": 5,
-                    "title": "Tin tức",
-                    "href": "/news"
+                    "title": "新闻",
+                    "href": "/新闻"
                 }
             ]
         },
         "service": {
-            "title": "Dịch vụ",
+            "title": "服务",
             "list": [
                 {
                     "id": "1",
-                    "title": "Dự án mới"
+                    "title": "新项目"
                 },
                 {
                     "id": "2",
-                    "title": "Thiết kế nhà đẹp"
+                    "title": "美丽的房子设计"
                 },
                 {
                     "id": "3",
-                    "title": "Ký gửi bất động sản"
+                    "title": "房屋及土地寄卖"
                 }
             ]
         }
     },
     "scroll": {
-        "title": "Cuộn xuống"
+        "title": "向下滚动"
     },
     "homepage": {
         "currency":{
@@ -182,113 +182,113 @@
             "intoMoney":"变成金钱"
         },
         "section1" : {
-            "subtitle": "An tâm với 100% bất động sản được xác thực tại KANGNAM",
-            "title": "Lựa Chọn Căn Nhà Ưng Ý",
-            "suggest": "Gợi ý"
+            "subtitle": "100%房地产经过康南核实，让您安心无忧",
+            "title": "选择您喜欢的房子",
+            "suggest": "提示"
         },
         "section2" : {
-            "subtitle": "Câu chuyện thương hiệu",
-            "title": "Chúng tôi là ai",
-            "description": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp, chuyên phân phối đa dạng các phân khúc bất động sản trải dài khắp miền Bắc và miền Trung với đội ngũ chuyên viên môi giới giày dạn kinh nghiệm được đào tạo bài bản",
+            "subtitle": "品牌故事",
+            "title": "我们是谁",
+            "description": "康南房地产股份公司是一家专业的房地产经纪单位，专门在越南北部和中部分销各种房地产，拥有一支经验丰富、培训有条不紊的经纪专员队伍。",
             "detail": {
-                "title1": "Cam kết xác thực",
-                "title2": "Trọn hỗ trợ, chi phí thấp",
-                "title3": "Thủ tục nhanh chóng"
+                "title1": "核实承诺",
+                "title2": "全方位支持，低成本",
+                "title3": "手续快捷"
             },
             "button": {
-                "primary": "Về chúng tôi",
-                "secondary": "Xem dự án"
+                "primary": "关于我们",
+                "secondary": "查看项目"
             }
         },
         "section3": {
-            "title": "Dự án của chúng tôi",
-            "showMap": "Hiển thị bản đồ",
-            "button": "Xem tất cả"
+            "title": "我们的项目",
+            "showMap": "显示地图",
+            "button": "查看全部"
         },
         "section3Mobile": {
             "buy": {
-                "title": "Đang được rao bán",
+                "title": "兜售中",
                 "subtitle": {
-                    "over": "Hơn",
-                    "projectDistribution": "dự án đang được phân phối"
+                    "over": "比",
+                    "projectDistribution": "项目正在交付中"
                 },
-                "button": "Tất cả dự án"
+                "button": "所有项目"
             },
             "rent": {
-                "title": "Dự án cho thuê",
+                "title": "出租项目",
                 "subtitle": {
-                    "over": "Hơn",
-                    "projectDistribution": "dự án đang được phân phối"
+                    "over": "比",
+                    "projectDistribution": "项目正在交付中"
                 },
-                "button": "Tất cả dự án"
+                "button": "所有项目"
             }
         },
         "section4": {
-            "title": "Ký gửi nhà đất",
-            "description": "Chúng tôi cung cấp dịch vụ kí gửi bất động sản, đáp ứng nhu cầu bán hoặc cho thuê tài sản của quý khách.",
+            "title": "房屋及土地寄卖",
+            "description": "我们提供房地产寄卖服务，满足您出售或出租房地产的需求。",
             "detail": {
-                "title1": "Đặt khách hàng làm trọng tâm",
-                "title2": "Dịch vụ nhanh chóng",
-                "title3": "Đảm bảo thực thi"
+                "title1": "以客户为中心",
+                "title2": "服务快捷",
+                "title3": "保证执行"
             },
-            "button": "Đăng ký ngay"
+            "button": "现在注册"
         },
         "section5": {
-            "subtitle": "TỔNG HỢP CÁC BẤT ĐỘNG SẢN",
-            "title": "Bất Động Sản Nổi Bật",
-            "button": "Xem tất cả",
-            "over": "Hơn",
-            "projectDistribution": "dự án đang được phân phối"
+            "subtitle": "房地产汇总",
+            "title": "突出的房地产",
+            "button": "查看全部",
+            "over": "比",
+            "projectDistribution": "项目正在交付中"
         },
         "section6": {
-            "title": "Nổi bật theo khu vực",
-            "button": "Chi tiết dự án"
+            "title": "按地区突出",
+            "button": "项目详情"
         },
         "section7": {
-            "subtitle": "Tổng hợp các đối tác",
-            "title": "Đối tác của chúng tôi",
-            "button": "Trở thành đối tác"
+            "subtitle": "合作伙伴概要",
+            "title": "我们的合作伙伴",
+            "button": "成为合作伙伴"
         },
         "section8": {
-            "subtitle": "Tổng hợp tin tức",
-            "title": "Tin tức mới nhất",
-            "button": "Xem tất cả"
+            "subtitle": "新闻摘要",
+            "title": "最新消息",
+            "button": "查看全部"
         }
     },
     "projects": {
-        "subtitle": "100% authentic",
-        "title": "Buying and selling houses and apartments",
-        "titleH": "Renting an apartment land",
-        "titleP": "All Projects",
-        "map": "Map",
-        "category": "Type",
-        "address": "Location",
-        "show": "Display",
-        "over": "among more",
-        "validateProject": "Authentic housing",
-        "validateIsProject": "Project authentication",
+        "subtitle": "100%经过核实",
+        "title": "房屋、土地及套房买卖",
+        "titleH": "出租公寓和房地产",
+        "titleP": "所有项目",
+        "map": "地图",
+        "category": "类型",
+        "address": "地点",
+        "show": "展示",
+        "over": "其中更多",
+        "validateProject": "真实的房地产",
+        "validateIsProject": "认证项目",
         "item": {
-            "address": "Địa chỉ",
-            "price": "Mức giá",
-            "area": "Diện tích"
+            "address": "地址",
+            "price": "价格",
+            "area": "面积"
         },
         "filter1": {
-            "propertyTypeIds": "Select property type",
-            "propertyAreaTypeIds": "Choosing a real estate location",
-            "propertyTypeIdsP": "Select a project type",
-            "propertyAreaTypeIdsP": "Select project site",
-            "propertyCategoryIds": "Choose the form of real estate",
-            "status": "Select project status",
-            "price": "Quickly select a price range",
-            "area": "Quick selection of area",
-            "reset": "Đặt lại",
-            "cancel": "Hủy",
-            "apply": "Áp dụng"
+            "propertyTypeIds": "选择房地产类型",
+            "propertyAreaTypeIds": "选择房产地点",
+            "propertyTypeIdsP": "选择项目类型",
+            "propertyAreaTypeIdsP": "选择项目地点",
+            "propertyCategoryIds": "选择房产形式",
+            "status": "选择项目状态",
+            "price": "快速选择价格范围",
+            "area": "快速选择区域",
+            "reset": "重置",
+            "cancel": "取消",
+            "apply": "申请"
         },
         "filter2": {
-            "title1": "Mới nhất",
-            "title2": "Giá tăng dần",
-            "title3": "Giá giảm dần"
+            "title1": "最新",
+            "title2": "递加价格",
+            "title3": "递降价格"
         },
         "filterSecond":{
             "orSelect":"或者选择",
@@ -317,224 +317,224 @@
             "noinfo":"无信息"
         },
         "showMap": {
-            "list": "Danh sách",
-            "map": "Bản đồ"
+            "list": "清单",
+            "map": "地图"
         }
     },
     "listNews": {
         "section2": {
-            "subtitle": "Tin tức về",
-            "title": "Tin tức"
+            "subtitle": "新闻关于",
+            "title": "新闻"
         }
     },
     "projectDetail": {
-        "title": "Thông tin chi tiết",
+        "title": "详细信息",
         "info": {
-            "type": "Loại hình",
-            "area": "Diện tích",
-            "floors": "Số tầng",
-            "orientHouse": "Hướng nhà",
-            "year": "Năm xây dựng",
-            "orientBalcony": "Hướng ban công",
-            "interior": "Nội thất",
-            "juridical": "Pháp lý",
-            "location":"Vị trí",
-            "numberHouse":"Số toà nhà",
-            "yearBuilding":"Năm xây dựng",
+            "type": "类型",
+            "area": "面积",
+            "floors": "浴室",
+            "orientHouse": "房屋方向",
+            "year": "建造年份",
+            "orientBalcony": "阳台方向",
+            "interior": "家具",
+            "juridical": "法律文件",
+            "location":"位置",
+            "numberHouse":"楼号",
+            "yearBuilding":"建造年份",
             "scale":"规模",
             "investor":"投资者",
-            "title":"Nội dung dự án",
-            "codeProject":"Mã dự án",
-            "contact":"Thông tin Liên hệ",
-            "fullName":"Họ và tên",
-            "phone":"Số điện thoại",
-            "sendInfo":"Gửi thông tin"
+            "title":"项目内容",
+            "codeProject":"项目代码",
+            "contact":"联系方式",
+            "fullName":"姓名",
+            "phone":"电话",
+            "sendInfo":"提交信息"
         },
         "map": {
-            "address": "Địa chỉ",
-            "ward": "Phường/Xã",
-            "district": "Quận",
-            "city": "Thành phố/Tỉnh"
+            "address": "地址",
+            "ward": "市",
+            "district": "县",
+            "city": "坊"
         }
     },
     "aboutUs": {
         "section2": {
-            "subtitle": "Câu chuyện thương hiệu",
-            "title": "Giới thiệu",
-            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+            "subtitle": "品牌故事",
+            "title": "简介",
+            "description": "康南于2018年正式成立, 是东南亚房地产经纪领域的第一家科技公司。在康南, 我们通过使用市场数据分析系统、上市中房地产清单跟踪系统, 结合交互式通信技术、在线交易管理, 且通过提供价格比较工具, 使买卖过程更轻松, 并建立客户对我们的信任度, 为房屋买房双方带来最佳价值。同时, 康南还为经纪专员配备了客户管理系统(Smart CRM) 和数据库, 旨在成为满足与居住有关的所有需求的目的地。"
         },
         "section3": {
-            "subtitle": "ĐỘI NGŨ",
-            "title": "Chuyên Viên Kangnam",
-            "description": "Ra đời chính thức từ năm 2018, Kangnam là công ty công nghệ đầu tiên ở Đông Nam Á trong lĩnh vực môi giới bất động sản. Tại Kangnam, chúng tôi sử dụng công nghệ giúp quá trình mua bán được dễ dàng hơn và xây dựng lòng tin cho khách hàng thông qua việc cung cấp các công cụ so sánh giá bằng cách sử dụng hệ thống phân tích dữ liệu thị trường, theo dõi danh sách tài sản đang niêm yết, kết hợp với công nghệ truyền thông tương tác, quản lý giao dịch trực tuyến để mang lại giá trị tốt nhất cho người mua và người bán nhà. Đồng thời, Kangnam còn trang bị cho các môi giới hệ thống quản lý khách hàng (Smart CRM) và cơ sở dữ liệu, nhằm mục đích trở thành điểm đến cho mọi nhu cầu liên quan đến chỗ ở."
+            "subtitle": "员工队伍",
+            "title": "康南专员",
+            "description": "康南于2018年正式成立, 是东南亚房地产经纪领域的第一家科技公司。在康南, 我们通过使用市场数据分析系统、上市中房地产清单跟踪系统, 结合交互式通信技术、在线交易管理, 且通过提供价格比较工具, 使买卖过程更轻松, 并建立客户对我们的信任度, 为房屋买房双方带来最佳价值。同时, 康南还为经纪专员配备了客户管理系统(Smart CRM) 和数据库, 旨在成为满足与居住有关的所有需求的目的地。"
         },
         "section4": {
-            "description": "<p><strong>SỨ MỆNH</strong> của chúng tôi là <strong>THIẾT LẬP</strong> và <strong>THỰC THI</strong> những tiêu chuẩn cao nhất nhằm phục vụ lợi ích lớn nhất của Khách hàng cho mọi nhu cầu về <strong>BẤT ĐỘNG SẢN</strong></p>"
+            "description": "<p>我们的使命是建立和执行最高标准，旨在服务于客户的所有房地产需求的最大利益。</p>"
         },
         "section5": {
-            "subtitle": "Liên hệ",
-            "title": "Thông tin văn phòng",
-            "button": "Liên hệ ngay",
-            "headquarter": "Trụ sở chính (Hà Nội)"
+            "subtitle": "联系",
+            "title": "办公室信息",
+            "button": "立即联系",
+            "headquarter": "总部（河内）"
         }
     },
     "contact": {
         "section2": {
-            "subtitle": "Kết nối với chúng tôi",
-            "title": "Điền thông tin",
-            "infoTitle": "Thông tin liên hệ",
-            "button": "Gửi thông tin",
-            "contactAction": "Liên hệ ngay"
+            "subtitle": "联系我们",
+            "title": "填写信息",
+            "infoTitle": "联系方式",
+            "button": "提交信息",
+            "contactAction": "立即联系"
         },
         "notification": {
             "name": {
-                "required": "Vui lòng điền họ tên"
+                "required": "请填写您的全名"
             },
             "phone":{
-                "invalid" : "Số điện thoại không hợp lệ",
-                "required": "Vui lòng điền số điện thoại"
+                "invalid" : "无效的电话号码",
+                "required": "请填写您的电话号码"
             },
             "email":{
-                "invalid": "Email không hợp lệ",
-                "required": "Vui lòng điền email"
+                "invalid": "不合规电邮",
+                "required": "请填写您的电子邮件"
             }
         }
     },
     "deposit": {
         "wrapper": {
-            "title": "Bán và cho thuê nhà đất nhanh chóng, dễ dàng cùng Kangnam",
+            "title": "与康南快速、轻松地出售和出租房地产",
             "commitment": {
-                "title": "Cam kết với khách hàng",
+                "title": "对客户的承诺",
                 "detail": {
-                    "title1": "Đặt khách hàng làm trọng tâm cho mọi quyết định",
-                    "title2": "Những điều đã nói là những điều được làm",
-                    "title3": "Đảm bảo thực thi (Miễn phí các dịch vụ cao cấp nếu không bán được nhà)"
+                    "title1": "将客户置于任何决策的中心",
+                    "title2": "所说的是所做的事情。",
+                    "title3": "保证执行（倘未能卖出房屋，则免费各项高级服务）"
                 }
             },
             "additionalService": {
                 "detail": {
-                    "title1": "Dịch vụ chụp ảnh chuyên nghiệp",
-                    "subtitle1": "Hình ảnh chất lượng cao, chuyên nghiệp",
-                    "subtitle2": "Tiết kiệm đến 1.000.000 đồng so với thị trường"
+                    "title1": "专业摄影服务",
+                    "subtitle1": "高品质、专业的图像",
+                    "subtitle2": "与市场价格相比最多可节省 1,000,000 越南盾"
                 }
             },
-            "button": "Tìm hiểu thêm"
+            "button": "了解更多"
         },
         "form": {
-            "title": "Ký gửi nhà đất với Kangnam",
-            "subtitle": "Do hạn chế về khu vực hoạt động của các sàn giao dịch, KangNam xin phép chỉ tiếp nhận nhà đất ký gửi từ khu vực A và B.",
+            "title": "向康南寄卖房地产",
+            "subtitle": "由于交易大厅经营区域的限制, KangNam 请求只接受来自 A 区和 B 区的房地产托运。",
             "form1": {
-                "title": "Thông tin cơ bản",
-                "demand": "Nhu cầu của bạn là gì",
+                "title": "基本信息",
+                "demand": "您的需求是什么？",
                 "select": {
-                    "select1": "Bán",
-                    "select2": "Cho thuê",
-                    "select3": "Bán và cho thuê"
+                    "select1": "卖",
+                    "select2": "租",
+                    "select3": "出售和出租"
                 },
                 "input": {
-                    "input1": "Căn hộ",
-                    "input2": "Giá bán mong muốn",
-                    "input3": "Giá thuê mong muốn",
-                    "input4": "Địa chỉ"
+                    "input1": "套房 ",
+                    "input2": "希望售价",
+                    "input3": "希望租价",
+                    "input4": "地址"
                 },
                 "priceSubmit": {
-                    "sell": "Giá bán",
-                    "rent": "Giá thuê"
+                    "sell": "希望售价",
+                    "rent": "租金成本"
                 },
-                "step": "Bước 2"
+                "step": "第2步"
             },
             "form2": {
-                "back": "Trở lại",
-                "title": "Thông tin liên hệ",
-                "owner": "Tôi là chủ nhà",
+                "back": "返回",
+                "title": "联系方式",
+                "owner": "我是房东",
                 "input": {
-                    "input1": "Họ và tên",
-                    "input2": "Số điện thoại",
-                    "input3": "Email",
-                    "input4": "Lời nhắn"
+                    "input1": "姓名",
+                    "input2": "电话",
+                    "input3": "电子邮件",
+                    "input4": "留言"
                 },
-                "step": "Bước 3"
+                "step": "步骤3"
             },
             "form3": {
-                "back": "Trở lại",
-                "title": "Thông tin bất động sản",
-                "descriptionInput": "Mô tả nhà đất",
+                "back": "返回",
+                "title": "房产信息",
+                "descriptionInput": "房产描述",
                 "detailInput": {
-                    "title": "Thông tin chi tiết",
-                    "input1": "Loại hình",
-                    "input2": "Diện tích",
-                    "input3": "Số tầng",
-                    "input4": "Hướng nhà",
-                    "input5": "Loại công trình",
-                    "input6": "Hướng ban công",
-                    "input7": "Nội thất",
-                    "input8": "Pháp lý"
+                    "title": "细节",
+                    "input1": "类型",
+                    "input2": "面积",
+                    "input3": "浴室",
+                    "input4": "房屋方向",
+                    "input5": "建筑工程类别",
+                    "input6": "阳台方向",
+                    "input7": "家具",
+                    "input8": "法律文件"
                 },
                 "pictureInput": {
-                    "title": "Hình ảnh",
-                    "standard": "Tiêu chuẩn hình ảnh",
-                    "drop": "Kéo thả hình ảnh nhà đất hoặc bấm vào đây để tải lên",
-                    "recommend": "Đề xuất tỉ lệ hình ảnh tốt nhất là 1600x900 (16:9). Giới hạn 2MB/ảnh",
-                    "button": "Gửi thông tin"
+                    "title": "图片",
+                    "standard": "图片标准",
+                    "drop": "拖拽房地产图片或点击此处上传",
+                    "recommend": "推荐最佳图片纵横比为1600x900 (16:9)。每张图片大小限制为2MB",
+                    "button": "提交信息"
                 },
-                "validateFiles" : "Cần ít nhất 3 ảnh để xuất bản!"
+                "validateFiles" : "至少需要3张照片才能发布！"
             },
             "complete": {
-                "title": "Hoàn thành"
+                "title": "完成"
             }
         }
     },
     "otherPageBanner": [
         {
-            "title": "Thông tin nhanh chóng theo nhịp thị trường",
-            "des": "Không thể bỏ lỡ những thông tin quan trọng của thị trường theo dòng sự kiện",
-            "end": "Tin tức",
-            "slug": "news"
+            "title": "信息快速跟随市场节奏",
+            "des": "在事件流中不容错过市场的重要信息",
+            "end": "新闻",
+            "slug": "新闻"
         },
         {
-            "title": "Chúng tôi luôn hỗ trợ khách hàng một cách nhanh chóng",
-            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội ngũ chúng tôi tư vấn miễn phí",
-            "end": "Liên hệ",
-            "slug": "contact"
+            "title": "我们以最快的方式随时为客户提供支持",
+            "des": "请完整填写信息，以获得我们专员队伍的免费咨询",
+            "end": "联系",
+            "slug": "联系.联系"
         },
         {
-            "title": "Chúng tôi theo đuổi sự hoàn hảo trên từng dự án",
-            "des": "Công ty Cổ phần bất động sản Kangnam là đơn vị môi giới bất động sản chuyên nghiệp giàu kinh nghiệm",
-            "end": "Giới thiệu",
-            "slug": "about-us"
+            "title": "我们追求每个项目的完美",
+            "des": "康南房地产股份公司是一家经验丰富的专业房地产经纪单位",
+            "end": "简介",
+            "slug": "简介"
         },
         {
-            "title": "Thỏa thuận & pháp lý",
-            "des": "Quý khách hàng vui lòng điền đầy đủ thông tin để được đội nguc chúng tôi tư vấn miễn phí",
-            "end": "Pháp lý",
-            "slug": "agreements"
+            "title": "协议及法律文件",
+            "des": "请完整填写信息，以获得我们专员队伍的免费咨询",
+            "end": "法律文件",
+            "slug": "协议及法律文件"
         }
     ],
     "menuRes": {
-        "email": "Email",
-        "hotline": "Hotline",
-        "address": "Địa chỉ"
+        "email": "电子邮件",
+        "hotline": "热线",
+        "address": "地址"
     },
     "hiring": {
-        "button": "Xem tất cả",
-        "area": "Diện tích",
-        "address": "Địa chỉ",
-        "price": "Mức giá"
+        "button": "查看全部",
+        "area": "面积",
+        "address": "地址",
+        "price": "价格"
     },
     "selling": {
-        "button": "Xem tất cả",
-        "area": "Diện tích",
-        "address": "Địa chỉ",
-        "price": "Mức giá"
+        "button": "查看全部",
+        "area": "面积",
+        "address": "地址",
+        "price": "价格"
     },
     "relatedProjects": {
-        "subtitle": "Danh sách bất động sản",
-        "title": "Bất động sản liên quan",
+        "subtitle": "房地产清单",
+        "title": "相关房地产",
         "item": {
-            "title1": "Địa chỉ",
-            "title2": "Diện tích",
-            "title3": "Mức giá"
+            "title1": "地址",
+            "title2": "面积",
+            "title3": "价格"
         },
-        "button": "Xem tất cả"
+        "button": "查看全部"
     }
 }
