@@ -18,17 +18,17 @@
                     {
                         "id": 1,
                         "title": "简介",
-                        "href": "/简介"
+                        "href": "/about-us"
                     },
                     {
                         "id": 2,
                         "title": "联系",
-                        "href": "/联系"
+                        "href": "/contact"
                     },
                     {
                         "id": 3,
                         "title": "协议及法律文件",
-                        "href": "/协议及法律文件"
+                        "href": "/agreements"
                     }
                 ]
             }
@@ -96,24 +96,24 @@
             {
                 "id": 5,
                 "title": "协议及法律文件",
-                "href": "/协议及法律文件"
+                "href": "/agreements"
             }
         ],
         "nav2": [
             {
                 "id": 1,
                 "title": "关于康南",
-                "href": "/简介"
+                "href": "/about-us"
             },
             {
                 "id": 2,
                 "title": "新闻",
-                "href": "/新闻"
+                "href": "/news"
             },
             {
                 "id": 3,
                 "title": "联系",
-                "href": "/联系"
+                "href": "/contact"
             }
         ]
     },
@@ -132,7 +132,7 @@
                 {
                     "id": 2,
                     "title": "关于康南",
-                    "href": "/简介"
+                    "href": "/about-us"
                 },
                 {
                     "id": 3,
@@ -142,12 +142,12 @@
                 {
                     "id": 4,
                     "title": "房屋及土地寄卖",
-                    "href": "/房屋及土地寄卖"
+                    "href": "/deposit"
                 },
                 {
                     "id": 5,
                     "title": "新闻",
-                    "href": "/新闻"
+                    "href": "/news"
                 }
             ]
         },
@@ -489,25 +489,25 @@
             "title": "信息快速跟随市场节奏",
             "des": "在事件流中不容错过市场的重要信息",
             "end": "新闻",
-            "slug": "新闻"
+            "slug": "news"
         },
         {
             "title": "我们以最快的方式随时为客户提供支持",
             "des": "请完整填写信息，以获得我们专员队伍的免费咨询",
             "end": "联系",
-            "slug": "联系.联系"
+            "slug": "contact"
         },
         {
             "title": "我们追求每个项目的完美",
             "des": "康南房地产股份公司是一家经验丰富的专业房地产经纪单位",
             "end": "简介",
-            "slug": "简介"
+            "slug": "about-us"
         },
         {
             "title": "协议及法律文件",
             "des": "请完整填写信息，以获得我们专员队伍的免费咨询",
             "end": "法律文件",
-            "slug": "协议及法律文件"
+            "slug": "agreements"
         }
     ],
     "menuRes": {
