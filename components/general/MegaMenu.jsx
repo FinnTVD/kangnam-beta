@@ -12,6 +12,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
 
     const [listNav, setListNav] = useState([])
+    console.log('🚀 ~ MegaMenu ~ listNav:', listNav)
 
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
@@ -61,6 +62,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+    console.log('🚀 ~ MegaMenu ~ datapopup:', datapopup)
     // tin tuc
     const {
         data: categories,
@@ -71,7 +73,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log(categories)
 
     if (!listNav?.length) return
     if (fixed)
@@ -107,7 +108,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                     </div>
                                     <div
                                         style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
-                                        className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-sm after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
+                                        className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-[0_-2px_4px_0_rgb(0,0,0,0.05)] after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
                                     >
                                         <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
                                             {e?.title}
@@ -160,7 +161,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                     </Link>
                                     <div
                                         style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
-                                        className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-sm after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
+                                        className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-[0_-2px_4px_0_rgb(0,0,0,0.05)] after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
                                     >
                                         {e?.id == 3 && (
                                             <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
@@ -200,11 +201,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                     >
                                                         <Link
                                                             className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                            href={
+                                                            href={`${
+                                                                lang === 'vi'
+                                                                    ? `${e?.href}?propertyTypeIds=`
+                                                                    : `/${lang}${e?.href}?page=1&propertyTypeIds=`
+                                                            }${
                                                                 item?.translations?.find((i) =>
                                                                     i?.languageCode?.toLowerCase()?.includes(lang),
-                                                                )?.alias || '/'
-                                                            }
+                                                                )?.propertyTypeId || '/'
+                                                            }`}
                                                         >
                                                             {e?.title}{' '}
                                                             {item?.translations?.find((i) =>
@@ -255,7 +260,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                         {e?.branch ? (
                             <>
                                 <div className='px-[0.94vw] py-[1vw] flex cursor-pointer items-center gap-x-[0.5vw]'>
-                                    <span className='inline-block whitespace-nowrap title16-600-130 text-white'>
+                                    <span className='inline-block text-white whitespace-nowrap title16-600-130'>
                                         {e?.title}
                                     </span>
                                     <svg
@@ -275,16 +280,16 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                 </div>
                                 <div
                                     style={{ boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px' }}
-                                    className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-sm after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
+                                    className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-[0_-2px_4px_0_rgb(0,0,0,0.05)] after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
                                 >
                                     <span className='title16-600-130 text-den px-[1vw] pb-[0.75vw] block'>
                                         {e?.title}
                                     </span>
 
                                     <ul className={`${e?.branch?.length > 5 ? 'grid grid-cols-2' : ''} w-full`}>
-                                        {e?.branch?.map((item, index) => (
+                                        {e?.branch?.map((item, idx) => (
                                             <li
-                                                key={index}
+                                                key={idx}
                                                 className='px-[1vw] py-[0.5vw] hover:bg-[#f3f4f7]'
                                             >
                                                 <Link
@@ -328,7 +333,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                 </Link>
                                 {/* class cũ  className='min-w-[10vw] w-max z-0 pointer-events-none opacity-0 group-hover:opacity-100 group-hover:z-[99999] group-hover:pointer-events-auto fixed h-fit bg-white top-[5.9vw] rounded-[0.5vw] px-[2vw] pt-[1vw] pb-[3vw]' */}
                                 <div
-                                    className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-sm after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
+                                    className='min-w-[10vw] w-max absolute bottom-0 translate-y-full right-0 rounded-[0.625vw] group-hover:block hidden bg-white before:absolute before:block before:w-[0.8vw] before:h-[0.8vw] before:bg-white before:top-0 before:right-[1.25vw] before:rotate-45 before:-translate-y-1/2 after:block before:shadow-[0_-2px_4px_0_rgb(0,0,0,0.05)] after:h-[1.2vw] after:w-[12vw] after:absolute after:top-0 after:-translate-y-[95%] after:right-0 after:bg-transparent pt-[1vw] pb-[0.5vw]'
                                     style={{
                                         boxShadow:
                                             'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
@@ -372,11 +377,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                 >
                                                     <Link
                                                         className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                        href={
+                                                        href={`${
+                                                            lang === 'vi'
+                                                                ? `${e?.href}?propertyTypeIds=`
+                                                                : `/${lang}${e?.href}?page=1&propertyTypeIds=`
+                                                        }${
                                                             item?.translations?.find((i) =>
                                                                 i?.languageCode?.toLowerCase()?.includes(lang),
-                                                            )?.alias || '/'
-                                                        }
+                                                            )?.propertyTypeId || '/'
+                                                        }`}
                                                     >
                                                         {e?.title}{' '}
                                                         {item?.translations?.find((i) =>

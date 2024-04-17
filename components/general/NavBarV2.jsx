@@ -76,7 +76,7 @@ export default function NavBarV2({ lang, t }) {
                     <div className='flex gap-x-[1.25vw] items-center'>
                         <Link
                             href={`${lang !== 'vi' ? '/' + lang + '/deposit' : '/deposit'}`}
-                            className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[2vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap'
+                            className='bg-gradient-prominent shadow-prominent h-fit w-fit rounded-[10vw] py-[1vw] px-[1vw] text-d-9-d-9-d-9 title16-700-150 whitespace-nowrap lg:max-w-[13vw] lg:line-clamp-1'
                         >
                             {t?.Navbar?.button}
                         </Link>
