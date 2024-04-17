@@ -19,9 +19,9 @@ const nextConfig = {
         loader: 'custom',
         loaderFile: './loader.js',
     },
-    // compiler: {
-    //     removeConsole: true,
-    // },
+    compiler: {
+        removeConsole: true,
+    },
     // Use the CDN in production and localhost for development.
     // assetPrefix: isProd ? 'https://d1zo9jo0ujl2il.cloudfront.net' : undefined,
 }
