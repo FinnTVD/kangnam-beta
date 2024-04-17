@@ -12,7 +12,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
 
     const [listNav, setListNav] = useState([])
-    console.log('🚀 ~ MegaMenu ~ listNav:', listNav)
 
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
@@ -62,7 +61,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ MegaMenu ~ datapopup:', datapopup)
     // tin tuc
     const {
         data: categories,
@@ -73,6 +71,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
+    console.log('🚀 ~ MegaMenu ~ categories:', categories)
 
     if (!listNav?.length) return
     if (fixed)
@@ -227,11 +226,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                     >
                                                         <Link
                                                             className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                            href={
+                                                            href={`${
+                                                                lang === 'vi'
+                                                                    ? '/news?category='
+                                                                    : `/${lang}/news?category=`
+                                                            }${
                                                                 item?.translations?.find((i) =>
                                                                     i?.languageCode?.toLowerCase()?.includes(lang),
-                                                                )?.alias || '/'
-                                                            }
+                                                                )?.postTypeId || '/'
+                                                            }`}
                                                         >
                                                             {item?.translations?.find((i) =>
                                                                 i?.languageCode?.toLowerCase()?.includes(lang),
@@ -403,11 +406,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                 >
                                                     <Link
                                                         className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                        href={
+                                                        href={`${
+                                                            lang === 'vi'
+                                                                ? '/news?category='
+                                                                : `/${lang}/news?category=`
+                                                        }${
                                                             item?.translations?.find((i) =>
                                                                 i?.languageCode?.toLowerCase()?.includes(lang),
-                                                            )?.alias || '/'
-                                                        }
+                                                            )?.postTypeId || '/'
+                                                        }`}
                                                     >
                                                         {item?.translations?.find((i) =>
                                                             i?.languageCode?.toLowerCase()?.includes(lang),
