@@ -12,6 +12,7 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
     const setCategoryNav = useStore((state) => state.setCategoryNav)
 
     const [listNav, setListNav] = useState([])
+    console.log('🚀 ~ MegaMenu ~ listNav:', listNav)
 
     const { data, isLoading, error } = useSWR(`${process.env.NEXT_PUBLIC_API}/property-category`, fetcher, {
         revalidateIfStale: false,
@@ -71,8 +72,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ MegaMenu ~ categories:', categories)
-
     if (!listNav?.length) return
     if (fixed)
         return (
