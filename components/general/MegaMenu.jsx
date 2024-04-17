@@ -62,7 +62,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-    console.log('🚀 ~ MegaMenu ~ datapopup:', datapopup)
     // tin tuc
     const {
         data: categories,
@@ -73,7 +72,6 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-
     if (!listNav?.length) return
     if (fixed)
         return (
@@ -227,11 +225,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                     >
                                                         <Link
                                                             className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                            href={
+                                                            href={`${
+                                                                lang === 'vi'
+                                                                    ? '/news?category='
+                                                                    : `/${lang}/news?category=`
+                                                            }${
                                                                 item?.translations?.find((i) =>
                                                                     i?.languageCode?.toLowerCase()?.includes(lang),
-                                                                )?.alias || '/'
-                                                            }
+                                                                )?.postTypeId || '/'
+                                                            }`}
                                                         >
                                                             {item?.translations?.find((i) =>
                                                                 i?.languageCode?.toLowerCase()?.includes(lang),
@@ -403,11 +405,15 @@ const MegaMenu = ({ isHome, lang, t, fixed }) => {
                                                 >
                                                     <Link
                                                         className='block w-full h-full whitespace-nowrap title16-400-130 text-den'
-                                                        href={
+                                                        href={`${
+                                                            lang === 'vi'
+                                                                ? '/news?category='
+                                                                : `/${lang}/news?category=`
+                                                        }${
                                                             item?.translations?.find((i) =>
                                                                 i?.languageCode?.toLowerCase()?.includes(lang),
-                                                            )?.alias || '/'
-                                                        }
+                                                            )?.postTypeId || '/'
+                                                        }`}
                                                     >
                                                         {item?.translations?.find((i) =>
                                                             i?.languageCode?.toLowerCase()?.includes(lang),

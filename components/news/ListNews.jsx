@@ -1,17 +1,22 @@
 'use client'
 import ListNewsCategorized from './ListNewsCategorized'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import classes from './ListNewsStyles.module.css'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
 import { handleCheckLangCode, postTypeIdAgreement } from '@/utils'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const listNews = new Array(12).fill(0)
 
 export default function ListNews({ t, lang }) {
+    const router = useRouter()
+    const searchParams = useSearchParams()
     const [category, setCategory] = useState(null)
+    const categoryId = searchParams.get('category')
+
     const [pageNumber, setPageNumber] = useState(1)
     const langCode = handleCheckLangCode(lang)
 
@@ -25,12 +30,22 @@ export default function ListNews({ t, lang }) {
         revalidateOnReconnect: false,
     })
 
+    useEffect(() => {
+        if (categoryId) {
+            const categoryNew = categories?.data?.find((e) => e?.id === categoryId)
+            setCategory({
+                id: categoryNew?.id,
+                title: categoryNew?.translations?.find((i) => i?.languageCode?.toLowerCase()?.includes(lang))?.name,
+            })
+        }
+    }, [searchParams])
+
     const {
         data: dataNewsCategorized,
         error: errorNewsCategorized,
         isLoading: isLoadingNewsCategorized,
     } = useSWR(
-        process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&order=DESC&postTypeIds[]=${category?.id}`,
+        process.env.NEXT_PUBLIC_API + `/post?page=${pageNumber}&take=12&order=DESC&postTypeIds[]=${categoryId}`,
         fetcher,
         {
             revalidateIfStale: false,
@@ -48,7 +63,6 @@ export default function ListNews({ t, lang }) {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
-
     let newsCategorized
     let pageCount
     let categoryTranslation = []
@@ -118,7 +132,14 @@ export default function ListNews({ t, lang }) {
                                     : `${categoryStyle} bg-transparent text-den`
                             }
                             onClick={() => {
-                                setCategory(e)
+                                const paramNew = new URLSearchParams(searchParams)
+
+                                paramNew.set('category', e?.id)
+                                const pathName = lang === 'vi' ? '/news' : `/${lang}/news`
+                                router.push(pathName + '?' + paramNew.toString(), {
+                                    scroll: false,
+                                })
+                                // setCategory(e)
                                 setPageNumber(1)
                             }}
                         >
