@@ -6,7 +6,7 @@ export default async function getData(api, langCode) {
             'Content-Type': 'application/json',
             'X-language-code': `${langCode}`,
         },
-        next: { revalidate: 60 },
+        next: { revalidate: 3600 },
     })
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
